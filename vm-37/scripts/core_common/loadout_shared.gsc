@@ -1,0 +1,160 @@
+#namespace loadout;
+
+/*
+	Name: is_warlord_perk
+	Namespace: loadout
+	Checksum: 0xB2B662C1
+	Offset: 0x90
+	Size: 0xE
+	Parameters: 1
+	Flags: Linked
+*/
+function is_warlord_perk(itemindex)
+{
+	return false;
+}
+
+/*
+	Name: is_item_excluded
+	Namespace: loadout
+	Checksum: 0xAAD0CA1F
+	Offset: 0xA8
+	Size: 0x6E
+	Parameters: 1
+	Flags: Linked
+*/
+function is_item_excluded(itemindex)
+{
+	if(!level.onlinegame)
+	{
+		return false;
+	}
+	numexclusions = level.itemexclusions.size;
+	for(exclusionindex = 0; exclusionindex < numexclusions; exclusionindex++)
+	{
+		if(itemindex == level.itemexclusions[exclusionindex])
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+/*
+	Name: getloadoutitemfromddlstats
+	Namespace: loadout
+	Checksum: 0x35074FC6
+	Offset: 0x120
+	Size: 0x72
+	Parameters: 2
+	Flags: Linked
+*/
+function getloadoutitemfromddlstats(customclassnum, loadoutslot)
+{
+	itemindex = self getloadoutitem(customclassnum, loadoutslot);
+	if(is_item_excluded(itemindex) && !is_warlord_perk(itemindex))
+	{
+		return 0;
+	}
+	return itemindex;
+}
+
+/*
+	Name: initweaponattachments
+	Namespace: loadout
+	Checksum: 0xFB59066A
+	Offset: 0x1A0
+	Size: 0x22
+	Parameters: 1
+	Flags: Linked
+*/
+function initweaponattachments(weapon)
+{
+	self.currentweaponstarttime = gettime();
+	self.currentweapon = weapon;
+}
+
+/*
+	Name: isprimarydamage
+	Namespace: loadout
+	Checksum: 0xA71E74FA
+	Offset: 0x1D0
+	Size: 0x2A
+	Parameters: 1
+	Flags: Linked
+*/
+function isprimarydamage(meansofdeath)
+{
+	return meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET";
+}
+
+/*
+	Name: cac_modified_vehicle_damage
+	Namespace: loadout
+	Checksum: 0x8D22692D
+	Offset: 0x208
+	Size: 0x1EA
+	Parameters: 6
+	Flags: Linked
+*/
+function cac_modified_vehicle_damage(victim, attacker, damage, meansofdeath, weapon, inflictor)
+{
+	if(!isdefined(attacker) || !isdefined(damage) || !isplayer(damage))
+	{
+		return meansofdeath;
+	}
+	if(!isdefined(meansofdeath) || !isdefined(weapon) || !isdefined(inflictor))
+	{
+		return meansofdeath;
+	}
+	old_damage = meansofdeath;
+	final_damage = meansofdeath;
+	if(damage hasperk(#"specialty_bulletdamage") && isprimarydamage(weapon))
+	{
+		final_damage = (meansofdeath * (100 + level.cac_bulletdamage_data)) / 100;
+		/#
+			if(getdvarint(#"scr_perkdebug", 0))
+			{
+				println(("" + damage.name) + "");
+			}
+		#/
+	}
+	else
+	{
+		final_damage = old_damage;
+	}
+	/#
+		if(getdvarint(#"scr_perkdebug", 0))
+		{
+			println((((("" + (final_damage / old_damage)) + "") + old_damage) + "") + final_damage);
+		}
+	#/
+	return int(final_damage);
+}
+
+/*
+	Name: function_3ba6ee5d
+	Namespace: loadout
+	Checksum: 0x43FF6E68
+	Offset: 0x400
+	Size: 0xB4
+	Parameters: 2
+	Flags: Linked
+*/
+function function_3ba6ee5d(weapon, amount)
+{
+	if(weapon.iscliponly)
+	{
+		self setweaponammoclip(weapon, amount);
+	}
+	else
+	{
+		self setweaponammoclip(weapon, amount);
+		diff = amount - self getweaponammoclip(weapon);
+		/#
+			assert(diff >= 0);
+		#/
+		self setweaponammostock(weapon, diff);
+	}
+}
+
