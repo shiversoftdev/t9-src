@@ -342,16 +342,16 @@ function function_d8cb1a45()
 						{
 							self.stub.var_b57b8b27.var_df272b25 = self.stub.var_b57b8b27.var_2b65c496;
 						}
-						level thread veh/road_sounds/suspension/light/susp_light_10.ln75.pc.all.snd(self.stub.var_b57b8b27, self.stub.var_b57b8b27.var_df272b25);
+						level thread function_17b8d833(self.stub.var_b57b8b27, self.stub.var_b57b8b27.var_df272b25);
 					}
 					else if(isdefined(self.stub.var_b57b8b27.var_2b65c496) && self.stub.var_b57b8b27.var_df272b25 < self.stub.var_b57b8b27.var_2b65c496)
 					{
-						level thread veh/road_sounds/suspension/light/susp_light_10.ln75.pc.all.snd(self.stub.var_b57b8b27, self.stub.var_b57b8b27.var_df272b25);
+						level thread function_17b8d833(self.stub.var_b57b8b27, self.stub.var_b57b8b27.var_df272b25);
 					}
 				}
 				else if(self.stub.var_b57b8b27.var_df272b25 <= self.stub.var_b57b8b27.var_4c2e6c3e)
 				{
-					level thread veh/road_sounds/suspension/light/susp_light_10.ln75.pc.all.snd(self.stub.var_b57b8b27, self.stub.var_b57b8b27.var_df272b25);
+					level thread function_17b8d833(self.stub.var_b57b8b27, self.stub.var_b57b8b27.var_df272b25);
 				}
 				if(self.stub.var_b57b8b27.var_df272b25 >= self.stub.var_b57b8b27.var_4c2e6c3e)
 				{
@@ -364,7 +364,7 @@ function function_d8cb1a45()
 }
 
 /*
-	Name: veh/road_sounds/suspension/light/susp_light_10.ln75.pc.all.snd
+	Name: function_17b8d833
 	Namespace: namespace_9771a88f
 	Checksum: 0xD9CE1EAF
 	Offset: 0x2130
@@ -372,7 +372,7 @@ function function_d8cb1a45()
 	Parameters: 2
 	Flags: Linked
 */
-function veh/road_sounds/suspension/light/susp_light_10.ln75.pc.all.snd(entity, index)
+function function_17b8d833(entity, index)
 {
 	level endon(#"end_game");
 	entity.var_ed73ac32 = 1;
