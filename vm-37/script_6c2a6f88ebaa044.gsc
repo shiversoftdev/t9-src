@@ -1,10 +1,10 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace cinematicmotion;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: cinematicmotion
 	Checksum: 0x7036C7D
 	Offset: 0xA0
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"cinematicmotion", &function_70a657d8, undefined, undefined, undefined);
 }

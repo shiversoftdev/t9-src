@@ -1,6 +1,6 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace demo_shared;
 
@@ -21,7 +21,7 @@ function private autoexec function_97093ff6()
 #namespace demo;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: demo
 	Checksum: 0x59B4E56
 	Offset: 0x98
@@ -29,7 +29,7 @@ function private autoexec function_97093ff6()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"demo", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -65,7 +65,7 @@ function private init()
 }
 
 /*
-	Name: function_4ba58938
+	Name: add_bookmark
 	Namespace: demo
 	Checksum: 0x250E7FD6
 	Offset: 0x160
@@ -73,7 +73,7 @@ function private init()
 	Parameters: 2
 	Flags: Linked, Private
 */
-function private function_4ba58938(bookmark, overrideentitycamera)
+function private add_bookmark(bookmark, overrideentitycamera)
 {
 	if(!isdefined(bookmark))
 	{
@@ -87,7 +87,7 @@ function private function_4ba58938(bookmark, overrideentitycamera)
 }
 
 /*
-	Name: function_ae3420ca
+	Name: kill_bookmark
 	Namespace: demo
 	Checksum: 0xA28AA7F4
 	Offset: 0x1F8
@@ -95,10 +95,10 @@ function private function_4ba58938(bookmark, overrideentitycamera)
 	Parameters: 5
 	Flags: Linked
 */
-function function_ae3420ca(var_81538b15, var_f28fb772, einflictor, var_50d1e41a, overrideentitycamera)
+function kill_bookmark(var_81538b15, var_f28fb772, einflictor, var_50d1e41a, overrideentitycamera)
 {
 	bookmark = potm::function_5b1e9ed4(game.var_e9714926, #"kill", gettime(), var_81538b15, var_f28fb772, 0, einflictor, var_50d1e41a, overrideentitycamera);
-	function_4ba58938(bookmark, overrideentitycamera);
+	add_bookmark(bookmark, overrideentitycamera);
 }
 
 /*
@@ -112,12 +112,12 @@ function function_ae3420ca(var_81538b15, var_f28fb772, einflictor, var_50d1e41a,
 */
 function function_651a5f4(var_81538b15, einflictor)
 {
-	bookmark = potm::function_5b1e9ed4(game.var_e9714926, #"hash_23fbe94cfb952f6f", gettime(), var_81538b15, undefined, 0, einflictor);
-	function_4ba58938(bookmark);
+	bookmark = potm::function_5b1e9ed4(game.var_e9714926, #"object_destroy", gettime(), var_81538b15, undefined, 0, einflictor);
+	add_bookmark(bookmark);
 }
 
 /*
-	Name: function_dfecaa9
+	Name: event_bookmark
 	Namespace: demo
 	Checksum: 0xE4736878
 	Offset: 0x300
@@ -125,10 +125,10 @@ function function_651a5f4(var_81538b15, einflictor)
 	Parameters: 5
 	Flags: None
 */
-function function_dfecaa9(var_65e76577, time, var_81538b15, scoreeventpriority, eventdata)
+function event_bookmark(var_65e76577, time, var_81538b15, scoreeventpriority, eventdata)
 {
 	bookmark = potm::function_5b1e9ed4(game.var_e9714926, var_65e76577, time, var_81538b15, undefined, scoreeventpriority, undefined, undefined, 0, eventdata);
-	function_4ba58938(bookmark);
+	add_bookmark(bookmark);
 }
 
 /*
@@ -143,7 +143,7 @@ function function_dfecaa9(var_65e76577, time, var_81538b15, scoreeventpriority, 
 function bookmark(var_65e76577, time, var_81538b15, var_f28fb772, scoreeventpriority)
 {
 	bookmark = potm::function_5b1e9ed4(game.var_e9714926, var_65e76577, time, var_81538b15, var_f28fb772, scoreeventpriority);
-	function_4ba58938(bookmark);
+	add_bookmark(bookmark);
 }
 
 /*
@@ -173,7 +173,7 @@ function function_c6ae5fd6(var_65e76577, winningteamindex, losingteamindex)
 	{
 		bookmark.otherclientnum = losingteamindex;
 	}
-	function_4ba58938(bookmark);
+	add_bookmark(bookmark);
 }
 
 /*

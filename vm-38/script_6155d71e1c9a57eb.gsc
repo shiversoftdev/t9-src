@@ -1,12 +1,12 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_9b972177;
 
@@ -25,7 +25,7 @@ function private autoexec function_a91b029a()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9b972177
 	Checksum: 0x7D3419E1
 	Offset: 0x160
@@ -33,7 +33,7 @@ function private autoexec function_a91b029a()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_946f5279d6cd83c", undefined, &function_2a159d3e, undefined, undefined);
 }
@@ -57,7 +57,7 @@ function private function_2a159d3e()
 	callback::on_spawned(&on_player_spawned);
 	callback::on_connect(&on_player_connect);
 	callback::add_callback(#"objective_started", &function_83b6d24a);
-	callback::add_callback(#"hash_69090774fec4a17b", &function_2b1da4a6);
+	callback::add_callback(#"objective_ended", &function_2b1da4a6);
 }
 
 /*
@@ -412,7 +412,7 @@ function function_86df3ee8(str_objective_name)
 	str_override = undefined;
 	switch(str_objective_name)
 	{
-		case "hash_3406c2bf6d710fc":
+		case "holdout":
 		{
 			str_override = "survival_objective_hold_0";
 			break;

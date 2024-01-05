@@ -1,57 +1,57 @@
+#using scripts\weapons\weapons.gsc;
+#using scripts\cp_common\util.gsc;
+#using scripts\cp_common\rat.gsc;
+#using scripts\cp_common\load.gsc;
+#using scripts\cp_common\gametypes\shellshock.gsc;
+#using scripts\cp_common\gametypes\serversettings.gsc;
 #using script_32399001bdb550da;
+#using scripts\cp_common\gametypes\menus.gsc;
+#using scripts\cp_common\gametypes\loadout.gsc;
+#using scripts\cp_common\gametypes\globallogic_utils.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\gametypes\globallogic_spawn.gsc;
+#using scripts\cp_common\gametypes\globallogic_player.gsc;
+#using scripts\cp_common\gametypes\globallogic_defaults.gsc;
+#using scripts\cp_common\gametypes\dev.gsc;
+#using scripts\cp_common\gametypes\deathicons.gsc;
+#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using scripts\cp_common\challenges.gsc;
+#using scripts\cp_common\callbacks.gsc;
+#using scripts\cp_common\bb.gsc;
+#using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\tweakables_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spectating.gsc;
 #using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
-#using script_70a43d6ba27cff6a;
-#using script_7bafaa95bb1b427e;
-#using scripts\core_common\bb_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\demo_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\persistence_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\hud_message_shared.gsc;
+#using scripts\core_common\healthoverlay.gsc;
+#using scripts\core_common\globallogic\globallogic_player.gsc;
+#using scripts\core_common\gametype_shared.gsc;
 #using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\core_common\gamestate.gsc;
-#using scripts\core_common\gametype_shared.gsc;
-#using scripts\core_common\healthoverlay.gsc;
-#using scripts\core_common\hud_message_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\persistence_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spectating.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\tweakables_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\visionset_mgr_shared.gsc;
-#using scripts\core_common\weapons_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\callbacks.gsc;
-#using scripts\cp_common\challenges.gsc;
-#using scripts\cp_common\gametypes\battlechatter.gsc;
-#using scripts\cp_common\gametypes\deathicons.gsc;
-#using scripts\cp_common\gametypes\dev.gsc;
-#using scripts\cp_common\gametypes\globallogic_defaults.gsc;
-#using scripts\cp_common\gametypes\globallogic_player.gsc;
-#using scripts\cp_common\gametypes\globallogic_spawn.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\gametypes\globallogic_utils.gsc;
-#using scripts\cp_common\gametypes\loadout.gsc;
-#using scripts\cp_common\gametypes\menus.gsc;
-#using scripts\cp_common\gametypes\serversettings.gsc;
-#using scripts\cp_common\gametypes\shellshock.gsc;
-#using scripts\cp_common\load.gsc;
-#using scripts\cp_common\rat.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\demo_shared.gsc;
+#using scripts\core_common\damagefeedback_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\bb_shared.gsc;
 
 #namespace globallogic;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: globallogic
 	Checksum: 0x57A7E27C
 	Offset: 0x678
@@ -59,7 +59,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"globallogic", &function_70a657d8, undefined, undefined, #"visionset_mgr");
 }
@@ -110,8 +110,8 @@ function init()
 			level.rankedmatch = 1;
 		}
 	#/
-	level.script = util::function_53bbf9d2();
-	level.gametype = util::function_5df4294();
+	level.script = util::get_map_name();
+	level.gametype = util::get_game_type();
 	level.var_837aa533 = hash(level.gametype);
 	if(isdefined(level.gametype))
 	{
@@ -345,7 +345,7 @@ function precache_mp_leaderboards()
 	{
 		return;
 	}
-	mapname = util::function_53bbf9d2();
+	mapname = util::get_map_name();
 	globalleaderboards = "LB_MP_GB_XPPRESTIGE LB_MP_GB_SCORE LB_MP_GB_KDRATIO LB_MP_GB_KILLS LB_MP_GB_WINS LB_MP_GB_DEATHS LB_MP_GB_XPMAXPERGAME LB_MP_GB_TACTICALINSERTS LB_MP_GB_TACTICALINSERTSKILLS LB_MP_GB_PRESTIGEXP LB_MP_GB_HEADSHOTS LB_MP_GB_WEAPONS_PRIMARY LB_MP_GB_WEAPONS_SECONDARY";
 	careerleaderboard = "";
 	switch(level.gametype)
@@ -854,7 +854,7 @@ function updategameevents()
 			else if(atleasttwoteams())
 			{
 				level.gameforfeited = 0;
-				level notify(#"hash_39a00a79045884ca");
+				level notify(#"abort forfeit");
 			}
 		}
 		else
@@ -870,7 +870,7 @@ function updategameevents()
 			else if(util::totalplayercount() > 1)
 			{
 				level.gameforfeited = 0;
-				level notify(#"hash_39a00a79045884ca");
+				level notify(#"abort forfeit");
 			}
 		}
 	}
@@ -1083,7 +1083,7 @@ function getteamscoreratio()
 */
 function gethighestscore()
 {
-	highestscore = 999999999;
+	highestscore = -999999999;
 	for(index = 0; index < level.players.size; index++)
 	{
 		player = level.players[index];
@@ -1106,7 +1106,7 @@ function gethighestscore()
 */
 function getnexthighestscore(score)
 {
-	highestscore = 999999999;
+	highestscore = -999999999;
 	for(index = 0; index < level.players.size; index++)
 	{
 		player = level.players[index];
@@ -1156,7 +1156,7 @@ function sendafteractionreport(winner)
 			player stats::function_7a850245(#"privatematch", 1);
 		}
 		player stats::function_7a850245(#"demofileid", getdemofileid());
-		player stats::function_7a850245(#"matchid", function_c7c50474());
+		player stats::function_7a850245(#"matchid", getmatchid());
 		if(isdefined(winner) && winner == player.pers[#"team"])
 		{
 			player stats::function_7a850245(#"matchwon", 1);
@@ -2387,7 +2387,7 @@ function startgame()
 	}
 	level notify(#"prematch_over");
 	level.prematch_over = 1;
-	function_c1207282(level.players);
+	startplayers(level.players);
 	level flag::set("game_start");
 	thread timelimitclock();
 	thread graceperiod();
@@ -2473,7 +2473,7 @@ function function_b5d72fb0()
 }
 
 /*
-	Name: function_c1207282
+	Name: startplayers
 	Namespace: globallogic
 	Checksum: 0x555AC41D
 	Offset: 0x6540
@@ -2481,7 +2481,7 @@ function function_b5d72fb0()
 	Parameters: 1
 	Flags: None
 */
-function function_c1207282(players)
+function startplayers(players)
 {
 	if(!isdefined(players))
 	{
@@ -2640,13 +2640,13 @@ function callback_startgametype()
 		game.strings[#"hash_b71875e85956ea"] = #"hash_61f8bf2959b7bd5a";
 		game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
 		game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
-		game.strings[#"tie"] = #"hash_72785a9088fa0d1b";
-		game.strings[#"round_draw"] = #"hash_7d3ae25e0187143e";
+		game.strings[#"tie"] = #"mp/match_tie";
+		game.strings[#"round_draw"] = #"mp/round_draw";
 		game.strings[#"enemies_eliminated"] = #"mp_enemies_eliminated";
-		game.strings[#"score_limit_reached"] = #"hash_3050eee23c6a3574";
-		game.strings[#"round_limit_reached"] = #"hash_3b23cb510ab5970a";
-		game.strings[#"time_limit_reached"] = #"hash_4e2680278af76571";
-		game.strings[#"players_forfeited"] = #"hash_4b172be7ce459674";
+		game.strings[#"score_limit_reached"] = #"mp/score_limit_reached";
+		game.strings[#"round_limit_reached"] = #"mp/round_limit_reached";
+		game.strings[#"time_limit_reached"] = #"mp/time_limit_reached";
+		game.strings[#"players_forfeited"] = #"mp/players_forfeited";
 		game.strings[#"other_teams_forfeited"] = #"mp_other_teams_forfeited";
 		if(isdefined(level.onprecachegametype))
 		{

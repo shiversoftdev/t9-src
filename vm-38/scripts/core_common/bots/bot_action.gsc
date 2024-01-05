@@ -1,7 +1,7 @@
-#using script_1a36b1b297e29367;
-#using script_2255a7ad3edc838f;
-#using script_bc437ea5aebf041;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\bots\bot_weapons.gsc;
+#using scripts\core_common\bots\bot_actions.gsc;
+#using scripts\core_common\bots\bot.gsc;
 
 #namespace bot_action;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_10b376de()
 {
-	level notify(25858069);
+	level notify(-25858069);
 }
 
 /*
@@ -32,8 +32,8 @@ function function_70a657d8()
 {
 	level.botactions = [];
 	level.botweapons = [];
-	namespace_eed5a117::function_70a657d8();
-	namespace_d9f3dd47::function_70a657d8();
+	bot_actions::function_70a657d8();
+	bot_weapons::function_70a657d8();
 }
 
 /*
@@ -65,21 +65,21 @@ function shutdown()
 function think()
 {
 	pixbeginevent();
-	var_41fcf220 = self.bot.var_b594a2cd;
-	var_b594a2cd = self function_9e181b0f();
-	if(isdefined(var_b594a2cd) && isdefined(var_41fcf220) && var_b594a2cd == var_41fcf220)
+	var_41fcf220 = self.bot.actionparams;
+	actionparams = self function_9e181b0f();
+	if(isdefined(actionparams) && isdefined(var_41fcf220) && actionparams == var_41fcf220)
 	{
 		self notify(#"hash_77f2882ff9140e86");
 		pixendevent();
 		return;
 	}
 	self notify(#"hash_1ae115949cd752c8");
-	self.bot.var_b594a2cd = undefined;
+	self.bot.actionparams = undefined;
 	clear();
-	if(isdefined(var_b594a2cd))
+	if(isdefined(actionparams))
 	{
-		self.bot.var_b594a2cd = var_b594a2cd;
-		self thread [[var_b594a2cd.action.executefunc]](var_b594a2cd);
+		self.bot.actionparams = actionparams;
+		self thread [[actionparams.action.executefunc]](actionparams);
 	}
 	pixendevent();
 }
@@ -118,12 +118,12 @@ function clear()
 	Parameters: 1
 	Flags: Linked
 */
-function function_a0b0f487(var_b594a2cd)
+function function_a0b0f487(actionparams)
 {
 	if(self arecontrolsfrozen() || self function_5972c3cf())
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_329792b380cfd409";
+			actionparams.debug[actionparams.debug.size] = #"hash_329792b380cfd409";
 		#/
 		return true;
 	}
@@ -139,12 +139,12 @@ function function_a0b0f487(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function function_2c3ea0c6(var_b594a2cd)
+function function_2c3ea0c6(actionparams)
 {
 	if(self isplayinganimscripted())
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_5cbefc6b234455fc";
+			actionparams.debug[actionparams.debug.size] = #"hash_5cbefc6b234455fc";
 		#/
 		return true;
 	}
@@ -160,12 +160,12 @@ function function_2c3ea0c6(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function in_vehicle(var_b594a2cd)
+function in_vehicle(actionparams)
 {
 	if(self isinvehicle())
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_74dd6cdecdd53e96";
+			actionparams.debug[actionparams.debug.size] = #"hash_74dd6cdecdd53e96";
 		#/
 		return true;
 	}
@@ -181,12 +181,12 @@ function in_vehicle(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function function_ed7b2f42(var_b594a2cd)
+function function_ed7b2f42(actionparams)
 {
 	if(isdefined(self.bot.traversal))
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_17222d5087946703";
+			actionparams.debug[actionparams.debug.size] = #"hash_17222d5087946703";
 		#/
 		return true;
 	}
@@ -202,12 +202,12 @@ function function_ed7b2f42(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function function_a43bc7e2(var_b594a2cd)
+function function_a43bc7e2(actionparams)
 {
 	if(self.ignoreall)
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_5a308775df684ba1";
+			actionparams.debug[actionparams.debug.size] = #"hash_5a308775df684ba1";
 		#/
 		return true;
 	}
@@ -223,12 +223,12 @@ function function_a43bc7e2(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function in_combat(var_b594a2cd)
+function in_combat(actionparams)
 {
 	if(self.combatstate == #"combat_state_in_combat" || self.combatstate == #"combat_state_has_visible_enemy")
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_6c8a68a6b0ba3e46";
+			actionparams.debug[actionparams.debug.size] = #"hash_6c8a68a6b0ba3e46";
 		#/
 		return true;
 	}
@@ -244,12 +244,12 @@ function in_combat(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function just_spawned(var_b594a2cd)
+function just_spawned(actionparams)
 {
 	if(self.spawntime >= gettime())
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_5080fb7f9d457021";
+			actionparams.debug[actionparams.debug.size] = #"hash_5080fb7f9d457021";
 		#/
 		return true;
 	}
@@ -265,12 +265,12 @@ function just_spawned(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function flashed(var_b594a2cd)
+function flashed(actionparams)
 {
 	if(self.bot.flashed)
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"flashed";
+			actionparams.debug[actionparams.debug.size] = #"flashed";
 		#/
 		return true;
 	}
@@ -286,19 +286,19 @@ function flashed(var_b594a2cd)
 	Parameters: 1
 	Flags: Linked
 */
-function function_ebb8205b(var_b594a2cd)
+function function_ebb8205b(actionparams)
 {
 	if(self isinexecutionvictim())
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_6ad5723518a9aa59";
+			actionparams.debug[actionparams.debug.size] = #"hash_6ad5723518a9aa59";
 		#/
 		return true;
 	}
 	if(self isinexecutionattack())
 	{
 		/#
-			var_b594a2cd.debug[var_b594a2cd.debug.size] = #"hash_21cc6a6be1e0b67";
+			actionparams.debug[actionparams.debug.size] = #"hash_21cc6a6be1e0b67";
 		#/
 		return true;
 	}
@@ -350,7 +350,7 @@ function register_weapon(weaponname, weightfunc, executefunc)
 function private function_daafd48c(&paramslist)
 {
 	pixbeginevent();
-	var_6577f082 = self.bot.var_b594a2cd;
+	var_6577f082 = self.bot.actionparams;
 	weapons = self getweaponslist();
 	foreach(weapon in weapons)
 	{
@@ -359,20 +359,20 @@ function private function_daafd48c(&paramslist)
 		{
 			continue;
 		}
-		var_b594a2cd = undefined;
+		actionparams = undefined;
 		if(isdefined(var_6577f082) && var_6577f082.action == action && var_6577f082.weapon == weapon)
 		{
-			var_b594a2cd = var_6577f082;
+			actionparams = var_6577f082;
 		}
 		else
 		{
-			var_b594a2cd = {#weapon:weapon, #action:action};
+			actionparams = {#weapon:weapon, #action:action};
 		}
 		/#
-			var_b594a2cd.name = function_a16a090d(weapon);
-			var_b594a2cd.debug = [];
+			actionparams.name = function_a16a090d(weapon);
+			actionparams.debug = [];
 		#/
-		paramslist[paramslist.size] = var_b594a2cd;
+		paramslist[paramslist.size] = actionparams;
 	}
 	pixendevent();
 }
@@ -389,23 +389,23 @@ function private function_daafd48c(&paramslist)
 function private function_f692725c(&paramslist)
 {
 	pixbeginevent();
-	var_6577f082 = self.bot.var_b594a2cd;
+	var_6577f082 = self.bot.actionparams;
 	foreach(action in level.botactions)
 	{
-		var_b594a2cd = undefined;
+		actionparams = undefined;
 		if(isdefined(var_6577f082) && var_6577f082.action == action)
 		{
-			var_b594a2cd = var_6577f082;
+			actionparams = var_6577f082;
 		}
 		else
 		{
-			var_b594a2cd = {#action:action};
+			actionparams = {#action:action};
 		}
 		/#
-			var_b594a2cd.name = name;
-			var_b594a2cd.debug = [];
+			actionparams.name = name;
+			actionparams.debug = [];
 		#/
-		paramslist[paramslist.size] = var_b594a2cd;
+		paramslist[paramslist.size] = actionparams;
 	}
 	pixendevent();
 }
@@ -465,19 +465,19 @@ function private weight_actions(&paramslist)
 	pixbeginevent();
 	var_3a4035f3 = undefined;
 	bestweight = undefined;
-	foreach(var_b594a2cd in paramslist)
+	foreach(actionparams in paramslist)
 	{
 		pixbeginevent();
-		var_b594a2cd.weight = self [[var_b594a2cd.action.weightfunc]](var_b594a2cd);
+		actionparams.weight = self [[actionparams.action.weightfunc]](actionparams);
 		pixendevent();
-		if(!isdefined(var_b594a2cd.weight))
+		if(!isdefined(actionparams.weight))
 		{
 			continue;
 		}
-		if(!isdefined(var_3a4035f3) || var_b594a2cd.weight > bestweight)
+		if(!isdefined(var_3a4035f3) || actionparams.weight > bestweight)
 		{
-			var_3a4035f3 = var_b594a2cd;
-			bestweight = var_b594a2cd.weight;
+			var_3a4035f3 = actionparams;
+			bestweight = actionparams.weight;
 		}
 	}
 	/#
@@ -488,33 +488,33 @@ function private weight_actions(&paramslist)
 				record3dtext("", self.origin, (1, 0, 1), "", self, 0.5);
 			}
 			var_37c2490e = [];
-			foreach(var_b594a2cd in paramslist)
+			foreach(actionparams in paramslist)
 			{
-				if(!isdefined(var_b594a2cd.weight))
+				if(!isdefined(actionparams.weight))
 				{
-					var_37c2490e[var_37c2490e.size] = var_b594a2cd;
+					var_37c2490e[var_37c2490e.size] = actionparams;
 					continue;
 				}
 				for(i = 0; i < var_37c2490e.size; i++)
 				{
 					var_fd5e06c8 = var_37c2490e[i].weight;
-					if(!isdefined(var_fd5e06c8) || var_fd5e06c8 < var_b594a2cd.weight)
+					if(!isdefined(var_fd5e06c8) || var_fd5e06c8 < actionparams.weight)
 					{
 						break;
 					}
 				}
-				arrayinsert(var_37c2490e, var_b594a2cd, i);
+				arrayinsert(var_37c2490e, actionparams, i);
 			}
-			foreach(var_b594a2cd in var_37c2490e)
+			foreach(actionparams in var_37c2490e)
 			{
 				color = vectorscale((1, 1, 1), 0.75);
 				headerstr = "";
 				recordweight = "";
-				if(isdefined(var_b594a2cd.weight))
+				if(isdefined(actionparams.weight))
 				{
-					color = bot::function_f86de15e(var_b594a2cd.weight, 100, (1, 0, 0), (1, 0.5, 0), (1, 1, 0), (0, 1, 0));
-					recordweight = var_b594a2cd.weight;
-					if(var_b594a2cd === var_3a4035f3)
+					color = bot::function_f86de15e(actionparams.weight, 100, (1, 0, 0), (1, 0.5, 0), (1, 1, 0), (0, 1, 0));
+					recordweight = actionparams.weight;
+					if(actionparams === var_3a4035f3)
 					{
 						headerstr = "";
 					}
@@ -523,8 +523,8 @@ function private weight_actions(&paramslist)
 						headerstr = "";
 					}
 				}
-				record3dtext(((headerstr + function_9e72a96(var_b594a2cd.name)) + "") + recordweight, self.origin, color, "", self, 0.5);
-				foreach(entry in var_b594a2cd.debug)
+				record3dtext(((headerstr + function_9e72a96(actionparams.name)) + "") + recordweight, self.origin, color, "", self, 0.5);
+				foreach(entry in actionparams.debug)
 				{
 					record3dtext("" + function_9e72a96(entry), self.origin, color, "", self, 0.5);
 				}
@@ -567,13 +567,13 @@ function function_d6318084(weapon)
 	Parameters: 1
 	Flags: Linked
 */
-function function_32020adf(var_12be3b68)
+function function_32020adf(delaysec)
 {
-	if(!isdefined(var_12be3b68))
+	if(!isdefined(delaysec))
 	{
-		var_12be3b68 = undefined;
+		delaysec = undefined;
 	}
-	self.bot.var_ceffa180 = gettime() + (int(var_12be3b68 * 1000));
+	self.bot.var_ceffa180 = gettime() + (int(delaysec * 1000));
 }
 
 /*
@@ -591,14 +591,14 @@ function private function_2a2a2cd2(name, action, weapon)
 	{
 		weapon = undefined;
 	}
-	var_b594a2cd = {#weapon:weapon, #action:action};
+	actionparams = {#weapon:weapon, #action:action};
 	eye = self.origin + (0, 0, self getplayerviewheight());
-	var_b594a2cd.aimorigin = eye + (128 * anglestoforward(self.angles));
+	actionparams.aimorigin = eye + (128 * anglestoforward(self.angles));
 	/#
-		var_b594a2cd.name = name;
-		var_b594a2cd.weight = "";
+		actionparams.name = name;
+		actionparams.weight = "";
 	#/
-	self.bot.var_e6a1f475 = var_b594a2cd;
+	self.bot.var_e6a1f475 = actionparams;
 }
 
 /*
@@ -664,7 +664,7 @@ function function_2a24a928()
 		return undefined;
 	}
 	var_137299d = [];
-	var_7607a546 = function_ad6356f5(self.origin);
+	var_7607a546 = getclosesttacpoint(self.origin);
 	if(isdefined(var_7607a546))
 	{
 		foreach(target in potentialtargets)

@@ -1,16 +1,16 @@
-#using script_256b8879317373de;
-#using script_32c8b5b0eb2854f3;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\string_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\string_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using script_32c8b5b0eb2854f3;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 #namespace val;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: val
 	Checksum: 0x4928D077
 	Offset: 0x460
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"values", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -37,7 +37,7 @@ function private function_70a657d8()
 	register("takedamage", 1, "$self", &set_takedamage, "$value");
 	default_func("takedamage", "$self", &default_takedamage);
 	register("allowdeath", 1, "$self", &set_allowdeath, "$value");
-	default_func("allowdeath", "$self", &function_d5397f5b);
+	default_func("allowdeath", "$self", &default_allowdeath);
 	register("magic_bullet_shield", 1, "$self", &function_87a1ac43, "$value");
 	default_func("magic_bullet_shield", "$self", &function_aac507e5);
 	link("magic_bullet_shield", "allowdeath", &function_49321c2b);
@@ -60,7 +60,7 @@ function private function_70a657d8()
 	default_value("disable_weapon_pickup", 0);
 	register("disable_weapon_fire", 1, "$self", &function_16f5ac8e, "$value");
 	default_value("disable_weapon_fire", 0);
-	register("disable_offhand_weapons", 1, "$self", &function_9492c418, "$value");
+	register("disable_offhand_weapons", 1, "$self", &set_disableoffhandweapons, "$value");
 	default_value("disable_offhand_weapons", 0);
 	register("disable_offhand_special", 1, "$self", &function_37c7ffcd, "$value");
 	default_value("disable_offhand_special", 0);
@@ -72,15 +72,15 @@ function private function_70a657d8()
 	default_value("freezecontrols", 0);
 	register("freezecontrols_allowlook", 1, "$self", &freezecontrolsallowlook, "$value");
 	default_value("freezecontrols_allowlook", 0);
-	register("disablegadgets", 1, "$self", &function_cd5fec49, "$value");
+	register("disablegadgets", 1, "$self", &gadgetsdisabled, "$value");
 	default_value("disablegadgets", 0);
-	register("hide", 1, "$self", &function_b981952a, "$value");
+	register("hide", 1, "$self", &set_hide, "$value");
 	default_value("hide", 0);
-	register("health_regen", 1, "$self", &function_a8c51b69, "$value");
+	register("health_regen", 1, "$self", &set_health_regen, "$value");
 	default_value("health_regen", 1);
-	register("disable_health_regen_delay", 1, "$self", &function_a89d2031, "$value");
+	register("disable_health_regen_delay", 1, "$self", &set_disable_health_regen_delay, "$value");
 	default_value("disable_health_regen_delay", 0);
-	register("ignore_health_regen_delay", 1, "$self", &function_ee2e556b, "$value");
+	register("ignore_health_regen_delay", 1, "$self", &set_ignore_health_regen_delay, "$value");
 	default_value("ignore_health_regen_delay", 0);
 	register("show_hud", 1, "$self", &setclientuivisibilityflag, "hud_visible", "$value");
 	default_value("show_hud", 1);
@@ -92,7 +92,7 @@ function private function_70a657d8()
 	default_value("show_compass", 1);
 	register("show_hit_marker", 1, "$self", &function_62318390, "$value");
 	default_value("show_hit_marker", 1);
-	register("disable_gestures", 1, "$self", &function_8210793d, "$value");
+	register("disable_gestures", 1, "$self", &set_disablegestures, "$value");
 	default_value("disable_gestures", 0);
 	register("allow_jump", 1, "$self", &allowjump, "$value");
 	default_value("allow_jump", 1);
@@ -135,7 +135,7 @@ function private function_70a657d8()
 		validate("", "", &validate_takedamage);
 		validate("", "", &arecontrolsfrozen);
 		validate("", "", &function_5972c3cf);
-		validate("", "", &function_cd5fec49);
+		validate("", "", &gadgetsdisabled);
 		validate("", "", &ishidden);
 	#/
 }
@@ -596,7 +596,7 @@ function private set_allowdeath(b_value)
 }
 
 /*
-	Name: function_d5397f5b
+	Name: default_allowdeath
 	Namespace: val
 	Checksum: 0xF68BD9B4
 	Offset: 0x2398
@@ -604,7 +604,7 @@ function private set_allowdeath(b_value)
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_d5397f5b()
+function private default_allowdeath()
 {
 	return issentient(self) || isvehicle(self);
 }
@@ -863,7 +863,7 @@ function private function_15d061e0(b_value)
 }
 
 /*
-	Name: function_9492c418
+	Name: set_disableoffhandweapons
 	Namespace: val
 	Checksum: 0x9C0F4456
 	Offset: 0x2800
@@ -871,7 +871,7 @@ function private function_15d061e0(b_value)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_9492c418(b_value)
+function private set_disableoffhandweapons(b_value)
 {
 	if(!isdefined(b_value))
 	{
@@ -1030,7 +1030,7 @@ function private function_62318390(b_value)
 }
 
 /*
-	Name: function_8210793d
+	Name: set_disablegestures
 	Namespace: val
 	Checksum: 0x2C992E53
 	Offset: 0x2A98
@@ -1038,7 +1038,7 @@ function private function_62318390(b_value)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_8210793d(b_value)
+function private set_disablegestures(b_value)
 {
 	if(!isdefined(b_value))
 	{
@@ -1046,12 +1046,12 @@ function private function_8210793d(b_value)
 	}
 	if(isplayer(self))
 	{
-		self.var_89b32012 = b_value;
+		self.disablegestures = b_value;
 	}
 }
 
 /*
-	Name: function_b981952a
+	Name: set_hide
 	Namespace: val
 	Checksum: 0x9E82B1C8
 	Offset: 0x2AE8
@@ -1059,7 +1059,7 @@ function private function_8210793d(b_value)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_b981952a(b_value)
+function private set_hide(b_value)
 {
 	if(!isdefined(b_value))
 	{
@@ -1083,7 +1083,7 @@ function private function_b981952a(b_value)
 }
 
 /*
-	Name: function_a8c51b69
+	Name: set_health_regen
 	Namespace: val
 	Checksum: 0x77F0B384
 	Offset: 0x2B68
@@ -1091,7 +1091,7 @@ function private function_b981952a(b_value)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_a8c51b69(b_value)
+function private set_health_regen(b_value)
 {
 	if(!isdefined(b_value))
 	{
@@ -1108,7 +1108,7 @@ function private function_a8c51b69(b_value)
 }
 
 /*
-	Name: function_a89d2031
+	Name: set_disable_health_regen_delay
 	Namespace: val
 	Checksum: 0x6B0EA213
 	Offset: 0x2BC0
@@ -1116,7 +1116,7 @@ function private function_a8c51b69(b_value)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_a89d2031(b_value)
+function private set_disable_health_regen_delay(b_value)
 {
 	if(!isdefined(b_value))
 	{
@@ -1133,7 +1133,7 @@ function private function_a89d2031(b_value)
 }
 
 /*
-	Name: function_ee2e556b
+	Name: set_ignore_health_regen_delay
 	Namespace: val
 	Checksum: 0x53E96EF1
 	Offset: 0x2C10
@@ -1141,7 +1141,7 @@ function private function_a89d2031(b_value)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_ee2e556b(b_value)
+function private set_ignore_health_regen_delay(b_value)
 {
 	if(!isdefined(b_value))
 	{
@@ -1466,11 +1466,11 @@ function private display_value(index, str_name, str_id, value, b_valid, on_hud)
 		{
 			on_hud = 0;
 		}
-		if(function_7a600918(str_name))
+		if(ishash(str_name))
 		{
 			str_name = function_9e72a96(str_name);
 		}
-		if(function_7a600918(str_id))
+		if(ishash(str_id))
 		{
 			str_id = function_9e72a96(str_id);
 		}

@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace zombie_eye_glow;
@@ -15,11 +15,11 @@
 */
 function private autoexec function_9822984d()
 {
-	level notify(1132983429);
+	level notify(-1132983429);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zombie_eye_glow
 	Checksum: 0x39968B63
 	Offset: 0xD0
@@ -27,7 +27,7 @@ function private autoexec function_9822984d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zombie_eye_glow", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

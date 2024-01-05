@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_81599b35 : class_6aaccc24
+class cbountyhunterbuy : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_81599b35
+		Namespace: cbountyhunterbuy
 		Checksum: 0xB550D7CC
 		Offset: 0x2D8
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_81599b35 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_81599b35
+		Namespace: cbountyhunterbuy
 		Checksum: 0x531364BD
 		Offset: 0x3A8
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_81599b35 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_81599b35
+		Namespace: cbountyhunterbuy
 		Checksum: 0xEB7B87E
 		Offset: 0x378
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_81599b35 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_81599b35
+		Name: register_clientside
+		Namespace: cbountyhunterbuy
 		Checksum: 0xEE89349A
 		Offset: 0x320
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("BountyHunterBuy");
+		cluielem::register_clientside("BountyHunterBuy");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_81599b35
+		Namespace: cbountyhunterbuy
 		Checksum: 0xB492B128
 		Offset: 0x2F8
 		Size: 0x1C
@@ -68,12 +68,12 @@ class class_81599b35 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("BountyHunterBuy");
+		cluielem::setup_clientfields("BountyHunterBuy");
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_81599b35
+		Namespace: cbountyhunterbuy
 		Checksum: 0xA692EB8A
 		Offset: 0x348
 		Size: 0x24
@@ -82,7 +82,7 @@ class class_81599b35 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -100,7 +100,7 @@ class class_81599b35 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_81599b35();
+	elem = new cbountyhunterbuy();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: bountyhunterbuy
 	Checksum: 0xFE3FA916
 	Offset: 0x220
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_81599b35();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cbountyhunterbuy();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

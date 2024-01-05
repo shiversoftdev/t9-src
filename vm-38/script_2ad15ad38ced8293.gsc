@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_2d7ccca3;
 
@@ -18,7 +18,7 @@ function private autoexec function_74a00533()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2d7ccca3
 	Checksum: 0x80E41A09
 	Offset: 0xE8
@@ -26,7 +26,7 @@ function private autoexec function_74a00533()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3dcfc06bf6bfc5f5", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -42,7 +42,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	clientfield::function_a8bbc967("hudItems.ammoCooldowns.fieldUpgrade", #"hud_items", [1:#"fieldupgrade", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.ammoCooldowns.fieldUpgrade", #"hud_items", [1:#"fieldupgrade", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
 	clientfield::register("missile", "fieldUpgradeActive", 1, 1, "int", &function_5fbd38e2, 0, 0);
 }
 

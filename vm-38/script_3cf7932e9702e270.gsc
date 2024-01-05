@@ -1,13 +1,13 @@
-#using script_5bb072c3abf4652c;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_51d1d6a3;
 
@@ -22,11 +22,11 @@
 */
 function private autoexec function_7e3ec462()
 {
-	level notify(873289453);
+	level notify(-873289453);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_51d1d6a3
 	Checksum: 0x2CA4510D
 	Offset: 0x2E8
@@ -34,7 +34,7 @@ function private autoexec function_7e3ec462()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5fae7e8391e7e602", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -50,7 +50,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	level.var_4d16d15f = #"hash_583a7c6fc0d127b0";
+	level.var_4d16d15f = #"strauss";
 	level.var_24cfb8fb = "none";
 }
 
@@ -252,7 +252,7 @@ function private function_40466d11()
 		level.var_8804e5b7 = 1;
 		switch(level.var_4d16d15f)
 		{
-			case "hash_583a7c6fc0d127b0":
+			case "strauss":
 			{
 				level thread function_14a92dc6(#"hash_2bfa170c2577a2c0");
 				break;
@@ -271,14 +271,14 @@ function private function_40466d11()
 	}
 	if(!is_true(level.var_8fff3192))
 	{
-		var_be17187b = undefined;
-		var_be17187b = self waittill(#"spawned_split_ai", #"death");
-		if(var_be17187b._notify == "spawned_split_ai")
+		s_waitresult = undefined;
+		s_waitresult = self waittill(#"spawned_split_ai", #"death");
+		if(s_waitresult._notify == "spawned_split_ai")
 		{
 			level.var_8fff3192 = 1;
 			switch(level.var_4d16d15f)
 			{
-				case "hash_583a7c6fc0d127b0":
+				case "strauss":
 				{
 					level thread function_14a92dc6(#"hash_26e569fb2e7fabe");
 					break;
@@ -346,11 +346,11 @@ function function_3633608()
 	level endon(#"end_game", #"game_ended");
 	level waittill(#"end_of_round");
 	wait(2);
-	level.var_4d16d15f = array::random([2:#"grey", 1:#"carver", 0:#"hash_583a7c6fc0d127b0"]);
+	level.var_4d16d15f = array::random([2:#"grey", 1:#"carver", 0:#"strauss"]);
 	level.var_6d0817f3 = function_21a3a673(1, 3);
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_7c89e8e126b6c6fd" + level.var_6d0817f3);
 			break;
@@ -371,7 +371,7 @@ function function_3633608()
 	level.var_6d0817f3 = function_21a3a673(1, 3);
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_746082b4ed748867");
 			level thread function_14a92dc6(#"hash_703122bc846f3274" + level.var_6d0817f3, 2);
@@ -398,7 +398,7 @@ function function_3633608()
 	level.var_6d0817f3 = function_21a3a673(1, 3);
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_664de04f130d528f" + level.var_6d0817f3);
 			break;
@@ -419,7 +419,7 @@ function function_3633608()
 	level.var_6d0817f3 = function_21a3a673(1, 3);
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level zm_vo::function_7622cb70(#"hash_37898e53a04b05e" + level.var_6d0817f3, 2);
 			break;
@@ -439,7 +439,7 @@ function function_3633608()
 	level function_14a92dc6(#"hash_435c5cccc93229fb", 2);
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_3581d9e7960a0f9e");
 			break;
@@ -474,7 +474,7 @@ function function_902215db()
 	{
 		switch(level.var_4d16d15f)
 		{
-			case "hash_583a7c6fc0d127b0":
+			case "strauss":
 			{
 				level.var_516c02a2 function_14a92dc6(#"hash_1ba60eb0e7d6a166");
 				break;
@@ -509,7 +509,7 @@ function function_ab2c7273()
 	level waittill(#"hash_43f35dbac954ab43");
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_53d9751e497e3c70");
 			break;
@@ -530,7 +530,7 @@ function function_ab2c7273()
 	{
 		switch(level.var_4d16d15f)
 		{
-			case "hash_583a7c6fc0d127b0":
+			case "strauss":
 			{
 				level.var_c3accf46 function_14a92dc6(#"hash_5155cb66536ec31d");
 				break;
@@ -564,7 +564,7 @@ function function_4a3710bf()
 	level waittill(#"hash_20690d1d96df7c03");
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_3f97277da473b26");
 			break;
@@ -585,7 +585,7 @@ function function_4a3710bf()
 	{
 		switch(level.var_4d16d15f)
 		{
-			case "hash_583a7c6fc0d127b0":
+			case "strauss":
 			{
 				level.var_ae002b60 function_14a92dc6(#"hash_668d7bbc9af9b6d9");
 				break;
@@ -621,7 +621,7 @@ function function_5510bf92()
 	{
 		switch(level.var_4d16d15f)
 		{
-			case "hash_583a7c6fc0d127b0":
+			case "strauss":
 			{
 				level.var_42000fd0 function_14a92dc6(#"hash_7a5f631bfc8662ea");
 				break;
@@ -657,7 +657,7 @@ function function_835805bb()
 	{
 		switch(level.var_4d16d15f)
 		{
-			case "hash_583a7c6fc0d127b0":
+			case "strauss":
 			{
 				level.var_c8a2dc28 function_14a92dc6(#"hash_17c189767812d048");
 				break;
@@ -698,7 +698,7 @@ function function_19c1718a()
 			{
 				switch(level.var_4d16d15f)
 				{
-					case "hash_583a7c6fc0d127b0":
+					case "strauss":
 					{
 						level function_14a92dc6(#"hash_5e88d33aa9677afe");
 						break;
@@ -720,7 +720,7 @@ function function_19c1718a()
 			{
 				switch(level.var_4d16d15f)
 				{
-					case "hash_583a7c6fc0d127b0":
+					case "strauss":
 					{
 						level function_14a92dc6(#"hash_2caf7a7d178b77ba");
 						break;
@@ -742,7 +742,7 @@ function function_19c1718a()
 			{
 				switch(level.var_4d16d15f)
 				{
-					case "hash_583a7c6fc0d127b0":
+					case "strauss":
 					{
 						level function_14a92dc6(#"hash_17c2d93101463ced");
 						break;
@@ -764,7 +764,7 @@ function function_19c1718a()
 			{
 				switch(level.var_4d16d15f)
 				{
-					case "hash_583a7c6fc0d127b0":
+					case "strauss":
 					{
 						level function_14a92dc6(#"hash_5bf0eab62d8ef917");
 						break;
@@ -802,7 +802,7 @@ function function_13d6d61f()
 	level flag::wait_till_clear(#"hash_23d445a634bedeae");
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_ce99e6568dee47d");
 			break;
@@ -821,7 +821,7 @@ function function_13d6d61f()
 	level flag::wait_till(#"hash_1e2c6b7b99b8706b");
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_2a02c9052990894a");
 			break;
@@ -856,7 +856,7 @@ function function_c45ee789()
 	level waittill(#"hash_222af38f51671594");
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_f86b89d90bc0baa");
 			break;
@@ -890,7 +890,7 @@ function function_73b2378f()
 	level function_14a92dc6(#"hash_cb591bbc36d61c6");
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_1f2fad952b916ca0");
 			break;
@@ -926,7 +926,7 @@ function function_61e91466()
 	level zm_vo::function_d6f8bbd9(#"hash_4427f4ac84d6ca61", 1, function_a1ef346b());
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_59c256f38f192498");
 			break;
@@ -979,7 +979,7 @@ function function_afe33aa6()
 	level zm_vo::function_d6f8bbd9(#"hash_7f5ce38acf75a8f4", undefined, function_a1ef346b());
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_7b3b9b567d3354a4");
 			break;
@@ -1015,7 +1015,7 @@ function function_56ba2988()
 	{
 		switch(level.var_4d16d15f)
 		{
-			case "hash_583a7c6fc0d127b0":
+			case "strauss":
 			{
 				level function_14a92dc6(#"hash_7e2b798c1a94936c");
 				break;
@@ -1053,7 +1053,7 @@ function function_7def382e()
 	}
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_652055f58c723ad");
 			break;
@@ -1270,7 +1270,7 @@ function function_6a3c98be()
 	while(true)
 	{
 		var_2f39336 = self zm_zonemgr::get_player_zone();
-		self waittill(#"hash_2d4daa9e80b86b60");
+		self waittill(#"zone_change");
 		if(isdefined(var_2f39336))
 		{
 			if(isinarray(var_e10caa68, var_2f39336) && !is_true(level.var_909c3262) && (self.cached_zone_name === "zone_center_lower" || self.cached_zone_name === "zone_center_upper_west" || self.cached_zone_name === "zone_center_upper_north" || self.cached_zone_name === "zone_center_upper") && !is_true(level.var_1f38ef9f) && !level flag::get(#"dark_aether_active"))
@@ -1279,7 +1279,7 @@ function function_6a3c98be()
 				level.var_1f38ef9f = 1;
 				switch(level.var_4d16d15f)
 				{
-					case "hash_583a7c6fc0d127b0":
+					case "strauss":
 					{
 						level function_14a92dc6(#"hash_10e465208d0c985b");
 						break;
@@ -1318,14 +1318,14 @@ function function_daafb798()
 	level.var_7974d690 = [1:"zone_proto_upstairs", 0:"zone_proto_interior_cave"];
 	while(true)
 	{
-		self waittill(#"hash_2d4daa9e80b86b60");
+		self waittill(#"zone_change");
 		if(self zm_zonemgr::is_player_in_zone(level.var_7974d690, 0) && !is_true(level.var_ae9e1aec) && !is_true(level.var_1f38ef9f) && !level flag::get(#"dark_aether_active"))
 		{
 			level.var_ae9e1aec = 1;
 			level.var_1f38ef9f = 1;
 			switch(level.var_4d16d15f)
 			{
-				case "hash_583a7c6fc0d127b0":
+				case "strauss":
 				{
 					level function_14a92dc6(#"hash_70fba3c776927b17");
 					break;
@@ -1363,7 +1363,7 @@ function function_71299b6e()
 	var_25e4248d waittill(#"trigger");
 	switch(level.var_4d16d15f)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			level function_14a92dc6(#"hash_2df687a8d81dd712");
 			break;
@@ -1435,7 +1435,7 @@ function function_ee2c526b()
 				{
 					switch(level.var_4d16d15f)
 					{
-						case "hash_583a7c6fc0d127b0":
+						case "strauss":
 						{
 							level function_14a92dc6(#"hash_5d6224d4b53f40b4", 2);
 							break;

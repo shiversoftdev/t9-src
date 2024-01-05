@@ -1,12 +1,12 @@
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 
 #namespace globallogic_player;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: globallogic_player
 	Checksum: 0x862DBDD7
 	Offset: 0x80
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"globallogic_player", &function_70a657d8, undefined, undefined, undefined);
 }

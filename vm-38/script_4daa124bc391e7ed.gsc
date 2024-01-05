@@ -25,7 +25,7 @@ function private autoexec function_8c90c0e1()
 */
 function function_bdda909b()
 {
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		return;
 	}

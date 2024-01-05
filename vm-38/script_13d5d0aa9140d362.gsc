@@ -1,13 +1,13 @@
 #using script_16b1b77a76492c6a;
-#using script_3f9e0dc8454d98e1;
-#using script_7fc996fe8678852;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_e51c1e80;
 
@@ -26,7 +26,7 @@ function private autoexec function_697bd9b1()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e51c1e80
 	Checksum: 0x180DC938
 	Offset: 0x2A8
@@ -34,7 +34,7 @@ function private autoexec function_697bd9b1()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4713d315c3e40cdc", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
 }
@@ -413,32 +413,32 @@ function function_724dafb1(destination)
 	{
 		switch(spawn.targetname)
 		{
-			case "hash_c64614656e0182f":
+			case "mp_map_wide_fav_spawn":
 			{
 				var_22e1dc7 = "vehicle_t9_mil_fav_light";
 				break;
 			}
-			case "hash_109832f363ee6abe":
+			case "mp_map_wide_jetski_spawn":
 			{
 				var_22e1dc7 = "veh_boct_mil_jetski";
 				break;
 			}
-			case "hash_1b7c5cdc7dca1887":
+			case "mp_map_wide_motorcycle_spawn":
 			{
 				var_22e1dc7 = "vehicle_motorcycle_mil_us_offroad";
 				break;
 			}
-			case "hash_6d89a26b51ebc12e":
+			case "mp_map_wide_pbr_spawn":
 			{
 				var_22e1dc7 = "vehicle_boct_mil_boat_pbr";
 				break;
 			}
-			case "hash_40c3b9ab556335b3":
+			case "mp_map_wide_snowmobile_spawn":
 			{
 				var_22e1dc7 = "vehicle_t9_mil_snowmobile";
 				break;
 			}
-			case "hash_307f829b4d3ea1de":
+			case "mp_map_wide_uaz_spawn":
 			{
 				var_22e1dc7 = "vehicle_t9_mil_ru_truck_light_player";
 				break;
@@ -592,6 +592,6 @@ function function_cddedd63(var_1028910, v_angle_offset, n_x_offset)
 	trigger.vehicle = self;
 	trigger.vehicle_position = self.origin;
 	trigger.spawn_struct = struct;
-	trigger callback::function_35a12f19(&namespace_2c949ef8::function_39ee3b21);
+	trigger callback::on_trigger(&namespace_2c949ef8::function_39ee3b21);
 }
 

@@ -1,6 +1,6 @@
 #using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace dropkick;
 
@@ -47,9 +47,9 @@ function function_311e397d(localclientnum, oldval, newval, bnewent, binitialsnap
 	if(bwastimejump == 1 && level.var_67c8b45f !== 1)
 	{
 		level.var_67c8b45f = 1;
-		level thread function_df0960d3(fieldname);
-		level thread function_ef284b9c(fieldname);
-		level thread function_efd48790(fieldname);
+		level childthread function_df0960d3(fieldname);
+		level childthread function_ef284b9c(fieldname);
+		level childthread function_efd48790(fieldname);
 	}
 	else
 	{
@@ -60,7 +60,7 @@ function function_311e397d(localclientnum, oldval, newval, bnewent, binitialsnap
 		}
 		else if(bwastimejump == 3)
 		{
-			level thread function_81e1cce7(fieldname);
+			level childthread function_81e1cce7(fieldname);
 		}
 	}
 }
@@ -182,16 +182,16 @@ function private function_e8a68a06(localclientnum, waittime)
 	}
 	if(isdefined(level.var_abfcab7a))
 	{
-		foreach(var_65837411 in level.var_abfcab7a)
+		foreach(tagfx in level.var_abfcab7a)
 		{
-			stopfx(localclientnum, var_65837411);
+			stopfx(localclientnum, tagfx);
 		}
 	}
 	if(isdefined(level.var_2efb73eb))
 	{
-		foreach(var_65837411 in level.var_2efb73eb)
+		foreach(tagfx in level.var_2efb73eb)
 		{
-			stopfx(localclientnum, var_65837411);
+			stopfx(localclientnum, tagfx);
 		}
 	}
 }

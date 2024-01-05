@@ -1,20 +1,20 @@
-#using script_14d2d89964cae0b1;
-#using script_18869d46adac498f;
-#using script_20055f2f97341caa;
-#using script_311c446e3df6c3fa;
-#using script_40e017336a087343;
-#using script_5ee86fb478309acf;
 #using script_7ae1d3c7bfe5070;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\scene_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\util_shared.csc;
+#using script_311c446e3df6c3fa;
 #using scripts\zm_common\zm_score.csc;
+#using script_5ee86fb478309acf;
+#using scripts\core_common\postfx_shared.csc;
+#using script_18869d46adac498f;
+#using script_40e017336a087343;
+#using script_14d2d89964cae0b1;
+#using scripts\core_common\math_shared.csc;
+#using script_20055f2f97341caa;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\scene_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_dbaeabbd;
 
@@ -44,7 +44,7 @@ function private autoexec function_b45f8db1()
 function init()
 {
 	luielemtext::register();
-	level.var_252ba2b0 = namespace_5ac3cdbb::register();
+	level.var_252ba2b0 = zm_tungsten_grandprix::register();
 	clientfield::register("world", "" + #"hash_112d67305f861fe", 28000, 3, "int", &function_3bab499f, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_3d5c2390c0768ed2", 28000, 1, "int", &function_dc99662d, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_79077a9af52542c8", 28000, 1, "int", &function_f0302ec9, 0, 0);
@@ -189,12 +189,12 @@ function function_e56be134(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwasdemojump)
 	{
-		self function_bf9d3071(#"hash_33472031c8a872cd");
+		self playrenderoverridebundle(#"hash_33472031c8a872cd");
 		self playsound(fieldname, #"hash_1bf3ee4eb2a58e82");
 	}
 	else
 	{
-		self function_5d482e78(#"hash_33472031c8a872cd");
+		self stoprenderoverridebundle(#"hash_33472031c8a872cd");
 		self playsound(fieldname, #"hash_3a07d2cfdb8bbda7");
 	}
 }
@@ -460,7 +460,7 @@ function function_b794d678(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(isdefined(self.var_a00ef04e))
 	{
-		self function_5d482e78(self.var_a00ef04e);
+		self stoprenderoverridebundle(self.var_a00ef04e);
 		self.var_a00ef04e = undefined;
 	}
 	var_ce472137 = function_8978c19(fieldname);
@@ -493,7 +493,7 @@ function function_b794d678(localclientnum, oldval, newval, bnewent, binitialsnap
 	}
 	if(isdefined(self.var_a00ef04e))
 	{
-		self function_bf9d3071(self.var_a00ef04e);
+		self playrenderoverridebundle(self.var_a00ef04e);
 	}
 }
 
@@ -721,27 +721,27 @@ function function_bd4d69e3(localclientnum, var_6e938f0b, var_e15e9f2a, var_801f8
 			{
 				case 1:
 				{
-					var_2e1f34dd = util::spawn_model(localclientnum, #"hash_62b204735601bbc9", v_point);
+					e_item = util::spawn_model(localclientnum, #"hash_62b204735601bbc9", v_point);
 					break;
 				}
 				case 2:
 				{
-					var_2e1f34dd = util::spawn_model(localclientnum, #"p9_sur_junk_parts_pile", v_point);
+					e_item = util::spawn_model(localclientnum, #"p9_sur_junk_parts_pile", v_point);
 					break;
 				}
 				case 3:
 				{
-					var_2e1f34dd = util::spawn_model(localclientnum, #"p9_sur_junk_parts_rare", v_point);
+					e_item = util::spawn_model(localclientnum, #"p9_sur_junk_parts_rare", v_point);
 					break;
 				}
 				default:
 				{
-					var_2e1f34dd = util::spawn_model(localclientnum, #"hash_62b204735601bbc9", v_point);
+					e_item = util::spawn_model(localclientnum, #"hash_62b204735601bbc9", v_point);
 					break;
 				}
 			}
-			var_2e1f34dd util::delay(5, undefined, &delete);
-			var_2e1f34dd thread function_69ffb9e7(localclientnum, self, var_e15e9f2a);
+			e_item util::delay(5, undefined, &delete);
+			e_item childthread function_69ffb9e7(localclientnum, self, var_e15e9f2a);
 			var_6e938f0b--;
 		}
 		wait(var_801f8ece);

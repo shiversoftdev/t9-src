@@ -1,9 +1,9 @@
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\damage.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\damage.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_502f6ccb;
 
@@ -18,7 +18,7 @@
 */
 function private autoexec function_b05f57da()
 {
-	level notify(760235234);
+	level notify(-760235234);
 }
 
 #namespace microwave_turret;

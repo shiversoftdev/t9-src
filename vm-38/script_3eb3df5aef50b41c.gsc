@@ -1,7 +1,7 @@
-#using script_1883fa4e60abbf9f;
-#using script_3ad66e3076c279ab;
-#using script_6c5ee33879e077f8;
 #using script_7e3221b6c80d8cc4;
+#using script_1883fa4e60abbf9f;
+#using script_6c5ee33879e077f8;
+#using script_3ad66e3076c279ab;
 #using scripts\core_common\flag_shared.gsc;
 
 #namespace friendly;
@@ -17,7 +17,7 @@
 */
 function private autoexec function_82f2f286()
 {
-	level notify(757850486);
+	level notify(-757850486);
 }
 
 #namespace namespace_32a4062b;

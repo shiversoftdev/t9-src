@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_a0b518ca : class_6aaccc24
+class class_a0b518ca : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,11 +47,11 @@ class class_a0b518ca : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_338d48a0
+		Name: set_hasdamage
 		Namespace: namespace_a0b518ca
 		Checksum: 0x832E6DA3
 		Offset: 0x668
@@ -59,7 +59,7 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_338d48a0(player, value)
+	function set_hasdamage(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "hasDamage", value);
 	}
@@ -75,11 +75,11 @@ class class_a0b518ca : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_62264c81
+		Name: set_chargepct
 		Namespace: namespace_a0b518ca
 		Checksum: 0xE01C8BB1
 		Offset: 0x4D8
@@ -87,13 +87,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_62264c81(player, value)
+	function set_chargepct(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "chargePct", value);
 	}
 
 	/*
-		Name: function_751f7270
+		Name: set_hascharge
 		Namespace: namespace_a0b518ca
 		Checksum: 0x456DAD00
 		Offset: 0x618
@@ -101,7 +101,7 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_751f7270(player, value)
+	function set_hascharge(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "hasCharge", value);
 	}
@@ -117,17 +117,17 @@ class class_a0b518ca : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_control_point_hud");
-		namespace_6aaccc24::function_da693cbe("chargePct", 8000, 7, "float");
-		namespace_6aaccc24::function_da693cbe("damagePct", 8000, 7, "float");
-		namespace_6aaccc24::function_da693cbe("ordaHealthPct", 16000, 7, "float");
-		namespace_6aaccc24::function_da693cbe("hasOrda", 16000, 1, "int");
-		namespace_6aaccc24::function_da693cbe("hasCharge", 16000, 1, "int");
-		namespace_6aaccc24::function_da693cbe("hasDamage", 16000, 1, "int");
+		cluielem::setup_clientfields("zm_control_point_hud");
+		cluielem::add_clientfield("chargePct", 8000, 7, "float");
+		cluielem::add_clientfield("damagePct", 8000, 7, "float");
+		cluielem::add_clientfield("ordaHealthPct", 16000, 7, "float");
+		cluielem::add_clientfield("hasOrda", 16000, 1, "int");
+		cluielem::add_clientfield("hasCharge", 16000, 1, "int");
+		cluielem::add_clientfield("hasDamage", 16000, 1, "int");
 	}
 
 	/*
-		Name: function_a04ff29a
+		Name: set_damagepct
 		Namespace: namespace_a0b518ca
 		Checksum: 0xD2B03B1F
 		Offset: 0x528
@@ -135,13 +135,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a04ff29a(player, value)
+	function set_damagepct(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "damagePct", value);
 	}
 
 	/*
-		Name: function_a59aefa6
+		Name: set_ordahealthpct
 		Namespace: namespace_a0b518ca
 		Checksum: 0x52F11E48
 		Offset: 0x578
@@ -149,13 +149,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a59aefa6(player, value)
+	function set_ordahealthpct(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "ordaHealthPct", value);
 	}
 
 	/*
-		Name: function_a95c34f3
+		Name: set_hasorda
 		Namespace: namespace_a0b518ca
 		Checksum: 0xE7B9EA6A
 		Offset: 0x5C8
@@ -163,18 +163,18 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a95c34f3(player, value)
+	function set_hasorda(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "hasOrda", value);
 	}
 
 }
 
-#namespace namespace_72133e5;
+#namespace zm_control_point_hud;
 
 /*
 	Name: function_eb17663
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x52660878
 	Offset: 0x118
 	Size: 0x14
@@ -183,12 +183,12 @@ class class_a0b518ca : class_6aaccc24
 */
 function private autoexec function_eb17663()
 {
-	level notify(1151047824);
+	level notify(-1151047824);
 }
 
 /*
 	Name: register
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0xC0B971F3
 	Offset: 0x138
 	Size: 0x34
@@ -204,7 +204,7 @@ function register()
 
 /*
 	Name: open
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x3A6790E3
 	Offset: 0x178
 	Size: 0x38
@@ -222,7 +222,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x2AD0B106
 	Offset: 0x1B8
 	Size: 0x1C
@@ -236,7 +236,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x1E0592EA
 	Offset: 0x1E0
 	Size: 0x1A
@@ -249,86 +249,86 @@ function is_open(player)
 }
 
 /*
-	Name: function_62264c81
-	Namespace: namespace_72133e5
+	Name: set_chargepct
+	Namespace: zm_control_point_hud
 	Checksum: 0x49892A03
 	Offset: 0x208
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_62264c81(player, value)
+function set_chargepct(player, value)
 {
-	[[ self ]]->function_62264c81(player, value);
+	[[ self ]]->set_chargepct(player, value);
 }
 
 /*
-	Name: function_a04ff29a
-	Namespace: namespace_72133e5
+	Name: set_damagepct
+	Namespace: zm_control_point_hud
 	Checksum: 0xB40559A1
 	Offset: 0x238
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_a04ff29a(player, value)
+function set_damagepct(player, value)
 {
-	[[ self ]]->function_a04ff29a(player, value);
+	[[ self ]]->set_damagepct(player, value);
 }
 
 /*
-	Name: function_a59aefa6
-	Namespace: namespace_72133e5
+	Name: set_ordahealthpct
+	Namespace: zm_control_point_hud
 	Checksum: 0x240FB947
 	Offset: 0x268
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_a59aefa6(player, value)
+function set_ordahealthpct(player, value)
 {
-	[[ self ]]->function_a59aefa6(player, value);
+	[[ self ]]->set_ordahealthpct(player, value);
 }
 
 /*
-	Name: function_a95c34f3
-	Namespace: namespace_72133e5
+	Name: set_hasorda
+	Namespace: zm_control_point_hud
 	Checksum: 0x418AC2F9
 	Offset: 0x298
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_a95c34f3(player, value)
+function set_hasorda(player, value)
 {
-	[[ self ]]->function_a95c34f3(player, value);
+	[[ self ]]->set_hasorda(player, value);
 }
 
 /*
-	Name: function_751f7270
-	Namespace: namespace_72133e5
+	Name: set_hascharge
+	Namespace: zm_control_point_hud
 	Checksum: 0xDD69489
 	Offset: 0x2C8
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_751f7270(player, value)
+function set_hascharge(player, value)
 {
-	[[ self ]]->function_751f7270(player, value);
+	[[ self ]]->set_hascharge(player, value);
 }
 
 /*
-	Name: function_338d48a0
-	Namespace: namespace_72133e5
+	Name: set_hasdamage
+	Namespace: zm_control_point_hud
 	Checksum: 0xD973F8D9
 	Offset: 0x2F8
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_338d48a0(player, value)
+function set_hasdamage(player, value)
 {
-	[[ self ]]->function_338d48a0(player, value);
+	[[ self ]]->set_hasdamage(player, value);
 }
 

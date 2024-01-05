@@ -1,20 +1,20 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
-#namespace namespace_97e79b2;
+#namespace red_door;
 
 /*
 	Name: function_7859d20f
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x614565FF
 	Offset: 0x350
 	Size: 0x14
@@ -27,22 +27,22 @@ function private autoexec function_7859d20f()
 }
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_97e79b2
+	Name: __init__system__
+	Namespace: red_door
 	Checksum: 0x83CDA0C3
 	Offset: 0x370
 	Size: 0x4C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_6838326db46b0ee5", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
+	system::register(#"red_door", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xBC72B4E7
 	Offset: 0x3C8
 	Size: 0x2C
@@ -59,7 +59,7 @@ function private function_70a657d8()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x9450C0BC
 	Offset: 0x400
 	Size: 0x184
@@ -78,7 +78,7 @@ function init_clientfields()
 
 /*
 	Name: function_8ac3bea9
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x195C01F7
 	Offset: 0x590
 	Size: 0x128
@@ -102,7 +102,7 @@ function private function_8ac3bea9()
 
 /*
 	Name: function_1d5c7052
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xD1170F00
 	Offset: 0x6C0
 	Size: 0x94
@@ -111,18 +111,18 @@ function private function_8ac3bea9()
 */
 function function_1d5c7052(a_ents)
 {
-	var_fd99631b = a_ents[getfirstarraykey(a_ents)];
+	e_wormhole = a_ents[getfirstarraykey(a_ents)];
 	do
 	{
 		util::wait_network_frame();
 	}
-	while(!var_fd99631b isplayinganimscripted());
-	var_fd99631b clientfield::set("" + #"hash_7948e032082fdac", 1);
+	while(!e_wormhole isplayinganimscripted());
+	e_wormhole clientfield::set("" + #"hash_7948e032082fdac", 1);
 }
 
 /*
 	Name: function_a78584c0
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xE984168A
 	Offset: 0x760
 	Size: 0x33E
@@ -157,7 +157,7 @@ function function_a78584c0(var_6c365dbf, var_7ccf65c7, var_1f8fbe0b)
 	{
 		level.var_98b11ed9 = 0;
 	}
-	self thread function_fdb3b5(v_start_origin, s_teleport_room, var_98b11ed9);
+	self childthread function_fdb3b5(v_start_origin, s_teleport_room, var_98b11ed9);
 	v_vortex_origin = s_teleport_room.origin + (anglestoforward(s_teleport_room.angles) * 1000);
 	var_291fc0f7 = struct::spawn(v_vortex_origin, s_teleport_room.angles - vectorscale((0, 1, 0), 90));
 	self function_82c1415f(var_291fc0f7, var_1f8fbe0b);
@@ -186,7 +186,7 @@ function function_a78584c0(var_6c365dbf, var_7ccf65c7, var_1f8fbe0b)
 
 /*
 	Name: function_fdb3b5
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xE65DA16C
 	Offset: 0xAA8
 	Size: 0xE4
@@ -199,7 +199,7 @@ function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9)
 	self dontinterpolate();
 	self setorigin(s_teleport_room.origin);
 	self setplayerangles(s_teleport_room.angles);
-	self thread function_e4af83af(s_teleport_room);
+	self childthread function_e4af83af(s_teleport_room);
 	waittillframeend();
 	self function_bc82f900(#"hash_5d8a1a68b12dfb24");
 	self clientfield::set_to_player("" + #"hash_3c5be6b25c626e06", var_98b11ed9);
@@ -207,7 +207,7 @@ function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9)
 
 /*
 	Name: function_e4af83af
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xC36F102C
 	Offset: 0xB98
 	Size: 0x74
@@ -224,7 +224,7 @@ function private function_e4af83af(s_teleport_room)
 
 /*
 	Name: function_82c1415f
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x964714AE
 	Offset: 0xC18
 	Size: 0x1E4
@@ -273,7 +273,7 @@ function function_82c1415f(var_291fc0f7, var_1f8fbe0b)
 
 /*
 	Name: function_d4fbc062
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xB8A2561E
 	Offset: 0xE08
 	Size: 0x142
@@ -307,7 +307,7 @@ function function_d4fbc062(var_6a4c362c, var_7ccf65c7)
 
 /*
 	Name: function_4fb1c2d2
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xF980AA6E
 	Offset: 0xF58
 	Size: 0x60
@@ -326,7 +326,7 @@ function function_4fb1c2d2(var_7ccf65c7)
 
 /*
 	Name: function_60d91d03
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x662BC14A
 	Offset: 0xFC0
 	Size: 0x154
@@ -364,7 +364,7 @@ function function_60d91d03(var_f0bbde5, a_e_players)
 
 /*
 	Name: function_32bd90e0
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xA939F090
 	Offset: 0x1120
 	Size: 0x50
@@ -385,7 +385,7 @@ function function_32bd90e0(var_7c48c7c3)
 
 /*
 	Name: function_4e050b78
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x72C68167
 	Offset: 0x1178
 	Size: 0x492
@@ -464,7 +464,7 @@ function function_4e050b78(str_volume)
 
 /*
 	Name: function_3ec6cff6
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x2519BBBB
 	Offset: 0x1618
 	Size: 0x2DA
@@ -519,7 +519,7 @@ function function_3ec6cff6(var_bfeb630c, var_ab8445e, var_879ad2b9)
 
 /*
 	Name: function_26eb27e2
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x1616D1F5
 	Offset: 0x1900
 	Size: 0xA2
@@ -546,7 +546,7 @@ function function_26eb27e2(e_enemy, var_f0bbde5)
 
 /*
 	Name: function_2aed1d83
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x8754D51B
 	Offset: 0x19B0
 	Size: 0x174
@@ -581,7 +581,7 @@ function function_2aed1d83(var_f0bbde5, var_b3733073)
 
 /*
 	Name: function_7a607f29
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x2F648A5A
 	Offset: 0x1B30
 	Size: 0x154
@@ -591,10 +591,10 @@ function function_2aed1d83(var_f0bbde5, var_b3733073)
 function function_7a607f29(var_12230d08)
 {
 	self.var_27583a48 = 1;
-	self val::set(#"hash_6838326db46b0ee5", "ignoreme", 1);
-	self val::set(#"hash_6838326db46b0ee5", "freezecontrols", 1);
-	self val::set(#"hash_6838326db46b0ee5", "show_hud", 0);
-	self val::set(#"hash_6838326db46b0ee5", "takedamage", 0);
+	self val::set(#"red_door", "ignoreme", 1);
+	self val::set(#"red_door", "freezecontrols", 1);
+	self val::set(#"red_door", "show_hud", 0);
+	self val::set(#"red_door", "takedamage", 0);
 	b_disable_weapons = 1;
 	if(b_disable_weapons)
 	{
@@ -602,14 +602,14 @@ function function_7a607f29(var_12230d08)
 		{
 			self forceoffhandend();
 		}
-		self val::set(#"hash_6838326db46b0ee5", "disable_weapons", 1);
+		self val::set(#"red_door", "disable_weapons", 1);
 	}
 	self util::magic_bullet_shield();
 }
 
 /*
 	Name: function_e61d152a
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xAA1F7076
 	Offset: 0x1C90
 	Size: 0x106
@@ -619,18 +619,18 @@ function function_7a607f29(var_12230d08)
 function function_e61d152a()
 {
 	self show();
-	self val::reset(#"hash_6838326db46b0ee5", "ignoreme");
-	self val::reset(#"hash_6838326db46b0ee5", "disable_weapons");
-	self val::reset(#"hash_6838326db46b0ee5", "freezecontrols");
-	self val::reset(#"hash_6838326db46b0ee5", "show_hud");
-	self val::reset(#"hash_6838326db46b0ee5", "takedamage");
+	self val::reset(#"red_door", "ignoreme");
+	self val::reset(#"red_door", "disable_weapons");
+	self val::reset(#"red_door", "freezecontrols");
+	self val::reset(#"red_door", "show_hud");
+	self val::reset(#"red_door", "takedamage");
 	self util::stop_magic_bullet_shield();
 	self.var_27583a48 = 0;
 }
 
 /*
 	Name: function_f86439bc
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x76E9E973
 	Offset: 0x1DA0
 	Size: 0x194
@@ -669,7 +669,7 @@ function function_f86439bc()
 
 /*
 	Name: door_setup
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xCC6BBB3C
 	Offset: 0x1F40
 	Size: 0x6BE
@@ -793,9 +793,9 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
 						}
 						break;
 					}
-					case "hash_75294573d425dff4":
+					case "door_interact":
 					{
-						door_struct.var_d6de7a25 = ent;
+						door_struct.door_interact = ent;
 						door_struct thread function_736b8a03(1);
 						break;
 					}
@@ -839,7 +839,7 @@ function door_setup(struct_targetname, struct, var_9409066b, var_f1096822, var_1
 
 /*
 	Name: function_736b8a03
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xB143ED11
 	Offset: 0x2608
 	Size: 0x7C
@@ -855,7 +855,7 @@ function function_736b8a03(on)
 
 /*
 	Name: function_a6dcc63f
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x80EBBAC
 	Offset: 0x2690
 	Size: 0x198
@@ -864,34 +864,34 @@ function function_736b8a03(on)
 */
 function function_a6dcc63f(s_door)
 {
-	if(!isdefined(s_door.var_d6de7a25.script_string))
+	if(!isdefined(s_door.door_interact.script_string))
 	{
 		return;
 	}
-	if(!isdefined(s_door.var_d6de7a25.radius))
+	if(!isdefined(s_door.door_interact.radius))
 	{
-		s_door.var_d6de7a25.radius = 26;
+		s_door.door_interact.radius = 26;
 	}
-	if(!isdefined(s_door.var_d6de7a25.height))
+	if(!isdefined(s_door.door_interact.height))
 	{
-		s_door.var_d6de7a25.height = 88;
+		s_door.door_interact.height = 88;
 	}
-	if(!isdefined(s_door.var_d6de7a25.z_offset))
+	if(!isdefined(s_door.door_interact.z_offset))
 	{
-		s_door.var_d6de7a25.z_offset = -39;
+		s_door.door_interact.z_offset = -39;
 	}
-	t_door = spawn("trigger_radius", s_door.var_d6de7a25.origin + (0, 0, s_door.var_d6de7a25.z_offset), 0, s_door.var_d6de7a25.radius, s_door.var_d6de7a25.height);
+	t_door = spawn("trigger_radius", s_door.door_interact.origin + (0, 0, s_door.door_interact.z_offset), 0, s_door.door_interact.radius, s_door.door_interact.height);
 	t_door.s_door = s_door;
 	t_door triggerignoreteam();
 	t_door setvisibletoall();
 	t_door setteamfortrigger(#"none");
-	t_door callback::function_35a12f19(&function_e1544483);
+	t_door callback::on_trigger(&function_e1544483);
 	return t_door;
 }
 
 /*
 	Name: function_e1544483
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x9C5D3ED6
 	Offset: 0x2830
 	Size: 0x38C
@@ -910,11 +910,11 @@ function function_e1544483(var_10d5f200)
 	player function_7a607f29();
 	if(!var_8f1ba730)
 	{
-		while(level.var_d03afa3[self.s_door.var_d6de7a25.script_string] === 1)
+		while(level.var_d03afa3[self.s_door.door_interact.script_string] === 1)
 		{
 			util::wait_network_frame();
 		}
-		level thread function_78e3c2ba(self.s_door.var_d6de7a25.script_string);
+		level thread function_78e3c2ba(self.s_door.door_interact.script_string);
 	}
 	if(isalive(self))
 	{
@@ -942,7 +942,7 @@ function function_e1544483(var_10d5f200)
 			}
 		}
 	}
-	self.s_door.var_d6de7a25 playsound(#"hash_779c0992525e3838");
+	self.s_door.door_interact playsound(#"hash_779c0992525e3838");
 	player ghost();
 	if(isdefined(self.s_door.script_noteworthy))
 	{
@@ -956,14 +956,14 @@ function function_e1544483(var_10d5f200)
 		}
 	}
 	player function_a78584c0(undefined, self.s_door.targetname);
-	var_f0bbde5 = player function_c78572ab(self.s_door.var_d6de7a25.script_string, self.s_door.targetname);
+	var_f0bbde5 = player function_c78572ab(self.s_door.door_interact.script_string, self.s_door.targetname);
 	player function_2aed1d83(var_f0bbde5);
 	player thread function_71178f71();
 }
 
 /*
 	Name: function_71178f71
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x774B8971
 	Offset: 0x2BC8
 	Size: 0xB4
@@ -981,7 +981,7 @@ function function_71178f71()
 
 /*
 	Name: function_78e3c2ba
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x2646CE62
 	Offset: 0x2C88
 	Size: 0x5C
@@ -998,7 +998,7 @@ function function_78e3c2ba(var_5817f611)
 
 /*
 	Name: function_c78572ab
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x7703593C
 	Offset: 0x2CF0
 	Size: 0x4A
@@ -1014,7 +1014,7 @@ function function_c78572ab(var_f80635c, var_7ccf65c7)
 
 /*
 	Name: function_7a74dbfd
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x3D9FC25D
 	Offset: 0x2D48
 	Size: 0xE6
@@ -1045,7 +1045,7 @@ function function_7a74dbfd(str_targetname)
 
 /*
 	Name: function_bb42a4ce
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xEB9FDE37
 	Offset: 0x2E38
 	Size: 0x4C
@@ -1060,7 +1060,7 @@ function function_bb42a4ce(str_side, var_3b3f5ecb)
 
 /*
 	Name: function_bc3bedde
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xA087CFB6
 	Offset: 0x2E90
 	Size: 0x64
@@ -1070,7 +1070,7 @@ function function_bb42a4ce(str_side, var_3b3f5ecb)
 function function_bc3bedde()
 {
 	/#
-		str_mapname = util::function_53bbf9d2();
+		str_mapname = util::get_map_name();
 		adddebugcommand(("" + str_mapname) + "");
 		level thread devgui_think();
 	#/
@@ -1078,7 +1078,7 @@ function function_bc3bedde()
 
 /*
 	Name: devgui_think
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0x31CE06FC
 	Offset: 0x2F00
 	Size: 0xCE
@@ -1107,7 +1107,7 @@ function devgui_think()
 
 /*
 	Name: function_8d419972
-	Namespace: namespace_97e79b2
+	Namespace: red_door
 	Checksum: 0xC3ED1CC
 	Offset: 0x2FD8
 	Size: 0x12C

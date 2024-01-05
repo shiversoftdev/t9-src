@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_cf08fa2b : class_6aaccc24
+class cmp_prop_timer : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_cf08fa2b
+		Namespace: cmp_prop_timer
 		Checksum: 0xFAF9CDEF
 		Offset: 0x368
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_cf08fa2b : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_cf08fa2b
+		Namespace: cmp_prop_timer
 		Checksum: 0xB346BBB4
 		Offset: 0x540
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_cf08fa2b : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_cf08fa2b
+		Namespace: cmp_prop_timer
 		Checksum: 0xEDBDCF02
 		Offset: 0x4A0
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_cf08fa2b : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_51883733
-		Namespace: namespace_cf08fa2b
+		Name: set_isprop
+		Namespace: cmp_prop_timer
 		Checksum: 0xECDF2CE3
 		Offset: 0x508
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_51883733(localclientnum, value)
+	function set_isprop(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "isProp", value);
+		[[ self ]]->set_data(localclientnum, "isProp", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_cf08fa2b
+		Name: register_clientside
+		Namespace: cmp_prop_timer
 		Checksum: 0x79269E3
 		Offset: 0x410
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_prop_timer");
+		cluielem::register_clientside("mp_prop_timer");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_cf08fa2b
+		Namespace: cmp_prop_timer
 		Checksum: 0x5BC670A
 		Offset: 0x388
 		Size: 0x7C
@@ -82,28 +82,28 @@ class class_cf08fa2b : class_6aaccc24
 	*/
 	function setup_clientfields(var_43c7e6f7, var_6fb92716)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_prop_timer");
-		namespace_6aaccc24::function_da693cbe("timeRemaining", 1, 5, "int", var_43c7e6f7);
-		namespace_6aaccc24::function_da693cbe("isProp", 1, 1, "int", var_6fb92716);
+		cluielem::setup_clientfields("mp_prop_timer");
+		cluielem::add_clientfield("timeRemaining", 1, 5, "int", var_43c7e6f7);
+		cluielem::add_clientfield("isProp", 1, 1, "int", var_6fb92716);
 	}
 
 	/*
-		Name: function_cb4a80b1
-		Namespace: namespace_cf08fa2b
+		Name: set_timeremaining
+		Namespace: cmp_prop_timer
 		Checksum: 0xEAE6EB1E
 		Offset: 0x4D0
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_cb4a80b1(localclientnum, value)
+	function set_timeremaining(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "timeRemaining", value);
+		[[ self ]]->set_data(localclientnum, "timeRemaining", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_cf08fa2b
+		Namespace: cmp_prop_timer
 		Checksum: 0x834657FF
 		Offset: 0x438
 		Size: 0x5C
@@ -112,9 +112,9 @@ class class_cf08fa2b : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "timeRemaining", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "isProp", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "timeRemaining", 0);
+		[[ self ]]->set_data(localclientnum, "isProp", 0);
 	}
 
 }
@@ -132,7 +132,7 @@ class class_cf08fa2b : class_6aaccc24
 */
 function register(var_43c7e6f7, var_6fb92716)
 {
-	elem = new class_cf08fa2b();
+	elem = new cmp_prop_timer();
 	[[ elem ]]->setup_clientfields(var_43c7e6f7, var_6fb92716);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -154,7 +154,7 @@ function register(var_43c7e6f7, var_6fb92716)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_prop_timer
 	Checksum: 0x7AB1D7AA
 	Offset: 0x250
@@ -162,10 +162,10 @@ function register(var_43c7e6f7, var_6fb92716)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_cf08fa2b();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cmp_prop_timer();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -212,7 +212,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_cb4a80b1
+	Name: set_timeremaining
 	Namespace: mp_prop_timer
 	Checksum: 0x7A82DEA4
 	Offset: 0x308
@@ -220,13 +220,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_cb4a80b1(localclientnum, value)
+function set_timeremaining(localclientnum, value)
 {
-	[[ self ]]->function_cb4a80b1(localclientnum, value);
+	[[ self ]]->set_timeremaining(localclientnum, value);
 }
 
 /*
-	Name: function_51883733
+	Name: set_isprop
 	Namespace: mp_prop_timer
 	Checksum: 0xF585EC3C
 	Offset: 0x338
@@ -234,8 +234,8 @@ function function_cb4a80b1(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_51883733(localclientnum, value)
+function set_isprop(localclientnum, value)
 {
-	[[ self ]]->function_51883733(localclientnum, value);
+	[[ self ]]->set_isprop(localclientnum, value);
 }
 

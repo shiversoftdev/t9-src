@@ -1,11 +1,11 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace ray_gun;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: ray_gun
 	Checksum: 0x377EB7F6
 	Offset: 0x78
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ray_gun", &__init__, undefined, undefined, #"killstreaks");
 }

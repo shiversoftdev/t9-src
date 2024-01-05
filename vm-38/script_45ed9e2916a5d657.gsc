@@ -1,8 +1,8 @@
 #using script_ac6a30f1991e105;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_cd6bd9f;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_a2eb6dc5()
 {
-	level notify(1953799655);
+	level notify(-1953799655);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_cd6bd9f
 	Checksum: 0xE3E48A5F
 	Offset: 0xD8
@@ -29,7 +29,7 @@ function private autoexec function_a2eb6dc5()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_54149d856843e31a", &function_70a657d8, undefined, undefined, undefined);
 }

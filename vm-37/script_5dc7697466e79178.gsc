@@ -1,11 +1,11 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace location;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: location
 	Checksum: 0xC6B9EF73
 	Offset: 0x88
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"location", &function_70a657d8, undefined, undefined, undefined);
 }

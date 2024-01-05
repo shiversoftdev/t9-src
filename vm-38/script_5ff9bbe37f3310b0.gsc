@@ -1,18 +1,18 @@
-#using script_16b1b77a76492c6a;
-#using script_19367cd29a4485db;
-#using script_34ab99a4ca1a43d;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_19367cd29a4485db;
+#using script_34ab99a4ca1a43d;
+#using script_16b1b77a76492c6a;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_12a6a726;
 
@@ -31,7 +31,7 @@ function private autoexec function_1687ba55()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_12a6a726
 	Checksum: 0xA5741E3B
 	Offset: 0x1B8
@@ -39,7 +39,7 @@ function private autoexec function_1687ba55()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_72a9f15f4124442", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -290,7 +290,7 @@ function function_19490940(eventstruct)
 	instance = self.struct.parent;
 	var_31919730 = self.struct.scriptmodel;
 	var_31919730 endon(#"death");
-	self callback::function_b74bf3e(&function_19490940);
+	self callback::remove_on_trigger(&function_19490940);
 	var_571f5454 = self.origin;
 	self.b_started = 1;
 	self setinvisibletoall();

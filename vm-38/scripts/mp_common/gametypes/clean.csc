@@ -1,6 +1,6 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace clean;
 
@@ -29,14 +29,14 @@ function private autoexec function_ccb5520()
 */
 event main(eventstruct)
 {
-	clientfield::function_a8bbc967("hudItems.cleanCarryCount", #"hud_items", #"cleancarrycount", 14000, 4, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.cleanCarryFull", #"hud_items", #"cleancarryfull", 14000, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.cleanCarryCount", #"hud_items", #"cleancarrycount", 14000, 4, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.cleanCarryFull", #"hud_items", #"cleancarryfull", 14000, 1, "int", undefined, 0, 0);
 	clientfield::register("scriptmover", "taco_flag", 14000, 2, "int", &function_11abf5b2, 0, 0);
 	clientfield::register("allplayers", "taco_carry", 14000, 1, "int", &function_aa7bb941, 0, 0);
 	clientfield::register("scriptmover", "taco_waypoint", 14000, 1, "int", &function_a4a5d612, 0, 0);
 	level.var_aaaae0b = #"hash_206afab0af20880d";
 	level.var_5844252c = #"hash_672b6ef826294e77";
-	level.var_ce64ea3e = #"hash_77d505035209b8d6";
+	level.var_ce64ea3e = #"clean_taco";
 	if(is_true(getgametypesetting(#"hash_5cc4c3042b7d4935")))
 	{
 		level.var_aaaae0b = #"hash_464eae7df8ee284a";
@@ -60,7 +60,7 @@ event main(eventstruct)
 function function_52ee8599()
 {
 	function_3385d776(#"ui/fx8_fracture_deposit_point_end_ire");
-	forcestreamxmodel(#"hash_4e3eff45df49869e");
+	forcestreamxmodel(#"p9_pot_of_gold_pristine");
 }
 
 /*
@@ -88,7 +88,7 @@ function private on_localclient_connect(localclientnum)
 */
 function function_11abf5b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	self notify(#"hash_7117a0f5c62d8c3d");
+	self notify(#"stopbounce");
 	if(isdefined(self.var_47b256ef))
 	{
 		self.var_47b256ef unlink();
@@ -169,7 +169,7 @@ function function_81431153(localclientnum)
 */
 function function_d1834e16(localclientnum)
 {
-	self endon(#"hash_7117a0f5c62d8c3d");
+	self endon(#"stopbounce");
 	self endon(#"death");
 	toppos = self.origin + vectorscale((0, 0, 1), 12);
 	bottompos = self.origin;
@@ -256,7 +256,7 @@ function function_d91ca1f1(localclientnum)
 		level.var_ccb8d7fb[localclientnum][i] = spawnstruct();
 		objid = util::getnextobjid(localclientnum);
 		level.var_ccb8d7fb[localclientnum][i].id = objid;
-		level.var_ccb8d7fb[localclientnum][i].var_336f0669 = undefined;
+		level.var_ccb8d7fb[localclientnum][i].tacoentnum = undefined;
 		objective_add(localclientnum, objid, "invisible", level.var_ce64ea3e);
 	}
 }
@@ -270,13 +270,13 @@ function function_d91ca1f1(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_5d02c098(localclientnum, var_336f0669)
+function function_5d02c098(localclientnum, tacoentnum)
 {
 	for(i = 0; i < 26; i++)
 	{
-		if(!isdefined(level.var_ccb8d7fb[localclientnum][i].var_336f0669))
+		if(!isdefined(level.var_ccb8d7fb[localclientnum][i].tacoentnum))
 		{
-			level.var_ccb8d7fb[localclientnum][i].var_336f0669 = var_336f0669;
+			level.var_ccb8d7fb[localclientnum][i].tacoentnum = tacoentnum;
 			return level.var_ccb8d7fb[localclientnum][i].id;
 		}
 	}
@@ -292,13 +292,13 @@ function function_5d02c098(localclientnum, var_336f0669)
 	Parameters: 2
 	Flags: None
 */
-function function_53576950(localclientnum, var_336f0669)
+function function_53576950(localclientnum, tacoentnum)
 {
 	for(i = 0; i < 26; i++)
 	{
-		if(level.var_ccb8d7fb[localclientnum][i].var_336f0669 === var_336f0669)
+		if(level.var_ccb8d7fb[localclientnum][i].tacoentnum === tacoentnum)
 		{
-			level.var_ccb8d7fb[localclientnum][i].var_336f0669 = undefined;
+			level.var_ccb8d7fb[localclientnum][i].tacoentnum = undefined;
 			return level.var_ccb8d7fb[localclientnum][i].id;
 		}
 	}

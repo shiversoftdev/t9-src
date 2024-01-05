@@ -1,11 +1,11 @@
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\visionset_mgr_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace zm_traps;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_traps
 	Checksum: 0xB59633A9
 	Offset: 0x98
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_traps", &function_70a657d8, undefined, undefined, undefined);
 }

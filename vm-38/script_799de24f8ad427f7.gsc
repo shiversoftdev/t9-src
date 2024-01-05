@@ -1,24 +1,24 @@
-#using script_1029986e2bc8ca8e;
-#using script_5a525a75a8f1f7e4;
-#using script_7224d61ed502ea07;
 #using script_7b1cd3908a825fdd;
 #using script_7d7ac1f663edcdc8;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_magicbox.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_1029986e2bc8ca8e;
+#using script_5a525a75a8f1f7e4;
+#using scripts\zm_common\zm_wallbuy.gsc;
+#using scripts\zm_common\zm_magicbox.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
-#namespace namespace_b57ebf44;
+#namespace zm_destination_manager;
 
 /*
 	Name: function_11956762
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x69BE9B17
 	Offset: 0xE8
 	Size: 0x14
@@ -31,22 +31,22 @@ function private autoexec function_11956762()
 }
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_b57ebf44
+	Name: __init__system__
+	Namespace: zm_destination_manager
 	Checksum: 0x42D7749C
 	Offset: 0x108
 	Size: 0x54
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_110e3595fef1adb7", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
+	system::register(#"zm_destination_manager", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x4350B4B3
 	Offset: 0x168
 	Size: 0x46
@@ -62,7 +62,7 @@ function private function_70a657d8()
 
 /*
 	Name: finalize
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x257420CE
 	Offset: 0x1B8
 	Size: 0x2C
@@ -79,7 +79,7 @@ function private finalize()
 
 /*
 	Name: function_123b048f
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x2C4024C5
 	Offset: 0x1F0
 	Size: 0x7A
@@ -99,7 +99,7 @@ function function_123b048f(var_8a952bed)
 
 /*
 	Name: function_2e165386
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xBED0A082
 	Offset: 0x278
 	Size: 0x16
@@ -113,7 +113,7 @@ function function_2e165386()
 
 /*
 	Name: function_f3be07d7
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x56BD1322
 	Offset: 0x298
 	Size: 0x1DA
@@ -155,7 +155,7 @@ function function_f3be07d7(destination)
 
 /*
 	Name: function_e4254bac
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x2A30DE73
 	Offset: 0x480
 	Size: 0x1FC
@@ -188,7 +188,7 @@ function function_e4254bac(destination, var_f281f968)
 
 /*
 	Name: function_6f9efb66
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xBC45C592
 	Offset: 0x688
 	Size: 0x114
@@ -221,7 +221,7 @@ function private function_6f9efb66()
 
 /*
 	Name: function_1975f7db
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xF0F95CE8
 	Offset: 0x7A8
 	Size: 0x3CC
@@ -303,7 +303,7 @@ function private function_1975f7db()
 
 /*
 	Name: function_786a9f4d
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x59C524B9
 	Offset: 0xB80
 	Size: 0x366
@@ -325,7 +325,7 @@ function function_786a9f4d(destinations)
 			var_7719033f = getnextarraykey(var_94b9529d);
 			level thread activate(destination);
 			s_result = undefined;
-			s_result = level waittill(#"hash_69090774fec4a17b");
+			s_result = level waittill(#"objective_ended");
 			if(s_result.completed === 0)
 			{
 				if(isdefined(level.var_7d45d0d4.var_4824f1b9) && [[level.var_7d45d0d4.var_4824f1b9]]())
@@ -363,7 +363,7 @@ function function_786a9f4d(destinations)
 
 /*
 	Name: load_next_map
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x8177BAB9
 	Offset: 0xEF0
 	Size: 0x224
@@ -393,7 +393,7 @@ function load_next_map(destination)
 
 /*
 	Name: function_c62829da
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xACF60BBD
 	Offset: 0x1120
 	Size: 0xA6
@@ -422,7 +422,7 @@ function private function_c62829da(destination)
 
 /*
 	Name: function_ab94c270
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x9F24A2C8
 	Offset: 0x11D0
 	Size: 0x114
@@ -457,7 +457,7 @@ function function_ab94c270(destination)
 
 /*
 	Name: activate
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x26410B0C
 	Offset: 0x12F0
 	Size: 0x1E4
@@ -490,7 +490,7 @@ function activate(destination)
 
 /*
 	Name: deactivate
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x7AE779A6
 	Offset: 0x14E0
 	Size: 0x68
@@ -506,7 +506,7 @@ function deactivate(destination)
 
 /*
 	Name: function_506afb9e
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x849E373C
 	Offset: 0x1550
 	Size: 0x21E
@@ -516,7 +516,7 @@ function deactivate(destination)
 function function_506afb9e(destination, var_2371bf)
 {
 	names = var_2371bf;
-	if(isstring(var_2371bf) || function_7a600918(var_2371bf))
+	if(isstring(var_2371bf) || ishash(var_2371bf))
 	{
 		names = [0:var_2371bf];
 	}
@@ -540,7 +540,7 @@ function function_506afb9e(destination, var_2371bf)
 
 /*
 	Name: function_66ec9032
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x1E5DED75
 	Offset: 0x1778
 	Size: 0x156

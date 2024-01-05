@@ -1,11 +1,11 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm_audio.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_jump_pad;
 
@@ -20,11 +20,11 @@
 */
 function private autoexec function_30e8a028()
 {
-	level notify(1854539481);
+	level notify(-1854539481);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_jump_pad
 	Checksum: 0xAA330FB2
 	Offset: 0x108
@@ -32,7 +32,7 @@ function private autoexec function_30e8a028()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_jump_pad", &function_70a657d8, undefined, undefined, undefined);
 }

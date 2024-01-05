@@ -1,15 +1,15 @@
-#using script_3dfd071e58d0071f;
-#using script_45fdb6cec5580007;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\popups_shared.gsc;
+#using script_45fdb6cec5580007;
 #using scripts\core_common\system_shared.gsc;
+#using script_3dfd071e58d0071f;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\battlechatter.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace ping;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: ping
 	Checksum: 0xB5F5AFB9
 	Offset: 0x98
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ping", &function_70a657d8, undefined, undefined, undefined);
 }

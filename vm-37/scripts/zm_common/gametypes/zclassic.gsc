@@ -1,30 +1,30 @@
-#using script_113dd7f0ea2a1d4f;
-#using script_165beea08a63a243;
-#using script_3411bb48d41bd3b;
-#using script_34ab99a4ca1a43d;
-#using script_4421226bbc54b398;
-#using script_5bb072c3abf4652c;
-#using script_6ce38ab036223e6e;
-#using script_799de24f8ad427f7;
 #using script_7b1cd3908a825fdd;
-#using script_db06eb511bd9b36;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gamestate.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\callbacks.gsc;
-#using scripts\zm_common\gametypes\zm_gametype.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_behavior.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
-#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_vo.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_4421226bbc54b398;
+#using scripts\zm_common\zm.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_round_logic.gsc;
+#using scripts\zm_common\zm_cleanup_mgr.gsc;
+#using scripts\zm_common\zm_behavior.gsc;
+#using script_799de24f8ad427f7;
+#using script_3411bb48d41bd3b;
+#using scripts\zm_common\callbacks.gsc;
+#using script_34ab99a4ca1a43d;
+#using scripts\zm_common\gametypes\zm_gametype.gsc;
+#using script_113dd7f0ea2a1d4f;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\gamestate.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_165beea08a63a243;
 
 #namespace zclassic;
 
@@ -50,7 +50,7 @@ event main(eventstruct)
 	level.onstartgametype = &onstartgametype;
 	level._game_module_custom_spawn_init_func = &zm_gametype::custom_spawn_init_func;
 	level._game_module_stat_update_func = &zm_stats::survival_classic_custom_stat_update;
-	level._round_start_func = &namespace_a28acff3::round_start;
+	level._round_start_func = &zm_round_logic::round_start;
 	level.var_4d30a9f0 = 1;
 	level.var_cdc822b = &function_38499d79;
 	level.var_9f01688e = 1;
@@ -58,7 +58,7 @@ event main(eventstruct)
 	level thread function_a24232f4();
 	namespace_58949729::function_5a12541e();
 	level thread intro_cinematic();
-	callback::function_189f87c1(&function_189f87c1);
+	callback::on_round_end(&on_round_end);
 	challenges::registerchallengescallback("gameEnd", &give_match_bonus);
 	callback::add_callback(#"hash_594217387367ebb4", &function_d81240c3);
 	callback::on_spawned(&on_player_spawn);
@@ -219,7 +219,7 @@ function on_player_spawn()
 		self.pers[#"score"] = var_c6b6dcea;
 		self.score = self.pers[#"score"];
 		self.score_total = self.score;
-		self.var_f22ee5e = self.score_total;
+		self.objscore = self.score_total;
 		/#
 			if(getdvarint(#"zombie_cheat", 0) >= 1)
 			{
@@ -280,7 +280,7 @@ function function_a24232f4()
 }
 
 /*
-	Name: function_189f87c1
+	Name: on_round_end
 	Namespace: zclassic
 	Checksum: 0x380603E8
 	Offset: 0xC08
@@ -288,7 +288,7 @@ function function_a24232f4()
 	Parameters: 0
 	Flags: None
 */
-function function_189f87c1()
+function on_round_end()
 {
 	level endon(#"hash_3e765c26047c9f54", #"end_game");
 	var_370ac26d = zm::function_d3113f01().var_bd588afd;

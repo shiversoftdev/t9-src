@@ -1,14 +1,14 @@
-#using script_1cd491b1807da8f7;
-#using script_2f844119a654d6a;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gestures.gsc;
+#using scripts\weapons\land_mine.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gestures.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_1cd491b1807da8f7;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_f3e83343;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_f3e83343
 	Checksum: 0xA03EBF8B
 	Offset: 0x138
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_56764d013a0eb19c", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -222,7 +222,7 @@ function function_160e40a2()
 								continue;
 							}
 							bundle = function_489009c1(dynent);
-							if(isdefined(bundle) && isdefined(bundle.var_c14aa186) && isdefined(bundle.var_c14aa186[stateindex]))
+							if(isdefined(bundle) && isdefined(bundle.dynentstates) && isdefined(bundle.dynentstates[stateindex]))
 							{
 								var_b731b99b = 6;
 								if(stateindex == 0 || stateindex == 6)
@@ -239,8 +239,8 @@ function function_160e40a2()
 									}
 								}
 								var_bb075e98 = {#origin:var_dea242aa};
-								var_a852a7dd = var_bb075e98 dynent_use::function_bf7b8a27(dynent, player, var_b731b99b, 1, 1);
-								player gestures::function_b204f6e3("ges_t9_door_shove", undefined, 0);
+								var_a852a7dd = var_bb075e98 dynent_use::use_dynent(dynent, player, var_b731b99b, 1, 1);
+								player gestures::play_gesture("ges_t9_door_shove", undefined, 0);
 								player function_bc82f900("door_shove");
 								playsoundatposition("evt_door_bash", dynent.origin);
 								playfx("debris/fx9_door_bash", dynent.origin, anglestoforward(dynent.angles), anglestoup(dynent.angles));
@@ -311,7 +311,7 @@ function function_c743094d(eventstruct)
 			}
 		}
 		bundle = function_489009c1(dynent);
-		if(isdefined(bundle) && isdefined(bundle.var_c14aa186) && isdefined(bundle.var_c14aa186[stateindex]))
+		if(isdefined(bundle) && isdefined(bundle.dynentstates) && isdefined(bundle.dynentstates[stateindex]))
 		{
 			var_b731b99b = 6;
 			if(stateindex == 0 || stateindex == 6)
@@ -325,7 +325,7 @@ function function_c743094d(eventstruct)
 					var_b731b99b = 5;
 				}
 			}
-			var_a852a7dd = eventstruct.attacker.var_8a022726 dynent_use::function_bf7b8a27(dynent, eventstruct.attacker, var_b731b99b, 1, 1);
+			var_a852a7dd = eventstruct.attacker.var_8a022726 dynent_use::use_dynent(dynent, eventstruct.attacker, var_b731b99b, 1, 1);
 			playsoundatposition("evt_door_bash", dynent.origin);
 			playfx("debris/fx9_door_bash", dynent.origin, anglestoforward(dynent.angles), anglestoup(dynent.angles));
 			dynent.var_a548ec11 = gettime() + (var_a852a7dd * 1000);
@@ -507,7 +507,7 @@ function private function_724a2fa5(eventstruct)
 	{
 		return;
 	}
-	var_a852a7dd = dynent_use::function_bf7b8a27(dynent);
+	var_a852a7dd = dynent_use::use_dynent(dynent);
 	dynent.var_a548ec11 = gettime() + (var_a852a7dd * 1000);
 }
 

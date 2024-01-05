@@ -1,12 +1,12 @@
-#using script_218f57fb32d9325b;
-#using script_35598499769dbb3d;
+#using script_68d08b784c92da95;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 #using script_41fe08c37d53a635;
 #using script_4c5c4a64a59247a2;
+#using script_35598499769dbb3d;
 #using script_4d85e8de54b02198;
-#using script_6809bf766eba194a;
-#using script_68d08b784c92da95;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using scripts\core_common\ai\archetype_human_cover.gsc;
 
 #namespace animationstatenetwork;
 

@@ -1,12 +1,12 @@
-#using script_158d50d476435605;
-#using scripts\core_common\animation_shared.csc;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\exploder_shared.csc;
 #using scripts\core_common\lui_shared.csc;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\scene_shared.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\exploder_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\animation_shared.csc;
+#using scripts\core_common\activecamo_shared.csc;
 
 #namespace callback;
 
@@ -281,7 +281,7 @@ function on_finalize_initialization(func, obj)
 }
 
 /*
-	Name: function_d46d9315
+	Name: on_gameplay_started
 	Namespace: callback
 	Checksum: 0x34FB2C56
 	Offset: 0x9E0
@@ -289,9 +289,9 @@ function on_finalize_initialization(func, obj)
 	Parameters: 2
 	Flags: Linked
 */
-function function_d46d9315(func, obj)
+function on_gameplay_started(func, obj)
 {
-	add_callback(#"hash_53992479a389b987", func, obj);
+	add_callback(#"on_gameplay_started", func, obj);
 }
 
 /*
@@ -421,7 +421,7 @@ function on_laststand(func, obj)
 }
 
 /*
-	Name: function_53888e7f
+	Name: remove_on_laststand
 	Namespace: callback
 	Checksum: 0x805DE880
 	Offset: 0xCB0
@@ -429,7 +429,7 @@ function on_laststand(func, obj)
 	Parameters: 2
 	Flags: None
 */
-function function_53888e7f(func, obj)
+function remove_on_laststand(func, obj)
 {
 	remove_callback(#"on_player_laststand", func, obj);
 }
@@ -463,7 +463,7 @@ function function_930e5d42(func, obj)
 }
 
 /*
-	Name: function_f77ced93
+	Name: on_weapon_change
 	Namespace: callback
 	Checksum: 0x7C5152F2
 	Offset: 0xD88
@@ -471,7 +471,7 @@ function function_930e5d42(func, obj)
 	Parameters: 2
 	Flags: Linked
 */
-function function_f77ced93(func, obj)
+function on_weapon_change(func, obj)
 {
 	self add_entity_callback(#"weapon_change", func, obj);
 }
@@ -645,7 +645,7 @@ function on_end_game(func, obj)
 }
 
 /*
-	Name: function_b195a021
+	Name: remove_on_end_game
 	Namespace: callback
 	Checksum: 0x575391F9
 	Offset: 0x1130
@@ -653,13 +653,13 @@ function on_end_game(func, obj)
 	Parameters: 2
 	Flags: None
 */
-function function_b195a021(func, obj)
+function remove_on_end_game(func, obj)
 {
 	remove_callback(#"on_end_game", func, obj);
 }
 
 /*
-	Name: function_e9e16e2f
+	Name: on_killcam_begin
 	Namespace: callback
 	Checksum: 0x8FE3427B
 	Offset: 0x1178
@@ -667,13 +667,13 @@ function function_b195a021(func, obj)
 	Parameters: 2
 	Flags: Linked
 */
-function function_e9e16e2f(func, obj)
+function on_killcam_begin(func, obj)
 {
 	add_callback(#"killcam_begin", func, obj);
 }
 
 /*
-	Name: function_4f6cafea
+	Name: on_killcam_end
 	Namespace: callback
 	Checksum: 0xC0C5F684
 	Offset: 0x11C0
@@ -681,7 +681,7 @@ function function_e9e16e2f(func, obj)
 	Parameters: 2
 	Flags: Linked
 */
-function function_4f6cafea(func, obj)
+function on_killcam_end(func, obj)
 {
 	add_callback(#"killcam_end", func, obj);
 }
@@ -715,7 +715,7 @@ function function_fb65b7c2(func, obj)
 }
 
 /*
-	Name: function_10a8ebd8
+	Name: on_melee
 	Namespace: callback
 	Checksum: 0x3B73B24F
 	Offset: 0x1298
@@ -723,13 +723,13 @@ function function_fb65b7c2(func, obj)
 	Parameters: 2
 	Flags: None
 */
-function function_10a8ebd8(func, obj)
+function on_melee(func, obj)
 {
 	add_callback(#"melee", func, obj);
 }
 
 /*
-	Name: function_35a12f19
+	Name: on_trigger
 	Namespace: callback
 	Checksum: 0x3293397B
 	Offset: 0x12E0
@@ -737,13 +737,13 @@ function function_10a8ebd8(func, obj)
 	Parameters: 2
 	Flags: None
 */
-function function_35a12f19(func, obj)
+function on_trigger(func, obj)
 {
-	add_entity_callback(#"hash_1bd0411eb5169b", func, obj);
+	add_entity_callback(#"on_trigger", func, obj);
 }
 
 /*
-	Name: function_b74bf3e
+	Name: remove_on_trigger
 	Namespace: callback
 	Checksum: 0xA1F77141
 	Offset: 0x1328
@@ -751,13 +751,13 @@ function function_35a12f19(func, obj)
 	Parameters: 2
 	Flags: None
 */
-function function_b74bf3e(func, obj)
+function remove_on_trigger(func, obj)
 {
-	function_52ac9652(#"hash_1bd0411eb5169b", func, obj);
+	function_52ac9652(#"on_trigger", func, obj);
 }
 
 /*
-	Name: function_a04381e0
+	Name: on_trigger_once
 	Namespace: callback
 	Checksum: 0xE74D9065
 	Offset: 0x1370
@@ -765,13 +765,13 @@ function function_b74bf3e(func, obj)
 	Parameters: 2
 	Flags: None
 */
-function function_a04381e0(func, obj)
+function on_trigger_once(func, obj)
 {
-	add_entity_callback(#"hash_46d459e3750a3345", func, obj);
+	add_entity_callback(#"on_trigger_once", func, obj);
 }
 
 /*
-	Name: function_3507ed1f
+	Name: remove_on_trigger_once
 	Namespace: callback
 	Checksum: 0x51113F2A
 	Offset: 0x13B8
@@ -779,9 +779,9 @@ function function_a04381e0(func, obj)
 	Parameters: 2
 	Flags: Linked
 */
-function function_3507ed1f(func, obj)
+function remove_on_trigger_once(func, obj)
 {
-	function_52ac9652(#"hash_46d459e3750a3345", func, obj);
+	function_52ac9652(#"on_trigger_once", func, obj);
 }
 
 /*
@@ -1659,7 +1659,7 @@ event function_327732bf(eventstruct)
 {
 	if(isdefined(level.var_dda8e1d8))
 	{
-		[[level.var_dda8e1d8]](eventstruct.localclientnum, eventstruct.job_index, eventstruct.extracam_index, eventstruct.session_mode, eventstruct.character_index, eventstruct.var_7abdc6dd, eventstruct.item_type, eventstruct.item_index, eventstruct.is_defaultrender);
+		[[level.var_dda8e1d8]](eventstruct.localclientnum, eventstruct.job_index, eventstruct.extracam_index, eventstruct.session_mode, eventstruct.character_index, eventstruct.outfit_index, eventstruct.item_type, eventstruct.item_index, eventstruct.is_defaultrender);
 	}
 }
 
@@ -1836,11 +1836,11 @@ event function_2073f6dc(eventstruct)
 	magnitude = float(eventstruct.magnitude);
 	innerradius = float(eventstruct.innerradius);
 	outerradius = float(eventstruct.outerradius);
-	var_489a8c6f = (isdefined(self.var_f501d778) ? self.var_f501d778 : 50);
-	var_5143872f = (isdefined(self.var_e14c1b5c) ? self.var_e14c1b5c : 25);
+	innerdamage = (isdefined(self.var_f501d778) ? self.var_f501d778 : 50);
+	outerdamage = (isdefined(self.var_e14c1b5c) ? self.var_e14c1b5c : 25);
 	var_a62fd3ab = (isdefined(self.var_abe3f153) ? self.var_abe3f153 : 1);
 	var_c1cde02b = (isdefined(self.var_bd0f9401) ? self.var_bd0f9401 : 1);
-	physicsexplosionsphere(eventstruct.localclientnum, origin, outerradius, innerradius, magnitude, var_489a8c6f, var_5143872f, var_a62fd3ab, var_c1cde02b);
+	physicsexplosionsphere(eventstruct.localclientnum, origin, outerradius, innerradius, magnitude, innerdamage, outerdamage, var_a62fd3ab, var_c1cde02b);
 }
 
 /*
@@ -2000,7 +2000,7 @@ event function_5067ee2f(eventstruct)
 }
 
 /*
-	Name: function_fa19b45b
+	Name: codecallback_forcestreambundle
 	Namespace: callback
 	Checksum: 0x61412497
 	Offset: 0x3120
@@ -2008,7 +2008,7 @@ event function_5067ee2f(eventstruct)
 	Parameters: 1
 	Flags: Event
 */
-event function_fa19b45b(eventstruct)
+event codecallback_forcestreambundle(eventstruct)
 {
 	forcestreambundle(eventstruct.name, eventstruct.var_3c542760, eventstruct.var_a0e51075);
 }
@@ -2026,7 +2026,7 @@ event function_582e112f(eventstruct)
 {
 	if(isdefined(level.var_45ca79e5))
 	{
-		[[level.var_45ca79e5]](eventstruct.localclientnum, eventstruct.eventtype, eventstruct.var_d8138db2, eventstruct.value, eventstruct.value2);
+		[[level.var_45ca79e5]](eventstruct.localclientnum, eventstruct.eventtype, eventstruct.itemid, eventstruct.value, eventstruct.value2);
 	}
 }
 
@@ -2048,7 +2048,7 @@ event function_11988454(eventstruct)
 }
 
 /*
-	Name: function_6eb09118
+	Name: codecallback_trigger
 	Namespace: callback
 	Checksum: 0x954F633A
 	Offset: 0x3200
@@ -2056,13 +2056,13 @@ event function_11988454(eventstruct)
 	Parameters: 1
 	Flags: Event
 */
-event function_6eb09118(eventstruct)
+event codecallback_trigger(eventstruct)
 {
 	if(isdefined(level.var_a6c75fcb))
 	{
-		self callback(#"hash_1bd0411eb5169b", eventstruct);
-		self callback(#"hash_46d459e3750a3345", eventstruct);
-		self function_3507ed1f("all");
+		self callback(#"on_trigger", eventstruct);
+		self callback(#"on_trigger_once", eventstruct);
+		self remove_on_trigger_once("all");
 	}
 }
 
@@ -2141,7 +2141,7 @@ event function_250a9740(eventstruct)
 }
 
 /*
-	Name: function_2eb17944
+	Name: codecallback_death
 	Namespace: callback
 	Checksum: 0x1055C5FA
 	Offset: 0x3460
@@ -2149,14 +2149,14 @@ event function_250a9740(eventstruct)
 	Parameters: 1
 	Flags: Event
 */
-event function_2eb17944(eventstruct)
+event codecallback_death(eventstruct)
 {
 	self notify(#"death", eventstruct);
 	self entity_callback(#"death", eventstruct);
 }
 
 /*
-	Name: function_40d9ce80
+	Name: codecallback_melee
 	Namespace: callback
 	Checksum: 0x1463EA3A
 	Offset: 0x34B0
@@ -2164,7 +2164,7 @@ event function_2eb17944(eventstruct)
 	Parameters: 1
 	Flags: Event
 */
-event function_40d9ce80(eventstruct)
+event codecallback_melee(eventstruct)
 {
 	self callback(#"melee", eventstruct);
 }
@@ -2303,7 +2303,7 @@ event function_7831af89(eventstruct)
 }
 
 /*
-	Name: function_fbeb26f6
+	Name: codecallback_updateactivecamo
 	Namespace: callback
 	Checksum: 0x8E2A5E32
 	Offset: 0x3848
@@ -2311,9 +2311,9 @@ event function_7831af89(eventstruct)
 	Parameters: 1
 	Flags: Event
 */
-event function_fbeb26f6(eventstruct)
+event codecallback_updateactivecamo(eventstruct)
 {
-	self callback(#"hash_1d3c7b07ff527f3e", eventstruct.localclientnum, eventstruct);
+	self callback(#"updateactivecamo", eventstruct.localclientnum, eventstruct);
 }
 
 /*
@@ -2495,9 +2495,9 @@ function callback_stunned(localclientnum, oldval, newval, bnewent, binitialsnap,
 	{
 		self notify(#"not_stunned");
 	}
-	if(isdefined(self.var_ba36f5d))
+	if(isdefined(self.stunnedcallback))
 	{
-		self [[self.var_ba36f5d]](fieldname, bwastimejump);
+		self [[self.stunnedcallback]](fieldname, bwastimejump);
 	}
 }
 

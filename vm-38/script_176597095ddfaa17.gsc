@@ -1,13 +1,13 @@
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\values_shared.gsc;
 #using script_1cc417743d7c262d;
 #using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_d0ab5955;
 
@@ -22,11 +22,11 @@
 */
 function private autoexec function_3cf4377c()
 {
-	level notify(1700690992);
+	level notify(-1700690992);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_d0ab5955
 	Checksum: 0x76FB8613
 	Offset: 0x250
@@ -34,7 +34,7 @@ function private autoexec function_3cf4377c()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_d07e35f920d16a8", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -92,7 +92,7 @@ function init()
 	}
 	level.var_f2211522 = getentarray("survival_fow", "script_noteworthy");
 	callback::on_connect(&on_connect);
-	callback::function_98a0917d(&start);
+	callback::on_game_playing(&start);
 }
 
 /*
@@ -334,7 +334,7 @@ function function_3824d2dc(v_loc)
 */
 function function_dc15ad60()
 {
-	level endoncallback(&function_a9d55ec2, #"game_ended");
+	level endoncallback(&cleanup_feedback, #"game_ended");
 	level flag::wait_till_clear(#"hash_4930756571725d11");
 	while(true)
 	{
@@ -369,7 +369,7 @@ function function_dc15ad60()
 			if(isplayer(entity) && (!isalive(entity) || entity scene::is_igc_active()))
 			{
 				entity clientfield::set("outsidetile", 0);
-				entity function_8c7edff5();
+				entity hide_effects();
 				continue;
 			}
 			if(!entity function_3824d2dc() && !is_true(entity.var_99582f14) && isdefined(entity.maxhealth))
@@ -401,7 +401,7 @@ function function_dc15ad60()
 				if(isplayer(entity))
 				{
 					entity clientfield::set("outsidetile", 1);
-					entity function_3ac75bd8(intensity);
+					entity show_effects(intensity);
 					player = entity;
 				}
 				if(dodamage)
@@ -435,7 +435,7 @@ function function_dc15ad60()
 			if(isplayer(entity))
 			{
 				entity clientfield::set("outsidetile", 0);
-				entity function_8c7edff5();
+				entity hide_effects();
 			}
 			entity.var_9a1624b5 = undefined;
 		}
@@ -448,7 +448,7 @@ function function_dc15ad60()
 }
 
 /*
-	Name: function_a9d55ec2
+	Name: cleanup_feedback
 	Namespace: namespace_d0ab5955
 	Checksum: 0xD92942F9
 	Offset: 0x14A8
@@ -456,16 +456,16 @@ function function_dc15ad60()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_a9d55ec2(notifyhash)
+function private cleanup_feedback(notifyhash)
 {
 	foreach(player in getplayers())
 	{
-		player function_8c7edff5();
+		player hide_effects();
 	}
 }
 
 /*
-	Name: function_3ac75bd8
+	Name: show_effects
 	Namespace: namespace_d0ab5955
 	Checksum: 0xA2C8E5BF
 	Offset: 0x1548
@@ -473,7 +473,7 @@ function private function_a9d55ec2(notifyhash)
 	Parameters: 1
 	Flags: Linked
 */
-function function_3ac75bd8(intensity)
+function show_effects(intensity)
 {
 	if(self clientfield::get_to_player("fogofwareffects") == 0 && !self isinmovemode("ufo", "noclip"))
 	{
@@ -483,7 +483,7 @@ function function_3ac75bd8(intensity)
 }
 
 /*
-	Name: function_8c7edff5
+	Name: hide_effects
 	Namespace: namespace_d0ab5955
 	Checksum: 0x491155B6
 	Offset: 0x15F0
@@ -491,7 +491,7 @@ function function_3ac75bd8(intensity)
 	Parameters: 0
 	Flags: Linked
 */
-function function_8c7edff5()
+function hide_effects()
 {
 	if(self clientfield::get_to_player("fogofwareffects") != 0)
 	{

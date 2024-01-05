@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_9c58d24e : class_6aaccc24
+class class_9c58d24e : cluielem
 {
 
 	/*
@@ -44,7 +44,7 @@ class class_9c58d24e : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -58,7 +58,7 @@ class class_9c58d24e : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -72,16 +72,16 @@ class class_9c58d24e : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_beacon_menu");
+		cluielem::setup_clientfields("sr_beacon_menu");
 	}
 
 }
 
-#namespace namespace_d84b2e13;
+#namespace sr_beacon_menu;
 
 /*
 	Name: function_cb491f74
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0xAC24CEE7
 	Offset: 0xA8
 	Size: 0x14
@@ -90,12 +90,12 @@ class class_9c58d24e : class_6aaccc24
 */
 function private autoexec function_cb491f74()
 {
-	level notify(798772028);
+	level notify(-798772028);
 }
 
 /*
 	Name: register
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0x4F13716
 	Offset: 0xC8
 	Size: 0x34
@@ -111,7 +111,7 @@ function register()
 
 /*
 	Name: open
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0x40D59CB0
 	Offset: 0x108
 	Size: 0x38
@@ -129,7 +129,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0x6221B1B7
 	Offset: 0x148
 	Size: 0x1C
@@ -143,7 +143,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0xD7920DB2
 	Offset: 0x170
 	Size: 0x1A

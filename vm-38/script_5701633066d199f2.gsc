@@ -1,67 +1,67 @@
-#using script_1510b5c03c279e8f;
+#using script_761ab8de8f97d130;
 #using script_15ddefec0f2c1a92;
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c5daa95f8fec03c;
-#using script_2c7754f0e88c7dd4;
-#using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3bbf85ab4cb9f3c2;
-#using script_3faf478d5b0850fe;
-#using script_40eb62810357ba9b;
-#using script_40f967ad5d18ea74;
-#using script_44dc341d87a68571;
-#using script_46777b16a6ea6667;
-#using script_47851dbeea22fe66;
-#using script_489b835a247c990e;
-#using script_49adc60ba76a57c7;
-#using script_4bf952f6ba31bb17;
-#using script_4d748e58ce25b60c;
-#using script_4d85e8de54b02198;
-#using script_5133d88c555e460;
-#using script_522aeb6ae906391e;
-#using script_52608be2732b3c77;
-#using script_5701633066d199f2;
-#using script_57f7003580bb15e0;
-#using script_59f07c660e6710a5;
-#using script_5e8f7ecf981ad9a3;
-#using script_5f20d3b434d24884;
-#using script_6281e493de3ff80b;
-#using script_6809bf766eba194a;
-#using script_68cdf0ca5df5e;
 #using script_6dce1fe6a7dd35c7;
 #using script_71971f45043d4dfe;
-#using script_736b4607e813f2e5;
-#using script_74a56359b7d02ab6;
-#using script_761ab8de8f97d130;
-#using script_774302f762d76254;
+#using script_1510b5c03c279e8f;
 #using script_7857e1ad7dfdbc95;
-#using script_79cafc73107dd980;
+#using script_5133d88c555e460;
+#using script_2c7754f0e88c7dd4;
+#using script_6281e493de3ff80b;
 #using script_7a9e25472d14a1ff;
-#using script_7b7ed6e4bc963a51;
-#using script_bd2b8aaa388dcce;
-#using script_caf007e2a98afa2;
+#using script_44dc341d87a68571;
+#using script_52608be2732b3c77;
+#using script_49adc60ba76a57c7;
+#using script_5e8f7ecf981ad9a3;
+#using script_79cafc73107dd980;
+#using script_40eb62810357ba9b;
+#using script_736b4607e813f2e5;
+#using script_46777b16a6ea6667;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
 #using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_3aa0f32b70d4f7cb;
+#using script_489b835a247c990e;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_caf007e2a98afa2;
+#using script_4d85e8de54b02198;
+#using script_4bf952f6ba31bb17;
+#using script_59f07c660e6710a5;
+#using script_7b7ed6e4bc963a51;
+#using script_522aeb6ae906391e;
+#using script_1a9763988299e68d;
+#using script_2a5bf5b4a00cee0d;
+#using script_3bbf85ab4cb9f3c2;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
+#using script_774302f762d76254;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_74a56359b7d02ab6;
+#using script_68cdf0ca5df5e;
+#using scripts\core_common\ai\zombie.gsc;
 #using scripts\core_common\throttle_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_3819e7a1427df6d2;
+#using script_2c5daa95f8fec03c;
+#using script_35598499769dbb3d;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_250e9486;
 
@@ -661,23 +661,23 @@ function function_d138afd9()
 	level doa_pickups::function_68442ee7(spot, 20, 128, 1);
 	if(roll > 25)
 	{
-		level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boots"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
+		level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boots"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
 	}
 	if(roll > 35)
 	{
-		level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boxing_glove"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
+		level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boxing_glove"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
 	}
 	if(roll > 65)
 	{
-		level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_gift_box"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
+		level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_gift_box"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
 	}
 	if(roll > 75)
 	{
-		level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_siegebot_mini"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
+		level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_siegebot_mini"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
 	}
 	if(roll > 95)
 	{
-		level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_potion_orange"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
+		level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_potion_orange"), spot + (randomintrange(-40, 40), randomintrange(-40, 40), 0), undefined, undefined, 1);
 	}
 }
 
@@ -759,7 +759,7 @@ function function_25b2c8a9(spawner, str_targetname, force_spawn)
 {
 	self function_166a9ab7();
 	self clientfield::set("enable_on_radar", 1);
-	self callback::function_d8abfc3d(#"hash_11aa32ad6d527054", &function_448dac71);
+	self callback::function_d8abfc3d(#"on_ai_melee", &function_448dac71);
 	self callback::function_d8abfc3d(#"on_ai_killed", &function_21ef174b);
 	self thread function_fce39c7a();
 	/#
@@ -782,7 +782,7 @@ function function_25b2c8a9(spawner, str_targetname, force_spawn)
 	self.engagementdistance = 2400;
 	self.var_a84a3d40 = sqr(self.engagementdistance);
 	self.var_f578c3a2 = sqr(36);
-	self.var_42abd8e = 1;
+	self.shouldspawn = 1;
 	self.var_c0bd8c06 = 0;
 	self.var_f6b9e96d = 0;
 	self.missinglegs = 0;
@@ -2541,7 +2541,7 @@ function function_9b31d191(einflictor, eattacker, idamage, smeansofdeath, weapon
 		{
 			if(is_true(vdir.var_b9bb0656))
 			{
-				vdir.owner namespace_d2efac9a::function_1bcac64f();
+				vdir.owner namespace_d2efac9a::vehiclekill();
 			}
 		}
 	}
@@ -2941,10 +2941,10 @@ function function_3d752709(enemy, var_bd97c6ae)
 	{
 		return false;
 	}
-	var_f2fb414f = anglestoforward(var_bd97c6ae.angles);
-	var_9349139f = enemy.origin - var_bd97c6ae.origin;
-	var_3e3c8075 = (var_9349139f[0], var_9349139f[1], 0);
-	var_c2ee8451 = (var_f2fb414f[0], var_f2fb414f[1], 0);
+	facingvec = anglestoforward(var_bd97c6ae.angles);
+	enemyvec = enemy.origin - var_bd97c6ae.origin;
+	var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
+	var_c2ee8451 = (facingvec[0], facingvec[1], 0);
 	var_3e3c8075 = vectornormalize(var_3e3c8075);
 	var_c2ee8451 = vectornormalize(var_c2ee8451);
 	var_34e02165 = vectordot(var_c2ee8451, var_3e3c8075);
@@ -2973,9 +2973,9 @@ function function_5a481a84(player, dist)
 	dist = distance(self.origin, player.origin);
 	targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
 	var_a6470558 = vectornormalize(targetorigin - self.origin);
-	var_d3cafde6 = self.meleeweapon.var_d3cafde6;
-	var_32708f81 = dist + var_d3cafde6;
-	var_8cf8f805 = mapfloat(0, var_d3cafde6, dist, var_32708f81, dist);
+	aimeleerange = self.meleeweapon.aimeleerange;
+	var_32708f81 = dist + aimeleerange;
+	var_8cf8f805 = mapfloat(0, aimeleerange, dist, var_32708f81, dist);
 	player playerknockback(1);
 	player applyknockback(int(var_8cf8f805), var_a6470558);
 	player playerknockback(0);
@@ -2999,8 +2999,8 @@ function function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point
 	var_b1c1c5cf = 1;
 	if(var_8d3f5b7d)
 	{
-		var_38d1de41 = isdefined(namespace_81245006::function_fab3ee3e(self));
-		if(var_30362eca && var_ebcb86d6 hasperk(#"hash_6afc24062d2515a2"))
+		has_weakpoints = isdefined(namespace_81245006::function_fab3ee3e(self));
+		if(var_30362eca && var_ebcb86d6 hasperk(#"specialty_mod_awareness"))
 		{
 			if(var_b1c1c5cf < 1)
 			{

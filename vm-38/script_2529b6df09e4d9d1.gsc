@@ -1,11 +1,11 @@
-#using script_7cc5fb39b97494c4;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\doors_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\serverfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\cp_common\bb.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_7cc5fb39b97494c4;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\doors_shared.gsc;
+#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 class class_d28acd06 : class_9e71c1a2
 {
@@ -112,9 +112,9 @@ class class_d28acd06 : class_9e71c1a2
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_309c16b5(e_player, var_ee0af263)
+	function function_309c16b5(e_player, n_new_val)
 	{
-		[[ self ]]->complete(e_player, var_ee0af263 == 2, e_player.team);
+		[[ self ]]->complete(e_player, n_new_val == 2, e_player.team);
 	}
 
 	/*
@@ -287,11 +287,11 @@ class class_d28acd06 : class_9e71c1a2
 */
 function private autoexec function_124b49ac()
 {
-	level notify(1735451933);
+	level notify(-1735451933);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: lockpick
 	Checksum: 0x812A9B0E
 	Offset: 0x1D0
@@ -299,7 +299,7 @@ function private autoexec function_124b49ac()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	level.class_factory["minigame_" + "lockpick"] = &function_8d584152;
 	system::register("lockpick", &function_70a657d8);

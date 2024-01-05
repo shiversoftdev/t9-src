@@ -1,6 +1,6 @@
-#using script_7e59d7bba853fe4b;
-#using scripts\core_common\spawner_shared.gsc;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 
 #namespace namespace_20cd530c;
 
@@ -15,6 +15,6 @@
 */
 function private autoexec function_78197e02()
 {
-	level notify(102282428);
+	level notify(-102282428);
 }
 

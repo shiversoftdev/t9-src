@@ -1,7 +1,7 @@
-#using script_6e3c826b1814cab6;
+#using scripts\zm_common\zm_customgame.gsc;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 
 #namespace serversettings;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_da8d999b()
 {
-	level notify(1255477968);
+	level notify(-1255477968);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: serversettings
 	Checksum: 0x8E03E5B
 	Offset: 0xB0
@@ -28,7 +28,7 @@ function private autoexec function_da8d999b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"serversettings", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -81,7 +81,7 @@ function main()
 		level.allow_teamchange = 1;
 	}
 	setdvar(#"ui_allow_teamchange", level.allow_teamchange);
-	level.friendlyfire = getgametypesetting(#"hash_3f8f02e8109b6e93");
+	level.friendlyfire = getgametypesetting(#"zmfriendlyfiretype");
 	if(!isdefined(level.friendlyfire))
 	{
 		level.friendlyfire = 0;
@@ -152,7 +152,7 @@ function updateserversettings()
 		level.allowvote = g_allowvote;
 		setdvar(#"ui_allowvote", level.allowvote);
 	}
-	scr_friendlyfire = getgametypesetting(#"hash_3f8f02e8109b6e93");
+	scr_friendlyfire = getgametypesetting(#"zmfriendlyfiretype");
 	if(!isdefined(scr_friendlyfire))
 	{
 		scr_friendlyfire = 0;
@@ -160,7 +160,7 @@ function updateserversettings()
 	if(level.friendlyfire != scr_friendlyfire)
 	{
 		level.friendlyfire = scr_friendlyfire;
-		namespace_59ff1d6c::function_928be07c();
+		zm_custom::function_928be07c();
 		setdvar(#"ui_friendlyfire", level.friendlyfire);
 	}
 }

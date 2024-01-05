@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_58949729;
 
@@ -19,7 +19,7 @@ function private autoexec function_c6699733()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_58949729
 	Checksum: 0x4F4C76DA
 	Offset: 0x130
@@ -27,7 +27,7 @@ function private autoexec function_c6699733()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5f19cd68b4607f52", &function_70a657d8, undefined, undefined, undefined);
 }

@@ -1,10 +1,10 @@
-#using script_256b8879317373de;
-#using script_7dc3a36c222eaf22;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using script_7dc3a36c222eaf22;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace spectating;
 
@@ -19,11 +19,11 @@
 */
 function private autoexec function_36cf5805()
 {
-	level notify(2119833321);
+	level notify(-2119833321);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: spectating
 	Checksum: 0xC380929C
 	Offset: 0xE0
@@ -31,7 +31,7 @@ function private autoexec function_36cf5805()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"spectating", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -176,7 +176,7 @@ function set_permissions()
 		}
 		if(team == #"spectator")
 		{
-			self.var_92e86779 = #"invalid";
+			self.spectatorteam = #"invalid";
 			self allowspectateallteams(1);
 			self allowspectateteam("freelook", 0);
 			self allowspectateteam(#"none", 1);
@@ -191,14 +191,14 @@ function set_permissions()
 	{
 		case 0:
 		{
-			self.var_92e86779 = #"invalid";
+			self.spectatorteam = #"invalid";
 			self allowspectateteam(#"none", 1);
 			self allowspectateteam("localplayers", 0);
 			break;
 		}
 		case 3:
 		{
-			self.var_92e86779 = #"invalid";
+			self.spectatorteam = #"invalid";
 			if(self issplitscreen() && self other_local_player_still_alive())
 			{
 				self allowspectateteam(#"none", 0);
@@ -207,7 +207,7 @@ function set_permissions()
 		}
 		case 1:
 		{
-			self.var_92e86779 = #"invalid";
+			self.spectatorteam = #"invalid";
 			if(!level.teambased)
 			{
 				self allowspectateallteams(1);
@@ -229,14 +229,14 @@ function set_permissions()
 		}
 		case 6:
 		{
-			self.var_92e86779 = team;
+			self.spectatorteam = team;
 			self allowspectateteam(#"none", 0);
 			self allowspectateteam(team, 1);
 			break;
 		}
 		case 2:
 		{
-			self.var_92e86779 = #"invalid";
+			self.spectatorteam = #"invalid";
 			self allowspectateteam(#"none", 1);
 			self allowspectateallteams(1);
 			foreach(team in level.teams)
@@ -317,7 +317,7 @@ function function_18b8b7e4(players, origin)
 }
 
 /*
-	Name: function_78d7160b
+	Name: spectator_team
 	Namespace: spectating
 	Checksum: 0x64AEAA19
 	Offset: 0xC28
@@ -325,9 +325,9 @@ function function_18b8b7e4(players, origin)
 	Parameters: 1
 	Flags: Linked
 */
-function function_78d7160b(player)
+function spectator_team(player)
 {
-	return player.var_92e86779;
+	return player.spectatorteam;
 }
 
 /*
@@ -430,7 +430,7 @@ function function_460b3788(players, var_22b78352, var_89bd5332, var_c9fe8766)
 	if(var_c9fe8766)
 	{
 		teammates = function_a1ef346b(self.team);
-		return self function_460b3788(teammates, &function_78d7160b, #"invalid", 0);
+		return self function_460b3788(teammates, &spectator_team, #"invalid", 0);
 	}
 	target = array::random(function_a1ef346b());
 	if(isdefined(target))
@@ -456,10 +456,10 @@ function function_4c37bb21()
 	{
 		players = function_a1ef346b(self.team);
 	}
-	var_156b3879 = self function_460b3788(players, &function_78d7160b, #"invalid", 0);
+	var_156b3879 = self function_460b3788(players, &spectator_team, #"invalid", 0);
 	if(isdefined(var_156b3879) && isplayer(var_156b3879))
 	{
-		self.var_92e86779 = var_156b3879.team;
+		self.spectatorteam = var_156b3879.team;
 		if(self.sessionstate !== "playing")
 		{
 			self setcurrentspectatorclient(var_156b3879);
@@ -488,7 +488,7 @@ function function_10fbd7e5()
 	var_156b3879 = self function_460b3788(players, &function_44d43a69, #"invalid", 1);
 	if(isdefined(var_156b3879) && isplayer(var_156b3879))
 	{
-		self.var_92e86779 = var_156b3879.team;
+		self.spectatorteam = var_156b3879.team;
 		if(self.sessionstate !== "playing")
 		{
 			self setcurrentspectatorclient(var_156b3879);
@@ -513,7 +513,7 @@ function function_da128b1()
 	{
 		return function_10fbd7e5();
 	}
-	if(level.spectatetype === 4 && self.var_92e86779 !== #"invalid")
+	if(level.spectatetype === 4 && self.spectatorteam !== #"invalid")
 	{
 		return function_4c37bb21();
 	}
@@ -765,7 +765,7 @@ function function_26c5324a(var_156b3879)
 	self.spectatorclient = -1;
 	if(!self spawning::function_29b859d1())
 	{
-		self.var_92e86779 = var_156b3879.team;
+		self.spectatorteam = var_156b3879.team;
 	}
 	self setcurrentspectatorclient(var_156b3879);
 	self callback::callback(#"hash_37840d0d5a10e6b8", {#client:var_156b3879});
@@ -815,7 +815,7 @@ function function_836ee9ed(var_156b3879)
 	}
 	else
 	{
-		self.var_92e86779 = self.team;
+		self.spectatorteam = self.team;
 	}
 }
 

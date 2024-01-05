@@ -1,7 +1,7 @@
 #using script_17a9d06bf819b2d3;
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_3bb7295f;
 
@@ -20,7 +20,7 @@ function private autoexec function_7188ff36()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_3bb7295f
 	Checksum: 0x443BBFEA
 	Offset: 0xB8
@@ -28,7 +28,7 @@ function private autoexec function_7188ff36()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4e2289c68f35238d", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -44,6 +44,6 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	namespace_5b1144e::function_5ae4a10c(array(#"p8_wz_snowball_pile", #"hash_26cf4dd6af8cf570"), "snowball_pile", #"hash_34daeba184b6d103", undefined, #"hash_2236529fd654a6b9");
+	namespace_5b1144e::function_5ae4a10c(array(#"p8_wz_snowball_pile", #"p8_wz_snowball_pile_sml"), "snowball_pile", #"hash_34daeba184b6d103", undefined, #"hash_2236529fd654a6b9");
 }
 

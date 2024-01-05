@@ -1,12 +1,12 @@
 #using script_60d2812480bc5591;
+#using scripts\zm\zm_gold_main_quest.gsc;
 #using script_7d7ac1f663edcdc8;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\zm\zm_gold_util.gsc;
 #using scripts\core_common\struct.gsc;
 #using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\zm\zm_gold_main_quest.gsc;
-#using scripts\zm\zm_gold_util.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_2a67e53;
 
@@ -21,7 +21,7 @@
 */
 function private autoexec function_5c1f2cb9()
 {
-	level notify(1191508389);
+	level notify(-1191508389);
 }
 
 /*
@@ -92,11 +92,11 @@ function private function_26d68622(v_center, n_group)
 	Parameters: 2
 	Flags: Linked, Private
 */
-function private function_18e95e2b(var_e9a27711, var_d9ee8daa)
+function private function_18e95e2b(var_e9a27711, s_screen)
 {
 	var_91baf01e = util::spawn_model("tag_origin");
 	var_91baf01e setforcenocull();
-	level function_d25d2a9(var_e9a27711, var_d9ee8daa, var_91baf01e);
+	level function_d25d2a9(var_e9a27711, s_screen, var_91baf01e);
 	level.terminal.control = var_91baf01e;
 }
 
@@ -350,16 +350,16 @@ function private function_1e3823bc(var_3f94a5b6)
 	Parameters: 4
 	Flags: Linked, Private
 */
-function private function_d25d2a9(var_e9a27711, var_d9ee8daa, var_7b1452d6, n_active)
+function private function_d25d2a9(var_e9a27711, s_screen, var_7b1452d6, n_active)
 {
 	if(!isdefined(n_active))
 	{
 		n_active = 0;
 	}
-	var_2b6fca73[0] = distance(var_e9a27711, var_d9ee8daa.center + (0, 60, -20));
-	var_2b6fca73[1] = distance(var_e9a27711, var_d9ee8daa.center + (0, -40, -80));
-	a_angles[0] = acos((abs((var_d9ee8daa.center[1] + ((0, 60, -20)[1])) - var_e9a27711[1])) / var_2b6fca73[0]);
-	a_angles[1] = acos((abs((var_d9ee8daa.center[2] + ((0, -40, -80)[2])) - var_e9a27711[2])) / var_2b6fca73[1]);
+	var_2b6fca73[0] = distance(var_e9a27711, s_screen.center + (0, 60, -20));
+	var_2b6fca73[1] = distance(var_e9a27711, s_screen.center + (0, -40, -80));
+	a_angles[0] = acos((abs((s_screen.center[1] + ((0, 60, -20)[1])) - var_e9a27711[1])) / var_2b6fca73[0]);
+	a_angles[1] = acos((abs((s_screen.center[2] + ((0, -40, -80)[2])) - var_e9a27711[2])) / var_2b6fca73[1]);
 	var_7b1452d6.radius = (var_2b6fca73[0], var_2b6fca73[1], 0);
 	var_7b1452d6.origin = var_7b1452d6.radius * 10000;
 	var_7b1452d6.origin = (var_7b1452d6.origin[0], var_7b1452d6.origin[1], n_active);
@@ -445,7 +445,7 @@ function private function_d228e8b0(var_3f94a5b6)
 		waitresult = self waittill(#"menuresponse");
 		menu = waitresult.menu;
 		response = waitresult.response;
-		if(menu == #"hash_5bc5fa54cf66129d")
+		if(menu == #"zm_gold_align_satellite_hud")
 		{
 			switch(waitresult.response)
 			{
@@ -549,9 +549,9 @@ function function_f3c47da1(var_3f94a5b6, e_trigger)
 			break;
 		}
 		s_input = self function_1e3823bc(var_3f94a5b6);
-		var_d9ee8daa = var_3f94a5b6.screen;
+		s_screen = var_3f94a5b6.screen;
 		/#
-			box(var_d9ee8daa.center, var_d9ee8daa.half_size * -1, var_d9ee8daa.half_size, 0, (1, 0, 0), 1, 0);
+			box(s_screen.center, s_screen.half_size * -1, s_screen.half_size, 0, (1, 0, 0), 1, 0);
 			function_b95b9a60(var_3f94a5b6.cursor, 0.2, (1, 0, 0), 1, 0);
 			foreach(var_9da78756 in var_3f94a5b6.satellites)
 			{
@@ -570,51 +570,51 @@ function function_f3c47da1(var_3f94a5b6, e_trigger)
 				n_radius = var_3f94a5b6.control.radius[0];
 				n_angle = var_3f94a5b6.control.angles[0];
 				/#
-					line(var_d9ee8daa.center + v_anchor, var_3f94a5b6.cursor, (0, 1, 0), 1, 0);
+					line(s_screen.center + v_anchor, var_3f94a5b6.cursor, (0, 1, 0), 1, 0);
 					print3d(var_3f94a5b6.cursor + vectorscale((0, 0, 1), 2), (n_angle + "") + n_radius, (0, 1, 0), 1, 0.1);
 				#/
-				var_26c827e8 = (abs(v_anchor[2] + var_d9ee8daa.half_size[2])) / n_radius;
+				var_26c827e8 = (abs(v_anchor[2] + s_screen.half_size[2])) / n_radius;
 				a_angles[0] = (var_26c827e8 > 1 ? 0 : asin(var_26c827e8));
-				var_c575b928 = (abs(v_anchor[1] + var_d9ee8daa.half_size[1])) / n_radius;
+				var_c575b928 = (abs(v_anchor[1] + s_screen.half_size[1])) / n_radius;
 				a_angles[1] = (var_c575b928 > 1 ? 0 : acos(var_c575b928));
 				if(a_angles[0] > a_angles[1])
 				{
 					var_37503ff5[0] = a_angles[0];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, v_anchor[1] - (n_radius * cos(a_angles[0])), var_d9ee8daa.half_size[2] * -1);
+						var_49f94306 = s_screen.center + (0, v_anchor[1] - (n_radius * cos(a_angles[0])), s_screen.half_size[2] * -1);
 					#/
 				}
 				else
 				{
 					var_37503ff5[0] = a_angles[1];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, var_d9ee8daa.half_size[1] * -1, v_anchor[2] + (n_radius * sin(a_angles[1])));
+						var_49f94306 = s_screen.center + (0, s_screen.half_size[1] * -1, v_anchor[2] + (n_radius * sin(a_angles[1])));
 					#/
 				}
 				/#
-					line(var_d9ee8daa.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
+					line(s_screen.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
 					print3d(var_49f94306, var_37503ff5[0], (0, 1, 0), 1, 0.1);
 				#/
-				var_26c827e8 = (abs(v_anchor[2] - var_d9ee8daa.half_size[2])) / n_radius;
+				var_26c827e8 = (abs(v_anchor[2] - s_screen.half_size[2])) / n_radius;
 				a_angles[0] = (var_26c827e8 > 1 ? 90 : asin(var_26c827e8));
-				var_c575b928 = (abs(v_anchor[1] - var_d9ee8daa.half_size[1])) / n_radius;
+				var_c575b928 = (abs(v_anchor[1] - s_screen.half_size[1])) / n_radius;
 				a_angles[1] = (var_c575b928 > 1 ? 90 : acos(var_c575b928));
 				if(a_angles[0] < a_angles[1])
 				{
 					var_37503ff5[1] = a_angles[0];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, v_anchor[1] - (n_radius * cos(a_angles[0])), var_d9ee8daa.half_size[2]);
+						var_49f94306 = s_screen.center + (0, v_anchor[1] - (n_radius * cos(a_angles[0])), s_screen.half_size[2]);
 					#/
 				}
 				else
 				{
 					var_37503ff5[1] = a_angles[1];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, var_d9ee8daa.half_size[1], v_anchor[2] + (n_radius * sin(a_angles[1])));
+						var_49f94306 = s_screen.center + (0, s_screen.half_size[1], v_anchor[2] + (n_radius * sin(a_angles[1])));
 					#/
 				}
 				/#
-					line(var_d9ee8daa.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
+					line(s_screen.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
 					print3d(var_49f94306, var_37503ff5[1], (0, 1, 0), 1, 0.1);
 				#/
 				var_9c66888e = n_angle + ((s_input.updown * 20) / n_radius);
@@ -626,7 +626,7 @@ function function_f3c47da1(var_3f94a5b6, e_trigger)
 				{
 					var_9c66888e = var_37503ff5[1];
 				}
-				v_target = (var_d9ee8daa.center + v_anchor) + (n_radius * (0, cos(var_9c66888e) * -1, sin(var_9c66888e)));
+				v_target = (s_screen.center + v_anchor) + (n_radius * (0, cos(var_9c66888e) * -1, sin(var_9c66888e)));
 				n_active = 1;
 			}
 			else
@@ -635,51 +635,51 @@ function function_f3c47da1(var_3f94a5b6, e_trigger)
 				n_radius = var_3f94a5b6.control.radius[1];
 				n_angle = var_3f94a5b6.control.angles[1];
 				/#
-					line(var_d9ee8daa.center + v_anchor, var_3f94a5b6.cursor, (0, 0, 1), 1, 0);
+					line(s_screen.center + v_anchor, var_3f94a5b6.cursor, (0, 0, 1), 1, 0);
 					print3d(var_3f94a5b6.cursor - vectorscale((0, 0, 1), 2), (n_angle + "") + n_radius, (0, 0, 1), 1, 0.1);
 				#/
-				var_c575b928 = (abs(v_anchor[2] - var_d9ee8daa.half_size[2])) / n_radius;
+				var_c575b928 = (abs(v_anchor[2] - s_screen.half_size[2])) / n_radius;
 				a_angles[0] = (var_c575b928 > 1 ? 0 : acos(var_c575b928));
-				var_26c827e8 = (abs(v_anchor[1] + var_d9ee8daa.half_size[1])) / n_radius;
+				var_26c827e8 = (abs(v_anchor[1] + s_screen.half_size[1])) / n_radius;
 				a_angles[1] = (var_26c827e8 > 1 ? 0 : asin(var_26c827e8));
 				if(a_angles[0] > a_angles[1])
 				{
 					var_37503ff5[0] = a_angles[0];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, v_anchor[1] + (n_radius * sin(a_angles[0])), var_d9ee8daa.half_size[2]);
+						var_49f94306 = s_screen.center + (0, v_anchor[1] + (n_radius * sin(a_angles[0])), s_screen.half_size[2]);
 					#/
 				}
 				else
 				{
 					var_37503ff5[0] = a_angles[1];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, var_d9ee8daa.half_size[1] * -1, v_anchor[2] + (n_radius * cos(a_angles[1])));
+						var_49f94306 = s_screen.center + (0, s_screen.half_size[1] * -1, v_anchor[2] + (n_radius * cos(a_angles[1])));
 					#/
 				}
 				/#
-					line(var_d9ee8daa.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
+					line(s_screen.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
 					print3d(var_49f94306, var_37503ff5[0], (0, 0, 1), 1, 0.1);
 				#/
-				var_c575b928 = (abs(v_anchor[2] + var_d9ee8daa.half_size[2])) / n_radius;
+				var_c575b928 = (abs(v_anchor[2] + s_screen.half_size[2])) / n_radius;
 				a_angles[0] = (var_c575b928 > 1 ? 90 : acos(var_c575b928));
-				var_26c827e8 = (abs(v_anchor[1] - var_d9ee8daa.half_size[1])) / n_radius;
+				var_26c827e8 = (abs(v_anchor[1] - s_screen.half_size[1])) / n_radius;
 				a_angles[1] = (var_26c827e8 > 1 ? 90 : asin(var_26c827e8));
 				if(a_angles[0] < a_angles[1])
 				{
 					var_37503ff5[1] = a_angles[0];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, v_anchor[1] + (n_radius * sin(a_angles[0])), var_d9ee8daa.half_size[2] * -1);
+						var_49f94306 = s_screen.center + (0, v_anchor[1] + (n_radius * sin(a_angles[0])), s_screen.half_size[2] * -1);
 					#/
 				}
 				else
 				{
 					var_37503ff5[1] = a_angles[1];
 					/#
-						var_49f94306 = var_d9ee8daa.center + (0, var_d9ee8daa.half_size[1], v_anchor[2] + (n_radius * cos(a_angles[1])));
+						var_49f94306 = s_screen.center + (0, s_screen.half_size[1], v_anchor[2] + (n_radius * cos(a_angles[1])));
 					#/
 				}
 				/#
-					line(var_d9ee8daa.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
+					line(s_screen.center + v_anchor, var_49f94306, (1, 0, 0), 1, 0);
 					print3d(var_49f94306, var_37503ff5[1], (0, 0, 1), 1, 0.1);
 				#/
 				var_9c66888e = n_angle + ((s_input.leftright * 20) / n_radius);
@@ -691,14 +691,14 @@ function function_f3c47da1(var_3f94a5b6, e_trigger)
 				{
 					var_9c66888e = var_37503ff5[1];
 				}
-				v_target = (var_d9ee8daa.center + v_anchor) + (n_radius * (0, sin(var_9c66888e), cos(var_9c66888e)));
+				v_target = (s_screen.center + v_anchor) + (n_radius * (0, sin(var_9c66888e), cos(var_9c66888e)));
 				n_active = 2;
 			}
 			/#
 				line(var_3f94a5b6.cursor, v_target, (1, 1, 0), 1, 0, 10);
 			#/
 			var_3f94a5b6.cursor = v_target;
-			level function_d25d2a9(var_3f94a5b6.cursor, var_d9ee8daa, var_3f94a5b6.control, n_active);
+			level function_d25d2a9(var_3f94a5b6.cursor, s_screen, var_3f94a5b6.control, n_active);
 			wait(0.05);
 		}
 		else

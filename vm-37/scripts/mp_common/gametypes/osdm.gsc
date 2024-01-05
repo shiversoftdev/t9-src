@@ -1,12 +1,12 @@
-#using script_1cc417743d7c262d;
 #using scripts\mp_common\gametypes\dm.gsc;
 #using scripts\mp_common\gametypes\os.gsc;
+#using script_1cc417743d7c262d;
 
-#namespace namespace_82ae72f6;
+#namespace osdm;
 
 /*
 	Name: main
-	Namespace: namespace_82ae72f6
+	Namespace: osdm
 	Checksum: 0x20D53F71
 	Offset: 0xA0
 	Size: 0x64

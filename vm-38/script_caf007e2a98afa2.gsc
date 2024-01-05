@@ -11,7 +11,7 @@
 */
 function private autoexec function_9c140811()
 {
-	level notify(67018958);
+	level notify(-67018958);
 }
 
 #namespace animationstatenetworkutility;

@@ -1,47 +1,47 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
-#using script_2474a362752098d2;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c9915120c137848;
-#using script_350cffecd05ef6cf;
-#using script_36fc02e86719d0f5;
-#using script_3bbf85ab4cb9f3c2;
-#using script_3faf478d5b0850fe;
-#using script_40f967ad5d18ea74;
-#using script_413ab8fe25a61c50;
-#using script_47851dbeea22fe66;
-#using script_47fb62300ac0bd60;
-#using script_4d748e58ce25b60c;
-#using script_4d8045dbc17aa3ee;
-#using script_50fca1a24ae351;
-#using script_5549681e1669c11a;
-#using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_634ae70c663d1cc9;
-#using script_68cdf0ca5df5e;
 #using script_6991584fc21f5ae8;
-#using script_6b6510e124bad778;
-#using script_74a56359b7d02ab6;
-#using script_75d4e6ecb8f05163;
+#using script_2c9915120c137848;
+#using script_2474a362752098d2;
+#using script_36fc02e86719d0f5;
+#using script_1a9763988299e68d;
+#using script_2a5bf5b4a00cee0d;
+#using script_3bbf85ab4cb9f3c2;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
 #using script_f25df01962c79c6;
+#using script_6b6510e124bad778;
+#using script_634ae70c663d1cc9;
+#using script_4d8045dbc17aa3ee;
+#using script_1b0b07ff57d1dde3;
+#using script_350cffecd05ef6cf;
+#using script_1ee011cd0961afd7;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_50fca1a24ae351;
+#using script_17dcb1172e441bf6;
+#using script_74a56359b7d02ab6;
+#using script_5549681e1669c11a;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_413ab8fe25a61c50;
+#using script_68cdf0ca5df5e;
 #using scripts\core_common\values_shared.gsc;
 #using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using script_75d4e6ecb8f05163;
 
 #namespace namespace_4dae815d;
 
@@ -56,7 +56,7 @@
 */
 function private autoexec function_9e19a181()
 {
-	level notify(840427643);
+	level notify(-840427643);
 }
 
 /*
@@ -105,7 +105,7 @@ function init()
 	}
 	level.doa.doa_bundle = getscriptbundle("doa_bundle");
 	level thread function_170b90e5();
-	callback::add_callback(#"hash_4e1a50a35ec44bcc", &on_menu_response);
+	callback::add_callback(#"menu_response", &on_menu_response);
 }
 
 /*
@@ -706,26 +706,26 @@ function function_295c3381(var_4b98f072)
 	{
 		if(self.doa.score.lives > 0 && self.doa.score.keys > 0)
 		{
-			level.var_43cd3fe5 doa_keytrade::function_8a6595db(self, hash(#"hash_66f6e25631ff2352"));
+			level.var_43cd3fe5 doa_keytrade::set_textboxhint(self, hash(#"hash_66f6e25631ff2352"));
 		}
 		else
 		{
 			if(self.doa.score.keys > 0)
 			{
-				level.var_43cd3fe5 doa_keytrade::function_8a6595db(self, hash(#"hash_1c0a5279bafa7779"));
+				level.var_43cd3fe5 doa_keytrade::set_textboxhint(self, hash(#"hash_1c0a5279bafa7779"));
 			}
 			else
 			{
-				level.var_43cd3fe5 doa_keytrade::function_8a6595db(self, hash(#"hash_305f779ad154229"));
+				level.var_43cd3fe5 doa_keytrade::set_textboxhint(self, hash(#"hash_305f779ad154229"));
 			}
 		}
 		if(self.doa.score.lives > 0)
 		{
-			level.var_43cd3fe5 doa_keytrade::function_3ae8b40f(self, hash(#"hash_344d11efdbb3a755"));
+			level.var_43cd3fe5 doa_keytrade::set_confirmbtn(self, hash(#"hash_344d11efdbb3a755"));
 		}
 		else
 		{
-			level.var_43cd3fe5 doa_keytrade::function_3ae8b40f(self, hash(""));
+			level.var_43cd3fe5 doa_keytrade::set_confirmbtn(self, hash(""));
 		}
 		if(self usebuttonpressed() && self.doa.score.lives > 0)
 		{
@@ -814,7 +814,7 @@ function function_e591be12()
 {
 	self notify("6e9bc0427b140bde");
 	self endon("6e9bc0427b140bde");
-	level endon(#"hash_3a4493c309cc9b06");
+	level endon(#"doa_roj_visited");
 	if(level flag::get("doa_roj_visited"))
 	{
 		return;

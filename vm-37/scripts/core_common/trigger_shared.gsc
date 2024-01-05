@@ -1,17 +1,17 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\teleport_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\teleport_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace trigger;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: trigger
 	Checksum: 0x1E68F43C
 	Offset: 0x218
@@ -19,7 +19,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"trigger", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -40,7 +40,7 @@ function private function_70a657d8()
 }
 
 /*
-	Name: function_cbf8fb6b
+	Name: add_handler
 	Namespace: trigger
 	Checksum: 0xA3539346
 	Offset: 0x2A8
@@ -48,7 +48,7 @@ function private function_70a657d8()
 	Parameters: 4
 	Flags: Linked
 */
-function function_cbf8fb6b(var_60ffbed2, func_handler, func_init, var_114fa26c)
+function add_handler(var_60ffbed2, func_handler, func_init, var_114fa26c)
 {
 	if(!isdefined(var_114fa26c))
 	{
@@ -60,11 +60,11 @@ function function_cbf8fb6b(var_60ffbed2, func_handler, func_init, var_114fa26c)
 		{
 			if(var_114fa26c)
 			{
-				self callback::function_a04381e0(func_handler);
+				self callback::on_trigger_once(func_handler);
 			}
 			else
 			{
-				self callback::function_35a12f19(func_handler);
+				self callback::on_trigger(func_handler);
 			}
 		}
 		if(isfunctionptr(func_init))
@@ -102,18 +102,18 @@ function init_flags(str_kvp)
 function trigger_think()
 {
 	self endon(#"death");
-	function_cbf8fb6b("target", &trigger_spawner);
-	function_cbf8fb6b("script_flag_true", undefined, &init_flags);
-	function_cbf8fb6b("script_flag_true_any", undefined, &init_flags);
-	function_cbf8fb6b("script_flag_false_any", undefined, &init_flags);
-	function_cbf8fb6b("script_flag_false", undefined, &init_flags);
-	function_cbf8fb6b("script_flag_set", &flag_set_trigger, &init_flags);
-	function_cbf8fb6b("script_flag_clear", &flag_clear_trigger, &init_flags);
-	function_cbf8fb6b("script_trigger_group", &trigger_group);
-	function_cbf8fb6b("script_notify", &trigger_notify);
-	function_cbf8fb6b("script_killspawner", &kill_spawner_trigger);
-	function_cbf8fb6b("script_teleport_location", &teleport::team);
-	function_cbf8fb6b(&is_trigger_once, &trigger_once);
+	add_handler("target", &trigger_spawner);
+	add_handler("script_flag_true", undefined, &init_flags);
+	add_handler("script_flag_true_any", undefined, &init_flags);
+	add_handler("script_flag_false_any", undefined, &init_flags);
+	add_handler("script_flag_false", undefined, &init_flags);
+	add_handler("script_flag_set", &flag_set_trigger, &init_flags);
+	add_handler("script_flag_clear", &flag_clear_trigger, &init_flags);
+	add_handler("script_trigger_group", &trigger_group);
+	add_handler("script_notify", &trigger_notify);
+	add_handler("script_killspawner", &kill_spawner_trigger);
+	add_handler("script_teleport_location", &teleport::team);
+	add_handler(&is_trigger_once, &trigger_once);
 	if(isdefined(self.script_flag_set_on_touching) || isdefined(self.script_flag_set_on_not_touching))
 	{
 		level thread script_flag_set_touching(self);
@@ -123,7 +123,7 @@ function trigger_think()
 		level thread look_trigger(self);
 		s_info = undefined;
 		s_info = self waittill(#"trigger_look");
-		self thread callback::function_6eb09118(s_info, 1);
+		self thread callback::codecallback_trigger(s_info, 1);
 	}
 }
 
@@ -337,8 +337,8 @@ function function_ac2f203a(str_flag)
 */
 function flag_set_trigger()
 {
-	var_af1bea51 = util::create_flags_and_return_tokens(self.script_flag_set);
-	foreach(str_flag in var_af1bea51)
+	a_str_flags = util::create_flags_and_return_tokens(self.script_flag_set);
+	foreach(str_flag in a_str_flags)
 	{
 		level flag::set(str_flag);
 	}
@@ -355,8 +355,8 @@ function flag_set_trigger()
 */
 function flag_clear_trigger(s_info)
 {
-	var_af1bea51 = util::create_flags_and_return_tokens(self.script_flag_clear);
-	foreach(str_flag in var_af1bea51)
+	a_str_flags = util::create_flags_and_return_tokens(self.script_flag_clear);
+	foreach(str_flag in a_str_flags)
 	{
 		level flag::clear(str_flag);
 	}
@@ -588,18 +588,18 @@ function get_all(...)
 {
 	if(vararg.size == 1 && isarray(vararg[0]))
 	{
-		var_b00e97e6 = vararg[0];
+		a_vararg = vararg[0];
 	}
 	else
 	{
-		var_b00e97e6 = vararg;
+		a_vararg = vararg;
 	}
 	a_all = getentarraybytype(20);
-	if(var_b00e97e6.size)
+	if(a_vararg.size)
 	{
 		for(i = a_all.size - 1; i >= 0; i--)
 		{
-			if(!isinarray(var_b00e97e6, a_all[i].classname))
+			if(!isinarray(a_vararg, a_all[i].classname))
 			{
 				arrayremoveindex(a_all, i);
 			}
@@ -621,13 +621,13 @@ function is_trigger_of_type(...)
 {
 	if(vararg.size == 1 && isarray(vararg[0]))
 	{
-		var_b00e97e6 = vararg[0];
+		a_vararg = vararg[0];
 	}
 	else
 	{
-		var_b00e97e6 = vararg;
+		a_vararg = vararg;
 	}
-	return isinarray(var_b00e97e6, self.classname);
+	return isinarray(a_vararg, self.classname);
 }
 
 /*
@@ -1364,7 +1364,7 @@ function run(func, ...)
 		{
 			if(trig.target === self.targetname)
 			{
-				trig callback::function_35a12f19(&function_996dfbe2, undefined, self, func, vararg);
+				trig callback::on_trigger(&function_996dfbe2, undefined, self, func, vararg);
 				var_3bdd90c2 = 1;
 			}
 		}

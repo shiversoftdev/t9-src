@@ -1,36 +1,36 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
+#using script_5133d88c555e460;
+#using script_36fc02e86719d0f5;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
+#using script_2a5bf5b4a00cee0d;
+#using script_3bbf85ab4cb9f3c2;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
+#using script_774302f762d76254;
+#using script_634ae70c663d1cc9;
 #using script_1b0b07ff57d1dde3;
 #using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_36fc02e86719d0f5;
-#using script_3bbf85ab4cb9f3c2;
-#using script_3faf478d5b0850fe;
-#using script_40f967ad5d18ea74;
-#using script_413ab8fe25a61c50;
-#using script_47851dbeea22fe66;
-#using script_4d748e58ce25b60c;
-#using script_5133d88c555e460;
-#using script_5549681e1669c11a;
 #using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_634ae70c663d1cc9;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using script_774302f762d76254;
+#using script_5549681e1669c11a;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_413ab8fe25a61c50;
 #using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 class class_f4bf8a8 
 {
@@ -1652,7 +1652,7 @@ function function_afa7d50a(arena_struct, index)
 	level.doa.arenas[[[ arena ]]->getid()] = arena;
 	var_663588d = "Zombietron/Arenas/";
 	var_59ea00e = ("scr_arena_activate " + ([[ arena ]]->getname())) + "; zombie_devgui arena";
-	util::function_e2e9d901(((var_663588d + ([[ arena ]]->getname())) + ":") + ([[ arena ]]->getid()), var_59ea00e);
+	util::add_devgui(((var_663588d + ([[ arena ]]->getname())) + ":") + ([[ arena ]]->getid()), var_59ea00e);
 }
 
 /*
@@ -2037,7 +2037,7 @@ function function_6d6bfe1f(var_e1dd1170, rounds)
 		level.doa.var_5de71250 = 0;
 		level.doa.var_f66b524a = 0;
 		level.doa.var_aa7fba18 = 0;
-		level.doa.var_e230dc1d = 0;
+		level.doa.challengeactive = 0;
 		level.doa.var_465867b = 0;
 		namespace_1e25ad94::debugmsg((((((("Arena (" + var_4a140058) + ") round starting at: ") + level.doa.roundstarttime) + " RoundNumber: ") + level.doa.roundnumber) + " Rounds Left on this Arena: ") + level.doa.var_4cfbc260);
 		[[ level.doa.var_39e3fa99 ]]->function_9f494a87();
@@ -2054,7 +2054,7 @@ function function_6d6bfe1f(var_e1dd1170, rounds)
 		{
 			result = undefined;
 			result = level waittill(#"hash_145c9457d2598ba");
-			level.doa.var_e230dc1d = 1;
+			level.doa.challengeactive = 1;
 		}
 		switch(level.doa.var_6a0340ad)
 		{
@@ -2098,8 +2098,8 @@ function function_6d6bfe1f(var_e1dd1170, rounds)
 		level.doa.var_f66b524a = level.doa.roundendtime - level.doa.roundstarttime;
 		if(!is_true(level.doa.var_3ec3c9aa))
 		{
-			var_aa127355 = {#hash_49a074e7:int(float(level.doa.var_f66b524a) / 1000), #roundnumber:level.doa.roundnumber};
-			function_92d1707f(#"hash_70c149ea78c8a7ac", var_aa127355);
+			eventparams = {#hash_49a074e7:int(float(level.doa.var_f66b524a) / 1000), #roundnumber:level.doa.roundnumber};
+			function_92d1707f(#"hash_70c149ea78c8a7ac", eventparams);
 		}
 		else
 		{
@@ -2141,7 +2141,7 @@ function function_6d6bfe1f(var_e1dd1170, rounds)
 			level namespace_a6ddb172::function_7a0e5387(10);
 			result = undefined;
 			result = level waittill(#"doa_exit_taken");
-			playsoundatposition(#"hash_3959c4c416ecc9e3", (0, 0, 0));
+			playsoundatposition(#"evt_doa_travel_doors_chosen", (0, 0, 0));
 			namespace_1e25ad94::debugmsg(("Arena (" + var_4a140058) + ") waiting for doa_exit_taken recieved");
 			[[ level.doa.var_39e3fa99 ]]->function_7ce9bb97();
 			var_1075516b = result.direction;
@@ -2831,7 +2831,7 @@ function function_b0a158d7()
 					def = doa_pickups::function_2c9923d7(type);
 					var_7cc1c2b2[entnum] = def;
 				}
-				doa_pickups::function_d080f0db(def, player.origin, player.angles, undefined, 1, glow, undefined, undefined, player, 0);
+				doa_pickups::itemspawn(def, player.origin, player.angles, undefined, 1, glow, undefined, undefined, player, 0);
 				player.doa.var_6b4163f1 = 0;
 				self.juice = self.juice - 5;
 			}

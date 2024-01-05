@@ -1,23 +1,23 @@
-#using script_16b1b77a76492c6a;
 #using script_215d7818c548cb51;
-#using script_27347f09888ad15;
+#using script_16b1b77a76492c6a;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
 #using script_3411bb48d41bd3b;
-#using script_5bb072c3abf4652c;
+#using script_27347f09888ad15;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 #using script_7fc996fe8678852;
 #using scripts\core_common\animation_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 
 #namespace namespace_2303c104;
 
@@ -36,7 +36,7 @@ function private autoexec function_faee6623()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2303c104
 	Checksum: 0x9015E434
 	Offset: 0x238
@@ -44,7 +44,7 @@ function private autoexec function_faee6623()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1e60252f388011fb", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }

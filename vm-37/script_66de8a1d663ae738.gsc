@@ -1,5 +1,5 @@
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace aimappingtableutility;
 

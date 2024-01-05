@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_9c58d24e : class_6aaccc24
+class class_9c58d24e : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_9c58d24e : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_9c58d24e
 		Checksum: 0xF9C8F613
 		Offset: 0x340
@@ -52,9 +52,9 @@ class class_9c58d24e : class_6aaccc24
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_beacon_menu");
+		cluielem::register_clientside("sr_beacon_menu");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_9c58d24e : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_beacon_menu");
+		cluielem::setup_clientfields("sr_beacon_menu");
 	}
 
 	/*
@@ -82,16 +82,16 @@ class class_9c58d24e : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
 
-#namespace namespace_d84b2e13;
+#namespace sr_beacon_menu;
 
 /*
 	Name: function_2529039
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0xF5335478
 	Offset: 0xA8
 	Size: 0x14
@@ -105,7 +105,7 @@ function private autoexec function_2529039()
 
 /*
 	Name: register
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0x9655FEE3
 	Offset: 0xC8
 	Size: 0x16E
@@ -120,40 +120,40 @@ function register()
 	{
 		level.var_ae746e8f = associativearray();
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"]))
+	if(!isdefined(level.var_ae746e8f[#"sr_beacon_menu"]))
 	{
-		level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"] = [];
+		level.var_ae746e8f[#"sr_beacon_menu"] = [];
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"]))
+	if(!isdefined(level.var_ae746e8f[#"sr_beacon_menu"]))
 	{
-		level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"] = [];
+		level.var_ae746e8f[#"sr_beacon_menu"] = [];
 	}
-	else if(!isarray(level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"]))
+	else if(!isarray(level.var_ae746e8f[#"sr_beacon_menu"]))
 	{
-		level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"] = array(level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"]);
+		level.var_ae746e8f[#"sr_beacon_menu"] = array(level.var_ae746e8f[#"sr_beacon_menu"]);
 	}
-	level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"][level.var_ae746e8f[#"hash_26e4ec7e2fffff8d"].size] = elem;
+	level.var_ae746e8f[#"sr_beacon_menu"][level.var_ae746e8f[#"sr_beacon_menu"].size] = elem;
 }
 
 /*
-	Name: function_5c1bb138
-	Namespace: namespace_d84b2e13
+	Name: register_clientside
+	Namespace: sr_beacon_menu
 	Checksum: 0xA0447803
 	Offset: 0x240
 	Size: 0x34
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_9c58d24e();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0x4C92B014
 	Offset: 0x280
 	Size: 0x1C
@@ -167,7 +167,7 @@ function open(player)
 
 /*
 	Name: close
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0x9DE286F
 	Offset: 0x2A8
 	Size: 0x1C
@@ -181,7 +181,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_d84b2e13
+	Namespace: sr_beacon_menu
 	Checksum: 0xC32F1927
 	Offset: 0x2D0
 	Size: 0x1A

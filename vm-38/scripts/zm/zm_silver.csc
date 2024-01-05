@@ -1,24 +1,24 @@
-#using script_22a36cbdf7e3bd31;
-#using script_27ba6748d83412fd;
 #using script_2c5f2d4e7aa698c4;
-#using script_2c6e6e28dd66dcc4;
-#using script_2c8fd33ddb45e78b;
-#using script_302b64aab899ff3a;
-#using script_5fb8da2731850d9e;
-#using script_60793766a26de8df;
-#using script_6243781aa5394e62;
-#using script_7975a13c504d62ab;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\load_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm\zm_silver_main_quest.csc;
-#using scripts\zm\zm_silver_pap_quest.csc;
 #using scripts\zm\zm_silver_sound.csc;
 #using scripts\zm\zm_silver_util.csc;
+#using script_22a36cbdf7e3bd31;
 #using scripts\zm\zm_silver_ww_quest.csc;
+#using scripts\zm\zm_silver_pap_quest.csc;
+#using scripts\zm\zm_silver_main_quest.csc;
+#using script_7975a13c504d62ab;
+#using script_2c6e6e28dd66dcc4;
+#using script_6243781aa5394e62;
+#using scripts\zm_common\zm_fasttravel.csc;
+#using script_2c8fd33ddb45e78b;
+#using script_60793766a26de8df;
+#using script_5fb8da2731850d9e;
+#using scripts\core_common\load_shared.csc;
+#using scripts\core_common\ai\zombie.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_ee0fc845;
 
@@ -33,7 +33,7 @@
 */
 function private autoexec function_1ac9f7b2()
 {
-	level notify(396523935);
+	level notify(-396523935);
 }
 
 /*
@@ -63,7 +63,7 @@ function autoexec opt_in()
 */
 event main(eventstruct)
 {
-	clientfield::function_a8bbc967("player_lives", #"zm_hud", #"player_lives", 1, 2, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("player_lives", #"zm_hud", #"player_lives", 1, 2, "int", undefined, 0, 0);
 	clientfield::register("toplayer", "" + #"hash_464e0cd19b3b8c12", 1, 1, "int", &function_c2858d41, 0, 0);
 	clientfield::register("toplayer", "" + #"hash_4be33f9c734f0cb9", 1, 2, "int", &namespace_f172695e::function_2f3017ad, 0, 0);
 	clientfield::register("world", "" + #"hash_5e38b0496d9664bb", 1, 3, "int", &function_ce2c0029, 0, 0);
@@ -78,11 +78,11 @@ event main(eventstruct)
 	level.var_a396a670 = 1;
 	setdvar(#"player_shallowwaterwadescale", 1);
 	setdvar(#"player_waistwaterwadescale", 1);
-	setdvar(#"hash_70d60913dea5aadd", 1);
+	setdvar(#"player_deepwaterwadescale", 1);
 	setdvar(#"hash_5e3c0f05d2935beb", 1);
 	setsaveddvar(#"hash_235cfa4e56938e9c", 100);
 	namespace_812a8849::init();
-	namespace_9f845210::function_842831cf();
+	namespace_9f845210::init_clientfield();
 	namespace_c8c67699::init();
 	namespace_d769652e::init();
 	namespace_2b924e50::init();

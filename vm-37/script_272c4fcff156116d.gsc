@@ -3,7 +3,7 @@
 #namespace activities;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: activities
 	Checksum: 0x68D3D72F
 	Offset: 0x88
@@ -11,7 +11,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"activities", &function_70a657d8, undefined, undefined, undefined);
 }

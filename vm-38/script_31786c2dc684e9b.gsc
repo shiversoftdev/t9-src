@@ -1,39 +1,39 @@
-#using script_1292451e284848cc;
-#using script_263b7f2982258785;
-#using script_2d443451ce681a;
-#using script_31e9b35aaacbbd93;
-#using script_32399001bdb550da;
-#using script_37f9ff47f340fbe8;
-#using script_3b82b8c68189025e;
-#using script_3dc93ca9902a9cda;
-#using script_474bf596f5ecdb01;
 #using script_4937c6974f43bb71;
+#using script_31e9b35aaacbbd93;
+#using script_85cd2e9a28ea8a1;
 #using script_54412fb3a6fab34c;
 #using script_5552bd756afee443;
-#using script_61cfc2ab8e60625;
+#using script_3dc93ca9902a9cda;
+#using script_1292451e284848cc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using script_474bf596f5ecdb01;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using scripts\cp_common\objectives.gsc;
 #using script_67c9a990c0db216c;
-#using script_6eea75edd4d830a;
-#using script_73e0d5e10c6348fa;
 #using script_74940ab70a48ee4e;
+#using script_6eea75edd4d830a;
+#using script_37f9ff47f340fbe8;
 #using script_7b4396f5e8e35b28;
 #using script_7d0013bbc05623b9;
-#using script_85cd2e9a28ea8a1;
+#using script_32399001bdb550da;
+#using script_73e0d5e10c6348fa;
+#using script_3b82b8c68189025e;
+#using script_263b7f2982258785;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\cp_common\util.gsc;
+#using script_61cfc2ab8e60625;
+#using script_2d443451ce681a;
 #using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
-#using scripts\cp_common\skipto.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_14a3352a;
 
@@ -51,11 +51,11 @@ function private autoexec function_c810475a()
 	level notify(1697585363);
 }
 
-#namespace namespace_5df9d277;
+#namespace tkdn_raid_bar;
 
 /*
 	Name: starting
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x733B8A67
 	Offset: 0xE48
 	Size: 0x64
@@ -65,13 +65,13 @@ function private autoexec function_c810475a()
 function starting(str_skipto)
 {
 	level.var_c0c469ea = 1.75;
-	level thread scene::init_streamer(#"hash_694a104e9b984eb", getplayers());
+	level thread scene::init_streamer(#"scene_tkd_hit2_intro_bar_v2", getplayers());
 	namespace_a052577e::function_b9b9189c();
 }
 
 /*
 	Name: main
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xCE39F0B5
 	Offset: 0xEB8
 	Size: 0x60C
@@ -136,7 +136,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: function_2c918915
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x554076B8
 	Offset: 0x14D0
 	Size: 0x3C
@@ -151,7 +151,7 @@ function function_2c918915()
 
 /*
 	Name: function_1df134ab
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x84835FFB
 	Offset: 0x1518
 	Size: 0x3C
@@ -166,7 +166,7 @@ function function_1df134ab()
 
 /*
 	Name: function_9153c019
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xEE8555F9
 	Offset: 0x1560
 	Size: 0xBC
@@ -188,7 +188,7 @@ function function_9153c019(a_ents)
 
 /*
 	Name: function_e9102587
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xB2962CEC
 	Offset: 0x1628
 	Size: 0xEC
@@ -210,7 +210,7 @@ function function_e9102587()
 
 /*
 	Name: function_513e85fe
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x5035E82C
 	Offset: 0x1720
 	Size: 0xEC
@@ -237,7 +237,7 @@ function function_513e85fe(a_ents)
 
 /*
 	Name: function_ac208f44
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x5A3730A4
 	Offset: 0x1818
 	Size: 0x2E4
@@ -277,7 +277,7 @@ function function_ac208f44()
 
 /*
 	Name: function_e2d2754d
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x1D3059D6
 	Offset: 0x1B08
 	Size: 0xA84
@@ -409,7 +409,7 @@ function function_e2d2754d(a_ents)
 
 /*
 	Name: function_94005f3d
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xB8D0FCD0
 	Offset: 0x2598
 	Size: 0x12E
@@ -438,7 +438,7 @@ function function_94005f3d(guy)
 
 /*
 	Name: function_b252dec4
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xA6390B2C
 	Offset: 0x26D0
 	Size: 0x136
@@ -469,7 +469,7 @@ function function_b252dec4()
 
 /*
 	Name: function_616d61c3
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x1EE03C7B
 	Offset: 0x2810
 	Size: 0x110
@@ -497,7 +497,7 @@ function function_616d61c3()
 
 /*
 	Name: function_9248227f
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xDF6E9289
 	Offset: 0x2928
 	Size: 0x138
@@ -527,7 +527,7 @@ function function_9248227f()
 
 /*
 	Name: function_fa84c01d
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x859E3CD
 	Offset: 0x2A68
 	Size: 0x10E
@@ -558,7 +558,7 @@ function function_fa84c01d(guy)
 
 /*
 	Name: function_8c455090
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x1FB87ED0
 	Offset: 0x2B80
 	Size: 0x13E
@@ -589,7 +589,7 @@ function function_8c455090()
 
 /*
 	Name: function_4a906234
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xAF2CDB22
 	Offset: 0x2CC8
 	Size: 0x13E
@@ -620,7 +620,7 @@ function function_4a906234()
 
 /*
 	Name: function_10254e69
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xA85ED31F
 	Offset: 0x2E10
 	Size: 0x300
@@ -671,7 +671,7 @@ function function_10254e69()
 
 /*
 	Name: function_a5d7de3c
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xA831D5BE
 	Offset: 0x3118
 	Size: 0xA0
@@ -689,7 +689,7 @@ function function_a5d7de3c()
 
 /*
 	Name: function_f0ba2044
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xE4A0F77D
 	Offset: 0x31C0
 	Size: 0x124
@@ -704,7 +704,7 @@ function function_f0ba2044(player)
 	}
 	wait(0.1);
 	level thread util::screen_fade_in(1.75);
-	lui_menu = lui::function_e810a527("full_screen_movie");
+	lui_menu = lui::get_luimenu("full_screen_movie");
 	if([[ lui_menu ]]->function_7bfd10e6(player))
 	{
 		player notify(#"menuresponse", {#value:1, #response:#"finished_movie_playback", #menu:#"full_screen_movie"});
@@ -715,7 +715,7 @@ function function_f0ba2044(player)
 
 /*
 	Name: function_68461db2
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x89FAD6D8
 	Offset: 0x32F0
 	Size: 0x334
@@ -749,7 +749,7 @@ function function_68461db2()
 
 /*
 	Name: function_3f2fe2a4
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xBB0D2937
 	Offset: 0x3630
 	Size: 0x34A
@@ -792,7 +792,7 @@ function function_3f2fe2a4(var_9f43fd46, var_5526621d, var_e3fbbf0d, use_ent)
 
 /*
 	Name: function_76052005
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x5DFE773C
 	Offset: 0x3988
 	Size: 0x2EC
@@ -838,7 +838,7 @@ function function_76052005(var_68f1c314)
 
 /*
 	Name: function_a6d1922d
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x1753AD08
 	Offset: 0x3C80
 	Size: 0xC0
@@ -868,7 +868,7 @@ function function_a6d1922d()
 
 /*
 	Name: function_8f134086
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xDDD5A0EB
 	Offset: 0x3D48
 	Size: 0x40
@@ -883,7 +883,7 @@ function function_8f134086()
 
 /*
 	Name: function_d8e3ce93
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x103A6DF1
 	Offset: 0x3D90
 	Size: 0x7C
@@ -901,7 +901,7 @@ function function_d8e3ce93()
 
 /*
 	Name: cleanup
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x5775204C
 	Offset: 0x3E18
 	Size: 0x24
@@ -914,7 +914,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0xFCFB4705
 	Offset: 0x3E48
 	Size: 0x24
@@ -928,7 +928,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x85EBABBA
 	Offset: 0x3E78
 	Size: 0x34
@@ -942,7 +942,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_5df9d277
+	Namespace: tkdn_raid_bar
 	Checksum: 0x80F724D1
 	Offset: 0x3EB8
 	Size: 0x4

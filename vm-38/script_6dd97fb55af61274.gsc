@@ -1,12 +1,12 @@
-#using script_125eee34421b60ab;
 #using script_1940fc077a028a81;
-#using script_3357acf79ce92f4b;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
 #using script_3411bb48d41bd3b;
-#using script_7e59d7bba853fe4b;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
+#using script_3357acf79ce92f4b;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_125eee34421b60ab;
 
 #namespace namespace_d35b13b1;
 
@@ -25,7 +25,7 @@ function private autoexec function_3290702d()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_d35b13b1
 	Checksum: 0x145EBB75
 	Offset: 0x110
@@ -33,7 +33,7 @@ function private autoexec function_3290702d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7eaac11b6cd35b05", &function_70a657d8, undefined, &function_4df027f2, undefined);
 }
@@ -96,8 +96,8 @@ function function_ce3b36df()
 		self.ai.var_870d0893 = 1;
 		self.completed_emerging_into_playable_area = 1;
 	}
-	self callback::function_d8abfc3d(#"hash_11aa32ad6d527054", &namespace_85745671::function_b8eb5dea);
-	self callback::function_d8abfc3d(#"hash_11aa32ad6d527054", &namespace_85745671::function_95c99579, undefined, [1:1, 0:undefined]);
+	self callback::function_d8abfc3d(#"on_ai_melee", &namespace_85745671::function_b8eb5dea);
+	self callback::function_d8abfc3d(#"on_ai_melee", &namespace_85745671::function_95c99579, undefined, [1:1, 0:undefined]);
 	self callback::function_d8abfc3d(#"hash_10ab46b52df7967a", &namespace_85745671::function_5cb3181e);
 	self.var_12af7864 = 1;
 	self.var_c11b8a5a = 1;
@@ -120,7 +120,7 @@ function function_e7ad996()
 {
 	if(is_true(self.ai.var_870d0893))
 	{
-		function_fb4a1aa3(self);
+		setup_awareness(self);
 	}
 }
 
@@ -145,7 +145,7 @@ function function_f9780e50(params)
 }
 
 /*
-	Name: function_fb4a1aa3
+	Name: setup_awareness
 	Namespace: namespace_d35b13b1
 	Checksum: 0x69D3A4A4
 	Offset: 0x490
@@ -153,14 +153,14 @@ function function_f9780e50(params)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_fb4a1aa3(entity)
+function private setup_awareness(entity)
 {
-	entity.var_f9a12c59 = 1;
-	entity.var_ed35eeb2 = 1;
+	entity.has_awareness = 1;
+	entity.ignorelaststandplayers = 1;
 	self callback::function_d8abfc3d(#"on_ai_damage", &awareness::function_5f511313);
-	awareness::function_dad6ba0e(entity, #"wander", &function_1df172de, &awareness::function_4ebe4a6d, &awareness::function_b264a0bc, undefined, &awareness::function_555d960b);
-	awareness::function_dad6ba0e(entity, #"investigate", &function_bbd541c7, &awareness::function_9eefc327, &awareness::function_34162a25, undefined, &awareness::function_a360dd00);
-	awareness::function_dad6ba0e(entity, #"chase", &function_7812e703, &function_333a7b23, &awareness::function_b9f81e8b, &awareness::function_5c40e824);
+	awareness::register_state(entity, #"wander", &function_1df172de, &awareness::function_4ebe4a6d, &awareness::function_b264a0bc, undefined, &awareness::function_555d960b);
+	awareness::register_state(entity, #"investigate", &function_bbd541c7, &awareness::function_9eefc327, &awareness::function_34162a25, undefined, &awareness::function_a360dd00);
+	awareness::register_state(entity, #"chase", &function_7812e703, &function_333a7b23, &awareness::function_b9f81e8b, &awareness::function_5c40e824);
 	awareness::set_state(entity, #"wander");
 	entity thread awareness::function_fa6e010d();
 }
@@ -264,7 +264,7 @@ function private function_333a7b23(entity)
 		{
 			entity.var_ba3e3319 = -1;
 		}
-		enemy = namespace_e0710ee6::function_825317c(entity);
+		enemy = zm_ai_utility::function_825317c(entity);
 		if(isdefined(enemy) && distance2dsquared(enemy.origin, entity.origin) < (2250000 * sqr(0.5)))
 		{
 			if(gettime() > entity.var_ba3e3319)
@@ -305,7 +305,7 @@ function private function_333a7b23(entity)
 		if(var_bd871069)
 		{
 			var_1f1f9cfa = entity function_4794d6a3();
-			enemy = namespace_e0710ee6::function_825317c(entity);
+			enemy = zm_ai_utility::function_825317c(entity);
 			if(is_true(var_1f1f9cfa.isatgoal) && isdefined(enemy))
 			{
 				to_enemy = enemy.origin - self.origin;

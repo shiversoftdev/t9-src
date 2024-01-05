@@ -1,10 +1,10 @@
-#using script_18f0d22c75b141a7;
-#using script_256b8879317373de;
 #using script_32399001bdb550da;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\healthoverlay.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using scripts\core_common\healthoverlay.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace loadout;
 
@@ -23,7 +23,7 @@ function private autoexec function_f099e9()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: loadout
 	Checksum: 0x12609083
 	Offset: 0x200
@@ -31,7 +31,7 @@ function private autoexec function_f099e9()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"loadout", &function_70a657d8, undefined, undefined, #"load");
 }

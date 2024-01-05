@@ -1,8 +1,8 @@
-#using script_3b78d6d26bf3ec83;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
+#using scripts\abilities\gadgets\gadget_jammer_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace listening_device;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_eada1612()
 {
-	level notify(1064669527);
+	level notify(-1064669527);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: listening_device
 	Checksum: 0xF6EB167C
 	Offset: 0x180
@@ -29,7 +29,7 @@ function private autoexec function_eada1612()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"listening_device", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -64,7 +64,7 @@ function private function_70a657d8()
 */
 function function_9147a2d6(localclientnum)
 {
-	self thread function_31a1aa18(localclientnum);
+	self thread on_game_ended(localclientnum);
 }
 
 /*
@@ -932,7 +932,7 @@ function private function_ea9698c4(localclientnum)
 }
 
 /*
-	Name: function_31a1aa18
+	Name: on_game_ended
 	Namespace: listening_device
 	Checksum: 0x35C19416
 	Offset: 0x2BF0
@@ -940,7 +940,7 @@ function private function_ea9698c4(localclientnum)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_31a1aa18(localclientnum)
+function private on_game_ended(localclientnum)
 {
 	level waittill(#"game_ended");
 	function_8c113a94(localclientnum);

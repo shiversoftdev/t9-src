@@ -1,19 +1,19 @@
-#using script_19367cd29a4485db;
-#using script_340a2e805e35f7a2;
-#using script_3411bb48d41bd3b;
 #using script_34ab99a4ca1a43d;
-#using script_7e59d7bba853fe4b;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
+#using script_19367cd29a4485db;
+#using script_3411bb48d41bd3b;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_340a2e805e35f7a2;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_ac4c291d;
 
@@ -32,7 +32,7 @@ function private autoexec function_787fb99d()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_ac4c291d
 	Checksum: 0x8457FD92
 	Offset: 0x178
@@ -40,7 +40,7 @@ function private autoexec function_787fb99d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1c2f845f6ae4ceb2", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -92,9 +92,9 @@ function private function_cc775529(s_instance)
 	s_instance.var_b7eee573 = var_b7eee573;
 	s_instance.n_obj_id = zm_utility::function_f5a222a8(#"hash_2d6eaf696a019fa3", var_b7eee573);
 	var_b7eee573.aitype = #"hash_1aff4b71635bda08";
-	var_b7eee573.var_ae8ec545 = #"hash_5eaef6da3bb64b9a";
+	var_b7eee573.aisettingsbundle = #"hash_5eaef6da3bb64b9a";
 	var_3d014474 = function_9ad12bee(var_b7eee573.aitype);
-	var_b7eee573.maxhealth = var_b7eee573 namespace_e0710ee6::function_f7014c3d(var_3d014474);
+	var_b7eee573.maxhealth = var_b7eee573 zm_ai_utility::function_f7014c3d(var_3d014474);
 	var_b7eee573.health = var_b7eee573.maxhealth;
 	var_b7eee573 val::set(#"hash_1592629a5ec5c8a", "takedamage", 1);
 	var_b7eee573 val::set(#"hash_1592629a5ec5c8a", "allowdeath", 0);

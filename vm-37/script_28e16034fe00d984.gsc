@@ -1,14 +1,14 @@
-#using script_65fbfb5ecb1f899e;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using script_65fbfb5ecb1f899e;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_96850e69;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_96850e69
 	Checksum: 0xAC6D841C
 	Offset: 0x140
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3ee5d3ee068a8cc", &function_70a657d8, undefined, undefined, undefined);
 }

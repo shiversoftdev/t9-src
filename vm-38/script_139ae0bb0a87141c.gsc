@@ -1,15 +1,15 @@
-#using script_1883fa4e60abbf9f;
-#using script_3072532951b5b4ae;
-#using script_5450c003e8a913b7;
-#using script_6f8610e78fdd3440;
-#using script_7b68dad851540de;
-#using script_7e3221b6c80d8cc4;
 #using script_fe983bbff18d77f;
+#using script_6f8610e78fdd3440;
+#using script_1883fa4e60abbf9f;
+#using script_7e3221b6c80d8cc4;
+#using script_5450c003e8a913b7;
+#using script_3072532951b5b4ae;
 #using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_7b68dad851540de;
 #using scripts\core_common\struct.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace group;
 
@@ -24,7 +24,7 @@
 */
 function private autoexec function_2e8983ef()
 {
-	level notify(445160610);
+	level notify(-445160610);
 }
 
 /*
@@ -188,7 +188,7 @@ function clearallgroups()
 			{
 				foreach(pod in group.pods)
 				{
-					pod notify(#"hash_55de2cfece5469ed");
+					pod notify(#"debug off");
 				}
 			}
 		}

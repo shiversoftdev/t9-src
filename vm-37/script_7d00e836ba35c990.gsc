@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_c24030b9 : class_6aaccc24
+class class_c24030b9 : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,11 +47,11 @@ class class_c24030b9 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_54166b84
+		Name: set_objpoints
 		Namespace: namespace_c24030b9
 		Checksum: 0x39CCA7FE
 		Offset: 0x380
@@ -59,7 +59,7 @@ class class_c24030b9 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_54166b84(player, value)
+	function set_objpoints(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "objpoints", value);
 	}
@@ -75,7 +75,7 @@ class class_c24030b9 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -89,13 +89,13 @@ class class_c24030b9 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "objectiveText", 1);
-		namespace_6aaccc24::function_da693cbe("objpoints", 1, 11, "int");
+		cluielem::setup_clientfields("mp_gamemode_onslaught_msg");
+		cluielem::function_dcb34c80("string", "objectiveText", 1);
+		cluielem::add_clientfield("objpoints", 1, 11, "int");
 	}
 
 	/*
-		Name: function_eab3d36f
+		Name: set_objectivetext
 		Namespace: namespace_c24030b9
 		Checksum: 0x8A2499E0
 		Offset: 0x330
@@ -103,7 +103,7 @@ class class_c24030b9 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_eab3d36f(player, value)
+	function set_objectivetext(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "objectiveText", value);
 	}
@@ -175,7 +175,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_eab3d36f
+	Name: set_objectivetext
 	Namespace: mp_gamemode_onslaught_msg
 	Checksum: 0xF38C0467
 	Offset: 0x1C0
@@ -183,13 +183,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_eab3d36f(player, value)
+function set_objectivetext(player, value)
 {
-	[[ self ]]->function_eab3d36f(player, value);
+	[[ self ]]->set_objectivetext(player, value);
 }
 
 /*
-	Name: function_54166b84
+	Name: set_objpoints
 	Namespace: mp_gamemode_onslaught_msg
 	Checksum: 0x2D87BFEC
 	Offset: 0x1F0
@@ -197,8 +197,8 @@ function function_eab3d36f(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_54166b84(player, value)
+function set_objpoints(player, value)
 {
-	[[ self ]]->function_54166b84(player, value);
+	[[ self ]]->set_objpoints(player, value);
 }
 

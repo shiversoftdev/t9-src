@@ -1,39 +1,39 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
+#using script_4611af4073d18808;
+#using script_2c9915120c137848;
+#using script_2474a362752098d2;
+#using script_77357b2d180aa2b8;
+#using script_683a55734f15d50e;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
+#using script_2a5bf5b4a00cee0d;
+#using script_3bbf85ab4cb9f3c2;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
+#using script_774302f762d76254;
+#using script_634ae70c663d1cc9;
+#using script_6b6510e124bad778;
 #using script_1b0b07ff57d1dde3;
 #using script_1ee011cd0961afd7;
-#using script_2474a362752098d2;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c9915120c137848;
-#using script_3bbf85ab4cb9f3c2;
-#using script_3faf478d5b0850fe;
-#using script_40f967ad5d18ea74;
-#using script_4611af4073d18808;
-#using script_47851dbeea22fe66;
-#using script_4d748e58ce25b60c;
-#using script_5549681e1669c11a;
 #using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_634ae70c663d1cc9;
-#using script_683a55734f15d50e;
-#using script_68cdf0ca5df5e;
-#using script_6b6510e124bad778;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using script_77357b2d180aa2b8;
-#using script_774302f762d76254;
+#using script_5549681e1669c11a;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
+#using script_68cdf0ca5df5e;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 class class_744b99c 
 {
@@ -1248,12 +1248,12 @@ function init()
 			for(i = 0; i < sections; i++)
 			{
 				var_59ea00e = ((("scr_wild_activate " + ([[ var_3d2cc936 ]]->getname())) + "@") + i) + "; zombie_devgui wild";
-				util::function_e2e9d901((((var_663588d + ([[ var_3d2cc936 ]]->getname())) + "    Section ") + (i + 1) + ":") + ([[ var_3d2cc936 ]]->getid()), var_59ea00e);
+				util::add_devgui((((var_663588d + ([[ var_3d2cc936 ]]->getname())) + "    Section ") + (i + 1) + ":") + ([[ var_3d2cc936 ]]->getid()), var_59ea00e);
 			}
 			continue;
 		}
 		var_59ea00e = ("scr_wild_activate " + ([[ var_3d2cc936 ]]->getname())) + "; zombie_devgui wild";
-		util::function_e2e9d901(((var_663588d + ([[ var_3d2cc936 ]]->getname())) + ":") + ([[ var_3d2cc936 ]]->getid()), var_59ea00e);
+		util::add_devgui(((var_663588d + ([[ var_3d2cc936 ]]->getname())) + ":") + ([[ var_3d2cc936 ]]->getid()), var_59ea00e);
 	}
 }
 

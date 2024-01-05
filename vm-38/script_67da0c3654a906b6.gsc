@@ -1,10 +1,10 @@
-#using script_27c22e1d8df4d852;
-#using script_6021ce59143452c3;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_score.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_trial_util.gsc;
+#using scripts\zm_common\zm_trial.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_6c76c1da;
 
@@ -19,11 +19,11 @@
 */
 function private autoexec function_7db2224d()
 {
-	level notify(1025417162);
+	level notify(-1025417162);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6c76c1da
 	Checksum: 0x285B820A
 	Offset: 0xE0
@@ -31,7 +31,7 @@ function private autoexec function_7db2224d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_442b60ca31422a3c", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -47,15 +47,15 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!zm_trial::function_b47f6aba())
+	if(!zm_trial::is_trial_mode())
 	{
 		return;
 	}
-	zm_trial::register_challenge(#"hash_5124770c13a75bab", &function_d1de6a85, &function_9e7b3f4d);
+	zm_trial::register_challenge(#"hash_5124770c13a75bab", &on_begin, &on_end);
 }
 
 /*
-	Name: function_d1de6a85
+	Name: on_begin
 	Namespace: namespace_6c76c1da
 	Checksum: 0x7523B17C
 	Offset: 0x190
@@ -63,7 +63,7 @@ function private function_70a657d8()
 	Parameters: 3
 	Flags: Private
 */
-function private function_d1de6a85(var_93fc795f, var_a7c52900, var_c8a36f90)
+function private on_begin(var_93fc795f, var_a7c52900, var_c8a36f90)
 {
 	var_a7c52900 = zm_trial::function_5769f26a(var_a7c52900);
 	level.var_1c8f9eba = var_c8a36f90;
@@ -74,7 +74,7 @@ function private function_d1de6a85(var_93fc795f, var_a7c52900, var_c8a36f90)
 		{
 			switch(var_c8a36f90)
 			{
-				case "hash_7ea198622e307b9":
+				case "prone_random":
 				{
 					player thread function_9c988cd8(var_93fc795f, var_a7c52900, 1);
 					break;
@@ -92,7 +92,7 @@ function private function_d1de6a85(var_93fc795f, var_a7c52900, var_c8a36f90)
 }
 
 /*
-	Name: function_9e7b3f4d
+	Name: on_end
 	Namespace: namespace_6c76c1da
 	Checksum: 0x42461F47
 	Offset: 0x2F8
@@ -100,7 +100,7 @@ function private function_d1de6a85(var_93fc795f, var_a7c52900, var_c8a36f90)
 	Parameters: 1
 	Flags: Private
 */
-function private function_9e7b3f4d(round_reset)
+function private on_end(round_reset)
 {
 	level.var_1c8f9eba = undefined;
 }
@@ -226,7 +226,7 @@ function private function_26f124d8()
 			}
 			return false;
 		}
-		case "hash_7ea198622e307b9":
+		case "prone_random":
 		case "prone":
 		{
 			if(self getstance() === "prone")

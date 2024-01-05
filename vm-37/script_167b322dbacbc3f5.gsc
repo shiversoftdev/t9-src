@@ -1,5 +1,5 @@
-#using script_c8d806d2487b617;
 #using scripts\core_common\util_shared.gsc;
+#using script_c8d806d2487b617;
 
 #namespace namespace_681edb36;
 
@@ -14,7 +14,7 @@
 */
 function function_23dd41e7()
 {
-	gametype = function_be90acca(util::function_5df4294());
+	gametype = function_be90acca(util::get_game_type());
 	if(gametype === "fireteam_dirty_bomb")
 	{
 		return true;
@@ -59,12 +59,12 @@ function function_dd83b835()
 	namespace_956bd4dd::function_df1ecefe(1, 1, level.var_c43aac04, level.var_c43aac04);
 	var_32adf91d = 0;
 	var_32adf91d++;
-	namespace_956bd4dd::function_1cb3c52d(#"hash_376aa98c6fac7859", var_32adf91d, 0, #"hash_1d314eaef40aeb56");
+	namespace_956bd4dd::function_1cb3c52d(#"disable_perks", var_32adf91d, 0, #"hash_1d314eaef40aeb56");
 	var_32adf91d++;
-	namespace_956bd4dd::function_1cb3c52d(#"hash_376aa98c6fac7859", var_32adf91d, 0, #"hash_1d314eaef40aeb56");
+	namespace_956bd4dd::function_1cb3c52d(#"disable_perks", var_32adf91d, 0, #"hash_1d314eaef40aeb56");
 	namespace_956bd4dd::function_1cb3c52d(#"hash_53d8a06b13ec49d9", var_32adf91d, 0, #"hash_5a56d7c195afe83b");
 	var_32adf91d++;
-	namespace_956bd4dd::function_1cb3c52d(#"hash_376aa98c6fac7859", var_32adf91d, 0, #"hash_1d314eaef40aeb56");
+	namespace_956bd4dd::function_1cb3c52d(#"disable_perks", var_32adf91d, 0, #"hash_1d314eaef40aeb56");
 	namespace_956bd4dd::function_1cb3c52d(#"hash_53d8a06b13ec49d9", var_32adf91d, 0, #"hash_5a56d7c195afe83b");
 	namespace_956bd4dd::function_1cb3c52d(#"dot", var_32adf91d, 0, #"hash_4a0fb4fb83a8430a");
 	var_32adf91d++;

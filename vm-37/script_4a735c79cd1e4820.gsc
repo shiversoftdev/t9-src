@@ -1,6 +1,6 @@
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\cp_common\util.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_845d1a97;
 
@@ -112,13 +112,13 @@ function function_80d28d77(localclientnum, var_7b70989a, var_4b30f907, var_9cb23
 				culldist = getdvarfloat(#"hash_366b9410b5385383", -1);
 			}
 		#/
-		var_5c5b7682 = getlocalclienteyepos(localclientnum);
+		playereyepos = getlocalclienteyepos(localclientnum);
 		playerangles = getlocalclientangles(localclientnum);
 		playerorigin = getlocalclientpos(localclientnum);
 		playerfov = getlocalclientfov(localclientnum);
 		var_c760e88e = playerfov * 0.5;
 		bounds = function_c440d28e(self.model);
-		var_a6448197 = self function_4b2f0374(var_5c5b7682, playerangles, var_c760e88e, culldist);
+		var_a6448197 = self function_4b2f0374(playereyepos, playerangles, var_c760e88e, culldist);
 		if(var_a6448197)
 		{
 			for(i = 0; i < var_70bdcaa; i++)

@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\math_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_345fff71;
 
@@ -15,13 +15,13 @@
 */
 function private autoexec function_27db5f96()
 {
-	level notify(124300988);
+	level notify(-124300988);
 }
 
 #namespace cinematicmotion;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: cinematicmotion
 	Checksum: 0x6F9C1DA
 	Offset: 0xD8
@@ -29,7 +29,7 @@ function private autoexec function_27db5f96()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"cinematicmotion", &function_70a657d8, undefined, undefined, undefined);
 }

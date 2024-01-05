@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_28a7d65d : class_6aaccc24
+class cself_respawn : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x52B1EC21
 		Offset: 0x328
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_28a7d65d : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x8EE667C0
 		Offset: 0x480
 		Size: 0x14
@@ -30,22 +30,22 @@ class class_28a7d65d : class_6aaccc24
 	}
 
 	/*
-		Name: function_459465a
-		Namespace: namespace_28a7d65d
+		Name: set_percent
+		Namespace: cself_respawn
 		Checksum: 0xAF5BB400
 		Offset: 0x448
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_459465a(localclientnum, value)
+	function set_percent(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "percent", value);
+		[[ self ]]->set_data(localclientnum, "percent", value);
 	}
 
 	/*
 		Name: open
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x1A5B1125
 		Offset: 0x418
 		Size: 0x24
@@ -54,26 +54,26 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_28a7d65d
+		Name: register_clientside
+		Namespace: cself_respawn
 		Checksum: 0x262034EC
 		Offset: 0x3A0
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("self_respawn");
+		cluielem::register_clientside("self_respawn");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0xB22C7CEC
 		Offset: 0x348
 		Size: 0x4C
@@ -82,13 +82,13 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function setup_clientfields(var_1089a5f3)
 	{
-		namespace_6aaccc24::setup_clientfields("self_respawn");
-		namespace_6aaccc24::function_da693cbe("percent", 1, 6, "float", var_1089a5f3);
+		cluielem::setup_clientfields("self_respawn");
+		cluielem::add_clientfield("percent", 1, 6, "float", var_1089a5f3);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x2DD9CBB8
 		Offset: 0x3C8
 		Size: 0x48
@@ -97,8 +97,8 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "percent", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "percent", 0);
 	}
 
 }
@@ -116,7 +116,7 @@ class class_28a7d65d : class_6aaccc24
 */
 function register(var_1089a5f3)
 {
-	elem = new class_28a7d65d();
+	elem = new cself_respawn();
 	[[ elem ]]->setup_clientfields(var_1089a5f3);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -138,7 +138,7 @@ function register(var_1089a5f3)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: self_respawn
 	Checksum: 0x29CFF52E
 	Offset: 0x240
@@ -146,10 +146,10 @@ function register(var_1089a5f3)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_28a7d65d();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cself_respawn();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -196,7 +196,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_459465a
+	Name: set_percent
 	Namespace: self_respawn
 	Checksum: 0x39C553D0
 	Offset: 0x2F8
@@ -204,8 +204,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_459465a(localclientnum, value)
+function set_percent(localclientnum, value)
 {
-	[[ self ]]->function_459465a(localclientnum, value);
+	[[ self ]]->set_percent(localclientnum, value);
 }
 

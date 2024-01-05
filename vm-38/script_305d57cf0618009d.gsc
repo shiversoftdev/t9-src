@@ -1,11 +1,11 @@
-#using script_d9b5c8b1ad38ef5;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\oob.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using script_d9b5c8b1ad38ef5;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_3088f362;
 
@@ -23,11 +23,11 @@ function private autoexec function_3fbd0a49()
 	level notify(811336963);
 }
 
-#namespace namespace_67838d10;
+#namespace player_insertion;
 
 /*
 	Name: function_63977a98
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x4A79D337
 	Offset: 0x2D0
 	Size: 0x1C
@@ -41,7 +41,7 @@ function function_63977a98(newtime)
 
 /*
 	Name: function_d28162a2
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x798449B6
 	Offset: 0x2F8
 	Size: 0x1C
@@ -55,7 +55,7 @@ function function_d28162a2(newtime)
 
 /*
 	Name: function_1a50e8a5
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xC02753A9
 	Offset: 0x320
 	Size: 0x1C
@@ -69,7 +69,7 @@ function function_1a50e8a5(newtime)
 
 /*
 	Name: function_a21d9dc
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x126D7950
 	Offset: 0x348
 	Size: 0xA4
@@ -80,14 +80,14 @@ function function_a21d9dc(insertion)
 {
 	insertion flag::clear(#"hash_60fcdd11812a0134");
 	insertion flag::clear(#"hash_122f326d72f4c884");
-	insertion flag::clear(#"hash_5a3e17fbc33cdc86");
-	insertion flag::clear(#"hash_3dc9cb68998d9dfd");
+	insertion flag::clear(#"insertion_teleport_completed");
+	insertion flag::clear(#"insertion_presentation_completed");
 	function_bb93a8cd(insertion);
 }
 
 /*
 	Name: function_bb93a8cd
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x9CC1CE0A
 	Offset: 0x3F8
 	Size: 0x196
@@ -96,8 +96,8 @@ function function_a21d9dc(insertion)
 */
 function function_bb93a8cd(insertion)
 {
-	var_f90ae72e = (isdefined(getgametypesetting(#"hash_731988b03dc6ee17")) ? getgametypesetting(#"hash_731988b03dc6ee17") : 1);
-	if(var_f90ae72e > 0)
+	insertioncount = (isdefined(getgametypesetting(#"hash_731988b03dc6ee17")) ? getgametypesetting(#"hash_731988b03dc6ee17") : 1);
+	if(insertioncount > 0)
 	{
 		activeplayers = function_a1ef346b();
 		var_2c34761b = [];
@@ -123,7 +123,7 @@ function function_bb93a8cd(insertion)
 
 /*
 	Name: function_dd34168c
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xA34BDE96
 	Offset: 0x598
 	Size: 0x5C
@@ -141,7 +141,7 @@ function function_dd34168c(insertion, flag)
 
 /*
 	Name: function_df47b31b
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xA26FC475
 	Offset: 0x600
 	Size: 0x76
@@ -163,7 +163,7 @@ function private function_df47b31b(flag)
 
 /*
 	Name: function_1e4302d0
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x6C393617
 	Offset: 0x680
 	Size: 0x5A
@@ -181,7 +181,7 @@ function function_1e4302d0(value, index)
 
 /*
 	Name: function_fd3c1bcc
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x3909C76F
 	Offset: 0x6E8
 	Size: 0xD8
@@ -206,7 +206,7 @@ function private function_fd3c1bcc(start, end, default_val)
 
 /*
 	Name: function_a5fd9aa8
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x730BD403
 	Offset: 0x7D0
 	Size: 0x84
@@ -227,7 +227,7 @@ function function_a5fd9aa8(insertion)
 
 /*
 	Name: function_70dd0500
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xC6B0F2A7
 	Offset: 0x860
 	Size: 0x88
@@ -249,7 +249,7 @@ function function_70dd0500()
 
 /*
 	Name: function_3ca86964
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x7E8BC24C
 	Offset: 0x8F0
 	Size: 0x192
@@ -265,16 +265,16 @@ function private function_3ca86964(var_1d83d08d)
 	{
 		return {#end:maxs, #start:mins};
 	}
-	var_f5663ad6 = var_6024133d[0].origin;
-	var_4ffef006 = var_6024133d[1].origin;
-	mins = (min(var_f5663ad6[0], var_4ffef006[0]), min(var_f5663ad6[1], var_4ffef006[1]), 150000);
-	maxs = (max(var_f5663ad6[0], var_4ffef006[0]), max(var_f5663ad6[1], var_4ffef006[1]), 150000);
+	o_a = var_6024133d[0].origin;
+	o_b = var_6024133d[1].origin;
+	mins = (min(o_a[0], o_b[0]), min(o_a[1], o_b[1]), -150000);
+	maxs = (max(o_a[0], o_b[0]), max(o_a[1], o_b[1]), 150000);
 	return function_24531a26(var_1d83d08d.start, var_1d83d08d.end, mins, maxs);
 }
 
 /*
 	Name: function_9ddb4115
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xC42385EA
 	Offset: 0xA90
 	Size: 0x26A
@@ -292,9 +292,9 @@ function private function_9ddb4115(var_1d83d08d)
 	/#
 		assert(isdefined(var_1d83d08d.end));
 	#/
-	if(isdefined(level.var_fb91af8) && level.var_fb91af8.size > 0)
+	if(isdefined(level.deathcircles) && level.deathcircles.size > 0)
 	{
-		initcircle = level.var_fb91af8[0];
+		initcircle = level.deathcircles[0];
 		var_ddab8e6c = var_1d83d08d.start;
 		var_dd00b78e = vectornormalize(var_1d83d08d.end - var_1d83d08d.start);
 		var_164fe5c9 = distance2dsquared(var_ddab8e6c, initcircle.origin);
@@ -328,7 +328,7 @@ function private function_9ddb4115(var_1d83d08d)
 
 /*
 	Name: function_ea1ad421
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xACA8AB64
 	Offset: 0xD08
 	Size: 0x168
@@ -362,7 +362,7 @@ function private function_ea1ad421(insertion, start, end)
 
 /*
 	Name: function_f31cf3bb
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x1B6D96C1
 	Offset: 0xE78
 	Size: 0x128
@@ -405,7 +405,7 @@ function function_f31cf3bb(point, direction, step, depth, var_94a1d56d)
 
 /*
 	Name: function_9368af66
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x689134D4
 	Offset: 0xFA8
 	Size: 0xC4
@@ -420,13 +420,13 @@ function function_9368af66(insertion, player)
 	/#
 		assert(isplayer(player));
 	#/
-	insertion.var_ef59e360 setvisibletoplayer(player);
-	insertion.var_ef59e360 clientfield::set("infiltration_ent", function_1e4302d0(1, insertion.index));
+	insertion.infilteament setvisibletoplayer(player);
+	insertion.infilteament clientfield::set("infiltration_ent", function_1e4302d0(1, insertion.index));
 }
 
 /*
 	Name: function_d53a8c5b
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xAF2F260E
 	Offset: 0x1078
 	Size: 0x2DC
@@ -450,7 +450,7 @@ function function_d53a8c5b(insertion, fly_over_point, var_59526dd5, offset)
 	direction = anglestoforward(var_872f085f);
 	direction = vectornormalize(direction);
 	var_7c712437 = fly_over_point + (anglestoright(var_872f085f) * offset);
-	var_1d83d08d = {#end:var_7c712437 + (direction * 150000), #start:var_7c712437 + (direction * 150000)};
+	var_1d83d08d = {#end:var_7c712437 + (direction * 150000), #start:var_7c712437 + (direction * -150000)};
 	result = function_3ca86964(var_1d83d08d);
 	var_1d83d08d.start = function_fd3c1bcc(fly_over_point, var_1d83d08d.start, result.start);
 	var_1d83d08d.end = function_fd3c1bcc(fly_over_point, var_1d83d08d.end, result.end);
@@ -466,7 +466,7 @@ function function_d53a8c5b(insertion, fly_over_point, var_59526dd5, offset)
 
 /*
 	Name: function_e04b0ea8
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x651AFB54
 	Offset: 0x1360
 	Size: 0x1AC
@@ -492,7 +492,7 @@ function private function_e04b0ea8(insertion, start_point, var_872f085f, var_373
 
 /*
 	Name: function_1db63266
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xCEA2A043
 	Offset: 0x1518
 	Size: 0x9C
@@ -506,7 +506,7 @@ function function_1db63266()
 	#/
 	var_5ed0195b = function_20cba65e(self);
 	insertion = level.insertions[var_5ed0195b];
-	if(isdefined(insertion) && isdefined(insertion.var_ef59e360))
+	if(isdefined(insertion) && isdefined(insertion.infilteament))
 	{
 		function_9368af66(insertion, self);
 	}
@@ -514,7 +514,7 @@ function function_1db63266()
 
 /*
 	Name: fly_path
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xD1D66C4F
 	Offset: 0x15C0
 	Size: 0x914
@@ -539,7 +539,7 @@ function private fly_path(insertion, var_1d83d08d, fly_over_point, var_59526dd5)
 	startpoint = var_82b0af47 - (var_858edbc2 * direction);
 	endpoint = var_ee07e61a + (var_abb846da * direction);
 	/#
-		if(getdvarint(#"hash_64f65224ca092b2d", 0) == 1)
+		if(getdvarint(#"scr_insertion_debug", 0) == 1)
 		{
 			offset = vectorscale((0, 0, 1), 300);
 			debug_sphere(var_1d83d08d.start + (2 * offset), 45, (0, 1, 1));
@@ -586,9 +586,9 @@ function private fly_path(insertion, var_1d83d08d, fly_over_point, var_59526dd5)
 	if(max((isdefined(getgametypesetting(#"hash_731988b03dc6ee17")) ? getgametypesetting(#"hash_731988b03dc6ee17") : 1), 1) > 1)
 	{
 		util::wait_network_frame();
-		insertion.var_ef59e360 = spawn("script_model", (0, 0, 0));
-		insertion.var_ef59e360.targetname = "infil_team_ent";
-		insertion.var_ef59e360 setinvisibletoall();
+		insertion.infilteament = spawn("script_model", (0, 0, 0));
+		insertion.infilteament.targetname = "infil_team_ent";
+		insertion.infilteament setinvisibletoall();
 		activeplayers = function_a1ef346b();
 		foreach(player in activeplayers)
 		{
@@ -603,7 +603,7 @@ function private fly_path(insertion, var_1d83d08d, fly_over_point, var_59526dd5)
 
 /*
 	Name: function_20cba65e
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x8E126D63
 	Offset: 0x1EE0
 	Size: 0x1B4
@@ -641,25 +641,25 @@ function function_20cba65e(player)
 
 /*
 	Name: function_1b105d5b
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x49D7D7F4
 	Offset: 0x20A0
 	Size: 0x3DC
 	Parameters: 5
 	Flags: Linked
 */
-function function_1b105d5b(insertion, fadeouttime, var_8e0c0121, fadeintime, rumble)
+function function_1b105d5b(insertion, fadeouttime, blacktime, fadeintime, rumble)
 {
 	/#
 		assert(isstruct(insertion));
 	#/
-	if(isdefined(lui::function_e810a527("FullScreenBlack")))
+	if(isdefined(lui::get_luimenu("FullScreenBlack")))
 	{
-		lui_menu = lui::function_e810a527("FullScreenBlack");
+		lui_menu = lui::get_luimenu("FullScreenBlack");
 	}
 	else
 	{
-		insertion flag::set(#"hash_3dc9cb68998d9dfd");
+		insertion flag::set(#"insertion_presentation_completed");
 		return;
 	}
 	function_a5fd9aa8(insertion);
@@ -671,27 +671,27 @@ function function_1b105d5b(insertion, fadeouttime, var_8e0c0121, fadeintime, rum
 			{
 				[[ lui_menu ]]->open(player);
 			}
-			[[ lui_menu ]]->function_9cd54463(player, 0);
-			[[ lui_menu ]]->function_331f9dd(player, 1);
-			[[ lui_menu ]]->function_237ff433(player, int(fadeouttime * 1000));
+			[[ lui_menu ]]->set_startalpha(player, 0);
+			[[ lui_menu ]]->set_endalpha(player, 1);
+			[[ lui_menu ]]->set_fadeovertime(player, int(fadeouttime * 1000));
 		}
 	}
-	wait(fadeouttime + var_8e0c0121);
-	insertion flag::wait_till_timeout(2, #"hash_5a3e17fbc33cdc86");
+	wait(fadeouttime + blacktime);
+	insertion flag::wait_till_timeout(2, #"insertion_teleport_completed");
 	function_a5fd9aa8(insertion);
 	foreach(player in insertion.players)
 	{
 		if(rumble)
 		{
-			player function_bc82f900(#"hash_4b19c1d08875f55c");
+			player function_bc82f900(#"infiltration_rumble");
 		}
 		if(![[ lui_menu ]]->function_7bfd10e6(player))
 		{
 			[[ lui_menu ]]->open(player);
 		}
-		[[ lui_menu ]]->function_9cd54463(player, 1);
-		[[ lui_menu ]]->function_331f9dd(player, 0);
-		[[ lui_menu ]]->function_237ff433(player, int(fadeintime * 1000));
+		[[ lui_menu ]]->set_startalpha(player, 1);
+		[[ lui_menu ]]->set_endalpha(player, 0);
+		[[ lui_menu ]]->set_fadeovertime(player, int(fadeintime * 1000));
 	}
 	wait(fadeintime);
 	function_a5fd9aa8(insertion);
@@ -699,12 +699,12 @@ function function_1b105d5b(insertion, fadeouttime, var_8e0c0121, fadeintime, rum
 	{
 		[[ lui_menu ]]->close(player);
 	}
-	insertion flag::set(#"hash_3dc9cb68998d9dfd");
+	insertion flag::set(#"insertion_presentation_completed");
 }
 
 /*
 	Name: function_9ed051a4
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xD612261C
 	Offset: 0x2488
 	Size: 0x49C
@@ -725,12 +725,12 @@ function function_9ed051a4()
 	#/
 	map_center = math::find_box_center(level.mapbounds.var_8faef7b7, level.mapbounds.var_68fd6e0a);
 	map_center = map_center + (0, 0, function_70dd0500());
-	if(is_true(getgametypesetting(#"hash_7d3d69a0fd97862d")))
+	if(is_true(getgametypesetting(#"wzintersectdeathcircle")))
 	{
 		circleindex = (isdefined(getgametypesetting(#"hash_567a288b2ca685f3")) ? getgametypesetting(#"hash_567a288b2ca685f3") : 0);
-		if(isdefined(level.var_fb91af8) && level.var_fb91af8.size > 0 && circleindex < level.var_fb91af8.size)
+		if(isdefined(level.deathcircles) && level.deathcircles.size > 0 && circleindex < level.deathcircles.size)
 		{
-			center = level.var_fb91af8[circleindex].origin;
+			center = level.deathcircles[circleindex].origin;
 			return (center[0], center[1], map_center[2]);
 		}
 	}
@@ -744,9 +744,9 @@ function function_9ed051a4()
 	}
 	x = (abs(level.mapbounds.var_68fd6e0a[0] - level.mapbounds.var_8faef7b7[0])) * 0.5;
 	y = (abs(level.mapbounds.var_68fd6e0a[1] - level.mapbounds.var_8faef7b7[1])) * 0.5;
-	var_b97cc2ac = math::clamp(level.var_427d6976.("insertionFlyoverBoundsOuterRatio"), 0, 1);
-	var_40f8484d = math::clamp(level.var_427d6976.("insertionFlyoverBoundsInnerRatio"), 0, var_b97cc2ac);
-	var_5017ad06 = (x * (var_b97cc2ac - var_40f8484d), y * (var_b97cc2ac - var_40f8484d), 0);
+	ratio_max = math::clamp(level.var_427d6976.("insertionFlyoverBoundsOuterRatio"), 0, 1);
+	var_40f8484d = math::clamp(level.var_427d6976.("insertionFlyoverBoundsInnerRatio"), 0, ratio_max);
+	var_5017ad06 = (x * (ratio_max - var_40f8484d), y * (ratio_max - var_40f8484d), 0);
 	random_point = (randomfloatrange(var_5017ad06[0] * -1, var_5017ad06[0]), randomfloatrange(var_5017ad06[1] * -1, var_5017ad06[1]), 0);
 	if(var_40f8484d > 0)
 	{
@@ -759,7 +759,7 @@ function function_9ed051a4()
 
 /*
 	Name: function_da0c552e
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x6547F6F2
 	Offset: 0x2930
 	Size: 0x1D2
@@ -768,15 +768,15 @@ function function_9ed051a4()
 */
 function function_da0c552e()
 {
-	if(is_true(getgametypesetting(#"hash_7d3d69a0fd97862d")))
+	if(is_true(getgametypesetting(#"wzintersectdeathcircle")))
 	{
 		circleindex = (isdefined(getgametypesetting(#"hash_567a288b2ca685f3")) ? getgametypesetting(#"hash_567a288b2ca685f3") : 0);
-		if(isdefined(level.var_fb91af8) && level.var_fb91af8.size > 0 && circleindex < level.var_fb91af8.size)
+		if(isdefined(level.deathcircles) && level.deathcircles.size > 0 && circleindex < level.deathcircles.size)
 		{
-			center = level.var_fb91af8[circleindex].origin;
+			center = level.deathcircles[circleindex].origin;
 			if(circleindex > 0)
 			{
-				var_6bf489f1 = level.var_fb91af8[0].origin;
+				var_6bf489f1 = level.deathcircles[0].origin;
 				var_1ce870a0 = vectornormalize(center - var_6bf489f1);
 				var_6e3e0ad7 = vectortoangles(var_1ce870a0);
 				if(math::cointoss())
@@ -800,7 +800,7 @@ function function_da0c552e()
 
 /*
 	Name: function_85635daf
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x21533913
 	Offset: 0x2B10
 	Size: 0x74
@@ -812,8 +812,8 @@ function function_85635daf(startpoint, total_distance, delta_t)
 	while(true)
 	{
 		current_distance = distance(startpoint, self.origin);
-		var_3d1b6203 = current_distance / total_distance;
-		if(var_3d1b6203 > delta_t)
+		current_t = current_distance / total_distance;
+		if(current_t > delta_t)
 		{
 			return;
 		}
@@ -823,7 +823,7 @@ function function_85635daf(startpoint, total_distance, delta_t)
 
 /*
 	Name: function_2b41b403
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xC648F6AD
 	Offset: 0x2B90
 	Size: 0x98
@@ -839,7 +839,7 @@ function function_2b41b403(velocity)
 
 /*
 	Name: function_51350a25
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0x428F1AB0
 	Offset: 0x2C30
 	Size: 0x5C
@@ -861,7 +861,7 @@ function function_51350a25()
 
 /*
 	Name: debug_sphere
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xA522C6A7
 	Offset: 0x2C98
 	Size: 0xF4
@@ -879,7 +879,7 @@ function debug_sphere(origin, radius, color, alpha, time)
 		{
 			time = 5000;
 		}
-		if(getdvarint(#"hash_64f65224ca092b2d", 0) == 1)
+		if(getdvarint(#"scr_insertion_debug", 0) == 1)
 		{
 			if(!isdefined(color))
 			{
@@ -893,7 +893,7 @@ function debug_sphere(origin, radius, color, alpha, time)
 
 /*
 	Name: debug_line
-	Namespace: namespace_67838d10
+	Namespace: player_insertion
 	Checksum: 0xA7BBC667
 	Offset: 0x2D98
 	Size: 0xC4
@@ -911,7 +911,7 @@ function debug_line(from, to, color, time, depthtest)
 		{
 			depthtest = 1;
 		}
-		if(getdvarint(#"hash_64f65224ca092b2d", 0) == 1)
+		if(getdvarint(#"scr_insertion_debug", 0) == 1)
 		{
 			if(distancesquared(from, to) < 0.01)
 			{

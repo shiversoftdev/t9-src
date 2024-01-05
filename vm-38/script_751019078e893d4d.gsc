@@ -1,10 +1,10 @@
-#using script_1cd690a97dfca36e;
 #using script_28e27ee9b45fd02d;
 #using script_31671175564a93b7;
-#using scripts\core_common\array_shared.csc;
+#using script_1cd690a97dfca36e;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\math_shared.csc;
 #using scripts\core_common\struct.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_6ca4ad5f;
 
@@ -19,7 +19,7 @@
 */
 function private autoexec function_dcd9b737()
 {
-	level notify(1503044725);
+	level notify(-1503044725);
 }
 
 #namespace snd;
@@ -84,7 +84,7 @@ function private function_20b6bc92()
 			if(isfunctionptr(var_dfd5412c.callbackfunc))
 			{
 				target = var_dfd5412c.target;
-				value = [[var_dfd5412c.callbackfunc]](target, var_dfd5412c.var_8e530837, var_dfd5412c);
+				value = [[var_dfd5412c.callbackfunc]](target, var_dfd5412c.callbackdata, var_dfd5412c);
 				function_fee448d5(var_dfd5412c, value);
 			}
 			/#
@@ -104,10 +104,10 @@ function private function_20b6bc92()
 	Parameters: 12
 	Flags: None
 */
-function function_b009fcc9(x, y, w, h, target, callbackfunc, var_8e530837, var_b1332cff, var_48a7a4bd, backgroundalpha, var_a2dbe44f, var_6a3d8755)
+function function_b009fcc9(x, y, w, h, target, callbackfunc, callbackdata, var_b1332cff, backgroundcolor, backgroundalpha, var_a2dbe44f, var_6a3d8755)
 {
 	var_b1332cff = function_ea2f17d1(var_b1332cff, 0);
-	var_48a7a4bd = function_ea2f17d1(var_48a7a4bd, vectorscale((1, 1, 1), 0.72974));
+	backgroundcolor = function_ea2f17d1(backgroundcolor, vectorscale((1, 1, 1), 0.72974));
 	backgroundalpha = function_ea2f17d1(backgroundalpha, 0.72974);
 	var_a2dbe44f = function_ea2f17d1(var_a2dbe44f, (0, 1, 0));
 	var_6a3d8755 = function_ea2f17d1(var_6a3d8755, 0.72974);
@@ -117,13 +117,13 @@ function function_b009fcc9(x, y, w, h, target, callbackfunc, var_8e530837, var_b
 	var_dfd5412c.var_1734a02c = array(w, h);
 	var_dfd5412c.var_ca1ec566 = (x, y, 0);
 	var_dfd5412c.var_708cbe39 = (w, h, 0);
-	var_dfd5412c.var_28f96332 = var_48a7a4bd;
+	var_dfd5412c.var_28f96332 = backgroundcolor;
 	var_dfd5412c.var_685ce76a = backgroundalpha;
 	var_dfd5412c.var_4a70ec60 = var_a2dbe44f;
 	var_dfd5412c.var_e2c0fdcb = var_6a3d8755;
 	var_dfd5412c.target = target;
 	var_dfd5412c.callbackfunc = callbackfunc;
-	var_dfd5412c.var_8e530837 = var_8e530837;
+	var_dfd5412c.callbackdata = callbackdata;
 	var_dfd5412c.var_c53c088d = gettime();
 	var_fc6c677b = "white";
 	/#

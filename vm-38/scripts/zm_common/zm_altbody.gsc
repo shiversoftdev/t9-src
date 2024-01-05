@@ -1,25 +1,25 @@
-#using script_b52a163973f339f;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\visionset_mgr_shared.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm_bgb.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_laststand.gsc;
-#using scripts\zm_common\zm_perks.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_unitrigger.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_perks.gsc;
+#using scripts\zm_common\zm_laststand.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\zm_common\zm_bgb.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\zm_common\zm_characters.gsc;
+#using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_altbody;
 
@@ -38,7 +38,7 @@ function private autoexec function_c582f022()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_altbody
 	Checksum: 0x5170E509
 	Offset: 0x250
@@ -46,7 +46,7 @@ function private autoexec function_c582f022()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_altbody", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -66,7 +66,7 @@ function private function_70a657d8()
 	{
 		level.var_28f2d2b1 = [];
 	}
-	clientfield::function_a8bbc967("player_lives", 1, 2, "int");
+	clientfield::register_clientuimodel("player_lives", 1, 2, "int");
 	clientfield::register("toplayer", "player_in_afterlife", 1, 1, "int");
 	clientfield::register("toplayer", "player_mana", 1, 8, "float");
 	clientfield::register("allplayers", "player_altbody", 1, 1, "int");

@@ -1,36 +1,36 @@
-#using script_263b7f2982258785;
-#using script_26850092de25d970;
-#using script_2b1257dca3b9fd1e;
-#using script_2d443451ce681a;
-#using script_31786c2dc684e9b;
-#using script_31e9b35aaacbbd93;
-#using script_32399001bdb550da;
-#using script_3626f1b2cf51a99c;
-#using script_3b82b8c68189025e;
-#using script_3dc93ca9902a9cda;
-#using script_4ab78e327b76395f;
 #using script_5552bd756afee443;
-#using script_61cfc2ab8e60625;
-#using script_73e0d5e10c6348fa;
 #using script_7cf3e180e994d17f;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using script_31e9b35aaacbbd93;
+#using script_3dc93ca9902a9cda;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
 #using scripts\cp_common\skipto.gsc;
+#using script_3626f1b2cf51a99c;
+#using script_4ab78e327b76395f;
+#using script_32399001bdb550da;
+#using scripts\core_common\math_shared.gsc;
+#using script_73e0d5e10c6348fa;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using script_26850092de25d970;
+#using script_31786c2dc684e9b;
 #using scripts\cp_common\util.gsc;
+#using script_2b1257dca3b9fd1e;
+#using script_263b7f2982258785;
+#using scripts\core_common\struct.gsc;
+#using scripts\cp_common\objectives.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using script_3b82b8c68189025e;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using script_61cfc2ab8e60625;
+#using script_2d443451ce681a;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_8c930e93;
 
@@ -45,14 +45,14 @@
 */
 function private autoexec function_d1269214()
 {
-	level notify(1114994465);
+	level notify(-1114994465);
 }
 
-#namespace namespace_b331012d;
+#namespace tkdn_raid_apt;
 
 /*
 	Name: starting
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x80FF7F69
 	Offset: 0x9C8
 	Size: 0x51C
@@ -79,8 +79,8 @@ function starting(str_skipto)
 	level.woods forceteleport(var_1100faeb.origin, var_1100faeb.angles);
 	level.var_efac709f = getent("player_breach_clip", "targetname");
 	level.var_efac709f disconnectpaths();
-	var_d582d701 = getent("alley_clip", "targetname");
-	var_d582d701 delete();
+	alley_clip = getent("alley_clip", "targetname");
+	alley_clip delete();
 	self util::blend_movespeedscale(0.5, 0.25);
 	level util::function_3e65fe0b(1);
 	level.var_2f3bf638 = getent("raid_car", "targetname");
@@ -99,7 +99,7 @@ function starting(str_skipto)
 
 /*
 	Name: main
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x774A544E
 	Offset: 0xEF0
 	Size: 0x424
@@ -150,7 +150,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: function_6ac3fee4
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x6D677489
 	Offset: 0x1320
 	Size: 0x12
@@ -164,7 +164,7 @@ function function_6ac3fee4()
 
 /*
 	Name: function_7eba1826
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xB7CD6176
 	Offset: 0x1340
 	Size: 0x114
@@ -193,7 +193,7 @@ function function_7eba1826()
 
 /*
 	Name: function_a8e1bcc4
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xF638243B
 	Offset: 0x1460
 	Size: 0x4CC
@@ -254,7 +254,7 @@ function function_a8e1bcc4()
 
 /*
 	Name: function_da18e538
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x553040B2
 	Offset: 0x1938
 	Size: 0x74
@@ -272,7 +272,7 @@ function function_da18e538()
 
 /*
 	Name: function_f7ceb1f2
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xDAAE2FAC
 	Offset: 0x19B8
 	Size: 0x136
@@ -298,7 +298,7 @@ function function_f7ceb1f2(a_ents)
 
 /*
 	Name: function_c71b0701
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x9C5D51F8
 	Offset: 0x1AF8
 	Size: 0xAC
@@ -317,7 +317,7 @@ function function_c71b0701()
 
 /*
 	Name: function_20215540
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x9E1BA5BF
 	Offset: 0x1BB0
 	Size: 0x54
@@ -333,7 +333,7 @@ function function_20215540()
 
 /*
 	Name: function_486a4628
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x423B551C
 	Offset: 0x1C10
 	Size: 0x5C
@@ -348,7 +348,7 @@ function function_486a4628()
 
 /*
 	Name: function_430ab215
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xF0900230
 	Offset: 0x1C78
 	Size: 0x3C
@@ -363,7 +363,7 @@ function function_430ab215()
 
 /*
 	Name: function_c3919cdc
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xFFEE0F82
 	Offset: 0x1CC0
 	Size: 0x30
@@ -378,7 +378,7 @@ function function_c3919cdc()
 
 /*
 	Name: function_8c4bd0ee
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x769B82DA
 	Offset: 0x1CF8
 	Size: 0x30
@@ -393,7 +393,7 @@ function function_8c4bd0ee()
 
 /*
 	Name: function_85249ea7
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x53FB94B8
 	Offset: 0x1D30
 	Size: 0x70
@@ -411,7 +411,7 @@ function function_85249ea7()
 
 /*
 	Name: function_aeaba0c9
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x3B08081A
 	Offset: 0x1DA8
 	Size: 0xBC
@@ -431,7 +431,7 @@ function function_aeaba0c9(pos, dest, delay)
 
 /*
 	Name: function_9800206d
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x433018E9
 	Offset: 0x1E70
 	Size: 0xF8
@@ -458,7 +458,7 @@ function function_9800206d(timer, delay)
 
 /*
 	Name: function_1a76e609
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xC10B5F28
 	Offset: 0x1F70
 	Size: 0x34
@@ -473,7 +473,7 @@ function function_1a76e609()
 
 /*
 	Name: function_25e67322
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x640D309E
 	Offset: 0x1FB0
 	Size: 0x34
@@ -488,7 +488,7 @@ function function_25e67322()
 
 /*
 	Name: function_306807e5
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x2AB15464
 	Offset: 0x1FF0
 	Size: 0x1AC
@@ -502,7 +502,7 @@ function function_306807e5()
 	self.var_c681e4c1 = 1;
 	if(self.script_noteworthy == "kitchen_enemy4")
 	{
-		level.var_e985d6b4 = self;
+		level.kitchen_enemy4 = self;
 	}
 	self thread function_5ba83448();
 	level waittill(#"hash_2d7f82360e399f87");
@@ -523,7 +523,7 @@ function function_306807e5()
 
 /*
 	Name: function_629b5919
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x9FA9BE2C
 	Offset: 0x21A8
 	Size: 0x34
@@ -540,7 +540,7 @@ function function_629b5919()
 
 /*
 	Name: function_5ba83448
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xC52BE4B2
 	Offset: 0x21E8
 	Size: 0x1B4
@@ -579,7 +579,7 @@ function function_5ba83448()
 
 /*
 	Name: function_69b8767f
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xF83E81A4
 	Offset: 0x23A8
 	Size: 0x2C
@@ -593,7 +593,7 @@ function function_69b8767f()
 
 /*
 	Name: function_8dac85e
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x88864B71
 	Offset: 0x23E0
 	Size: 0xDC
@@ -612,7 +612,7 @@ function function_8dac85e(scene, death_shot, var_5505b07f, loop)
 
 /*
 	Name: function_719a1d22
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xDB16B4AA
 	Offset: 0x24C8
 	Size: 0x76
@@ -631,7 +631,7 @@ function function_719a1d22()
 
 /*
 	Name: function_ced2a7df
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x1F801EEA
 	Offset: 0x2548
 	Size: 0xFE
@@ -656,7 +656,7 @@ function function_ced2a7df()
 
 /*
 	Name: function_a6a40606
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x5F6EE489
 	Offset: 0x2650
 	Size: 0x3C
@@ -671,7 +671,7 @@ function function_a6a40606()
 
 /*
 	Name: function_596afdef
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x69E80154
 	Offset: 0x2698
 	Size: 0x164
@@ -696,7 +696,7 @@ function function_596afdef()
 
 /*
 	Name: left_flank
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x594438D4
 	Offset: 0x2808
 	Size: 0x54
@@ -711,7 +711,7 @@ function left_flank()
 
 /*
 	Name: function_917872db
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x8A1D33D0
 	Offset: 0x2868
 	Size: 0x144
@@ -725,16 +725,16 @@ function function_917872db()
 	qasim = var_a2ec2530[0] spawner::spawn(1);
 	level notify(#"hash_750f5969110dee88");
 	qasim namespace_b100dd86::function_6578b894();
-	var_c5225a2a = struct::get("rooftop_goto", "targetname");
+	rooftop_goto = struct::get("rooftop_goto", "targetname");
 	objectives::remove("obj_takedown_qasim");
 	level objectives::complete("follow_adler", level.adler);
-	objectives::goto("obj_rooftops", var_c5225a2a.origin);
+	objectives::goto("obj_rooftops", rooftop_goto.origin);
 	level thread function_effaa7aa();
 }
 
 /*
 	Name: function_effaa7aa
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x68557460
 	Offset: 0x29B8
 	Size: 0x3C
@@ -749,7 +749,7 @@ function function_effaa7aa()
 
 /*
 	Name: function_801d630c
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x583DC16F
 	Offset: 0x2A00
 	Size: 0x1D4
@@ -781,7 +781,7 @@ function function_801d630c()
 
 /*
 	Name: function_d068d0f8
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x6964E4C5
 	Offset: 0x2BE0
 	Size: 0x74
@@ -798,7 +798,7 @@ function function_d068d0f8()
 
 /*
 	Name: function_5001b9be
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x580F6A3C
 	Offset: 0x2C60
 	Size: 0x44
@@ -813,7 +813,7 @@ function function_5001b9be()
 
 /*
 	Name: function_5547ef8b
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xCCF204FB
 	Offset: 0x2CB0
 	Size: 0x124
@@ -839,7 +839,7 @@ function function_5547ef8b()
 
 /*
 	Name: cleanup
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xF0CCA630
 	Offset: 0x2DE0
 	Size: 0x24
@@ -852,7 +852,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0xC828D79F
 	Offset: 0x2E10
 	Size: 0x24
@@ -866,7 +866,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x80F724D1
 	Offset: 0x2E40
 	Size: 0x4
@@ -879,7 +879,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_b331012d
+	Namespace: tkdn_raid_apt
 	Checksum: 0x80F724D1
 	Offset: 0x2E50
 	Size: 0x4

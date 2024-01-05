@@ -1,10 +1,10 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace gamestate;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: gamestate
 	Checksum: 0xF7F4D62C
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"gamestate", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -56,7 +56,7 @@ event function_69452d92(eventstruct)
 		{
 			case "playing":
 			{
-				callback::callback(#"hash_361e06db4b210e", eventstruct);
+				callback::callback(#"on_game_playing", eventstruct);
 				break;
 			}
 			case "postgame":

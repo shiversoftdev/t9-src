@@ -1,36 +1,36 @@
-#using script_1435f3c9fc699e04;
-#using script_1cc417743d7c262d;
-#using script_2c49ae69cd8ce30c;
-#using script_335d0650ed05d36d;
-#using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
-#using script_7a8059ca02b7b09e;
-#using script_7d712f77ab8d0c16;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
-#using scripts\core_common\demo_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\medals_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\challenges.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
-#using scripts\mp_common\gametypes\outcome.gsc;
-#using scripts\mp_common\gametypes\round.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
+#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\outcome.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\core_common\battlechatter.gsc;
+#using scripts\mp_common\challenges.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\trigger_shared.gsc;
+#using script_44b0b8420eabacad;
+#using script_335d0650ed05d36d;
+#using script_7d712f77ab8d0c16;
+#using scripts\core_common\sound_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\popups_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\medals_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using script_1435f3c9fc699e04;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\demo_shared.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_d150537f;
 
@@ -950,7 +950,7 @@ function give_capture_credit(touchlist, string, capturetime, capture_team, lastc
 			potm::bookmark(#"event", gettime(), player);
 			player stats::function_bb7eedf0(#"captures", 1);
 			player stats::function_bb7eedf0(#"hash_2f1df496791a2f5f", 1);
-			player contracts::function_a54e2068(#"hash_4fa0008b60deaab4");
+			player contracts::increment_contract(#"hash_4fa0008b60deaab4");
 			continue;
 		}
 		/#
@@ -1092,7 +1092,7 @@ function function_4a415293(time)
 		zone.gameobject recordgameeventnonplayer("hardpoint_moved");
 	}
 	level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {#eventtype:#"hardpoint_moved"});
-	playsoundatposition(#"hash_492b7638b1c9781a", (0, 0, 0));
+	playsoundatposition(#"mpl_hardpoint_move", (0, 0, 0));
 	foreach(zone in level.active_zones)
 	{
 		zone.gameobject.onuse = undefined;
@@ -1127,10 +1127,10 @@ function function_a84bac48(team)
 		{
 			player.pers[#"objtime"]++;
 			player.objtime = player.pers[#"objtime"];
-			player contracts::function_a54e2068(#"hash_78c9a64d04286f61", 1);
+			player contracts::increment_contract(#"hash_78c9a64d04286f61", 1);
 			if((player.pers[#"objtime"] % 60) == 0)
 			{
-				player contracts::function_a54e2068(#"hash_92db988270f4f67");
+				player contracts::increment_contract(#"hash_92db988270f4f67");
 			}
 		}
 		var_998771f0 = "hardpoint" + self.script_index;
@@ -1334,7 +1334,7 @@ function setup_zones()
 	zones = get_zone_array();
 	if(zones.size == 0)
 	{
-		globallogic_utils::add_map_error("No zones found for KOTH in map " + util::function_53bbf9d2());
+		globallogic_utils::add_map_error("No zones found for KOTH in map " + util::get_map_name());
 	}
 	trigs = getentarray("koth_zone_trigger", "targetname");
 	var_4cb5e04 = getentarray("koth_zone_trigger", "script_noteworthy");
@@ -1674,7 +1674,7 @@ function function_610d3790(einflictor, victim, idamage, weapon)
 	{
 		if([[level.iskillstreakweapon]](weapon) || (isdefined(weapon.statname) && [[level.iskillstreakweapon]](getweapon(weapon.statname))))
 		{
-			var_629fbd5c = 1;
+			weaponiskillstreak = 1;
 		}
 	}
 	medalgiven = 0;
@@ -1734,7 +1734,7 @@ function function_610d3790(einflictor, victim, idamage, weapon)
 				}
 				if(var_1cfdf798)
 				{
-					if(!is_true(var_629fbd5c))
+					if(!is_true(weaponiskillstreak))
 					{
 						scoreevents::function_2a2e1723(#"hardpoint_kill", attacker, idamage, weapon);
 					}
@@ -1770,7 +1770,7 @@ function function_610d3790(einflictor, victim, idamage, weapon)
 				if(var_1cfdf798)
 				{
 					attacker challenges::killedzoneattacker(weapon);
-					if(!is_true(var_629fbd5c))
+					if(!is_true(weaponiskillstreak))
 					{
 						scoreevents::function_2a2e1723(#"hardpoint_kill", attacker, idamage, weapon);
 					}
@@ -1828,7 +1828,7 @@ function function_610d3790(einflictor, victim, idamage, weapon)
 					if(var_1cfdf798)
 					{
 						attacker challenges::killedzoneattacker(weapon);
-						if(!is_true(var_629fbd5c))
+						if(!is_true(weaponiskillstreak))
 						{
 							scoreevents::function_2a2e1723(#"hardpoint_kill", attacker, idamage, weapon);
 						}
@@ -1854,7 +1854,7 @@ function function_610d3790(einflictor, victim, idamage, weapon)
 				{
 					if(var_1cfdf798)
 					{
-						if(!is_true(var_629fbd5c))
+						if(!is_true(weaponiskillstreak))
 						{
 							scoreevents::function_2a2e1723(#"hardpoint_kill", attacker, idamage, weapon);
 						}

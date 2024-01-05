@@ -1,30 +1,30 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
+#using script_2440f86f9cd325ac;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
+#using script_2a5bf5b4a00cee0d;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
 #using script_1b0b07ff57d1dde3;
 #using script_1ee011cd0961afd7;
-#using script_2440f86f9cd325ac;
-#using script_2a5bf5b4a00cee0d;
-#using script_3faf478d5b0850fe;
-#using script_40f967ad5d18ea74;
-#using script_47851dbeea22fe66;
-#using script_4d748e58ce25b60c;
 #using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_68cdf0ca5df5e;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
+#using script_68cdf0ca5df5e;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_77eccc4f;
 
@@ -39,7 +39,7 @@
 */
 function private autoexec function_106e327d()
 {
-	level notify(383590591);
+	level notify(-383590591);
 }
 
 /*
@@ -180,7 +180,7 @@ function function_93e7ee52(challengetype, name)
 			def = doa_pickups::function_6265bde4(item);
 			if(isdefined(def))
 			{
-				pickup = level doa_pickups::function_d080f0db(def, loot.origin, undefined, undefined, 1);
+				pickup = level doa_pickups::itemspawn(def, loot.origin, undefined, undefined, 1);
 				if(isdefined(pickup))
 				{
 					pickup.origin = loot.origin;

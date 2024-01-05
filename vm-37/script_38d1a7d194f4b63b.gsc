@@ -1,25 +1,25 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
-#namespace namespace_fe8e9929;
+#namespace hint_tutorial;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_fe8e9929
+	Name: __init__system__
+	Namespace: hint_tutorial
 	Checksum: 0x8D7D7549
 	Offset: 0xC8
 	Size: 0x34
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("hint_tutorial", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_fe8e9929
+	Namespace: hint_tutorial
 	Checksum: 0x2F1C17B1
 	Offset: 0x108
 	Size: 0x4C
@@ -33,7 +33,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_22315c10
-	Namespace: namespace_fe8e9929
+	Namespace: hint_tutorial
 	Checksum: 0x638EA701
 	Offset: 0x160
 	Size: 0xC2

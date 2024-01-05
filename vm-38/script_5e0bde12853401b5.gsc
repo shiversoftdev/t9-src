@@ -1,18 +1,18 @@
-#using script_396f7d71538c9677;
-#using script_47fb62300ac0bd60;
-#using script_545a0bac37bda541;
-#using script_57f7003580bb15e0;
-#using script_7bafaa95bb1b427e;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\entityheadicons_shared.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
 #using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\killcam_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\weapons\weapons.gsc;
+#using scripts\weapons\weaponobjects.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\globallogic\globallogic_score.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\killcam_shared.gsc;
+#using scripts\core_common\entityheadicons_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_396f7d71538c9677;
+#using scripts\core_common\battlechatter.gsc;
 
 #namespace namespace_8c178c42;
 
@@ -33,7 +33,7 @@ function private autoexec function_dced4d5f()
 #namespace namespace_ad7d66e9;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_ad7d66e9
 	Checksum: 0xDB4739AB
 	Offset: 0x1F8
@@ -41,7 +41,7 @@ function private autoexec function_dced4d5f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6cc8dc4627aa0eaa", &init_shared, undefined, undefined, undefined);
 }
@@ -57,9 +57,9 @@ function private autoexec function_89f2df9()
 */
 function init_shared()
 {
-	params = function_4d1e7b48(#"hash_69374f563cb01313");
+	params = getstatuseffect(#"hash_69374f563cb01313");
 	level.var_26472ea3 = params.var_18d16a6b;
-	level.var_71a63cb2 = params.var_67e2281d;
+	level.var_71a63cb2 = params.setype;
 	level.var_f217c587 = [];
 }
 
@@ -106,7 +106,7 @@ function function_bba54dca()
 {
 	self waittill(#"death");
 	waittillframeend();
-	self notify(#"hash_2a125df0aca068b");
+	self notify(#"molotov_deleted");
 }
 
 /*
@@ -120,13 +120,13 @@ function function_bba54dca()
 */
 function function_1cdbb1e5(owner, weapon)
 {
-	self endon(#"hacked", #"hash_2a125df0aca068b");
+	self endon(#"hacked", #"molotov_deleted");
 	/#
-		assert(isdefined(weapon.var_4dd46f8a), "" + weapon.name);
+		assert(isdefined(weapon.customsettings), "" + weapon.name);
 	#/
 	self thread function_bba54dca();
 	team = self.team;
-	var_3e7a440 = getscriptbundle(weapon.var_4dd46f8a);
+	var_3e7a440 = getscriptbundle(weapon.customsettings);
 	self thread function_71c73ece();
 	waitresult = undefined;
 	waitresult = self waittill(#"projectile_impact_explode", #"explode");
@@ -149,10 +149,10 @@ function function_1cdbb1e5(owner, weapon)
 	Parameters: 7
 	Flags: Linked
 */
-function function_462c8632(owner, origin, normal, velocity, weapon, team, var_4dd46f8a)
+function function_462c8632(owner, origin, normal, velocity, weapon, team, customsettings)
 {
 	playsoundatposition("", origin);
-	self thread function_e8ad1d81(origin, owner, normal, velocity, weapon, team, var_4dd46f8a);
+	self thread function_e8ad1d81(origin, owner, normal, velocity, weapon, team, customsettings);
 }
 
 /*
@@ -166,8 +166,8 @@ function function_462c8632(owner, origin, normal, velocity, weapon, team, var_4d
 */
 function function_f4e48434(position)
 {
-	var_c84f4998 = getwaterheight(position) - position[2];
-	return var_c84f4998 >= 24;
+	water_depth = getwaterheight(position) - position[2];
+	return water_depth >= 24;
 }
 
 /*
@@ -179,13 +179,13 @@ function function_f4e48434(position)
 	Parameters: 1
 	Flags: Linked
 */
-function function_a66ba8cc(var_c84f4998)
+function function_a66ba8cc(water_depth)
 {
-	return 0 < var_c84f4998 && var_c84f4998 < 24;
+	return 0 < water_depth && water_depth < 24;
 }
 
 /*
-	Name: function_330c2616
+	Name: get_water_depth
 	Namespace: namespace_ad7d66e9
 	Checksum: 0xD804055
 	Offset: 0x620
@@ -193,7 +193,7 @@ function function_a66ba8cc(var_c84f4998)
 	Parameters: 1
 	Flags: Linked
 */
-function function_330c2616(position)
+function get_water_depth(position)
 {
 	return getwaterheight(position) - position[2];
 }
@@ -248,9 +248,9 @@ function function_7cbeb2f0(normal)
 	Parameters: 7
 	Flags: Linked
 */
-function function_e8ad1d81(position, owner, normal, velocity, weapon, team, var_4dd46f8a)
+function function_e8ad1d81(position, owner, normal, velocity, weapon, team, customsettings)
 {
-	var_4f9d7296 = position;
+	originalposition = position;
 	var_493d36f9 = normal;
 	var_77261b6 = vectornormalize(velocity);
 	var_1f254a06 = vectorscale(var_77261b6, -1);
@@ -258,7 +258,7 @@ function function_e8ad1d81(position, owner, normal, velocity, weapon, team, var_
 	var_e76400c0 = undefined;
 	wallnormal = undefined;
 	var_693f108f = undefined;
-	var_aecaaa11 = getweapon(#"hash_23dd6039fe2f36c6");
+	var_aecaaa11 = getweapon(#"molotov_fire");
 	var_5632b17 = getweapon("molotov_fire_wall");
 	var_7bf146f2 = getweapon("molotov_steam");
 	if(normal[2] < -0.5)
@@ -310,14 +310,14 @@ function function_e8ad1d81(position, owner, normal, velocity, weapon, team, var_
 	if(normal[2] < 0.5)
 	{
 		wall_normal = normal;
-		var_36c22d1d = var_4f9d7296 + vectorscale(var_493d36f9, 8);
+		var_36c22d1d = originalposition + vectorscale(var_493d36f9, 8);
 		var_8ae62b02 = var_36c22d1d - vectorscale((0, 0, 1), 300);
 		var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, vectorscale((-1, -1, -1), 3), vectorscale((1, 1, 1), 3), self, 1);
 		var_693f108f = var_69d15ad0[#"fraction"] * 300;
 		var_959a2a8b = 0;
 		if(var_693f108f > 10)
 		{
-			var_e76400c0 = var_4f9d7296;
+			var_e76400c0 = originalposition;
 			wallnormal = var_493d36f9;
 			var_d6d43109 = sqrt(1 - var_69d15ad0[#"fraction"]);
 			var_959a2a8b = 1;
@@ -336,21 +336,21 @@ function function_e8ad1d81(position, owner, normal, velocity, weapon, team, var_
 		}
 		if(var_959a2a8b)
 		{
-			x = var_4f9d7296[0];
-			y = var_4f9d7296[1];
+			x = originalposition[0];
+			y = originalposition[1];
 			lowestz = var_69d15ad0[#"position"][2];
-			z = var_4f9d7296[2];
+			z = originalposition[2];
 			while(z > lowestz)
 			{
 				newpos = (x, y, z);
-				var_c84f4998 = function_330c2616(newpos);
-				if(function_a66ba8cc(var_c84f4998) || function_f4e48434(newpos))
+				water_depth = get_water_depth(newpos);
+				if(function_a66ba8cc(water_depth) || function_f4e48434(newpos))
 				{
-					newpos = newpos - (0, 0, var_c84f4998);
-					level thread function_42b9fdbe(var_7bf146f2, newpos, (0, 0, 1), int(var_4dd46f8a.var_b79d64a9), team);
+					newpos = newpos - (0, 0, water_depth);
+					level thread function_42b9fdbe(var_7bf146f2, newpos, (0, 0, 1), int(customsettings.var_b79d64a9), team);
 					break;
 				}
-				level thread function_42b9fdbe(var_5632b17, newpos, wall_normal, int(var_4dd46f8a.var_b79d64a9), team);
+				level thread function_42b9fdbe(var_5632b17, newpos, wall_normal, int(customsettings.var_b79d64a9), team);
 				z = z - randomintrange(20, 30);
 			}
 			var_bc9ec158 = 0.6 * var_69d15ad0[#"fraction"];
@@ -374,11 +374,11 @@ function function_e8ad1d81(position, owner, normal, velocity, weapon, team, var_
 		if(trace[#"fraction"] < 0.9)
 		{
 			var_252a0dc7 = trace[#"normal"];
-			spawntimedfx(var_5632b17, traceposition, var_252a0dc7, int(var_4dd46f8a.var_b79d64a9), team);
+			spawntimedfx(var_5632b17, traceposition, var_252a0dc7, int(customsettings.var_b79d64a9), team);
 		}
 	}
 	var_1f254a06 = normal;
-	level function_8a03d3f3(owner, position, startpos, var_1f254a06, var_d6d43109, rotation, weapon, var_4dd46f8a, team, var_e76400c0, wallnormal, var_693f108f);
+	level function_8a03d3f3(owner, position, startpos, var_1f254a06, var_d6d43109, rotation, weapon, customsettings, team, var_e76400c0, wallnormal, var_693f108f);
 }
 
 /*
@@ -461,9 +461,9 @@ function function_31f342a2(origin, var_9c7e3678)
 	Parameters: 12
 	Flags: Linked
 */
-function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, weapon, var_4dd46f8a, team, var_e76400c0, wallnormal, var_693f108f)
+function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, weapon, customsettings, team, var_e76400c0, wallnormal, var_693f108f)
 {
-	defaultdistance = var_4dd46f8a.var_6193a41b * multiplier;
+	defaultdistance = customsettings.var_6193a41b * multiplier;
 	defaultdropdistance = getdvarint(#"hash_4a8fc6d7cacea9d5", 90);
 	colorarray = [];
 	colorarray[colorarray.size] = (0.9, 0.2, 0.2);
@@ -477,18 +477,18 @@ function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotat
 	locations[#"distsqrd"] = [];
 	locations[#"fxtoplay"] = [];
 	locations[#"radius"] = [];
-	locations[#"hash_33059ac06a23beca"] = [];
-	locations[#"hash_7852e39f75c4b5c0"] = [];
+	locations[#"tallfire"] = [];
+	locations[#"smallfire"] = [];
 	locations[#"steam"] = [];
-	fxcount = var_4dd46f8a.var_b650dc43;
-	var_33ad9452 = (isdefined(var_4dd46f8a.var_bc24d9d3) ? var_4dd46f8a.var_bc24d9d3 : 0);
-	fxcount = int(math::clamp((fxcount * multiplier) + 6, 6, var_4dd46f8a.var_b650dc43));
+	fxcount = customsettings.var_b650dc43;
+	var_33ad9452 = (isdefined(customsettings.var_bc24d9d3) ? customsettings.var_bc24d9d3 : 0);
+	fxcount = int(math::clamp((fxcount * multiplier) + 6, 6, customsettings.var_b650dc43));
 	if(multiplier < 0.04)
 	{
 		fxcount = 0;
 	}
 	function_31cc6bd9();
-	if(function_31f342a2(startpos, sqr(var_4dd46f8a.var_6193a41b * 1.5)) && fxcount > 10)
+	if(function_31f342a2(startpos, sqr(customsettings.var_6193a41b * 1.5)) && fxcount > 10)
 	{
 		fxcount = 7;
 	}
@@ -513,7 +513,7 @@ function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotat
 			locations[#"normal"][count] = trace[#"normal"];
 			if(var_1cac1ca8)
 			{
-				locations[#"hash_33059ac06a23beca"][count] = 1;
+				locations[#"tallfire"][count] = 1;
 			}
 			hitsomething = 1;
 		}
@@ -524,17 +524,17 @@ function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotat
 			{
 				function_1493c734(var_e5d1793d[#"position"], 10, (0, 0, 1), 0.6, 200);
 				locations[#"loc"][count] = var_e5d1793d[#"position"];
-				var_c84f4998 = function_330c2616(var_e5d1793d[#"position"]);
-				if(function_a66ba8cc(var_c84f4998))
+				water_depth = get_water_depth(var_e5d1793d[#"position"]);
+				if(function_a66ba8cc(water_depth))
 				{
 					locations[#"normal"][count] = (0, 0, 1);
 					locations[#"steam"][count] = 1;
-					locations[#"loc"][count] = locations[#"loc"][count] - (0, 0, var_c84f4998);
+					locations[#"loc"][count] = locations[#"loc"][count] - (0, 0, water_depth);
 				}
 				else
 				{
 					locations[#"normal"][count] = var_e5d1793d[#"normal"];
-					locations[#"hash_7852e39f75c4b5c0"][count] = 1;
+					locations[#"smallfire"][count] = 1;
 				}
 			}
 		}
@@ -552,19 +552,19 @@ function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotat
 				function_1493c734(var_9417df90[#"position"], 10, (0, 0, 1), 0.6, 200);
 				locindex = count + (fxcount * (var_ecef2fde + 1));
 				locations[#"loc"][locindex] = var_9417df90[#"position"];
-				var_c84f4998 = function_330c2616(var_9417df90[#"position"]);
-				if(function_a66ba8cc(var_c84f4998))
+				water_depth = get_water_depth(var_9417df90[#"position"]);
+				if(function_a66ba8cc(water_depth))
 				{
 					locations[#"normal"][locindex] = (0, 0, 1);
 					locations[#"steam"][locindex] = 1;
-					locations[#"loc"][locindex] = locations[#"loc"][locindex] - (0, 0, var_c84f4998);
+					locations[#"loc"][locindex] = locations[#"loc"][locindex] - (0, 0, water_depth);
 					continue;
 				}
 				locations[#"normal"][locindex] = var_9417df90[#"normal"];
 			}
 		}
 	}
-	var_aecaaa11 = getweapon(#"hash_23dd6039fe2f36c6");
+	var_aecaaa11 = getweapon(#"molotov_fire");
 	var_3cbce009 = getweapon("molotov_fire_tall");
 	var_4a1b9411 = getweapon("molotov_fire_small");
 	var_7bf146f2 = getweapon("molotov_steam");
@@ -578,7 +578,7 @@ function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotat
 	{
 		if(!isdefined(var_e76400c0))
 		{
-			spawntimedfx(weapon, var_6b23e1c9, normal, int(var_4dd46f8a.var_b79d64a9), team);
+			spawntimedfx(weapon, var_6b23e1c9, normal, int(customsettings.var_b79d64a9), team);
 		}
 	}
 	if(level.gameended)
@@ -596,37 +596,37 @@ function function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotat
 	var_bf264593 = level.var_a88ac760.size;
 	level.var_a88ac760[var_bf264593] = {};
 	var_4b424bc1 = level.var_a88ac760[var_bf264593];
-	var_4b424bc1.var_46ee5246 = int(gettime() + (var_4dd46f8a.var_b79d64a9 * 1000));
+	var_4b424bc1.var_46ee5246 = int(gettime() + (customsettings.var_b79d64a9 * 1000));
 	var_4b424bc1.origin = startpos;
-	thread damageeffectarea(owner, startpos, normal, var_aecaaa11, var_4dd46f8a, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246);
-	thread function_9464e4ad(owner, startpos, normal, var_aecaaa11, var_4dd46f8a, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246);
+	thread damageeffectarea(owner, startpos, normal, var_aecaaa11, customsettings, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246);
+	thread function_9464e4ad(owner, startpos, normal, var_aecaaa11, customsettings, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246);
 	var_b1dd2ca0 = getarraykeys(locations[#"loc"]);
-	foreach(var_7ee5c69b in var_b1dd2ca0)
+	foreach(lockey in var_b1dd2ca0)
 	{
-		if(!isdefined(var_7ee5c69b))
+		if(!isdefined(lockey))
 		{
 			continue;
 		}
-		if(function_f4e48434(locations[#"loc"][var_7ee5c69b]))
+		if(function_f4e48434(locations[#"loc"][lockey]))
 		{
 			continue;
 		}
-		if(isdefined(locations[#"hash_7852e39f75c4b5c0"][var_7ee5c69b]))
+		if(isdefined(locations[#"smallfire"][lockey]))
 		{
 			fireweapon = var_4a1b9411;
 		}
 		else
 		{
-			if(isdefined(locations[#"steam"][var_7ee5c69b]))
+			if(isdefined(locations[#"steam"][lockey]))
 			{
 				fireweapon = var_7bf146f2;
 			}
 			else
 			{
-				fireweapon = (isdefined(locations[#"hash_33059ac06a23beca"][var_7ee5c69b]) ? var_3cbce009 : var_aecaaa11);
+				fireweapon = (isdefined(locations[#"tallfire"][lockey]) ? var_3cbce009 : var_aecaaa11);
 			}
 		}
-		level thread function_42b9fdbe(fireweapon, locations[#"loc"][var_7ee5c69b], locations[#"normal"][var_7ee5c69b], int(var_4dd46f8a.var_b79d64a9), team);
+		level thread function_42b9fdbe(fireweapon, locations[#"loc"][lockey], locations[#"normal"][lockey], int(customsettings.var_b79d64a9), team);
 	}
 }
 
@@ -658,7 +658,7 @@ function function_42b9fdbe(weapon, loc, normal, duration, team)
 function incendiary_debug_line(from, to, color, depthtest, time)
 {
 	/#
-		debug_rcbomb = getdvarint(#"hash_4eff71fc5bf5542a", 0);
+		debug_rcbomb = getdvarint(#"scr_molotov_debug", 0);
 		if(debug_rcbomb == 1)
 		{
 			if(!isdefined(time))
@@ -683,11 +683,11 @@ function incendiary_debug_line(from, to, color, depthtest, time)
 	Parameters: 10
 	Flags: Linked
 */
-function damageeffectarea(owner, position, normal, weapon, var_4dd46f8a, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime)
+function damageeffectarea(owner, position, normal, weapon, customsettings, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime)
 {
 	level endon(#"game_ended");
-	radius = var_4dd46f8a.var_6193a41b * radius_multiplier;
-	height = var_4dd46f8a.var_cbd86f3e;
+	radius = customsettings.var_6193a41b * radius_multiplier;
+	height = customsettings.var_cbd86f3e;
 	trigger_radius_position = normal - (0, 0, height);
 	trigger_radius_height = height * 2;
 	if(isdefined(var_e76400c0) && isdefined(wallnormal))
@@ -724,14 +724,14 @@ function damageeffectarea(owner, position, normal, weapon, var_4dd46f8a, radius_
 	while(gettime() < damageendtime && (!isdefined(position) || position.team == originalteam))
 	{
 		damageapplied = 0;
-		potential_targets = self getpotentialtargets(position, var_4dd46f8a);
+		potential_targets = self getpotentialtargets(position, customsettings);
 		if(isdefined(position))
 		{
 			position.var_52dceca = [];
 		}
 		foreach(target in potential_targets)
 		{
-			self trytoapplyfiredamage(target, position, normal, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a);
+			self trytoapplyfiredamage(target, position, normal, fireeffectarea, var_289a74bc, weapon, customsettings);
 		}
 		if(isdefined(position))
 		{
@@ -739,7 +739,7 @@ function damageeffectarea(owner, position, normal, weapon, var_4dd46f8a, radius_
 			if(var_2d3611fa > 0 && burntime < gettime())
 			{
 				scoreevents::processscoreevent(#"hash_1343f5418bd52c6c", position, undefined, weapon, var_2d3611fa);
-				burntime = gettime() + (int(var_4dd46f8a.var_5c06ec56 * 1000));
+				burntime = gettime() + (int(customsettings.var_5c06ec56 * 1000));
 			}
 			if(var_d0603aba)
 			{
@@ -754,7 +754,7 @@ function damageeffectarea(owner, position, normal, weapon, var_4dd46f8a, radius_
 				var_d0603aba = 0;
 			}
 		}
-		wait(var_4dd46f8a.var_90bd7d92);
+		wait(customsettings.var_90bd7d92);
 	}
 	arrayremovevalue(self.var_ebf0b1c9, undefined);
 	foreach(target in self.var_ebf0b1c9)
@@ -815,11 +815,11 @@ function stopfiresound()
 	Parameters: 10
 	Flags: Linked
 */
-function function_9464e4ad(owner, position, normal, weapon, var_4dd46f8a, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime)
+function function_9464e4ad(owner, position, normal, weapon, customsettings, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime)
 {
 	level endon(#"game_ended");
-	radius = var_4dd46f8a.var_6193a41b * radius_multiplier;
-	height = var_4dd46f8a.var_cbd86f3e;
+	radius = customsettings.var_6193a41b * radius_multiplier;
+	height = customsettings.var_cbd86f3e;
 	trigger_radius_position = normal - (0, 0, height);
 	trigger_radius_height = height * 2;
 	if(isdefined(var_e76400c0) && isdefined(wallnormal))
@@ -832,7 +832,7 @@ function function_9464e4ad(owner, position, normal, weapon, var_4dd46f8a, radius
 		fireeffectarea = spawn("trigger_radius", trigger_radius_position, 0, radius, trigger_radius_height);
 	}
 	self.var_ebf0b1c9 = [];
-	self thread function_f8f4d9fc(damageendtime, position, normal, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a);
+	self thread function_f8f4d9fc(damageendtime, position, normal, fireeffectarea, var_289a74bc, weapon, customsettings);
 	while(gettime() < damageendtime)
 	{
 		damageapplied = 0;
@@ -847,9 +847,9 @@ function function_9464e4ad(owner, position, normal, weapon, var_4dd46f8a, radius
 			{
 				continue;
 			}
-			self trytoapplyfiredamage(target, position, normal, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a);
+			self trytoapplyfiredamage(target, position, normal, fireeffectarea, var_289a74bc, weapon, customsettings);
 		}
-		wait(var_4dd46f8a.var_8fbd03cb);
+		wait(customsettings.var_8fbd03cb);
 	}
 	arrayremovevalue(self.var_ebf0b1c9, undefined);
 	foreach(target in self.var_ebf0b1c9)
@@ -880,7 +880,7 @@ function function_9464e4ad(owner, position, normal, weapon, var_4dd46f8a, radius
 	Parameters: 2
 	Flags: Linked
 */
-function getpotentialtargets(owner, var_4dd46f8a)
+function getpotentialtargets(owner, customsettings)
 {
 	owner_team = (isdefined(owner) ? owner.team : undefined);
 	if(level.teambased && isdefined(owner_team) && level.friendlyfire == 0)
@@ -888,13 +888,13 @@ function getpotentialtargets(owner, var_4dd46f8a)
 		potential_targets = [];
 		foreach(team, _ in level.teams)
 		{
-			if(var_4dd46f8a.var_14e16318 === 1 || util::function_fbce7263(team, owner_team))
+			if(customsettings.var_14e16318 === 1 || util::function_fbce7263(team, owner_team))
 			{
 				potential_targets = arraycombine(potential_targets, getplayers(team), 0, 0);
 				continue;
 			}
 		}
-		if(is_true(var_4dd46f8a.var_4e1d1f97))
+		if(is_true(customsettings.var_4e1d1f97))
 		{
 			if(!isdefined(potential_targets))
 			{
@@ -1017,7 +1017,7 @@ function function_5a49ebd3(team)
 	Parameters: 7
 	Flags: Linked
 */
-function trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a)
+function trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, weapon, customsettings)
 {
 	if(!(isdefined(fireeffectarea) || isdefined(var_289a74bc)))
 	{
@@ -1045,7 +1045,7 @@ function trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a7
 		{
 			if(isplayer(target))
 			{
-				target thread damageinfirearea(sourcepos, trace, position, weapon, var_4dd46f8a, owner);
+				target thread damageinfirearea(sourcepos, trace, position, weapon, customsettings, owner);
 				if(isdefined(owner) && util::function_fbce7263(target.team, owner.team))
 				{
 					owner.var_52dceca[targetentnum] = target;
@@ -1053,7 +1053,7 @@ function trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a7
 			}
 			else
 			{
-				target thread function_37ddab3(sourcepos, trace, position, weapon, var_4dd46f8a, owner);
+				target thread function_37ddab3(sourcepos, trace, position, weapon, customsettings, owner);
 			}
 			self.var_ebf0b1c9[targetentnum] = target;
 		}
@@ -1086,15 +1086,15 @@ function trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a7
 	Parameters: 6
 	Flags: Linked
 */
-function damageinfirearea(origin, trace, position, weapon, var_4dd46f8a, owner)
+function damageinfirearea(origin, trace, position, weapon, customsettings, owner)
 {
 	self endon(#"death");
 	timer = 0;
-	if(candofiredamage(self, var_4dd46f8a.var_90bd7d92))
+	if(candofiredamage(self, customsettings.var_90bd7d92))
 	{
 		/#
-			level.var_de532e7f = getdvarint(#"hash_4eff71fc5bf5542a", 0);
-			if(level.var_de532e7f)
+			level.molotov_debug = getdvarint(#"scr_molotov_debug", 0);
+			if(level.molotov_debug)
 			{
 				if(!isdefined(level.incendiarydamagetime))
 				{
@@ -1109,7 +1109,7 @@ function damageinfirearea(origin, trace, position, weapon, var_4dd46f8a, owner)
 		{
 			self.var_84e41b20 = [];
 		}
-		params = function_4d1e7b48(#"hash_69374f563cb01313");
+		params = getstatuseffect(#"hash_69374f563cb01313");
 		self status_effect::status_effect_apply(params, weapon, owner, 0, undefined, undefined, position);
 		self.var_ae639436 = var_4dd4e6ee;
 		self thread sndfiredamage();
@@ -1125,7 +1125,7 @@ function damageinfirearea(origin, trace, position, weapon, var_4dd46f8a, owner)
 	Parameters: 7
 	Flags: Linked
 */
-function function_f8f4d9fc(damageendtime, owner, position, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a)
+function function_f8f4d9fc(damageendtime, owner, position, fireeffectarea, var_289a74bc, weapon, customsettings)
 {
 	while(gettime() < damageendtime)
 	{
@@ -1137,9 +1137,9 @@ function function_f8f4d9fc(damageendtime, owner, position, fireeffectarea, var_2
 			{
 				continue;
 			}
-			self trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a);
+			self trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, weapon, customsettings);
 		}
-		wait(var_4dd46f8a.var_4bf1fc1f);
+		wait(customsettings.var_4bf1fc1f);
 	}
 }
 
@@ -1152,18 +1152,18 @@ function function_f8f4d9fc(damageendtime, owner, position, fireeffectarea, var_2
 	Parameters: 6
 	Flags: Linked
 */
-function function_37ddab3(origin, trace, position, weapon, var_4dd46f8a, owner)
+function function_37ddab3(origin, trace, position, weapon, customsettings, owner)
 {
 	self endon(#"death");
 	timer = 0;
-	if(candofiredamage(self, var_4dd46f8a.var_8fbd03cb))
+	if(candofiredamage(self, customsettings.var_8fbd03cb))
 	{
 		var_4dd4e6ee = owner;
 		if(!isdefined(self.var_84e41b20))
 		{
 			self.var_84e41b20 = [];
 		}
-		var_341dfe48 = int(var_4dd46f8a.var_4931651e * var_4dd46f8a.var_8fbd03cb);
+		var_341dfe48 = int(customsettings.var_4931651e * customsettings.var_8fbd03cb);
 		self dodamage(var_341dfe48, self.origin, owner, weapon, "none", "MOD_BURNED", 0, weapon);
 		self.var_ae639436 = var_4dd4e6ee;
 	}
@@ -1229,8 +1229,8 @@ function hitpos(start, end, color)
 {
 	trace = bullettrace(start, end, 0, undefined);
 	/#
-		level.var_de532e7f = getdvarint(#"hash_4eff71fc5bf5542a", 0);
-		if(level.var_de532e7f)
+		level.molotov_debug = getdvarint(#"scr_molotov_debug", 0);
+		if(level.molotov_debug)
 		{
 			debugstar(trace[#"position"], 2000, color);
 		}
@@ -1303,12 +1303,12 @@ function resetfiredamage(entnum, time)
 function function_1493c734(origin, radius, color, alpha, time)
 {
 	/#
-		var_9f49d7d = getdvarint(#"hash_58042b6209e0c2a6", 0);
-		if(var_9f49d7d > 0)
+		debug_fire = getdvarint(#"hash_58042b6209e0c2a6", 0);
+		if(debug_fire > 0)
 		{
-			if(var_9f49d7d > 1)
+			if(debug_fire > 1)
 			{
-				radius = int(radius / var_9f49d7d);
+				radius = int(radius / debug_fire);
 			}
 			util::debug_sphere(origin, radius, color, alpha, time);
 		}

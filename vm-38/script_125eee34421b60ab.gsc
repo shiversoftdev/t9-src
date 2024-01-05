@@ -1,34 +1,34 @@
-#using script_2c5daa95f8fec03c;
-#using script_317aa6153a75c589;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\ai\archetype_mocomps_utility.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\ai\zombie.gsc;
 #using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
+#using script_71dfbfdfba4489a0;
 #using script_41fe08c37d53a635;
-#using script_47fb62300ac0bd60;
+#using script_2c5daa95f8fec03c;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_3819e7a1427df6d2;
 #using script_4bf952f6ba31bb17;
 #using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_6809bf766eba194a;
-#using script_71dfbfdfba4489a0;
-#using script_7e59d7bba853fe4b;
-#using script_8988fdbc78d6c53;
-#using script_bd2b8aaa388dcce;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\visionset_mgr_shared.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace raz;
 
@@ -43,7 +43,7 @@
 */
 function private autoexec function_46759466()
 {
-	level notify(1036210333);
+	level notify(-1036210333);
 }
 
 #namespace razbehavior;
@@ -516,22 +516,22 @@ function private razstartdeath(entity)
 					self razserverutils::function_50c2a59e(undefined);
 					break;
 				}
-				case "hash_352acf24b5bb0a05":
+				case "left_arm_armor":
 				{
 					self razserverutils::function_597f31c9(undefined);
 					break;
 				}
-				case "hash_4dc9cf5bd0d33c56":
+				case "right_leg_armor":
 				{
 					self razserverutils::function_578362e9(undefined);
 					break;
 				}
-				case "hash_1f0551f17a593ef7":
+				case "left_leg_armor":
 				{
 					self razserverutils::function_50f53d3b(undefined);
 					break;
 				}
-				case "hash_5e9092fc1c0e973c":
+				case "right_arm_armor":
 				{
 					self razserverutils::function_afcd63e1(undefined, undefined, undefined);
 					break;
@@ -855,7 +855,7 @@ function get_target_ent(entity)
 	{
 		return entity.attackable;
 	}
-	return namespace_e0710ee6::function_825317c(entity);
+	return zm_ai_utility::function_825317c(entity);
 }
 
 /*
@@ -1461,7 +1461,7 @@ function function_2869a8ae(eventstruct)
 	switch(notify_string)
 	{
 		case "summon":
-		case "hash_739393982a94979e":
+		case "ambient_line":
 		{
 			self thread function_6f9720f9(notify_string);
 			return;
@@ -1492,7 +1492,7 @@ function function_2869a8ae(eventstruct)
 			break;
 		}
 		case "alerted":
-		case "hash_37f66b10bf727fdf":
+		case "melee_notetrack":
 		case "jump":
 		case "hash_7ab80d642b09800b":
 		{
@@ -1502,8 +1502,8 @@ function function_2869a8ae(eventstruct)
 			break;
 		}
 		case "ambient":
-		case "hash_4320680add0fb1ee":
-		case "hash_7609057ae05fd29a":
+		case "ambient_enraged":
+		case "ambient_alert":
 		{
 			n_priority = 1;
 			break;

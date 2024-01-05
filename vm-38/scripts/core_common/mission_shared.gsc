@@ -14,13 +14,13 @@
 */
 function private autoexec function_a8117988()
 {
-	level notify(2130333284);
+	level notify(-2130333284);
 }
 
 #namespace mission_utils;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: mission_utils
 	Checksum: 0x13BA671F
 	Offset: 0xB8
@@ -28,7 +28,7 @@ function private autoexec function_a8117988()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"mission", &function_70a657d8, undefined, undefined, undefined);
 }

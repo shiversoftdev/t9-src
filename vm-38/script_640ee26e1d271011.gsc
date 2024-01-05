@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_73eecff9 : class_6aaccc24
+class cmp_prop_controls : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0xB2A81694
 		Offset: 0x300
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_73eecff9 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0x98F73414
 		Offset: 0x3D0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_73eecff9 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0xA5577F7B
 		Offset: 0x3A0
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_73eecff9 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_73eecff9
+		Name: register_clientside
+		Namespace: cmp_prop_controls
 		Checksum: 0x3FFCC4F1
 		Offset: 0x348
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_prop_controls");
+		cluielem::register_clientside("mp_prop_controls");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0xCEA40F97
 		Offset: 0x320
 		Size: 0x1C
@@ -68,12 +68,12 @@ class class_73eecff9 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("mp_prop_controls");
+		cluielem::setup_clientfields("mp_prop_controls");
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0x48A86AA5
 		Offset: 0x370
 		Size: 0x24
@@ -82,7 +82,7 @@ class class_73eecff9 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -100,7 +100,7 @@ class class_73eecff9 : class_6aaccc24
 */
 function private autoexec function_b9c88aca()
 {
-	level notify(795455546);
+	level notify(-795455546);
 }
 
 /*
@@ -114,7 +114,7 @@ function private autoexec function_b9c88aca()
 */
 function register()
 {
-	elem = new class_73eecff9();
+	elem = new cmp_prop_controls();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -136,7 +136,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_prop_controls
 	Checksum: 0x469AAE33
 	Offset: 0x248
@@ -144,10 +144,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_73eecff9();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cmp_prop_controls();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

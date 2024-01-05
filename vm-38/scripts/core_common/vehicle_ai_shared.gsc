@@ -1,13 +1,13 @@
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\statemachine_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\vehicle_death_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\statemachine_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 #namespace vehicle_ai_shared;
 
@@ -28,7 +28,7 @@ function private autoexec function_d6f8ed44()
 #namespace vehicle_ai;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: vehicle_ai
 	Checksum: 0xDF8F6AA0
 	Offset: 0x2D0
@@ -36,7 +36,7 @@ function private autoexec function_d6f8ed44()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"vehicle_ai", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -3245,12 +3245,12 @@ function function_1e0d693b(goal, enemy)
 				{
 					point._scoredebug = [];
 				}
-				if(!isdefined(point._scoredebug[#"hash_3f8a9579ce4600de"]))
+				if(!isdefined(point._scoredebug[#"no visibility"]))
 				{
-					point._scoredebug[#"hash_3f8a9579ce4600de"] = spawnstruct();
+					point._scoredebug[#"no visibility"] = spawnstruct();
 				}
-				point._scoredebug[#"hash_3f8a9579ce4600de"].score = -5000;
-				point._scoredebug[#"hash_3f8a9579ce4600de"].scorename = "";
+				point._scoredebug[#"no visibility"].score = -5000;
+				point._scoredebug[#"no visibility"].scorename = "";
 			#/
 			point.score = point.score + -5000;
 		}

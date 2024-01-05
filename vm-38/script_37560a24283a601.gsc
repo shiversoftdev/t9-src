@@ -1,9 +1,9 @@
-#using script_4e53735256f112ac;
+#using scripts\zm_common\zm_utility.csc;
 #using script_d67878983e3d7c;
+#using script_4e53735256f112ac;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
 
 #namespace namespace_797fe2e7;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_29fff104()
 {
-	level notify(470464335);
+	level notify(-470464335);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_797fe2e7
 	Checksum: 0x5AB43936
 	Offset: 0xC8
@@ -30,7 +30,7 @@ function private autoexec function_29fff104()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_607f0336b64df630", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }

@@ -1,11 +1,11 @@
 #using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_d0eacb0d;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_d0eacb0d
 	Checksum: 0xE78ED4CF
 	Offset: 0x98
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_dd05779fff7e75f", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -396,7 +396,7 @@ function function_ef45a8f4(vs)
 	{
 		return false;
 	}
-	if(!isdefined(vehicle.var_4a479473))
+	if(!isdefined(vehicle.last_enter))
 	{
 		return false;
 	}

@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_d4941e5e : class_6aaccc24
+class cstealth_meter_display : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0x9C597585
 		Offset: 0x310
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_d4941e5e : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0x2F4F2EF2
 		Offset: 0x770
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_d4941e5e : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0x2E2E424D
 		Offset: 0x448
 		Size: 0x3C
@@ -47,40 +47,40 @@ class class_d4941e5e : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_18066380
-		Namespace: namespace_d4941e5e
+		Name: set_direction
+		Namespace: cstealth_meter_display
 		Checksum: 0x7A165EC9
 		Offset: 0x6D0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_18066380(player, value)
+	function set_direction(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "direction", value);
 	}
 
 	/*
-		Name: function_4d628707
-		Namespace: namespace_d4941e5e
+		Name: set_awarenessstate
+		Namespace: cstealth_meter_display
 		Checksum: 0xE56C487B
 		Offset: 0x630
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4d628707(player, value)
+	function set_awarenessstate(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "awarenessState", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0xBFABDC0D
 		Offset: 0x490
 		Size: 0x24
@@ -89,26 +89,26 @@ class class_d4941e5e : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_7425637b
-		Namespace: namespace_d4941e5e
+		Name: set_awarenessprogress
+		Namespace: cstealth_meter_display
 		Checksum: 0xEDCD5C8
 		Offset: 0x680
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_7425637b(player, value)
+	function set_awarenessprogress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "awarenessProgress", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0xEE6315DE
 		Offset: 0x330
 		Size: 0x10C
@@ -117,32 +117,32 @@ class class_d4941e5e : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("stealth_meter_display");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("entNum", 1, 10, "int");
-		namespace_6aaccc24::function_da693cbe("awarenessState", 1, 4, "int");
-		namespace_6aaccc24::function_da693cbe("awarenessProgress", 1, 4, "float");
-		namespace_6aaccc24::function_da693cbe("direction", 1, 4, "float");
-		namespace_6aaccc24::function_da693cbe("clamped", 1, 1, "int");
+		cluielem::setup_clientfields("stealth_meter_display");
+		cluielem::add_clientfield("_state", 1, 2, "int");
+		cluielem::add_clientfield("entNum", 1, 10, "int");
+		cluielem::add_clientfield("awarenessState", 1, 4, "int");
+		cluielem::add_clientfield("awarenessProgress", 1, 4, "float");
+		cluielem::add_clientfield("direction", 1, 4, "float");
+		cluielem::add_clientfield("clamped", 1, 1, "int");
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_d4941e5e
+		Name: set_entnum
+		Namespace: cstealth_meter_display
 		Checksum: 0x6D48503E
 		Offset: 0x5E0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c8350e33(player, value)
+	function set_entnum(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "entNum", value);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0xB1CA87E4
 		Offset: 0x4C0
 		Size: 0x114
@@ -180,15 +180,15 @@ class class_d4941e5e : class_6aaccc24
 	}
 
 	/*
-		Name: function_fae2a569
-		Namespace: namespace_d4941e5e
+		Name: set_clamped
+		Namespace: cstealth_meter_display
 		Checksum: 0xE7946819
 		Offset: 0x720
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_fae2a569(player, value)
+	function set_clamped(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "clamped", value);
 	}
@@ -208,7 +208,7 @@ class class_d4941e5e : class_6aaccc24
 */
 function register()
 {
-	elem = new class_d4941e5e();
+	elem = new cstealth_meter_display();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -274,7 +274,7 @@ function set_state(player, state_name)
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: stealth_meter_display
 	Checksum: 0xBDF4BE99
 	Offset: 0x220
@@ -282,13 +282,13 @@ function set_state(player, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_c8350e33(player, value)
+function set_entnum(player, value)
 {
-	[[ self ]]->function_c8350e33(player, value);
+	[[ self ]]->set_entnum(player, value);
 }
 
 /*
-	Name: function_4d628707
+	Name: set_awarenessstate
 	Namespace: stealth_meter_display
 	Checksum: 0x559EABFF
 	Offset: 0x250
@@ -296,13 +296,13 @@ function function_c8350e33(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4d628707(player, value)
+function set_awarenessstate(player, value)
 {
-	[[ self ]]->function_4d628707(player, value);
+	[[ self ]]->set_awarenessstate(player, value);
 }
 
 /*
-	Name: function_7425637b
+	Name: set_awarenessprogress
 	Namespace: stealth_meter_display
 	Checksum: 0x24C56644
 	Offset: 0x280
@@ -310,13 +310,13 @@ function function_4d628707(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_7425637b(player, value)
+function set_awarenessprogress(player, value)
 {
-	[[ self ]]->function_7425637b(player, value);
+	[[ self ]]->set_awarenessprogress(player, value);
 }
 
 /*
-	Name: function_18066380
+	Name: set_direction
 	Namespace: stealth_meter_display
 	Checksum: 0x56001BD5
 	Offset: 0x2B0
@@ -324,13 +324,13 @@ function function_7425637b(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_18066380(player, value)
+function set_direction(player, value)
 {
-	[[ self ]]->function_18066380(player, value);
+	[[ self ]]->set_direction(player, value);
 }
 
 /*
-	Name: function_fae2a569
+	Name: set_clamped
 	Namespace: stealth_meter_display
 	Checksum: 0x29B7A53C
 	Offset: 0x2E0
@@ -338,8 +338,8 @@ function function_18066380(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_fae2a569(player, value)
+function set_clamped(player, value)
 {
-	[[ self ]]->function_fae2a569(player, value);
+	[[ self ]]->set_clamped(player, value);
 }
 

@@ -1,7 +1,7 @@
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_df7b10e3;
 
@@ -20,7 +20,7 @@ function private autoexec function_b56a1aba()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_df7b10e3
 	Checksum: 0x4AA5149C
 	Offset: 0x140
@@ -28,7 +28,7 @@ function private autoexec function_b56a1aba()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_68f737a6647aee3f", &function_70a657d8, undefined, undefined, undefined);
 }

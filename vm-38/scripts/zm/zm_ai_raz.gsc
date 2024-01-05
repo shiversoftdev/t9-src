@@ -1,14 +1,14 @@
-#using script_3751b21462a54a7d;
-#using script_3a88f428c6d8ef90;
-#using script_58c342edd81589fb;
-#using script_5f261a5d57de5f7c;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\weapons_shared.gsc;
+#using scripts\zm_common\zm_round_spawning.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_5f261a5d57de5f7c;
+#using script_3751b21462a54a7d;
 #using scripts\zm_common\zm_weapons.gsc;
+#using script_3a88f428c6d8ef90;
+#using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace zm_ai_raz;
 
@@ -27,7 +27,7 @@ function private autoexec function_2d6ef273()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_ai_raz
 	Checksum: 0x23696365
 	Offset: 0xF0
@@ -35,7 +35,7 @@ function private autoexec function_2d6ef273()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_ai_raz", &function_70a657d8, undefined, &function_4df027f2, undefined);
 }

@@ -1,6 +1,6 @@
 #using script_1435f3c9fc699e04;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_38ee089b;
 
@@ -17,7 +17,7 @@ function function_70a657d8()
 {
 	if(!sessionmodeisprivate())
 	{
-		if(function_59116c33() || !getdvarint(#"hash_199dcc375667485", 0))
+		if(isshipbuild() || !getdvarint(#"hash_199dcc375667485", 0))
 		{
 			return;
 		}
@@ -47,12 +47,12 @@ function private function_72b9b674()
 	switch(level.gametype)
 	{
 		case "conf":
-		case "hash_40e7fa1f82c9a9a9":
+		case "conf_hc":
 		{
 			return &function_13821498;
 		}
 		case "control":
-		case "hash_1acc245ba0adf546":
+		case "control_hc":
 		case "hash_594c4ab1d31aa150":
 		{
 			return &function_750b5743;
@@ -63,7 +63,7 @@ function private function_72b9b674()
 		{
 			return &function_13821498;
 		}
-		case "hash_2b1e0466676a9e7d":
+		case "dom_hc":
 		case "dom":
 		case "hash_5e13d8428d20cfa6":
 		{
@@ -84,7 +84,7 @@ function private function_72b9b674()
 			return &koth_start;
 		}
 		case "hash_ce0d2a7056f9c17":
-		case "hash_2ad10ed6e94a349c":
+		case "tdm_hc":
 		case "tdm":
 		{
 			return &function_13821498;
@@ -694,7 +694,7 @@ function private function_5c2d40ff(target)
 	}
 	if(regions.size <= 0)
 	{
-		tpoint = function_ad6356f5(target.origin);
+		tpoint = getclosesttacpoint(target.origin);
 		if(isdefined(tpoint))
 		{
 			region = function_b507a336(tpoint.region);

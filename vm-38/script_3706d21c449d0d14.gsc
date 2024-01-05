@@ -1,11 +1,11 @@
-#using script_32399001bdb550da;
-#using script_47fb62300ac0bd60;
+#using scripts\core_common\struct.gsc;
 #using script_5f2ba47ebe695e43;
 #using script_62d87b28984d3246;
+#using script_32399001bdb550da;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace gamedifficulty;
 
@@ -20,7 +20,7 @@
 */
 function private autoexec function_1a891b4e()
 {
-	level notify(54497718);
+	level notify(-54497718);
 }
 
 /*
@@ -51,7 +51,7 @@ function setskill(reset, skill_override)
 {
 	if(!isdefined(level.script))
 	{
-		level.script = util::function_53bbf9d2();
+		level.script = util::get_map_name();
 	}
 	if(!is_true(reset))
 	{

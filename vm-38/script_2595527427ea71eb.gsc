@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_3df1eeda : class_6aaccc24
+class czm_trial_timer : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0x3140F0BF
 		Offset: 0x238
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_3df1eeda : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0xB4CFEF60
 		Offset: 0x3E8
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_3df1eeda : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0x630E84EC
 		Offset: 0x2D0
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_3df1eeda : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0xB64D9DE9
 		Offset: 0x318
 		Size: 0x24
@@ -61,40 +61,40 @@ class class_3df1eeda : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_6ad54036
-		Namespace: namespace_3df1eeda
+		Name: set_under_round_rules
+		Namespace: czm_trial_timer
 		Checksum: 0x650B3E34
 		Offset: 0x398
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_6ad54036(player, value)
+	function set_under_round_rules(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "under_round_rules", value);
 	}
 
 	/*
-		Name: function_8ede8e82
-		Namespace: namespace_3df1eeda
+		Name: set_timer_text
+		Namespace: czm_trial_timer
 		Checksum: 0x1D5C70F3
 		Offset: 0x348
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_8ede8e82(player, value)
+	function set_timer_text(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "timer_text", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0x7A215DF3
 		Offset: 0x258
 		Size: 0x6C
@@ -103,9 +103,9 @@ class class_3df1eeda : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_trial_timer");
-		namespace_6aaccc24::function_dcb34c80("string", "timer_text", 1);
-		namespace_6aaccc24::function_da693cbe("under_round_rules", 1, 1, "int");
+		cluielem::setup_clientfields("zm_trial_timer");
+		cluielem::function_dcb34c80("string", "timer_text", 1);
+		cluielem::add_clientfield("under_round_rules", 1, 1, "int");
 	}
 
 }
@@ -123,7 +123,7 @@ class class_3df1eeda : class_6aaccc24
 */
 function private autoexec function_de724a26()
 {
-	level notify(2053755473);
+	level notify(-2053755473);
 }
 
 /*
@@ -137,7 +137,7 @@ function private autoexec function_de724a26()
 */
 function register()
 {
-	elem = new class_3df1eeda();
+	elem = new czm_trial_timer();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -189,7 +189,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_8ede8e82
+	Name: set_timer_text
 	Namespace: zm_trial_timer
 	Checksum: 0x64D923CF
 	Offset: 0x1D8
@@ -197,13 +197,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: Linked
 */
-function function_8ede8e82(player, value)
+function set_timer_text(player, value)
 {
-	[[ self ]]->function_8ede8e82(player, value);
+	[[ self ]]->set_timer_text(player, value);
 }
 
 /*
-	Name: function_6ad54036
+	Name: set_under_round_rules
 	Namespace: zm_trial_timer
 	Checksum: 0xD5366668
 	Offset: 0x208
@@ -211,8 +211,8 @@ function function_8ede8e82(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_6ad54036(player, value)
+function set_under_round_rules(player, value)
 {
-	[[ self ]]->function_6ad54036(player, value);
+	[[ self ]]->set_under_round_rules(player, value);
 }
 

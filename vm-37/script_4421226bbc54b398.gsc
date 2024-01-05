@@ -1,19 +1,19 @@
 #using script_18077945bb84ede7;
-#using script_47fb62300ac0bd60;
-#using script_ab890501c40b73c;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\callbacks.gsc;
 #using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_contracts.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_d4ecbbf0;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_d4ecbbf0
 	Checksum: 0x9FF549CE
 	Offset: 0x330
@@ -21,7 +21,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6750752a31e788e2", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -37,8 +37,8 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	callback::function_10a4dd0a(&function_10a4dd0a);
-	callback::add_callback(#"hash_69090774fec4a17b", &function_37c1c391);
+	callback::on_item_pickup(&on_item_pickup);
+	callback::add_callback(#"objective_ended", &function_37c1c391);
 	/#
 		level function_14defa19();
 		level thread function_868c9a6e();
@@ -846,7 +846,7 @@ function function_73cddc69(var_8e592166)
 		self [[level.var_24a62388]]();
 	}
 	self zm_stats::increment_challenge_stat(#"hash_775bd6b063e325ff");
-	self contracts::function_5b88297d(#"hash_ddd05a3c6891d38");
+	self contracts::increment_zm_contract(#"hash_ddd05a3c6891d38");
 	if(zm_utility::is_survival())
 	{
 		self thread function_7b6ac8d5(0);
@@ -947,7 +947,7 @@ function function_73cddc69(var_8e592166)
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: namespace_d4ecbbf0
 	Checksum: 0x64852578
 	Offset: 0x1E08
@@ -955,7 +955,7 @@ function function_73cddc69(var_8e592166)
 	Parameters: 1
 	Flags: Linked
 */
-function function_10a4dd0a(params)
+function on_item_pickup(params)
 {
 	item = params.item;
 	if(isplayer(self))
@@ -1040,7 +1040,7 @@ function function_868c9a6e()
 			{
 				if(strstartswith(str_command, ""))
 				{
-					str = function_ea13f55(str_command, "", "");
+					str = strreplace(str_command, "", "");
 					arr = strtok(str, "");
 					var_a4a3ca3a = arr[0];
 					amount = arr[1];

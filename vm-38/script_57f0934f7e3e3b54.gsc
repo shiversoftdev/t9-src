@@ -1,7 +1,7 @@
-#using script_6ad3fda349f49bf9;
-#using script_d116a14142e2250;
-#using scripts\core_common\clientfield_shared.csc;
+#using scripts\killstreaks\killstreak_detect.csc;
+#using scripts\killstreaks\killstreaks_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace killstreaks;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_38936795()
 {
-	level notify(642594457);
+	level notify(-642594457);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: killstreaks
 	Checksum: 0x14185F67
 	Offset: 0xE0
@@ -28,7 +28,7 @@ function private autoexec function_38936795()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"killstreaks", &function_70a657d8, undefined, undefined, #"renderoverridebundle");
 }
@@ -64,14 +64,14 @@ function private function_f1707039()
 	for(i = 0; i < 4; i++)
 	{
 		level.var_4b42d599[i] = ("killstreaks.killstreak" + i) + ".inUse";
-		clientfield::function_a8bbc967(level.var_4b42d599[i], #"hash_38b7a28901866ae4", [1:#"inuse", 0:#"killstreak" + (isdefined(i) ? "" + i : "")], 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel(level.var_4b42d599[i], #"hash_38b7a28901866ae4", [1:#"inuse", 0:#"killstreak" + (isdefined(i) ? "" + i : "")], 1, 1, "int", undefined, 0, 0);
 	}
 	level.var_46b33f90[i] = [];
 	level.var_173b8ed7 = max(8, 4);
 	for(i = 0; i < level.var_173b8ed7; i++)
 	{
 		level.var_46b33f90[i] = ("killstreaks.killstreak" + i) + ".spaceFull";
-		clientfield::function_a8bbc967(level.var_46b33f90[i], #"hash_38b7a28901866ae4", [1:#"hash_3bbe3fe57a438e3c", 0:#"killstreak" + (isdefined(i) ? "" + i : "")], 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel(level.var_46b33f90[i], #"hash_38b7a28901866ae4", [1:#"hash_3bbe3fe57a438e3c", 0:#"killstreak" + (isdefined(i) ? "" + i : "")], 1, 1, "int", undefined, 0, 0);
 	}
 }
 

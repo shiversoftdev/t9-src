@@ -1,7 +1,7 @@
-#using script_18f0d22c75b141a7;
+#using scripts\core_common\player\player_loadout.gsc;
 #using scripts\core_common\bb_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace bb;
 
@@ -20,7 +20,7 @@ function private autoexec function_5d78cec0()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: bb
 	Checksum: 0xA016E7EB
 	Offset: 0x118
@@ -28,7 +28,7 @@ function private autoexec function_5d78cec0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"bb", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -109,7 +109,7 @@ function function_95a5b5c2(var_daec1817, label, team, origin, player)
 {
 	if(sessionmodeismultiplayergame())
 	{
-		var_cfad67d4 = (function_7a600918(team) ? team : hash(team));
+		var_cfad67d4 = (ishash(team) ? team : hash(team));
 		if(isplayer(player))
 		{
 			clientid = (isdefined(player.clientid) ? player.clientid : -1);
@@ -216,51 +216,51 @@ function function_6661621a()
 	{
 		return;
 	}
-	var_1a7851a3 = spawnstruct();
-	var_1a7851a3.gametime = function_f8d53445();
-	var_1a7851a3.spawnid = getplayerspawnid(self);
+	mploadout = spawnstruct();
+	mploadout.gametime = function_f8d53445();
+	mploadout.spawnid = getplayerspawnid(self);
 	primaryweapon = self getloadoutweapon(self.class_num, "primary");
-	var_1a7851a3.primary = primaryweapon.name;
-	var_6834562f = function_285f8efd(primaryweapon);
-	var_1a7851a3.primaryattachment1 = var_6834562f.var_65be22a9;
-	var_1a7851a3.primaryattachment2 = var_6834562f.attachment1;
-	var_1a7851a3.primaryattachment3 = var_6834562f.attachment2;
-	var_1a7851a3.primaryattachment4 = var_6834562f.attachment3;
-	var_1a7851a3.var_741a707b = var_6834562f.attachment4;
-	var_1a7851a3.var_27509928 = hash(self getweaponoptic(primaryweapon));
-	var_1a7851a3.var_813fa3e2 = self function_a83d51c5(self.class_num, 1);
+	mploadout.primary = primaryweapon.name;
+	primaryattachments = function_285f8efd(primaryweapon);
+	mploadout.primaryattachment1 = primaryattachments.attachment0;
+	mploadout.primaryattachment2 = primaryattachments.attachment1;
+	mploadout.primaryattachment3 = primaryattachments.attachment2;
+	mploadout.primaryattachment4 = primaryattachments.attachment3;
+	mploadout.primaryattachment5 = primaryattachments.attachment4;
+	mploadout.primaryreticle = hash(self getweaponoptic(primaryweapon));
+	mploadout.var_813fa3e2 = self function_a83d51c5(self.class_num, 1);
 	secondaryweapon = self getloadoutweapon(self.class_num, "secondary");
-	var_1a7851a3.secondary = secondaryweapon.name;
-	var_90030ba7 = function_285f8efd(secondaryweapon);
-	var_1a7851a3.secondaryattachment1 = var_90030ba7.var_65be22a9;
-	var_1a7851a3.secondaryattachment2 = var_90030ba7.attachment1;
-	var_1a7851a3.var_1e8aa8c8 = var_90030ba7.attachment2;
-	var_1a7851a3.var_783f5bcc = var_90030ba7.attachment3;
-	var_1a7851a3.var_82897060 = var_90030ba7.attachment4;
-	var_1a7851a3.var_92bbb1fd = hash(self getweaponoptic(secondaryweapon));
-	var_1a7851a3.var_69054e67 = self function_a83d51c5(self.class_num, 0);
+	mploadout.secondary = secondaryweapon.name;
+	secondaryattachments = function_285f8efd(secondaryweapon);
+	mploadout.secondaryattachment1 = secondaryattachments.attachment0;
+	mploadout.secondaryattachment2 = secondaryattachments.attachment1;
+	mploadout.secondaryattachment3 = secondaryattachments.attachment2;
+	mploadout.secondaryattachment4 = secondaryattachments.attachment3;
+	mploadout.secondaryattachment5 = secondaryattachments.attachment4;
+	mploadout.secondaryreticle = hash(self getweaponoptic(secondaryweapon));
+	mploadout.var_69054e67 = self function_a83d51c5(self.class_num, 0);
 	primarygrenade = self function_826ed2dd();
-	var_1a7851a3.primarygrenade = primarygrenade.name;
-	var_1a7851a3.primarygrenadecount = (self getloadoutitem(self.class_num, "primarygrenadecount") ? 2 : 1);
-	var_1a7851a3.specialgrenade = self function_b958b70d(self.class_num, "secondarygrenade");
-	var_1a7851a3.specialgrenadecount = (self getloadoutitem(self.class_num, "secondarygrenadecount") ? 2 : 1);
+	mploadout.primarygrenade = primarygrenade.name;
+	mploadout.primarygrenadecount = (self getloadoutitem(self.class_num, "primarygrenadecount") ? 2 : 1);
+	mploadout.specialgrenade = self function_b958b70d(self.class_num, "secondarygrenade");
+	mploadout.specialgrenadecount = (self getloadoutitem(self.class_num, "secondarygrenadecount") ? 2 : 1);
 	fieldupgrade = self loadout::function_18a77b37("specialgrenade");
-	var_1a7851a3.fieldupgrade = fieldupgrade.name;
-	var_1a7851a3.tacticalgear = self function_d78e0e04(self.class_num);
-	var_1a7851a3.killstreak1 = (self.killstreak.size > 0 ? hash(self.killstreak[0]) : 0);
-	var_1a7851a3.killstreak2 = (self.killstreak.size > 1 ? hash(self.killstreak[1]) : 0);
-	var_1a7851a3.killstreak3 = (self.killstreak.size > 2 ? hash(self.killstreak[2]) : 0);
+	mploadout.fieldupgrade = fieldupgrade.name;
+	mploadout.tacticalgear = self function_d78e0e04(self.class_num);
+	mploadout.killstreak1 = (self.killstreak.size > 0 ? hash(self.killstreak[0]) : 0);
+	mploadout.killstreak2 = (self.killstreak.size > 1 ? hash(self.killstreak[1]) : 0);
+	mploadout.killstreak3 = (self.killstreak.size > 2 ? hash(self.killstreak[2]) : 0);
 	talents = self function_4a9f1384(self.class_num);
-	var_1a7851a3.var_942f949 = (talents.size > 0 ? talents[0] : 0);
-	var_1a7851a3.var_f788d5d5 = (talents.size > 1 ? talents[1] : 0);
-	var_1a7851a3.var_9e81a3e0 = (talents.size > 2 ? talents[2] : 0);
-	var_1a7851a3.var_9c409f5e = (talents.size > 3 ? talents[3] : 0);
-	var_1a7851a3.var_e56631ac = (talents.size > 4 ? talents[4] : 0);
-	var_1a7851a3.var_432fed3e = (talents.size > 5 ? talents[5] : 0);
+	mploadout.talent0 = (talents.size > 0 ? talents[0] : 0);
+	mploadout.talent1 = (talents.size > 1 ? talents[1] : 0);
+	mploadout.talent2 = (talents.size > 2 ? talents[2] : 0);
+	mploadout.talent3 = (talents.size > 3 ? talents[3] : 0);
+	mploadout.talent4 = (talents.size > 4 ? talents[4] : 0);
+	mploadout.talent5 = (talents.size > 5 ? talents[5] : 0);
 	wildcards = self function_6f2c0492(self.class_num);
-	var_1a7851a3.var_bd1c86b8 = (wildcards.size > 0 ? wildcards[0] : 0);
-	var_1a7851a3.var_cb5e233b = (wildcards.size > 1 ? wildcards[1] : 0);
-	var_1a7851a3.var_13573300 = (wildcards.size > 2 ? wildcards[2] : 0);
+	mploadout.wildcard0 = (wildcards.size > 0 ? wildcards[0] : 0);
+	mploadout.wildcard1 = (wildcards.size > 1 ? wildcards[1] : 0);
+	mploadout.wildcard2 = (wildcards.size > 2 ? wildcards[2] : 0);
 	if(isdefined(self.playerrole) && isdefined(self.playerrole.var_c21d61e9))
 	{
 		var_c0f05cbb = getweapon((isdefined(self.playerrole.var_c21d61e9) ? self.playerrole.var_c21d61e9 : level.weaponnone));
@@ -269,9 +269,9 @@ function function_6661621a()
 	{
 		var_c0f05cbb = level.weaponnone;
 	}
-	var_1a7851a3.var_9911e1f2 = var_c0f05cbb.name;
-	var_1a7851a3.specialistindex = (isdefined(self getspecialistindex()) ? self getspecialistindex() : -1);
-	function_92d1707f(#"hash_30b542620e21966d", #"hash_606f63fe928017f1", var_1a7851a3);
+	mploadout.var_9911e1f2 = var_c0f05cbb.name;
+	mploadout.specialistindex = (isdefined(self getspecialistindex()) ? self getspecialistindex() : -1);
+	function_92d1707f(#"hash_30b542620e21966d", #"mploadouts", mploadout);
 }
 
 /*
@@ -320,7 +320,7 @@ function commit_spawn_data()
 function function_285f8efd(weapon)
 {
 	var_e38a0464 = spawnstruct();
-	var_e38a0464.var_65be22a9 = 0;
+	var_e38a0464.attachment0 = 0;
 	var_e38a0464.attachment1 = 0;
 	var_e38a0464.attachment2 = 0;
 	var_e38a0464.attachment3 = 0;
@@ -332,7 +332,7 @@ function function_285f8efd(weapon)
 	{
 		return var_e38a0464;
 	}
-	var_e38a0464.var_65be22a9 = hash(weapon.attachments[0]);
+	var_e38a0464.attachment0 = hash(weapon.attachments[0]);
 	if(weapon.attachments.size == 1)
 	{
 		return var_e38a0464;

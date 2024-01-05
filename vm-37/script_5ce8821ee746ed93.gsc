@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_6dd74b12 : class_6aaccc24
+class csuccess_screen : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_6dd74b12
+		Namespace: csuccess_screen
 		Checksum: 0x928FF90A
 		Offset: 0x178
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_6dd74b12 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_6dd74b12
+		Namespace: csuccess_screen
 		Checksum: 0x1463279F
 		Offset: 0x238
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_6dd74b12 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_6dd74b12
+		Namespace: csuccess_screen
 		Checksum: 0x2CCA2BF4
 		Offset: 0x1C0
 		Size: 0x3C
@@ -44,12 +44,12 @@ class class_6dd74b12 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_6dd74b12
+		Namespace: csuccess_screen
 		Checksum: 0x4FDBFC39
 		Offset: 0x208
 		Size: 0x24
@@ -58,12 +58,12 @@ class class_6dd74b12 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_6dd74b12
+		Namespace: csuccess_screen
 		Checksum: 0x18BACB35
 		Offset: 0x198
 		Size: 0x1C
@@ -72,7 +72,7 @@ class class_6dd74b12 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("success_screen");
+		cluielem::setup_clientfields("success_screen");
 	}
 
 }
@@ -90,7 +90,7 @@ class class_6dd74b12 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_6dd74b12();
+	elem = new csuccess_screen();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

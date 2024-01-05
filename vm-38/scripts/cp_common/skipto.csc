@@ -1,12 +1,12 @@
-#using scripts\core_common\array_shared.csc;
 #using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace skipto;
 
@@ -21,11 +21,11 @@
 */
 function private autoexec function_b63bf986()
 {
-	level notify(142083565);
+	level notify(-142083565);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: skipto
 	Checksum: 0xCCEBA3BF
 	Offset: 0x1B0
@@ -33,7 +33,7 @@ function private autoexec function_b63bf986()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"skipto", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -57,7 +57,7 @@ function private function_70a657d8()
 	level.default_skipto = "_default";
 	add_internal("_default");
 	add_internal("no_game");
-	load_mission_table(#"hash_42982af1920b8bfd", util::function_53bbf9d2());
+	load_mission_table(#"hash_42982af1920b8bfd", util::get_map_name());
 	level thread watch_players_connect();
 	level thread function_17cc9832();
 }
@@ -919,7 +919,7 @@ function stop_objective_logic(name, starting)
 */
 function set_last_map_dvar(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	var_1fdcd030 = util::function_53bbf9d2();
+	var_1fdcd030 = util::get_map_name();
 	setdvar(#"last_map", var_1fdcd030);
 }
 

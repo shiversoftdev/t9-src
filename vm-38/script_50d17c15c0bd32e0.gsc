@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_9e6034d2 : class_6aaccc24
+class cplayer_insertion_choice : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0xA022DF69
 		Offset: 0x1F0
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_9e6034d2 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0xEA42BFB7
 		Offset: 0x440
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_9e6034d2 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x692ED424
 		Offset: 0x260
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_9e6034d2 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x232E70C1
 		Offset: 0x2A8
 		Size: 0x24
@@ -61,12 +61,12 @@ class class_9e6034d2 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x27D1B8F0
 		Offset: 0x210
 		Size: 0x44
@@ -75,13 +75,13 @@ class class_9e6034d2 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("player_insertion_choice");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
+		cluielem::setup_clientfields("player_insertion_choice");
+		cluielem::add_clientfield("_state", 1, 2, "int");
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0xFE1AC78F
 		Offset: 0x2D8
 		Size: 0x15C
@@ -96,13 +96,13 @@ class class_9e6034d2 : class_6aaccc24
 		}
 		else
 		{
-			if(#"hash_bcb68d30ea251e2" == state_name)
+			if(#"groundvehicle" == state_name)
 			{
 				player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "_state", 1);
 			}
 			else
 			{
-				if(#"hash_a9365fdb97f532b" == state_name)
+				if(#"halojump" == state_name)
 				{
 					player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "_state", 2);
 				}
@@ -154,7 +154,7 @@ function private autoexec function_e8aaca32()
 */
 function register()
 {
-	elem = new class_9e6034d2();
+	elem = new cplayer_insertion_choice();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

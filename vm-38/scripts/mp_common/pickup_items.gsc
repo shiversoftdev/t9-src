@@ -1,9 +1,9 @@
-#using script_7bafaa95bb1b427e;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\weapons\weapons.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace pickup_items;
 
@@ -22,7 +22,7 @@ function private autoexec function_f6abecff()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: pickup_items
 	Checksum: 0x7877646F
 	Offset: 0x1A8
@@ -30,7 +30,7 @@ function private autoexec function_f6abecff()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"pickup_items", &function_70a657d8, undefined, undefined, undefined);
 }

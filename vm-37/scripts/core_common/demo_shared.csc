@@ -1,12 +1,12 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace demo;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: demo
 	Checksum: 0xAAB4E922
 	Offset: 0x80
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"demo", &function_70a657d8, undefined, undefined, undefined);
 }

@@ -1,6 +1,6 @@
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
 
 #namespace array;
 
@@ -366,7 +366,7 @@ function add(&array, item, allow_dupes)
 	Parameters: 5
 	Flags: None
 */
-function add_sorted(&array, item, allow_dupes, var_13d5adf2, var_e19f0739)
+function add_sorted(&array, item, allow_dupes, func_compare, var_e19f0739)
 {
 	if(!isdefined(allow_dupes))
 	{
@@ -382,7 +382,7 @@ function add_sorted(&array, item, allow_dupes, var_13d5adf2, var_e19f0739)
 		{
 			for(i = 0; i <= array.size; i++)
 			{
-				if(i == array.size || (isdefined(var_13d5adf2) && ([[var_13d5adf2]](item, array[i]) || var_e19f0739)) || (!isdefined(var_13d5adf2) && (item <= array[i] || var_e19f0739)))
+				if(i == array.size || (isdefined(func_compare) && ([[func_compare]](item, array[i]) || var_e19f0739)) || (!isdefined(func_compare) && (item <= array[i] || var_e19f0739)))
 				{
 					arrayinsert(array, item, i);
 					break;
@@ -962,15 +962,15 @@ function private function_80fe1cb6(a, b)
 	Parameters: 3
 	Flags: Linked
 */
-function find(&array, ent, var_13d5adf2)
+function find(&array, ent, func_compare)
 {
-	if(!isdefined(var_13d5adf2))
+	if(!isdefined(func_compare))
 	{
-		var_13d5adf2 = &function_80fe1cb6;
+		func_compare = &function_80fe1cb6;
 	}
 	for(i = 0; i < array.size; i++)
 	{
-		if([[var_13d5adf2]](array[i], ent))
+		if([[func_compare]](array[i], ent))
 		{
 			return i;
 		}

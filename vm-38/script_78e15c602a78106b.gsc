@@ -1,37 +1,37 @@
-#using script_14f4a3c583c77d4b;
-#using script_3cebb48c37fc271;
-#using script_3f9e0dc8454d98e1;
-#using script_42b51e4a369b0f95;
 #using script_43ce7284919bced2;
-#using script_4ce5d94e8c797350;
-#using script_52c6c2d1a2ef1b46;
-#using script_5bb072c3abf4652c;
+#using script_42b51e4a369b0f95;
 #using script_6d148b720e2af260;
-#using script_7224d61ed502ea07;
-#using script_7b1cd3908a825fdd;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\load_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_audio.gsc;
+#using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_devgui.gsc;
 #using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_perks.gsc;
-#using scripts\zm_common\zm_power.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
 #using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
-#using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_unitrigger.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_perks.gsc;
+#using script_7b1cd3908a825fdd;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_wallbuy.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_ui_inventory.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_power.gsc;
+#using scripts\zm_common\zm_loadout.gsc;
+#using scripts\zm_common\zm_fasttravel.gsc;
+#using script_4ce5d94e8c797350;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using scripts\zm_common\zm.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_471b2690;
 
@@ -407,7 +407,7 @@ function private function_a688a771()
 	{
 		level.var_e0c7b4b2.var_4d30df70 = 0;
 	}
-	self thread function_46d03b27();
+	self childthread function_46d03b27();
 	while(true)
 	{
 		if(level.var_e0c7b4b2 function_fa889b40())
@@ -473,15 +473,15 @@ function function_46d03b27()
 				if(!isalive(level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel.my_target))
 				{
 					var_649dd690 = level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.var_e0159e34;
-					level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel thread function_96e00567(var_43ed722a, var_649dd690);
-					level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8 thread function_96e00567(var_43ed722a, var_649dd690);
+					level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel childthread function_96e00567(var_43ed722a, var_649dd690);
+					level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8 childthread function_96e00567(var_43ed722a, var_649dd690);
 				}
-				level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2 thread function_96e00567(var_43ed722a);
+				level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2 childthread function_96e00567(var_43ed722a);
 			}
 			if(isalive(level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel.my_target))
 			{
 				var_43ed722a = vectortoangles(level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel.my_target.origin - level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel.origin);
-				level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel thread function_96e00567(var_43ed722a, level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.var_e0159e34);
+				level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel childthread function_96e00567(var_43ed722a, level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.var_e0159e34);
 				level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8 function_96e00567(var_43ed722a);
 				level.var_e0c7b4b2.var_df4d758d.var_3b09f1e2.chopper.var_15ba53f8.turret_barrel function_883dd655(var_43ed722a);
 			}
@@ -945,7 +945,7 @@ function function_f35a7c49(target)
 		}
 		bullet_target = self.var_b74bb962.origin + (anglestoforward(self.var_b74bb962.angles) * 2000);
 		magicbullet(level.var_9e7b0d9, self.var_b74bb962.origin, bullet_target + v_offset, self);
-		a_zombies = self function_bdda420f(target.origin, 70);
+		a_zombies = self getenemiesinradius(target.origin, 70);
 		foreach(zombie in a_zombies)
 		{
 			if(isalive(zombie) && zombie.var_6f84b820 === #"normal")
@@ -1105,8 +1105,8 @@ function private function_e0beead2()
 function function_cd7a3de4()
 {
 	/#
-		util::function_345e5b9a("");
-		util::function_345e5b9a("");
+		util::add_debug_command("");
+		util::add_debug_command("");
 		zm_devgui::add_custom_devgui_callback(&cmd);
 	#/
 }

@@ -4,7 +4,7 @@
 #namespace spawn_beacon;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: spawn_beacon
 	Checksum: 0x457B658F
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"spawnbeacon", &function_70a657d8, undefined, undefined, #"killstreaks");
 }

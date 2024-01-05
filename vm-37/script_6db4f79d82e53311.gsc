@@ -1,5 +1,5 @@
-#using script_2a30ac7aa0ee8988;
 #using script_54f593f5beb1464a;
+#using script_2a30ac7aa0ee8988;
 
 #namespace namespace_9be0edfa;
 
@@ -28,10 +28,10 @@ function autoexec __init__()
 */
 function function_a1302aca()
 {
-	var_87d0eef8 = &namespace_b0722f43::function_63bfe27;
-	var_74257310 = &namespace_b0722f43::function_6da5e673;
-	var_f8a4c541 = &namespace_b0722f43::function_6991057;
-	var_edfbccd0 = &namespace_b0722f43::function_e70fa91c;
-	namespace_1c7b37c6::function_149cbc84(var_f8a4c541, #"hash_218c23f79bec44e2", #"hash_76f3a790ba92b7db");
+	var_87d0eef8 = &item_world_fixup::remove_item;
+	var_74257310 = &item_world_fixup::add_item_replacement;
+	var_f8a4c541 = &item_world_fixup::function_6991057;
+	var_edfbccd0 = &item_world_fixup::function_e70fa91c;
+	namespace_1c7b37c6::item_replacer(var_f8a4c541, #"hash_218c23f79bec44e2", #"hash_76f3a790ba92b7db");
 }
 

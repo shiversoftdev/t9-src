@@ -1,42 +1,42 @@
-#using script_1cc417743d7c262d;
-#using script_2c49ae69cd8ce30c;
-#using script_335d0650ed05d36d;
-#using script_38af8be38c6709ff;
-#using script_47fb62300ac0bd60;
-#using script_7a8059ca02b7b09e;
-#using script_7b8ad364b9de169e;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
-#using scripts\core_common\demo_shared.gsc;
-#using scripts\core_common\dogtags.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\medals_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\spawnbeacon_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\bb.gsc;
-#using scripts\mp_common\challenges.gsc;
-#using scripts\mp_common\contracts.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_defaults.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
-#using scripts\mp_common\gametypes\hud_message.gsc;
-#using scripts\mp_common\userspawnselection.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\challenges.gsc;
+#using scripts\mp_common\bb.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\mp_common\gametypes\globallogic_defaults.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\core_common\battlechatter.gsc;
+#using scripts\abilities\mp\gadgets\gadget_concertina_wire.gsc;
+#using scripts\abilities\mp\gadgets\gadget_smart_cover.gsc;
+#using scripts\mp_common\gametypes\hud_message.gsc;
+#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
+#using scripts\core_common\dogtags.gsc;
+#using scripts\mp_common\contracts.gsc;
+#using scripts\mp_common\userspawnselection.gsc;
+#using scripts\core_common\spawnbeacon_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\sound_shared.gsc;
+#using script_335d0650ed05d36d;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\popups_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\medals_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\demo_shared.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace sd;
 
@@ -77,7 +77,7 @@ event main(eventstruct)
 	level.ondeadevent = &ondeadevent;
 	level.ononeleftevent = &ononeleftevent;
 	level.ontimelimit = &ontimelimit;
-	level.var_f6d301b = &function_f6d301b;
+	level.onendround = &onendround;
 	level.iskillboosting = &sd_iskillboosting;
 	level.figure_out_gametype_friendly_fire = &figureoutgametypefriendlyfire;
 	level.var_17ae20ae = &function_17ae20ae;
@@ -154,7 +154,7 @@ function function_17ae20ae(einflictor, attacker, smeansofdeath, weapon)
 }
 
 /*
-	Name: function_f6d301b
+	Name: onendround
 	Namespace: sd
 	Checksum: 0xD73CC091
 	Offset: 0x8C8
@@ -162,7 +162,7 @@ function function_17ae20ae(einflictor, attacker, smeansofdeath, weapon)
 	Parameters: 0
 	Flags: None
 */
-function function_f6d301b()
+function onendround()
 {
 	function_4c593022();
 	function_7996e36d();
@@ -655,14 +655,14 @@ function givelastattackerwarning(team)
 	Parameters: 2
 	Flags: Private
 */
-function private function_d9c14343(team, var_3aef38fd)
+function private function_d9c14343(team, deadteam)
 {
-	if(!isdefined(team) || !isdefined(var_3aef38fd))
+	if(!isdefined(team) || !isdefined(deadteam))
 	{
 		return;
 	}
 	waittillframeend();
-	var_fbd29ffa = (isdefined(level.var_ee2324e4[var_3aef38fd]) ? level.var_ee2324e4[var_3aef38fd] : 0);
+	var_fbd29ffa = (isdefined(level.var_ee2324e4[deadteam]) ? level.var_ee2324e4[deadteam] : 0);
 	if(var_fbd29ffa < 1)
 	{
 		return;
@@ -771,7 +771,7 @@ function bombs()
 		smart_cover::function_18f38647(trigger);
 		concertina_wire::function_18f38647(trigger);
 		name = #"sd" + trigger.script_label;
-		waypointname = #"hash_2797ef96a09741f0" + trigger.script_label;
+		waypointname = #"sd_waypoint" + trigger.script_label;
 		trigger.angles = visuals[0].angles;
 		trigger function_682f34cf(-800);
 		trigger usetriggerignoreuseholdtime();
@@ -1122,9 +1122,9 @@ function onuseplantobject(player)
 	demo::bookmark(#"event", gettime(), player);
 	potm::bookmark(#"event", gettime(), player);
 	player stats::function_bb7eedf0(#"plants", 1);
-	player stats::function_dad108fa(#"hash_6ed8aab88512306b", 1);
+	player stats::function_dad108fa(#"plants_defuses", 1);
 	player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
-	player contracts::function_a54e2068(#"hash_7fb3342ea8ac7e7c");
+	player contracts::increment_contract(#"hash_7fb3342ea8ac7e7c");
 	globallogic_audio::leader_dialog("bombPlanted");
 	scoreevents::processscoreevent(#"planted_bomb", player, undefined, undefined);
 	player recordgameevent("plant");
@@ -1169,8 +1169,8 @@ function onusedefuseobject(player)
 	player.pers[#"objectives"]++;
 	player.objectives = player.pers[#"objectives"];
 	player stats::function_bb7eedf0(#"defuses", 1);
-	player stats::function_dad108fa(#"hash_6ed8aab88512306b", 1);
-	player contracts::function_a54e2068(#"hash_7fb3342ea8ac7e7c");
+	player stats::function_dad108fa(#"plants_defuses", 1);
+	player contracts::increment_contract(#"hash_7fb3342ea8ac7e7c");
 	demo::bookmark(#"event", gettime(), player);
 	potm::bookmark(#"event", gettime(), player);
 	globallogic_audio::leader_dialog("bombDefused");
@@ -1184,7 +1184,7 @@ function onusedefuseobject(player)
 	{
 		scoreevents::processscoreevent(#"defused_bomb", player, undefined, undefined);
 	}
-	player globallogic_score::incpersstat(#"hash_2dadc7ba42ffd04d", 1, 0, 1);
+	player globallogic_score::incpersstat(#"objectivedefends", 1, 0, 1);
 	player recordgameevent("defuse");
 	level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {#eventtype:#"defuse", #player:player});
 }

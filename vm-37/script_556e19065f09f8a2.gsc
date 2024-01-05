@@ -1,11 +1,11 @@
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace zombie_eye_glow;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zombie_eye_glow
 	Checksum: 0x89A23C94
 	Offset: 0xB0
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zombie_eye_glow", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

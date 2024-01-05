@@ -1,18 +1,18 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_grappler;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_grappler
 	Checksum: 0x6C47E769
 	Offset: 0x120
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_grappler", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -38,10 +38,10 @@ function private function_70a657d8()
 {
 	clientfield::register("scriptmover", "grappler_beam_source", 1, getminbitcountfornum(5), "int");
 	clientfield::register("scriptmover", "grappler_beam_target", 1, getminbitcountfornum(5), "int");
-	level.var_ddd7276e = [];
+	level.grapple_ids = [];
 	for(id = 1; id < 5; id++)
 	{
-		level.var_ddd7276e[id] = 0;
+		level.grapple_ids[id] = 0;
 	}
 }
 
@@ -69,11 +69,11 @@ function private function_8ac3bea9()
 */
 function private function_5f5a3405()
 {
-	foreach(key, value in level.var_ddd7276e)
+	foreach(key, value in level.grapple_ids)
 	{
 		if(value === 0)
 		{
-			level.var_ddd7276e[key] = 1;
+			level.grapple_ids[key] = 1;
 			return key;
 		}
 	}
@@ -91,7 +91,7 @@ function private function_5f5a3405()
 */
 function function_56813755()
 {
-	foreach(value in level.var_ddd7276e)
+	foreach(value in level.grapple_ids)
 	{
 		if(value === 0)
 		{
@@ -113,9 +113,9 @@ function function_56813755()
 function private function_2772f623(id)
 {
 	/#
-		assert(isdefined(level.var_ddd7276e[id]) && level.var_ddd7276e[id] === 1);
+		assert(isdefined(level.grapple_ids[id]) && level.grapple_ids[id] === 1);
 	#/
-	level.var_ddd7276e[id] = 0;
+	level.grapple_ids[id] = 0;
 }
 
 /*
@@ -127,7 +127,7 @@ function private function_2772f623(id)
 	Parameters: 4
 	Flags: None
 */
-function start_grapple(prone_2_run_roll, var_beb2295, n_type, n_speed)
+function start_grapple(prone_2_run_roll, e_grapplee, n_type, n_speed)
 {
 	if(!isdefined(n_speed))
 	{
@@ -136,41 +136,41 @@ function start_grapple(prone_2_run_roll, var_beb2295, n_type, n_speed)
 	/#
 		assert(n_type == 2);
 	#/
-	e_source = function_6be863a(prone_2_run_roll function_f21c3519(), prone_2_run_roll.angles);
-	var_28ac1348 = function_6be863a(prone_2_run_roll function_f21c3519(), prone_2_run_roll.angles * -1);
-	thread function_30a5f5c1(e_source, var_28ac1348);
-	if(isdefined(var_28ac1348))
+	e_source = create_mover(prone_2_run_roll function_f21c3519(), prone_2_run_roll.angles);
+	e_beamend = create_mover(prone_2_run_roll function_f21c3519(), prone_2_run_roll.angles * -1);
+	thread function_30a5f5c1(e_source, e_beamend);
+	if(isdefined(e_beamend))
 	{
-		var_beb2295 function_a60cb756(1, 1);
+		e_grapplee function_a60cb756(1, 1);
 		util::wait_network_frame();
-		n_time = function_b9937e84(prone_2_run_roll, var_beb2295, n_speed);
-		var_28ac1348.origin = prone_2_run_roll function_f21c3519();
-		var_5f04bf66 = var_beb2295 function_f21c3519();
-		var_28ac1348 playsound(#"zmb_grapple_start");
-		var_28ac1348 moveto(var_5f04bf66, n_time);
-		var_28ac1348 waittill(#"movedone");
-		var_7fdf7771 = var_5f04bf66 - var_beb2295.origin;
-		var_28ac1348.origin = var_beb2295.origin;
-		if(isplayer(var_beb2295))
+		n_time = function_b9937e84(prone_2_run_roll, e_grapplee, n_speed);
+		e_beamend.origin = prone_2_run_roll function_f21c3519();
+		var_5f04bf66 = e_grapplee function_f21c3519();
+		e_beamend playsound(#"zmb_grapple_start");
+		e_beamend moveto(var_5f04bf66, n_time);
+		e_beamend waittill(#"movedone");
+		var_7fdf7771 = var_5f04bf66 - e_grapplee.origin;
+		e_beamend.origin = e_grapplee.origin;
+		if(isplayer(e_grapplee))
 		{
-			var_beb2295 playerlinkto(var_28ac1348, "tag_origin");
+			e_grapplee playerlinkto(e_beamend, "tag_origin");
 		}
 		else
 		{
-			var_beb2295 linkto(var_28ac1348);
+			e_grapplee linkto(e_beamend);
 		}
-		var_beb2295 playsound(#"zmb_grapple_grab");
+		e_grapplee playsound(#"zmb_grapple_grab");
 		var_b7f19309 = prone_2_run_roll function_f21c3519() - var_7fdf7771;
-		var_28ac1348 moveto(var_b7f19309, n_time);
-		var_28ac1348 playsound(#"zmb_grapple_pull");
-		var_28ac1348 waittill(#"movedone");
+		e_beamend moveto(var_b7f19309, n_time);
+		e_beamend playsound(#"zmb_grapple_pull");
+		e_beamend waittill(#"movedone");
 		function_c43e7cab();
-		var_28ac1348 clientfield::set("grappler_beam_target", 0);
-		var_beb2295 unlink();
-		var_beb2295 function_a60cb756(0, 1);
+		e_beamend clientfield::set("grappler_beam_target", 0);
+		e_grapplee unlink();
+		e_grapplee function_a60cb756(0, 1);
 		util::wait_network_frame();
-		function_a8e7b940(var_28ac1348);
-		function_a8e7b940(e_source);
+		destroy_mover(e_beamend);
+		destroy_mover(e_source);
 	}
 }
 
@@ -234,17 +234,17 @@ function function_30a5f5c1(e_source, e_target)
 {
 	function_c43e7cab();
 	level.var_acec7a44 = 1;
-	var_352f8ca9 = function_5f5a3405();
+	grapple_id = function_5f5a3405();
 	if(isdefined(e_source))
 	{
-		e_source clientfield::set("grappler_beam_source", var_352f8ca9);
+		e_source clientfield::set("grappler_beam_source", grapple_id);
 	}
 	util::wait_network_frame();
 	if(isdefined(e_target))
 	{
-		e_target clientfield::set("grappler_beam_target", var_352f8ca9);
+		e_target clientfield::set("grappler_beam_target", grapple_id);
 	}
-	thread function_1b905efa(e_source, e_target, var_352f8ca9);
+	thread function_1b905efa(e_source, e_target, grapple_id);
 	util::wait_network_frame();
 	level.var_acec7a44 = 0;
 }
@@ -258,9 +258,9 @@ function function_30a5f5c1(e_source, e_target)
 	Parameters: 3
 	Flags: Private
 */
-function private function_b9937e84(var_ad3953a4, var_c53e9947, n_speed)
+function private function_b9937e84(e_from, e_to, n_speed)
 {
-	n_distance = distance(var_ad3953a4 function_f21c3519(), var_c53e9947 function_f21c3519());
+	n_distance = distance(e_from function_f21c3519(), e_to function_f21c3519());
 	return n_distance / n_speed;
 }
 
@@ -325,16 +325,16 @@ function function_a60cb756(var_b4666218, var_e9f8c8f3)
 */
 function function_f21c3519()
 {
-	if(isdefined(self.var_9319fd9))
+	if(isdefined(self.grapple_tag))
 	{
-		v_origin = self gettagorigin(self.var_9319fd9);
+		v_origin = self gettagorigin(self.grapple_tag);
 		return v_origin;
 	}
 	return self.origin;
 }
 
 /*
-	Name: function_6be863a
+	Name: create_mover
 	Namespace: zm_grappler
 	Checksum: 0x7603D99D
 	Offset: 0xBE0
@@ -342,7 +342,7 @@ function function_f21c3519()
 	Parameters: 2
 	Flags: None
 */
-function function_6be863a(v_origin, v_angles)
+function create_mover(v_origin, v_angles)
 {
 	model = "tag_origin";
 	e_ent = util::spawn_model(model, v_origin, v_angles);
@@ -350,7 +350,7 @@ function function_6be863a(v_origin, v_angles)
 }
 
 /*
-	Name: function_a8e7b940
+	Name: destroy_mover
 	Namespace: zm_grappler
 	Checksum: 0x1E2EBABE
 	Offset: 0xC38
@@ -358,11 +358,11 @@ function function_6be863a(v_origin, v_angles)
 	Parameters: 1
 	Flags: None
 */
-function function_a8e7b940(var_28ac1348)
+function destroy_mover(e_beamend)
 {
-	if(isdefined(var_28ac1348))
+	if(isdefined(e_beamend))
 	{
-		var_28ac1348 delete();
+		e_beamend delete();
 	}
 }
 

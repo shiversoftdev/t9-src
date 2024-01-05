@@ -2,25 +2,25 @@
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
-#namespace namespace_2d81529e;
+#namespace wz_player;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_2d81529e
+	Name: __init__system__
+	Namespace: wz_player
 	Checksum: 0x4F442979
 	Offset: 0x78
 	Size: 0x3C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_6d455d07ee9a592c", &function_70a657d8, undefined, undefined, undefined);
+	system::register(#"wz_player", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_2d81529e
+	Namespace: wz_player
 	Checksum: 0x7C6DD44
 	Offset: 0xC0
 	Size: 0x24
@@ -34,7 +34,7 @@ function private function_70a657d8()
 
 /*
 	Name: on_player_spawned
-	Namespace: namespace_2d81529e
+	Namespace: wz_player
 	Checksum: 0xAE13FF4B
 	Offset: 0xF0
 	Size: 0x24
@@ -43,19 +43,19 @@ function private function_70a657d8()
 */
 function on_player_spawned()
 {
-	self callback::function_20263b9e(&function_20263b9e);
+	self callback::on_grenade_fired(&on_grenade_fired);
 }
 
 /*
-	Name: function_20263b9e
-	Namespace: namespace_2d81529e
+	Name: on_grenade_fired
+	Namespace: wz_player
 	Checksum: 0xBE1EE67D
 	Offset: 0x120
 	Size: 0xA2
 	Parameters: 1
 	Flags: None
 */
-function function_20263b9e(params)
+function on_grenade_fired(params)
 {
 	grenade = params.projectile;
 	weapon = params.weapon;
@@ -76,7 +76,7 @@ function function_20263b9e(params)
 
 /*
 	Name: function_4861487f
-	Namespace: namespace_2d81529e
+	Namespace: wz_player
 	Checksum: 0xFD1DFEDF
 	Offset: 0x1D0
 	Size: 0x56
@@ -98,7 +98,7 @@ function function_4861487f(weapon, player)
 
 /*
 	Name: function_cd8ee3c5
-	Namespace: namespace_2d81529e
+	Namespace: wz_player
 	Checksum: 0x15135B62
 	Offset: 0x230
 	Size: 0x124
@@ -116,14 +116,14 @@ function function_cd8ee3c5()
 		if(isdefined(trace[#"position"]) && trace[#"surfacetype"] != #"none")
 		{
 			org = trace[#"position"];
-			namespace_8f74625a::function_1b48df6d(org, 1);
+			item_supply_drop::drop_supply_drop(org, 1);
 		}
 	}
 }
 
 /*
 	Name: grenade_safe_to_throw
-	Namespace: namespace_2d81529e
+	Namespace: wz_player
 	Checksum: 0xF646C058
 	Offset: 0x360
 	Size: 0x18
@@ -137,7 +137,7 @@ function grenade_safe_to_throw(player, weapon)
 
 /*
 	Name: makegrenadedudanddestroy
-	Namespace: namespace_2d81529e
+	Namespace: wz_player
 	Checksum: 0x3DC0EC2F
 	Offset: 0x380
 	Size: 0x64
@@ -158,7 +158,7 @@ function makegrenadedudanddestroy()
 
 /*
 	Name: debug_star
-	Namespace: namespace_2d81529e
+	Namespace: wz_player
 	Checksum: 0x57E3ECE3
 	Offset: 0x3F0
 	Size: 0x7C

@@ -1,10 +1,10 @@
-#using script_70a43d6ba27cff6a;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using scripts\weapons\weaponobjects.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\globallogic\globallogic_player.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_495a69cb;
 
@@ -36,10 +36,10 @@ function private autoexec function_ffc9441b()
 function init_shared()
 {
 	register_clientfields();
-	level.var_f791a4f2 = spawnstruct();
+	level.trackerperk = spawnstruct();
 	level.var_c8241070 = &function_c8241070;
 	thread function_a7e7bda0();
-	level.var_f791a4f2.var_ec00f4ac = [];
+	level.trackerperk.var_ec00f4ac = [];
 	callback::on_spawned(&onplayerspawned);
 }
 
@@ -54,7 +54,7 @@ function init_shared()
 */
 function register_clientfields()
 {
-	clientfield::function_a8bbc967("huditems.isExposedOnMinimap", 1, 1, "int");
+	clientfield::register_clientuimodel("huditems.isExposedOnMinimap", 1, 1, "int");
 }
 
 /*
@@ -82,7 +82,7 @@ function onplayerspawned()
 */
 function function_c8241070(player, weapon)
 {
-	level.var_f791a4f2.var_ec00f4ac[weapon.clientid] = gettime() + (float(getdvarint(#"hash_6f3f10e68d2fedba", 0)) / 1000);
+	level.trackerperk.var_ec00f4ac[weapon.clientid] = gettime() + (float(getdvarint(#"hash_6f3f10e68d2fedba", 0)) / 1000);
 }
 
 /*
@@ -136,7 +136,7 @@ function function_43084f6c(player)
 */
 function function_2c77961d(player)
 {
-	expiretime = level.var_f791a4f2.var_ec00f4ac[player.clientid];
+	expiretime = level.trackerperk.var_ec00f4ac[player.clientid];
 	if(!isdefined(expiretime))
 	{
 		return false;
@@ -201,7 +201,7 @@ function function_a7e7bda0()
 			{
 				continue;
 			}
-			if(!player hasperk(#"hash_82d803aeee9cafb"))
+			if(!player hasperk(#"specialty_detectedicon"))
 			{
 				continue;
 			}

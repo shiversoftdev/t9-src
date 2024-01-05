@@ -1,26 +1,26 @@
-#using script_263b7f2982258785;
+#using scripts\core_common\exploder_shared.gsc;
 #using script_31e9b35aaacbbd93;
 #using script_3dc93ca9902a9cda;
-#using script_70b6424f429d140;
-#using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_263b7f2982258785;
+#using script_70b6424f429d140;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_ai_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
-#using scripts\core_common\vehicleriders_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
-#using scripts\cp_common\skipto.gsc;
+#using scripts\core_common\ai_shared.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\cp_common\objectives.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\vehicleriders_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_d92ad9f3;
 
@@ -250,7 +250,7 @@ function function_e78650d8()
 	while(!level flag::get("bustout_player_start"))
 	{
 		ret = undefined;
-		ret = level waittill(#"hash_7e4bcb956ddf5b40", #"hash_37caa0d42a34eb70");
+		ret = level waittill(#"bustout_player_start", #"bustout_player_entered_house");
 		if(level flag::get("bustout_player_start") || !level flag::get("bustout_player_entered_house"))
 		{
 			player setmovespeedscale(1);
@@ -535,7 +535,7 @@ function function_17162917()
 */
 function function_ba2c935e(mover, next_target)
 {
-	level endon(#"hash_19462bead9046022");
+	level endon(#"bustout_house_shotup");
 	while(true)
 	{
 		mover moveto(next_target.origin, 1.5, 1.5 * 0.33, 1.5 * 0.33);

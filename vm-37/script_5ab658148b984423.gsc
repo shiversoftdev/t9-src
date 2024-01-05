@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_616a42d0 : class_6aaccc24
+class czm_build_progress : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_616a42d0
+		Namespace: czm_build_progress
 		Checksum: 0xB09D89E
 		Offset: 0x1C8
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_616a42d0 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_616a42d0
+		Namespace: czm_build_progress
 		Checksum: 0x23E379AE
 		Offset: 0x300
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_616a42d0 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_616a42d0
+		Namespace: czm_build_progress
 		Checksum: 0x4EC1E20B
 		Offset: 0x238
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_616a42d0 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_616a42d0
+		Namespace: czm_build_progress
 		Checksum: 0x10682DF4
 		Offset: 0x280
 		Size: 0x24
@@ -61,12 +61,12 @@ class class_616a42d0 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_616a42d0
+		Namespace: czm_build_progress
 		Checksum: 0xC6B8493A
 		Offset: 0x1E8
 		Size: 0x44
@@ -75,20 +75,20 @@ class class_616a42d0 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_build_progress");
-		namespace_6aaccc24::function_da693cbe("progress", 1, 6, "float");
+		cluielem::setup_clientfields("zm_build_progress");
+		cluielem::add_clientfield("progress", 1, 6, "float");
 	}
 
 	/*
-		Name: function_affe8f61
-		Namespace: namespace_616a42d0
+		Name: set_progress
+		Namespace: czm_build_progress
 		Checksum: 0x822848A3
 		Offset: 0x2B0
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_affe8f61(player, value)
+	function set_progress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "progress", value);
 	}
@@ -108,7 +108,7 @@ class class_616a42d0 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_616a42d0();
+	elem = new czm_build_progress();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -160,7 +160,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_affe8f61
+	Name: set_progress
 	Namespace: zm_build_progress
 	Checksum: 0x9DB384F7
 	Offset: 0x198
@@ -168,8 +168,8 @@ function is_open(player)
 	Parameters: 2
 	Flags: Linked
 */
-function function_affe8f61(player, value)
+function set_progress(player, value)
 {
-	[[ self ]]->function_affe8f61(player, value);
+	[[ self ]]->set_progress(player, value);
 }
 

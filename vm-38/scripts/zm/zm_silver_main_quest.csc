@@ -1,10 +1,10 @@
-#using script_17a9d06bf819b2d3;
-#using scripts\core_common\audio_shared.csc;
 #using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using scripts\zm_common\zm_utility.csc;
+#using script_17a9d06bf819b2d3;
 #using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\audio_shared.csc;
 
 #namespace namespace_d769652e;
 
@@ -19,7 +19,7 @@
 */
 function private autoexec function_b6c2e1fd()
 {
-	level notify(512796774);
+	level notify(-512796774);
 }
 
 /*
@@ -35,7 +35,7 @@ function init()
 {
 	namespace_5b1144e::function_5ae4a10c(#"p9_fxanim_zm_gp_crafting_variant_xmodel", "workbench", #"hash_d670b6f3d8c2841", undefined, undefined, 1);
 	namespace_5b1144e::function_5ae4a10c(#"p9_rus_computer_02", "medbay_computer", undefined, #"hash_5b20033c44a4321f", undefined, 1);
-	if(!zm_utility::function_e51dc2d8())
+	if(!zm_utility::is_ee_enabled())
 	{
 		return;
 	}
@@ -615,7 +615,7 @@ function function_6f615c6d(localclientnum, oldval, newval, bnewent, binitialsnap
 	else
 	{
 		level notify(#"hash_3bbf8d3383f43cdf");
-		audio::stoploopat(#"hash_b2bcc3355f1b804", (-144, 2019, -170));
+		audio::stoploopat(#"zmb_silver_mq_6_alarm_2_lp", (-144, 2019, -170));
 		playsound(fieldname, #"hash_3d7e471c91f5482c", (-144, 2019, -170));
 		playsound(fieldname, #"hash_3d7e471c91f5482c", (565, 2137, -178));
 	}

@@ -1,6 +1,6 @@
 #using script_18bc13f07baf161a;
-#using scripts\core_common\array_shared.csc;
 #using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_21dd166c;
 

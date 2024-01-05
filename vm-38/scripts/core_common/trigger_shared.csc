@@ -11,7 +11,7 @@
 */
 function private autoexec function_8b203b48()
 {
-	level notify(35024089);
+	level notify(-35024089);
 }
 
 #namespace trigger;

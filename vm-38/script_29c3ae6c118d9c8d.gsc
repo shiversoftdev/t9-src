@@ -1,6 +1,6 @@
-#using script_4e261fd4bc49e992;
-#using script_78825cbb1ab9f493;
 #using scripts\core_common\dogtags.csc;
+#using script_78825cbb1ab9f493;
+#using scripts\core_common\player\player_insertion.csc;
 
 #namespace namespace_f2e23b4a;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_8a4997a()
 {
-	level notify(1267775477);
+	level notify(-1267775477);
 }
 
 /*

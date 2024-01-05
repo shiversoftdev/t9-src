@@ -1,8 +1,8 @@
+#using script_75da5547b1822294;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spectating.gsc;
 #using script_306215d6cfd5f1f4;
 #using script_6167e26342be354b;
-#using script_75da5547b1822294;
-#using scripts\core_common\spectating.gsc;
-#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_8a203916;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_2371ef38()
 {
-	level notify(1925482646);
+	level notify(-1925482646);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_8a203916
 	Checksum: 0xD2B63916
 	Offset: 0x100
@@ -29,7 +29,7 @@ function private autoexec function_2371ef38()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_62a9656d2aaa46aa", &function_70a657d8, undefined, undefined, #"spectating");
 }

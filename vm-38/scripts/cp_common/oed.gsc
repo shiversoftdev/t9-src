@@ -1,14 +1,14 @@
 #using script_32399001bdb550da;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace oed;
 
@@ -23,11 +23,11 @@
 */
 function private autoexec function_f6ab5af1()
 {
-	level notify(1222051136);
+	level notify(-1222051136);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: oed
 	Checksum: 0xEFB54035
 	Offset: 0x198
@@ -35,7 +35,7 @@ function private autoexec function_f6ab5af1()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"oed", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

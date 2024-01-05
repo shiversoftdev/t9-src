@@ -1,10 +1,10 @@
-#using script_5bb072c3abf4652c;
-#using script_64111d5c475f54c2;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\zm_common\zm_devgui.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_64111d5c475f54c2;
 
 #namespace namespace_2b924e50;
 
@@ -106,7 +106,7 @@ function close_hud()
 function function_12995a01(status)
 {
 	self function_1aeb4889();
-	level.zm_silver_hud zm_silver_hud::function_9efecfd1(self, status);
+	level.zm_silver_hud zm_silver_hud::set_aetherscopestatus(self, status);
 }
 
 /*
@@ -122,7 +122,7 @@ function function_2c918ed(n_display_time, str_waittill)
 {
 	self endon(#"death");
 	self function_1aeb4889();
-	level.zm_silver_hud zm_silver_hud::function_39ee9107(self, 1);
+	level.zm_silver_hud zm_silver_hud::set_showphoto(self, 1);
 }
 
 /*
@@ -389,7 +389,7 @@ function function_14a89247()
 	/#
 		foreach(player in function_a1ef346b())
 		{
-			level.zm_silver_hud zm_silver_hud::function_39ee9107(player, 0);
+			level.zm_silver_hud zm_silver_hud::set_showphoto(player, 0);
 		}
 		waitframe(1);
 		function_30fe7a2();

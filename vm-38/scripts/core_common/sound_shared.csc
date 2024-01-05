@@ -13,7 +13,7 @@
 */
 function private autoexec function_2b898297()
 {
-	level notify(295196481);
+	level notify(-295196481);
 }
 
 #namespace sound;

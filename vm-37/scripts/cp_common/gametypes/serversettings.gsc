@@ -1,12 +1,12 @@
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 
 #namespace serversettings;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: serversettings
 	Checksum: 0xAAAA14D
 	Offset: 0xB8
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"serversettings", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -99,7 +99,7 @@ function init()
 		}
 	}
 	level.mapsize = getdvarfloat(#"scr_mapsize", 0);
-	constrain_gametype(util::function_5df4294());
+	constrain_gametype(util::get_game_type());
 	constrain_map_size(level.mapsize);
 	for(;;)
 	{

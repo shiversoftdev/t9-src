@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_b9aee0cd : class_6aaccc24
+class czm_arcade_timer : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_b9aee0cd
+		Namespace: czm_arcade_timer
 		Checksum: 0x1224E3A8
 		Offset: 0x818
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_b9aee0cd : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_b9aee0cd
+		Namespace: czm_arcade_timer
 		Checksum: 0xD34E8A62
 		Offset: 0xAB8
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_b9aee0cd : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_b9aee0cd
+		Namespace: czm_arcade_timer
 		Checksum: 0x89373D9B
 		Offset: 0x900
 		Size: 0x3C
@@ -47,40 +47,40 @@ class class_b9aee0cd : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_21eb67aa
-		Namespace: namespace_b9aee0cd
+		Name: set_minutes
+		Namespace: czm_arcade_timer
 		Checksum: 0xA98E1FD2
 		Offset: 0xA18
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_21eb67aa(player, value)
+	function set_minutes(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "minutes", value);
 	}
 
 	/*
-		Name: function_28ccc05d
-		Namespace: namespace_b9aee0cd
+		Name: set_title
+		Namespace: czm_arcade_timer
 		Checksum: 0xED38230B
 		Offset: 0xA68
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_28ccc05d(player, value)
+	function set_title(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "title", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_b9aee0cd
+		Namespace: czm_arcade_timer
 		Checksum: 0x2E421812
 		Offset: 0x948
 		Size: 0x24
@@ -89,26 +89,26 @@ class class_b9aee0cd : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_7954feaf
-		Namespace: namespace_b9aee0cd
+		Name: set_showzero
+		Namespace: czm_arcade_timer
 		Checksum: 0x9FAA9282
 		Offset: 0x978
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_7954feaf(player, value)
+	function set_showzero(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showzero", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_b9aee0cd
+		Namespace: czm_arcade_timer
 		Checksum: 0xAAB40A56
 		Offset: 0x838
 		Size: 0xBC
@@ -117,23 +117,23 @@ class class_b9aee0cd : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_arcade_timer");
-		namespace_6aaccc24::function_da693cbe("showzero", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("seconds", 1, 6, "int");
-		namespace_6aaccc24::function_da693cbe("minutes", 1, 4, "int");
-		namespace_6aaccc24::function_dcb34c80("string", "title", 1);
+		cluielem::setup_clientfields("zm_arcade_timer");
+		cluielem::add_clientfield("showzero", 1, 1, "int");
+		cluielem::add_clientfield("seconds", 1, 6, "int");
+		cluielem::add_clientfield("minutes", 1, 4, "int");
+		cluielem::function_dcb34c80("string", "title", 1);
 	}
 
 	/*
-		Name: function_c48569e7
-		Namespace: namespace_b9aee0cd
+		Name: set_seconds
+		Namespace: czm_arcade_timer
 		Checksum: 0x831DE34
 		Offset: 0x9C8
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c48569e7(player, value)
+	function set_seconds(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "seconds", value);
 	}
@@ -153,22 +153,22 @@ class class_b9aee0cd : class_6aaccc24
 */
 function set_timer(player, var_c895e25d, var_b1100790)
 {
-	self function_bbba5164(player);
+	self open_timer(player);
 	n_minutes = int(floor(var_c895e25d / 60));
 	n_seconds = int(var_c895e25d - (n_minutes * 60));
-	self function_21eb67aa(player, n_minutes);
-	self function_c48569e7(player, n_seconds);
+	self set_minutes(player, n_minutes);
+	self set_seconds(player, n_seconds);
 	if(n_seconds < 10)
 	{
-		self function_7954feaf(player, 1);
+		self set_showzero(player, 1);
 	}
 	else
 	{
-		self function_7954feaf(player, 0);
+		self set_showzero(player, 0);
 	}
 	if(isdefined(var_b1100790))
 	{
-		self function_28ccc05d(player, var_b1100790);
+		self set_title(player, var_b1100790);
 	}
 }
 
@@ -275,11 +275,11 @@ function function_ecffd525(player)
 		player.var_e325b124 = 0;
 	}
 	player.var_e325b124++;
-	self function_bbba5164(player);
+	self open_timer(player);
 }
 
 /*
-	Name: function_bbba5164
+	Name: open_timer
 	Namespace: zm_arcade_timer
 	Checksum: 0xFD6BAA47
 	Offset: 0x530
@@ -287,7 +287,7 @@ function function_ecffd525(player)
 	Parameters: 1
 	Flags: None
 */
-function function_bbba5164(player)
+function open_timer(player)
 {
 	if(!self is_open(player))
 	{
@@ -304,11 +304,11 @@ function function_bbba5164(player)
 	Parameters: 3
 	Flags: None
 */
-function function_9bab3960(player, var_d5710e87, var_b1100790)
+function function_9bab3960(player, b_force_close, var_b1100790)
 {
-	if(!isdefined(var_d5710e87))
+	if(!isdefined(b_force_close))
 	{
-		var_d5710e87 = 0;
+		b_force_close = 0;
 	}
 	if(!isdefined(player.var_e325b124))
 	{
@@ -319,13 +319,13 @@ function function_9bab3960(player, var_d5710e87, var_b1100790)
 	{
 		player.var_26b0547b = undefined;
 	}
-	if(self is_open(player) && (player.var_e325b124 <= 0 || var_d5710e87))
+	if(self is_open(player) && (player.var_e325b124 <= 0 || b_force_close))
 	{
 		player.var_e325b124 = 0;
 		self close(player);
 		player notify(#"hash_2a4a6c3c411261d8");
 		player.var_26b0547b = undefined;
-		if(var_d5710e87)
+		if(b_force_close)
 		{
 			player notify(#"hash_660dedc4af5b4336");
 		}
@@ -343,7 +343,7 @@ function function_9bab3960(player, var_d5710e87, var_b1100790)
 */
 function register()
 {
-	elem = new class_b9aee0cd();
+	elem = new czm_arcade_timer();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -395,7 +395,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_7954feaf
+	Name: set_showzero
 	Namespace: zm_arcade_timer
 	Checksum: 0x972A3C33
 	Offset: 0x758
@@ -403,13 +403,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_7954feaf(player, value)
+function set_showzero(player, value)
 {
-	[[ self ]]->function_7954feaf(player, value);
+	[[ self ]]->set_showzero(player, value);
 }
 
 /*
-	Name: function_c48569e7
+	Name: set_seconds
 	Namespace: zm_arcade_timer
 	Checksum: 0xAFBDC5C1
 	Offset: 0x788
@@ -417,13 +417,13 @@ function function_7954feaf(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c48569e7(player, value)
+function set_seconds(player, value)
 {
-	[[ self ]]->function_c48569e7(player, value);
+	[[ self ]]->set_seconds(player, value);
 }
 
 /*
-	Name: function_21eb67aa
+	Name: set_minutes
 	Namespace: zm_arcade_timer
 	Checksum: 0x6B5A1721
 	Offset: 0x7B8
@@ -431,13 +431,13 @@ function function_c48569e7(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_21eb67aa(player, value)
+function set_minutes(player, value)
 {
-	[[ self ]]->function_21eb67aa(player, value);
+	[[ self ]]->set_minutes(player, value);
 }
 
 /*
-	Name: function_28ccc05d
+	Name: set_title
 	Namespace: zm_arcade_timer
 	Checksum: 0x61747EEA
 	Offset: 0x7E8
@@ -445,8 +445,8 @@ function function_21eb67aa(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_28ccc05d(player, value)
+function set_title(player, value)
 {
-	[[ self ]]->function_28ccc05d(player, value);
+	[[ self ]]->set_title(player, value);
 }
 

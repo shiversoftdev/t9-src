@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_495a69cb;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_6f3441c9()
 {
-	level notify(1762447005);
+	level notify(-1762447005);
 }
 
 #namespace tracker;
@@ -47,7 +47,7 @@ function init_shared()
 */
 function private registerclientfields()
 {
-	clientfield::function_a8bbc967("huditems.isExposedOnMinimap", #"hud_items", #"hash_1fe5d2b9e7136055", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("huditems.isExposedOnMinimap", #"hud_items", #"hash_1fe5d2b9e7136055", 1, 1, "int", undefined, 0, 0);
 }
 
 /*

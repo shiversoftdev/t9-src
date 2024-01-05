@@ -1,13 +1,13 @@
-#using script_47fb62300ac0bd60;
+#using scripts\cp_common\skipto.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\skipto.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace achievements;
 
@@ -26,7 +26,7 @@ function private autoexec function_ec8f1203()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: achievements
 	Checksum: 0x356DC59D
 	Offset: 0x168
@@ -34,7 +34,7 @@ function private autoexec function_ec8f1203()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"achievements", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -83,7 +83,7 @@ function function_df1192a7()
 function give_achievement(achievement, var_a299f0b3)
 {
 	/#
-		assert(function_7a600918(var_a299f0b3), "");
+		assert(ishash(var_a299f0b3), "");
 	#/
 	/#
 		printtoprightln("" + function_9e72a96(var_a299f0b3), (1, 1, 1));
@@ -483,7 +483,7 @@ function checkweaponchallengecomplete(var_71d636c6)
 function function_533e57d6(player, count)
 {
 	player stats::function_dad108fa("cp_body_shield_count", count);
-	var_69fa8154 = (isdefined(player stats::function_441050ca("cp_body_shield_count")) ? player stats::function_441050ca("cp_body_shield_count") : 0);
+	var_69fa8154 = (isdefined(player stats::get_stat_global("cp_body_shield_count")) ? player stats::get_stat_global("cp_body_shield_count") : 0);
 	if(var_69fa8154 >= 5)
 	{
 		player give_achievement(#"hash_7cfe4a58cd11b4f5");
@@ -530,10 +530,10 @@ function function_1d62fbfa(count, weapclass, firetype)
 			}
 		}
 	}
-	lmgkills = (isdefined(self stats::function_441050ca(#"cp_kills_lmg")) ? self stats::function_441050ca(#"cp_kills_lmg") : 0);
-	smgkills = (isdefined(self stats::function_441050ca(#"cp_kills_smg")) ? self stats::function_441050ca(#"cp_kills_smg") : 0);
-	arkills = (isdefined(self stats::function_441050ca(#"cp_kills_ar")) ? self stats::function_441050ca(#"cp_kills_ar") : 0);
-	var_2f070c99 = (isdefined(self stats::function_441050ca(#"cp_kills_sg")) ? self stats::function_441050ca(#"cp_kills_sg") : 0);
+	lmgkills = (isdefined(self stats::get_stat_global(#"cp_kills_lmg")) ? self stats::get_stat_global(#"cp_kills_lmg") : 0);
+	smgkills = (isdefined(self stats::get_stat_global(#"cp_kills_smg")) ? self stats::get_stat_global(#"cp_kills_smg") : 0);
+	arkills = (isdefined(self stats::get_stat_global(#"cp_kills_ar")) ? self stats::get_stat_global(#"cp_kills_ar") : 0);
+	var_2f070c99 = (isdefined(self stats::get_stat_global(#"cp_kills_sg")) ? self stats::get_stat_global(#"cp_kills_sg") : 0);
 	if(lmgkills >= 5 && smgkills >= 5 && arkills >= 5 && var_2f070c99 >= 5)
 	{
 		self give_achievement(#"hash_779bbce9266d0ae6");

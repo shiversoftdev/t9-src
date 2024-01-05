@@ -1,6 +1,6 @@
 #using script_6a0921d005260773;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_8a67e6b6;
 

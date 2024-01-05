@@ -1,7 +1,7 @@
 #using script_1883fa4e60abbf9f;
 #using script_42e8ee8721f5e6ef;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
@@ -19,7 +19,7 @@
 */
 function private autoexec function_b9692474()
 {
-	level notify(371912204);
+	level notify(-371912204);
 }
 
 /*
@@ -74,10 +74,10 @@ function stealth_noteworthy_thread(enabled, callouts)
 	{
 		self.stealth.stealth_noted = [];
 	}
-	self thread stealth_noteworthy_kill_monitor();
+	self childthread stealth_noteworthy_kill_monitor();
 	if(is_true(callouts))
 	{
-		self thread stealth_noteworthy_callouts(1);
+		self childthread stealth_noteworthy_callouts(1);
 	}
 	contents = stealth_noteworthy_aim_contents();
 	while(true)
@@ -398,23 +398,23 @@ function private stealth_noteworthy_priority(eventname)
 	}
 	switch(eventname)
 	{
-		case "hash_48d20ba57ac4bfc9":
+		case "civilian_kill":
 		{
 			return 70;
 		}
-		case "hash_1660e53a237b361f":
+		case "good_kill_double":
 		{
 			return 60;
 		}
-		case "hash_69549d190b855fff":
+		case "good_kill_impressive":
 		{
 			return 50;
 		}
-		case "hash_3dba80d5e594e48e":
+		case "good_kill_bullet":
 		{
 			return 40;
 		}
-		case "hash_3ad2f4667e2f7219":
+		case "good_kill":
 		{
 			return 30;
 		}

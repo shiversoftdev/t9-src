@@ -1,11 +1,11 @@
-#using script_4e53735256f112ac;
-#using script_d67878983e3d7c;
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using script_d67878983e3d7c;
+#using script_4e53735256f112ac;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\beam_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_ce9594c1;
 
@@ -24,7 +24,7 @@ function private autoexec function_3bb041c4()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_ce9594c1
 	Checksum: 0x5FC7E9EF
 	Offset: 0x278
@@ -32,7 +32,7 @@ function private autoexec function_3bb041c4()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_49946b57ce6e712f", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }
@@ -76,7 +76,7 @@ function function_dfadfc0e(localclientnum, oldval, newval, bnewent, binitialsnap
 		{
 			if(!self postfx::function_556665f2("pstfx_zm_dying_wish"))
 			{
-				self postfx::playpostfxbundle(#"hash_25bb574aef83c416");
+				self postfx::playpostfxbundle(#"pstfx_zm_dying_wish");
 			}
 			if(!isdefined(self.var_cc84f2f5) && self function_da43934d())
 			{
@@ -95,7 +95,7 @@ function function_dfadfc0e(localclientnum, oldval, newval, bnewent, binitialsnap
 		{
 			if(self postfx::function_556665f2("pstfx_zm_dying_wish"))
 			{
-				self postfx::stoppostfxbundle(#"hash_25bb574aef83c416");
+				self postfx::stoppostfxbundle(#"pstfx_zm_dying_wish");
 			}
 		}
 		if(isdefined(self.var_7b61d94d) && isdefined(self.var_ac385caa))

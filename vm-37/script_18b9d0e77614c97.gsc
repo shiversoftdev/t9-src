@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace streamer;
 

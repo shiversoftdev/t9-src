@@ -1,8 +1,8 @@
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\array_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_7819da81;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_b1308d14()
 {
-	level notify(746172027);
+	level notify(-746172027);
 }
 
 #namespace battlechatter;
@@ -136,7 +136,7 @@ function mpdialog_value(mpdialogkey, defaultvalue)
 	Parameters: 4
 	Flags: Linked
 */
-function function_d804d2f0(localclientnum, var_70b80ca6, player, allyradiussq)
+function function_d804d2f0(localclientnum, speakingplayer, player, allyradiussq)
 {
 	if(!is_true(level.var_e444d44))
 	{
@@ -166,15 +166,15 @@ function function_d804d2f0(localclientnum, var_70b80ca6, player, allyradiussq)
 	{
 		return false;
 	}
-	if(!isdefined(var_70b80ca6))
+	if(!isdefined(speakingplayer))
 	{
 		return false;
 	}
-	if(!isdefined(var_70b80ca6.origin))
+	if(!isdefined(speakingplayer.origin))
 	{
 		return false;
 	}
-	if(player == var_70b80ca6 || player.team != var_70b80ca6.team)
+	if(player == speakingplayer || player.team != speakingplayer.team)
 	{
 		return false;
 	}
@@ -182,7 +182,7 @@ function function_d804d2f0(localclientnum, var_70b80ca6, player, allyradiussq)
 	{
 		return false;
 	}
-	distsq = distancesquared(var_70b80ca6.origin, player.origin);
+	distsq = distancesquared(speakingplayer.origin, player.origin);
 	if(distsq > allyradiussq)
 	{
 		return false;
@@ -199,7 +199,7 @@ function function_d804d2f0(localclientnum, var_70b80ca6, player, allyradiussq)
 	Parameters: 3
 	Flags: Linked
 */
-function function_db89c38f(localclientnum, var_70b80ca6, allyradiussq)
+function function_db89c38f(localclientnum, speakingplayer, allyradiussq)
 {
 	if(!is_true(level.var_e444d44))
 	{
@@ -208,13 +208,13 @@ function function_db89c38f(localclientnum, var_70b80ca6, allyradiussq)
 	allies = [];
 	foreach(player in getplayers(localclientnum))
 	{
-		if(!function_d804d2f0(localclientnum, var_70b80ca6, player, allyradiussq))
+		if(!function_d804d2f0(localclientnum, speakingplayer, player, allyradiussq))
 		{
 			continue;
 		}
 		allies[allies.size] = player;
 	}
-	allies = arraysort(allies, var_70b80ca6.origin);
+	allies = arraysort(allies, speakingplayer.origin);
 	if(!isdefined(allies) || allies.size == 0)
 	{
 		return undefined;

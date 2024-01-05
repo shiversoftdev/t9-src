@@ -1,14 +1,14 @@
-#using script_13da4e6b98ca81a1;
+#using script_680dddbda86931fa;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
 #using script_5eefb31e6afe008b;
 #using script_618d6f5ff5d18933;
-#using script_680dddbda86931fa;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\battlechatter.csc;
+#using script_13da4e6b98ca81a1;
 #using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\battlechatter.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace ping;
 
@@ -23,11 +23,11 @@
 */
 function private autoexec function_7b61deaf()
 {
-	level notify(592152311);
+	level notify(-592152311);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: ping
 	Checksum: 0x76C4ABB0
 	Offset: 0x358
@@ -35,7 +35,7 @@ function private autoexec function_7b61deaf()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ping", &function_70a657d8, &init, undefined, undefined);
 }
@@ -57,10 +57,10 @@ function private function_70a657d8()
 	callback::function_56df655f(&function_2dd58893);
 	callback::function_f8062bf(&function_2dd58893);
 	callback::function_ed112c52(&function_2dd58893);
-	callback::function_e9e16e2f(&function_2dd58893);
-	callback::function_4f6cafea(&function_2dd58893);
+	callback::on_killcam_begin(&function_2dd58893);
+	callback::on_killcam_end(&function_2dd58893);
 	level.ping = spawnstruct();
-	level.ping.types = [12:{#objective:#"hash_3a3dbdaf943d02d5", #sound:#"hash_1a0de47f7204a9d6"}, 11:{#objective:#"hash_4aacdcc1899f9c59", #sound:#"hash_3cd7abefb7adef5b"}, 10:{#objective:#"hash_6618dbd21e3a5068", #sound:#"hash_3cd7abefb7adef5b"}, 9:{#objective:#"hash_19b425c37cb9f718", #sound:#"hash_1a0de47f7204a9d6"}, 8:{#objective:#"hash_19b425c37cb9f718", #sound:#"hash_1a0de47f7204a9d6"}, 7:{#objective:#"hash_4aacdcc1899f9c59", #sound:#"hash_3cd7abefb7adef5b"}, 6:{#objective:#"hash_4aacdcc1899f9c59", #sound:#"hash_3cd7abefb7adef5b"}, 5:{#sound:#"hash_1a0de47f7204a9d6"}, 4:{#objective:#"hash_614502911ac7d29", #sound:#"hash_1a0de47f7204a9d6"}, 3:{#objective:#"hash_6ee59c4b375ac2ae", #sound:#"hash_3cd7abefb7adef5b"}, 2:{#objective:#"hash_35880e38e054d2b3", #sound:#"hash_3cd7abefb7adef5b"}, 1:{#objective:#"hash_35880e38e054d2b3", #sound:#"hash_1a0de47f7204a9d6"}, 0:{#objective:#"hash_3a3dbdaf943d02d5", #sound:#"hash_1a0de47f7204a9d6"}];
+	level.ping.types = [12:{#objective:#"teammate_waypoint", #sound:#"hash_1a0de47f7204a9d6"}, 11:{#objective:#"hash_4aacdcc1899f9c59", #sound:#"hash_3cd7abefb7adef5b"}, 10:{#objective:#"hash_6618dbd21e3a5068", #sound:#"hash_3cd7abefb7adef5b"}, 9:{#objective:#"hash_19b425c37cb9f718", #sound:#"hash_1a0de47f7204a9d6"}, 8:{#objective:#"hash_19b425c37cb9f718", #sound:#"hash_1a0de47f7204a9d6"}, 7:{#objective:#"hash_4aacdcc1899f9c59", #sound:#"hash_3cd7abefb7adef5b"}, 6:{#objective:#"hash_4aacdcc1899f9c59", #sound:#"hash_3cd7abefb7adef5b"}, 5:{#sound:#"hash_1a0de47f7204a9d6"}, 4:{#objective:#"hash_614502911ac7d29", #sound:#"hash_1a0de47f7204a9d6"}, 3:{#objective:#"hash_6ee59c4b375ac2ae", #sound:#"hash_3cd7abefb7adef5b"}, 2:{#objective:#"hash_35880e38e054d2b3", #sound:#"hash_3cd7abefb7adef5b"}, 1:{#objective:#"hash_35880e38e054d2b3", #sound:#"hash_1a0de47f7204a9d6"}, 0:{#objective:#"teammate_waypoint", #sound:#"hash_1a0de47f7204a9d6"}];
 	/#
 		assert(level.ping.types.size == 13);
 	#/
@@ -142,7 +142,7 @@ function private function_c81ef836()
 				x = waitresult.xcoord;
 				y = waitresult.ycoord;
 				var_bfd46ccc = 2147483647;
-				var_cfa5f67b = 2147483647;
+				var_cfa5f67b = -2147483647;
 				trace = bullettrace((x, y, var_bfd46ccc), (x, y, var_cfa5f67b), 0, self, 1);
 				position = trace[#"position"];
 				if(trace[#"fraction"] == 1)
@@ -578,8 +578,8 @@ function private function_78827e7f(params)
 	unique_id = params.uniqueid;
 	var_43a0500c = params.var_43a0500c;
 	var_dcc5aade = is_true(params.var_dcc5aade);
-	var_d017e788 = function_5c10bd79(local_client_num);
-	var_df55840 = var_d017e788 == var_56bcf423 && !var_dcc5aade;
+	currentplayer = function_5c10bd79(local_client_num);
+	var_df55840 = currentplayer == var_56bcf423 && !var_dcc5aade;
 	if(codcaster::function_b8fe9b52(local_client_num))
 	{
 		return;
@@ -606,7 +606,7 @@ function private function_78827e7f(params)
 	}
 	else
 	{
-		if(event_type < 13 && var_d017e788 == var_56bcf423 && !remove)
+		if(event_type < 13 && currentplayer == var_56bcf423 && !remove)
 		{
 			playsound(local_client_num, level.ping.types[event_type].sound);
 		}
@@ -700,7 +700,7 @@ function private function_85bffd7c(local_client_num, event_type, location, clien
 	setuimodelvalue(getuimodel(model, "customText"), (isdefined(var_fc97ceec) ? var_fc97ceec : #""));
 	setuimodelvalue(getuimodel(model, "offsetZ"), (isdefined(offsetz) ? offsetz : 0));
 	setuimodelvalue(getuimodel(model, "customImage"), (isdefined(var_c039614d) ? var_c039614d : #""));
-	function_9a227103(getuimodel(model, "notify"));
+	forcenotifyuimodel(getuimodel(model, "notify"));
 }
 
 /*
@@ -1284,9 +1284,9 @@ function private function_a5de4bd1(local_client_num, unique_id, event_type, loca
 		else
 		{
 			function_807b75f0(local_client_num, var_ec31db0f, event_type);
-			if(namespace_ad5a0cd6::function_da09de95(var_113c24cb))
+			if(item_world_util::function_da09de95(var_113c24cb))
 			{
-				ent_num = namespace_ad5a0cd6::function_c094ccd3(var_113c24cb);
+				ent_num = item_world_util::function_c094ccd3(var_113c24cb);
 				if(isdefined(ent_num))
 				{
 					item = getentbynum(local_client_num, ent_num);
@@ -1612,10 +1612,10 @@ function private function_b7306aa(local_client_num, unique_id, event_type, locat
 			}
 			image = undefined;
 			var_52c78c2c = undefined;
-			var_51d5c26f = ent ai::function_9139c839();
-			if(isdefined(var_51d5c26f))
+			settingsbundle = ent ai::function_9139c839();
+			if(isdefined(settingsbundle))
 			{
-				category = var_51d5c26f.category;
+				category = settingsbundle.category;
 				if(isdefined(category))
 				{
 					switch(category)
@@ -1829,7 +1829,7 @@ function private function_43569f3b(ent)
 */
 function private function_d87cb3c7(var_11a7485e)
 {
-	if(isdefined(var_11a7485e) && var_11a7485e != "" && !function_7a600918(var_11a7485e))
+	if(isdefined(var_11a7485e) && var_11a7485e != "" && !ishash(var_11a7485e))
 	{
 		var_212af42f = getsubstr(var_11a7485e, 4, var_11a7485e.size);
 		if(var_212af42f == "Location")

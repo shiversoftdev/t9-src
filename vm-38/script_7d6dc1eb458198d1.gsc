@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_a0b518ca : class_6aaccc24
+class class_a0b518ca : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_a0b518ca : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_338d48a0
+		Name: set_hasdamage
 		Namespace: namespace_a0b518ca
 		Checksum: 0xF919D998
 		Offset: 0x880
@@ -52,13 +52,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_338d48a0(localclientnum, value)
+	function set_hasdamage(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "hasDamage", value);
+		[[ self ]]->set_data(localclientnum, "hasDamage", value);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_a0b518ca
 		Checksum: 0x50681D08
 		Offset: 0x620
@@ -66,13 +66,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_control_point_hud");
+		cluielem::register_clientside("zm_control_point_hud");
 	}
 
 	/*
-		Name: function_62264c81
+		Name: set_chargepct
 		Namespace: namespace_a0b518ca
 		Checksum: 0xC7C85E5C
 		Offset: 0x768
@@ -80,13 +80,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_62264c81(localclientnum, value)
+	function set_chargepct(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "chargePct", value);
+		[[ self ]]->set_data(localclientnum, "chargePct", value);
 	}
 
 	/*
-		Name: function_751f7270
+		Name: set_hascharge
 		Namespace: namespace_a0b518ca
 		Checksum: 0xD9B3B77
 		Offset: 0x848
@@ -94,9 +94,9 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_751f7270(localclientnum, value)
+	function set_hascharge(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "hasCharge", value);
+		[[ self ]]->set_data(localclientnum, "hasCharge", value);
 	}
 
 	/*
@@ -110,17 +110,17 @@ class class_a0b518ca : class_6aaccc24
 	*/
 	function setup_clientfields(var_4bf38eea, var_7cc0b11d, var_14431277, var_db1c4294, var_87048abd, var_dd55685a)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_control_point_hud");
-		namespace_6aaccc24::function_da693cbe("chargePct", 8000, 7, "float", var_4bf38eea);
-		namespace_6aaccc24::function_da693cbe("damagePct", 8000, 7, "float", var_7cc0b11d);
-		namespace_6aaccc24::function_da693cbe("ordaHealthPct", 16000, 7, "float", var_14431277);
-		namespace_6aaccc24::function_da693cbe("hasOrda", 16000, 1, "int", var_db1c4294);
-		namespace_6aaccc24::function_da693cbe("hasCharge", 16000, 1, "int", var_87048abd);
-		namespace_6aaccc24::function_da693cbe("hasDamage", 16000, 1, "int", var_dd55685a);
+		cluielem::setup_clientfields("zm_control_point_hud");
+		cluielem::add_clientfield("chargePct", 8000, 7, "float", var_4bf38eea);
+		cluielem::add_clientfield("damagePct", 8000, 7, "float", var_7cc0b11d);
+		cluielem::add_clientfield("ordaHealthPct", 16000, 7, "float", var_14431277);
+		cluielem::add_clientfield("hasOrda", 16000, 1, "int", var_db1c4294);
+		cluielem::add_clientfield("hasCharge", 16000, 1, "int", var_87048abd);
+		cluielem::add_clientfield("hasDamage", 16000, 1, "int", var_dd55685a);
 	}
 
 	/*
-		Name: function_a04ff29a
+		Name: set_damagepct
 		Namespace: namespace_a0b518ca
 		Checksum: 0x4D120C86
 		Offset: 0x7A0
@@ -128,13 +128,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a04ff29a(localclientnum, value)
+	function set_damagepct(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "damagePct", value);
+		[[ self ]]->set_data(localclientnum, "damagePct", value);
 	}
 
 	/*
-		Name: function_a59aefa6
+		Name: set_ordahealthpct
 		Namespace: namespace_a0b518ca
 		Checksum: 0x8F220BEE
 		Offset: 0x7D8
@@ -142,13 +142,13 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a59aefa6(localclientnum, value)
+	function set_ordahealthpct(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "ordaHealthPct", value);
+		[[ self ]]->set_data(localclientnum, "ordaHealthPct", value);
 	}
 
 	/*
-		Name: function_a95c34f3
+		Name: set_hasorda
 		Namespace: namespace_a0b518ca
 		Checksum: 0x1427C44F
 		Offset: 0x810
@@ -156,9 +156,9 @@ class class_a0b518ca : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a95c34f3(localclientnum, value)
+	function set_hasorda(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "hasOrda", value);
+		[[ self ]]->set_data(localclientnum, "hasOrda", value);
 	}
 
 	/*
@@ -172,22 +172,22 @@ class class_a0b518ca : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "chargePct", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "damagePct", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "ordaHealthPct", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "hasOrda", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "hasCharge", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "hasDamage", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "chargePct", 0);
+		[[ self ]]->set_data(localclientnum, "damagePct", 0);
+		[[ self ]]->set_data(localclientnum, "ordaHealthPct", 0);
+		[[ self ]]->set_data(localclientnum, "hasOrda", 0);
+		[[ self ]]->set_data(localclientnum, "hasCharge", 0);
+		[[ self ]]->set_data(localclientnum, "hasDamage", 0);
 	}
 
 }
 
-#namespace namespace_72133e5;
+#namespace zm_control_point_hud;
 
 /*
 	Name: function_4552498
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x77F7A34B
 	Offset: 0x110
 	Size: 0x14
@@ -196,12 +196,12 @@ class class_a0b518ca : class_6aaccc24
 */
 function private autoexec function_4552498()
 {
-	level notify(697194221);
+	level notify(-697194221);
 }
 
 /*
 	Name: register
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x593FE275
 	Offset: 0x130
 	Size: 0x1A6
@@ -216,40 +216,40 @@ function register(var_4bf38eea, var_7cc0b11d, var_14431277, var_db1c4294, var_87
 	{
 		level.var_ae746e8f = associativearray();
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_53727b8181275445"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_control_point_hud"]))
 	{
-		level.var_ae746e8f[#"hash_53727b8181275445"] = [];
+		level.var_ae746e8f[#"zm_control_point_hud"] = [];
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_53727b8181275445"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_control_point_hud"]))
 	{
-		level.var_ae746e8f[#"hash_53727b8181275445"] = [];
+		level.var_ae746e8f[#"zm_control_point_hud"] = [];
 	}
-	else if(!isarray(level.var_ae746e8f[#"hash_53727b8181275445"]))
+	else if(!isarray(level.var_ae746e8f[#"zm_control_point_hud"]))
 	{
-		level.var_ae746e8f[#"hash_53727b8181275445"] = array(level.var_ae746e8f[#"hash_53727b8181275445"]);
+		level.var_ae746e8f[#"zm_control_point_hud"] = array(level.var_ae746e8f[#"zm_control_point_hud"]);
 	}
-	level.var_ae746e8f[#"hash_53727b8181275445"][level.var_ae746e8f[#"hash_53727b8181275445"].size] = elem;
+	level.var_ae746e8f[#"zm_control_point_hud"][level.var_ae746e8f[#"zm_control_point_hud"].size] = elem;
 }
 
 /*
-	Name: function_5c1bb138
-	Namespace: namespace_72133e5
+	Name: register_clientside
+	Namespace: zm_control_point_hud
 	Checksum: 0x715F0657
 	Offset: 0x2E0
 	Size: 0x34
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_a0b518ca();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0xB48954B
 	Offset: 0x320
 	Size: 0x1C
@@ -263,7 +263,7 @@ function open(player)
 
 /*
 	Name: close
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x1F89F37C
 	Offset: 0x348
 	Size: 0x1C
@@ -277,7 +277,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_72133e5
+	Namespace: zm_control_point_hud
 	Checksum: 0x68A997EB
 	Offset: 0x370
 	Size: 0x1A
@@ -290,86 +290,86 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_62264c81
-	Namespace: namespace_72133e5
+	Name: set_chargepct
+	Namespace: zm_control_point_hud
 	Checksum: 0xFB1617AF
 	Offset: 0x398
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_62264c81(localclientnum, value)
+function set_chargepct(localclientnum, value)
 {
-	[[ self ]]->function_62264c81(localclientnum, value);
+	[[ self ]]->set_chargepct(localclientnum, value);
 }
 
 /*
-	Name: function_a04ff29a
-	Namespace: namespace_72133e5
+	Name: set_damagepct
+	Namespace: zm_control_point_hud
 	Checksum: 0x55D47F1F
 	Offset: 0x3C8
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_a04ff29a(localclientnum, value)
+function set_damagepct(localclientnum, value)
 {
-	[[ self ]]->function_a04ff29a(localclientnum, value);
+	[[ self ]]->set_damagepct(localclientnum, value);
 }
 
 /*
-	Name: function_a59aefa6
-	Namespace: namespace_72133e5
+	Name: set_ordahealthpct
+	Namespace: zm_control_point_hud
 	Checksum: 0x979D2497
 	Offset: 0x3F8
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_a59aefa6(localclientnum, value)
+function set_ordahealthpct(localclientnum, value)
 {
-	[[ self ]]->function_a59aefa6(localclientnum, value);
+	[[ self ]]->set_ordahealthpct(localclientnum, value);
 }
 
 /*
-	Name: function_a95c34f3
-	Namespace: namespace_72133e5
+	Name: set_hasorda
+	Namespace: zm_control_point_hud
 	Checksum: 0xAB8A1C2
 	Offset: 0x428
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_a95c34f3(localclientnum, value)
+function set_hasorda(localclientnum, value)
 {
-	[[ self ]]->function_a95c34f3(localclientnum, value);
+	[[ self ]]->set_hasorda(localclientnum, value);
 }
 
 /*
-	Name: function_751f7270
-	Namespace: namespace_72133e5
+	Name: set_hascharge
+	Namespace: zm_control_point_hud
 	Checksum: 0x2A676EA9
 	Offset: 0x458
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_751f7270(localclientnum, value)
+function set_hascharge(localclientnum, value)
 {
-	[[ self ]]->function_751f7270(localclientnum, value);
+	[[ self ]]->set_hascharge(localclientnum, value);
 }
 
 /*
-	Name: function_338d48a0
-	Namespace: namespace_72133e5
+	Name: set_hasdamage
+	Namespace: zm_control_point_hud
 	Checksum: 0x64D1EE95
 	Offset: 0x488
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_338d48a0(localclientnum, value)
+function set_hasdamage(localclientnum, value)
 {
-	[[ self ]]->function_338d48a0(localclientnum, value);
+	[[ self ]]->set_hasdamage(localclientnum, value);
 }
 

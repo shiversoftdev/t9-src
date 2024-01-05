@@ -1,6 +1,6 @@
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
 
 #namespace util;
 
@@ -1386,11 +1386,11 @@ function function_ff74bf7(team)
 	Parameters: 4
 	Flags: Linked
 */
-function function_a3f7de13(var_e0dd85aa, s_team, n_clientnum, var_ba966ff5)
+function function_a3f7de13(var_e0dd85aa, s_team, n_clientnum, extradata)
 {
-	if(!isdefined(var_ba966ff5))
+	if(!isdefined(extradata))
 	{
-		var_ba966ff5 = 0;
+		extradata = 0;
 	}
 	if(!isdefined(var_e0dd85aa))
 	{
@@ -1420,7 +1420,7 @@ function function_a3f7de13(var_e0dd85aa, s_team, n_clientnum, var_ba966ff5)
 	players = getplayers();
 	foreach(player in players)
 	{
-		player luinotifyevent(#"hash_2f8d0153aa606f7d", 4, var_e0dd85aa, var_dfc4aab4, n_clientnum, var_ba966ff5);
+		player luinotifyevent(#"announcement_event", 4, var_e0dd85aa, var_dfc4aab4, n_clientnum, extradata);
 	}
 }
 

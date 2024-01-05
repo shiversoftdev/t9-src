@@ -1,12 +1,12 @@
-#using script_44b0b8420eabacad;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_utils.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\cp_common\gametypes\globallogic_utils.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
 
 #namespace globallogic_defaults;
 
@@ -54,8 +54,8 @@ function getwinningteamfromloser(losing_team)
 function default_onforfeit(team)
 {
 	level.gameforfeited = 1;
-	level notify(#"hash_7c63ed1f465e8e8e");
-	level endon(#"hash_7c63ed1f465e8e8e", #"hash_39a00a79045884ca");
+	level notify(#"forfeit in progress");
+	level endon(#"forfeit in progress", #"abort forfeit");
 	forfeit_delay = 20;
 	announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
 	wait(10);

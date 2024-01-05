@@ -1,9 +1,9 @@
+#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\overtime.gsc;
+#using scripts\mp_common\gametypes\outcome.gsc;
+#using scripts\mp_common\gametypes\globallogic.gsc;
 #using script_3d703ef87a841fe4;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\outcome.gsc;
-#using scripts\mp_common\gametypes\overtime.gsc;
-#using scripts\mp_common\gametypes\round.gsc;
 
 #namespace match;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_acd2421a()
 {
-	level notify(69160514);
+	level notify(-69160514);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: match
 	Checksum: 0x6854AEFE
 	Offset: 0xE8
@@ -30,7 +30,7 @@ function private autoexec function_acd2421a()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"match", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -82,7 +82,7 @@ function private function_94003d29()
 	round::function_37f04b09();
 	if(overtime::is_overtime_round())
 	{
-		function_1362c7e0();
+		set_overtime();
 	}
 }
 
@@ -113,12 +113,12 @@ function private function_b6b94df8()
 {
 	if(overtime::is_overtime_round())
 	{
-		function_1362c7e0();
+		set_overtime();
 	}
 }
 
 /*
-	Name: function_1362c7e0
+	Name: set_overtime
 	Namespace: match
 	Checksum: 0x186F4228
 	Offset: 0x240
@@ -126,7 +126,7 @@ function private function_b6b94df8()
 	Parameters: 0
 	Flags: Linked
 */
-function function_1362c7e0()
+function set_overtime()
 {
 	round::set_flag("overtime");
 	set_flag("overtime");
@@ -147,7 +147,7 @@ function set_flag(flag)
 }
 
 /*
-	Name: function_5f24faac
+	Name: get_flag
 	Namespace: match
 	Checksum: 0x48D60C11
 	Offset: 0x2B8
@@ -155,13 +155,13 @@ function set_flag(flag)
 	Parameters: 1
 	Flags: Linked
 */
-function function_5f24faac(flag)
+function get_flag(flag)
 {
-	return outcome::function_5f24faac(game.outcome, flag);
+	return outcome::get_flag(game.outcome, flag);
 }
 
 /*
-	Name: function_46cb766c
+	Name: clear_flag
 	Namespace: match
 	Checksum: 0xE4D16CC5
 	Offset: 0x2F0
@@ -169,9 +169,9 @@ function function_5f24faac(flag)
 	Parameters: 1
 	Flags: None
 */
-function function_46cb766c(flag)
+function clear_flag(flag)
 {
-	return outcome::function_46cb766c(game.outcome, flag);
+	return outcome::clear_flag(game.outcome, flag);
 }
 
 /*
@@ -239,7 +239,7 @@ function get_winning_team()
 }
 
 /*
-	Name: function_ebd67076
+	Name: is_winning_team
 	Namespace: match
 	Checksum: 0xF58B48F0
 	Offset: 0x420
@@ -247,7 +247,7 @@ function get_winning_team()
 	Parameters: 1
 	Flags: None
 */
-function function_ebd67076(team)
+function is_winning_team(team)
 {
 	if(isdefined(game.outcome.team) && team == game.outcome.team)
 	{
@@ -332,7 +332,7 @@ function function_b5f4c9d8()
 }
 
 /*
-	Name: function_9b24638f
+	Name: get_winner
 	Namespace: match
 	Checksum: 0xBCC24596
 	Offset: 0x5D0
@@ -340,7 +340,7 @@ function function_b5f4c9d8()
 	Parameters: 0
 	Flags: Linked
 */
-function function_9b24638f()
+function get_winner()
 {
 	if(is_true(level.teambased))
 	{
@@ -350,7 +350,7 @@ function function_9b24638f()
 }
 
 /*
-	Name: function_d1e740f6
+	Name: set_winner
 	Namespace: match
 	Checksum: 0x8B90F983
 	Offset: 0x630
@@ -358,9 +358,9 @@ function function_9b24638f()
 	Parameters: 1
 	Flags: None
 */
-function function_d1e740f6(var_512330f1)
+function set_winner(team_or_player)
 {
-	outcome::function_d1e740f6(game.outcome, var_512330f1);
+	outcome::set_winner(game.outcome, team_or_player);
 }
 
 /*
@@ -403,12 +403,12 @@ function function_870759fb()
 */
 function function_6d0354e3()
 {
-	winner = round::function_9b24638f();
+	winner = round::get_winner();
 	if(game.outcome.var_aefc8b8d.var_c1e98979 != 7)
 	{
-		if(level.teambased && function_5f24faac("overtime"))
+		if(level.teambased && get_flag("overtime"))
 		{
-			if(!is_true(level.doubleovertime) || round::function_5f24faac("tie"))
+			if(!is_true(level.doubleovertime) || round::get_flag("tie"))
 			{
 				winner = teams::function_d85770f0("overtimeroundswon");
 			}

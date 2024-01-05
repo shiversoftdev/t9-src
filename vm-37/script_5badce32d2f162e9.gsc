@@ -1,16 +1,16 @@
-#using script_178024232e91b0a1;
 #using script_1883fa4e60abbf9f;
 #using script_3072532951b5b4ae;
-#using script_3aa0f32b70d4f7cb;
-#using script_6809bf766eba194a;
 #using script_68d08b784c92da95;
-#using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_3aa0f32b70d4f7cb;
+#using script_178024232e91b0a1;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_dba1ec08;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_dba1ec08
 	Checksum: 0x24481533
 	Offset: 0xE0
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2dc824b6cfc14a18", &function_70a657d8, undefined, undefined, #"archetype_utility");
 }

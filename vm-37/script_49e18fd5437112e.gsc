@@ -1,12 +1,12 @@
-#using script_152c3f4ffef9e588;
-#using script_c8d806d2487b617;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_c8d806d2487b617;
+#using script_152c3f4ffef9e588;
 
 #namespace namespace_2b1568cc;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2b1568cc
 	Checksum: 0x65BF7097
 	Offset: 0xC0
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_380b7703a79220e8", &function_70a657d8, undefined, undefined, #"radiation");
 }

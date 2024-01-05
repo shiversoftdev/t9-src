@@ -1,7 +1,7 @@
-#using script_3371dd5958d2f84f;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\gestures.gsc;
+#using scripts\mp_common\dynamic_loadout.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\gestures.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
 
 #namespace pickup_ammo;
 
@@ -30,8 +30,8 @@ function private autoexec function_94086288()
 */
 function function_cff1656d()
 {
-	var_c2c1c043 = getentarray("pickup_ammo", "targetname");
-	foreach(pickup in var_c2c1c043)
+	pickup_ammos = getentarray("pickup_ammo", "targetname");
+	foreach(pickup in pickup_ammos)
 	{
 		pickup.trigger = spawn("trigger_radius_use", pickup.origin + vectorscale((0, 0, 1), 15), 0, 120, 100);
 		pickup.trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
@@ -62,13 +62,13 @@ function function_4827d817(weapon)
 	{
 		return false;
 	}
-	package = getscriptbundle(level.var_a9f35be1[0]);
+	package = getscriptbundle(level.bountypackagelist[0]);
 	slot = undefined;
-	if(isdefined(self.pers[#"hash_50251e63e4a703b5"].weapons[0]) && self.pers[#"hash_50251e63e4a703b5"].weapons[0].name == weapon.name)
+	if(isdefined(self.pers[#"dynamic_loadout"].weapons[0]) && self.pers[#"dynamic_loadout"].weapons[0].name == weapon.name)
 	{
 		slot = 0;
 	}
-	else if(isdefined(self.pers[#"hash_50251e63e4a703b5"].weapons[1]) && self.pers[#"hash_50251e63e4a703b5"].weapons[1].name == weapon.name)
+	else if(isdefined(self.pers[#"dynamic_loadout"].weapons[1]) && self.pers[#"dynamic_loadout"].weapons[1].name == weapon.name)
 	{
 		slot = 1;
 	}
@@ -76,8 +76,8 @@ function function_4827d817(weapon)
 	{
 		return false;
 	}
-	var_f3e0cb57 = self.pers[#"hash_50251e63e4a703b5"].clientfields[slot].val - 1;
-	package = getscriptbundle(level.var_a9f35be1[var_f3e0cb57]);
+	var_f3e0cb57 = self.pers[#"dynamic_loadout"].clientfields[slot].val - 1;
+	package = getscriptbundle(level.bountypackagelist[var_f3e0cb57]);
 	var_e6e3de63 = package.var_ef921c3c;
 	maxammo = package.refillammo;
 	if(!isdefined(maxammo) || maxammo == 0)
@@ -121,8 +121,8 @@ function private function_5bb13b48(player)
 		primaries = player getweaponslistprimaries();
 		foreach(weapon in primaries)
 		{
-			var_f34ce24d = player function_4827d817(weapon);
-			if(var_f34ce24d)
+			ammogiven = player function_4827d817(weapon);
+			if(ammogiven)
 			{
 				var_bd3d7a99 = 1;
 			}
@@ -170,7 +170,7 @@ function private function_7a80944d(player)
 	level endon(#"game_ended");
 	self endon(#"death");
 	player endon(#"disconnect");
-	wait((isdefined(level.var_ca2fc68c) ? level.var_ca2fc68c : 0));
+	wait((isdefined(level.pickup_respawn_time) ? level.pickup_respawn_time : 0));
 	if(isdefined(self.objectiveid))
 	{
 		objective_setvisibletoplayer(self.objectiveid, player);

@@ -1,7 +1,7 @@
-#using scripts\core_common\multi_extracam.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\multi_extracam.csc;
 
 #namespace weapon_customization_icon;
 
@@ -20,7 +20,7 @@ function private autoexec function_7b73623d()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: weapon_customization_icon
 	Checksum: 0xD9657131
 	Offset: 0x198
@@ -28,7 +28,7 @@ function private autoexec function_7b73623d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"weapon_customization_icon", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -251,7 +251,7 @@ function get_safehouse_position_struct()
 {
 	position = spawnstruct();
 	position.angles = (0, 0, 0);
-	switch(util::function_53bbf9d2())
+	switch(util::get_map_name())
 	{
 		default:
 		{

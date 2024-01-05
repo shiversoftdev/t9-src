@@ -1,13 +1,13 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\fx_shared.csc;
-#using scripts\core_common\sound_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\sound_shared.csc;
+#using scripts\core_common\fx_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace exploder;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: exploder
 	Checksum: 0xB4A292C9
 	Offset: 0x108
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"exploder", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -105,7 +105,7 @@ function player_init(clientnum)
 		level.createfxent = [];
 	}
 	acceptabletargetnames = [];
-	acceptabletargetnames[#"hash_7a9dcee99d931917"] = 1;
+	acceptabletargetnames[#"exploderchunk visible"] = 1;
 	acceptabletargetnames[#"exploderchunk"] = 1;
 	acceptabletargetnames[#"exploder"] = 1;
 	exploder_id = 1;
@@ -284,7 +284,7 @@ function exploder(exploder_id)
 */
 function function_993369d6(exploder_id)
 {
-	if(isstring(exploder_id) || function_7a600918(exploder_id))
+	if(isstring(exploder_id) || ishash(exploder_id))
 	{
 		activate_radiant_exploder(exploder_id, 1);
 		return;
@@ -391,7 +391,7 @@ function activate_radiant_exploder(string, immediate)
 */
 function stop_exploder(exploder_id)
 {
-	if(isstring(exploder_id) || function_7a600918(exploder_id))
+	if(isstring(exploder_id) || ishash(exploder_id))
 	{
 		var_2639b9f6 = getlocalplayers();
 		for(localclientnum = 0; localclientnum < var_2639b9f6.size; localclientnum++)
@@ -434,7 +434,7 @@ function stop_exploder(exploder_id)
 function kill_exploder(exploder_id)
 {
 	var_2639b9f6 = getlocalplayers();
-	if(isstring(exploder_id) || function_7a600918(exploder_id))
+	if(isstring(exploder_id) || ishash(exploder_id))
 	{
 		for(localclientnum = 0; localclientnum < var_2639b9f6.size; localclientnum++)
 		{

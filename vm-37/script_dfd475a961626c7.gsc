@@ -1,13 +1,13 @@
-#using script_1cd690a97dfca36e;
 #using script_28e27ee9b45fd02d;
 #using script_31671175564a93b7;
+#using script_1cd690a97dfca36e;
 #using script_3318f11e3a1b2358;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\music_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\music_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_a052577e;
 
@@ -61,22 +61,22 @@ function private _objective(objective)
 {
 	switch(objective)
 	{
-		case "hash_43fda5a71e2cf1d9":
+		case "tkdn_raid_bar":
 		{
 			function_b6407dd4(1);
 			break;
 		}
-		case "hash_512e8aab43df84ba":
+		case "tkdn_raid_gearup":
 		{
 			function_b6407dd4(1);
 			break;
 		}
-		case "hash_3ccd7ea71a859e23":
+		case "tkdn_raid_apt":
 		{
 			function_b6407dd4(1);
 			break;
 		}
-		case "hash_284d0daaf024071e":
+		case "tkdn_raid_capture":
 		{
 			function_b6407dd4(1);
 			break;
@@ -86,12 +86,12 @@ function private _objective(objective)
 			function_b6407dd4(1);
 			break;
 		}
-		case "hash_3131dfbc0ce5b7d9":
+		case "tkdn_af_intro":
 		{
 			function_b6407dd4(0);
 			break;
 		}
-		case "hash_35cbe00e084c6cf2":
+		case "tkdn_af_hill":
 		{
 			function_b6407dd4(0);
 			level thread function_955f4842();
@@ -99,14 +99,14 @@ function private _objective(objective)
 			level notify(#"hash_50385173feb854f0");
 			break;
 		}
-		case "hash_c8e65be67e56b17":
+		case "tkdn_af_tarmac":
 		{
 			function_b6407dd4(0);
 			level thread function_2d8bbe54(0.1);
 			level thread function_a43c0d2c();
 			break;
 		}
-		case "hash_12044e7569915825":
+		case "tkdn_af_chase":
 		{
 			function_b6407dd4(0);
 			function_5ea2c6e3("cp_tkdn_af_chase_mix", 0, 1);
@@ -115,7 +115,7 @@ function private _objective(objective)
 			level thread function_d1b165f5();
 			break;
 		}
-		case "hash_2ca6b61fed7d1f53":
+		case "tkdn_af_rc_chase":
 		{
 			function_b6407dd4(0);
 			function_5ea2c6e3("cp_tkdn_af_chase_mix", 0, 1);
@@ -123,12 +123,12 @@ function private _objective(objective)
 			level thread function_e8df4c70();
 			break;
 		}
-		case "hash_55356ede737cfa8e":
+		case "tkdn_af_skid":
 		{
 			function_b6407dd4(0);
 			break;
 		}
-		case "hash_4582a1402b7d9111":
+		case "tkdn_af_wreck":
 		{
 			function_b6407dd4(0);
 			break;
@@ -175,28 +175,28 @@ function private _targetname(ent, name)
 			level.woods = undefined;
 			break;
 		}
-		case "hash_3e5a47e745cb0f0a":
+		case "af_flyover":
 		{
 			plane = ent;
 			var_d776868d = snd::play("veh_tkd_airstrip_flyover", plane);
 			snd::function_f4f3a2a(var_d776868d, plane, 9);
 			break;
 		}
-		case "hash_3a06f6e374f6209a":
+		case "cargo_plane":
 		{
-			level.var_3fbdf2c1 = ent;
+			level.cargo_plane = ent;
 			ent waittill(#"death");
-			level.var_3fbdf2c1 = undefined;
+			level.cargo_plane = undefined;
 			break;
 		}
-		case "hash_c018cd54896556c":
+		case "cargo_plane_mover":
 		{
-			level.var_4e95df22 = ent;
+			level.cargo_plane_mover = ent;
 			ent waittill(#"death");
-			level.var_4e95df22 = undefined;
+			level.cargo_plane_mover = undefined;
 			break;
 		}
-		case "hash_340166229f12355f":
+		case "af_truck_plr":
 		{
 			level.var_5acf72ee = ent;
 			function_b3fdcb06(level.var_5acf72ee, "tag_axel_front_up", "veh_tkd_chase_plr_jeep_high_lp");
@@ -205,33 +205,33 @@ function private _targetname(ent, name)
 			level.var_5acf72ee = undefined;
 			break;
 		}
-		case "hash_4cc39b1d5d4a07b2":
+		case "rc_car_plr":
 		{
-			level.var_2fc0ac93 = ent;
+			level.rc_car_plr = ent;
 			level thread function_e8df4c70();
 			ent waittill(#"death");
-			level.var_2fc0ac93 = undefined;
+			level.rc_car_plr = undefined;
 			break;
 		}
-		case "hash_3f62d2c3ae864d8":
+		case "af_enemy_chase_veh":
 		{
-			level.var_aacee = snd::function_4b879845(level.var_aacee, ent);
+			level.af_enemy_chase_veh = snd::function_4b879845(level.af_enemy_chase_veh, ent);
 			function_b3fdcb06(ent, "tag_axel_front_up", "veh_tkd_chase_npc_jeeps_high_lp");
 			function_244835ac(ent, "veh_tkd_rcxd_deploy_tires_lp");
 			ent waittill(#"death");
-			level.var_aacee = snd::function_16b5f116(level.var_aacee, ent);
+			level.af_enemy_chase_veh = snd::function_16b5f116(level.af_enemy_chase_veh, ent);
 			break;
 		}
-		case "hash_2600ea47e831c2fa":
+		case "skid_veh":
 		{
 			function_b3fdcb06(ent, "tag_axel_front_up", "veh_tkd_skid_veh_high_lp");
 			function_244835ac(ent, "veh_tkd_skid_veh_tires_skid_lp");
 			level thread function_7142e76c(ent);
 			break;
 		}
-		case "hash_2045ab8b48791497":
+		case "cargo_debris":
 		{
-			level thread function_7a571978(ent);
+			level thread cargo_debris(ent);
 			break;
 		}
 		default:
@@ -317,19 +317,19 @@ function private function_f2a2832d(player, msg)
 	#/
 	switch(msg)
 	{
-		case "hash_390996e933fcfc21":
+		case "triton_on":
 		{
 			function_b6407dd4(1);
 			break;
 		}
-		case "hash_682cc54356ca001d":
+		case "triton_off":
 		{
 			function_b6407dd4(0);
 			break;
 		}
-		case "hash_51a8ee167f3bb02b":
+		case "intro_trans_out":
 		{
-			level notify(#"hash_51a8ee167f3bb02b");
+			level notify(#"intro_trans_out");
 			break;
 		}
 		case "hash_443db59c2d746e0f":
@@ -342,27 +342,27 @@ function private function_f2a2832d(player, msg)
 			function_ed62c9c2("cp_takedown_bar_intro");
 			break;
 		}
-		case "hash_2484607687e21399":
+		case "cp_takedown_raid_af_transition":
 		{
 			function_5ea2c6e3("cp_takedown_raid_af_transition");
 			break;
 		}
-		case "hash_5e2de3e1a975b9b9":
+		case "cp_takedown_raid_af_transition_complete":
 		{
 			function_ed62c9c2("cp_takedown_raid_af_transition");
 			break;
 		}
-		case "hash_cc8bac81a7189f5":
+		case "hit3_fadein":
 		{
 			thread function_8881654();
 			break;
 		}
-		case "hash_5ead2ba319ea3d3e":
+		case "af_intro_camera_whoosh":
 		{
 			snd::play("evt_tkd_af_intro_camera_whoosh");
 			break;
 		}
-		case "hash_5e176c5823761990":
+		case "af_intro_done":
 		{
 			wait(5);
 			level notify(#"hash_50385173feb854f0");
@@ -372,15 +372,15 @@ function private function_f2a2832d(player, msg)
 		{
 			break;
 		}
-		case "hash_4af1873417a08a37":
+		case "snd_overlook_scene":
 		{
 			thread function_2f088c3f();
 			thread function_9c9fad4e();
 			break;
 		}
-		case "hash_2c1c27cfc400de3c":
+		case "start_sniping":
 		{
-			level notify(#"hash_2c1c27cfc400de3c");
+			level notify(#"start_sniping");
 			break;
 		}
 		case "hash_1533b6e574c5cfe7":
@@ -400,7 +400,7 @@ function private function_f2a2832d(player, msg)
 			function_5ea2c6e3("cp_tkdn_af_tarmac_combat", 1, 1);
 			break;
 		}
-		case "hash_11dad53625ede57f":
+		case "af_truck_plr_in":
 		{
 			function_ed62c9c2("cp_tkdn_af_tarmac_combat", 4);
 			function_5ea2c6e3("cp_tkdn_af_chase_mix", 4, 1);
@@ -425,23 +425,23 @@ function private function_f2a2832d(player, msg)
 		{
 			break;
 		}
-		case "hash_3865fdc375b84165":
+		case "af_skid_starting":
 		{
 			thread function_41798e8d();
 			break;
 		}
-		case "hash_30497fc39d2a7a7e":
+		case "af_skid_complete":
 		{
 			function_ed62c9c2("cp_tkdn_af_chase_mix", 3);
 			level notify(#"hash_accff44c369c030");
 			break;
 		}
-		case "hash_386613f28cf9e9e8":
+		case "plane_idle":
 		{
 			thread function_2d8bbe54(0.5);
 			break;
 		}
-		case "hash_72f7704317f50c58":
+		case "start_plane_rev":
 		{
 			break;
 		}
@@ -449,33 +449,33 @@ function private function_f2a2832d(player, msg)
 		{
 			level notify(#"hash_2b1ea816682de37d");
 			level notify(#"hash_6f65948492627624");
-			thread function_b5f89c52(level.var_3fbdf2c1);
+			thread function_b5f89c52(level.cargo_plane);
 			thread function_b5f89c52(level.var_5acf72ee);
-			thread function_b5f89c52(level.var_2fc0ac93);
+			thread function_b5f89c52(level.rc_car_plr);
 			function_ed62c9c2("cp_tkdn_af_chase_rcxd_mix", 0.25);
 			level thread function_721eb243();
 			break;
 		}
-		case "hash_5dde7e297f29cd33":
+		case "af_wreck":
 		{
 			break;
 		}
-		case "hash_271813ef65bc023c":
+		case "af_wreck_amb":
 		{
-			level thread function_3599840b();
+			level thread af_wreck_amb();
 			break;
 		}
-		case "hash_6000ba211d2a699e":
+		case "af_wreck_amb_end":
 		{
-			level notify(#"hash_6000ba211d2a699e");
+			level notify(#"af_wreck_amb_end");
 			break;
 		}
-		case "hash_20f512f76f66802b":
+		case "end_fadeout":
 		{
 			thread function_4df43a5e();
 			break;
 		}
-		case "hash_620960b0a0b9daf4":
+		case "unlock_all_takedownmus":
 		{
 			function_2cca7b47(0, #"hash_985a48664a3651b");
 			function_2cca7b47(0, #"hash_985a58664a366ce");
@@ -684,7 +684,7 @@ function function_2f088c3f()
 {
 	wait(5);
 	function_5ea2c6e3("cp_tkdn_af_hill");
-	level waittill(#"hash_2c1c27cfc400de3c");
+	level waittill(#"start_sniping");
 	function_ed62c9c2("cp_tkdn_af_hill");
 }
 
@@ -699,7 +699,7 @@ function function_2f088c3f()
 */
 function function_9c9fad4e()
 {
-	level endoncallback(&function_d111fa29, #"hash_2c1c27cfc400de3c");
+	level endoncallback(&function_d111fa29, #"start_sniping");
 	player = getlocalplayers()[0];
 	player endon(#"death");
 	function_5ea2c6e3("cp_tkdn_af_hill_binoculars", 0, 0);
@@ -805,7 +805,7 @@ function function_a43c0d2c()
 */
 function function_5be14e40()
 {
-	while(!isdefined(level.var_3fbdf2c1))
+	while(!isdefined(level.cargo_plane))
 	{
 		waitframe(1);
 	}
@@ -822,7 +822,7 @@ function function_5be14e40()
 */
 function function_53c8ee41()
 {
-	while(!isdefined(level.var_4e95df22))
+	while(!isdefined(level.cargo_plane_mover))
 	{
 		waitframe(1);
 	}
@@ -845,7 +845,7 @@ function function_955f4842()
 	}
 	level.var_1c393e86 = 1;
 	function_5be14e40();
-	start = snd::play("veh_tkd_af_cargo_plane_start", [1:(288, 0, 108), 0:level.var_3fbdf2c1]);
+	start = snd::play("veh_tkd_af_cargo_plane_start", [1:(288, 0, 108), 0:level.cargo_plane]);
 	thread function_2d8bbe54(3);
 }
 
@@ -867,7 +867,7 @@ function function_2d8bbe54(wait_time)
 	level.var_3f10e8f2 = 1;
 	function_5be14e40();
 	wait_time = snd::function_ea2f17d1(wait_time, 0.5);
-	level.var_2d8bbe54 = snd::play("veh_tkd_af_cargo_plane_idle_lp", [1:(288, 0, 108), 0:level.var_3fbdf2c1]);
+	level.var_2d8bbe54 = snd::play("veh_tkd_af_cargo_plane_idle_lp", [1:(288, 0, 108), 0:level.cargo_plane]);
 	snd::function_db78159d(level.var_2d8bbe54, 0);
 	snd::set_pitch(level.var_2d8bbe54, 1);
 	wait(wait_time);
@@ -894,7 +894,7 @@ function function_e9cf99c1()
 	}
 	level.var_b2f77aec = 1;
 	function_5be14e40();
-	snd::play("veh_tkd_af_cargo_plane_accelerate", [1:(288, 0, 108), 0:level.var_3fbdf2c1]);
+	snd::play("veh_tkd_af_cargo_plane_accelerate", [1:(288, 0, 108), 0:level.cargo_plane]);
 	level notify(#"hash_5b80aed93a868b80");
 }
 
@@ -915,7 +915,7 @@ function function_ad605463()
 	}
 	level.var_72cef6cb = 1;
 	function_53c8ee41();
-	snd::play("veh_tkd_af_cargo_plane_takeoff", [1:(288, 0, 108), 0:level.var_4e95df22]);
+	snd::play("veh_tkd_af_cargo_plane_takeoff", [1:(288, 0, 108), 0:level.cargo_plane_mover]);
 	waitframe(3);
 	level notify(#"hash_352bb96b1643631");
 }
@@ -937,7 +937,7 @@ function function_d1b165f5()
 	}
 	level.var_ea29c588 = 1;
 	function_53c8ee41();
-	level thread function_b3fdcb06(level.var_4e95df22, (288, 0, 108), "veh_tkd_af_cargo_plane_high_lyr1_lp");
+	level thread function_b3fdcb06(level.cargo_plane_mover, (288, 0, 108), "veh_tkd_af_cargo_plane_high_lyr1_lp");
 }
 
 /*
@@ -999,7 +999,7 @@ function function_b5f89c52(veh)
 */
 function function_81191c8a()
 {
-	while(!isdefined(level.var_2fc0ac93))
+	while(!isdefined(level.rc_car_plr))
 	{
 		waitframe(1);
 	}
@@ -1022,9 +1022,9 @@ function function_e8df4c70()
 	}
 	level.var_b7589e37 = 1;
 	function_81191c8a();
-	snd::play([2:0, 1:"wpn_tkd_rcxd_deploy_drop", 0:1.1], level.var_2fc0ac93);
+	snd::play([2:0, 1:"wpn_tkd_rcxd_deploy_drop", 0:1.1], level.rc_car_plr);
 	function_5ea2c6e3("cp_tkdn_af_chase_rcxd_mix", 1, 1);
-	function_d942b1c8(level.var_2fc0ac93, "tag_suspension_front", "wpn_tkd_rcxd_veh_high_lp");
+	function_d942b1c8(level.rc_car_plr, "tag_suspension_front", "wpn_tkd_rcxd_veh_high_lp");
 	function_ed62c9c2("cp_tkdn_af_rc_chase_tires", 3);
 }
 
@@ -1073,7 +1073,7 @@ function function_7142e76c(veh)
 }
 
 /*
-	Name: function_7a571978
+	Name: cargo_debris
 	Namespace: namespace_a052577e
 	Checksum: 0x105BA8EB
 	Offset: 0x2BD0
@@ -1081,7 +1081,7 @@ function function_7142e76c(veh)
 	Parameters: 1
 	Flags: Linked
 */
-function function_7a571978(ent)
+function cargo_debris(ent)
 {
 	if(!isdefined(ent.var_a107d844))
 	{
@@ -1091,7 +1091,7 @@ function function_7a571978(ent)
 }
 
 /*
-	Name: function_3599840b
+	Name: af_wreck_amb
 	Namespace: namespace_a052577e
 	Checksum: 0x1A79C1C2
 	Offset: 0x2C30
@@ -1099,7 +1099,7 @@ function function_7a571978(ent)
 	Parameters: 0
 	Flags: Linked
 */
-function function_3599840b()
+function af_wreck_amb()
 {
 	var_a27674c9 = snd::play("emt_tkd_wreck_fire_01_lp", (10461, -54901, -25182));
 	var_d96e62bc = snd::play("emt_tkd_wreck_fire_02_lp", (10738, -54523, -25136));
@@ -1108,7 +1108,7 @@ function function_3599840b()
 	var_47cd46cf = snd::play("emt_tkd_wreck_sirens_01_lp", (10491, -53575, -25003));
 	var_630e7d51 = snd::play("emt_tkd_wreck_sirens_02_lp", (15160, -54833, -24566));
 	var_f07a182a = snd::play("emt_tkd_wreck_sirens_03_lp", (-4034, -49059, -24440));
-	level waittill(#"hash_6000ba211d2a699e");
+	level waittill(#"af_wreck_amb_end");
 	snd::stop(var_a27674c9, 3);
 	snd::stop(var_d96e62bc, 3);
 	snd::stop(var_c6a73d2e, 3);

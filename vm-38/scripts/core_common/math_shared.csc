@@ -11,7 +11,7 @@
 */
 function private autoexec function_60b8033()
 {
-	level notify(1557606703);
+	level notify(-1557606703);
 }
 
 #namespace math;

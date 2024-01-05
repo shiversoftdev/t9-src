@@ -1,7 +1,7 @@
 #using script_615526011fd0894c;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_24fd6413;
 
@@ -37,7 +37,7 @@ event main(eventstruct)
 	clientfield::register("scriptmover", "" + #"rocket_damage", 1, 1, "counter", &function_c4893dbf, 0, 0);
 	clientfield::register("actor", "" + #"zombie_soul", 1, 1, "int", &function_bb5d646a, 0, 0);
 	clientfield::register("world", "" + #"hash_71f053fa597abb52", 1, 1, "int", &function_a2e43552, 0, 0);
-	namespace_30e191ea::register();
+	sr_objective_secure_hud::register();
 	util::waitforclient(0);
 }
 
@@ -227,13 +227,13 @@ function function_a2e43552(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwastimejump == 1)
 	{
-		forcestreamxmodel(#"hash_43cafe376f48ce7f");
-		forcestreamxmodel(#"hash_1125fec2b65433c5");
+		forcestreamxmodel(#"p9_sur_computer_console_hvt_01_screen_missile_in_act");
+		forcestreamxmodel(#"p9_sur_computer_console_hvt_01_screen_missile_act");
 	}
 	else
 	{
-		stopforcestreamingxmodel(#"hash_43cafe376f48ce7f");
-		stopforcestreamingxmodel(#"hash_1125fec2b65433c5");
+		stopforcestreamingxmodel(#"p9_sur_computer_console_hvt_01_screen_missile_in_act");
+		stopforcestreamingxmodel(#"p9_sur_computer_console_hvt_01_screen_missile_act");
 	}
 }
 

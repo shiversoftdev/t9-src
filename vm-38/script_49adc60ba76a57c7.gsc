@@ -1,38 +1,38 @@
-#using script_164a456ce05c3483;
-#using script_178024232e91b0a1;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_2c5daa95f8fec03c;
-#using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
+#using script_164a456ce05c3483;
 #using script_47851dbeea22fe66;
+#using script_1ee011cd0961afd7;
+#using script_5f20d3b434d24884;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\statemachine_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_67e37e63e177f107;
+#using scripts\core_common\util_shared.gsc;
+#using script_178024232e91b0a1;
+#using script_2c5daa95f8fec03c;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_59f07c660e6710a5;
+#using script_35598499769dbb3d;
+#using script_7b7ed6e4bc963a51;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
 #using script_489b835a247c990e;
+#using script_3819e7a1427df6d2;
 #using script_4bf952f6ba31bb17;
 #using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_5701633066d199f2;
-#using script_57f7003580bb15e0;
-#using script_59f07c660e6710a5;
-#using script_5f20d3b434d24884;
-#using script_67e37e63e177f107;
-#using script_7b7ed6e4bc963a51;
 #using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\statemachine_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 class class_a504b9a3 
 {
@@ -356,19 +356,19 @@ function private function_36603968(inflictor, attacker, damage, flags, meansofda
 	Parameters: 1
 	Flags: Linked
 */
-function function_67525edc(var_3f1f1429)
+function function_67525edc(dustball)
 {
 	enemies = function_f6f34851(self.team);
 	foreach(target in enemies)
 	{
 		if(isplayer(target))
 		{
-			distsq = distancesquared(var_3f1f1429.origin, target.origin);
+			distsq = distancesquared(dustball.origin, target.origin);
 			if(distsq <= sqr(150))
 			{
-				params = function_4d1e7b48(#"hash_12a64221f4d27f9b");
+				params = getstatuseffect(#"hash_12a64221f4d27f9b");
 				weapon = getweapon(#"eq_molotov");
-				target status_effect::status_effect_apply(params, weapon, var_3f1f1429, 0, 3000, undefined, var_3f1f1429.origin);
+				target status_effect::status_effect_apply(params, weapon, dustball, 0, 3000, undefined, dustball.origin);
 			}
 		}
 	}
@@ -425,12 +425,12 @@ function elephantstartdeath(elephant)
 	phase = elephant.ai.phase;
 	elephant.skipdeath = 1;
 	elephant.diedinscriptedanim = 1;
-	elephant.var_8cf9d4df = namespace_ec06fe4a::function_e22ae9b3(elephant.origin);
-	elephant.var_8cf9d4df thread namespace_ec06fe4a::function_52afe5df(10);
-	elephant.var_8cf9d4df setmodel(model);
-	elephant.var_8cf9d4df useanimtree("generic");
-	elephant.var_8cf9d4df thread animation::play(animname, elephant.origin, elephant.angles, 1, 0.2, 0.1, undefined, undefined, undefined, 0);
-	elephant.var_8cf9d4df clientfield::set("entrails_model_cf", 1);
+	elephant.entrailsmodel = namespace_ec06fe4a::function_e22ae9b3(elephant.origin);
+	elephant.entrailsmodel thread namespace_ec06fe4a::function_52afe5df(10);
+	elephant.entrailsmodel setmodel(model);
+	elephant.entrailsmodel useanimtree("generic");
+	elephant.entrailsmodel thread animation::play(animname, elephant.origin, elephant.angles, 1, 0.2, 0.1, undefined, undefined, undefined, 0);
+	elephant.entrailsmodel clientfield::set("entrails_model_cf", 1);
 	origin = elephant.origin;
 	angles = elephant.angles;
 	elephant clientfield::set("towers_boss_eye_fx_cf", 0);
@@ -483,11 +483,11 @@ function function_4b28fc8c(entity)
 	{
 		landpos = entity.favoriteenemy.origin;
 	}
-	var_f5022ab9 = namespace_ec06fe4a::function_e22ae9b3(launchpos, "tag_origin");
+	headproj = namespace_ec06fe4a::function_e22ae9b3(launchpos, "tag_origin");
 	vectorfromenemy = vectornormalize(entity.origin - landpos);
 	vectorfromenemy = vectorscale(vectorfromenemy, 250);
 	targetpos = (landpos + vectorfromenemy) + vectorscale((0, 0, 1), 200);
-	var_f5022ab9 clientfield::set("towers_boss_head_proj_fx_cf", 1);
+	headproj clientfield::set("towers_boss_head_proj_fx_cf", 1);
 	trajectory = [];
 	dirtotarget = targetpos - launchpos;
 	var_f1c85329 = vectorscale((0, 0, 1), 30);
@@ -499,14 +499,14 @@ function function_4b28fc8c(entity)
 	var_10b732dc = 0.3;
 	foreach(point in trajectory)
 	{
-		var_f5022ab9 moveto(point, var_10b732dc);
-		var_f5022ab9 waittill(#"movedone");
+		headproj moveto(point, var_10b732dc);
+		headproj waittill(#"movedone");
 	}
 	self playsound(#"hash_62894125ab280b62");
 	self notify(#"hash_79e095919e415a70");
 	if(isdefined(entity.ai.var_502d9d0d))
 	{
-		[[entity.ai.var_502d9d0d]](entity, var_f5022ab9);
+		[[entity.ai.var_502d9d0d]](entity, headproj);
 	}
 }
 
@@ -532,15 +532,15 @@ function private function_df15eebf(entity)
 		dist = distance(self.origin, target.origin);
 		if(isplayer(target) && dist < 600)
 		{
-			params = function_4d1e7b48(#"hash_2c80515d8ac9f1b4");
+			params = getstatuseffect(#"hash_2c80515d8ac9f1b4");
 			weapon = getweapon(#"zombie_ai_defaultmelee");
 			target status_effect::status_effect_apply(params, weapon, entity, 0, 500);
 		}
 	}
 	entity clientfield::increment("towers_boss_melee_effect");
-	var_a5a1f99c = getaiarchetypearray(#"zombie");
-	var_a5a1f99c = array::filter(var_a5a1f99c, 0, &function_1d65bc12, entity);
-	foreach(zombie in var_a5a1f99c)
+	zombiesarray = getaiarchetypearray(#"zombie");
+	zombiesarray = array::filter(zombiesarray, 0, &function_1d65bc12, entity);
+	foreach(zombie in zombiesarray)
 	{
 		zombie namespace_250e9486::setup_zombie_knockdown(entity);
 	}
@@ -606,7 +606,7 @@ function private function_2328518e(entity)
 		dist = distance(var_dc9ec224, target.origin);
 		if(isplayer(target) && dist < 450)
 		{
-			params = function_4d1e7b48(#"hash_2c80515d8ac9f1b4");
+			params = getstatuseffect(#"hash_2c80515d8ac9f1b4");
 			weapon = getweapon("zombie_ai_defaultmelee");
 			target status_effect::status_effect_apply(params, weapon, entity, 0, 500);
 		}
@@ -712,10 +712,10 @@ function private function_1d65bc12(enemy, elephant, var_60e4c6b7)
 	{
 		return false;
 	}
-	var_f2fb414f = anglestoforward(elephant.angles);
-	var_9349139f = enemy.origin - elephant.origin;
-	var_3e3c8075 = (var_9349139f[0], var_9349139f[1], 0);
-	var_c2ee8451 = (var_f2fb414f[0], var_f2fb414f[1], 0);
+	facingvec = anglestoforward(elephant.angles);
+	enemyvec = enemy.origin - elephant.origin;
+	var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
+	var_c2ee8451 = (facingvec[0], facingvec[1], 0);
 	var_3e3c8075 = vectornormalize(var_3e3c8075);
 	var_c2ee8451 = vectornormalize(var_c2ee8451);
 	if(var_60e4c6b7)
@@ -744,11 +744,11 @@ function private elephantknockdownservice(entity)
 	{
 		return false;
 	}
-	var_a5a1f99c = getaiarchetypearray(#"zombie");
-	var_a5a1f99c = arraycombine(var_a5a1f99c, getaiarchetypearray(#"catalyst"), 0, 0);
-	var_a5a1f99c = arraycombine(var_a5a1f99c, getaiarchetypearray(#"tiger"), 0, 0);
-	var_a5a1f99c = array::filter(var_a5a1f99c, 0, &function_1d65bc12, entity);
-	foreach(zombie in var_a5a1f99c)
+	zombiesarray = getaiarchetypearray(#"zombie");
+	zombiesarray = arraycombine(zombiesarray, getaiarchetypearray(#"catalyst"), 0, 0);
+	zombiesarray = arraycombine(zombiesarray, getaiarchetypearray(#"tiger"), 0, 0);
+	zombiesarray = array::filter(zombiesarray, 0, &function_1d65bc12, entity);
+	foreach(zombie in zombiesarray)
 	{
 		zombie namespace_250e9486::setup_zombie_knockdown(entity);
 	}
@@ -822,10 +822,10 @@ function function_ce8fe2b0(entity, var_ab9f62ef)
 	{
 		var_6629fd0d = entity.origin + (forwarddist * forwardvec);
 	}
-	var_cbdae441 = getclosestpointonnavmesh(var_6629fd0d, 500, 200);
-	if(isdefined(var_cbdae441))
+	closestpointonnavmesh = getclosestpointonnavmesh(var_6629fd0d, 500, 200);
+	if(isdefined(closestpointonnavmesh))
 	{
-		trace = groundtrace(var_cbdae441 + vectorscale((0, 0, 1), 200), var_cbdae441 + (vectorscale((0, 0, -1), 200)), 0, undefined);
+		trace = groundtrace(closestpointonnavmesh + vectorscale((0, 0, 1), 200), closestpointonnavmesh + (vectorscale((0, 0, -1), 200)), 0, undefined);
 		if(isdefined(trace[#"position"]))
 		{
 			newpos = trace[#"position"];
@@ -833,11 +833,11 @@ function function_ce8fe2b0(entity, var_ab9f62ef)
 		/#
 			recordsphere(newpos, 15, (1, 0.5, 0), "");
 		#/
-		var_3f1f1429 = spawnvehicle(#"hash_6be593a62b8b87a5", newpos, entity.angles, "dynamic_spawn_ai");
-		var_3f1f1429 thread namespace_ec06fe4a::function_52afe5df(15);
-		if(isdefined(var_3f1f1429))
+		dustball = spawnvehicle(#"hash_6be593a62b8b87a5", newpos, entity.angles, "dynamic_spawn_ai");
+		dustball thread namespace_ec06fe4a::function_52afe5df(15);
+		if(isdefined(dustball))
 		{
-			var_3f1f1429.var_6353e3f1 = 1;
+			dustball.var_6353e3f1 = 1;
 			entity.ai.var_f2d193df = gettime() + randomintrange(5000, 8000);
 			if(is_true(self.var_fe41477d))
 			{
@@ -866,9 +866,9 @@ function function_ce8fe2b0(entity, var_ab9f62ef)
 	{
 		return;
 	}
-	if(targets.size > 1 && self.ai.phase == #"hash_266f56fb994e6639" && isdefined(var_3f1f1429) && isalive(var_3f1f1429) && !isdefined(var_ab9f62ef))
+	if(targets.size > 1 && self.ai.phase == #"hash_266f56fb994e6639" && isdefined(dustball) && isalive(dustball) && !isdefined(var_ab9f62ef))
 	{
-		function_ce8fe2b0(self, var_3f1f1429.origin);
+		function_ce8fe2b0(self, dustball.origin);
 	}
 }
 

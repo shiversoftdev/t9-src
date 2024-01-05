@@ -1,8 +1,8 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace player_vehicle;
 
@@ -21,7 +21,7 @@ function private autoexec function_923534cb()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: player_vehicle
 	Checksum: 0x9B9228A7
 	Offset: 0x208
@@ -29,7 +29,7 @@ function private autoexec function_923534cb()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"player_vehicle", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -88,7 +88,7 @@ function private function_4edde887(localclientnum)
 	{
 		self function_3f24c5a(1);
 	}
-	self.var_ba36f5d = &function_ba36f5d;
+	self.stunnedcallback = &stunnedcallback;
 	self function_1f0c7136(3);
 }
 
@@ -174,7 +174,7 @@ function private function_54e9d3c4(localclientnum)
 		self.var_e29b96d2 function_a5edb367(#"neutral");
 		self.var_e29b96d2 function_8e04481f();
 		self.var_e29b96d2 function_5e00861(0.62);
-		self.var_e29b96d2 function_5db470de(localclientnum, 2400, 1);
+		self.var_e29b96d2 enablevisioncircle(localclientnum, 2400, 1);
 	}
 }
 
@@ -222,7 +222,7 @@ function function_3ec2efae(localclientnum)
 }
 
 /*
-	Name: function_ba36f5d
+	Name: stunnedcallback
 	Namespace: player_vehicle
 	Checksum: 0xB4567AA0
 	Offset: 0x9F0
@@ -230,7 +230,7 @@ function function_3ec2efae(localclientnum)
 	Parameters: 2
 	Flags: Linked
 */
-function function_ba36f5d(localclientnum, val)
+function stunnedcallback(localclientnum, val)
 {
 	self setstunned(val);
 }
@@ -285,7 +285,7 @@ function private function_1e8ff2f7(settings, seat_index)
 	{
 		case 0:
 		{
-			return settings.var_e90e82ca;
+			return settings.vehicle_turret;
 		}
 		case 1:
 		{

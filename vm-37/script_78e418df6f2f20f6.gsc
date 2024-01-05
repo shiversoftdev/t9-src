@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_442ed2b4 : class_6aaccc24
+class class_442ed2b4 : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_442ed2b4 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_442ed2b4
 		Checksum: 0xC6264817
 		Offset: 0x3B8
@@ -52,9 +52,9 @@ class class_442ed2b4 : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_gamemode_onslaught_bossalert_msg");
+		cluielem::register_clientside("mp_gamemode_onslaught_bossalert_msg");
 	}
 
 	/*
@@ -68,12 +68,12 @@ class class_442ed2b4 : class_6aaccc24
 	*/
 	function setup_clientfields(var_ef8933e3)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_bossalert_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "bossAlertText", 1);
+		cluielem::setup_clientfields("mp_gamemode_onslaught_bossalert_msg");
+		cluielem::function_dcb34c80("string", "bossAlertText", 1);
 	}
 
 	/*
-		Name: function_b73d2d7c
+		Name: set_bossalerttext
 		Namespace: namespace_442ed2b4
 		Checksum: 0xCEF7CB65
 		Offset: 0x468
@@ -81,9 +81,9 @@ class class_442ed2b4 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_b73d2d7c(localclientnum, value)
+	function set_bossalerttext(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "bossAlertText", value);
+		[[ self ]]->set_data(localclientnum, "bossAlertText", value);
 	}
 
 	/*
@@ -97,8 +97,8 @@ class class_442ed2b4 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "bossAlertText", #"");
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "bossAlertText", #"");
 	}
 
 }
@@ -138,7 +138,7 @@ function register(var_ef8933e3)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_gamemode_onslaught_bossalert_msg
 	Checksum: 0x2A8F6F7F
 	Offset: 0x258
@@ -146,10 +146,10 @@ function register(var_ef8933e3)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_442ed2b4();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -196,7 +196,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_b73d2d7c
+	Name: set_bossalerttext
 	Namespace: mp_gamemode_onslaught_bossalert_msg
 	Checksum: 0xC7D61015
 	Offset: 0x310
@@ -204,8 +204,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_b73d2d7c(localclientnum, value)
+function set_bossalerttext(localclientnum, value)
 {
-	[[ self ]]->function_b73d2d7c(localclientnum, value);
+	[[ self ]]->set_bossalerttext(localclientnum, value);
 }
 

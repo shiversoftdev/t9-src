@@ -1,18 +1,18 @@
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_4a3f9b8905878272;
 #using script_3819e7a1427df6d2;
 #using script_3aa0f32b70d4f7cb;
-#using script_4a3f9b8905878272;
-#using script_6809bf766eba194a;
 #using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\vehicleriders_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace turret;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: turret
 	Checksum: 0x8C990DF2
 	Offset: 0x398
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"turret", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -2010,7 +2010,7 @@ function _debug_turret_think(n_index)
 			}
 			else
 			{
-				if(s_turret flag::get(#"hash_4d488fd6bd2939d3"))
+				if(s_turret flag::get(#"turret manual"))
 				{
 					str_behavior = str_behavior + "";
 				}
@@ -2393,7 +2393,7 @@ function _index(n_index)
 function _get_best_target(n_index)
 {
 	e_best_target = undefined;
-	self util::function_c596f193();
+	self util::make_sentient();
 	switch(n_index)
 	{
 		case 0:
@@ -2508,7 +2508,7 @@ function trace_test(e_target, v_offset, n_index)
 	s_turret = _get_turret_data(n_index);
 	v_start_org = self gettagorigin(s_turret.str_tag_pivot);
 	v_target = (isvec(e_target) ? e_target : e_target.origin) + v_offset;
-	if(sessionmodeismultiplayergame() || function_f99d2668() && isplayer(e_target))
+	if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame() && isplayer(e_target))
 	{
 		v_target = e_target getshootatpos();
 	}

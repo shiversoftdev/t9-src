@@ -1,8 +1,8 @@
 #using script_1478fbd17fe393cf;
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\serverfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_9b5aa273;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_8e7afeb9()
 {
-	level notify(1422224519);
+	level notify(-1422224519);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9b5aa273
 	Checksum: 0x83AF60BE
 	Offset: 0xE8
@@ -29,7 +29,7 @@ function private autoexec function_8e7afeb9()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2b0f887705d6f3e", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -71,11 +71,11 @@ function private function_b58b73b6(oldval, newval)
 		{
 			if(self function_82f2f066())
 			{
-				namespace_fe8e9929::function_4c2d4fc4(#"hash_5b44c3504ac0a01e", #"", 0, #"", 2);
+				hint_tutorial::function_4c2d4fc4(#"hash_5b44c3504ac0a01e", #"", 0, #"", 2);
 			}
 			else
 			{
-				namespace_fe8e9929::function_4c2d4fc4(#"hash_5b4b0dc5da9b211d", #"", 0, #"", 2);
+				hint_tutorial::function_4c2d4fc4(#"hash_5b4b0dc5da9b211d", #"", 0, #"", 2);
 			}
 			player val::set(#"hold_breath", "disable_usability", 1);
 		}
@@ -84,7 +84,7 @@ function private function_b58b73b6(oldval, newval)
 	{
 		if(level.var_5f632232 === #"hash_5b4b0dc5da9b211d" || level.var_5f632232 === #"hash_5b44c3504ac0a01e")
 		{
-			namespace_fe8e9929::function_9f427d88(0);
+			hint_tutorial::function_9f427d88(0);
 		}
 		player val::reset_all(#"hold_breath");
 	}
@@ -103,7 +103,7 @@ event function_d49b3ac5()
 {
 	if(level.var_5f632232 === #"hash_5b4b0dc5da9b211d" || level.var_5f632232 === #"hash_5b44c3504ac0a01e")
 	{
-		namespace_fe8e9929::function_9f427d88(0);
+		hint_tutorial::function_9f427d88(0);
 		player = getplayers()[0];
 		player val::reset_all(#"hold_breath");
 	}

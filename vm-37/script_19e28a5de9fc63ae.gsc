@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_f2a6c231 : class_6aaccc24
+class cfail_screen : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_f2a6c231
+		Namespace: cfail_screen
 		Checksum: 0xA83899BA
 		Offset: 0x2D8
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_f2a6c231 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_f2a6c231
+		Namespace: cfail_screen
 		Checksum: 0xC0641752
 		Offset: 0x3A8
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_f2a6c231 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_f2a6c231
+		Namespace: cfail_screen
 		Checksum: 0x15ED68C2
 		Offset: 0x378
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_f2a6c231 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_f2a6c231
+		Name: register_clientside
+		Namespace: cfail_screen
 		Checksum: 0x165224CC
 		Offset: 0x320
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("fail_screen");
+		cluielem::register_clientside("fail_screen");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_f2a6c231
+		Namespace: cfail_screen
 		Checksum: 0x9D92F2B
 		Offset: 0x2F8
 		Size: 0x1C
@@ -68,12 +68,12 @@ class class_f2a6c231 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("fail_screen");
+		cluielem::setup_clientfields("fail_screen");
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_f2a6c231
+		Namespace: cfail_screen
 		Checksum: 0x69693B4F
 		Offset: 0x348
 		Size: 0x24
@@ -82,7 +82,7 @@ class class_f2a6c231 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -100,7 +100,7 @@ class class_f2a6c231 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_f2a6c231();
+	elem = new cfail_screen();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: fail_screen
 	Checksum: 0xC54187F5
 	Offset: 0x220
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_f2a6c231();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cfail_screen();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

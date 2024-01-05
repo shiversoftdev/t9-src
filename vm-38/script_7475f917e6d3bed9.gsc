@@ -1,21 +1,21 @@
 #using script_1d0f884737f7cbe8;
-#using script_3728b3b9606c4299;
-#using script_383a3b1bb18ba876;
-#using script_4721de209091b1a6;
-#using script_57c900a7e39234be;
-#using script_57f7003580bb15e0;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using script_7bafaa95bb1b427e;
-#using script_bc6a9a35c229565;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\killcam_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\weapons\weapons.gsc;
+#using scripts\weapons\heatseekingmissile.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using script_4721de209091b1a6;
+#using scripts\killstreaks\killstreak_detect.gsc;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
+#using scripts\killstreaks\airsupport.gsc;
+#using scripts\core_common\killcam_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_b00a727a;
 
@@ -30,7 +30,7 @@
 */
 function private autoexec function_eb4ee3ff()
 {
-	level notify(1974928613);
+	level notify(-1974928613);
 }
 
 #namespace napalm_strike;
@@ -49,7 +49,7 @@ function init_shared(bundlename, var_b083dcd0)
 	/#
 		assert(!isdefined(var_b083dcd0) || isfunctionptr(var_b083dcd0));
 	#/
-	killstreaks::function_e4ef8390(bundlename, (isdefined(var_b083dcd0) ? var_b083dcd0 : &function_aad649e1));
+	killstreaks::register_killstreak(bundlename, (isdefined(var_b083dcd0) ? var_b083dcd0 : &function_aad649e1));
 	clientfield::register("scriptmover", "" + #"hash_72f92383f772d276", 1, 1, "int");
 	clientfield::register("scriptmover", "" + #"hash_3d8e05debfa62f2d", 1, 1, "int");
 	clientfield::register("missile", "" + #"hash_77346335cbe9ecde", 1, 1, "int");
@@ -191,7 +191,7 @@ function function_88e2e18a(killstreaktype, location, team, killstreak_id, startd
 		#/
 		if(!isdefined(height))
 		{
-			if(function_f99d2668())
+			if(sessionmodeiswarzonegame())
 			{
 				var_b0490eb9 = getheliheightlockheight(position);
 				groundheight = targetpoint[2];
@@ -290,7 +290,7 @@ function private spawnplane(startnode, owner, killstreak_id, killstreakbundle, k
 	#/
 	plane thread killstreaks::function_5a7ecb6b();
 	plane setdrawinfrared(1);
-	plane util::function_c596f193();
+	plane util::make_sentient();
 	plane killstreaks::configure_team(killstreaktype, killstreak_id, owner);
 	plane killstreaks::function_2b6aa9e8(bundlename, &function_5e2b9745, &function_7f88b108);
 	killstreak_detect::killstreaktargetset(plane);
@@ -539,7 +539,7 @@ function function_a7d56780(killstreakbundle)
 function private function_77ba1651(position, owner, normal, direction, killcament, team)
 {
 	bundlename = (sessionmodeiszombiesgame() ? "napalm_strike_zm" : "napalm_strike");
-	var_4f9d7296 = position;
+	originalposition = position;
 	var_493d36f9 = normal;
 	killstreakbundle = killstreaks::get_script_bundle(bundlename);
 	var_8a11dbc7 = killstreakbundle.var_36ae071d / 2;
@@ -564,13 +564,13 @@ function private function_77ba1651(position, owner, normal, direction, killcamen
 	if(normal[2] < 0.5)
 	{
 		wall_normal = normal;
-		var_36c22d1d = var_4f9d7296 + vectorscale(var_493d36f9, 8);
+		var_36c22d1d = originalposition + vectorscale(var_493d36f9, 8);
 		var_8ae62b02 = var_36c22d1d - (0, 0, var_8a11dbc7);
 		var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, vectorscale((-1, -1, -1), 3), vectorscale((1, 1, 1), 3), self, 1 | 4);
 		var_693f108f = var_69d15ad0[#"fraction"] * var_8a11dbc7;
 		if(var_693f108f > 10)
 		{
-			var_e76400c0 = var_4f9d7296;
+			var_e76400c0 = originalposition;
 			wallnormal = var_493d36f9;
 		}
 		if(var_69d15ad0[#"fraction"] < 1)
@@ -642,14 +642,14 @@ function function_985141f2(owner, startpos, normal, direction, killcament, team,
 	level thread function_660d94c3(firesound, killcament, var_51589eb4);
 	damageendtime = int(gettime() + (var_51589eb4 * 1000));
 	var_b1dd2ca0 = getarraykeys(locations[#"loc"]);
-	foreach(var_7ee5c69b in var_b1dd2ca0)
+	foreach(lockey in var_b1dd2ca0)
 	{
-		position = locations[#"loc"][var_7ee5c69b];
+		position = locations[#"loc"][lockey];
 		if(isunderwater(position))
 		{
 			continue;
 		}
-		fxnormal = locations[#"normal"][var_7ee5c69b];
+		fxnormal = locations[#"normal"][lockey];
 		if(fxnormal[2] < 0.2)
 		{
 			var_8866515 = (0, 0, 1);
@@ -667,7 +667,7 @@ function function_985141f2(owner, startpos, normal, direction, killcament, team,
 				sphere(damageposition, 70, (1, 0, 0), 0.3, 1, 10, 200);
 			}
 		#/
-		weapon = (locations[#"surfacetype"][var_7ee5c69b] == "water" ? var_b366de9c : var_54715763);
+		weapon = (locations[#"surfacetype"][lockey] == "water" ? var_b366de9c : var_54715763);
 		spawntimedfx(weapon, position, var_8866515, var_51589eb4, team, 0);
 		wait(0.25);
 	}
@@ -738,9 +738,9 @@ function private function_a4b1f727(position)
 	Parameters: 1
 	Flags: Private
 */
-function private function_3b402cdd(var_c84f4998)
+function private function_3b402cdd(water_depth)
 {
-	return 0 < var_c84f4998 && var_c84f4998 < 24;
+	return 0 < water_depth && water_depth < 24;
 }
 
 /*
@@ -754,8 +754,8 @@ function private function_3b402cdd(var_c84f4998)
 */
 function private isunderwater(position)
 {
-	var_c84f4998 = getwaterheight(position) - position[2];
-	return var_c84f4998 >= 24;
+	water_depth = getwaterheight(position) - position[2];
+	return water_depth >= 24;
 }
 
 /*
@@ -848,8 +848,8 @@ function private function_e3bc95f2(killstreakbundle)
 */
 function function_1db9aa5e()
 {
-	params = function_4d1e7b48("dot_napalm_strike");
-	self status_effect::function_408158ef(params.var_67e2281d, params.var_18d16a6b);
+	params = getstatuseffect("dot_napalm_strike");
+	self status_effect::function_408158ef(params.setype, params.var_18d16a6b);
 }
 
 /*
@@ -927,7 +927,7 @@ function function_4cf0607d(var_93057333, weapon, killstreakbundle)
 	self endon(#"death");
 	if(candofiredamage(self, killstreakbundle.var_f5f02f46))
 	{
-		params = function_4d1e7b48("dot_napalm_strike");
+		params = getstatuseffect("dot_napalm_strike");
 		params.killcament = var_93057333.killcament;
 		self status_effect::status_effect_apply(params, weapon, var_93057333.owner, 0, undefined, undefined, var_93057333.damageposition);
 		self thread sndfiredamage();

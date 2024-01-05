@@ -1,15 +1,15 @@
-#using script_35598499769dbb3d;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using script_35598499769dbb3d;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 class class_358332cc 
 {
@@ -63,7 +63,7 @@ class class_358332cc
 */
 function private autoexec function_b128a549()
 {
-	level notify(1642830987);
+	level notify(-1642830987);
 }
 
 #namespace vehicle;
@@ -761,7 +761,7 @@ function function_b9342b7d(ai, vehicle, seat)
 }
 
 /*
-	Name: function_3eb6760
+	Name: init_rider
 	Namespace: vehicle
 	Checksum: 0xA3957E73
 	Offset: 0x1D68
@@ -769,7 +769,7 @@ function function_b9342b7d(ai, vehicle, seat)
 	Parameters: 3
 	Flags: Linked, Private
 */
-function private function_3eb6760(ai, vehicle, seat)
+function private init_rider(ai, vehicle, seat)
 {
 	/#
 		assert(isdefined(vehicle));
@@ -1055,11 +1055,11 @@ function private function_114d7bd3(vehicle)
 			assert(ai flag::get(""));
 		#/
 		incombat = function_b214280f(ai);
-		var_64bd966f = function_422cecb5(ai, incombat);
+		closeanim = function_422cecb5(ai, incombat);
 		ai get_out(vehicle, ai, "driver", incombat);
-		if(isdefined(var_64bd966f) && isdefined(vehicle))
+		if(isdefined(closeanim) && isdefined(vehicle))
 		{
-			function_2893ab77(vehicle, "driver", var_64bd966f, incombat);
+			function_2893ab77(vehicle, "driver", closeanim, incombat);
 		}
 	}
 }
@@ -1090,11 +1090,11 @@ function private function_b56639f2(vehicle)
 			assert(ai flag::get(""));
 		#/
 		incombat = function_b214280f(ai);
-		var_64bd966f = function_422cecb5(ai, incombat);
+		closeanim = function_422cecb5(ai, incombat);
 		ai get_out(vehicle, ai, "passenger1", incombat);
-		if(isdefined(var_64bd966f) && isdefined(vehicle))
+		if(isdefined(closeanim) && isdefined(vehicle))
 		{
-			function_2893ab77(vehicle, "passenger1", var_64bd966f, incombat);
+			function_2893ab77(vehicle, "passenger1", closeanim, incombat);
 		}
 	}
 }
@@ -1125,11 +1125,11 @@ function private function_2ef91b74(vehicle)
 			assert(ai flag::get(""));
 		#/
 		incombat = function_b214280f(ai);
-		var_64bd966f = function_422cecb5(ai, incombat);
+		closeanim = function_422cecb5(ai, incombat);
 		ai get_out(vehicle, ai, "gunner1", incombat);
-		if(isdefined(var_64bd966f) && isdefined(vehicle))
+		if(isdefined(closeanim) && isdefined(vehicle))
 		{
-			function_2893ab77(vehicle, "gunner1", var_64bd966f, incombat);
+			function_2893ab77(vehicle, "gunner1", closeanim, incombat);
 		}
 	}
 }
@@ -1160,11 +1160,11 @@ function private function_da0917a4(vehicle)
 			assert(ai flag::get(""));
 		#/
 		incombat = function_b214280f(ai);
-		var_64bd966f = function_422cecb5(ai, incombat);
+		closeanim = function_422cecb5(ai, incombat);
 		ai get_out(vehicle, ai, "gunner2", incombat);
-		if(isdefined(var_64bd966f) && isdefined(vehicle))
+		if(isdefined(closeanim) && isdefined(vehicle))
 		{
-			function_2893ab77(vehicle, "gunner2", var_64bd966f, incombat);
+			function_2893ab77(vehicle, "gunner2", closeanim, incombat);
 		}
 	}
 }
@@ -1554,16 +1554,16 @@ function private function_b214280f(ai)
 */
 function private function_422cecb5(ai, incombat)
 {
-	var_64bd966f = undefined;
+	closeanim = undefined;
 	if(incombat && isdefined(ai.var_ec30f5da.var_b7605392))
 	{
-		var_64bd966f = ai.var_ec30f5da.var_b7605392;
+		closeanim = ai.var_ec30f5da.var_b7605392;
 	}
 	else if(isdefined(ai.var_ec30f5da.vehiclecloseanim))
 	{
-		var_64bd966f = ai.var_ec30f5da.vehiclecloseanim;
+		closeanim = ai.var_ec30f5da.vehiclecloseanim;
 	}
-	return var_64bd966f;
+	return closeanim;
 }
 
 /*
@@ -1899,7 +1899,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44)
 				#/
 				return false;
 			}
-			function_3eb6760(ai, vehicle, "driver");
+			init_rider(ai, vehicle, "driver");
 			break;
 		}
 		case "passenger1":
@@ -1916,7 +1916,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44)
 				#/
 				return false;
 			}
-			function_3eb6760(ai, vehicle, "passenger1");
+			init_rider(ai, vehicle, "passenger1");
 			break;
 		}
 		case "gunner1":
@@ -1957,7 +1957,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44)
 					return false;
 				}
 			}
-			function_3eb6760(ai, vehicle, var_ae62c7e5);
+			init_rider(ai, vehicle, var_ae62c7e5);
 			break;
 		}
 		case "gunner2":
@@ -1974,7 +1974,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44)
 				#/
 				return false;
 			}
-			function_3eb6760(ai, vehicle, "gunner2");
+			init_rider(ai, vehicle, "gunner2");
 			break;
 		}
 		default:
@@ -1992,7 +1992,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44)
 				#/
 				return false;
 			}
-			function_3eb6760(ai, vehicle, var_b11e7fca);
+			init_rider(ai, vehicle, var_b11e7fca);
 			seat = var_b11e7fca;
 			break;
 		}
@@ -2084,7 +2084,7 @@ function private function_1585495a(ai, animname)
 	self notify("21aaaa1580e18b13");
 	self endon("21aaaa1580e18b13");
 	self function_88042c5b(ai, animname);
-	self thread function_88042c5b(ai, ai.var_ec30f5da.rideanim);
+	self childthread function_88042c5b(ai, ai.var_ec30f5da.rideanim);
 }
 
 /*
@@ -2110,11 +2110,11 @@ function private function_8a1b8aa0(ai, vehicle)
 		result = vehicle waittill(#"vehicle_starting", #"vehicle_stopping");
 		if(result._notify == "vehicle_starting" && isdefined(ai.var_ec30f5da.startanim))
 		{
-			self thread function_1585495a(ai, ai.var_ec30f5da.startanim);
+			self childthread function_1585495a(ai, ai.var_ec30f5da.startanim);
 		}
 		else if(result._notify == "vehicle_stopping" && isdefined(ai.var_ec30f5da.stopanim))
 		{
-			self thread function_1585495a(ai, ai.var_ec30f5da.stopanim);
+			self childthread function_1585495a(ai, ai.var_ec30f5da.stopanim);
 		}
 	}
 }

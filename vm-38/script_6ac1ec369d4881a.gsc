@@ -1,9 +1,9 @@
-#using script_383a3b1bb18ba876;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\armor.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\armor.gsc;
 
 #namespace armor;
 
@@ -18,13 +18,13 @@
 */
 function private autoexec function_2ce57693()
 {
-	level notify(738977989);
+	level notify(-738977989);
 }
 
 #namespace weapon_armor;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: weapon_armor
 	Checksum: 0x26080766
 	Offset: 0xD8
@@ -32,7 +32,7 @@ function private autoexec function_2ce57693()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"weapon_armor", &init_shared, undefined, undefined, undefined);
 }
@@ -48,7 +48,7 @@ function private autoexec function_89f2df9()
 */
 function init_shared()
 {
-	killstreaks::function_e4ef8390("weapon_armor", &use_armor);
+	killstreaks::register_killstreak("weapon_armor", &use_armor);
 	callback::on_player_killed(&on_player_killed);
 }
 
@@ -128,7 +128,7 @@ function function_b299c6ec(eattacker, weapon)
 */
 function on_player_killed(params)
 {
-	if(armor::function_4f977182() > 0 && isdefined(self.var_c79fb13d))
+	if(armor::get_armor() > 0 && isdefined(self.var_c79fb13d))
 	{
 		if(sessionmodeismultiplayergame())
 		{

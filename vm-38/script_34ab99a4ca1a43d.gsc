@@ -1,28 +1,28 @@
 #using script_165beea08a63a243;
 #using script_1caf36ff04a85ff6;
-#using script_1cc417743d7c262d;
-#using script_340a2e805e35f7a2;
-#using script_3a704cbcf4081bfb;
 #using script_471b31bd963b388e;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using script_340a2e805e35f7a2;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
+#using script_3a704cbcf4081bfb;
+#using script_1cc417743d7c262d;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\throttle_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\throttle_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_58949729;
 
@@ -37,11 +37,11 @@
 */
 function private autoexec function_4b4719bd()
 {
-	level notify(197632755);
+	level notify(-197632755);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_58949729
 	Checksum: 0x5610FCB9
 	Offset: 0x3E8
@@ -49,7 +49,7 @@ function private autoexec function_4b4719bd()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5f19cd68b4607f52", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
 }
@@ -88,7 +88,7 @@ function function_70a657d8()
 	function_6ac967bf(#"large", 2, #"hash_4651e6abf3256e06");
 	function_6ac967bf(#"large", 3, #"hash_4651e7abf3256fb9");
 	function_6ac967bf(#"large", 4, #"hash_4651e8abf325716c");
-	function_6ac967bf(#"large", 5, #"hash_4651e9abf325731f");
+	function_6ac967bf(#"large", 5, #"large_chest_level_5");
 	function_6ac967bf(#"large", 6, #"hash_4651eaabf32574d2");
 	function_6ac967bf(#"medium", 1, #"hash_570210f86dd830fd");
 	function_6ac967bf(#"medium", 2, #"hash_57020df86dd82be4");
@@ -212,7 +212,7 @@ function function_70a657d8()
 function finalize()
 {
 	/#
-		level thread function_2085db3b();
+		level thread init_devgui();
 	#/
 }
 
@@ -622,19 +622,19 @@ function function_6e72c1e2(instance)
 		{
 			return 5;
 		}
-		case "hash_2d1de2a0a5c25bd9":
+		case "destination_forest":
 		{
 			return 5;
 		}
-		case "hash_43272f4dc95dce62":
+		case "destination_golova":
 		{
 			return 5;
 		}
-		case "hash_1cc277407eed9c27":
+		case "destination_sanatorium":
 		{
 			return 5;
 		}
-		case "hash_13e66a07a0ef569d":
+		case "destination_ski":
 		{
 			return 5;
 		}
@@ -679,19 +679,19 @@ function function_933f4c09(instance)
 		{
 			return 10;
 		}
-		case "hash_2d1de2a0a5c25bd9":
+		case "destination_forest":
 		{
 			return 10;
 		}
-		case "hash_43272f4dc95dce62":
+		case "destination_golova":
 		{
 			return 10;
 		}
-		case "hash_1cc277407eed9c27":
+		case "destination_sanatorium":
 		{
 			return 10;
 		}
-		case "hash_13e66a07a0ef569d":
+		case "destination_ski":
 		{
 			return 10;
 		}
@@ -736,19 +736,19 @@ function function_7cd90066(instance)
 		{
 			return 10;
 		}
-		case "hash_2d1de2a0a5c25bd9":
+		case "destination_forest":
 		{
 			return 10;
 		}
-		case "hash_43272f4dc95dce62":
+		case "destination_golova":
 		{
 			return 10;
 		}
-		case "hash_1cc277407eed9c27":
+		case "destination_sanatorium":
 		{
 			return 10;
 		}
-		case "hash_13e66a07a0ef569d":
+		case "destination_ski":
 		{
 			return 10;
 		}
@@ -779,7 +779,7 @@ function function_7cd90066(instance)
 function function_c3e93273(instance)
 {
 	var_cc1fb2d0 = function_fd5e77fa(#"large");
-	var_3a053962 = #"hash_39c86bb99fc237d";
+	var_3a053962 = #"p9_fxanim_zm_gp_chest_01_lrg_low_xmodel";
 	/#
 		str_dvar = "";
 	#/
@@ -803,7 +803,7 @@ function function_c3e93273(instance)
 function function_50855654(instance)
 {
 	var_cc1fb2d0 = function_fd5e77fa(#"medium");
-	var_3a053962 = #"hash_4392142b99d9d79a";
+	var_3a053962 = #"p9_fxanim_zm_gp_chest_01_med_low_xmodel";
 	/#
 		str_dvar = "";
 	#/
@@ -827,7 +827,7 @@ function function_50855654(instance)
 function function_61f1a62e(instance)
 {
 	var_cc1fb2d0 = function_fd5e77fa(#"small");
-	var_3a053962 = #"hash_27f68725fa24b68";
+	var_3a053962 = #"p9_fxanim_zm_gp_chest_01_sml_low_xmodel";
 	/#
 		str_dvar = "";
 	#/
@@ -1239,7 +1239,7 @@ function function_8665f666(eventstruct)
 	}
 	self.b_opened = 1;
 	self notify(#"chest_opened");
-	self callback::function_b74bf3e(&function_8665f666);
+	self callback::remove_on_trigger(&function_8665f666);
 	self triggerenable(0);
 	self.struct.scriptmodel thread scene::play(self.struct.var_422ae63e, self.struct.scriptmodel);
 	if(isplayer(eventstruct.activator))
@@ -1423,12 +1423,12 @@ function function_3e953077(instance)
 				{
 					if(math::cointoss(50))
 					{
-						model = #"hash_40ce47dd15f047d6";
+						model = #"p9_gold_surcrystal_medium_01";
 						str_scene = "p9_zm_gold_sur_crystal_medium_01_bundle";
 					}
 					else
 					{
-						model = #"hash_40ce46dd15f04623";
+						model = #"p9_gold_surcrystal_medium_02";
 						str_scene = "p9_zm_gold_sur_crystal_medium_02_bundle";
 					}
 					e_pod = util::spawn_model(model, spawn.origin, spawn.angles, undefined, 1);
@@ -1704,7 +1704,7 @@ function function_e15f0669()
 }
 
 /*
-	Name: function_2085db3b
+	Name: init_devgui
 	Namespace: namespace_58949729
 	Checksum: 0xD0B57298
 	Offset: 0x5340
@@ -1712,18 +1712,18 @@ function function_e15f0669()
 	Parameters: 0
 	Flags: None
 */
-function function_2085db3b()
+function init_devgui()
 {
 	/#
 		util::waittill_can_add_debug_command();
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
 		level thread function_b6b13cf8();
 	#/
 }

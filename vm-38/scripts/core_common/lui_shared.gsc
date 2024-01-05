@@ -1,23 +1,23 @@
 #using script_4194df57536e11ed;
 #using script_50719ad9bcd4b183;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\string_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\string_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
-class class_6aaccc24 
+class cluielem 
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xD170555D
 		Offset: 0x2F38
 		Size: 0x2A
@@ -33,7 +33,7 @@ class class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0x80F724D1
 		Offset: 0x3370
 		Size: 0x4
@@ -46,7 +46,7 @@ class class_6aaccc24
 
 	/*
 		Name: function_7bfd10e6
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xA711572D
 		Offset: 0x3230
 		Size: 0x3A
@@ -59,27 +59,27 @@ class class_6aaccc24
 	}
 
 	/*
-		Name: function_8b8089ba
-		Namespace: namespace_6aaccc24
+		Name: open_luielem
+		Namespace: cluielem
 		Checksum: 0x5D256C6A
 		Offset: 0x31C0
 		Size: 0x62
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_8b8089ba(player, flags)
+	function open_luielem(player, flags)
 	{
 		if(!isdefined(flags))
 		{
 			flags = 0;
 		}
-		player function_5686f5cd(hash(var_d5213cbb), var_bf9c8c95, flags);
+		player openluielem(hash(var_d5213cbb), var_bf9c8c95, flags);
 		self.var_779239b4 = 1;
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0x2FBC1D80
 		Offset: 0x2F70
 		Size: 0xCE
@@ -102,15 +102,15 @@ class class_6aaccc24
 	}
 
 	/*
-		Name: function_a68f6e20
-		Namespace: namespace_6aaccc24
+		Name: close_luielem
+		Namespace: cluielem
 		Checksum: 0x6E626A7
 		Offset: 0x3278
 		Size: 0xEE
 		Parameters: 1
 		Flags: Linked
 	*/
-	function function_a68f6e20(player)
+	function close_luielem(player)
 	{
 		if(isplayer(player))
 		{
@@ -118,28 +118,28 @@ class class_6aaccc24
 			{
 				player.var_3bc46b87[hash(var_d5213cbb)][var_bf9c8c95] = undefined;
 			}
-			player function_43d5b973(hash(var_d5213cbb), var_bf9c8c95);
+			player closeluielem(hash(var_d5213cbb), var_bf9c8c95);
 			self.var_779239b4 = 0;
 		}
 	}
 
 	/*
-		Name: function_b0c4e363
-		Namespace: namespace_6aaccc24
+		Name: set_clientfield
+		Namespace: cluielem
 		Checksum: 0xFBD3782E
 		Offset: 0x3120
 		Size: 0x44
 		Parameters: 3
 		Flags: Linked
 	*/
-	function function_b0c4e363(player, field_name, value)
+	function set_clientfield(player, field_name, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, field_name, value);
 	}
 
 	/*
 		Name: function_d6203429
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xD2B4C7B6
 		Offset: 0x3170
 		Size: 0x44
@@ -152,26 +152,26 @@ class class_6aaccc24
 	}
 
 	/*
-		Name: function_da693cbe
-		Namespace: namespace_6aaccc24
+		Name: add_clientfield
+		Namespace: cluielem
 		Checksum: 0x8AAEC4AA
 		Offset: 0x3048
 		Size: 0x64
 		Parameters: 5
 		Flags: Linked
 	*/
-	function function_da693cbe(field_name, version, bits, type, var_59f69872)
+	function add_clientfield(field_name, version, bits, type, var_59f69872)
 	{
 		if(!isdefined(var_59f69872))
 		{
 			var_59f69872 = 1;
 		}
-		clientfield::function_346f95ba(var_d5213cbb, var_bf9c8c95, field_name, version, bits, type, var_59f69872);
+		clientfield::register_luielem(var_d5213cbb, var_bf9c8c95, field_name, version, bits, type, var_59f69872);
 	}
 
 	/*
 		Name: function_dcb34c80
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xE0EF6643
 		Offset: 0x30B8
 		Size: 0x5C
@@ -208,7 +208,7 @@ function private autoexec function_ce311244()
 #namespace lui;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: lui
 	Checksum: 0xE582CF52
 	Offset: 0x248
@@ -216,7 +216,7 @@ function private autoexec function_ce311244()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"lui_shared", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -233,8 +233,8 @@ function private autoexec function_89f2df9()
 function private function_70a657d8()
 {
 	callback::on_spawned(&refresh_menu_values);
-	function_b95a3ba5("FullScreenBlack", &full_screen_black::register);
-	function_b95a3ba5("InitialBlack", &initial_black::register);
+	add_luimenu("FullScreenBlack", &full_screen_black::register);
+	add_luimenu("InitialBlack", &initial_black::register);
 }
 
 /*
@@ -339,7 +339,7 @@ function function_1c4c4975()
 }
 
 /*
-	Name: function_b95a3ba5
+	Name: add_luimenu
 	Namespace: lui
 	Checksum: 0x7836CCF5
 	Offset: 0x6B0
@@ -347,7 +347,7 @@ function function_1c4c4975()
 	Parameters: 2
 	Flags: Linked
 */
-function function_b95a3ba5(alias, registerfunc)
+function add_luimenu(alias, registerfunc)
 {
 	if(!isdefined(level.luimenus))
 	{
@@ -357,7 +357,7 @@ function function_b95a3ba5(alias, registerfunc)
 }
 
 /*
-	Name: function_e810a527
+	Name: get_luimenu
 	Namespace: lui
 	Checksum: 0x48E3052E
 	Offset: 0x710
@@ -365,7 +365,7 @@ function function_b95a3ba5(alias, registerfunc)
 	Parameters: 1
 	Flags: Linked
 */
-function function_e810a527(alias)
+function get_luimenu(alias)
 {
 	return level.luimenus[alias];
 }
@@ -427,9 +427,9 @@ function set_color(menu, color)
 {
 	if(!isint(menu))
 	{
-		[[ menu ]]->function_eccc151d(self, color[0]);
-		[[ menu ]]->function_2208b8db(self, color[1]);
-		[[ menu ]]->function_7420df0a(self, color[2]);
+		[[ menu ]]->set_red(self, color[0]);
+		[[ menu ]]->set_green(self, color[1]);
+		[[ menu ]]->set_blue(self, color[2]);
 	}
 }
 
@@ -775,25 +775,25 @@ function private _play_movie_for_player(str_movie, str_type, show_black_screen, 
 	{
 		self playsoundtoplayer(#"uin_pip_open", self);
 	}
-	lui_menu = function_e810a527(str_menu);
+	lui_menu = get_luimenu(str_menu);
 	if(![[ lui_menu ]]->function_7bfd10e6(self))
 	{
 		[[ lui_menu ]]->open(self);
 	}
 	if(isdefined(lui_menu))
 	{
-		[[ lui_menu ]]->function_87bb24(self, str_movie);
-		[[ lui_menu ]]->function_8f7a8b9c(self, show_black_screen);
-		[[ lui_menu ]]->function_5caa21cb(self, b_looping);
-		[[ lui_menu ]]->function_493305af(self, 0);
+		[[ lui_menu ]]->set_moviename(self, str_movie);
+		[[ lui_menu ]]->set_showblackscreen(self, show_black_screen);
+		[[ lui_menu ]]->set_looping(self, b_looping);
+		[[ lui_menu ]]->set_additive(self, 0);
 		if(str_menu != "pip_menu")
 		{
-			[[ lui_menu ]]->function_251fc818(self, str_key);
+			[[ lui_menu ]]->set_moviekey(self, str_key);
 			[[ lui_menu ]]->registerplayer_callout_traversal(self, b_skippable);
 		}
 		if(issubstr(str_type, "additive"))
 		{
-			[[ lui_menu ]]->function_493305af(self, 1);
+			[[ lui_menu ]]->set_additive(self, 1);
 		}
 		while(true)
 		{
@@ -896,15 +896,15 @@ function play_outro_movie(outro_movie)
 */
 function private function_1bc580af()
 {
-	lui_menu = function_e810a527("full_screen_movie");
+	lui_menu = get_luimenu("full_screen_movie");
 	if(![[ lui_menu ]]->function_7bfd10e6(self))
 	{
 		[[ lui_menu ]]->open(self);
 	}
 	if(isdefined(lui_menu))
 	{
-		[[ lui_menu ]]->function_3a81612d(self, 1);
-		[[ lui_menu ]]->function_8f7a8b9c(self, 1);
+		[[ lui_menu ]]->set_playoutromovie(self, 1);
+		[[ lui_menu ]]->set_showblackscreen(self, 1);
 		while(true)
 		{
 			waitresult = undefined;
@@ -1191,15 +1191,15 @@ function private _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_
 		lui_menu = s_menu.lui_menu;
 		_one_screen_fade_per_network_frame(s_menu);
 		n_start_alpha = lerpfloat(s_menu.n_start_alpha, s_menu.n_target_alpha, (s_menu.n_target_time > 0 ? (gettime() - s_menu.n_start_time) / s_menu.n_target_time : 1));
-		[[ lui_menu ]]->function_9cd54463(self, n_start_alpha);
-		[[ lui_menu ]]->function_331f9dd(self, n_target_alpha);
+		[[ lui_menu ]]->set_startalpha(self, n_start_alpha);
+		[[ lui_menu ]]->set_endalpha(self, n_target_alpha);
 		waitframe(1);
 	}
 	else
 	{
-		if(isdefined(function_e810a527(str_menu)))
+		if(isdefined(get_luimenu(str_menu)))
 		{
-			lui_menu = function_e810a527(str_menu);
+			lui_menu = get_luimenu(str_menu);
 			if(![[ lui_menu ]]->function_7bfd10e6(self))
 			{
 				[[ lui_menu ]]->open(self);
@@ -1227,10 +1227,10 @@ function private _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_
 	}
 	else
 	{
-		[[ lui_menu ]]->function_9cd54463(self, n_start_alpha);
-		[[ lui_menu ]]->function_331f9dd(self, n_target_alpha);
-		[[ lui_menu ]]->function_237ff433(self, n_time_ms);
-		[[ lui_menu ]]->function_ae1277a0(self, drawhud);
+		[[ lui_menu ]]->set_startalpha(self, n_start_alpha);
+		[[ lui_menu ]]->set_endalpha(self, n_target_alpha);
+		[[ lui_menu ]]->set_fadeovertime(self, n_time_ms);
+		[[ lui_menu ]]->set_drawhud(self, drawhud);
 	}
 	/#
 		if(!isdefined(level.n_fade_debug_time))
@@ -1259,7 +1259,7 @@ function private _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_
 	}
 	else
 	{
-		[[ lui_menu ]]->function_237ff433(self, 0);
+		[[ lui_menu ]]->set_fadeovertime(self, 0);
 	}
 	if(b_force_close_menu || n_target_alpha == 0)
 	{

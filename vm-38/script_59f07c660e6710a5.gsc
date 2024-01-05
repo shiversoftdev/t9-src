@@ -11,7 +11,7 @@
 */
 function private autoexec function_6a8ca704()
 {
-	level notify(893872920);
+	level notify(-893872920);
 }
 
 /*
@@ -145,10 +145,10 @@ function private _checkregistrationprerequisites(archetype, attribute, callbackf
 {
 	/#
 		/#
-			assert(function_7a600918(archetype), "");
+			assert(ishash(archetype), "");
 		#/
 		/#
-			assert(function_7a600918(attribute), "");
+			assert(ishash(attribute), "");
 		#/
 		/#
 			assert(!isdefined(callbackfunction) || isfunctionptr(callbackfunction), "");

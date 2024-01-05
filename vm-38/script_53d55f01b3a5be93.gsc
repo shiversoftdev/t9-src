@@ -1,6 +1,6 @@
-#using script_37b70f9e98c4329b;
-#using scripts\core_common\ai_shared.csc;
+#using scripts\zm\ai\zm_ai_hulk.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_45b55437;
 
@@ -15,11 +15,11 @@
 */
 function private autoexec function_6ad7e667()
 {
-	level notify(54842839);
+	level notify(-54842839);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_45b55437
 	Checksum: 0x86040F00
 	Offset: 0x98
@@ -27,7 +27,7 @@ function private autoexec function_6ad7e667()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7d755ebddd333af6", &function_70a657d8, undefined, undefined, undefined);
 }

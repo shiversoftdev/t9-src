@@ -1,25 +1,25 @@
-#using script_15022fca9ab99080;
-#using script_2c74a7b5eea1ec89;
-#using script_3728b3b9606c4299;
-#using script_383a3b1bb18ba876;
-#using script_3fda550bc6e1089a;
+#using scripts\weapons\heatseekingmissile.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
+#using scripts\killstreaks\killstreak_bundles.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\killstreaks\killstreak_vehicle.gsc;
 #using script_4721de209091b1a6;
-#using script_47fb62300ac0bd60;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\audio_shared.gsc;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\oob.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\killstreaks\helicopter_shared.gsc;
 #using scripts\core_common\vehicle_death_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\battlechatter.gsc;
+#using scripts\core_common\audio_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_e8c18978;
 
@@ -54,7 +54,7 @@ function function_70a657d8(bundlename)
 	clientfield::register("vehicle", "" + #"hash_46646871455cab15", 1, 2, "int");
 	clientfield::register("vehicle", "" + #"hash_6cf1a3b26118d892", 1, 1, "int");
 	init_shared();
-	killstreaks::function_e4ef8390(bundlename, &activatemaingunner);
+	killstreaks::register_killstreak(bundlename, &activatemaingunner);
 }
 
 /*
@@ -164,11 +164,11 @@ function function_5160bb1e(killstreaktype)
 	level.chopper_gunner helicopter::create_flare_ent(vectorscale((0, 0, -1), 150));
 	level.chopper_gunner thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile(bundle, "death");
 	level.chopper_gunner.is_still_valid_target_for_stinger_override = &function_c2bfa7e1;
-	level.chopper_gunner thread namespace_231aa29a::function_d4896942(bundle, "chopper_gunner");
-	level.chopper_gunner thread namespace_231aa29a::function_31f9c728(bundle, "chopper_gunner", "exp_incoming_missile", "uin_ac130_alarm_missile_incoming");
+	level.chopper_gunner thread killstreak_vehicle::function_d4896942(bundle, "chopper_gunner");
+	level.chopper_gunner thread killstreak_vehicle::function_31f9c728(bundle, "chopper_gunner", "exp_incoming_missile", "uin_ac130_alarm_missile_incoming");
 	level.chopper_gunner setrotorspeed(1);
 	level thread helicopter::function_eca18f00(level.chopper_gunner, bundle.var_f90029e2);
-	level.chopper_gunner util::function_c596f193();
+	level.chopper_gunner util::make_sentient();
 	level.chopper_gunner.maxvisibledist = 16384;
 	level.chopper_gunner function_53d3b37a(bundle);
 	level.chopper_gunner.totalrockethits = 0;
@@ -177,7 +177,7 @@ function function_5160bb1e(killstreaktype)
 	self thread namespace_f9b02f80::play_killstreak_start_dialog("chopper_gunner", self.team, killstreak_id);
 	level.chopper_gunner namespace_f9b02f80::play_pilot_dialog_on_owner("arrive", "chopper_gunner", killstreak_id);
 	level.chopper_gunner thread killstreaks::player_killstreak_threat_tracking("chopper_gunner", 0.8660254);
-	self stats::function_e24eec31(bundle.var_1ab696c6, #"used", 1);
+	self stats::function_e24eec31(bundle.ksweapon, #"used", 1);
 	self clientfield::set_to_player("" + #"hash_7c907650b14abbbe", 1);
 	if(sessionmodeiszombiesgame() && is_true(level.var_68e3cf24) && !is_true(level.var_d5ad2e35))
 	{
@@ -196,7 +196,7 @@ function function_5160bb1e(killstreaktype)
 	}
 	else
 	{
-		if(sessionmodeiszombiesgame() && !isdefined(level.var_97e461d4) && util::function_5df4294() === #"zsurvival")
+		if(sessionmodeiszombiesgame() && !isdefined(level.var_97e461d4) && util::get_game_type() === #"zsurvival")
 		{
 			var_6b3ce0fa = getvehiclenodearray("chopper_gunner_path_start_multi", "targetname");
 			foreach(node in var_6b3ce0fa)
@@ -216,7 +216,7 @@ function function_5160bb1e(killstreaktype)
 	/#
 		assert(isdefined(startnode), "");
 	#/
-	if(function_f99d2668() && !is_true(level.var_29cfe9dd) || is_true(level.var_d5ad2e35))
+	if(sessionmodeiswarzonegame() && !is_true(level.var_29cfe9dd) || is_true(level.var_d5ad2e35))
 	{
 		if(sessionmodeiszombiesgame())
 		{

@@ -1,6 +1,6 @@
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_85b89288;
 
@@ -19,7 +19,7 @@ function private autoexec function_8f474823()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_85b89288
 	Checksum: 0xEA85A3FD
 	Offset: 0x98
@@ -27,7 +27,7 @@ function private autoexec function_8f474823()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_621e37612030164f", &function_70a657d8, undefined, undefined, undefined);
 }

@@ -1,11 +1,11 @@
-#using script_152c3f4ffef9e588;
-#using script_c8d806d2487b617;
 #using scripts\core_common\system_shared.gsc;
+#using script_c8d806d2487b617;
+#using script_152c3f4ffef9e588;
 
 #namespace namespace_81546b33;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_81546b33
 	Checksum: 0x945DCD84
 	Offset: 0x78
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"hash_7b2d0df8fb9099a8", &function_70a657d8, undefined, undefined, #"radiation");
@@ -36,13 +36,13 @@ function private function_70a657d8()
 		{
 			return;
 		}
-		level thread function_44b9dd1d();
+		level thread _setup_devgui();
 		level thread function_aa32646f();
 	#/
 }
 
 /*
-	Name: function_44b9dd1d
+	Name: _setup_devgui
 	Namespace: namespace_81546b33
 	Checksum: 0x4654B1F9
 	Offset: 0x128
@@ -50,7 +50,7 @@ function private function_70a657d8()
 	Parameters: 0
 	Flags: Private
 */
-function private function_44b9dd1d()
+function private _setup_devgui()
 {
 	/#
 		while(!canadddebugcommand())

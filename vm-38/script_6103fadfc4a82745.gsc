@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_e5d48e46 : class_6aaccc24
+class cscavenger_icon : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x37DF1D99
 		Offset: 0x290
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_e5d48e46 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0xE1328C46
 		Offset: 0x510
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_e5d48e46 : class_6aaccc24
 
 	/*
 		Name: function_65b281a
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0xFC4CA4D
 		Offset: 0x438
 		Size: 0x3C
@@ -48,7 +48,7 @@ class class_e5d48e46 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x31716144
 		Offset: 0x378
 		Size: 0x3C
@@ -61,12 +61,12 @@ class class_e5d48e46 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: function_417df30c
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0xF47D9D44
 		Offset: 0x4C8
 		Size: 0x3C
@@ -80,7 +80,7 @@ class class_e5d48e46 : class_6aaccc24
 
 	/*
 		Name: function_47e82a09
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x2AB76318
 		Offset: 0x480
 		Size: 0x3C
@@ -94,7 +94,7 @@ class class_e5d48e46 : class_6aaccc24
 
 	/*
 		Name: close
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x4161A525
 		Offset: 0x3C0
 		Size: 0x24
@@ -103,12 +103,12 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0xB2C40628
 		Offset: 0x2B0
 		Size: 0xBC
@@ -117,16 +117,16 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("scavenger_icon");
-		namespace_6aaccc24::function_da693cbe("ammoPulse", 1, 1, "counter");
-		namespace_6aaccc24::function_da693cbe("armorPlatePulse", 1, 1, "counter");
-		namespace_6aaccc24::function_da693cbe("scrapPulse", 1, 1, "counter");
-		namespace_6aaccc24::function_da693cbe("rareScrapPulse", 4000, 1, "counter");
+		cluielem::setup_clientfields("scavenger_icon");
+		cluielem::add_clientfield("ammoPulse", 1, 1, "counter");
+		cluielem::add_clientfield("armorPlatePulse", 1, 1, "counter");
+		cluielem::add_clientfield("scrapPulse", 1, 1, "counter");
+		cluielem::add_clientfield("rareScrapPulse", 4000, 1, "counter");
 	}
 
 	/*
 		Name: function_e4e9c303
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x71FFC07A
 		Offset: 0x3F0
 		Size: 0x3C
@@ -153,7 +153,7 @@ class class_e5d48e46 : class_6aaccc24
 */
 function private autoexec function_e2357b6b()
 {
-	level notify(869192725);
+	level notify(-869192725);
 }
 
 /*
@@ -167,7 +167,7 @@ function private autoexec function_e2357b6b()
 */
 function register()
 {
-	elem = new class_e5d48e46();
+	elem = new cscavenger_icon();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

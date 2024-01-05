@@ -1,11 +1,11 @@
 #using script_274952f8a08d7ad0;
-#using scripts\core_common\animation_debug_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\shaderanim_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\shaderanim_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\animation_debug_shared.csc;
 
 #namespace animation_shared;
 
@@ -20,13 +20,13 @@
 */
 function private autoexec function_4b73c73()
 {
-	level notify(1554073009);
+	level notify(-1554073009);
 }
 
 #namespace animation;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: animation
 	Checksum: 0xC934263D
 	Offset: 0x330
@@ -34,7 +34,7 @@ function private autoexec function_4b73c73()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"animation", &function_70a657d8, undefined, undefined, undefined);
 }

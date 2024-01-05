@@ -1,7 +1,7 @@
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\beam_shared.csc;
 
 #namespace namespace_b2add33c;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_a1cc205c()
 {
-	level notify(588627623);
+	level notify(-588627623);
 }
 
 /*

@@ -1,16 +1,16 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_1caf36ff04a85ff6;
-#using script_4108035fe400ce67;
-#using script_471b31bd963b388e;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using script_7bacb32f8222fa3e;
-#using script_7bafaa95bb1b427e;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\loadout_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
+#using scripts\weapons\weapons.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\loadout_shared.gsc;
+#using script_471b31bd963b388e;
+#using script_4108035fe400ce67;
+#using script_1caf36ff04a85ff6;
+#using scripts\core_common\item_inventory.gsc;
+#using script_7bacb32f8222fa3e;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_1d9319e5;
 
@@ -29,7 +29,7 @@ function private autoexec function_4ded8b37()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1d9319e5
 	Checksum: 0x18052C5A
 	Offset: 0x130
@@ -37,7 +37,7 @@ function private autoexec function_4ded8b37()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_f11f051d1c7994a", &function_70a657d8, undefined, undefined, #"item_world");
 }
@@ -53,7 +53,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!namespace_b376ff3f::function_7d5553ac())
+	if(!item_inventory::function_7d5553ac())
 	{
 		return;
 	}
@@ -122,9 +122,9 @@ function private function_77512b90(killstreakbundle, var_e8992218)
 	Parameters: 7
 	Flags: Linked, Private
 */
-function private function_898628ef(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slotid)
+function private function_898628ef(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slotid)
 {
-	killstreakbundle = getscriptbundle(var_d8138db2.var_a6762160.killstreak);
+	killstreakbundle = getscriptbundle(itemid.var_a6762160.killstreak);
 	result = 0;
 	killstreakname = undefined;
 	if(isdefined(killstreakbundle) && isdefined(killstreakbundle.var_fc0c8eae) && isdefined(killstreakbundle.var_fc0c8eae.name))
@@ -141,7 +141,7 @@ function private function_898628ef(item, player, var_bd027dd9, var_d8138db2, ite
 		weapons = itemcount getweaponslist();
 		foreach(weapon in weapons)
 		{
-			var_16f12c31 = namespace_ad5a0cd6::function_3531b9ba(weapon.name);
+			var_16f12c31 = item_world_util::function_3531b9ba(weapon.name);
 			if(!isdefined(var_16f12c31))
 			{
 				continue;
@@ -150,13 +150,13 @@ function private function_898628ef(item, player, var_bd027dd9, var_d8138db2, ite
 			hasammo = ammo > 0;
 			if(hasammo)
 			{
-				var_d90e0e15 = function_4ba8fde(var_16f12c31);
-				var_390fc2d8 = getscriptbundle(var_d90e0e15.var_a6762160.killstreak);
+				itempoint = function_4ba8fde(var_16f12c31);
+				var_390fc2d8 = getscriptbundle(itempoint.var_a6762160.killstreak);
 				if(var_390fc2d8.var_fc0c8eae.name == #"inventory_planemortar")
 				{
 					ammo = (isdefined(itemcount.pers[#"hash_1aaccfe69e328d6e"][3]) ? itemcount.pers[#"hash_1aaccfe69e328d6e"][3] : 3);
 				}
-				level thread item_drop::drop_item(0, undefined, 1, ammo, var_d90e0e15.id, itemcount.origin + (anglestoforward(itemcount.angles) * randomfloatrange(10, 30)), itemcount.angles, 2);
+				level thread item_drop::drop_item(0, undefined, 1, ammo, itempoint.id, itemcount.origin + (anglestoforward(itemcount.angles) * randomfloatrange(10, 30)), itemcount.angles, 2);
 				var_e8992218 = 1;
 			}
 			itemcount takeweapon(weapon);
@@ -197,7 +197,7 @@ function private function_898628ef(item, player, var_bd027dd9, var_d8138db2, ite
 	Parameters: 7
 	Flags: Linked, Private
 */
-function private function_a712496a(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slotid)
+function private function_a712496a(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slotid)
 {
 	primaryweapons = var_aec6fa7f getweaponslistprimaries();
 	primaryweapon = (isdefined(primaryweapons[0]) ? primaryweapons[0] : level.weaponnone);
@@ -251,7 +251,7 @@ function private function_a712496a(item, player, var_bd027dd9, var_d8138db2, ite
 	Parameters: 7
 	Flags: Linked, Private
 */
-function private function_6598f0a0(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slotid)
+function private function_6598f0a0(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slotid)
 {
 	var_6a4efe8e = var_aec6fa7f clientfield::get_player_uimodel("hud_items.selfReviveAvailable");
 	if(var_6a4efe8e)

@@ -1,9 +1,9 @@
-#using script_359683f0ff3b3fbb;
 #using script_3daa514e0b3cd5f4;
-#using scripts\core_common\callbacks_shared.csc;
+#using scripts\zm_common\zm_utility.csc;
+#using script_359683f0ff3b3fbb;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_ec502488;
 
@@ -20,10 +20,10 @@ event main(eventstruct)
 {
 	clientfield::register("allplayers", "cranked_explode_fx", 1, 1, "counter", &function_d2f90d68, 0, 0);
 	clientfield::register("toplayer", "cranked_timer_sfx", 1, 1, "int", &function_d76f5ac9, 0, 0);
-	clientfield::function_a8bbc967("ZMHud.zmCrankedMax", #"zm_hud", #"hash_30167484a080284", 6000, 5, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("ZMHud.zmCrankedPct", #"zm_hud", #"hash_1f89ec485ae9a5c1", 6000, 16, "float", undefined, 0, 0);
-	clientfield::function_a8bbc967("ZMHud.zmCrankedTimerReset", #"zm_hud", #"hash_4b231de3b871f42", 6000, 1, "counter", undefined, 0, 0);
-	clientfield::function_a8bbc967("ZMHud.zmCrankedRoundNotification", #"zm_hud", #"hash_5fae6d66ff61741", 6000, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("ZMHud.zmCrankedMax", #"zm_hud", #"hash_30167484a080284", 6000, 5, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("ZMHud.zmCrankedPct", #"zm_hud", #"hash_1f89ec485ae9a5c1", 6000, 16, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("ZMHud.zmCrankedTimerReset", #"zm_hud", #"hash_4b231de3b871f42", 6000, 1, "counter", undefined, 0, 0);
+	clientfield::register_clientuimodel("ZMHud.zmCrankedRoundNotification", #"zm_hud", #"hash_5fae6d66ff61741", 6000, 1, "int", undefined, 0, 0);
 	level._zombie_gamemodeprecache = &onprecachegametype;
 	level._zombie_gamemodemain = &onstartgametype;
 	if(!isdefined(level.var_352498c6))
@@ -31,7 +31,7 @@ event main(eventstruct)
 		prototype_hud::register();
 		level.var_352498c6 = 1;
 	}
-	callback::function_d46d9315(&function_d46d9315);
+	callback::on_gameplay_started(&on_gameplay_started);
 	/#
 		println("");
 	#/
@@ -70,7 +70,7 @@ function onstartgametype()
 }
 
 /*
-	Name: function_d46d9315
+	Name: on_gameplay_started
 	Namespace: namespace_ec502488
 	Checksum: 0xBF548DD9
 	Offset: 0x4A0
@@ -78,7 +78,7 @@ function onstartgametype()
 	Parameters: 1
 	Flags: None
 */
-function function_d46d9315(localclientnum)
+function on_gameplay_started(localclientnum)
 {
 	waitframe(1);
 	util::function_8eb5d4b0(3500, 2.5);
@@ -176,7 +176,7 @@ function function_ee85e4e3(localclientnum)
 			function_672403ca("zmb_cranked_neardeath", 1, var_d71c11ca);
 			self.var_5a72f7c9 = 1;
 			str_alias = #"hash_37a0bf7f61bc3362" + n_timer;
-			self playrumbleonentity(localclientnum, #"hash_4b19c1d08875f55c");
+			self playrumbleonentity(localclientnum, #"infiltration_rumble");
 		}
 		else
 		{

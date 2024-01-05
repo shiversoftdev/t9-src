@@ -21,7 +21,7 @@ function scalevolume(ent, vol)
 #namespace namespace_6c0cd084;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6c0cd084
 	Checksum: 0x6AD2E031
 	Offset: 0xF0
@@ -29,7 +29,7 @@ function scalevolume(ent, vol)
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_299575137124db03", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -125,7 +125,7 @@ function private function_8991ddb4(localclientnum)
 	}
 	if(isdefined(self.var_214c1803.var_1911547e))
 	{
-		self.var_214c1803.elem = stealth_meter_display::function_5c1bb138();
+		self.var_214c1803.elem = stealth_meter_display::register_clientside();
 		if(!self.var_214c1803.elem stealth_meter_display::is_open(localclientnum))
 		{
 			self.var_214c1803.elem stealth_meter_display::open(localclientnum);
@@ -140,7 +140,7 @@ function private function_8991ddb4(localclientnum)
 		{
 			entnum = self.var_214c1803.var_b4185011 getentitynumber();
 		}
-		self.var_214c1803.elem stealth_meter_display::function_c8350e33(localclientnum, entnum);
+		self.var_214c1803.elem stealth_meter_display::set_entnum(localclientnum, entnum);
 	}
 	return self.var_214c1803.elem;
 }
@@ -199,19 +199,19 @@ function private function_5010aab6(localclientnum, oldvalue, newvalue, bnewent, 
 			{
 				entnum = self.var_214c1803.var_b4185011 getentitynumber();
 			}
-			self.var_214c1803.elem stealth_meter_display::function_c8350e33(wasdemojump, entnum);
+			self.var_214c1803.elem stealth_meter_display::set_entnum(wasdemojump, entnum);
 		}
 		if(getdvarint(#"hash_7bf40e4b6a830d11", 1))
 		{
-			self.var_214c1803.elem stealth_meter_display::function_4d628707(wasdemojump, self.var_214c1803.var_97c4563c);
-			self.var_214c1803.elem stealth_meter_display::function_7425637b(wasdemojump, self.var_214c1803.sight);
-			self.var_214c1803.elem stealth_meter_display::function_fae2a569(wasdemojump, 1);
+			self.var_214c1803.elem stealth_meter_display::set_awarenessstate(wasdemojump, self.var_214c1803.var_97c4563c);
+			self.var_214c1803.elem stealth_meter_display::set_awarenessprogress(wasdemojump, self.var_214c1803.sight);
+			self.var_214c1803.elem stealth_meter_display::set_clamped(wasdemojump, 1);
 		}
 		else
 		{
-			self.var_214c1803.elem stealth_meter_display::function_4d628707(wasdemojump, 0);
-			self.var_214c1803.elem stealth_meter_display::function_7425637b(wasdemojump, 0);
-			self.var_214c1803.elem stealth_meter_display::function_fae2a569(wasdemojump, 0);
+			self.var_214c1803.elem stealth_meter_display::set_awarenessstate(wasdemojump, 0);
+			self.var_214c1803.elem stealth_meter_display::set_awarenessprogress(wasdemojump, 0);
+			self.var_214c1803.elem stealth_meter_display::set_clamped(wasdemojump, 0);
 		}
 	}
 }

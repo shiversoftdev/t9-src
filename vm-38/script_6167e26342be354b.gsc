@@ -1,27 +1,27 @@
-#using script_2da073d4aa78c206;
-#using script_396f7d71538c9677;
-#using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
+#using scripts\core_common\util_shared.gsc;
 #using script_5ee699b0aaf564c4;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
 #using script_75da5547b1822294;
-#using script_7dc3a36c222eaf22;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\match_record.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\oob.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_44b0b8420eabacad;
 #using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\spectating.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
+#using script_7dc3a36c222eaf22;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_insertion.gsc;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\match_record.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_396f7d71538c9677;
+#using scripts\core_common\battlechatter.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_cd4d78f1;
 
@@ -42,7 +42,7 @@ function private autoexec function_bcac182b()
 #namespace squad_spawn;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: squad_spawn
 	Checksum: 0xA2C867DA
 	Offset: 0x438
@@ -50,7 +50,7 @@ function private autoexec function_bcac182b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"squad_spawning", &init, undefined, undefined, undefined);
 }
@@ -238,12 +238,12 @@ function function_e5152e84(fieldname, defaultvalue, var_393bca70)
 */
 function private setupclientfields()
 {
-	clientfield::function_a8bbc967("hudItems.squadSpawnOnStatus", 1, 3, "int");
-	clientfield::function_a8bbc967("hudItems.squadSpawnActive", 1, 1, "int");
-	clientfield::function_a8bbc967("hudItems.squadSpawnRespawnStatus", 1, 2, "int");
-	clientfield::function_a8bbc967("hudItems.squadSpawnViewType", 1, 1, "int");
-	clientfield::function_a8bbc967("hudItems.squadAutoSpawnPromptActive", 1, 1, "int");
-	clientfield::function_a8bbc967("hudItems.squadSpawnSquadWipe", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.squadSpawnOnStatus", 1, 3, "int");
+	clientfield::register_clientuimodel("hudItems.squadSpawnActive", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.squadSpawnRespawnStatus", 1, 2, "int");
+	clientfield::register_clientuimodel("hudItems.squadSpawnViewType", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.squadAutoSpawnPromptActive", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.squadSpawnSquadWipe", 1, 1, "int");
 }
 
 /*
@@ -334,7 +334,7 @@ function function_841e08f9(player)
 	{
 		return false;
 	}
-	if(namespace_67838d10::function_6660c1f() && !is_true(player.var_7689a9b2))
+	if(player_insertion::function_6660c1f() && !is_true(player.var_7689a9b2))
 	{
 		return false;
 	}
@@ -1142,7 +1142,7 @@ function filter_spawn_points(targetplayer, &points)
 */
 function private function_e1997588(targetplayer, &points)
 {
-	nearbyplayers = targetplayer function_bdda420f(targetplayer.origin, 7500);
+	nearbyplayers = targetplayer getenemiesinradius(targetplayer.origin, 7500);
 	if(nearbyplayers.size <= 0)
 	{
 		return points;
@@ -1190,7 +1190,7 @@ function private function_32843fc9(startpoint, endpoint)
 	for(index = 0; index < 7; index++)
 	{
 		groundtrace = groundtrace(startpoint, endpoint, 0, undefined, 0);
-		if(groundtrace[#"fraction"] <= 0 || groundtrace[#"hash_7f9ee3a239b86eea"])
+		if(groundtrace[#"fraction"] <= 0 || groundtrace[#"startsolid"])
 		{
 			if(startpoint[2] > endpoint[2])
 			{
@@ -1362,7 +1362,7 @@ function function_403f2d91(var_53227942)
 */
 function function_d072f205()
 {
-	return currentsessionmode() != 4 && level.var_d0252074 && !util::function_3f165ee8();
+	return currentsessionmode() != 4 && level.var_d0252074 && !util::is_frontend_map();
 }
 
 /*
@@ -1598,7 +1598,7 @@ function function_bfb027d2(player)
 	if((isdefined(player.var_12db485c) ? player.var_12db485c : 0) < gettime())
 	{
 		player.var_708884c0 = gettime() + randomintrange(100, 400);
-		enemies = player function_bdda420f(player.origin, (isdefined(getgametypesetting(#"hash_718b497c5205e74b")) ? getgametypesetting(#"hash_718b497c5205e74b") : 0));
+		enemies = player getenemiesinradius(player.origin, (isdefined(getgametypesetting(#"hash_718b497c5205e74b")) ? getgametypesetting(#"hash_718b497c5205e74b") : 0));
 		if(enemies.size > 0)
 		{
 			return 1;
@@ -1813,7 +1813,7 @@ function on_player_killed(params)
 		if(var_72ea2bd8.size >= (max(2, (isdefined(level.var_704bcca1) ? level.var_704bcca1 : 0) - 1)) && isplayer(attacker) && attacker util::isenemyplayer(self))
 		{
 			scoreevents::processscoreevent(#"hash_44c301a9ab6ae990", attacker, self, params.weapon);
-			if(attacker stats::function_441050ca(#"hash_13ea35c63c00066c") >= 10)
+			if(attacker stats::get_stat_global(#"hash_13ea35c63c00066c") >= 10)
 			{
 				attacker giveachievement(#"hash_3f780d94296c68c6");
 			}

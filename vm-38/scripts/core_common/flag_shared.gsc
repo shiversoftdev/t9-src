@@ -14,7 +14,7 @@
 */
 function private autoexec function_e7283420()
 {
-	level notify(910207069);
+	level notify(-910207069);
 }
 
 #namespace flag;

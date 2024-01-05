@@ -1,14 +1,14 @@
 #using script_1029986e2bc8ca8e;
-#using script_2255a7ad3edc838f;
 #using script_2618e0f3e5e11649;
 #using script_3411bb48d41bd3b;
-#using script_3f9e0dc8454d98e1;
 #using script_4108035fe400ce67;
+#using scripts\core_common\ai\zombie_utility.gsc;
 #using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\bots\bot.gsc;
 #using scripts\core_common\laststand_shared.gsc;
 #using scripts\core_common\rat_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_7d3a1543;
 
@@ -29,7 +29,7 @@ function private autoexec function_b0702527()
 #namespace rat;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: rat
 	Checksum: 0x640A85A9
 	Offset: 0xD8
@@ -37,7 +37,7 @@ function private autoexec function_b0702527()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"hash_2a909a3d7374cf00", &function_70a657d8, undefined, undefined, undefined);
@@ -435,7 +435,7 @@ function function_92891f6e(params)
 			return 0;
 		}
 		instance = level.var_7d45d0d4.var_3385b421;
-		objective_manager::function_2c679cc2(level.var_7d45d0d4.var_3385b421, var_4f7fa3d1);
+		objective_manager::objective_ended(level.var_7d45d0d4.var_3385b421, var_4f7fa3d1);
 		return instance.success;
 	#/
 }
@@ -464,7 +464,7 @@ function function_834d65f9(params)
 		instance = level.var_7d45d0d4.var_3385b421;
 		if(var_4f7fa3d1)
 		{
-			level notify(#"hash_489578e243cefa93");
+			level notify(#"timer_defend");
 			objective_manager::stop_timer();
 		}
 		else
@@ -510,7 +510,7 @@ function function_adb96ff1()
 {
 	/#
 		instance = level.var_7d45d0d4.var_3385b421;
-		level.var_7d75c960.var_fb516651.var_94b03771.health = 0;
+		level.var_7d75c960.var_fb516651.mdl_portal.health = 0;
 		return instance.success;
 	#/
 }

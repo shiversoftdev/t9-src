@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_c3742963 : class_6aaccc24
+class cconsequences_notification : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0x808719B2
 		Offset: 0x518
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_c3742963 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0xECEDA3FF
 		Offset: 0x6C8
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_c3742963 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0x8EECB15
 		Offset: 0x5B0
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_c3742963 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0xBAC7AF83
 		Offset: 0x5F8
 		Size: 0x24
@@ -61,12 +61,12 @@ class class_c3742963 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0xF7A57BE7
 		Offset: 0x538
 		Size: 0x6C
@@ -75,28 +75,28 @@ class class_c3742963 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("consequences_notification");
-		namespace_6aaccc24::function_da693cbe("visible", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("content_index", 1, 4, "int");
+		cluielem::setup_clientfields("consequences_notification");
+		cluielem::add_clientfield("visible", 1, 1, "int");
+		cluielem::add_clientfield("content_index", 1, 4, "int");
 	}
 
 	/*
-		Name: function_afdd9f65
-		Namespace: namespace_c3742963
+		Name: set_content_index
+		Namespace: cconsequences_notification
 		Checksum: 0xA5CE69B1
 		Offset: 0x678
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_afdd9f65(player, value)
+	function set_content_index(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "content_index", value);
 	}
 
 	/*
 		Name: set_visible
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0x146B6C8C
 		Offset: 0x628
 		Size: 0x44
@@ -141,7 +141,7 @@ function function_aa7a37a1(player, index)
 	{
 		[[ self ]]->open(player);
 	}
-	[[ self ]]->function_afdd9f65(player, index);
+	[[ self ]]->set_content_index(player, index);
 	[[ self ]]->set_visible(player, 1);
 }
 
@@ -209,7 +209,7 @@ function function_cd2efd2d(player, ref)
 		{
 			if(consequence == ref)
 			{
-				[[ self ]]->function_afdd9f65(player, index);
+				[[ self ]]->set_content_index(player, index);
 				return true;
 			}
 			index++;
@@ -252,7 +252,7 @@ function function_d9ee11d6(player)
 */
 function register()
 {
-	elem = new class_c3742963();
+	elem = new cconsequences_notification();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -318,7 +318,7 @@ function set_visible(player, value)
 }
 
 /*
-	Name: function_afdd9f65
+	Name: set_content_index
 	Namespace: consequences_notification
 	Checksum: 0xA02C802
 	Offset: 0x4E8
@@ -326,8 +326,8 @@ function set_visible(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_afdd9f65(player, value)
+function set_content_index(player, value)
 {
-	[[ self ]]->function_afdd9f65(player, value);
+	[[ self ]]->set_content_index(player, value);
 }
 

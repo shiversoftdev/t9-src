@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_1b312da5;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_18813e2()
 {
-	level notify(225901127);
+	level notify(-225901127);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1b312da5
 	Checksum: 0x693DE5BD
 	Offset: 0xD0
@@ -28,7 +28,7 @@ function private autoexec function_18813e2()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3cd3b81be4386726", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -48,7 +48,7 @@ function function_70a657d8()
 	{
 		return;
 	}
-	if(!zm_utility::function_e51dc2d8())
+	if(!zm_utility::is_ee_enabled())
 	{
 		return;
 	}

@@ -5,7 +5,7 @@
 #namespace namespace_9b5aa273;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9b5aa273
 	Checksum: 0x29A09578
 	Offset: 0xA0
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2b0f887705d6f3e", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -51,12 +51,12 @@ function private function_b58b73b6(oldval, newval)
 	{
 		if(!isdefined(level.var_5f632232))
 		{
-			namespace_fe8e9929::function_4c2d4fc4(#"hash_5b4b0dc5da9b211d", #"", 0, #"", 2);
+			hint_tutorial::function_4c2d4fc4(#"hash_5b4b0dc5da9b211d", #"", 0, #"", 2);
 		}
 	}
 	else if(level.var_5f632232 === #"hash_5b4b0dc5da9b211d")
 	{
-		namespace_fe8e9929::function_9f427d88(0);
+		hint_tutorial::function_9f427d88(0);
 	}
 }
 

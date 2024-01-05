@@ -1,53 +1,53 @@
-#using script_256b8879317373de;
-#using script_32399001bdb550da;
+#using scripts\weapons\weapons.gsc;
+#using scripts\weapons\weapon_utils.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\cp_common\util.gsc;
 #using script_35ae72be7b4fec10;
-#using script_35b5ff21c2a0960f;
-#using script_3626f1b2cf51a99c;
-#using script_3706d21c449d0d14;
-#using script_3f27a7b2232674db;
-#using script_47fb62300ac0bd60;
+#using scripts\cp_common\skipto.gsc;
 #using script_48294c0de5c37487;
-#using script_5399f402045d7abd;
-#using script_57f7003580bb15e0;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using script_70a43d6ba27cff6a;
-#using script_7133a4d461308099;
-#using script_725554a59d6a75b9;
-#using script_7bafaa95bb1b427e;
-#using script_bc839bb0e693558;
+#using script_32399001bdb550da;
 #using script_db93c4bbed6e456;
+#using scripts\cp_common\gametypes\loadout.gsc;
+#using scripts\cp_common\gametypes\globallogic_utils.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\gametypes\globallogic_spawn.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
+#using script_3706d21c449d0d14;
+#using scripts\cp_common\bb.gsc;
+#using script_3626f1b2cf51a99c;
+#using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\tweakables_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\spectating.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\core_common\persistence_shared.gsc;
+#using scripts\core_common\medals_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\healthoverlay.gsc;
+#using scripts\core_common\globallogic\globallogic_vehicle.gsc;
+#using scripts\core_common\globallogic\globallogic_player.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_725554a59d6a75b9;
+#using scripts\core_common\demo_shared.gsc;
+#using scripts\core_common\damagefeedback_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\bb_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\audio_shared.gsc;
-#using scripts\core_common\bb_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\demo_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\healthoverlay.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\medals_shared.gsc;
-#using scripts\core_common\persistence_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spectating.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\tweakables_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
-#using scripts\core_common\weapons_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_spawn.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\gametypes\globallogic_utils.gsc;
-#using scripts\cp_common\gametypes\loadout.gsc;
-#using scripts\cp_common\skipto.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\activecamo_shared.gsc;
+#using scripts\abilities\ability_power.gsc;
 
 #namespace globallogic_player;
 
@@ -66,7 +66,7 @@ function private autoexec function_7407223b()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: globallogic_player
 	Checksum: 0xA121AF9E
 	Offset: 0xA60
@@ -74,7 +74,7 @@ function private autoexec function_7407223b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"globallogic_player", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -218,7 +218,7 @@ function private function_16f6fb10()
 		self notifyonplayercommand("", "");
 		while(true)
 		{
-			self waittill(#"hash_561a693fae6d2e9f");
+			self waittill(#"play_gesture");
 			gesture = level.var_b63e01a9;
 			var_f3002d70 = function_39ab832f(1);
 			if(!var_f3002d70)
@@ -421,7 +421,7 @@ function callback_playerconnect()
 	}
 	if(!level.splitscreen && !isdefined(self.pers[#"score"]))
 	{
-		iprintln(#"hash_2bff59245c345d80", self);
+		iprintln(#"mp/connected", self);
 	}
 	if(!isdefined(self.pers[#"score"]))
 	{
@@ -530,7 +530,7 @@ function callback_playerconnect()
 	self.gametype_kill_streak = 0;
 	self.spawnqueueindex = -1;
 	self.deathtime = 0;
-	player::function_5ae8566b(1, 0);
+	player::init_heal(1, 0);
 	self.lastgrenadesuicidetime = -1;
 	self.teamkillsthisround = 0;
 	if(isdefined(world.player_lives))
@@ -1070,7 +1070,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
 	}
 	overrideplayerdamage = function_7681dccc();
 	idamage = int(idamage);
-	var_a1f8d00b = idamage;
+	unmodified = idamage;
 	if(isdefined(overrideplayerdamage))
 	{
 		modifieddamage = self [[overrideplayerdamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex);
@@ -1258,7 +1258,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
 	{
 		self notify(#"body_shield_damage", params);
 		self.var_c3d9d4c9 = 1;
-		var_709ce886 = 1;
+		blockeddamage = 1;
 		idamage = 0;
 	}
 	if(idamage > 0)
@@ -1424,7 +1424,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
 		}
 		else
 		{
-			if(idamage < 1 && !is_true(var_709ce886) && !self flag::get("player_is_invulnerable"))
+			if(idamage < 1 && !is_true(blockeddamage) && !self flag::get("player_is_invulnerable"))
 			{
 				idamage = 1;
 			}
@@ -1454,7 +1454,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
 					eattacker.damagedplayers[self.clientid].entity = self;
 				}
 			}
-			if(is_true(var_709ce886))
+			if(is_true(blockeddamage))
 			{
 				self clientfield::set_to_player("player_damage_type", 1);
 				self addtodamageindicator(50, vdir);
@@ -1483,7 +1483,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
 	}
 	else
 	{
-		idamage = var_a1f8d00b;
+		idamage = unmodified;
 		self finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, vsurfacenormal);
 	}
 	time = gettime();
@@ -1837,7 +1837,7 @@ function private function_bb371c3(var_b1630ef, debugdraw)
 	var_68e0f9e9 = (var_2ae934a0 * -1, var_2ae934a0 * -1, var_2ae934a0 * -1);
 	var_4da0b949 = (var_2ae934a0, var_2ae934a0, var_2ae934a0);
 	var_6c3bd059 = physicstrace(var_fd0c9f1c, var_6e0e1c32, var_68e0f9e9, var_4da0b949, player, 32);
-	if(is_true(var_6c3bd059[#"hash_7f9ee3a239b86eea"]) || var_6c3bd059[#"fraction"] < 0.9)
+	if(is_true(var_6c3bd059[#"startsolid"]) || var_6c3bd059[#"fraction"] < 0.9)
 	{
 		var_c440a44e = 0;
 	}
@@ -1858,7 +1858,7 @@ function private function_bb371c3(var_b1630ef, debugdraw)
 	startoffset = vectorscale((0, 0, 1), 5);
 	var_770c351c = vectorscale((0, 0, -1), 8);
 	var_891e5be8 = physicstrace(var_fe488304 + startoffset, var_fe488304 + var_770c351c, var_c8e0e024, var_288b287b, player, 32);
-	if(is_true(var_891e5be8[#"hash_7f9ee3a239b86eea"]) || var_891e5be8[#"fraction"] > 0.9 || var_891e5be8[#"fraction"] < 0.1)
+	if(is_true(var_891e5be8[#"startsolid"]) || var_891e5be8[#"fraction"] > 0.9 || var_891e5be8[#"fraction"] < 0.1)
 	{
 		var_f3002d70 = 0;
 	}
@@ -1942,7 +1942,7 @@ function private function_7abbea8e(params)
 		}
 	#/
 	var_463ffce7 = player getgestureanimlength(gesture);
-	player thread function_d2b1e36d(var_463ffce7);
+	player childthread function_d2b1e36d(var_463ffce7);
 	if(!var_5d3a3f89)
 	{
 		var_ba99925e = max(var_463ffce7 - 0.15, 0.1);
@@ -2121,7 +2121,7 @@ function playerkilled_obituary(attacker, einflictor, weapon, smeansofdeath)
 		{
 			obituary(self, self, weapon, smeansofdeath);
 		}
-		demo::function_ae3420ca(self, self, einflictor);
+		demo::kill_bookmark(self, self, einflictor);
 	}
 	else
 	{
@@ -2129,7 +2129,7 @@ function playerkilled_obituary(attacker, einflictor, weapon, smeansofdeath)
 		{
 			obituary(self, attacker, weapon, smeansofdeath);
 		}
-		demo::function_ae3420ca(self, attacker, einflictor);
+		demo::kill_bookmark(self, attacker, einflictor);
 	}
 }
 
@@ -3463,7 +3463,7 @@ function recordactiveplayersendgamematchrecordstats()
 }
 
 /*
-	Name: function_452827de
+	Name: callback_playershielddamageblocked
 	Namespace: globallogic_player
 	Checksum: 0x4A8F0E4E
 	Offset: 0xB380
@@ -3471,7 +3471,7 @@ function recordactiveplayersendgamematchrecordstats()
 	Parameters: 1
 	Flags: Linked
 */
-function function_452827de(damage)
+function callback_playershielddamageblocked(damage)
 {
 }
 

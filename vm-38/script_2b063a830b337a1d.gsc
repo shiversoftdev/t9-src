@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_fb1bfa12 : class_6aaccc24
+class cevidence_board_mission_preview : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x5550228F
 		Offset: 0x3C8
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_fb1bfa12 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0xF55CF60
 		Offset: 0x7D0
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_fb1bfa12 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x4FC5C24F
 		Offset: 0x528
 		Size: 0x3C
@@ -47,68 +47,68 @@ class class_fb1bfa12 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_10415bce
-		Namespace: namespace_fb1bfa12
+		Name: set_lvldescriptionshort
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x3972053B
 		Offset: 0x6E0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_10415bce(player, value)
+	function set_lvldescriptionshort(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "lvlDescriptionShort", value);
 	}
 
 	/*
-		Name: function_275127c2
-		Namespace: namespace_fb1bfa12
+		Name: set_lvldescriptionlong
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0xC710C33E
 		Offset: 0x730
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_275127c2(player, value)
+	function set_lvldescriptionlong(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "lvlDescriptionLong", value);
 	}
 
 	/*
-		Name: function_3d5ae5d4
-		Namespace: namespace_fb1bfa12
+		Name: set_lvlprogress
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x68389C78
 		Offset: 0x780
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3d5ae5d4(player, value)
+	function set_lvlprogress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "lvlProgress", value);
 	}
 
 	/*
-		Name: function_57d3362b
-		Namespace: namespace_fb1bfa12
+		Name: set_activestate
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x29A3DC03
 		Offset: 0x5F0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_57d3362b(player, value)
+	function set_activestate(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "activeState", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x4A2ABF33
 		Offset: 0x570
 		Size: 0x24
@@ -117,12 +117,12 @@ class class_fb1bfa12 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x7CAF82CE
 		Offset: 0x3E8
 		Size: 0x134
@@ -131,54 +131,54 @@ class class_fb1bfa12 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("evidence_board_mission_preview");
-		namespace_6aaccc24::function_da693cbe("entNum", 1, 10, "int");
-		namespace_6aaccc24::function_da693cbe("activeState", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("lvlYear", 1, 11, "int");
-		namespace_6aaccc24::function_dcb34c80("string", "lvlName", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "lvlDescriptionShort", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "lvlDescriptionLong", 1);
-		namespace_6aaccc24::function_da693cbe("lvlProgress", 1, 4, "float");
+		cluielem::setup_clientfields("evidence_board_mission_preview");
+		cluielem::add_clientfield("entNum", 1, 10, "int");
+		cluielem::add_clientfield("activeState", 1, 2, "int");
+		cluielem::add_clientfield("lvlYear", 1, 11, "int");
+		cluielem::function_dcb34c80("string", "lvlName", 1);
+		cluielem::function_dcb34c80("string", "lvlDescriptionShort", 1);
+		cluielem::function_dcb34c80("string", "lvlDescriptionLong", 1);
+		cluielem::add_clientfield("lvlProgress", 1, 4, "float");
 	}
 
 	/*
-		Name: function_c063a71c
-		Namespace: namespace_fb1bfa12
+		Name: set_lvlname
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x415CFE1F
 		Offset: 0x690
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c063a71c(player, value)
+	function set_lvlname(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "lvlName", value);
 	}
 
 	/*
-		Name: function_c2c6a8c3
-		Namespace: namespace_fb1bfa12
+		Name: set_lvlyear
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x1096ABCC
 		Offset: 0x640
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c2c6a8c3(player, value)
+	function set_lvlyear(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "lvlYear", value);
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_fb1bfa12
+		Name: set_entnum
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x1CAD3E8D
 		Offset: 0x5A0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c8350e33(player, value)
+	function set_entnum(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "entNum", value);
 	}
@@ -198,7 +198,7 @@ class class_fb1bfa12 : class_6aaccc24
 */
 function private autoexec function_be23586f()
 {
-	level notify(1121885646);
+	level notify(-1121885646);
 }
 
 /*
@@ -212,7 +212,7 @@ function private autoexec function_be23586f()
 */
 function set_display_info(player, var_ba420c60)
 {
-	function_c063a71c(player, var_ba420c60.levelname);
+	set_lvlname(player, var_ba420c60.levelname);
 }
 
 /*
@@ -226,7 +226,7 @@ function set_display_info(player, var_ba420c60)
 */
 function register()
 {
-	elem = new class_fb1bfa12();
+	elem = new cevidence_board_mission_preview();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -278,7 +278,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xFA4CD9FB
 	Offset: 0x278
@@ -286,13 +286,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_c8350e33(player, value)
+function set_entnum(player, value)
 {
-	[[ self ]]->function_c8350e33(player, value);
+	[[ self ]]->set_entnum(player, value);
 }
 
 /*
-	Name: function_57d3362b
+	Name: set_activestate
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xC666C165
 	Offset: 0x2A8
@@ -300,13 +300,13 @@ function function_c8350e33(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_57d3362b(player, value)
+function set_activestate(player, value)
 {
-	[[ self ]]->function_57d3362b(player, value);
+	[[ self ]]->set_activestate(player, value);
 }
 
 /*
-	Name: function_c2c6a8c3
+	Name: set_lvlyear
 	Namespace: evidence_board_mission_preview
 	Checksum: 0x553506B9
 	Offset: 0x2D8
@@ -314,13 +314,13 @@ function function_57d3362b(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c2c6a8c3(player, value)
+function set_lvlyear(player, value)
 {
-	[[ self ]]->function_c2c6a8c3(player, value);
+	[[ self ]]->set_lvlyear(player, value);
 }
 
 /*
-	Name: function_c063a71c
+	Name: set_lvlname
 	Namespace: evidence_board_mission_preview
 	Checksum: 0x32FA7012
 	Offset: 0x308
@@ -328,13 +328,13 @@ function function_c2c6a8c3(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c063a71c(player, value)
+function set_lvlname(player, value)
 {
-	[[ self ]]->function_c063a71c(player, value);
+	[[ self ]]->set_lvlname(player, value);
 }
 
 /*
-	Name: function_10415bce
+	Name: set_lvldescriptionshort
 	Namespace: evidence_board_mission_preview
 	Checksum: 0x638C5FC1
 	Offset: 0x338
@@ -342,13 +342,13 @@ function function_c063a71c(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_10415bce(player, value)
+function set_lvldescriptionshort(player, value)
 {
-	[[ self ]]->function_10415bce(player, value);
+	[[ self ]]->set_lvldescriptionshort(player, value);
 }
 
 /*
-	Name: function_275127c2
+	Name: set_lvldescriptionlong
 	Namespace: evidence_board_mission_preview
 	Checksum: 0x6E737854
 	Offset: 0x368
@@ -356,13 +356,13 @@ function function_10415bce(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_275127c2(player, value)
+function set_lvldescriptionlong(player, value)
 {
-	[[ self ]]->function_275127c2(player, value);
+	[[ self ]]->set_lvldescriptionlong(player, value);
 }
 
 /*
-	Name: function_3d5ae5d4
+	Name: set_lvlprogress
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xA7BBBA90
 	Offset: 0x398
@@ -370,8 +370,8 @@ function function_275127c2(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_3d5ae5d4(player, value)
+function set_lvlprogress(player, value)
 {
-	[[ self ]]->function_3d5ae5d4(player, value);
+	[[ self ]]->set_lvlprogress(player, value);
 }
 

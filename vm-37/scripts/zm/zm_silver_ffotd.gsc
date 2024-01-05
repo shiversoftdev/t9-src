@@ -1,25 +1,25 @@
 #using script_58860a35d0555f74;
 #using scripts\core_common\system_shared.gsc;
 
-#namespace namespace_b121f976;
+#namespace zm_silver_ffotd;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_b121f976
+	Name: __init__system__
+	Namespace: zm_silver_ffotd
 	Checksum: 0x2B1EAFC9
 	Offset: 0xE0
 	Size: 0x4C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_c5040460d9f3ee6", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
+	system::register(#"zm_silver_ffotd", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_b121f976
+	Namespace: zm_silver_ffotd
 	Checksum: 0x80F724D1
 	Offset: 0x138
 	Size: 0x4
@@ -32,7 +32,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_8ac3bea9
-	Namespace: namespace_b121f976
+	Namespace: zm_silver_ffotd
 	Checksum: 0xFE2563EA
 	Offset: 0x148
 	Size: 0x3E4

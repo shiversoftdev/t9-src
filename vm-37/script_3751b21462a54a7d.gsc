@@ -1,22 +1,22 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_256b8879317373de;
+#using scripts\zm_common\zm_utility.gsc;
 #using script_2c5daa95f8fec03c;
-#using script_47fb62300ac0bd60;
 #using script_5f261a5d57de5f7c;
-#using script_7e59d7bba853fe4b;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
 #using scripts\core_common\gestures.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_shared.gsc;
 #using scripts\core_common\healthoverlay.gsc;
-#using scripts\core_common\struct.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_791d0451;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_791d0451
 	Checksum: 0x731A673C
 	Offset: 0x1D8
@@ -24,7 +24,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2d064899850813e2", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -42,7 +42,7 @@ function function_70a657d8()
 {
 	level.var_fcb9f1fb = [];
 	callback::on_spawned(&on_player_spawn);
-	callback::function_10a4dd0a(&function_10a4dd0a);
+	callback::on_item_pickup(&on_item_pickup);
 	/#
 		level.var_c0f77370 = &function_c0f77370;
 	#/
@@ -54,11 +54,11 @@ function function_70a657d8()
 	function_e854b81f(#"hash_210097a75bb6c49a", #"hash_1f95b48e4a49df4a", #"hash_1f95b38e4a49dd97", #"hash_1f95b28e4a49dbe4", #"hash_1f95b18e4a49da31", #"hash_1f95b08e4a49d87e");
 	function_e854b81f(#"hash_602a1b6107105f07", #"hash_17ccbaee64daa05b", #"hash_17ccbbee64daa20e", #"hash_17ccbcee64daa3c1", #"hash_17ccbdee64daa574", #"hash_17ccbeee64daa727");
 	function_e854b81f(#"hash_51b6cc6dbafb7f31", #"hash_79774556f321d921", #"hash_79774256f321d408", #"hash_79774356f321d5bb", #"hash_79774856f321de3a", #"hash_79774956f321dfed");
-	clientfield::function_a8bbc967("zm_perks_per_controller.count", 1, 4, "int", 0);
+	clientfield::register_clientuimodel("zm_perks_per_controller.count", 1, 4, "int", 0);
 	for(i = 1; i <= 9; i++)
 	{
-		clientfield::function_a8bbc967(("zm_perks_per_controller." + i) + ".itemIndex", 1, 8, "int", 0);
-		clientfield::function_a8bbc967(("zm_perks_per_controller." + i) + ".lost", 1, 1, "int", 0);
+		clientfield::register_clientuimodel(("zm_perks_per_controller." + i) + ".itemIndex", 1, 8, "int", 0);
+		clientfield::register_clientuimodel(("zm_perks_per_controller." + i) + ".lost", 1, 1, "int", 0);
 	}
 }
 
@@ -246,7 +246,7 @@ function function_a0a66726()
 	foreach(var_91b99f7 in self.var_7341f980)
 	{
 		itemindex = 0;
-		if(isdefined(var_91b99f7) && function_7a600918(var_91b99f7) && var_91b99f7 != #"")
+		if(isdefined(var_91b99f7) && ishash(var_91b99f7) && var_91b99f7 != #"")
 		{
 			itemindex = getitemindexfromref(var_91b99f7);
 		}
@@ -367,7 +367,7 @@ function function_3fecad82(talent, var_6e2cc6cb)
 		self.var_7341f980[self.var_7341f980.size] = talent;
 	}
 	self function_a173ab53();
-	self namespace_b376ff3f::function_9f438f15();
+	self item_inventory::function_9f438f15();
 	if(isdefined(level.var_fcb9f1fb) && isdefined(level.var_fcb9f1fb[talent]))
 	{
 		self [[level.var_fcb9f1fb[talent]]]();
@@ -511,12 +511,12 @@ function private function_b4083162(talent)
 */
 function perk_give_bottle_begin(str_perk)
 {
-	weapon = function_6dc1382(str_perk);
+	weapon = get_perk_weapon(str_perk);
 	self thread gestures::function_f3e2696f(self, weapon, undefined, 2.5, undefined, undefined, undefined);
 }
 
 /*
-	Name: function_6dc1382
+	Name: get_perk_weapon
 	Namespace: namespace_791d0451
 	Checksum: 0x45B2D29D
 	Offset: 0x16F8
@@ -524,7 +524,7 @@ function perk_give_bottle_begin(str_perk)
 	Parameters: 1
 	Flags: Linked
 */
-function function_6dc1382(str_perk)
+function get_perk_weapon(str_perk)
 {
 	switch(str_perk)
 	{
@@ -610,7 +610,7 @@ function function_4c1d0e25(perk, var_b2d43592)
 	{
 		arrayremovevalue(self.var_7341f980, perk);
 		self function_a173ab53();
-		self namespace_b376ff3f::function_9f438f15();
+		self item_inventory::function_9f438f15();
 		var_3dab8681 = namespace_e86ffa8::function_cde018a9(perk);
 		if(isdefined(level._custom_perks[var_3dab8681]) && isdefined(level._custom_perks[var_3dab8681].player_thread_take))
 		{
@@ -659,7 +659,7 @@ function on_player_spawn()
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: namespace_791d0451
 	Checksum: 0x7030F661
 	Offset: 0x1BB0
@@ -667,7 +667,7 @@ function on_player_spawn()
 	Parameters: 1
 	Flags: Linked
 */
-function function_10a4dd0a(params)
+function on_item_pickup(params)
 {
 	item = params.item;
 	if(isplayer(self))

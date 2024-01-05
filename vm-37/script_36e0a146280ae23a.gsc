@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_e1dc992f : class_6aaccc24
+class class_e1dc992f : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_e1dc992f : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_e1dc992f
 		Checksum: 0x3F426332
 		Offset: 0x328
@@ -52,9 +52,9 @@ class class_e1dc992f : class_6aaccc24
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_crafting_table_menu");
+		cluielem::register_clientside("sr_crafting_table_menu");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_e1dc992f : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_crafting_table_menu");
+		cluielem::setup_clientfields("sr_crafting_table_menu");
 	}
 
 	/*
@@ -82,7 +82,7 @@ class class_e1dc992f : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: sr_crafting_table_menu
 	Checksum: 0x5D8E23DB
 	Offset: 0x228
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_e1dc992f();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

@@ -1,8 +1,8 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\renderoverridebundle.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\renderoverridebundle.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_7fe06af4;
 
@@ -72,12 +72,12 @@ function function_409efbe2(localclientnum, oldval, newval, bnewent, binitialsnap
 	{
 		function_2cca7b47(fieldname, #"hash_1ecdcf251e36d7b2");
 		callback::on_spawned(&on_player_spawned);
-		callback::function_e9e16e2f(&function_e9e16e2f);
+		callback::on_killcam_begin(&on_killcam_begin);
 		callback::on_player_corpse(&on_player_corpse);
 		return;
 	}
 	callback::remove_on_spawned(&on_player_spawned);
-	callback::function_e9e16e2f(&function_e9e16e2f);
+	callback::on_killcam_begin(&on_killcam_begin);
 	callback::on_player_corpse(&on_player_corpse);
 }
 
@@ -96,7 +96,7 @@ function on_player_spawned(localclientnum)
 }
 
 /*
-	Name: function_e9e16e2f
+	Name: on_killcam_begin
 	Namespace: namespace_7fe06af4
 	Checksum: 0x295E4BF3
 	Offset: 0x538
@@ -104,7 +104,7 @@ function on_player_spawned(localclientnum)
 	Parameters: 1
 	Flags: Linked
 */
-function function_e9e16e2f(params)
+function on_killcam_begin(params)
 {
 	localclientnum = params.localclientnum;
 	player = getlocalplayers()[localclientnum];

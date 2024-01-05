@@ -1,36 +1,36 @@
-#using script_18e21a7011416ce0;
-#using script_1c65dbfc2f1c8d8f;
-#using script_25ebc9ade08aed84;
+#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_audio_sq.gsc;
+#using scripts\zm_common\zm_sq.gsc;
+#using scripts\zm_common\zm_player.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
 #using script_34ab99a4ca1a43d;
-#using script_3cebb48c37fc271;
-#using script_3f9e0dc8454d98e1;
-#using script_4108035fe400ce67;
-#using script_5404bcacf34a92d;
-#using script_5bb072c3abf4652c;
-#using script_6c5b51f98cd04fa3;
 #using script_7a5293d92c61c788;
-#using script_7bacb32f8222fa3e;
-#using script_7fc996fe8678852;
+#using scripts\zm_common\zm_audio.gsc;
+#using script_5404bcacf34a92d;
+#using scripts\zm\zm_gold_ww_quest.gsc;
+#using script_25ebc9ade08aed84;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\zm_common\zm_zonemgr.gsc;
 #using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\zm_common\zm_fasttravel.gsc;
+#using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using script_4108035fe400ce67;
+#using script_7bacb32f8222fa3e;
+#using script_7fc996fe8678852;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm\zm_gold_ww_quest.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_player.gsc;
-#using scripts\zm_common\zm_unitrigger.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_36ebd7e4;
 
@@ -93,14 +93,14 @@ function init_clientfields()
 */
 function function_ec9e5cf2()
 {
-	namespace_8f39dfb1::init();
-	level namespace_ee206246::register(#"hash_4bcc3acb4102f466", #"step_1", #"hash_1309b1590ff55819", &function_1dcf5339, &function_9a3d73f5);
-	level namespace_ee206246::register(#"hash_4bcc3acb4102f466", #"step_2", #"hash_1309ae590ff55300", &function_bc64a2fc, &function_5339496c);
-	level namespace_ee206246::register(#"hash_5891e4c3e9c2ece4", #"step_1", #"hash_cdb7944a1051037", &function_f68bd85b, &function_a10cd1d4);
-	level namespace_ee206246::register(#"hash_5891e4c3e9c2ece4", #"step_2", #"hash_cdb7a44a10511ea", &function_513e5d8e, &function_af1af946);
-	level namespace_ee206246::register(#"hash_1e54ef45c51f5b1a", #"step_1", #"hash_1e54ef45c51f5b1a", &function_afb809d7, &function_a7f8da0d);
-	level namespace_ee206246::register(#"hash_68f490a90206132a", #"step_1", #"hash_18de4ebce0c76a15", &function_519f3aff, &function_bd8fd5ea);
-	level namespace_ee206246::register(#"hash_68f490a90206132a", #"step_2", #"hash_18de4bbce0c764fc", &function_c037252d, &function_610a4c69);
+	zm_audio_sq::init();
+	level zm_sq::register(#"hash_4bcc3acb4102f466", #"step_1", #"hash_1309b1590ff55819", &function_1dcf5339, &function_9a3d73f5);
+	level zm_sq::register(#"hash_4bcc3acb4102f466", #"step_2", #"hash_1309ae590ff55300", &function_bc64a2fc, &function_5339496c);
+	level zm_sq::register(#"hash_5891e4c3e9c2ece4", #"step_1", #"hash_cdb7944a1051037", &function_f68bd85b, &function_a10cd1d4);
+	level zm_sq::register(#"hash_5891e4c3e9c2ece4", #"step_2", #"hash_cdb7a44a10511ea", &function_513e5d8e, &function_af1af946);
+	level zm_sq::register(#"hash_1e54ef45c51f5b1a", #"step_1", #"hash_1e54ef45c51f5b1a", &function_afb809d7, &function_a7f8da0d);
+	level zm_sq::register(#"hash_68f490a90206132a", #"step_1", #"hash_18de4ebce0c76a15", &function_519f3aff, &function_bd8fd5ea);
+	level zm_sq::register(#"hash_68f490a90206132a", #"step_2", #"hash_18de4bbce0c764fc", &function_c037252d, &function_610a4c69);
 	level thread function_2abef8da();
 }
 
@@ -115,10 +115,10 @@ function function_ec9e5cf2()
 */
 function private function_2abef8da()
 {
-	level namespace_ee206246::start(#"hash_4bcc3acb4102f466");
-	level namespace_ee206246::start(#"hash_5891e4c3e9c2ece4");
-	level namespace_ee206246::start(#"hash_1e54ef45c51f5b1a");
-	level namespace_ee206246::start(#"hash_68f490a90206132a");
+	level zm_sq::start(#"hash_4bcc3acb4102f466");
+	level zm_sq::start(#"hash_5891e4c3e9c2ece4");
+	level zm_sq::start(#"hash_1e54ef45c51f5b1a");
+	level zm_sq::start(#"hash_68f490a90206132a");
 }
 
 /*
@@ -874,7 +874,7 @@ function function_338329dd()
 			ai = spawnactor("spawner_bo5_mimic", random_spawner.origin, random_spawner.angles);
 			if(isdefined(ai))
 			{
-				function_c7921311(ai);
+				set_zombie(ai);
 				if(!isdefined(var_394b1a2f))
 				{
 					var_394b1a2f = [];
@@ -911,7 +911,7 @@ function function_8bde8ea6()
 	while(var_2ce40fd3 < 6)
 	{
 		ai = spawnactor("spawner_bo5_zombie_zm_gold", var_633be68c[var_2ce40fd3].origin, var_633be68c[var_2ce40fd3].angles);
-		function_c7921311(ai);
+		set_zombie(ai);
 		if(isdefined(ai))
 		{
 			ai thread function_e6020995();
@@ -960,7 +960,7 @@ function function_8bde8ea6()
 			ai = spawnactor("spawner_bo5_zombie_zm_gold", random_spawner.origin, random_spawner.angles);
 			if(isdefined(ai))
 			{
-				function_c7921311(ai);
+				set_zombie(ai);
 				ai thread function_e6020995();
 				if(!isdefined(var_9cbc3287))
 				{
@@ -979,7 +979,7 @@ function function_8bde8ea6()
 }
 
 /*
-	Name: function_c7921311
+	Name: set_zombie
 	Namespace: namespace_36ebd7e4
 	Checksum: 0xC1016D07
 	Offset: 0x3520
@@ -987,7 +987,7 @@ function function_8bde8ea6()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_c7921311(e_zombie)
+function private set_zombie(e_zombie)
 {
 	if(isdefined(e_zombie))
 	{
@@ -1178,7 +1178,7 @@ function function_513e5d8e(var_a276c861)
 	jump_pad = array::random(var_f3ebc5a2);
 	while(isdefined(jump_pad))
 	{
-		jump_pad thread function_db5c2d6a(var_8b93416f, var_1cc461e0[jump_pad.script_int - 1]);
+		jump_pad childthread function_db5c2d6a(var_8b93416f, var_1cc461e0[jump_pad.script_int - 1]);
 		result = undefined;
 		result = jump_pad waittill(#"hash_342385e92a15b40");
 		if(is_true(result.success))
@@ -1237,10 +1237,10 @@ function function_83a84bcc(var_b10c41a6, var_f5d2b231)
 	var_10a95a2 = var_f5d2b231[0];
 	foreach(pad in var_f5d2b231)
 	{
-		if(pad.var_b555f02e === var_b10c41a6.var_e5a262d8.var_b555f02e)
+		if(pad.var_b555f02e === var_b10c41a6.landing_pad.var_b555f02e)
 		{
 			var_10a95a2 = pad;
-			if(pad.var_e5a262d8.var_b555f02e !== var_b10c41a6.var_b555f02e)
+			if(pad.landing_pad.var_b555f02e !== var_b10c41a6.var_b555f02e)
 			{
 				break;
 			}
@@ -1260,7 +1260,7 @@ function function_83a84bcc(var_b10c41a6, var_f5d2b231)
 */
 function function_4b391364()
 {
-	self endon(#"hash_7b651a1275b8f825");
+	self endon(#"jump_pad_quest_start");
 	wait(40);
 	self setcandamage(0);
 	self clientfield::set("" + #"hash_4566af74eca7b0fc", 0);
@@ -1306,7 +1306,7 @@ function function_db5c2d6a(var_8b93416f, var_ea14a37)
 	self clientfield::set("" + #"hash_4566af74eca7b0fc", 1);
 	if(!is_true(var_8b93416f))
 	{
-		self thread function_4b391364();
+		self childthread function_4b391364();
 	}
 	var_9e88794c = self gettagorigin("tag_light_blue_fx");
 	while(true)
@@ -1386,7 +1386,7 @@ function function_db5c2d6a(var_8b93416f, var_ea14a37)
 	}
 	if(is_true(var_f5c28fe2))
 	{
-		player thread namespace_47809ab2::function_c14f39dc(self.var_2ddd9b0c, self.var_e5a262d8);
+		player thread namespace_47809ab2::function_c14f39dc(self.var_2ddd9b0c, self.landing_pad);
 	}
 	self flag::clear("jump_pad_quest_start");
 	self.var_43032f5e.angles = var_bc6423c3;
@@ -1643,7 +1643,7 @@ function function_519f3aff(var_a276c861)
 		level.var_e59aeca1 thread function_363c7e7e((1, 0, 0));
 	#/
 	level thread function_2f6288d8();
-	callback::function_10a4dd0a(&function_e1ea43c1);
+	callback::on_item_pickup(&function_e1ea43c1);
 	callback::on_disconnect(&function_2085bf3b);
 	zm_player::function_a827358a(&function_8f9ea01c);
 	level flag::wait_till(#"hash_66609c56bb848409");
@@ -1666,7 +1666,7 @@ function function_bd8fd5ea(var_a276c861, var_19e802fa)
 		level flag::set(#"hash_3dff248b4edaface");
 		level flag::set(#"hash_2e43edba67c87ef1");
 	}
-	callback::remove_callback(#"hash_56d1805bfff3e65b", &function_e1ea43c1);
+	callback::remove_callback(#"on_item_pickup", &function_e1ea43c1);
 	callback::remove_on_disconnect(&function_2085bf3b);
 }
 
@@ -1734,7 +1734,7 @@ function function_2085bf3b()
 			{
 				self function_98957f5b();
 				level thread function_6413e9b();
-				callback::function_5a753d97(&function_2c951177);
+				callback::remove_on_weapon_change(&function_2c951177);
 				callback::function_824d206(&function_2056cd79);
 				break;
 			}
@@ -2055,7 +2055,7 @@ function function_c64d2826(e_player)
 	e_player giveweapon(level.var_e4731251);
 	e_player switchtoweapon(level.var_e4731251, 1);
 	e_player waittill(#"weapon_change_complete");
-	callback::function_f77ced93(&function_2c951177);
+	callback::on_weapon_change(&function_2c951177);
 	callback::function_33f0ddd3(&function_2056cd79);
 	e_player thread function_8ee22ffd();
 	e_player val::reset(#"hash_5f4be7238bf3892b", "disable_weapon_cycling");
@@ -2108,7 +2108,7 @@ function function_9c294ad5(e_player)
 	e_player endon(#"disconnect");
 	s_result = undefined;
 	s_result = e_player waittill(#"hash_31f98f1ef1f33ee1", #"fake_death");
-	callback::function_5a753d97(&function_2c951177);
+	callback::remove_on_weapon_change(&function_2c951177);
 	callback::function_824d206(&function_2056cd79);
 	e_player takeweapon(level.var_e4731251);
 	e_player notify(#"hide_equipment_hint_text");

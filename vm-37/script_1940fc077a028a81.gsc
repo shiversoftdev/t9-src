@@ -1,23 +1,23 @@
-#using script_178024232e91b0a1;
 #using script_3357acf79ce92f4b;
 #using script_3411bb48d41bd3b;
 #using script_3aa0f32b70d4f7cb;
-#using script_4bf952f6ba31bb17;
-#using script_4d85e8de54b02198;
-#using script_bd2b8aaa388dcce;
+#using script_178024232e91b0a1;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_4d85e8de54b02198;
+#using script_4bf952f6ba31bb17;
+#using scripts\core_common\ai\zombie.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_e292b080;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e292b080
 	Checksum: 0x35D228BE
 	Offset: 0x318
@@ -25,7 +25,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1f8830cd01b39f8f", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -60,7 +60,7 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&function_e91d8371));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1d72a84d1a755d7f", &function_e91d8371, 2);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieupdatethrottle", &function_e91d8371, 2);
 	/#
 		assert(isscriptfunctionptr(&function_5aeeecac));
 	#/
@@ -76,15 +76,15 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombieshouldmelee));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_3481eea9a9726377", &zombieshouldmelee);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieshouldmelee", &zombieshouldmelee);
 	/#
 		assert(isscriptfunctionptr(&function_d8b225ae));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_61ab63365479456b", &function_d8b225ae);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieshouldmeleeattackable", &function_d8b225ae);
 	/#
 		assert(isscriptfunctionptr(&zombieshouldmove));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_61a4f87f1c6225d0", &zombieshouldmove);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombieshouldmove", &zombieshouldmove);
 	/#
 		assert(isscriptfunctionptr(&function_bfc25c77));
 	#/
@@ -96,7 +96,7 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombieshouldknockdown));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_2cfb23ecd91e559f", &zombieshouldknockdown);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieshouldknockdown", &zombieshouldknockdown);
 	/#
 		assert(isscriptfunctionptr(&function_2a7b4aab));
 	#/
@@ -130,21 +130,21 @@ function private function_7ff2a0fc()
 	#/
 	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_35721134610efe59", &function_573545a);
 	/#
-		assert(isscriptfunctionptr(&function_c6787767));
+		assert(isscriptfunctionptr(&zombiemoveactionstart));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_a8a1cfa346aa6fb", &function_c6787767);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombiemoveactionstart", &zombiemoveactionstart);
 	/#
 		assert(isscriptfunctionptr(&zombiemoveactionupdate));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_7963765b515bfe18", &zombiemoveactionupdate);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombiemoveactionupdate", &zombiemoveactionupdate);
 	/#
-		assert(isscriptfunctionptr(&function_c6787767));
+		assert(isscriptfunctionptr(&zombiemoveactionstart));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_a8a1cfa346aa6fb", &function_c6787767);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiemoveactionstart", &zombiemoveactionstart);
 	/#
 		assert(isscriptfunctionptr(&zombiemoveactionupdate));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7963765b515bfe18", &zombiemoveactionupdate);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiemoveactionupdate", &zombiemoveactionupdate);
 	/#
 		assert(isscriptfunctionptr(&function_7c8e35e8));
 	#/
@@ -162,7 +162,7 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombieknockdownactionstart));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_70e2c6f9bb18c5cc", &zombieknockdownactionstart);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieknockdownactionstart", &zombieknockdownactionstart);
 	/#
 		assert(isscriptfunctionptr(&function_c8939973));
 	#/
@@ -170,7 +170,7 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombiegetupactionterminate));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_6c72993cdaed86ac", &zombiegetupactionterminate);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiegetupactionterminate", &zombiegetupactionterminate);
 	/#
 		assert(!isdefined(undefined) || isscriptfunctionptr(undefined));
 	#/
@@ -184,19 +184,19 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&function_f8250d5e));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_636c8e136e07da5a", &function_f8250d5e);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombieidleactionstart", &function_f8250d5e);
 	/#
 		assert(isscriptfunctionptr(&function_860d5d8));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_42e3f983d696091b", &function_860d5d8);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombieidleactionupdate", &function_860d5d8);
 	/#
 		assert(isscriptfunctionptr(&function_f8250d5e));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_636c8e136e07da5a", &function_f8250d5e);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieidleactionstart", &function_f8250d5e);
 	/#
 		assert(isscriptfunctionptr(&function_860d5d8));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_42e3f983d696091b", &function_860d5d8);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieidleactionupdate", &function_860d5d8);
 	/#
 		assert(isscriptfunctionptr(&function_f37b0fbd));
 	#/
@@ -246,7 +246,7 @@ function private function_e91d8371(entity)
 	}
 	level.var_8de0b84e[level.var_a2fbb776] = entity getentitynumber();
 	level.var_a2fbb776 = (level.var_a2fbb776 + 1) % 2;
-	if(is_true(level.is_survival) && is_true(entity.var_f9a12c59))
+	if(is_true(level.is_survival) && is_true(entity.has_awareness))
 	{
 		function_eea7a68a(entity);
 	}
@@ -297,7 +297,7 @@ function function_eea7a68a(entity)
 {
 	entity.enemy_override = namespace_85745671::function_b67c088d();
 	namespace_85745671::function_744beb04(entity);
-	awareness::function_c8f102d5(entity);
+	awareness::target_update(entity);
 }
 
 /*
@@ -313,7 +313,7 @@ function function_7c70e7fa(entity, var_21bdf069, dynent, var_144ce0a0)
 {
 	var_f3fec032 = function_489009c1(dynent);
 	state = function_ffdbe8c2(dynent);
-	if(var_144ce0a0 && state != 0 || (isdefined(var_f3fec032.var_c14aa186[state]) && is_true(var_f3fec032.var_c14aa186[state].ignoredamage)))
+	if(var_144ce0a0 && state != 0 || (isdefined(var_f3fec032.dynentstates[state]) && is_true(var_f3fec032.dynentstates[state].ignoredamage)))
 	{
 		return false;
 	}
@@ -437,22 +437,22 @@ function zombieshouldmelee(entity)
 		return false;
 	}
 	meleedistsq = zombiebehavior::function_997f1224(entity);
-	var_c6bad08 = undefined;
+	enemy_vehicle = undefined;
 	test_origin = entity.enemy.origin;
 	if(isplayer(entity.enemy))
 	{
 		if(namespace_85745671::function_142c3c86(entity.enemy))
 		{
-			var_c6bad08 = entity.enemy getvehicleoccupied();
-			var_81952387 = var_c6bad08.origin;
+			enemy_vehicle = entity.enemy getvehicleoccupied();
+			var_81952387 = enemy_vehicle.origin;
 			for(i = 0; i < 11; i++)
 			{
-				if(var_c6bad08 function_dcef0ba1(i))
+				if(enemy_vehicle function_dcef0ba1(i))
 				{
-					var_ec950ebd = var_c6bad08 function_defc91b2(i);
+					var_ec950ebd = enemy_vehicle function_defc91b2(i);
 					if(isdefined(var_ec950ebd) && var_ec950ebd >= 0)
 					{
-						seat_pos = var_c6bad08 function_5051cc0c(i);
+						seat_pos = enemy_vehicle function_5051cc0c(i);
 						if(distancesquared(entity.origin, var_81952387) > distancesquared(entity.origin, seat_pos))
 						{
 							var_81952387 = seat_pos;
@@ -466,16 +466,16 @@ function zombieshouldmelee(entity)
 		{
 			if(isvehicle(entity.enemy getgroundent()))
 			{
-				var_c6bad08 = entity.enemy getgroundent();
+				enemy_vehicle = entity.enemy getgroundent();
 				test_origin = (isdefined(entity.enemy.last_valid_position) ? entity.enemy.last_valid_position : entity.enemy.origin);
 			}
 			else if(isvehicle(entity.enemy getmoverent()))
 			{
-				var_c6bad08 = entity.enemy getmoverent();
+				enemy_vehicle = entity.enemy getmoverent();
 				test_origin = (isdefined(entity.enemy.last_valid_position) ? entity.enemy.last_valid_position : entity.enemy.origin);
 			}
 		}
-		if(isdefined(var_c6bad08) && isdefined(entity.var_cbc65493))
+		if(isdefined(enemy_vehicle) && isdefined(entity.var_cbc65493))
 		{
 			meleedistsq = meleedistsq * entity.var_cbc65493;
 		}
@@ -493,7 +493,7 @@ function zombieshouldmelee(entity)
 	{
 		return false;
 	}
-	if(!entity cansee((isdefined(var_c6bad08) ? var_c6bad08 : entity.enemy)))
+	if(!entity cansee((isdefined(enemy_vehicle) ? enemy_vehicle : entity.enemy)))
 	{
 		return false;
 	}
@@ -503,13 +503,13 @@ function zombieshouldmelee(entity)
 		entity.var_1b250399 = entity.origin;
 		return true;
 	}
-	if(isdefined(var_c6bad08))
+	if(isdefined(enemy_vehicle))
 	{
 		entity.idletime = gettime();
 		entity.var_1b250399 = entity.origin;
 		return true;
 	}
-	if(is_true(self.var_37f16e2e) && !tracepassedonnavmesh(entity.origin, (isdefined(entity.enemy.last_valid_position) ? entity.enemy.last_valid_position : entity.enemy.origin), entity.enemy getpathfindingradius()))
+	if(is_true(self.isonnavmesh) && !tracepassedonnavmesh(entity.origin, (isdefined(entity.enemy.last_valid_position) ? entity.enemy.last_valid_position : entity.enemy.origin), entity.enemy getpathfindingradius()))
 	{
 		return false;
 	}
@@ -755,7 +755,7 @@ function function_c8caa34b(entity)
 }
 
 /*
-	Name: function_c6787767
+	Name: zombiemoveactionstart
 	Namespace: namespace_e292b080
 	Checksum: 0x698A4897
 	Offset: 0x2A08
@@ -763,7 +763,7 @@ function function_c8caa34b(entity)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_c6787767(entity)
+function private zombiemoveactionstart(entity)
 {
 	entity.movetime = gettime();
 	entity.moveorigin = entity.origin;
@@ -821,7 +821,7 @@ function private function_7c8e35e8(entity, asmstate)
 		node.owner = entity;
 		if(entity.archetype !== #"zombie" && !isentity(entity.traversal_blocker))
 		{
-			entity callback::function_d8abfc3d(#"hash_11aa32ad6d527054", &damagedoor);
+			entity callback::function_d8abfc3d(#"on_ai_melee", &damagedoor);
 		}
 		if(isdefined(asmstate))
 		{
@@ -905,7 +905,7 @@ function private function_3f71b9c2(entity, asmstate)
 	}
 	asmstate.traversal_blocker = undefined;
 	asmstate.var_a476b329 = undefined;
-	asmstate callback::function_52ac9652(#"hash_11aa32ad6d527054", &damagedoor);
+	asmstate callback::function_52ac9652(#"on_ai_melee", &damagedoor);
 	if(asmstate asmgetstatus() == "asm_status_running")
 	{
 		asmstate.var_fc781a6f = 1;
@@ -1274,10 +1274,10 @@ function zombieupdategoal(goalpos)
 				path = undefined;
 				if(is_true(self.var_ceed8829))
 				{
-					var_f67d1ba2 = generatenavmeshpath(self.origin, goalpos, self);
-					if(isdefined(var_f67d1ba2) && var_f67d1ba2.status === "succeeded" && isdefined(var_f67d1ba2.pathpoints))
+					pathdata = generatenavmeshpath(self.origin, goalpos, self);
+					if(isdefined(pathdata) && pathdata.status === "succeeded" && isdefined(pathdata.pathpoints))
 					{
-						path = var_f67d1ba2.pathpoints;
+						path = pathdata.pathpoints;
 					}
 				}
 				else

@@ -1,27 +1,27 @@
-#using script_1287f54612f9bfce;
-#using script_18077945bb84ede7;
-#using script_1c65dbfc2f1c8d8f;
-#using script_1caf36ff04a85ff6;
-#using script_3751b21462a54a7d;
-#using script_3ddf84b7bb3bf47d;
-#using script_4108035fe400ce67;
+#using scripts\killstreaks\killstreaks_util.gsc;
 #using script_471b31bd963b388e;
-#using script_47fb62300ac0bd60;
-#using script_68d2ee1489345a1d;
+#using script_4108035fe400ce67;
 #using script_7bacb32f8222fa3e;
-#using script_7d7ac1f663edcdc8;
-#using script_7fc996fe8678852;
-#using script_ab890501c40b73c;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_1caf36ff04a85ff6;
+#using scripts\core_common\item_inventory.gsc;
+#using script_1287f54612f9bfce;
 #using scripts\zm_common\zm_stats.gsc;
+#using script_3ddf84b7bb3bf47d;
+#using script_7d7ac1f663edcdc8;
+#using script_18077945bb84ede7;
+#using script_3751b21462a54a7d;
+#using scripts\zm_common\zm_contracts.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_1cc7b406;
 
@@ -40,7 +40,7 @@ function private autoexec function_329d3053()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1cc7b406
 	Checksum: 0x6151FB52
 	Offset: 0x258
@@ -48,7 +48,7 @@ function private autoexec function_329d3053()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_49e3cc2797ad6fbc", &function_70a657d8, &function_8ac3bea9, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -551,7 +551,7 @@ function function_4b23ad31(machine, trigger)
 						}
 						if(has_enough)
 						{
-							self playrumbleonentity(#"hash_410bd55524ae7d");
+							self playrumbleonentity(#"zm_interact_rumble");
 							self function_52df229a(var_1a988176);
 							switch(var_1a988176)
 							{
@@ -566,8 +566,8 @@ function function_4b23ad31(machine, trigger)
 								case "hash_6ab225c69027e657":
 								case "hash_7ab18956a0660839":
 								{
-									self stats::function_622feb0d(var_82e23366.var_3cf2d21, #"crafted", 1);
-									self contracts::function_5b88297d(#"hash_5db7e053c5f4765f");
+									self stats::function_622feb0d(var_82e23366.namehash, #"crafted", 1);
+									self contracts::increment_zm_contract(#"hash_5db7e053c5f4765f");
 									break;
 								}
 								case "hash_5f6d7361258230a":
@@ -580,7 +580,7 @@ function function_4b23ad31(machine, trigger)
 								case "hash_541f29266c6b7df8":
 								case "hash_54877da1f10e40b5":
 								{
-									self contracts::function_5b88297d(#"hash_2ee6ab7ed0517a10");
+									self contracts::increment_zm_contract(#"hash_2ee6ab7ed0517a10");
 									break;
 								}
 							}
@@ -652,12 +652,12 @@ function function_52df229a(itemname, amount, var_75766173)
 		{
 			self notify(#"hash_4506f189fa360331");
 		}
-		var_fa3df96 = self namespace_b376ff3f::function_e66dcff5(item);
+		var_fa3df96 = self item_inventory::function_e66dcff5(item);
 		if(isdefined(var_fa3df96))
 		{
-			if(!namespace_ad5a0cd6::function_db35e94f(item.var_bd027dd9))
+			if(!item_world_util::function_db35e94f(item.var_bd027dd9))
 			{
-				item.var_bd027dd9 = namespace_ad5a0cd6::function_970b8d86(var_fa3df96);
+				item.var_bd027dd9 = item_world_util::function_970b8d86(var_fa3df96);
 			}
 			if(isdefined(currentweapon) && killstreaks::is_killstreak_weapon(currentweapon) && var_fa3df96 == 17)
 			{
@@ -667,12 +667,12 @@ function function_52df229a(itemname, amount, var_75766173)
 				self waittill(#"weapon_change");
 				waitframe(1);
 			}
-			item.var_8e092725 = 0;
+			item.hidetime = 0;
 			if(item.var_a6762160.itemtype === #"scorestreak")
 			{
 				if(self.inventory.items[var_fa3df96].var_bd027dd9 != 32767)
 				{
-					self namespace_b376ff3f::function_418f9eb8(self.inventory.items[var_fa3df96].var_bd027dd9);
+					self item_inventory::drop_inventory_item(self.inventory.items[var_fa3df96].var_bd027dd9);
 					item_world::function_de2018e3(item, self, var_fa3df96);
 				}
 				else
@@ -684,7 +684,7 @@ function function_52df229a(itemname, amount, var_75766173)
 			{
 				if(self.inventory.items[var_fa3df96].var_bd027dd9 != 32767 && self.inventory.items[var_fa3df96].var_a6762160.name != item.var_a6762160.name)
 				{
-					self namespace_b376ff3f::function_418f9eb8(self.inventory.items[var_fa3df96].var_bd027dd9);
+					self item_inventory::drop_inventory_item(self.inventory.items[var_fa3df96].var_bd027dd9);
 					item_world::function_de2018e3(item, self, var_fa3df96);
 				}
 				else
@@ -701,7 +701,7 @@ function function_52df229a(itemname, amount, var_75766173)
 }
 
 /*
-	Name: function_ff9ddbfa
+	Name: give_equipment
 	Namespace: namespace_1cc7b406
 	Checksum: 0xD41597D1
 	Offset: 0x1CD0
@@ -709,7 +709,7 @@ function function_52df229a(itemname, amount, var_75766173)
 	Parameters: 2
 	Flags: None
 */
-function function_ff9ddbfa(itemname, var_738dfc81)
+function give_equipment(itemname, var_738dfc81)
 {
 	for(i = 0; i < var_738dfc81; i++)
 	{
@@ -726,15 +726,15 @@ function function_ff9ddbfa(itemname, var_738dfc81)
 				{
 					if(isdefined(var_a6762160))
 					{
-						var_b619c089 = self namespace_b376ff3f::function_8babc9f9(var_a6762160);
+						inventoryitem = self item_inventory::function_8babc9f9(var_a6762160);
 					}
-					if(isdefined(var_b619c089))
+					if(isdefined(inventoryitem))
 					{
-						self namespace_b376ff3f::function_c8bedf1b(var_b619c089);
+						self item_inventory::equip_equipment(inventoryitem);
 					}
 					continue;
 				}
-				self namespace_b376ff3f::function_fba40e6c(dropitem);
+				self item_inventory::function_fba40e6c(dropitem);
 			}
 		}
 	}

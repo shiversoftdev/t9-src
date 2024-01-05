@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_d1ed471a : class_6aaccc24
+class class_d1ed471a : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_d1ed471a
 		Checksum: 0x1C8CEAA7
 		Offset: 0x340
@@ -52,9 +52,9 @@ class class_d1ed471a : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_gold_hud");
+		cluielem::register_clientside("zm_gold_hud");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_gold_hud");
+		cluielem::setup_clientfields("zm_gold_hud");
 	}
 
 	/*
@@ -82,16 +82,16 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
 
-#namespace namespace_82d7691b;
+#namespace zm_gold_hud;
 
 /*
 	Name: function_8c06d5e9
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0xB9C6EA0D
 	Offset: 0xA8
 	Size: 0x14
@@ -105,7 +105,7 @@ function private autoexec function_8c06d5e9()
 
 /*
 	Name: register
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0xAD80BDAE
 	Offset: 0xC8
 	Size: 0x16E
@@ -120,40 +120,40 @@ function register()
 	{
 		level.var_ae746e8f = associativearray();
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_270f51c6d631dccd"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_gold_hud"]))
 	{
-		level.var_ae746e8f[#"hash_270f51c6d631dccd"] = [];
+		level.var_ae746e8f[#"zm_gold_hud"] = [];
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_270f51c6d631dccd"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_gold_hud"]))
 	{
-		level.var_ae746e8f[#"hash_270f51c6d631dccd"] = [];
+		level.var_ae746e8f[#"zm_gold_hud"] = [];
 	}
-	else if(!isarray(level.var_ae746e8f[#"hash_270f51c6d631dccd"]))
+	else if(!isarray(level.var_ae746e8f[#"zm_gold_hud"]))
 	{
-		level.var_ae746e8f[#"hash_270f51c6d631dccd"] = array(level.var_ae746e8f[#"hash_270f51c6d631dccd"]);
+		level.var_ae746e8f[#"zm_gold_hud"] = array(level.var_ae746e8f[#"zm_gold_hud"]);
 	}
-	level.var_ae746e8f[#"hash_270f51c6d631dccd"][level.var_ae746e8f[#"hash_270f51c6d631dccd"].size] = elem;
+	level.var_ae746e8f[#"zm_gold_hud"][level.var_ae746e8f[#"zm_gold_hud"].size] = elem;
 }
 
 /*
-	Name: function_5c1bb138
-	Namespace: namespace_82d7691b
+	Name: register_clientside
+	Namespace: zm_gold_hud
 	Checksum: 0x4E8BD916
 	Offset: 0x240
 	Size: 0x34
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_d1ed471a();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0xDC8037A3
 	Offset: 0x280
 	Size: 0x1C
@@ -167,7 +167,7 @@ function open(player)
 
 /*
 	Name: close
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x9A28CCE
 	Offset: 0x2A8
 	Size: 0x1C
@@ -181,7 +181,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x9AC1CC48
 	Offset: 0x2D0
 	Size: 0x1A

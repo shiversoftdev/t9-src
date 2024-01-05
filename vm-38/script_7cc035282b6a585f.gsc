@@ -1,15 +1,15 @@
+#using scripts\core_common\clientfield_shared.csc;
 #using script_44c87b4589ee1f93;
 #using script_581877678e31274c;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
-#namespace namespace_5eb9b9b6;
+#namespace zm_ai_dog;
 
 /*
 	Name: function_85162410
-	Namespace: namespace_5eb9b9b6
+	Namespace: zm_ai_dog
 	Checksum: 0x530E4B45
 	Offset: 0xB8
 	Size: 0x14
@@ -22,22 +22,22 @@ function private autoexec function_85162410()
 }
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_5eb9b9b6
+	Name: __init__system__
+	Namespace: zm_ai_dog
 	Checksum: 0x5B6C6DE3
 	Offset: 0xD8
 	Size: 0x3C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_1bc870c3bcb2ff32", &function_70a657d8, undefined, undefined, undefined);
+	system::register(#"zm_ai_dog", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_5eb9b9b6
+	Namespace: zm_ai_dog
 	Checksum: 0x63163ABA
 	Offset: 0x120
 	Size: 0x7C
@@ -52,7 +52,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_3b0e8b8b
-	Namespace: namespace_5eb9b9b6
+	Namespace: zm_ai_dog
 	Checksum: 0x46B8707D
 	Offset: 0x1A8
 	Size: 0x24
@@ -66,7 +66,7 @@ function function_3b0e8b8b(localclientnum)
 
 /*
 	Name: zombiedogvocals
-	Namespace: namespace_5eb9b9b6
+	Namespace: zm_ai_dog
 	Checksum: 0xBB6A0D7A
 	Offset: 0x1D8
 	Size: 0x172

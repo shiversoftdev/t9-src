@@ -1,21 +1,21 @@
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using script_67ce8e728d8f37ba;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\compass.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\load_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\compass.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
-#namespace namespace_505fd4fc;
+#namespace mp_tundra;
 
 /*
 	Name: function_7defddbd
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0xA2DA586E
 	Offset: 0x240
 	Size: 0x4C
@@ -24,7 +24,7 @@
 */
 function autoexec function_7defddbd()
 {
-	if(util::function_5df4294() === #"vip")
+	if(util::get_game_type() === #"vip")
 	{
 		setgametypesetting(#"hash_3a15393c2e90e121", 1);
 	}
@@ -32,7 +32,7 @@ function autoexec function_7defddbd()
 
 /*
 	Name: codecallback_preinitialization
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0xF046FDB1
 	Offset: 0x298
 	Size: 0x34
@@ -46,7 +46,7 @@ event codecallback_preinitialization(eventstruct)
 
 /*
 	Name: main
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0x8AEB4568
 	Offset: 0x2D8
 	Size: 0x23C
@@ -59,7 +59,7 @@ event main(eventstruct)
 	level.levelkothdisable[level.levelkothdisable.size] = spawn("trigger_radius", (-898, 2710, 180), 0, 50, 150);
 	level.levelwardisable = [];
 	level.levelwardisable[level.levelwardisable.size] = spawn("trigger_radius", (-898, 2710, 180), 0, 50, 150);
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(!function_559de4b9(str_gametype))
 	{
 		hidemiscmodels("5v5_asset_boundary");
@@ -72,7 +72,7 @@ event main(eventstruct)
 	namespace_66d6aa44::function_3f3466c9();
 	killstreaks::function_257a5f13("straferun", 60);
 	killstreaks::function_257a5f13("helicopter_comlink", 75);
-	callback::function_98a0917d(&function_98a0917d);
+	callback::on_game_playing(&on_game_playing);
 	callback::on_end_game(&on_end_game);
 	load::main();
 	compass::setupminimap("");
@@ -83,7 +83,7 @@ event main(eventstruct)
 
 /*
 	Name: function_8993980
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0x12C9FDAF
 	Offset: 0x520
 	Size: 0x108
@@ -92,7 +92,7 @@ event main(eventstruct)
 */
 function function_8993980()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(str_gametype == "vip")
 	{
 		var_87e54151 = getentarray("script_vehicle", "classname");
@@ -107,17 +107,17 @@ function function_8993980()
 }
 
 /*
-	Name: function_98a0917d
-	Namespace: namespace_505fd4fc
+	Name: on_game_playing
+	Namespace: mp_tundra
 	Checksum: 0x1F0ABFB5
 	Offset: 0x630
 	Size: 0x224
 	Parameters: 0
 	Flags: None
 */
-function function_98a0917d()
+function on_game_playing()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(function_559de4b9(str_gametype))
 	{
 		hidemiscmodels("turret_model");
@@ -147,7 +147,7 @@ function function_98a0917d()
 
 /*
 	Name: function_559de4b9
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0x9F51963A
 	Offset: 0x860
 	Size: 0x10E
@@ -183,7 +183,7 @@ function function_559de4b9(str_gametype)
 
 /*
 	Name: on_end_game
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0x57EEA3E1
 	Offset: 0x978
 	Size: 0x5C
@@ -200,7 +200,7 @@ function on_end_game()
 
 /*
 	Name: function_e33449fd
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0xAEBF698
 	Offset: 0x9E0
 	Size: 0x4C
@@ -210,12 +210,12 @@ function on_end_game()
 function function_e33449fd()
 {
 	rope_bridge_trig = getent("rope_bridge_trig", "targetname");
-	rope_bridge_trig callback::function_35a12f19(&function_95ec9598);
+	rope_bridge_trig callback::on_trigger(&function_95ec9598);
 }
 
 /*
 	Name: function_95ec9598
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0x407FA5DD
 	Offset: 0xA38
 	Size: 0x1F6
@@ -229,7 +229,7 @@ function function_95ec9598(var_3a72e7b7)
 	{
 		level endon(#"game_ended");
 		scene = struct::get(#"hash_2467352290a052f7", "scriptbundlename");
-		bridge = scene.scene_ents[#"hash_7aff0ee60ddd937b"];
+		bridge = scene.scene_ents[#"prop 1"];
 		self.activated = 1;
 		level thread scene::play(#"hash_2467352290a052f7", "Shot 2");
 		while(self function_86072b19())
@@ -251,7 +251,7 @@ function function_95ec9598(var_3a72e7b7)
 
 /*
 	Name: function_86072b19
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0xF78C18D2
 	Offset: 0xC38
 	Size: 0xDC
@@ -272,7 +272,7 @@ function function_86072b19()
 
 /*
 	Name: function_acf0ca42
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0xF866FE8A
 	Offset: 0xD20
 	Size: 0xC4
@@ -293,7 +293,7 @@ function function_acf0ca42()
 
 /*
 	Name: function_64fefea
-	Namespace: namespace_505fd4fc
+	Namespace: mp_tundra
 	Checksum: 0x39D82DAC
 	Offset: 0xDF0
 	Size: 0x2C

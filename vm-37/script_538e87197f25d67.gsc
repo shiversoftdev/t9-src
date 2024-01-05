@@ -1,15 +1,15 @@
-#using script_136606144df0f9f1;
-#using script_19f3d8b7a687a3f1;
 #using script_34c3e29c2c0c97ef;
+#using script_19f3d8b7a687a3f1;
+#using script_136606144df0f9f1;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_82b4c2d1;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_82b4c2d1
 	Checksum: 0x276E2E04
 	Offset: 0xC8
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_79fe34c9f8a0e44c", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -64,7 +64,7 @@ function perk_machine_rob(localclientnum, oldval, newval, bnewent, binitialsnap,
 {
 	if(bwastimejump && isdefined(self))
 	{
-		self function_bf9d3071(#"hash_e8f3d55b3b05c7e");
+		self playrenderoverridebundle(#"hash_e8f3d55b3b05c7e");
 	}
 }
 

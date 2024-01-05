@@ -1,12 +1,12 @@
-#using script_1160d62024d6945b;
-#using script_40fc784c60f9fa7b;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\death_circle.gsc;
+#using script_40fc784c60f9fa7b;
+#using scripts\core_common\vehicle_shared.gsc;
+#using script_1160d62024d6945b;
+#using scripts\core_common\vehicle_death_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\vehicle_death_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_c8fb02a7;
 
@@ -35,7 +35,7 @@ function function_a01726dd()
 	callback::function_d8abfc3d(#"hash_2c1cafe2a67dfef8", &function_6ad9ed56);
 	callback::function_d8abfc3d(#"hash_2c1cafe2a67dfef8", &function_b515cb89);
 	callback::function_d8abfc3d(#"hash_55f29e0747697500", &function_6258a76c);
-	self callback::function_36aab2f3(&function_adbcb48d);
+	self callback::on_vehicle_collision(&function_adbcb48d);
 	self.overridevehiclekilled = &function_f7f4dbf0;
 	self thread function_97305c79();
 	self thread function_d6742832();
@@ -122,7 +122,7 @@ function private function_b5c0079f()
 		self.var_cb611709 linkto(self, self.var_f3652bd);
 		self.var_cb611709 setexcludeteamfortrigger(driver.team);
 		self.var_cb611709 triggerenable(1);
-		self.var_cb611709 callback::function_35a12f19(&function_727338d1);
+		self.var_cb611709 callback::on_trigger(&function_727338d1);
 	}
 	else
 	{
@@ -936,7 +936,7 @@ function private function_4f8aa02d()
 	while(true)
 	{
 		waterheight = getwaterheight(self.origin, 100, -10000);
-		if(waterheight != 131072)
+		if(waterheight != -131072)
 		{
 			var_19dbcac7 = (self.origin[2] + -70) - waterheight;
 			if(var_19dbcac7 <= 0)
@@ -1051,8 +1051,8 @@ function function_60bfc90(player, var_92eb9b7d, var_6d872cea)
 */
 function function_b1088764(player, var_92eb9b7d, var_6d872cea)
 {
-	player luinotifyevent(#"hash_529bc32407856cbf", 0);
-	player luinotifyeventtospectators(#"hash_529bc32407856cbf", 0);
+	player luinotifyevent(#"quick_fade", 0);
+	player luinotifyeventtospectators(#"quick_fade", 0);
 	self thread function_60bfc90(player, var_92eb9b7d, var_6d872cea);
 }
 
@@ -1073,14 +1073,14 @@ function private function_b515cb89(params)
 		{
 			function_dce84927();
 		}
-		else if(params.eventstruct.var_21911287 === 0)
+		else if(params.eventstruct.old_seat_index === 0)
 		{
 			function_d7021cf2();
 		}
 		if(isdefined(params.player))
 		{
 			enter_seat = params.eventstruct.seat_index;
-			exit_seat = params.eventstruct.var_21911287;
+			exit_seat = params.eventstruct.old_seat_index;
 			if(function_9ffa5fd(exit_seat, enter_seat))
 			{
 				self function_b1088764(params.player, exit_seat, enter_seat);
@@ -1458,13 +1458,13 @@ function private function_479389f3()
 		assert(isdefined(self.height));
 	#/
 	var_33a206d0 = [];
-	var_33a206d0[#"hash_64b97ae77785a7ee"] = self gettagorigin("tag_ground_contact_left_rear");
-	var_33a206d0[#"hash_349199d2ecdec815"] = self gettagorigin("tag_ground_contact_left_middle");
-	var_33a206d0[#"hash_29fc8d2eb0114b77"] = self gettagorigin("tag_ground_contact_left_front");
+	var_33a206d0[#"leftrear"] = self gettagorigin("tag_ground_contact_left_rear");
+	var_33a206d0[#"leftmiddle"] = self gettagorigin("tag_ground_contact_left_middle");
+	var_33a206d0[#"leftfront"] = self gettagorigin("tag_ground_contact_left_front");
 	var_8fc02d3b = [];
-	var_8fc02d3b[#"hash_3e2b39e8efce03e3"] = self gettagorigin("tag_ground_contact_right_rear");
-	var_8fc02d3b[#"hash_6d1b048369aa0658"] = self gettagorigin("tag_ground_contact_right_middle");
-	var_8fc02d3b[#"hash_3baad632e39e1598"] = self gettagorigin("tag_ground_contact_right_front");
+	var_8fc02d3b[#"rightrear"] = self gettagorigin("tag_ground_contact_right_rear");
+	var_8fc02d3b[#"rightmiddle"] = self gettagorigin("tag_ground_contact_right_middle");
+	var_8fc02d3b[#"rightfront"] = self gettagorigin("tag_ground_contact_right_front");
 	var_df47b913 = [];
 	foreach(tag, origin in var_33a206d0)
 	{

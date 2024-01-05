@@ -1,37 +1,37 @@
-#using script_1029986e2bc8ca8e;
-#using script_5a525a75a8f1f7e4;
-#using script_7224d61ed502ea07;
 #using script_7b1cd3908a825fdd;
 #using script_7d7ac1f663edcdc8;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_magicbox.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_1029986e2bc8ca8e;
+#using script_5a525a75a8f1f7e4;
+#using scripts\zm_common\zm_wallbuy.gsc;
+#using scripts\zm_common\zm_magicbox.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
-#namespace namespace_b57ebf44;
+#namespace zm_destination_manager;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_b57ebf44
+	Name: __init__system__
+	Namespace: zm_destination_manager
 	Checksum: 0x955A3085
 	Offset: 0x100
 	Size: 0x54
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_110e3595fef1adb7", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
+	system::register(#"zm_destination_manager", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xEA622852
 	Offset: 0x160
 	Size: 0x5C
@@ -48,7 +48,7 @@ function private function_70a657d8()
 
 /*
 	Name: finalize
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x972363
 	Offset: 0x1C8
 	Size: 0x2C
@@ -65,7 +65,7 @@ function private finalize()
 
 /*
 	Name: function_f2379036
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xA51B9191
 	Offset: 0x200
 	Size: 0x4C
@@ -75,13 +75,13 @@ function private finalize()
 function private function_f2379036()
 {
 	level.var_cbcc3ba = [];
-	level.var_cbcc3ba[#"hash_1cc277407eed9c27"] = "wz_forest";
-	level.var_cbcc3ba[#"hash_2d1de2a0a5c25bd9"] = "wz_sanatorium";
+	level.var_cbcc3ba[#"destination_sanatorium"] = "wz_forest";
+	level.var_cbcc3ba[#"destination_forest"] = "wz_sanatorium";
 }
 
 /*
 	Name: function_123b048f
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x927A1670
 	Offset: 0x258
 	Size: 0x7A
@@ -101,7 +101,7 @@ function function_123b048f(var_8a952bed)
 
 /*
 	Name: function_2e165386
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xAF15E261
 	Offset: 0x2E0
 	Size: 0x16
@@ -115,7 +115,7 @@ function function_2e165386()
 
 /*
 	Name: function_f3be07d7
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x1D8198B0
 	Offset: 0x300
 	Size: 0x16A
@@ -146,7 +146,7 @@ function function_f3be07d7(destination)
 
 /*
 	Name: function_85e09141
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x8E679EC7
 	Offset: 0x478
 	Size: 0x204
@@ -179,7 +179,7 @@ function function_85e09141(instance, var_f281f968)
 
 /*
 	Name: function_6f9efb66
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xB763CCF1
 	Offset: 0x688
 	Size: 0x114
@@ -212,7 +212,7 @@ function private function_6f9efb66()
 
 /*
 	Name: function_1975f7db
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xB2385CD0
 	Offset: 0x7A8
 	Size: 0x3AC
@@ -293,7 +293,7 @@ function private function_1975f7db()
 
 /*
 	Name: function_786a9f4d
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x255C68E5
 	Offset: 0xB60
 	Size: 0x366
@@ -315,7 +315,7 @@ function function_786a9f4d(destinations)
 			var_7692405 = getnextarraykey(var_26a5f658);
 			level thread activate(destination);
 			s_result = undefined;
-			s_result = level waittill(#"hash_69090774fec4a17b");
+			s_result = level waittill(#"objective_ended");
 			if(s_result.completed === 0)
 			{
 				if(isdefined(level.var_7d45d0d4.var_4824f1b9) && [[level.var_7d45d0d4.var_4824f1b9]]())
@@ -353,7 +353,7 @@ function function_786a9f4d(destinations)
 
 /*
 	Name: load_next_map
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x54CA1249
 	Offset: 0xED0
 	Size: 0x64
@@ -371,7 +371,7 @@ function private load_next_map(destination)
 
 /*
 	Name: function_c62829da
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x3B8C2344
 	Offset: 0xF40
 	Size: 0xA6
@@ -400,7 +400,7 @@ function private function_c62829da(destination)
 
 /*
 	Name: function_ab94c270
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x526FEE63
 	Offset: 0xFF0
 	Size: 0x114
@@ -435,7 +435,7 @@ function function_ab94c270(destination)
 
 /*
 	Name: activate
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xEEF9239
 	Offset: 0x1110
 	Size: 0x1E4
@@ -468,7 +468,7 @@ function activate(destination)
 
 /*
 	Name: deactivate
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x1A0D5C85
 	Offset: 0x1300
 	Size: 0x68
@@ -484,7 +484,7 @@ function deactivate(destination)
 
 /*
 	Name: function_506afb9e
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0x7F7A758E
 	Offset: 0x1370
 	Size: 0x21E
@@ -494,7 +494,7 @@ function deactivate(destination)
 function function_506afb9e(destination, var_2371bf)
 {
 	names = var_2371bf;
-	if(isstring(var_2371bf) || function_7a600918(var_2371bf))
+	if(isstring(var_2371bf) || ishash(var_2371bf))
 	{
 		names = [0:var_2371bf];
 	}
@@ -518,7 +518,7 @@ function function_506afb9e(destination, var_2371bf)
 
 /*
 	Name: function_66ec9032
-	Namespace: namespace_b57ebf44
+	Namespace: zm_destination_manager
 	Checksum: 0xEBDF8ECA
 	Offset: 0x1598
 	Size: 0x156

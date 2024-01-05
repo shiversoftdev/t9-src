@@ -1,8 +1,8 @@
+#using script_5450c003e8a913b7;
 #using script_1883fa4e60abbf9f;
 #using script_2d443451ce681a;
-#using script_5450c003e8a913b7;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace corpse;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_9073f90b()
 {
-	level notify(997453509);
+	level notify(-997453509);
 }
 
 /*
@@ -164,9 +164,9 @@ function corpse_check_shadow(origin)
 	if(!isdefined(self.in_shadow_origin) || distancesquared(self.in_shadow_origin, origin) > 1)
 	{
 		self.in_shadow = undefined;
-		if(isdefined(level.var_5ca45f26) && isdefined(level.var_5ca45f26[#"hash_772784d4b2054007"]))
+		if(isdefined(level.var_5ca45f26) && isdefined(level.var_5ca45f26[#"stealth_in_shadow"]))
 		{
-			foreach(trigger in level.var_5ca45f26[#"hash_772784d4b2054007"])
+			foreach(trigger in level.var_5ca45f26[#"stealth_in_shadow"])
 			{
 				if(isdefined(trigger) && trigger istouching(origin))
 				{
@@ -516,7 +516,7 @@ function suspicious_door_sighting()
 		}
 		if(distsq < var_3ff1021a)
 		{
-			if(!isdefined(door.seen) && self cansee(door) && util::function_30d3b9ff(door.origin, self, 250, getplayers()[0]))
+			if(!isdefined(door.seen) && self cansee(door) && util::can_see_ai(door.origin, self, 250, getplayers()[0]))
 			{
 				var_cc3596e8 = door;
 				break;
@@ -526,7 +526,7 @@ function suspicious_door_sighting()
 		var_385f9620 = vectornormalize((var_715a5cbd + vectorscale((0, 0, 1), 30)) - self geteye());
 		if(vectordot(sight, var_385f9620) > 0.55)
 		{
-			if(!isdefined(door.seen) && self cansee(door) && util::function_30d3b9ff(door.origin, self, 250, getplayers()[0]))
+			if(!isdefined(door.seen) && self cansee(door) && util::can_see_ai(door.origin, self, 250, getplayers()[0]))
 			{
 				var_cc3596e8 = door;
 				break;

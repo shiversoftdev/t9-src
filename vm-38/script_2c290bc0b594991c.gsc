@@ -44,7 +44,7 @@ function private function_9d16c83(var_705ed3b9, item_name)
 {
 	if(!is_true(getgametypesetting(var_705ed3b9)))
 	{
-		namespace_1c7b37c6::function_7860b659(&namespace_b0722f43::function_63bfe27, item_name);
+		namespace_1c7b37c6::item_remover(&item_world_fixup::remove_item, item_name);
 	}
 }
 
@@ -59,9 +59,9 @@ function private function_9d16c83(var_705ed3b9, item_name)
 */
 function function_45a212c0()
 {
-	var_87d0eef8 = &namespace_b0722f43::function_63bfe27;
-	var_74257310 = &namespace_b0722f43::function_6da5e673;
-	var_f8a4c541 = &namespace_b0722f43::function_6991057;
+	var_87d0eef8 = &item_world_fixup::remove_item;
+	var_74257310 = &item_world_fixup::add_item_replacement;
+	var_f8a4c541 = &item_world_fixup::function_6991057;
 	maxteamplayers = (isdefined(getgametypesetting(#"maxteamplayers")) ? getgametypesetting(#"maxteamplayers") : 1);
 	var_77c6811d = 1;
 	if(var_77c6811d)

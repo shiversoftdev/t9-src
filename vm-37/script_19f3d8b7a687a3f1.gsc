@@ -34,7 +34,7 @@ function function_c30c297c(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(isdefined(self))
 	{
-		self function_bf9d3071(#"hash_1528dae63f55fcde");
+		self playrenderoverridebundle(#"hash_1528dae63f55fcde");
 	}
 }
 

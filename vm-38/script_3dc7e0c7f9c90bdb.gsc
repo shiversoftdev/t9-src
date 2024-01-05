@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.csc;
+#using scripts\zm_common\zm_utility.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_63c7213c;
 
@@ -20,7 +20,7 @@ function private autoexec function_a598c747()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_63c7213c
 	Checksum: 0x85D36A22
 	Offset: 0x188
@@ -28,7 +28,7 @@ function private autoexec function_a598c747()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3c43448fdb77ea73", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -100,7 +100,7 @@ function function_ddc6498d(localclientnum, oldval, newval, bnewent, binitialsnap
 		{
 			var_70609425 = self.origin + vectorscale((0, 0, 1), 5000);
 			self.b_success = 1;
-			self.var_c2310a57 = playfx(fieldname, #"hash_38c212dea1c32d51", var_70609425, (1, 0, 0), (0, 0, 1));
+			self.var_c2310a57 = playfx(fieldname, #"zm_ai/fx9_orda_spawn_portal_c", var_70609425, (1, 0, 0), (0, 0, 1));
 			self playrumbleonentity(fieldname, "sr_world_event_soul_capture_crystal_leave_rumble");
 		}
 		if(!isdefined(self.var_b8f825a3))
@@ -141,7 +141,7 @@ function function_86bba240(localclientnum, oldval, newval, bnewent, binitialsnap
 	{
 		if(bwastimejump)
 		{
-			self function_bf9d3071(#"hash_5e190029d2c86444");
+			self playrenderoverridebundle(#"hash_5e190029d2c86444");
 			self function_78233d29(#"hash_5e190029d2c86444", "", "Brightness", 1);
 			self function_78233d29(#"hash_5e190029d2c86444", "", "Threshold", 1);
 		}

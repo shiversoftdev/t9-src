@@ -1,9 +1,9 @@
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_d0ab5955;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_a5f4007a()
 {
-	level notify(918358352);
+	level notify(-918358352);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_d0ab5955
 	Checksum: 0x70C00689
 	Offset: 0x1D0
@@ -30,7 +30,7 @@ function private autoexec function_a5f4007a()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_d07e35f920d16a8", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -90,7 +90,7 @@ function function_8ac3bea9()
 */
 function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	if(util::function_53bbf9d2() === "wz_sanatorium")
+	if(util::get_map_name() === "wz_sanatorium")
 	{
 		var_ee6bcd51 = #"hash_4a9cb80afea6f8cb" + "_sanatorium";
 	}
@@ -105,12 +105,12 @@ function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap,
 	}
 	if(bwastimejump)
 	{
-		self function_bf9d3071(var_ee6bcd51);
+		self playrenderoverridebundle(var_ee6bcd51);
 		self function_78233d29(var_ee6bcd51, "", "Scale", 1);
 	}
 	else
 	{
-		self function_5d482e78(var_ee6bcd51);
+		self stoprenderoverridebundle(var_ee6bcd51);
 	}
 }
 
@@ -173,17 +173,17 @@ function private function_347f52dd(localclientnum)
 	level.var_e9d75843[localclientnum] = var_ef2f4cec;
 	while(true)
 	{
-		var_d017e788 = function_5c10bd79(localclientnum);
-		if(!isdefined(var_d017e788))
+		currentplayer = function_5c10bd79(localclientnum);
+		if(!isdefined(currentplayer))
 		{
 			waitframe(1);
 			continue;
 		}
-		intensity = var_d017e788 clientfield::get_to_player("fogofwareffects");
+		intensity = currentplayer clientfield::get_to_player("fogofwareffects");
 		if(var_ef2f4cec.var_6f2e5a2b !== intensity)
 		{
 			var_ef2f4cec notify(#"hash_387bb78db1d4d1be");
-			var_ef2f4cec function_d45dd62(localclientnum, intensity, var_d017e788);
+			var_ef2f4cec function_d45dd62(localclientnum, intensity, currentplayer);
 			var_ef2f4cec.var_6f2e5a2b = intensity;
 		}
 		waitframe(1);
@@ -221,7 +221,7 @@ function private function_947e99a9(localclientnum, oldval, newval, bnewent, bini
 	Parameters: 3
 	Flags: Linked, Private
 */
-function private function_d45dd62(localclientnum, intensity, var_d017e788)
+function private function_d45dd62(localclientnum, intensity, currentplayer)
 {
 	if(!isdefined(intensity))
 	{
@@ -237,11 +237,11 @@ function private function_d45dd62(localclientnum, intensity, var_d017e788)
 		}
 		self.var_6e62d281 = undefined;
 	}
-	if(isdefined(var_d017e788.var_103fdf58))
+	if(isdefined(currentplayer.var_103fdf58))
 	{
 		playsound(localclientnum, #"hash_37b1613c2cb4c8f3", (0, 0, 0));
-		var_d017e788 stoploopsound(var_d017e788.var_103fdf58);
-		var_d017e788.var_103fdf58 = undefined;
+		currentplayer stoploopsound(currentplayer.var_103fdf58);
+		currentplayer.var_103fdf58 = undefined;
 	}
 	postfx = level.var_7bd7bdc8[intensity];
 	if(isdefined(postfx))
@@ -256,10 +256,10 @@ function private function_d45dd62(localclientnum, intensity, var_d017e788)
 			self.var_6e62d281 = playviewmodelfx(localclientnum, level.var_6e62d281, "tag_torso");
 		}
 		self.var_7bd7bdc8 = postfx;
-		if(!isdefined(var_d017e788.var_103fdf58))
+		if(!isdefined(currentplayer.var_103fdf58))
 		{
 			playsound(localclientnum, #"hash_7b5289d48cc02d77", (0, 0, 0));
-			var_d017e788.var_103fdf58 = var_d017e788 playloopsound("evt_sr_phase_player_lp");
+			currentplayer.var_103fdf58 = currentplayer playloopsound("evt_sr_phase_player_lp");
 		}
 	}
 }

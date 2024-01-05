@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_43514e12 : class_6aaccc24
+class class_43514e12 : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,7 +47,7 @@ class class_43514e12 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -61,7 +61,7 @@ class class_43514e12 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -75,13 +75,13 @@ class class_43514e12 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_2nd_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "objective2Text", 1);
-		namespace_6aaccc24::function_da693cbe("obj2points", 1, 11, "int");
+		cluielem::setup_clientfields("mp_gamemode_onslaught_2nd_msg");
+		cluielem::function_dcb34c80("string", "objective2Text", 1);
+		cluielem::add_clientfield("obj2points", 1, 11, "int");
 	}
 
 	/*
-		Name: function_9c1c0811
+		Name: set_objective2text
 		Namespace: namespace_43514e12
 		Checksum: 0x17FB8A1D
 		Offset: 0x330
@@ -89,7 +89,7 @@ class class_43514e12 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_9c1c0811(player, value)
+	function set_objective2text(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "objective2Text", value);
 	}
@@ -175,7 +175,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_9c1c0811
+	Name: set_objective2text
 	Namespace: mp_gamemode_onslaught_2nd_msg
 	Checksum: 0xC15FB9C4
 	Offset: 0x1C0
@@ -183,9 +183,9 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_9c1c0811(player, value)
+function set_objective2text(player, value)
 {
-	[[ self ]]->function_9c1c0811(player, value);
+	[[ self ]]->set_objective2text(player, value);
 }
 
 /*

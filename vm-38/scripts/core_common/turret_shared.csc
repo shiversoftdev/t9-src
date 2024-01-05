@@ -1,7 +1,7 @@
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 
 #namespace turret_shared;
 
@@ -22,7 +22,7 @@ function private autoexec function_85cd7cf1()
 #namespace turret;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: turret
 	Checksum: 0x8D63A055
 	Offset: 0xC8
@@ -30,7 +30,7 @@ function private autoexec function_85cd7cf1()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"turret", &function_70a657d8, undefined, undefined, undefined);
 }

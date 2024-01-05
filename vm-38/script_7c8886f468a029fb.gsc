@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_90c2e4ec : class_6aaccc24
+class class_90c2e4ec : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_90c2e4ec : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_90c2e4ec
 		Checksum: 0xAD2BA357
 		Offset: 0x440
@@ -52,9 +52,9 @@ class class_90c2e4ec : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_orda_health_bar");
+		cluielem::register_clientside("sr_orda_health_bar");
 	}
 
 	/*
@@ -66,15 +66,15 @@ class class_90c2e4ec : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function setup_clientfields(var_663a86fa, var_d79cca54)
+	function setup_clientfields(healthcallback, var_d79cca54)
 	{
-		namespace_6aaccc24::setup_clientfields("sr_orda_health_bar");
-		namespace_6aaccc24::function_da693cbe("health", 4000, 7, "float", var_663a86fa);
-		namespace_6aaccc24::function_da693cbe("is_beast", 4000, 1, "int", var_d79cca54);
+		cluielem::setup_clientfields("sr_orda_health_bar");
+		cluielem::add_clientfield("health", 4000, 7, "float", healthcallback);
+		cluielem::add_clientfield("is_beast", 4000, 1, "int", var_d79cca54);
 	}
 
 	/*
-		Name: function_dff51e54
+		Name: set_is_beast
 		Namespace: namespace_90c2e4ec
 		Checksum: 0x7FFD40DE
 		Offset: 0x540
@@ -82,9 +82,9 @@ class class_90c2e4ec : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_dff51e54(localclientnum, value)
+	function set_is_beast(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "is_beast", value);
+		[[ self ]]->set_data(localclientnum, "is_beast", value);
 	}
 
 	/*
@@ -98,7 +98,7 @@ class class_90c2e4ec : class_6aaccc24
 	*/
 	function set_health(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "health", value);
+		[[ self ]]->set_data(localclientnum, "health", value);
 	}
 
 	/*
@@ -112,18 +112,18 @@ class class_90c2e4ec : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "health", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "is_beast", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "health", 0);
+		[[ self ]]->set_data(localclientnum, "is_beast", 0);
 	}
 
 }
 
-#namespace namespace_e7b931aa;
+#namespace sr_orda_health_bar;
 
 /*
 	Name: function_41a7b58c
-	Namespace: namespace_e7b931aa
+	Namespace: sr_orda_health_bar
 	Checksum: 0x21AD2A18
 	Offset: 0xD8
 	Size: 0x14
@@ -132,60 +132,60 @@ class class_90c2e4ec : class_6aaccc24
 */
 function private autoexec function_41a7b58c()
 {
-	level notify(941724007);
+	level notify(-941724007);
 }
 
 /*
 	Name: register
-	Namespace: namespace_e7b931aa
+	Namespace: sr_orda_health_bar
 	Checksum: 0x45795D4D
 	Offset: 0xF8
 	Size: 0x17E
 	Parameters: 2
 	Flags: None
 */
-function register(var_663a86fa, var_d79cca54)
+function register(healthcallback, var_d79cca54)
 {
 	elem = new class_90c2e4ec();
-	[[ elem ]]->setup_clientfields(var_663a86fa, var_d79cca54);
+	[[ elem ]]->setup_clientfields(healthcallback, var_d79cca54);
 	if(!isdefined(level.var_ae746e8f))
 	{
 		level.var_ae746e8f = associativearray();
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_51902cdefeaf2cf0"]))
+	if(!isdefined(level.var_ae746e8f[#"sr_orda_health_bar"]))
 	{
-		level.var_ae746e8f[#"hash_51902cdefeaf2cf0"] = [];
+		level.var_ae746e8f[#"sr_orda_health_bar"] = [];
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_51902cdefeaf2cf0"]))
+	if(!isdefined(level.var_ae746e8f[#"sr_orda_health_bar"]))
 	{
-		level.var_ae746e8f[#"hash_51902cdefeaf2cf0"] = [];
+		level.var_ae746e8f[#"sr_orda_health_bar"] = [];
 	}
-	else if(!isarray(level.var_ae746e8f[#"hash_51902cdefeaf2cf0"]))
+	else if(!isarray(level.var_ae746e8f[#"sr_orda_health_bar"]))
 	{
-		level.var_ae746e8f[#"hash_51902cdefeaf2cf0"] = array(level.var_ae746e8f[#"hash_51902cdefeaf2cf0"]);
+		level.var_ae746e8f[#"sr_orda_health_bar"] = array(level.var_ae746e8f[#"sr_orda_health_bar"]);
 	}
-	level.var_ae746e8f[#"hash_51902cdefeaf2cf0"][level.var_ae746e8f[#"hash_51902cdefeaf2cf0"].size] = elem;
+	level.var_ae746e8f[#"sr_orda_health_bar"][level.var_ae746e8f[#"sr_orda_health_bar"].size] = elem;
 }
 
 /*
-	Name: function_5c1bb138
-	Namespace: namespace_e7b931aa
+	Name: register_clientside
+	Namespace: sr_orda_health_bar
 	Checksum: 0x74AAB41F
 	Offset: 0x280
 	Size: 0x34
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_90c2e4ec();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_e7b931aa
+	Namespace: sr_orda_health_bar
 	Checksum: 0x3E0ABCB0
 	Offset: 0x2C0
 	Size: 0x1C
@@ -199,7 +199,7 @@ function open(player)
 
 /*
 	Name: close
-	Namespace: namespace_e7b931aa
+	Namespace: sr_orda_health_bar
 	Checksum: 0xBB0D2404
 	Offset: 0x2E8
 	Size: 0x1C
@@ -213,7 +213,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_e7b931aa
+	Namespace: sr_orda_health_bar
 	Checksum: 0x7102EF49
 	Offset: 0x310
 	Size: 0x1A
@@ -227,7 +227,7 @@ function is_open(localclientnum)
 
 /*
 	Name: set_health
-	Namespace: namespace_e7b931aa
+	Namespace: sr_orda_health_bar
 	Checksum: 0xD838DDD4
 	Offset: 0x338
 	Size: 0x28
@@ -240,16 +240,16 @@ function set_health(localclientnum, value)
 }
 
 /*
-	Name: function_dff51e54
-	Namespace: namespace_e7b931aa
+	Name: set_is_beast
+	Namespace: sr_orda_health_bar
 	Checksum: 0xA26FEADC
 	Offset: 0x368
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_dff51e54(localclientnum, value)
+function set_is_beast(localclientnum, value)
 {
-	[[ self ]]->function_dff51e54(localclientnum, value);
+	[[ self ]]->set_is_beast(localclientnum, value);
 }
 

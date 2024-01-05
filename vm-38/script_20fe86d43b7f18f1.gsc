@@ -1,5 +1,5 @@
-#using scripts\core_common\array_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_14ee8104;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_7ad484f()
 {
-	level notify(250508674);
+	level notify(-250508674);
 }
 
 /*

@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_8c34ca59 : class_6aaccc24
+class cseeker_mine_prompt : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0x2C28BEC9
 		Offset: 0x230
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_8c34ca59 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0x56918045
 		Offset: 0x3E0
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_8c34ca59 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xD118D251
 		Offset: 0x2C8
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_8c34ca59 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0x87639077
 		Offset: 0x310
 		Size: 0x24
@@ -61,12 +61,12 @@ class class_8c34ca59 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xF08385BB
 		Offset: 0x250
 		Size: 0x6C
@@ -75,35 +75,35 @@ class class_8c34ca59 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("seeker_mine_prompt");
-		namespace_6aaccc24::function_da693cbe("progress", 1, 5, "float");
-		namespace_6aaccc24::function_da693cbe("promptState", 1, 2, "int");
+		cluielem::setup_clientfields("seeker_mine_prompt");
+		cluielem::add_clientfield("progress", 1, 5, "float");
+		cluielem::add_clientfield("promptState", 1, 2, "int");
 	}
 
 	/*
-		Name: function_affe8f61
-		Namespace: namespace_8c34ca59
+		Name: set_progress
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xE511E991
 		Offset: 0x340
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_affe8f61(player, value)
+	function set_progress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "progress", value);
 	}
 
 	/*
-		Name: function_c719cfea
-		Namespace: namespace_8c34ca59
+		Name: set_promptstate
+		Namespace: cseeker_mine_prompt
 		Checksum: 0x21D324AC
 		Offset: 0x390
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c719cfea(player, value)
+	function set_promptstate(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "promptState", value);
 	}
@@ -137,7 +137,7 @@ function private autoexec function_9822b7a5()
 */
 function register()
 {
-	elem = new class_8c34ca59();
+	elem = new cseeker_mine_prompt();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -189,7 +189,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_affe8f61
+	Name: set_progress
 	Namespace: seeker_mine_prompt
 	Checksum: 0xE7D8672B
 	Offset: 0x1D0
@@ -197,13 +197,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_affe8f61(player, value)
+function set_progress(player, value)
 {
-	[[ self ]]->function_affe8f61(player, value);
+	[[ self ]]->set_progress(player, value);
 }
 
 /*
-	Name: function_c719cfea
+	Name: set_promptstate
 	Namespace: seeker_mine_prompt
 	Checksum: 0xAB9F95EA
 	Offset: 0x200
@@ -211,8 +211,8 @@ function function_affe8f61(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c719cfea(player, value)
+function set_promptstate(player, value)
 {
-	[[ self ]]->function_c719cfea(player, value);
+	[[ self ]]->set_promptstate(player, value);
 }
 

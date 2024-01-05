@@ -4,7 +4,7 @@
 #namespace telemetry;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: telemetry
 	Checksum: 0xBB0C7ADA
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_53528dbbf6cd15c4", &function_70a657d8, undefined, undefined, undefined);
 }

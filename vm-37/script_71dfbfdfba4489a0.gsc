@@ -1,10 +1,10 @@
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace as_debug;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: as_debug
 	Checksum: 0x393C586F
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"as_debug", &function_70a657d8, undefined, undefined, undefined);

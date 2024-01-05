@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_1762fc34 : class_6aaccc24
+class clui_napalm_strike : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0x8F484C8F
 		Offset: 0x2E0
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_1762fc34 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0xE7533F02
 		Offset: 0x3B0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_1762fc34 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0x1D617D67
 		Offset: 0x380
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_1762fc34 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_1762fc34
+		Name: register_clientside
+		Namespace: clui_napalm_strike
 		Checksum: 0x433FD195
 		Offset: 0x328
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("lui_napalm_strike");
+		cluielem::register_clientside("lui_napalm_strike");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0xD12FCC37
 		Offset: 0x300
 		Size: 0x1C
@@ -68,12 +68,12 @@ class class_1762fc34 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("lui_napalm_strike");
+		cluielem::setup_clientfields("lui_napalm_strike");
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0xB312F0C5
 		Offset: 0x350
 		Size: 0x24
@@ -82,7 +82,7 @@ class class_1762fc34 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -100,7 +100,7 @@ class class_1762fc34 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_1762fc34();
+	elem = new clui_napalm_strike();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: lui_napalm_strike
 	Checksum: 0x68F8656D
 	Offset: 0x228
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_1762fc34();
-	[[ elem ]]->function_5c1bb138();
+	elem = new clui_napalm_strike();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

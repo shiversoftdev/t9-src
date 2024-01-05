@@ -32,7 +32,7 @@ function function_5b7d846d(str_name, n_version, n_bits, str_type)
 }
 
 /*
-	Name: function_a8bbc967
+	Name: register_clientuimodel
 	Namespace: clientfield
 	Checksum: 0xACFD2D9B
 	Offset: 0x168
@@ -40,13 +40,13 @@ function function_5b7d846d(str_name, n_version, n_bits, str_type)
 	Parameters: 5
 	Flags: Linked
 */
-function function_a8bbc967(str_name, n_version, n_bits, str_type, var_59f69872)
+function register_clientuimodel(str_name, n_version, n_bits, str_type, var_59f69872)
 {
 	registerclientfield("clientuimodel", str_name, n_version, n_bits, str_type, var_59f69872);
 }
 
 /*
-	Name: function_346f95ba
+	Name: register_luielem
 	Namespace: clientfield
 	Checksum: 0xF5B494E
 	Offset: 0x1C0
@@ -54,13 +54,13 @@ function function_a8bbc967(str_name, n_version, n_bits, str_type, var_59f69872)
 	Parameters: 7
 	Flags: Linked
 */
-function function_346f95ba(menu_name, var_483e93f7, field_name, n_version, n_bits, str_type, var_59f69872)
+function register_luielem(menu_name, var_483e93f7, field_name, n_version, n_bits, str_type, var_59f69872)
 {
 	registerclientfield("clientuimodel", (("luielement." + menu_name) + ".") + (isdefined(var_483e93f7) ? "" + var_483e93f7 : "") + field_name, n_version, n_bits, str_type, var_59f69872);
 }
 
 /*
-	Name: function_78175813
+	Name: register_bgcache
 	Namespace: clientfield
 	Checksum: 0x9D12C65D
 	Offset: 0x268
@@ -68,7 +68,7 @@ function function_346f95ba(menu_name, var_483e93f7, field_name, n_version, n_bit
 	Parameters: 4
 	Flags: None
 */
-function function_78175813(poolname, var_b693fec6, uniqueid, version)
+function register_bgcache(poolname, var_b693fec6, uniqueid, version)
 {
 	function_3ff577e6(poolname, var_b693fec6, uniqueid, version);
 }
@@ -126,11 +126,11 @@ function function_b63c5dfe(var_b693fec6, menu_name, var_483e93f7, field_name, ve
 */
 function set(str_field_name, n_value)
 {
-	self thread function_c41b127b(str_field_name, n_value);
+	self thread _set(str_field_name, n_value);
 }
 
 /*
-	Name: function_c41b127b
+	Name: _set
 	Namespace: clientfield
 	Checksum: 0xD06826C5
 	Offset: 0x428
@@ -138,7 +138,7 @@ function set(str_field_name, n_value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_c41b127b(str_field_name, n_value)
+function _set(str_field_name, n_value)
 {
 	if(!isdefined(str_field_name))
 	{
@@ -191,7 +191,7 @@ function is_registered(field_name)
 }
 
 /*
-	Name: function_6b3b55da
+	Name: can_set
 	Namespace: clientfield
 	Checksum: 0x8087A26F
 	Offset: 0x5C8
@@ -199,7 +199,7 @@ function is_registered(field_name)
 	Parameters: 2
 	Flags: Linked
 */
-function function_6b3b55da(str_field_name, n_value)
+function can_set(str_field_name, n_value)
 {
 	return function_26b3a620();
 }

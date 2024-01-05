@@ -1,17 +1,17 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\compass.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\load_shared.gsc;
 #using scripts\core_common\oob.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\compass.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
-#namespace namespace_94c51214;
+#namespace mp_nuketown6;
 
 /*
 	Name: main
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0x930763D2
 	Offset: 0x1F8
 	Size: 0x154
@@ -35,7 +35,7 @@ event main(eventstruct)
 
 /*
 	Name: on_player_spawned
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0xBAB03488
 	Offset: 0x358
 	Size: 0x54
@@ -53,7 +53,7 @@ function on_player_spawned()
 
 /*
 	Name: function_c6c7166a
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0x7A9FDD9F
 	Offset: 0x3B8
 	Size: 0xA4
@@ -62,7 +62,7 @@ function on_player_spawned()
 */
 function function_c6c7166a()
 {
-	if(util::function_5df4294() !== "dropkick" && getdvarint(#"hash_774f95460ca50d49", 1) && !getdvarint(#"hash_269852f320baca83", 0))
+	if(util::get_game_type() !== "dropkick" && getdvarint(#"hash_774f95460ca50d49", 1) && !getdvarint(#"hash_269852f320baca83", 0))
 	{
 		level.end_game_video = hash("MP_NUKETOWN6_ENDGAME_MOVIE");
 		level.var_48ea0e8c = 8;
@@ -71,7 +71,7 @@ function function_c6c7166a()
 
 /*
 	Name: function_b02d88a3
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0xAF613A04
 	Offset: 0x468
 	Size: 0xF4
@@ -81,7 +81,7 @@ function function_c6c7166a()
 function function_b02d88a3()
 {
 	var_76bdb3ae = strtok("dom dom10v10 war war12v12 sd control dropkick vip sd_hc dom_hc control_hc", " ");
-	gametype = util::function_5df4294();
+	gametype = util::get_game_type();
 	if(!isinarray(var_76bdb3ae, gametype))
 	{
 		hidemiscmodels("dom_bounds");
@@ -93,7 +93,7 @@ function function_b02d88a3()
 
 /*
 	Name: function_a6101b7
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0x7AA33466
 	Offset: 0x568
 	Size: 0x174
@@ -107,7 +107,7 @@ function function_a6101b7()
 		level flag::wait_till("first_player_spawned");
 		util::set_lighting_state(1);
 		exploder::exploder("fxexp_holiday");
-		if(util::function_5df4294() === #"zonslaught")
+		if(util::get_game_type() === #"zonslaught")
 		{
 			hidemiscmodels("nt6_xmas_props_no_zm");
 			array::delete_all(getentarray("nt6_xmas_props_no_zm", "targetname"));
@@ -122,7 +122,7 @@ function function_a6101b7()
 
 /*
 	Name: function_21acba11
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0xBDC4E923
 	Offset: 0x6E8
 	Size: 0x9C
@@ -131,7 +131,7 @@ function function_a6101b7()
 */
 function function_21acba11()
 {
-	if(util::function_5df4294() !== #"zonslaught" && util::function_5df4294() !== #"hash_321225a5ce1eb35")
+	if(util::get_game_type() !== #"zonslaught" && util::get_game_type() !== #"hash_321225a5ce1eb35")
 	{
 		hidemiscmodels("nt6_onslaught_props");
 		array::delete_all(getentarray("nt6_onslaught_props", "targetname"));

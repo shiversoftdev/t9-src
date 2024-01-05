@@ -1,28 +1,28 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1ee011cd0961afd7;
-#using script_2474a362752098d2;
-#using script_26187f7b449f7b92;
 #using script_2a5bf5b4a00cee0d;
 #using script_3bbf85ab4cb9f3c2;
 #using script_3faf478d5b0850fe;
 #using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
 #using script_5f20d3b434d24884;
 #using script_6b6510e124bad778;
+#using script_1ee011cd0961afd7;
+#using script_17dcb1172e441bf6;
 #using script_f38dc50f0e82277;
+#using script_2474a362752098d2;
+#using script_26187f7b449f7b92;
 #using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace doa_fate;
 
@@ -298,17 +298,17 @@ function awardfate(player, var_191ca105)
 			roll = randomint(30);
 			if(roll < 10)
 			{
-				level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_barrel"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+				level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_barrel"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
 			}
 			else
 			{
 				if(roll < 10)
 				{
-					level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boxing_glove"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+					level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boxing_glove"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
 				}
 				else
 				{
-					level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_sawblade"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+					level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_sawblade"), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
 				}
 			}
 			break;
@@ -641,11 +641,11 @@ function function_11463552()
 	Parameters: 2
 	Flags: Linked
 */
-function function_e4867f1d(fate, var_a653de3f)
+function function_e4867f1d(fate, roj)
 {
-	if(!isdefined(var_a653de3f))
+	if(!isdefined(roj))
 	{
-		var_a653de3f = 0;
+		roj = 0;
 	}
 	self endon(#"death");
 	level endon(#"hash_60341577c9ac6277");
@@ -665,7 +665,7 @@ function function_e4867f1d(fate, var_a653de3f)
 			result = undefined;
 			result = trigger waittill(#"trigger");
 			player = result.activator;
-			if(var_a653de3f == 0)
+			if(roj == 0)
 			{
 				if(isdefined(player.doa.rof))
 				{
@@ -678,7 +678,7 @@ function function_e4867f1d(fate, var_a653de3f)
 			}
 			else
 			{
-				if(isdefined(player.doa.var_a653de3f))
+				if(isdefined(player.doa.roj))
 				{
 					continue;
 				}
@@ -701,7 +701,7 @@ function function_e4867f1d(fate, var_a653de3f)
 				break;
 			}
 		}
-		if(var_a653de3f == 0)
+		if(roj == 0)
 		{
 			player.doa.var_e448d81 = 1;
 		}
@@ -714,14 +714,14 @@ function function_e4867f1d(fate, var_a653de3f)
 		level function_42b0778(self, player);
 		if(isdefined(player))
 		{
-			if(var_a653de3f == 0)
+			if(roj == 0)
 			{
 				player.doa.rof = fate.var_c8386627;
 				player.doa.var_e448d81 = undefined;
 			}
 			else
 			{
-				player.doa.var_a653de3f = fate.var_c8386627;
+				player.doa.roj = fate.var_c8386627;
 				player.doa.var_cb8b16a = undefined;
 			}
 			player giveachievement(#"hash_2670a9f559576876");
@@ -878,7 +878,7 @@ function function_41d66855(var_419d3eb7)
 		var_f5a8d3a4 = 1;
 		foreach(player in namespace_7f5aeb59::function_23e1f90f())
 		{
-			if(!isdefined(player.doa.var_a653de3f))
+			if(!isdefined(player.doa.roj))
 			{
 				var_f5a8d3a4 = 0;
 				break;

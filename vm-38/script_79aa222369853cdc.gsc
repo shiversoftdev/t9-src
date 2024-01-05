@@ -1,13 +1,13 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_37d61ee3 : class_6aaccc24
+class clui_plane_mortar : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_37d61ee3
+		Namespace: clui_plane_mortar
 		Checksum: 0x65B0F98C
 		Offset: 0x200
 		Size: 0x14
@@ -20,7 +20,7 @@ class class_37d61ee3 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_37d61ee3
+		Namespace: clui_plane_mortar
 		Checksum: 0xBDBA8668
 		Offset: 0x380
 		Size: 0x14
@@ -33,7 +33,7 @@ class class_37d61ee3 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_37d61ee3
+		Namespace: clui_plane_mortar
 		Checksum: 0x40042098
 		Offset: 0x248
 		Size: 0x3C
@@ -46,12 +46,12 @@ class class_37d61ee3 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_37d61ee3
+		Namespace: clui_plane_mortar
 		Checksum: 0x2D13FB52
 		Offset: 0x290
 		Size: 0x24
@@ -60,26 +60,26 @@ class class_37d61ee3 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_6c69ff4b
-		Namespace: namespace_37d61ee3
+		Name: set_selectorindex
+		Namespace: clui_plane_mortar
 		Checksum: 0x6E06E9B8
 		Offset: 0x2C0
 		Size: 0x54
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_6c69ff4b(player, value)
+	function set_selectorindex(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 1, value, 1);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_37d61ee3
+		Namespace: clui_plane_mortar
 		Checksum: 0xE493BBCF
 		Offset: 0x220
 		Size: 0x1C
@@ -88,19 +88,19 @@ class class_37d61ee3 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("lui_plane_mortar");
+		cluielem::setup_clientfields("lui_plane_mortar");
 	}
 
 	/*
-		Name: function_b172c58e
-		Namespace: namespace_37d61ee3
+		Name: set_selectorsavailable
+		Namespace: clui_plane_mortar
 		Checksum: 0x5FA88031
 		Offset: 0x320
 		Size: 0x54
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_b172c58e(player, value)
+	function set_selectorsavailable(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 2, value, 1);
 	}
@@ -134,7 +134,7 @@ function private autoexec function_36347b22()
 */
 function register()
 {
-	elem = new class_37d61ee3();
+	elem = new clui_plane_mortar();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -186,7 +186,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_6c69ff4b
+	Name: set_selectorindex
 	Namespace: lui_plane_mortar
 	Checksum: 0x624E7E69
 	Offset: 0x1A0
@@ -194,13 +194,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_6c69ff4b(player, value)
+function set_selectorindex(player, value)
 {
-	[[ self ]]->function_6c69ff4b(player, value);
+	[[ self ]]->set_selectorindex(player, value);
 }
 
 /*
-	Name: function_b172c58e
+	Name: set_selectorsavailable
 	Namespace: lui_plane_mortar
 	Checksum: 0xAD5DB9E6
 	Offset: 0x1D0
@@ -208,8 +208,8 @@ function function_6c69ff4b(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_b172c58e(player, value)
+function set_selectorsavailable(player, value)
 {
-	[[ self ]]->function_b172c58e(player, value);
+	[[ self ]]->set_selectorsavailable(player, value);
 }
 

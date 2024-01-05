@@ -1,19 +1,19 @@
-#using script_1c65dbfc2f1c8d8f;
+#using scripts\zm_common\zm_devgui.gsc;
+#using scripts\zm_common\zm.gsc;
 #using script_1caf36ff04a85ff6;
-#using script_24c32478acf44108;
-#using script_3f9e0dc8454d98e1;
 #using script_7bacb32f8222fa3e;
+#using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using script_24c32478acf44108;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
 
 #namespace namespace_6fc19861;
 
@@ -32,7 +32,7 @@ function private autoexec function_92bf3fd3()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6fc19861
 	Checksum: 0xE85F1F9E
 	Offset: 0x280
@@ -40,7 +40,7 @@ function private autoexec function_92bf3fd3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4c62174ea005e84e", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -62,11 +62,11 @@ function private function_70a657d8()
 	level.var_3e316c1b = getweapon(#"hash_7eab88123b09e2c");
 	level.var_386befd7 = 22500;
 	level.var_b8885484 = 750 / 20;
-	callback::function_f77ced93(&function_16139ef4);
+	callback::on_weapon_change(&function_16139ef4);
 	callback::on_ai_killed(&function_e339e720);
 	callback::on_ai_damage(&function_709843c2);
-	callback::function_10a4dd0a(&function_10a4dd0a);
-	callback::function_7897dfe6(&function_7897dfe6);
+	callback::on_item_pickup(&on_item_pickup);
+	callback::on_item_drop(&on_item_drop);
 	callback::on_connect(&on_player_connect);
 	if(!isdefined(level.var_91f71aa))
 	{
@@ -275,7 +275,7 @@ function function_16139ef4(params)
 		if(function_565c848a(params.weapon))
 		{
 			self thread function_db4bf625(params.weapon);
-			self thread function_219565f5(params.weapon);
+			self thread axe_left_throw_attack_think(params.weapon);
 			self clientfield::set("" + #"hash_5d6139b1ce0e7c82", 1);
 			if(!is_true(self.var_7fe71a4d))
 			{
@@ -484,7 +484,7 @@ function function_7862c208()
 		{
 			bundle = (isdefined(var_b1af7735.bundle) ? var_b1af7735.bundle : zm_utility::function_b42da08a(var_b1af7735));
 			state = function_ffdbe8c2(var_b1af7735);
-			if(is_true(var_b1af7735.var_c14aa186[state].ignoredamage))
+			if(is_true(var_b1af7735.dynentstates[state].ignoredamage))
 			{
 				continue;
 				continue;
@@ -721,7 +721,7 @@ function function_b9b06e2(e_target, weapon, swing_dir, v_to_target, n_damage)
 }
 
 /*
-	Name: function_219565f5
+	Name: axe_left_throw_attack_think
 	Namespace: namespace_6fc19861
 	Checksum: 0x9F60A542
 	Offset: 0x20C0
@@ -729,7 +729,7 @@ function function_b9b06e2(e_target, weapon, swing_dir, v_to_target, n_damage)
 	Parameters: 1
 	Flags: Private
 */
-function private function_219565f5(weapon)
+function private axe_left_throw_attack_think(weapon)
 {
 	self endon(#"death");
 	var_17b7891d = "ee911055e03280b" + "axe_left_throw_attack_think";
@@ -1305,15 +1305,15 @@ function function_49fa2899()
 	var_cb5aea38 = [2:((((17 + 1) + 8) + 1) + 8) + 1, 1:((17 + 1) + 8) + 1, 0:17 + 1];
 	foreach(slot in var_cb5aea38)
 	{
-		var_9ccb901d = self namespace_b376ff3f::function_2e711614(slot);
-		if(!isdefined(var_9ccb901d))
+		slot_item = self item_inventory::function_2e711614(slot);
+		if(!isdefined(slot_item))
 		{
 			continue;
 		}
-		var_291c422e = self namespace_a0d533d1::function_2b83d3ff(var_9ccb901d);
-		if(function_58d581b6(var_291c422e))
+		slot_weapon = self namespace_a0d533d1::function_2b83d3ff(slot_item);
+		if(function_58d581b6(slot_weapon))
 		{
-			var_b84949d0 = var_291c422e;
+			var_b84949d0 = slot_weapon;
 			break;
 		}
 	}
@@ -1321,7 +1321,7 @@ function function_49fa2899()
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: namespace_6fc19861
 	Checksum: 0x96715D4F
 	Offset: 0x3AF0
@@ -1329,7 +1329,7 @@ function function_49fa2899()
 	Parameters: 1
 	Flags: None
 */
-function function_10a4dd0a(params)
+function on_item_pickup(params)
 {
 	item = params.item;
 	if(isplayer(self))
@@ -1376,7 +1376,7 @@ function function_10a4dd0a(params)
 }
 
 /*
-	Name: function_7897dfe6
+	Name: on_item_drop
 	Namespace: namespace_6fc19861
 	Checksum: 0xE47A905B
 	Offset: 0x3D48
@@ -1384,7 +1384,7 @@ function function_10a4dd0a(params)
 	Parameters: 1
 	Flags: None
 */
-function function_7897dfe6(params)
+function on_item_drop(params)
 {
 	item = params.item;
 	if(isplayer(self) && isdefined(item.var_a6762160.weapon) && function_58d581b6(item.var_a6762160.weapon))
@@ -1405,7 +1405,7 @@ function function_7897dfe6(params)
 */
 function function_e5469f27(weapon, var_131779dd)
 {
-	var_55687712 = self namespace_b376ff3f::function_230ceec4(weapon);
+	var_55687712 = self item_inventory::function_230ceec4(weapon);
 	if(isdefined(var_55687712.var_a8bccf69))
 	{
 		if(is_true(var_131779dd))
@@ -1468,12 +1468,12 @@ function function_e5469f27(weapon, var_131779dd)
 function function_e711fec1()
 {
 	/#
-		level_name = util::function_53bbf9d2();
+		level_name = util::get_map_name();
 		if(level_name === "")
 		{
-			util::function_345e5b9a("");
-			util::function_345e5b9a("");
-			util::function_345e5b9a("");
+			util::add_debug_command("");
+			util::add_debug_command("");
+			util::add_debug_command("");
 			zm_devgui::add_custom_devgui_callback(&cmd);
 		}
 	#/

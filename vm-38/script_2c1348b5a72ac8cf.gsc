@@ -1,34 +1,34 @@
-#using script_263b7f2982258785;
-#using script_2d443451ce681a;
-#using script_31786c2dc684e9b;
-#using script_31e9b35aaacbbd93;
-#using script_3626f1b2cf51a99c;
-#using script_3dc93ca9902a9cda;
-#using script_474bf596f5ecdb01;
-#using script_4ab78e327b76395f;
-#using script_4ccd0c3512b52a10;
-#using script_61cfc2ab8e60625;
-#using script_6809bf766eba194a;
-#using script_6a27f4a76e9218f0;
-#using script_7cf3e180e994d17f;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\perks.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using script_6a27f4a76e9218f0;
+#using script_31e9b35aaacbbd93;
+#using script_7cf3e180e994d17f;
+#using script_3dc93ca9902a9cda;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
 #using scripts\cp_common\skipto.gsc;
+#using script_3626f1b2cf51a99c;
+#using script_4ab78e327b76395f;
+#using script_474bf596f5ecdb01;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using scripts\cp_common\objectives.gsc;
+#using script_4ccd0c3512b52a10;
 #using scripts\cp_common\util.gsc;
+#using script_31786c2dc684e9b;
+#using script_263b7f2982258785;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using script_61cfc2ab8e60625;
+#using script_2d443451ce681a;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\perks.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_7747d072;
 
@@ -46,11 +46,11 @@ function private autoexec function_228213c8()
 	level notify(1095615449);
 }
 
-#namespace namespace_53e86c1f;
+#namespace tkdn_raid_slide;
 
 /*
 	Name: starting
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x4674856E
 	Offset: 0x848
 	Size: 0x344
@@ -84,7 +84,7 @@ function starting(str_skipto)
 
 /*
 	Name: main
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x8C978B93
 	Offset: 0xB98
 	Size: 0xD94
@@ -95,12 +95,12 @@ function main(str_skipto, b_starting)
 {
 	if(b_starting)
 	{
-		namespace_b331012d::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
-		namespace_b331012d::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
-		namespace_b331012d::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
-		namespace_b331012d::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
-		namespace_b331012d::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
-		namespace_b331012d::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
+		tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
+		tkdn_raid_apt::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
+		tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
+		tkdn_raid_apt::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
+		tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
+		tkdn_raid_apt::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
 		level thread namespace_a052577e::function_1dc92e4f();
 		level thread scene::init("scene_tkd_hit2_adler_alley");
 		level thread scene::play("scene_tkd_hit2_adler_alley", "gate_closed");
@@ -109,8 +109,8 @@ function main(str_skipto, b_starting)
 		var_efac709f delete();
 		getactorarray("apt_blindfire_bathroom", "targetname")[0] delete();
 	}
-	level thread namespace_b995dbff::function_daaa52d5();
-	level thread namespace_b995dbff::function_b47183fb();
+	level thread tkdn_raid_capture::function_daaa52d5();
+	level thread tkdn_raid_capture::function_b47183fb();
 	player = getplayers()[0];
 	var_1fbc6848 = getspawnerarray("ledge_lmg_guy", "script_noteworthy");
 	var_1fbc6848[0] spawner::add_spawn_function(&function_b8018dce);
@@ -126,10 +126,10 @@ function main(str_skipto, b_starting)
 	player thread function_e99afe47();
 	level flag::wait_till("flag_start_roof_slide");
 	var_2b876e6f = getspawnerarray("slide_enemy1", "targetname");
-	level.var_c2f99c79 = var_2b876e6f[0] spawner::spawn(1);
-	level.var_c2f99c79.targetname = "slide_enemy1";
-	level.var_c2f99c79.health = 999;
-	level.var_c2f99c79 disableaimassist();
+	level.slide_enemy1 = var_2b876e6f[0] spawner::spawn(1);
+	level.slide_enemy1.targetname = "slide_enemy1";
+	level.slide_enemy1.health = 999;
+	level.slide_enemy1 disableaimassist();
 	var_b5c582ed = getspawnerarray("slide_enemy2", "targetname");
 	level.var_2db471ed = var_b5c582ed[0] spawner::spawn(1);
 	level.var_2db471ed.targetname = "slide_enemy2";
@@ -161,10 +161,10 @@ function main(str_skipto, b_starting)
 	level thread function_4b1afed9();
 	level scene::add_scene_func("scene_tkd_hit2_rooftop_slide", &function_c5d4fec8);
 	level thread scene::play("scene_tkd_hit2_rooftop_slide", "Shot 1", [0:fake_player]);
-	level.var_c2f99c79 thread scene::play("scene_tkd_hit2_rooftop_slide_enemy1", "Shot 1", [0:level.var_c2f99c79]);
+	level.slide_enemy1 thread scene::play("scene_tkd_hit2_rooftop_slide_enemy1", "Shot 1", [0:level.slide_enemy1]);
 	level.var_2db471ed thread scene::play("scene_tkd_hit2_rooftop_slide_enemy2", "Shot 1", [0:level.var_2db471ed]);
 	level.var_2006d692 thread scene::play("scene_tkd_hit2_rooftop_slide_enemy3", "Shot 1", [0:level.var_2006d692]);
-	level.var_c2f99c79 thread function_83cb8fb7();
+	level.slide_enemy1 thread function_83cb8fb7();
 	level.var_2006d692 thread function_83cb8fb7();
 	level.var_2006d692 thread function_d6825a2e();
 	level thread function_41a8d47e();
@@ -184,7 +184,7 @@ function main(str_skipto, b_starting)
 	player thread function_85757fc8();
 	player playerlinktodelta(fake_player, "tag_player", 0.2, 35, 30, 45, 6, 1, 0, 1);
 	setslowmotion(1, 0.2, 0.25, 1, 1);
-	player perks::function_7637bafa("specialty_fastads");
+	player perks::perk_setperk("specialty_fastads");
 	wait(0.1);
 	player enableweapons();
 	level waittill(#"hash_78624492cc89d4dd");
@@ -193,7 +193,7 @@ function main(str_skipto, b_starting)
 	setslowmotion(0.1, 1, 0.5, 1, 1);
 	level waittill(#"hash_35a786f9d88a2e60");
 	level thread function_58b2cc80();
-	player perks::function_45d12554("specialty_fastads");
+	player perks::perk_unsetperk("specialty_fastads");
 	player val::reset("slide", "allow_crouch");
 	player val::reset("slide", "allow_prone");
 	player unlink();
@@ -210,7 +210,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: function_b8018dce
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x332A111A
 	Offset: 0x1938
 	Size: 0x12
@@ -224,7 +224,7 @@ function function_b8018dce()
 
 /*
 	Name: function_c5d4fec8
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xACCC123A
 	Offset: 0x1958
 	Size: 0x28
@@ -238,7 +238,7 @@ function function_c5d4fec8(a_ents)
 
 /*
 	Name: function_58b2cc80
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x570BC812
 	Offset: 0x1988
 	Size: 0x90
@@ -260,7 +260,7 @@ function function_58b2cc80()
 
 /*
 	Name: function_85757fc8
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x78CF7A62
 	Offset: 0x1A20
 	Size: 0x64
@@ -276,7 +276,7 @@ function function_85757fc8()
 
 /*
 	Name: give_player_max_ammo
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xDD9BC427
 	Offset: 0x1A90
 	Size: 0xE8
@@ -296,7 +296,7 @@ function give_player_max_ammo()
 
 /*
 	Name: function_624525f
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xBD3D76FF
 	Offset: 0x1B80
 	Size: 0xEC
@@ -305,18 +305,18 @@ function give_player_max_ammo()
 */
 function function_624525f()
 {
-	level endon(#"hash_57e319ef58ba9a7b");
+	level endon(#"shot_slide_enemy1");
 	dmg_pos = getent("mb_slide_enemy1", "targetname");
 	level waittill(#"hash_3dd2c779be3b07c8");
-	if(isalive(level.var_c2f99c79) && !isdefined(level.var_c2f99c79.var_b481f04a))
+	if(isalive(level.slide_enemy1) && !isdefined(level.slide_enemy1.var_b481f04a))
 	{
-		magicbullet(getweapon(#"ar_standard_t9"), dmg_pos.origin, level.var_c2f99c79.origin + vectorscale((0, 0, 1), 50));
+		magicbullet(getweapon(#"ar_standard_t9"), dmg_pos.origin, level.slide_enemy1.origin + vectorscale((0, 0, 1), 50));
 	}
 }
 
 /*
 	Name: function_41a8d47e
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x51D3F4FA
 	Offset: 0x1C78
 	Size: 0x40
@@ -331,7 +331,7 @@ function function_41a8d47e()
 
 /*
 	Name: function_e99afe47
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x26B83C0
 	Offset: 0x1CC0
 	Size: 0x1A2
@@ -364,7 +364,7 @@ function function_e99afe47()
 
 /*
 	Name: function_f9dfbac1
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x4AF0FD1A
 	Offset: 0x1E70
 	Size: 0xEE
@@ -380,7 +380,7 @@ function function_f9dfbac1()
 	player notifyonplayercommand("pressed_jump", "+gostand");
 	while(true)
 	{
-		player waittill(#"hash_691e262461d75356");
+		player waittill(#"pressed_jump");
 		if(!player flag::get("body_shield_active"))
 		{
 			level flag::set("flag_start_roof_slide");
@@ -391,7 +391,7 @@ function function_f9dfbac1()
 
 /*
 	Name: function_6178ec8f
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x9675C97
 	Offset: 0x1F68
 	Size: 0xBC
@@ -409,7 +409,7 @@ function function_6178ec8f()
 
 /*
 	Name: function_79b1e578
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xF08BD812
 	Offset: 0x2030
 	Size: 0x34
@@ -424,7 +424,7 @@ function function_79b1e578()
 
 /*
 	Name: function_1f6d0353
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xD8B6C2CB
 	Offset: 0x2070
 	Size: 0xB4
@@ -446,7 +446,7 @@ function function_1f6d0353()
 
 /*
 	Name: function_4b1afed9
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x15E3D0B2
 	Offset: 0x2130
 	Size: 0x3C
@@ -461,7 +461,7 @@ function function_4b1afed9()
 
 /*
 	Name: function_d6825a2e
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x752D6458
 	Offset: 0x2178
 	Size: 0xC4
@@ -482,7 +482,7 @@ function function_d6825a2e()
 
 /*
 	Name: function_edf70272
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xF9FC1B68
 	Offset: 0x2248
 	Size: 0x36
@@ -500,7 +500,7 @@ function function_edf70272()
 
 /*
 	Name: function_83cb8fb7
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xCB2DD608
 	Offset: 0x2288
 	Size: 0x130
@@ -511,24 +511,24 @@ function function_83cb8fb7()
 {
 	player = getplayers()[0];
 	self waittill(#"damage", #"fake_damage");
-	if(self == level.var_c2f99c79)
+	if(self == level.slide_enemy1)
 	{
 		self thread scene::play("scene_tkd_hit2_rooftop_slide_enemy1", "death");
 		player playhitmarker(undefined, 5, undefined, 1);
-		level notify(#"hash_57e319ef58ba9a7b");
+		level notify(#"shot_slide_enemy1");
 		self.var_b481f04a = 1;
 	}
 	if(self == level.var_2006d692)
 	{
 		self thread scene::play("scene_tkd_hit2_rooftop_slide_enemy3", "death");
 		player playhitmarker(undefined, 5, undefined, 1);
-		level notify(#"hash_57e31bef58ba9de1");
+		level notify(#"shot_slide_enemy3");
 	}
 }
 
 /*
 	Name: function_bc2abab3
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xCE97C7B4
 	Offset: 0x23C0
 	Size: 0xFC
@@ -549,7 +549,7 @@ function function_bc2abab3()
 
 /*
 	Name: cleanup
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xD989AAD7
 	Offset: 0x24C8
 	Size: 0x24
@@ -562,7 +562,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0xA06BE26C
 	Offset: 0x24F8
 	Size: 0x24
@@ -576,7 +576,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x80F724D1
 	Offset: 0x2528
 	Size: 0x4
@@ -589,7 +589,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_53e86c1f
+	Namespace: tkdn_raid_slide
 	Checksum: 0x80F724D1
 	Offset: 0x2538
 	Size: 0x4

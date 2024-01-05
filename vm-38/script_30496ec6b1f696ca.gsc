@@ -1,13 +1,13 @@
 #using script_680dddbda86931fa;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
-#namespace namespace_8f74625a;
+#namespace item_supply_drop;
 
 /*
 	Name: function_90e766b2
-	Namespace: namespace_8f74625a
+	Namespace: item_supply_drop
 	Checksum: 0x7F354FF9
 	Offset: 0x160
 	Size: 0x14
@@ -20,22 +20,22 @@ function private autoexec function_90e766b2()
 }
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_8f74625a
+	Name: __init__system__
+	Namespace: item_supply_drop
 	Checksum: 0x4E26A615
 	Offset: 0x180
 	Size: 0x44
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_c70352f852fda84", &function_70a657d8, undefined, undefined, #"item_world");
+	system::register(#"item_supply_drop", &function_70a657d8, undefined, undefined, #"item_world");
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_8f74625a
+	Namespace: item_supply_drop
 	Checksum: 0x92A805A5
 	Offset: 0x1D0
 	Size: 0x164
@@ -44,40 +44,40 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!namespace_ad5a0cd6::use_item_spawns() || util::function_5df4294() === #"zsurvival")
+	if(!item_world_util::use_item_spawns() || util::get_game_type() === #"zsurvival")
 	{
 		return;
 	}
 	clientfield::register("scriptmover", "supply_drop_fx", 1, 1, "int", &supply_drop_fx, 0, 0);
-	clientfield::register("scriptmover", "supply_drop_parachute_rob", 1, 1, "int", &function_6567bf42, 0, 0);
+	clientfield::register("scriptmover", "supply_drop_parachute_rob", 1, 1, "int", &supply_drop_parachute, 0, 0);
 	clientfield::register("scriptmover", "supply_drop_portal_fx", 1, 1, "int", &supply_drop_portal_fx, 0, 0);
 	clientfield::register("vehicle", "supply_drop_vehicle_landed", 1, 1, "counter", &supply_drop_vehicle_landed, 0, 0);
 }
 
 /*
-	Name: function_6567bf42
-	Namespace: namespace_8f74625a
+	Name: supply_drop_parachute
+	Namespace: item_supply_drop
 	Checksum: 0xB6B74E05
 	Offset: 0x340
 	Size: 0x94
 	Parameters: 7
 	Flags: Linked
 */
-function function_6567bf42(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
+function supply_drop_parachute(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
 	if(bwastimejump == 1)
 	{
-		self function_bf9d3071(#"hash_336cece53ae2342f");
+		self playrenderoverridebundle(#"hash_336cece53ae2342f");
 	}
 	else
 	{
-		self function_5d482e78(#"hash_336cece53ae2342f");
+		self stoprenderoverridebundle(#"hash_336cece53ae2342f");
 	}
 }
 
 /*
 	Name: function_81431153
-	Namespace: namespace_8f74625a
+	Namespace: item_supply_drop
 	Checksum: 0xB4547218
 	Offset: 0x3E0
 	Size: 0x84
@@ -89,9 +89,9 @@ function function_81431153(localclientnum)
 	self waittill(#"death");
 	if(isdefined(self.fxent))
 	{
-		if(isdefined(self.fxent.var_4a630a3f))
+		if(isdefined(self.fxent.supplydropfx))
 		{
-			stopfx(localclientnum, self.fxent.var_4a630a3f);
+			stopfx(localclientnum, self.fxent.supplydropfx);
 		}
 		self.fxent delete();
 	}
@@ -99,7 +99,7 @@ function function_81431153(localclientnum)
 
 /*
 	Name: supply_drop_fx
-	Namespace: namespace_8f74625a
+	Namespace: item_supply_drop
 	Checksum: 0x76EBDF03
 	Offset: 0x470
 	Size: 0x16C
@@ -113,16 +113,16 @@ function supply_drop_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 		fxent = spawn(fieldname, self.origin, "script_model");
 		fxent setmodel("tag_origin");
 		fxent linkto(self);
-		fxent.var_4a630a3f = function_239993de(fieldname, "killstreaks/fx9_carepkg_signal_smk_blue", fxent, "tag_origin");
+		fxent.supplydropfx = function_239993de(fieldname, "killstreaks/fx9_carepkg_signal_smk_blue", fxent, "tag_origin");
 		self.fxent = fxent;
 		self.var_3a55f5cf = 1;
 		self thread function_81431153(fieldname);
 	}
 	else if(isdefined(self.fxent))
 	{
-		if(isdefined(self.fxent.var_4a630a3f))
+		if(isdefined(self.fxent.supplydropfx))
 		{
-			stopfx(fieldname, self.fxent.var_4a630a3f);
+			stopfx(fieldname, self.fxent.supplydropfx);
 		}
 		self.fxent delete();
 	}
@@ -130,7 +130,7 @@ function supply_drop_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
 /*
 	Name: supply_drop_portal_fx
-	Namespace: namespace_8f74625a
+	Namespace: item_supply_drop
 	Checksum: 0x6ADD1902
 	Offset: 0x5E8
 	Size: 0x15A
@@ -166,7 +166,7 @@ function supply_drop_portal_fx(localclientnum, oldval, newval, bnewent, binitial
 
 /*
 	Name: supply_drop_vehicle_landed
-	Namespace: namespace_8f74625a
+	Namespace: item_supply_drop
 	Checksum: 0x50CD9F87
 	Offset: 0x750
 	Size: 0x84

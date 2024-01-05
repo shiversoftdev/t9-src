@@ -1,18 +1,18 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\spectating.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spectating.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace killcam;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: killcam
 	Checksum: 0xB96B9D0C
 	Offset: 0x1A0
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"killcam", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -54,7 +54,7 @@ function init()
 	level.finalkillcam = getgametypesetting(#"allowfinalkillcam");
 	level.killcamtime = getgametypesetting(#"killcamtime");
 	level.var_a95350da = getgametypesetting(#"hash_154db5a1b2e9d757");
-	level.var_7abccc83 = !function_f99d2668();
+	level.var_7abccc83 = !sessionmodeiswarzonegame();
 	init_final_killcam();
 }
 
@@ -83,13 +83,13 @@ function end_killcam()
 	Parameters: 1
 	Flags: None
 */
-function function_2f7579f(var_167baaa)
+function function_2f7579f(weaponnamehash)
 {
 	if(!isdefined(level.var_ef3352fc))
 	{
 		level.var_ef3352fc = [];
 	}
-	level.var_ef3352fc[var_167baaa] = 1;
+	level.var_ef3352fc[weaponnamehash] = 1;
 }
 
 /*
@@ -263,7 +263,7 @@ function function_eb3deeec(spectatorclient, targetentityindex, killcam_entity_in
 }
 
 /*
-	Name: function_2c8aa45e
+	Name: has_deathcam
 	Namespace: killcam
 	Checksum: 0xA942BD8A
 	Offset: 0xB68
@@ -271,7 +271,7 @@ function function_eb3deeec(spectatorclient, targetentityindex, killcam_entity_in
 	Parameters: 0
 	Flags: Linked
 */
-function function_2c8aa45e()
+function has_deathcam()
 {
 	return isdefined(self.var_e59bd911);
 }
@@ -287,7 +287,7 @@ function function_2c8aa45e()
 */
 function start_deathcam()
 {
-	if(!self function_2c8aa45e())
+	if(!self has_deathcam())
 	{
 		self.sessionstate = "spectator";
 		self.spectatorclient = -1;
@@ -1187,7 +1187,7 @@ function final_killcam(winner)
 			final_killcam_internal(winner);
 		}
 	#/
-	luinotifyevent(#"hash_4448c66c7f84aa68");
+	luinotifyevent(#"clear_transition");
 	luinotifyevent(#"hash_6bb70498f448d405");
 	final_killcam_internal(winner);
 	util::setclientsysstate("levelNotify", "sndFKe");

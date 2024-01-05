@@ -1,7 +1,7 @@
-#using scripts\core_common\aat_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\aat_shared.csc;
 
 #namespace ammomod_cryofreeze;
 
@@ -145,9 +145,9 @@ function function_a7a5e842(localclientnum, oldval, newval, bnewent, binitialsnap
 */
 function function_bfdbfcd(localclientnum, b_freeze)
 {
-	self notify(#"hash_224e66d46cc29cd6");
-	self endoncallback(&function_2734889d, #"death", #"hash_224e66d46cc29cd6");
-	self function_bf9d3071("rob_test_character_ice");
+	self notify(#"end_frosty");
+	self endoncallback(&function_2734889d, #"death", #"end_frosty");
+	self playrenderoverridebundle("rob_test_character_ice");
 	if(!isdefined(self.var_82fb67e7))
 	{
 		self.var_82fb67e7 = 0;
@@ -175,7 +175,7 @@ function function_bfdbfcd(localclientnum, b_freeze)
 		else if(self.var_82fb67e7 <= 0)
 		{
 			self.var_958cf9c5 = undefined;
-			self function_5d482e78("rob_test_character_ice");
+			self stoprenderoverridebundle("rob_test_character_ice");
 			if(isdefined(self.var_feabd9ee))
 			{
 				stopfx(localclientnum, self.var_feabd9ee);

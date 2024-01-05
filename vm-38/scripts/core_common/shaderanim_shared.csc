@@ -11,7 +11,7 @@
 */
 function private autoexec function_3e669627()
 {
-	level notify(218527805);
+	level notify(-218527805);
 }
 
 #namespace shaderanim;

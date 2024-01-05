@@ -1,13 +1,13 @@
-#using script_2c5daa95f8fec03c;
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\scoreevents.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\perks.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_2c5daa95f8fec03c;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\scoreevents.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_b61a349a;
 
@@ -22,11 +22,11 @@
 */
 function private autoexec function_5ebbd151()
 {
-	level notify(940080514);
+	level notify(-940080514);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_b61a349a
 	Checksum: 0x9EC49C01
 	Offset: 0x100
@@ -34,7 +34,7 @@ function private autoexec function_5ebbd151()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_775f993ac537d970", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -82,7 +82,7 @@ function on_player_connect()
 {
 	self.var_d9fddbc5 = 0;
 	self.var_b37d3db2 = 0;
-	self callback::add_callback(#"weapon_fired", &function_78ccee50);
+	self callback::add_callback(#"weapon_fired", &on_weapon_fired);
 	self callback::add_callback(#"weapon_change", &function_39ab0a6a);
 }
 
@@ -111,16 +111,16 @@ function function_39ab0a6a(eventstruct)
 		}
 		if(!(weapon_class === "launcher" || weapon_class === "special"))
 		{
-			if(self perks::function_be94fe26(#"specialty_ammodrainsfromstockfirst"))
+			if(self perks::perk_hasperk(#"specialty_ammodrainsfromstockfirst"))
 			{
-				self perks::function_45d12554(#"specialty_ammodrainsfromstockfirst");
+				self perks::perk_unsetperk(#"specialty_ammodrainsfromstockfirst");
 			}
 		}
 	}
 }
 
 /*
-	Name: function_78ccee50
+	Name: on_weapon_fired
 	Namespace: namespace_b61a349a
 	Checksum: 0xEF33902A
 	Offset: 0x338
@@ -128,7 +128,7 @@ function function_39ab0a6a(eventstruct)
 	Parameters: 1
 	Flags: Linked
 */
-function function_78ccee50(eventstruct)
+function on_weapon_fired(eventstruct)
 {
 	if(!isplayer(self))
 	{
@@ -143,13 +143,13 @@ function function_78ccee50(eventstruct)
 			{
 				if(level.zombie_weapons[w_base].weapon_classname == "launcher" || level.zombie_weapons[w_base].weapon_classname == "special")
 				{
-					if(!self perks::function_be94fe26(#"specialty_ammodrainsfromstockfirst"))
+					if(!self perks::perk_hasperk(#"specialty_ammodrainsfromstockfirst"))
 					{
 						self.var_d9fddbc5++;
 						if(math::cointoss(25) || self.var_d9fddbc5 >= 4)
 						{
 							self.var_b37d3db2 = 1;
-							self perks::function_7637bafa(#"specialty_ammodrainsfromstockfirst");
+							self perks::perk_setperk(#"specialty_ammodrainsfromstockfirst");
 							self.var_d9fddbc5 = 0;
 						}
 					}
@@ -159,7 +159,7 @@ function function_78ccee50(eventstruct)
 						if(math::cointoss(var_409524fd))
 						{
 							self.var_d9fddbc5 = 0;
-							self perks::function_45d12554(#"specialty_ammodrainsfromstockfirst");
+							self perks::perk_unsetperk(#"specialty_ammodrainsfromstockfirst");
 						}
 					}
 				}

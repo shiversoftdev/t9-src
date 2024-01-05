@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_e22be003 : class_6aaccc24
+class class_e22be003 : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_2a0b1f84
+		Name: set_score3points
 		Namespace: namespace_e22be003
 		Checksum: 0xC26713A
 		Offset: 0x950
@@ -52,9 +52,9 @@ class class_e22be003 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_2a0b1f84(localclientnum, value)
+	function set_score3points(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "score3Points", value);
+		[[ self ]]->set_data(localclientnum, "score3Points", value);
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_4b3ad4c4(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "scorePoints", value);
+		[[ self ]]->set_data(localclientnum, "scorePoints", value);
 	}
 
 	/*
@@ -82,7 +82,7 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_4b560c24(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "scoreText", value);
+		[[ self ]]->set_data(localclientnum, "scoreText", value);
 	}
 
 	/*
@@ -96,13 +96,13 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_4bfdafeb(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "moveorb");
+		current_val = [[ self ]]->get_data(localclientnum, "moveorb");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "moveorb", new_val);
+		[[ self ]]->set_data(localclientnum, "moveorb", new_val);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_e22be003
 		Checksum: 0x3016AACE
 		Offset: 0x6F0
@@ -110,9 +110,9 @@ class class_e22be003 : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_gamemode_onslaught_score_msg");
+		cluielem::register_clientside("mp_gamemode_onslaught_score_msg");
 	}
 
 	/*
@@ -126,15 +126,15 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function setup_clientfields(var_ae3230db, var_3b37d9b6, var_edd1ee8c, var_215262d5, var_964ac54, var_a286206c, var_aaae2990, var_43f41525)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_score_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "scoreText", 1);
-		namespace_6aaccc24::function_da693cbe("scorePoints", 1, 11, "int", var_edd1ee8c);
-		namespace_6aaccc24::function_dcb34c80("string", "score2Text", 1);
-		namespace_6aaccc24::function_da693cbe("score2Points", 1, 11, "int", var_215262d5);
-		namespace_6aaccc24::function_da693cbe("score3Points", 1, 8, "int", var_964ac54);
-		namespace_6aaccc24::function_da693cbe("powerup", 1, 1, "counter", var_a286206c);
-		namespace_6aaccc24::function_da693cbe("lowpower", 1, 1, "counter", var_aaae2990);
-		namespace_6aaccc24::function_da693cbe("moveorb", 1, 1, "counter", var_43f41525);
+		cluielem::setup_clientfields("mp_gamemode_onslaught_score_msg");
+		cluielem::function_dcb34c80("string", "scoreText", 1);
+		cluielem::add_clientfield("scorePoints", 1, 11, "int", var_edd1ee8c);
+		cluielem::function_dcb34c80("string", "score2Text", 1);
+		cluielem::add_clientfield("score2Points", 1, 11, "int", var_215262d5);
+		cluielem::add_clientfield("score3Points", 1, 8, "int", var_964ac54);
+		cluielem::add_clientfield("powerup", 1, 1, "counter", var_a286206c);
+		cluielem::add_clientfield("lowpower", 1, 1, "counter", var_aaae2990);
+		cluielem::add_clientfield("moveorb", 1, 1, "counter", var_43f41525);
 	}
 
 	/*
@@ -148,9 +148,9 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_94b2b0bd(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "powerup");
+		current_val = [[ self ]]->get_data(localclientnum, "powerup");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "powerup", new_val);
+		[[ self ]]->set_data(localclientnum, "powerup", new_val);
 	}
 
 	/*
@@ -164,7 +164,7 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_955431ec(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "score2Points", value);
+		[[ self ]]->set_data(localclientnum, "score2Points", value);
 	}
 
 	/*
@@ -178,9 +178,9 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_d74c17ab(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "lowpower");
+		current_val = [[ self ]]->get_data(localclientnum, "lowpower");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "lowpower", new_val);
+		[[ self ]]->set_data(localclientnum, "lowpower", new_val);
 	}
 
 	/*
@@ -194,15 +194,15 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "scoreText", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "scorePoints", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "score2Text", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "score2Points", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "score3Points", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "powerup", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "lowpower", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "moveorb", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "scoreText", #"");
+		[[ self ]]->set_data(localclientnum, "scorePoints", 0);
+		[[ self ]]->set_data(localclientnum, "score2Text", #"");
+		[[ self ]]->set_data(localclientnum, "score2Points", 0);
+		[[ self ]]->set_data(localclientnum, "score3Points", 0);
+		[[ self ]]->set_data(localclientnum, "powerup", 0);
+		[[ self ]]->set_data(localclientnum, "lowpower", 0);
+		[[ self ]]->set_data(localclientnum, "moveorb", 0);
 	}
 
 	/*
@@ -216,7 +216,7 @@ class class_e22be003 : class_6aaccc24
 	*/
 	function function_fc075317(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "score2Text", value);
+		[[ self ]]->set_data(localclientnum, "score2Text", value);
 	}
 
 }
@@ -256,7 +256,7 @@ function register(var_ae3230db, var_3b37d9b6, var_edd1ee8c, var_215262d5, var_96
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_gamemode_onslaught_score_msg
 	Checksum: 0x58340DBC
 	Offset: 0x308
@@ -264,10 +264,10 @@ function register(var_ae3230db, var_3b37d9b6, var_edd1ee8c, var_215262d5, var_96
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_e22be003();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -370,7 +370,7 @@ function function_955431ec(localclientnum, value)
 }
 
 /*
-	Name: function_2a0b1f84
+	Name: set_score3points
 	Namespace: mp_gamemode_onslaught_score_msg
 	Checksum: 0xCFB2FD2
 	Offset: 0x480
@@ -378,9 +378,9 @@ function function_955431ec(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_2a0b1f84(localclientnum, value)
+function set_score3points(localclientnum, value)
 {
-	[[ self ]]->function_2a0b1f84(localclientnum, value);
+	[[ self ]]->set_score3points(localclientnum, value);
 }
 
 /*

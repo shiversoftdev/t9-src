@@ -1,10 +1,10 @@
+#using script_582965dd053f648e;
 #using script_18910f59cc847b42;
 #using script_1b2f6ef7778cf920;
-#using script_582965dd053f648e;
+#using scripts\wz_common\hud.csc;
 #using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
-#using scripts\wz_common\hud.csc;
 
 #namespace brawl;
 
@@ -64,7 +64,7 @@ function on_player_spawned(localclientnum)
 		level namespace_ac2a80f5::changecamera(localclientnum, self, 6);
 	}
 	self util::waittill_dobj(localclientnum);
-	self function_bf9d3071(#"hash_7974d58ec2b1797e");
+	self playrenderoverridebundle(#"hash_7974d58ec2b1797e");
 	while(true)
 	{
 		var_8b8faf32 = self function_e8ef30cc();

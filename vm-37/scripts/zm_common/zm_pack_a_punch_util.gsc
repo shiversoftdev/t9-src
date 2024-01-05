@@ -1,27 +1,27 @@
-#using script_1254ac024174d9c0;
-#using script_1c65dbfc2f1c8d8f;
-#using script_3f9e0dc8454d98e1;
-#using script_5b18db57724ff7be;
 #using script_698dd790cdc4965f;
-#using script_6e3c826b1814cab6;
-#using script_7133a4d461308099;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_bgb.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_magicbox.gsc;
-#using scripts\zm_common\zm_pack_a_punch.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\trials\zm_trial_disable_buys.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_pack_a_punch.gsc;
+#using scripts\zm_common\zm_magicbox.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\zm_common\zm_customgame.gsc;
+#using scripts\zm_common\zm_camos.gsc;
+#using scripts\zm_common\zm_bgb.gsc;
+#using scripts\zm_common\zm.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\activecamo_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_pap_util;
 
@@ -209,7 +209,7 @@ function update_hint_string(player)
 	{
 		if(zm_utility::is_standard())
 		{
-			if(!namespace_59ff1d6c::function_901b751c(#"hash_57a5c7a9dcf94d61") || !b_weapon_supports_aat)
+			if(!zm_custom::function_901b751c(#"hash_57a5c7a9dcf94d61") || !b_weapon_supports_aat)
 			{
 				self sethintstringforplayer(player, #"hash_fea06394ae21371");
 				return true;
@@ -221,7 +221,7 @@ function update_hint_string(player)
 		}
 		return false;
 	}
-	if(namespace_497ab7da::is_active())
+	if(zm_trial_disable_buys::is_active())
 	{
 		self sethintstring(#"hash_55d25caf8f7bbb2f");
 		return true;
@@ -592,7 +592,7 @@ function function_b81da3fd(weapon)
 	{
 		return false;
 	}
-	item = self namespace_b376ff3f::function_230ceec4(weapon);
+	item = self item_inventory::function_230ceec4(weapon);
 	if(isdefined(item.var_a8bccf69) && item.var_a8bccf69 > 1)
 	{
 		return true;
@@ -615,7 +615,7 @@ function function_2a196eff(weapon)
 	{
 		return;
 	}
-	item = self namespace_b376ff3f::function_230ceec4(weapon);
+	item = self item_inventory::function_230ceec4(weapon);
 	if(isdefined(item.var_a8bccf69))
 	{
 		return item.var_a8bccf69;
@@ -633,7 +633,7 @@ function function_2a196eff(weapon)
 */
 function function_7352d8cc(weapon)
 {
-	item = self namespace_b376ff3f::function_230ceec4(weapon);
+	item = self item_inventory::function_230ceec4(weapon);
 	if(isdefined(item.var_a8bccf69) && item.var_a8bccf69 >= 3)
 	{
 		return true;

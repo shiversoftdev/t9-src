@@ -1,14 +1,14 @@
-#using script_1cd690a97dfca36e;
 #using script_31671175564a93b7;
+#using script_1cd690a97dfca36e;
 #using script_3318f11e3a1b2358;
 #using script_dfd475a961626c7;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\fx_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\vehicle_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\fx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_db2381c4;
 
@@ -23,11 +23,11 @@
 */
 function private autoexec function_4b2a0ea3()
 {
-	level notify(1407960418);
+	level notify(-1407960418);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_db2381c4
 	Checksum: 0x215000B9
 	Offset: 0x910
@@ -35,7 +35,7 @@ function private autoexec function_4b2a0ea3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4ddffaa090d81227", &function_c7f33cce, &function_fa076c68, undefined, undefined);
 }
@@ -216,7 +216,7 @@ function private function_a9581e24(localclientnum, oldval, newval, bnewent, bini
 	{
 		level._fx = {};
 	}
-	level._fx.var_3fbdf2c1 = self;
+	level._fx.cargo_plane = self;
 }
 
 /*
@@ -587,7 +587,7 @@ function private function_a718a890(localclientnum, state)
 		/#
 			println("");
 		#/
-		self notify(#"hash_62bac55964763fcb");
+		self notify(#"stop_flashlight_fx");
 	}
 }
 
@@ -618,7 +618,7 @@ function private function_2550ab3e(localclientnum, state)
 			println("");
 		#/
 		self notify(#"hash_28344e38d8947eea");
-		self notify(#"hash_54f8be0b9f0a6337");
+		self notify(#"stop_blink_fx");
 	}
 }
 
@@ -636,16 +636,16 @@ function private function_7dc13ec9(localclientnum)
 	self notify("4486f93a90fd6e7");
 	self endon("4486f93a90fd6e7");
 	self endon(#"death", #"fx_death", #"hash_28344e38d8947eea");
-	if(isdefined(level._fx.var_3fbdf2c1))
+	if(isdefined(level._fx.cargo_plane))
 	{
 		var_3b16b806 = sqr(400);
 		var_87c1e213 = sqr(2500);
 		while(true)
 		{
-			distsqr = distance2dsquared(self.origin, level._fx.var_3fbdf2c1.origin);
+			distsqr = distance2dsquared(self.origin, level._fx.cargo_plane.origin);
 			self.fx_interval = (distsqr - var_3b16b806) / (var_87c1e213 - var_3b16b806);
 			self.fx_interval = max(0.1, min(1, self.fx_interval));
-			self notify(#"hash_54f8be0b9f0a6337");
+			self notify(#"stop_blink_fx");
 			var_b2b52cb5 = self.fx_interval * 0.5;
 			util::server_wait(localclientnum, var_b2b52cb5);
 			fxid = util::playfxontag(localclientnum, "maps/cp_takedown/fx9_td_rc_light_red", self, "tag_fx_light_rear");
@@ -684,7 +684,7 @@ function private function_3383f5e2(localclientnum, state)
 		/#
 			println("");
 		#/
-		self notify(#"hash_2350d020f803e372");
+		self notify(#"stop_proximity_fx");
 	}
 }
 
@@ -716,7 +716,7 @@ function private function_4cfdb901(localclientnum, state)
 		/#
 			println("");
 		#/
-		self notify(#"hash_6ef62fddf89d7ebb");
+		self notify(#"stop_damage_light_fx");
 	}
 	if(state & 32)
 	{
@@ -732,7 +732,7 @@ function private function_4cfdb901(localclientnum, state)
 		/#
 			println("");
 		#/
-		self notify(#"hash_5b0caecc303de78a");
+		self notify(#"stop_damage_medium_fx");
 	}
 	if(state & 64)
 	{
@@ -748,7 +748,7 @@ function private function_4cfdb901(localclientnum, state)
 		/#
 			println("");
 		#/
-		self notify(#"hash_570ee8f37faa545a");
+		self notify(#"stop_damage_heavy_fx");
 	}
 }
 
@@ -778,7 +778,7 @@ function private function_51de3dc2(localclientnum, state)
 		/#
 			println("");
 		#/
-		self notify(#"hash_3dd3a6dadf6578f");
+		self notify(#"stop_death_fx");
 	}
 }
 
@@ -1159,7 +1159,7 @@ function private function_d1374213(localclientnum, oldval, newval, bnewent, bini
 		}
 		case 1:
 		{
-			self function_bf9d3071("rob_p9_cp_takedown_snipercam_blood_henchman");
+			self playrenderoverridebundle("rob_p9_cp_takedown_snipercam_blood_henchman");
 			break;
 		}
 		case 2:
@@ -1169,7 +1169,7 @@ function private function_d1374213(localclientnum, oldval, newval, bnewent, bini
 		}
 		case 3:
 		{
-			self function_bf9d3071("rob_p9_cp_takedown_snipercam_blood_splatter");
+			self playrenderoverridebundle("rob_p9_cp_takedown_snipercam_blood_splatter");
 			break;
 		}
 	}

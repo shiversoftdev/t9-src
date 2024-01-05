@@ -1,7 +1,7 @@
-#using script_2255a7ad3edc838f;
-#using script_6158278c8647d8a9;
-#using scripts\core_common\bots\bot_action.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\bots\bot_position.gsc;
+#using scripts\core_common\bots\bot_action.gsc;
+#using scripts\core_common\bots\bot.gsc;
 
 #namespace namespace_255a2b21;
 
@@ -16,7 +16,7 @@
 */
 function function_70a657d8()
 {
-	if(currentsessionmode() == 4 || !(isdefined(getgametypesetting(#"hash_7ab596bf4932361d")) ? getgametypesetting(#"hash_7ab596bf4932361d") : 0))
+	if(currentsessionmode() == 4 || !(isdefined(getgametypesetting(#"allowlaststandforactiveclients")) ? getgametypesetting(#"allowlaststandforactiveclients") : 0))
 	{
 		return;
 	}
@@ -158,7 +158,7 @@ function private function_301f229d(team)
 				arrayinsert(assignments, {#distance:distance, #target:player, #bot:bot}, 0);
 				continue;
 			}
-			navmeshpoint = namespace_b20b4885::function_13796beb(player.origin);
+			navmeshpoint = bot_position::function_13796beb(player.origin);
 			if(!isdefined(navmeshpoint))
 			{
 				continue;
@@ -169,7 +169,7 @@ function private function_301f229d(team)
 			}
 			else
 			{
-				var_65c8979b = namespace_b20b4885::function_13796beb(bot.origin);
+				var_65c8979b = bot_position::function_13796beb(bot.origin);
 				if(!isdefined(var_65c8979b))
 				{
 					continue;

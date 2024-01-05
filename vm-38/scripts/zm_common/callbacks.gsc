@@ -1,15 +1,15 @@
-#using script_20ac552ee498eb9d;
-#using script_35b5ff21c2a0960f;
-#using script_522aeb6ae906391e;
-#using script_79a7e1c31a3e8cc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\gametypes\globallogic_actor.gsc;
-#using scripts\zm_common\gametypes\globallogic_player.gsc;
-#using scripts\zm_common\gametypes\hostmigration.gsc;
 #using scripts\zm_common\zm_player.gsc;
+#using scripts\zm_common\gametypes\hostmigration.gsc;
+#using scripts\zm_common\gametypes\globallogic_scriptmover.gsc;
+#using scripts\zm_common\gametypes\globallogic_player.gsc;
+#using scripts\zm_common\gametypes\globallogic_actor.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\core_common\globallogic\globallogic_vehicle.gsc;
+#using scripts\weapons\deployable.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_522aeb6ae906391e;
+#using scripts\core_common\struct.gsc;
 
 #namespace callbacks;
 
@@ -30,7 +30,7 @@ function private autoexec function_cd40ebb8()
 #namespace callback;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: callback
 	Checksum: 0xEBAD4C22
 	Offset: 0xF0
@@ -38,7 +38,7 @@ function private autoexec function_cd40ebb8()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"callback", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -102,7 +102,7 @@ function setdefaultcallbacks()
 	level.callbackplayermelee = &globallogic_player::callback_playermelee;
 	level.callbackactorspawned = &globallogic_actor::callback_actorspawned;
 	level.callbackactorcloned = &globallogic_actor::callback_actorcloned;
-	level.var_6788bf11 = &namespace_e42b3e24::function_8c7ec52f;
+	level.var_6788bf11 = &globallogic_scriptmover::function_8c7ec52f;
 	level.callbackvehiclespawned = &globallogic_vehicle::callback_vehiclespawned;
 	level.callbackplayermigrated = &globallogic_player::callback_playermigrated;
 	level.callbackhostmigration = &hostmigration::callback_hostmigration;
@@ -226,7 +226,7 @@ function function_50fdac80(func, obj)
 }
 
 /*
-	Name: function_189f87c1
+	Name: on_round_end
 	Namespace: callback
 	Checksum: 0x47ADDD4D
 	Offset: 0x608
@@ -234,13 +234,13 @@ function function_50fdac80(func, obj)
 	Parameters: 2
 	Flags: Linked
 */
-function function_189f87c1(func, obj)
+function on_round_end(func, obj)
 {
-	add_callback(#"hash_193ded5c8932fe29", func, obj);
+	add_callback(#"on_round_end", func, obj);
 }
 
 /*
-	Name: function_ec6dfc37
+	Name: remove_on_round_end
 	Namespace: callback
 	Checksum: 0x17CAEC7C
 	Offset: 0x650
@@ -248,9 +248,9 @@ function function_189f87c1(func, obj)
 	Parameters: 2
 	Flags: Linked
 */
-function function_ec6dfc37(func, obj)
+function remove_on_round_end(func, obj)
 {
-	remove_callback(#"hash_193ded5c8932fe29", func, obj);
+	remove_callback(#"on_round_end", func, obj);
 }
 
 /*

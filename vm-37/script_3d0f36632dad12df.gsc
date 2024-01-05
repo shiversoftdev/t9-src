@@ -1,13 +1,13 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\renderoverridebundle.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\renderoverridebundle.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace squad_spawn;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: squad_spawn
 	Checksum: 0x5D9BBB22
 	Offset: 0x1B0
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"squad_spawning", &init, undefined, undefined, undefined);
 }
@@ -31,13 +31,13 @@ function private autoexec function_89f2df9()
 */
 function init()
 {
-	level.var_d0252074 = (isdefined(getgametypesetting(#"hash_2b1f40bc711c41f3")) ? getgametypesetting(#"hash_2b1f40bc711c41f3") : 0) && !util::function_3f165ee8();
+	level.var_d0252074 = (isdefined(getgametypesetting(#"hash_2b1f40bc711c41f3")) ? getgametypesetting(#"hash_2b1f40bc711c41f3") : 0) && !util::is_frontend_map();
 	if(!level.var_d0252074)
 	{
 		return;
 	}
 	setupclientfields();
-	level callback::on_end_game(&function_31a1aa18);
+	level callback::on_end_game(&on_game_ended);
 }
 
 /*
@@ -51,12 +51,12 @@ function init()
 */
 function setupclientfields()
 {
-	clientfield::function_a8bbc967("hudItems.squadSpawnOnStatus", #"hud_items", #"hash_7105404fe72ff3f", 1, 3, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.squadSpawnActive", #"hud_items", #"squadspawnactive", 1, 1, "int", &function_cc03b772, 0, 0);
-	clientfield::function_a8bbc967("hudItems.squadSpawnRespawnStatus", #"hud_items", #"hash_6b8b915fbdeaa722", 1, 2, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.squadSpawnViewType", #"hud_items", #"hash_2d210ef59c073abd", 1, 1, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.squadAutoSpawnPromptActive", #"hud_items", #"hash_4b3a0953a67ca151", 1, 1, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.squadSpawnSquadWipe", #"hud_items", #"hash_241b5d6ff260de2d", 1, 1, "int", &function_a58f32b0, 0, 0);
+	clientfield::register_clientuimodel("hudItems.squadSpawnOnStatus", #"hud_items", #"hash_7105404fe72ff3f", 1, 3, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.squadSpawnActive", #"hud_items", #"squadspawnactive", 1, 1, "int", &function_cc03b772, 0, 0);
+	clientfield::register_clientuimodel("hudItems.squadSpawnRespawnStatus", #"hud_items", #"hash_6b8b915fbdeaa722", 1, 2, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.squadSpawnViewType", #"hud_items", #"hash_2d210ef59c073abd", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.squadAutoSpawnPromptActive", #"hud_items", #"hash_4b3a0953a67ca151", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.squadSpawnSquadWipe", #"hud_items", #"hash_241b5d6ff260de2d", 1, 1, "int", &function_a58f32b0, 0, 0);
 }
 
 /*
@@ -187,9 +187,9 @@ function function_a58f32b0(localclientnum, oldval, newval, bnewent, binitialsnap
 	Parameters: 2
 	Flags: Linked
 */
-function function_429c452(localclientnum, var_657eb40b)
+function function_429c452(localclientnum, should_play)
 {
-	if(!var_657eb40b)
+	if(!should_play)
 	{
 		return 0;
 	}
@@ -199,7 +199,7 @@ function function_429c452(localclientnum, var_657eb40b)
 	}
 	if(!isplayer(self))
 	{
-		return var_657eb40b;
+		return should_play;
 	}
 	localplayer = function_5c10bd79(localclientnum);
 	if(isdefined(localplayer) && !localplayer util::isenemyteam(self.team))
@@ -218,7 +218,7 @@ function function_429c452(localclientnum, var_657eb40b)
 }
 
 /*
-	Name: function_31a1aa18
+	Name: on_game_ended
 	Namespace: squad_spawn
 	Checksum: 0xC4EAFA7F
 	Offset: 0x948
@@ -226,7 +226,7 @@ function function_429c452(localclientnum, var_657eb40b)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_31a1aa18(localclientnum)
+function private on_game_ended(localclientnum)
 {
 	setsoundcontext("spawn_select_screen", "");
 	function_ed62c9c2("uin_overhead_map", 0.5);

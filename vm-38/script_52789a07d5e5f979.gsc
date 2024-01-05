@@ -1,10 +1,10 @@
 #using script_ac6a30f1991e105;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\footsteps_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\footsteps_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_33cf6d06;
 
@@ -36,15 +36,15 @@ function private autoexec function_395f9d6()
 function init()
 {
 	function_cae618b4("spawner_zombietron_blight_father");
-	level._effect[#"hash_372b98426a030ba5"] = "zm_ai/fx8_blightfather_weakspot_sack_amb";
-	level._effect[#"hash_53d2fc33c0f691f4"] = "zm_ai/fx8_blightfather_weakspot_elbow_amb";
-	level._effect[#"hash_1ce2f3394fd60355"] = "zm_ai/fx8_blightfather_weakspot_jaw_amb";
-	level._effect[#"hash_6553828310934056"] = "zm_ai/fx8_blightfather_vomit";
-	level._effect[#"hash_6c3415e2a989a2e0"] = "zm_ai/fx8_blightfather_vomit_object";
-	level._effect[#"hash_12f12714214cc841"] = "zm_ai/fx8_blightfather_maggot_spawn_burst";
-	level._effect[#"hash_1dad8364594fae5d"] = "zm_ai/fx8_blightfather_chaos_missle";
-	level._effect[#"hash_648523e9c72ac0c9"] = "zm_ai/fx8_blightfather_maggot_death_exp";
-	level.var_7e79839e = "zod_blight_father_grapple_beam";
+	level._effect[#"fx8_blightfather_weakspot_sack_amb"] = "zm_ai/fx8_blightfather_weakspot_sack_amb";
+	level._effect[#"fx8_blightfather_weakspot_elbow_amb"] = "zm_ai/fx8_blightfather_weakspot_elbow_amb";
+	level._effect[#"fx8_blightfather_weakspot_jaw_amb"] = "zm_ai/fx8_blightfather_weakspot_jaw_amb";
+	level._effect[#"fx8_blightfather_vomit"] = "zm_ai/fx8_blightfather_vomit";
+	level._effect[#"fx8_blightfather_vomit_object"] = "zm_ai/fx8_blightfather_vomit_object";
+	level._effect[#"fx8_blightfather_maggot_spawn_burst"] = "zm_ai/fx8_blightfather_maggot_spawn_burst";
+	level._effect[#"fx8_blightfather_chaos_missle"] = "zm_ai/fx8_blightfather_chaos_missle";
+	level._effect[#"fx8_blightfather_maggot_death_exp"] = "zm_ai/fx8_blightfather_maggot_death_exp";
+	level.grappler_beam = "zod_blight_father_grapple_beam";
 	footsteps::registeraitypefootstepcb(#"blight_father", &function_958ba8d1);
 	clientfield::register("actor", "blight_father_amb_sac_clientfield", 1, 1, "int", &function_192c82f8, 0, 0);
 	clientfield::register("actor", "blight_father_weakpoint_l_elbow_fx", 1, 1, "int", &function_c6aa29ea, 0, 0);
@@ -97,7 +97,7 @@ function private function_c6aa29ea(localclientnum, oldval, newval, bnewent, bini
 {
 	if(bwastimejump)
 	{
-		self.var_cc8c05d5 = util::playfxontag(fieldname, level._effect[#"hash_53d2fc33c0f691f4"], self, "tag_elbow_weakspot_le");
+		self.var_cc8c05d5 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_le");
 	}
 	else if(isdefined(self.var_cc8c05d5))
 	{
@@ -119,7 +119,7 @@ function private function_caf74103(localclientnum, oldval, newval, bnewent, bini
 {
 	if(bwastimejump)
 	{
-		self.var_e844c6a2 = util::playfxontag(fieldname, level._effect[#"hash_53d2fc33c0f691f4"], self, "tag_elbow_weakspot_ri");
+		self.var_e844c6a2 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_weakspot_elbow_amb"], self, "tag_elbow_weakspot_ri");
 	}
 	else if(isdefined(self.var_e844c6a2))
 	{
@@ -141,7 +141,7 @@ function private function_bc64a2a(localclientnum, oldval, newval, bnewent, binit
 {
 	if(bwastimejump)
 	{
-		self.var_81531422 = util::playfxontag(fieldname, level._effect[#"hash_372b98426a030ba5"], self, "tag_eggsack_weakspot_le_fx");
+		self.var_81531422 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_le_fx");
 	}
 	else if(isdefined(self.var_81531422))
 	{
@@ -163,7 +163,7 @@ function private function_c4fff539(localclientnum, oldval, newval, bnewent, bini
 {
 	if(bwastimejump)
 	{
-		self.var_40cb39ba = util::playfxontag(fieldname, level._effect[#"hash_372b98426a030ba5"], self, "tag_eggsack_weakspot_ri_fx");
+		self.var_40cb39ba = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_weakspot_sack_amb"], self, "tag_eggsack_weakspot_ri_fx");
 	}
 	else if(isdefined(self.var_40cb39ba))
 	{
@@ -185,7 +185,7 @@ function private function_de0a50df(localclientnum, oldval, newval, bnewent, bini
 {
 	if(bwastimejump)
 	{
-		self.var_2beadf7 = util::playfxontag(fieldname, level._effect[#"hash_1ce2f3394fd60355"], self, "tag_jaw");
+		self.var_2beadf7 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_weakspot_jaw_amb"], self, "tag_jaw");
 	}
 	else if(isdefined(self.var_2beadf7))
 	{
@@ -209,22 +209,22 @@ function private function_2c098ccc(localclientnum, oldval, newval, bnewent, bini
 	{
 		case 1:
 		{
-			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"hash_230802cc4433af6c"], self, "tag_origin");
+			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_vomit_purchase"], self, "tag_origin");
 			break;
 		}
 		case 2:
 		{
-			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"hash_4de3555fcfb16c37"], self, "tag_origin");
+			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_vomit_statue_purchase"], self, "tag_origin");
 			break;
 		}
 		case 3:
 		{
-			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"hash_583fd136df952ff6"], self, "tag_origin");
+			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_vomit_box_purchase"], self, "tag_origin");
 			break;
 		}
 		case 4:
 		{
-			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"hash_3411d7d89ef6dc3b"], self, "tag_origin");
+			self.var_32caa02 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_vomit_craft_purchase"], self, "tag_origin");
 			break;
 		}
 		default:
@@ -299,13 +299,13 @@ function private function_59f8f265(localclientnum, oldval, newval, bnewent, bini
 {
 	if(bwastimejump == 1)
 	{
-		self.var_b0d99f6 = util::playfxontag(fieldname, level._effect[#"hash_6553828310934056"], self, "tag_jaw");
+		self.var_b0d99f6 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_vomit"], self, "tag_jaw");
 	}
 	else
 	{
 		if(bwastimejump == 2)
 		{
-			self.var_b0d99f6 = util::playfxontag(fieldname, level._effect[#"hash_6c3415e2a989a2e0"], self, "tag_jaw");
+			self.var_b0d99f6 = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_vomit_object"], self, "tag_jaw");
 		}
 		else if(isdefined(self.var_b0d99f6))
 		{
@@ -326,7 +326,7 @@ function private function_59f8f265(localclientnum, oldval, newval, bnewent, bini
 */
 function private function_67ad42f3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	util::playfxontag(bwastimejump, level._effect[#"hash_12f12714214cc841"], self, "tag_sac_fx_le");
+	util::playfxontag(bwastimejump, level._effect[#"fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_le");
 }
 
 /*
@@ -340,7 +340,7 @@ function private function_67ad42f3(localclientnum, oldval, newval, bnewent, bini
 */
 function private function_f102952d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	util::playfxontag(bwastimejump, level._effect[#"hash_12f12714214cc841"], self, "tag_sac_fx_ri");
+	util::playfxontag(bwastimejump, level._effect[#"fx8_blightfather_maggot_spawn_burst"], self, "tag_sac_fx_ri");
 }
 
 /*
@@ -381,7 +381,7 @@ function private function_e47c2324(localclientnum, oldval, newval, bnewent, bini
 {
 	if(bwastimejump)
 	{
-		self.var_f2668f6d = util::playfxontag(fieldname, level._effect[#"hash_1dad8364594fae5d"], self, "tag_origin");
+		self.var_f2668f6d = util::playfxontag(fieldname, level._effect[#"fx8_blightfather_chaos_missle"], self, "tag_origin");
 	}
 	else if(isdefined(self.var_f2668f6d))
 	{
@@ -404,7 +404,7 @@ function private function_f02b0934(localclientnum, oldvalue, newvalue, bnewent, 
 	angles = self.angles;
 	if(isdefined(position) && isdefined(angles))
 	{
-		playfx(wasdemojump, level._effect[#"hash_648523e9c72ac0c9"], position, anglestoforward(angles), anglestoup(angles));
+		playfx(wasdemojump, level._effect[#"fx8_blightfather_maggot_death_exp"], position, anglestoforward(angles), anglestoup(angles));
 	}
 	earthquake(wasdemojump, 0.4, 0.8, self.origin, 300);
 }
@@ -525,7 +525,7 @@ function function_cf88b888()
 	self endon("7915320a3d7bf5e0");
 	self endoncallback(&function_43ec7ca3, #"death", #"hash_3af6fe8d4a8fac02");
 	var_893a571 = 0;
-	self function_bf9d3071("rob_zm_viewarm_vomit");
+	self playrenderoverridebundle("rob_zm_viewarm_vomit");
 	while(!var_893a571)
 	{
 		var_37159c8c = self.var_7fd3b200;
@@ -564,7 +564,7 @@ function function_1ca2497b()
 		self function_78233d29("rob_zm_viewarm_vomit", "", "Threshold", var_72840ba5);
 		if(var_72840ba5 <= 0)
 		{
-			self function_5d482e78("rob_zm_viewarm_vomit");
+			self stoprenderoverridebundle("rob_zm_viewarm_vomit");
 			var_e935ecce = 1;
 			break;
 		}

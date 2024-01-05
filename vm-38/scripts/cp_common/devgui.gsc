@@ -1,19 +1,19 @@
-#using script_32399001bdb550da;
-#using script_47fb62300ac0bd60;
 #using script_521cab335b496d29;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\dev_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\cp_common\challenges.gsc;
+#using script_32399001bdb550da;
+#using scripts\cp_common\skipto.gsc;
+#using scripts\cp_common\collectibles.gsc;
 #using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\weapons_shared.gsc;
-#using scripts\cp_common\challenges.gsc;
-#using scripts\cp_common\collectibles.gsc;
-#using scripts\cp_common\skipto.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\dev_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace devgui;
 
@@ -28,11 +28,11 @@
 */
 function private autoexec function_aa695eed()
 {
-	level notify(779742686);
+	level notify(-779742686);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: devgui
 	Checksum: 0xC91788E8
 	Offset: 0x100
@@ -40,7 +40,7 @@ function private autoexec function_aa695eed()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"devgui", &function_70a657d8, undefined, undefined, undefined);
@@ -1358,7 +1358,7 @@ function init_debug_center_screen()
 			}
 			else
 			{
-				level notify(#"hash_63054d2b7dcb7739");
+				level notify(#"stop center screen debug");
 				if(zero_idle_movement == 1)
 				{
 					setdvar(#"zero_idle_movement", 0);
@@ -1400,7 +1400,7 @@ function debug_center_screen()
 		level.center_screen_debug_hudelem2.x = 320 - 1;
 		level.center_screen_debug_hudelem2.y = 240;
 		level.center_screen_debug_hudelem2 setshader("", 1, 480);
-		level waittill(#"hash_63054d2b7dcb7739");
+		level waittill(#"stop center screen debug");
 		level.center_screen_debug_hudelem1 destroy();
 		level.center_screen_debug_hudelem2 destroy();
 		level.center_screen_debug_hudelem_active = 0;
@@ -1499,13 +1499,13 @@ function function_505cd4da()
 function private function_57edec18()
 {
 	/#
-		util::function_e2e9d901("", "");
-		util::function_e2e9d901("", "");
+		util::add_devgui("", "");
+		util::add_devgui("", "");
 		while(true)
 		{
-			if(getdvarint(#"hash_428eca4823d65134", 0))
+			if(getdvarint(#"scr_drone_camera", 0))
 			{
-				if(isdefined(level.var_6460e605))
+				if(isdefined(level.drone_camera))
 				{
 					waitframe(1);
 					continue;
@@ -1516,19 +1516,19 @@ function private function_57edec18()
 					waitframe(1);
 					continue;
 				}
-				var_6460e605 = spawnvehicle("", player.origin + vectorscale((0, 0, 1), 150), player.angles, "");
-				var_6460e605.ignoreme = 1;
-				var_6460e605 usevehicle(player, 0);
-				level.var_6460e605 = var_6460e605;
+				drone_camera = spawnvehicle("", player.origin + vectorscale((0, 0, 1), 150), player.angles, "");
+				drone_camera.ignoreme = 1;
+				drone_camera usevehicle(player, 0);
+				level.drone_camera = drone_camera;
 			}
-			else if(isdefined(level.var_6460e605))
+			else if(isdefined(level.drone_camera))
 			{
-				driver = level.var_6460e605 getseatoccupant(0);
+				driver = level.drone_camera getseatoccupant(0);
 				if(isdefined(driver))
 				{
 					driver unlink();
 				}
-				level.var_6460e605 delete();
+				level.drone_camera delete();
 			}
 			waitframe(1);
 		}

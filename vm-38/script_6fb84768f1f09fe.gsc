@@ -11,7 +11,7 @@
 */
 function private autoexec function_253489d8()
 {
-	level notify(1943069896);
+	level notify(-1943069896);
 }
 
 #namespace snipercam;

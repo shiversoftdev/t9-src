@@ -1,11 +1,11 @@
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_1e5d913d;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1e5d913d
 	Checksum: 0x99E152FA
 	Offset: 0x130
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_9fe6dae6d685563", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -143,19 +143,19 @@ function private function_8f050823()
 			/#
 				if(getdvarint(#"hash_2a6bc2c12ee6a9b4", 0))
 				{
-					var_c167c750 = strtok("" + data.var_78e64a1a, "");
-					var_78e64a1a = var_c167c750[0];
+					str_array = strtok("" + data.var_78e64a1a, "");
+					var_78e64a1a = str_array[0];
 					var_5d8d813a = "";
-					if(var_c167c750.size > 1)
+					if(str_array.size > 1)
 					{
-						var_5d8d813a = getsubstr(var_c167c750[1], 0, 1);
+						var_5d8d813a = getsubstr(str_array[1], 0, 1);
 					}
-					var_c167c750 = strtok("" + data.var_141b25f, "");
-					var_141b25f = var_c167c750[0];
+					str_array = strtok("" + data.var_141b25f, "");
+					var_141b25f = str_array[0];
 					var_68be928f = "";
-					if(var_c167c750.size > 1)
+					if(str_array.size > 1)
 					{
-						var_68be928f = getsubstr(var_c167c750[1], 0, 1);
+						var_68be928f = getsubstr(str_array[1], 0, 1);
 					}
 					print3d(self.origin + (0, 0, bounds[2] + 12), (((((("" + var_78e64a1a) + "") + var_5d8d813a) + "") + var_141b25f) + "") + var_68be928f, undefined, undefined, 0.1);
 				}
@@ -420,7 +420,7 @@ function private function_2138c62(local_client_num, var_1e5d913d, damage_data, v
 				lifetime = lifetime + randomfloat(var_2cc6e886.var_3478ebdf);
 			}
 			var_d017fb86 = "augmented_impact_fx_" + damage_data.var_7c5043e3;
-			self thread function_479d351(local_client_num, var_2cc6e886.start_sound, var_2cc6e886.loop_sound, var_2cc6e886.var_2fc34bba, damage_data.position, lifetime, var_2cc6e886.var_d560194f, var_d017fb86);
+			self thread function_479d351(local_client_num, var_2cc6e886.start_sound, var_2cc6e886.loop_sound, var_2cc6e886.end_sound, damage_data.position, lifetime, var_2cc6e886.var_d560194f, var_d017fb86);
 			if(lifetime > 0)
 			{
 				self thread function_a4507e23(local_client_num, effect_id, var_1e5d913d, lifetime, damage_data, var_d017fb86);
@@ -482,7 +482,7 @@ function private function_a4507e23(local_client_num, effect_id, var_1e5d913d, li
 	Parameters: 8
 	Flags: Private
 */
-function private function_479d351(local_client_num, start_sound, loop_sound, var_2fc34bba, position, lifetime, fade_time, var_d017fb86)
+function private function_479d351(local_client_num, start_sound, loop_sound, end_sound, position, lifetime, fade_time, var_d017fb86)
 {
 	if((isdefined(start_sound) ? start_sound : "") != "")
 	{
@@ -496,9 +496,9 @@ function private function_479d351(local_client_num, start_sound, loop_sound, var
 	if(lifetime > 0)
 	{
 		util::function_e532f5da(lifetime, self, "death", self, var_d017fb86);
-		if((isdefined(var_2fc34bba) ? var_2fc34bba : "") != "")
+		if((isdefined(end_sound) ? end_sound : "") != "")
 		{
-			self playsound(local_client_num, var_2fc34bba, position);
+			self playsound(local_client_num, end_sound, position);
 		}
 		if(isdefined(loop_sound_ent))
 		{

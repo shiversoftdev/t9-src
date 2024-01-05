@@ -1,27 +1,27 @@
-#using script_2255a7ad3edc838f;
-#using script_269e356734524812;
-#using script_3fda550bc6e1089a;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using script_788472602edbe3b9;
-#using script_7d712f77ab8d0c16;
-#using scripts\core_common\array_shared.gsc;
+#using scripts\mp_common\player\player_loadout.gsc;
 #using scripts\core_common\bots\bot_action.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\dev_shared.gsc;
-#using scripts\core_common\killcam_shared.gsc;
-#using scripts\core_common\perks.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\devgui.gsc;
-#using scripts\mp_common\gametypes\dev_class.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\core_common\bots\bot.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\mp_common\gametypes\dev_spawn.gsc;
+#using scripts\mp_common\gametypes\dev_class.gsc;
+#using scripts\mp_common\devgui.gsc;
+#using script_7d712f77ab8d0c16;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\sound_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\perks.gsc;
+#using scripts\killstreaks\helicopter_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\core_common\killcam_shared.gsc;
+#using scripts\core_common\dev_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace dev;
 
@@ -36,11 +36,11 @@
 */
 function private autoexec function_4d2b0d51()
 {
-	level notify(302944646);
+	level notify(-302944646);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: dev
 	Checksum: 0x40AF7EB2
 	Offset: 0x140
@@ -48,7 +48,7 @@ function private autoexec function_4d2b0d51()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"dev", &function_70a657d8, undefined, undefined, #"spawning_shared");
@@ -104,12 +104,12 @@ function init()
 		thread devhelipathdebugdraw();
 		thread devstraferunpathdebugdraw();
 		thread dev_class::dev_cac_init();
-		thread namespace_af53555a::function_d8049496();
+		thread dev_spawn::function_d8049496();
 		thread globallogic_score::setplayermomentumdebug();
 		setdvar(#"scr_giveperk", "");
 		setdvar(#"scr_forceevent", "");
 		setdvar(#"scr_draw_triggers", 0);
-		setdvar(#"hash_69042953f03fb8a4", "");
+		setdvar(#"scr_givegesture", "");
 		thread engagement_distance_debug_toggle();
 		thread equipment_dev_gui();
 		thread grenade_dev_gui();
@@ -872,7 +872,7 @@ function updatedevsettings()
 																											for(i = 0; i < level.radios.size; i++)
 																											{
 																												color = (1, 0, 0);
-																												level namespace_af53555a::showonespawnpoint(level.radios[i], color, "", 32, "");
+																												level dev_spawn::showonespawnpoint(level.radios[i], color, "", 32, "");
 																											}
 																										}
 																										else
@@ -965,13 +965,13 @@ function updatedevsettings()
 			{
 				for(j = 0; j < specialties.size; j++)
 				{
-					players[i] perks::function_7637bafa(specialties[j]);
+					players[i] perks::perk_setperk(specialties[j]);
 					players[i].extraperks[specialties[j]] = 1;
 				}
 			}
 			setdvar(#"scr_giveperk", "");
 		}
-		if(getdvarstring(#"hash_2d9131ec76baa766") == "")
+		if(getdvarstring(#"scr_giveskill") == "")
 		{
 			players = getplayers();
 			iprintln("");
@@ -984,11 +984,11 @@ function updatedevsettings()
 				player function_e6f9e3cd();
 				player loadout::function_3d16577a(player.team, player.curclass);
 			}
-			setdvar(#"hash_2d9131ec76baa766", "");
+			setdvar(#"scr_giveskill", "");
 		}
-		if(getdvarstring(#"hash_2d9131ec76baa766") != "")
+		if(getdvarstring(#"scr_giveskill") != "")
 		{
-			talentname = getdvarstring(#"hash_2d9131ec76baa766");
+			talentname = getdvarstring(#"scr_giveskill");
 			var_2fe3f7e3 = hash(talentname);
 			players = getplayers();
 			iprintln(("" + talentname) + "");
@@ -1001,9 +1001,9 @@ function updatedevsettings()
 				player function_b5feff95(var_2fe3f7e3);
 				player loadout::function_3d16577a(player.team, player.curclass);
 			}
-			setdvar(#"hash_2d9131ec76baa766", "");
+			setdvar(#"scr_giveskill", "");
 		}
-		if(getdvarstring(#"hash_5b311cf6da67afb") == "")
+		if(getdvarstring(#"scr_givetalent") == "")
 		{
 			players = getplayers();
 			iprintln("");
@@ -1016,11 +1016,11 @@ function updatedevsettings()
 				player function_e6f9e3cd();
 				player loadout::function_3d16577a(player.team, player.curclass);
 			}
-			setdvar(#"hash_5b311cf6da67afb", "");
+			setdvar(#"scr_givetalent", "");
 		}
-		if(getdvarstring(#"hash_5b311cf6da67afb") != "")
+		if(getdvarstring(#"scr_givetalent") != "")
 		{
-			talentname = getdvarstring(#"hash_5b311cf6da67afb");
+			talentname = getdvarstring(#"scr_givetalent");
 			var_2fe3f7e3 = hash(talentname);
 			players = getplayers();
 			iprintln(("" + talentname) + "");
@@ -1033,7 +1033,7 @@ function updatedevsettings()
 				player function_b5feff95(var_2fe3f7e3);
 				player loadout::function_3d16577a(player.team, player.curclass);
 			}
-			setdvar(#"hash_5b311cf6da67afb", "");
+			setdvar(#"scr_givetalent", "");
 		}
 		if(getdvarstring(#"scr_forcegrenade") != "")
 		{
@@ -1075,7 +1075,7 @@ function updatedevsettings()
 			perk = getdvarstring(#"scr_takeperk");
 			for(i = 0; i < level.players.size; i++)
 			{
-				level.players[i] perks::function_45d12554(perk);
+				level.players[i] perks::perk_unsetperk(perk);
 				level.players[i].extraperks[perk] = undefined;
 			}
 			setdvar(#"scr_takeperk", "");
@@ -1333,7 +1333,7 @@ function function_e88bdbcf(score)
 		{
 			if(isdefined(player) && isalive(player) && player.sessionstate == "")
 			{
-				player globallogic_score::function_49c10afe();
+				player globallogic_score::resetplayermomentum();
 			}
 		}
 	#/
@@ -1413,7 +1413,7 @@ function giveextraperks()
 			/#
 				println(((("" + self.name) + "") + perks[i]) + "");
 			#/
-			self perks::function_7637bafa(perks[i]);
+			self perks::perk_setperk(perks[i]);
 		}
 	#/
 }

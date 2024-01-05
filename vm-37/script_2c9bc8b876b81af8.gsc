@@ -1,6 +1,6 @@
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\cp_common\spawn_manager.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace spawn_manager;
 

@@ -1,5 +1,5 @@
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace global_fx;
 
@@ -14,11 +14,11 @@
 */
 function private autoexec function_56c32ac5()
 {
-	level notify(1913316617);
+	level notify(-1913316617);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: global_fx
 	Checksum: 0x2A6FA748
 	Offset: 0x90
@@ -26,7 +26,7 @@ function private autoexec function_56c32ac5()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"global_fx", &function_70a657d8, &main, undefined, undefined);
 }

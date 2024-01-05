@@ -1,35 +1,35 @@
-#using script_1029986e2bc8ca8e;
-#using script_113dd7f0ea2a1d4f;
-#using script_16b1b77a76492c6a;
 #using script_176597095ddfaa17;
-#using script_27347f09888ad15;
-#using script_3357acf79ce92f4b;
-#using script_3411bb48d41bd3b;
-#using script_35598499769dbb3d;
-#using script_4163291d6e693552;
-#using script_5bb072c3abf4652c;
-#using script_6c5b51f98cd04fa3;
+#using script_16b1b77a76492c6a;
 #using script_7b1cd3908a825fdd;
-#using script_7bacb32f8222fa3e;
-#using script_7fc996fe8678852;
+#using script_4163291d6e693552;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_sq.gsc;
 #using script_b9d273dc917ee1f;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_3411bb48d41bd3b;
+#using script_3357acf79ce92f4b;
+#using script_1029986e2bc8ca8e;
+#using script_27347f09888ad15;
+#using script_113dd7f0ea2a1d4f;
+#using script_35598499769dbb3d;
 #using scripts\core_common\vehicle_ai_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using script_7bacb32f8222fa3e;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 #namespace namespace_f865255e;
 
@@ -44,7 +44,7 @@
 */
 function private autoexec function_64b0535f()
 {
-	level notify(732477596);
+	level notify(-732477596);
 }
 
 /*
@@ -79,7 +79,7 @@ function function_42818ffd(instance)
 	namespace_d0ab5955::function_d4dec4e8(instance.location.destination, #"hash_77c04aaf41a18e41");
 	namespace_d0ab5955::function_f1ad7968(instance.location.destination, #"hash_1d72c1d85b91814e");
 	showmiscmodels("end_of_level_corpses");
-	level clientfield::set("" + #"hash_4c8a7e79b5a2c61d", 1);
+	level clientfield::set("" + #"end_of_level_corpses", 1);
 	exploder::exploder("fxexp_island_worklight");
 	level.var_97e461d4 = "chopper_gunner_path_sanatorium_exfil_end_of_level";
 	level flag::set(#"hash_3070ff342f14b371");
@@ -90,7 +90,7 @@ function function_42818ffd(instance)
 	if(isdefined(point))
 	{
 		item_drop::drop_item(0, undefined, 1, point.amount, point.id, var_655b61b6.origin, var_655b61b6.angles, 0);
-		callback::function_10a4dd0a(&function_10a4dd0a);
+		callback::on_item_pickup(&on_item_pickup);
 	}
 	instance.var_675dd2c4.n_obj_id = zm_utility::function_f5a222a8(#"hash_b418b036831ea2a", instance.var_675dd2c4);
 	instance.var_675dd2c4 playloopsound(#"hash_2e77024e1f0a29f1");
@@ -206,7 +206,7 @@ function function_1e6004ec(instance)
 	level flag::delay_set(5, #"hash_44733903bbd715c9");
 	level util::delay(5, undefined, &flag::clear, #"hash_178cddf0409be677");
 	s_result = undefined;
-	s_result = level waittill(#"hash_69090774fec4a17b");
+	s_result = level waittill(#"objective_ended");
 	if(is_true(s_result.completed))
 	{
 		str_reason = #"hash_6ebafb1370ab6c93";
@@ -238,7 +238,7 @@ function function_fb4f1c11(instance)
 	level flag::wait_till(#"hash_44733903bbd715c9");
 	level zm_vo::function_7622cb70(#"hash_7df08a932922311a");
 	level flag::set(#"hash_3bf08d8f0adeb2b5");
-	level flag::wait_till(#"hash_2c83e17b76817284");
+	level flag::wait_till(#"exfil_cleared");
 	level zm_vo::function_7622cb70(#"hash_4fd478e75857bfac");
 }
 
@@ -400,9 +400,9 @@ function private function_31125f54()
 {
 	while(true)
 	{
-		var_be17187b = undefined;
-		var_be17187b = level waittill(#"hash_4fbe4720f6f13107", #"hash_2c83e17b76817284");
-		if(level flag::get(#"hash_2c83e17b76817284") && level flag::get(#"hash_fdc24944f59c262") || is_true(var_be17187b.b_success))
+		s_waitresult = undefined;
+		s_waitresult = level waittill(#"hash_4fbe4720f6f13107", #"exfil_cleared");
+		if(level flag::get(#"exfil_cleared") && level flag::get(#"hash_fdc24944f59c262") || is_true(s_waitresult.b_success))
 		{
 			level.var_9f6064a4 = #"hash_6893db9b6c7b5a58";
 			level.var_73677dfc = 3;
@@ -455,13 +455,13 @@ function function_f1425083()
 {
 	foreach(player in getplayers())
 	{
-		level.var_31028c5d prototype_hud::function_953da284(player, #"hash_5d493ad17e0173ea");
-		level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
+		level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_5d493ad17e0173ea");
+		level.var_31028c5d prototype_hud::set_active_obj_visibility(player, 2);
 	}
 	level flag::wait_till(#"hash_6d6ca756d43c84ac");
 	foreach(player in getplayers())
 	{
-		level.var_31028c5d thread prototype_hud::function_817e4d10(player, 0);
+		level.var_31028c5d thread prototype_hud::set_active_obj_visibility(player, 0);
 	}
 }
 
@@ -508,7 +508,7 @@ function function_5ec737ca(params)
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: namespace_f865255e
 	Checksum: 0x89D1F450
 	Offset: 0x2308
@@ -516,7 +516,7 @@ function function_5ec737ca(params)
 	Parameters: 1
 	Flags: Private
 */
-function private function_10a4dd0a(params)
+function private on_item_pickup(params)
 {
 	if(params.item.var_a6762160.name === #"hash_3af5d193f6561a3c")
 	{
@@ -524,7 +524,7 @@ function private function_10a4dd0a(params)
 		{
 			player thread namespace_4abf1500::collect_intel(#"hash_4d8f86e486057da");
 		}
-		callback::remove_callback(#"hash_56d1805bfff3e65b", &function_10a4dd0a);
+		callback::remove_callback(#"on_item_pickup", &on_item_pickup);
 	}
 }
 
@@ -542,12 +542,12 @@ function function_29430f26(a_ents, b_enable)
 	if(is_true(b_enable))
 	{
 		showmiscmodels("end_of_level_exfil_outro_igc_props");
-		level clientfield::set("" + #"hash_2c5407e7aece0a93", 1);
+		level clientfield::set("" + #"end_of_level_exfil_outro_igc_props", 1);
 	}
 	else
 	{
 		hidemiscmodels("end_of_level_exfil_outro_igc_props");
-		level clientfield::set("" + #"hash_2c5407e7aece0a93", 0);
+		level clientfield::set("" + #"end_of_level_exfil_outro_igc_props", 0);
 	}
 }
 

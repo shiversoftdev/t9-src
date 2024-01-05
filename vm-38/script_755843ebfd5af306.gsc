@@ -1,8 +1,8 @@
-#using scripts\core_common\array_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\math_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_53a8fe5e;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_131a35aa()
 {
-	level notify(531691296);
+	level notify(-531691296);
 }
 
 /*

@@ -1,5 +1,5 @@
-#using script_1292451e284848cc;
 #using script_3dc93ca9902a9cda;
+#using script_1292451e284848cc;
 
 #namespace namespace_33f8f0d7;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_209d785d()
 {
-	level notify(1623105935);
+	level notify(-1623105935);
 }
 
 #namespace snd;

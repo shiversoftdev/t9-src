@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_b6739d61 : class_6aaccc24
+class conslaught_hud : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_b6739d61
+		Namespace: conslaught_hud
 		Checksum: 0xBAB192EE
 		Offset: 0x3F8
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_b6739d61 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_b6739d61
+		Namespace: conslaught_hud
 		Checksum: 0x6D118871
 		Offset: 0x8F0
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_b6739d61 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_b6739d61
+		Namespace: conslaught_hud
 		Checksum: 0xC046B94E
 		Offset: 0x5A8
 		Size: 0x3C
@@ -47,40 +47,40 @@ class class_b6739d61 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_1c28d7c2
-		Namespace: namespace_b6739d61
+		Name: set_showbossalert
+		Namespace: conslaught_hud
 		Checksum: 0xC2D23C39
 		Offset: 0x850
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_1c28d7c2(player, value)
+	function set_showbossalert(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showBossAlert", value);
 	}
 
 	/*
-		Name: function_2a0b1f84
-		Namespace: namespace_b6739d61
+		Name: set_score3points
+		Namespace: conslaught_hud
 		Checksum: 0x2C39C34F
 		Offset: 0x6C0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_2a0b1f84(player, value)
+	function set_score3points(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "score3Points", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_b6739d61
+		Namespace: conslaught_hud
 		Checksum: 0xCE6DBD82
 		Offset: 0x5F0
 		Size: 0x24
@@ -89,12 +89,12 @@ class class_b6739d61 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_b6739d61
+		Namespace: conslaught_hud
 		Checksum: 0xDFC46045
 		Offset: 0x418
 		Size: 0x184
@@ -103,123 +103,123 @@ class class_b6739d61 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("onslaught_hud");
-		namespace_6aaccc24::function_dcb34c80("string", "bossAlertText", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "objective2Text", 1);
-		namespace_6aaccc24::function_da693cbe("score3Points", 1, 8, "int");
-		namespace_6aaccc24::function_dcb34c80("string", "objectiveText", 1);
-		namespace_6aaccc24::function_da693cbe("showEndScore", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("showScore", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("showObjective", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("showBossAlert", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("showObjective2", 1, 1, "int");
+		cluielem::setup_clientfields("onslaught_hud");
+		cluielem::function_dcb34c80("string", "bossAlertText", 1);
+		cluielem::function_dcb34c80("string", "objective2Text", 1);
+		cluielem::add_clientfield("score3Points", 1, 8, "int");
+		cluielem::function_dcb34c80("string", "objectiveText", 1);
+		cluielem::add_clientfield("showEndScore", 1, 1, "int");
+		cluielem::add_clientfield("showScore", 1, 1, "int");
+		cluielem::add_clientfield("showObjective", 1, 1, "int");
+		cluielem::add_clientfield("showBossAlert", 1, 1, "int");
+		cluielem::add_clientfield("showObjective2", 1, 1, "int");
 	}
 
 	/*
-		Name: function_9b5f8a75
-		Namespace: namespace_b6739d61
+		Name: set_showendscore
+		Namespace: conslaught_hud
 		Checksum: 0x2F984854
 		Offset: 0x760
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_9b5f8a75(player, value)
+	function set_showendscore(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showEndScore", value);
 	}
 
 	/*
-		Name: function_9c1c0811
-		Namespace: namespace_b6739d61
+		Name: set_objective2text
+		Namespace: conslaught_hud
 		Checksum: 0x977B85E9
 		Offset: 0x670
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_9c1c0811(player, value)
+	function set_objective2text(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "objective2Text", value);
 	}
 
 	/*
-		Name: function_b73d2d7c
-		Namespace: namespace_b6739d61
+		Name: set_bossalerttext
+		Namespace: conslaught_hud
 		Checksum: 0x316901CC
 		Offset: 0x620
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_b73d2d7c(player, value)
+	function set_bossalerttext(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "bossAlertText", value);
 	}
 
 	/*
-		Name: function_d0a02472
-		Namespace: namespace_b6739d61
+		Name: set_showobjective
+		Namespace: conslaught_hud
 		Checksum: 0x1E5327C8
 		Offset: 0x800
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_d0a02472(player, value)
+	function set_showobjective(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showObjective", value);
 	}
 
 	/*
-		Name: function_d6b5fdc4
-		Namespace: namespace_b6739d61
+		Name: set_showobjective2
+		Namespace: conslaught_hud
 		Checksum: 0x23B0F8C2
 		Offset: 0x8A0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_d6b5fdc4(player, value)
+	function set_showobjective2(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showObjective2", value);
 	}
 
 	/*
-		Name: function_da96c24e
-		Namespace: namespace_b6739d61
+		Name: set_showscore
+		Namespace: conslaught_hud
 		Checksum: 0x9AE5E094
 		Offset: 0x7B0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_da96c24e(player, value)
+	function set_showscore(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showScore", value);
 	}
 
 	/*
-		Name: function_eab3d36f
-		Namespace: namespace_b6739d61
+		Name: set_objectivetext
+		Namespace: conslaught_hud
 		Checksum: 0x4A69492A
 		Offset: 0x710
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_eab3d36f(player, value)
+	function set_objectivetext(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "objectiveText", value);
 	}
 
 }
 
-#namespace namespace_6abbc37c;
+#namespace onslaught_hud;
 
 /*
 	Name: function_d812c2fd
-	Namespace: namespace_6abbc37c
+	Namespace: onslaught_hud
 	Checksum: 0x12D0CFD3
 	Offset: 0x158
 	Size: 0x14
@@ -233,7 +233,7 @@ function private autoexec function_d812c2fd()
 
 /*
 	Name: register
-	Namespace: namespace_6abbc37c
+	Namespace: onslaught_hud
 	Checksum: 0x5A6CAE71
 	Offset: 0x178
 	Size: 0x34
@@ -242,14 +242,14 @@ function private autoexec function_d812c2fd()
 */
 function register()
 {
-	elem = new class_b6739d61();
+	elem = new conslaught_hud();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_6abbc37c
+	Namespace: onslaught_hud
 	Checksum: 0xF79EBB64
 	Offset: 0x1B8
 	Size: 0x38
@@ -267,7 +267,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_6abbc37c
+	Namespace: onslaught_hud
 	Checksum: 0x8223FA61
 	Offset: 0x1F8
 	Size: 0x1C
@@ -281,7 +281,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_6abbc37c
+	Namespace: onslaught_hud
 	Checksum: 0xC4970C2C
 	Offset: 0x220
 	Size: 0x1A
@@ -294,128 +294,128 @@ function is_open(player)
 }
 
 /*
-	Name: function_b73d2d7c
-	Namespace: namespace_6abbc37c
+	Name: set_bossalerttext
+	Namespace: onslaught_hud
 	Checksum: 0xEF78D088
 	Offset: 0x248
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_b73d2d7c(player, value)
+function set_bossalerttext(player, value)
 {
-	[[ self ]]->function_b73d2d7c(player, value);
+	[[ self ]]->set_bossalerttext(player, value);
 }
 
 /*
-	Name: function_9c1c0811
-	Namespace: namespace_6abbc37c
+	Name: set_objective2text
+	Namespace: onslaught_hud
 	Checksum: 0xA5EAC571
 	Offset: 0x278
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_9c1c0811(player, value)
+function set_objective2text(player, value)
 {
-	[[ self ]]->function_9c1c0811(player, value);
+	[[ self ]]->set_objective2text(player, value);
 }
 
 /*
-	Name: function_2a0b1f84
-	Namespace: namespace_6abbc37c
+	Name: set_score3points
+	Namespace: onslaught_hud
 	Checksum: 0x377F4D4
 	Offset: 0x2A8
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_2a0b1f84(player, value)
+function set_score3points(player, value)
 {
-	[[ self ]]->function_2a0b1f84(player, value);
+	[[ self ]]->set_score3points(player, value);
 }
 
 /*
-	Name: function_eab3d36f
-	Namespace: namespace_6abbc37c
+	Name: set_objectivetext
+	Namespace: onslaught_hud
 	Checksum: 0xEC9E6F73
 	Offset: 0x2D8
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_eab3d36f(player, value)
+function set_objectivetext(player, value)
 {
-	[[ self ]]->function_eab3d36f(player, value);
+	[[ self ]]->set_objectivetext(player, value);
 }
 
 /*
-	Name: function_9b5f8a75
-	Namespace: namespace_6abbc37c
+	Name: set_showendscore
+	Namespace: onslaught_hud
 	Checksum: 0xCE595CE0
 	Offset: 0x308
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_9b5f8a75(player, value)
+function set_showendscore(player, value)
 {
-	[[ self ]]->function_9b5f8a75(player, value);
+	[[ self ]]->set_showendscore(player, value);
 }
 
 /*
-	Name: function_da96c24e
-	Namespace: namespace_6abbc37c
+	Name: set_showscore
+	Namespace: onslaught_hud
 	Checksum: 0xF4D3CD8
 	Offset: 0x338
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_da96c24e(player, value)
+function set_showscore(player, value)
 {
-	[[ self ]]->function_da96c24e(player, value);
+	[[ self ]]->set_showscore(player, value);
 }
 
 /*
-	Name: function_d0a02472
-	Namespace: namespace_6abbc37c
+	Name: set_showobjective
+	Namespace: onslaught_hud
 	Checksum: 0xC00B4800
 	Offset: 0x368
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_d0a02472(player, value)
+function set_showobjective(player, value)
 {
-	[[ self ]]->function_d0a02472(player, value);
+	[[ self ]]->set_showobjective(player, value);
 }
 
 /*
-	Name: function_1c28d7c2
-	Namespace: namespace_6abbc37c
+	Name: set_showbossalert
+	Namespace: onslaught_hud
 	Checksum: 0xA7D1E647
 	Offset: 0x398
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_1c28d7c2(player, value)
+function set_showbossalert(player, value)
 {
-	[[ self ]]->function_1c28d7c2(player, value);
+	[[ self ]]->set_showbossalert(player, value);
 }
 
 /*
-	Name: function_d6b5fdc4
-	Namespace: namespace_6abbc37c
+	Name: set_showobjective2
+	Namespace: onslaught_hud
 	Checksum: 0x95E27CE0
 	Offset: 0x3C8
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_d6b5fdc4(player, value)
+function set_showobjective2(player, value)
 {
-	[[ self ]]->function_d6b5fdc4(player, value);
+	[[ self ]]->set_showobjective2(player, value);
 }
 

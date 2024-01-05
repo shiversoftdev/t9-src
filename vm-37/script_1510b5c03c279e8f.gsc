@@ -1,33 +1,33 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1b905a8474ed2a62;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_3aa0f32b70d4f7cb;
+#using script_164a456ce05c3483;
 #using script_47851dbeea22fe66;
-#using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_5701633066d199f2;
-#using script_59f07c660e6710a5;
+#using script_1ee011cd0961afd7;
 #using script_5f20d3b434d24884;
-#using script_7b7ed6e4bc963a51;
-#using scripts\core_common\ai_shared.gsc;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_4d85e8de54b02198;
 #using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\statemachine_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\ai\blackboard_vehicle.gsc;
 #using scripts\core_common\vehicle_ai_shared.gsc;
 #using scripts\core_common\vehicle_death_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\statemachine_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_59f07c660e6710a5;
+#using script_7b7ed6e4bc963a51;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_7457b8d5;
 
@@ -215,7 +215,7 @@ function getnextmoveposition_ranged(enemy)
 		vehicle_ai::positionquery_filter_distawayfromtarget(queryresult, self.avoidentities, self.avoidentitiesdistance, -500);
 	}
 	best_point = undefined;
-	best_score = 999999;
+	best_score = -999999;
 	foreach(point in queryresult.data)
 	{
 		/#
@@ -573,7 +573,7 @@ function state_melee_combat_update(params)
 				queryresult = positionquery_source_navigation(targetpos, 0, self.settings.max_move_dist, self.settings.max_move_dist, self.radius, self);
 				positionquery_filter_inclaimedlocation(queryresult, self.enemy);
 				best_point = undefined;
-				best_score = 999999;
+				best_score = -999999;
 				foreach(point in queryresult.data)
 				{
 					/#

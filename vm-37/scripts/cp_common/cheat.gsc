@@ -1,10 +1,10 @@
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace cheat;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: cheat
 	Checksum: 0x3D444A75
 	Offset: 0x98
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"cheat", &function_70a657d8, undefined, undefined, undefined);
 }

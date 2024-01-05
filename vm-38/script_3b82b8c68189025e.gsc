@@ -1,22 +1,22 @@
-#using script_263b7f2982258785;
 #using script_32399001bdb550da;
-#using script_35ae72be7b4fec10;
 #using script_3dc93ca9902a9cda;
+#using scripts\cp_common\bb.gsc;
 #using script_4937c6974f43bb71;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
 #using script_7d0013bbc05623b9;
+#using script_35ae72be7b4fec10;
+#using scripts\cp_common\objectives.gsc;
+#using script_263b7f2982258785;
+#using scripts\cp_common\util.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\struct.gsc;
 #using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace dialog_tree;
 
@@ -31,11 +31,11 @@
 */
 function private autoexec function_be1d6d84()
 {
-	level notify(1121759039);
+	level notify(-1121759039);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: dialog_tree
 	Checksum: 0x29B09891
 	Offset: 0x4A0
@@ -43,7 +43,7 @@ function private autoexec function_be1d6d84()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("dialog_tree", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -528,7 +528,7 @@ function function_6bb91351(var_9c958fe3)
 	Parameters: 10
 	Flags: None
 */
-function function_b82713b8(var_348c0b50, var_f2aae3f7, var_dfe2a95d, var_60a7aecc, stance, fov, dof, lerptime, var_6549d3f9, var_aefbf05f)
+function function_b82713b8(player_loc, var_f2aae3f7, var_dfe2a95d, var_60a7aecc, stance, fov, dof, lerptime, var_6549d3f9, var_aefbf05f)
 {
 	if(!isdefined(stance))
 	{
@@ -547,12 +547,12 @@ function function_b82713b8(var_348c0b50, var_f2aae3f7, var_dfe2a95d, var_60a7aec
 		lerptime = 2;
 	}
 	new_pos = spawnstruct();
-	new_pos.var_348c0b50 = var_348c0b50;
+	new_pos.player_loc = player_loc;
 	new_pos.var_f2aae3f7 = var_f2aae3f7;
 	new_pos.var_9d5a3b8f = var_dfe2a95d;
 	new_pos.var_60a7aecc = var_60a7aecc;
 	new_pos.stance = stance;
-	new_pos.origin = var_348c0b50.origin;
+	new_pos.origin = player_loc.origin;
 	new_pos.fov = fov;
 	new_pos.dof = dof;
 	new_pos.lerptime = lerptime;
@@ -639,7 +639,7 @@ function private function_a92530c0(ai_actor, anim_struct)
 		{
 			/#
 			#/
-			if(!isdefined(pos.var_348c0b50))
+			if(!isdefined(pos.player_loc))
 			{
 				var_b0a7849f = struct::spawn();
 				var_b0a7849f.origin = ai_actor.origin;
@@ -652,8 +652,8 @@ function private function_a92530c0(ai_actor, anim_struct)
 						var_b0a7849f = var_7f0ec05a;
 					}
 				}
-				pos.var_348c0b50 = struct::spawn((var_b0a7849f.origin + (anglestoforward(var_b0a7849f.angles) * 56)) + (anglestoright(var_b0a7849f.angles) * -10), var_b0a7849f.angles + vectorscale((0, 1, 0), 180));
-				pos.origin = pos.var_348c0b50.origin;
+				pos.player_loc = struct::spawn((var_b0a7849f.origin + (anglestoforward(var_b0a7849f.angles) * 56)) + (anglestoright(var_b0a7849f.angles) * -10), var_b0a7849f.angles + vectorscale((0, 1, 0), 180));
+				pos.origin = pos.player_loc.origin;
 			}
 		}
 		var_bb76606c = arraygetclosest(player.origin, self.player_pos);
@@ -690,7 +690,7 @@ function private function_a92530c0(ai_actor, anim_struct)
 		}
 		self.activator val::set(#"dialog_tree", "allow_movement", 0);
 		self.activator ghost();
-		self.var_bc205c58 = player util::spawn_model("tag_origin", var_bb76606c.var_348c0b50.origin, var_bb76606c.var_348c0b50.angles);
+		self.var_bc205c58 = player util::spawn_model("tag_origin", var_bb76606c.player_loc.origin, var_bb76606c.player_loc.angles);
 		self.var_bc205c58 dontinterpolate();
 		if(isdefined(var_bb76606c.fov) && isdefined(level.var_fb0a6829[var_bb76606c.fov]))
 		{
@@ -987,7 +987,7 @@ function run(ai_actor, anim_struct, timer, activator, var_5bab29d8, var_cf6d95c9
 	{
 		level flag::set("dialog_tree_active");
 		level flag::set("prompts_disabled");
-		namespace_61e6d095::function_28027c42(#"dialog_tree", [1:#"hash_66c6997fe4c5ccf", 0:#"dialog_tree"]);
+		namespace_61e6d095::function_28027c42(#"dialog_tree", [1:#"hint_tutorial", 0:#"dialog_tree"]);
 		objectives::function_9dfb43fc();
 		self.var_bc62b3ce = getdvarfloat(#"hash_6b57212fd4fcdd3a");
 		setdvar(#"hash_6b57212fd4fcdd3a", 0);
@@ -1092,7 +1092,7 @@ function run(ai_actor, anim_struct, timer, activator, var_5bab29d8, var_cf6d95c9
 		if(isdefined(var_b7751c0b.var_3fa65bba))
 		{
 			ai_actor flag::set("_dialog_func_running");
-			ai_actor thread function_a7575efe(var_b7751c0b.var_3fa65bba, var_b7751c0b.var_d3d10c6d, var_b7751c0b.skip_func);
+			ai_actor childthread function_a7575efe(var_b7751c0b.var_3fa65bba, var_b7751c0b.var_d3d10c6d, var_b7751c0b.skip_func);
 		}
 		if(isdefined(var_b7751c0b.var_f8340c5b))
 		{
@@ -1175,7 +1175,7 @@ function run(ai_actor, anim_struct, timer, activator, var_5bab29d8, var_cf6d95c9
 	}
 	if(isdefined(self.exit_func))
 	{
-		ai_actor thread [[self.exit_func]]();
+		ai_actor childthread [[self.exit_func]]();
 	}
 	if(ai_actor.var_b905c47b <= 1)
 	{
@@ -1212,9 +1212,9 @@ function run(ai_actor, anim_struct, timer, activator, var_5bab29d8, var_cf6d95c9
 			ai_actor val::reset(#"dialog_tree", "ignoreme");
 			ai_actor val::reset(#"dialog_tree", "takedamage");
 		}
-		self notify(#"hash_6b84e3022512db10");
-		ai_actor notify(#"hash_6b84e3022512db10");
-		self.activator notify(#"hash_6b84e3022512db10");
+		self notify(#"dialog_tree_end");
+		ai_actor notify(#"dialog_tree_end");
+		self.activator notify(#"dialog_tree_end");
 		globallogic_ui::function_9ed5232e("hudItems.subtitles.noAutoHide", 0);
 		level flag::clear("dialog_tree_active");
 		level flag::clear("prompts_disabled");
@@ -1291,9 +1291,9 @@ function function_a6a75a20()
 function private function_27059a7f(ai_actor, anim_struct)
 {
 	self.activator endon(#"death");
-	self endon(#"hash_6b84e3022512db10");
-	level notify(#"hash_c35e2abccd4df12");
-	level endon(#"hash_c35e2abccd4df12");
+	self endon(#"dialog_tree_end");
+	level notify(#"watch_dt_skips");
+	level endon(#"watch_dt_skips");
 	while(true)
 	{
 		self.activator namespace_61e6d095::function_b0bad5ff("dialog_tree_end", "watch_dt_skips");
@@ -1311,7 +1311,7 @@ function private function_27059a7f(ai_actor, anim_struct)
 					snd::stop(ai_actor.var_e744d1aa);
 				}
 				ai_actor.var_e744d1aa = undefined;
-				ai_actor notify(#"hash_5d02e24cebf138cb");
+				ai_actor notify(#"cancel speaking");
 			}
 		}
 		if(ai_actor flag::get("_dialog_anim_playing") && isdefined(ai_actor._scene_object))
@@ -1434,7 +1434,7 @@ function private function_58881e72(sb, str_shot, anim_struct)
 function private function_62d48ab(ai_actor, var_2f04fa05)
 {
 	ai_actor endon(#"death");
-	ai_actor endon(#"hash_6b84e3022512db10");
+	ai_actor endon(#"dialog_tree_end");
 	waitframe(1);
 	if(!isarray(var_2f04fa05))
 	{
@@ -1579,10 +1579,10 @@ function private function_b85d5a3a(var_d9d52a9d, var_cf6d95c9)
 */
 function private function_a7575efe(func, param, skip_func)
 {
-	self endon(#"hash_6b84e3022512db10");
+	self endon(#"dialog_tree_end");
 	if(isdefined(skip_func))
 	{
-		self thread function_49048365(skip_func);
+		self childthread function_49048365(skip_func);
 	}
 	if(!isdefined(param))
 	{
@@ -1607,10 +1607,10 @@ function private function_a7575efe(func, param, skip_func)
 */
 function private function_49048365(skip_func)
 {
-	self endon(#"hash_6b84e3022512db10");
+	self endon(#"dialog_tree_end");
 	self endon(#"hash_4501fed1970295ab");
 	self waittill(#"hash_71ceced1590e6571");
-	self thread [[skip_func]]();
+	self childthread [[skip_func]]();
 }
 
 /*
@@ -1624,7 +1624,7 @@ function private function_49048365(skip_func)
 */
 function private function_c331410b(ai_actor, anims, anim_loop, struct, scriptbundle)
 {
-	self endon(#"hash_6b84e3022512db10");
+	self endon(#"dialog_tree_end");
 	ai_actor endon(#"hash_727216e12f8e4bc0");
 	if(isdefined(scriptbundle) && isdefined(anims))
 	{
@@ -1659,7 +1659,7 @@ function private function_c331410b(ai_actor, anims, anim_loop, struct, scriptbun
 */
 function private function_c4ae7ee0(ai_actor, shot_name, struct, scriptbundle)
 {
-	self endon(#"hash_6b84e3022512db10");
+	self endon(#"dialog_tree_end");
 	self.var_ebacf97b = shot_name;
 	struct scene::play(scriptbundle, shot_name, [0:ai_actor]);
 	self notify(#"hash_222d1d96d3da9edb");

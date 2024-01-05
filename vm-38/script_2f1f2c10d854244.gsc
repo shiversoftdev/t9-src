@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_2347be59 : class_6aaccc24
+class cmulti_stage_friendly_lockon : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_2347be59
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0xCA05CB42
 		Offset: 0x398
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_2347be59 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_2347be59
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0x37D7A643
 		Offset: 0x570
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_2347be59 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_2347be59
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0x699FB804
 		Offset: 0x4D0
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_2347be59 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_2347be59
+		Name: register_clientside
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0x942BD949
 		Offset: 0x440
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("multi_stage_friendly_lockon");
+		cluielem::register_clientside("multi_stage_friendly_lockon");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_2347be59
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0xC517DEC0
 		Offset: 0x3B8
 		Size: 0x7C
@@ -68,42 +68,42 @@ class class_2347be59 : class_6aaccc24
 	*/
 	function setup_clientfields(var_5a7b4b38, var_29786c92)
 	{
-		namespace_6aaccc24::setup_clientfields("multi_stage_friendly_lockon");
-		namespace_6aaccc24::function_da693cbe("entNum", 1, 10, "int", var_5a7b4b38);
-		namespace_6aaccc24::function_da693cbe("targetState", 1, 3, "int", var_29786c92);
+		cluielem::setup_clientfields("multi_stage_friendly_lockon");
+		cluielem::add_clientfield("entNum", 1, 10, "int", var_5a7b4b38);
+		cluielem::add_clientfield("targetState", 1, 3, "int", var_29786c92);
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_2347be59
+		Name: set_entnum
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0xD8595AC6
 		Offset: 0x500
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c8350e33(localclientnum, value)
+	function set_entnum(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "entNum", value);
+		[[ self ]]->set_data(localclientnum, "entNum", value);
 	}
 
 	/*
-		Name: function_f1e8a488
-		Namespace: namespace_2347be59
+		Name: set_targetstate
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0x639C25FB
 		Offset: 0x538
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f1e8a488(localclientnum, value)
+	function set_targetstate(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "targetState", value);
+		[[ self ]]->set_data(localclientnum, "targetState", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_2347be59
+		Namespace: cmulti_stage_friendly_lockon
 		Checksum: 0x4A95CA2F
 		Offset: 0x468
 		Size: 0x5C
@@ -112,9 +112,9 @@ class class_2347be59 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "entNum", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "targetState", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "entNum", 0);
+		[[ self ]]->set_data(localclientnum, "targetState", 0);
 	}
 
 }
@@ -146,7 +146,7 @@ function private autoexec function_f53a507d()
 */
 function register(var_5a7b4b38, var_29786c92)
 {
-	elem = new class_2347be59();
+	elem = new cmulti_stage_friendly_lockon();
 	[[ elem ]]->setup_clientfields(var_5a7b4b38, var_29786c92);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -168,7 +168,7 @@ function register(var_5a7b4b38, var_29786c92)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: multi_stage_friendly_lockon
 	Checksum: 0xADBEACCB
 	Offset: 0x280
@@ -176,10 +176,10 @@ function register(var_5a7b4b38, var_29786c92)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_2347be59();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cmulti_stage_friendly_lockon();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -226,7 +226,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: multi_stage_friendly_lockon
 	Checksum: 0x98A4D9CD
 	Offset: 0x338
@@ -234,13 +234,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_c8350e33(localclientnum, value)
+function set_entnum(localclientnum, value)
 {
-	[[ self ]]->function_c8350e33(localclientnum, value);
+	[[ self ]]->set_entnum(localclientnum, value);
 }
 
 /*
-	Name: function_f1e8a488
+	Name: set_targetstate
 	Namespace: multi_stage_friendly_lockon
 	Checksum: 0x7EE64C09
 	Offset: 0x368
@@ -248,8 +248,8 @@ function function_c8350e33(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_f1e8a488(localclientnum, value)
+function set_targetstate(localclientnum, value)
 {
-	[[ self ]]->function_f1e8a488(localclientnum, value);
+	[[ self ]]->set_targetstate(localclientnum, value);
 }
 

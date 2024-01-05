@@ -1,8 +1,8 @@
+#using script_7e3221b6c80d8cc4;
 #using script_1883fa4e60abbf9f;
 #using script_3ad66e3076c279ab;
-#using script_7e3221b6c80d8cc4;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace event;
 
@@ -415,14 +415,14 @@ function event_listener_thread()
 				typeorig = "";
 				if(isdefined(event.typeorig))
 				{
-					typeorig = ("" + (function_7a600918(event.typeorig) ? function_9e72a96(event.typeorig) : event.typeorig)) + "";
+					typeorig = ("" + (ishash(event.typeorig) ? function_9e72a96(event.typeorig) : event.typeorig)) + "";
 				}
-				var_c229055e = ("" + (function_7a600918(event.type) ? function_9e72a96(event.type) : event.type)) + typeorig;
+				event_str = ("" + (ishash(event.type) ? function_9e72a96(event.type) : event.type)) + typeorig;
 				if(isdefined(var_b3f16b56) && !var_b3f16b56)
 				{
-					var_c229055e = var_c229055e + "";
+					event_str = event_str + "";
 				}
-				self thread stealth_debug::function_314b7255(var_c229055e, (1, 1, 1), 1, 0.5, vectorscale((0, 0, 1), 40), 4);
+				self thread stealth_debug::function_314b7255(event_str, (1, 1, 1), 1, 0.5, vectorscale((0, 0, 1), 40), 4);
 				self.stealth.ai_event = event.type;
 			#/
 		}

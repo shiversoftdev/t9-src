@@ -1,11 +1,11 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\sound_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace util;
 
@@ -20,7 +20,7 @@
 */
 function private autoexec function_bdf32f89()
 {
-	level notify(717569382);
+	level notify(-717569382);
 }
 
 /*

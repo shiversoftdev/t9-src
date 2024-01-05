@@ -1,14 +1,14 @@
-#using script_2c49ae69cd8ce30c;
-#using script_3fda550bc6e1089a;
-#using script_4721de209091b1a6;
-#using script_47fb62300ac0bd60;
-#using script_6c8abe14025b47c4;
+#using scripts\mp_common\player\player_utils.gsc;
 #using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\mp_common\challenges.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using script_4721de209091b1a6;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\killstreaks\helicopter_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
 
 #namespace helicopter_guard;
 
@@ -23,13 +23,13 @@
 */
 function private autoexec function_9adb801()
 {
-	level notify(1198042134);
+	level notify(-1198042134);
 }
 
 #namespace helicopter;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: helicopter
 	Checksum: 0x1E5C1A04
 	Offset: 0x158
@@ -37,7 +37,7 @@ function private autoexec function_9adb801()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"helicopter_guard", &function_70a657d8, undefined, undefined, #"killstreaks");
 }
@@ -57,13 +57,13 @@ function private function_70a657d8()
 	level.var_4d5e1035 = &function_4d5e1035;
 	level.var_6af968ce = &function_6af968ce;
 	bundle = "killstreak_helicopter_guard";
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		bundle = "killstreak_helicopter_guard_wz";
 	}
-	if(sessionmodeismultiplayergame() || function_f99d2668())
+	if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame())
 	{
-		killstreaks::function_e4ef8390(bundle, &usekillstreakhelicopter);
+		killstreaks::register_killstreak(bundle, &usekillstreakhelicopter);
 	}
 	init_shared();
 	player::function_cf3aa03d(&function_d45a1f8d, 0);
@@ -160,10 +160,10 @@ function function_d45a1f8d(einflictor, attacker, idamage, smeansofdeath, weapon,
 	{
 		return;
 	}
-	if(shitloc.owner == psoffsettime && deathanimduration == getweapon(#"cobra_20mm_comlink") && (isdefined(shitloc.var_6ac0633e) ? shitloc.var_6ac0633e : 0) < gettime())
+	if(shitloc.owner == psoffsettime && deathanimduration == getweapon(#"cobra_20mm_comlink") && (isdefined(shitloc.lastkillvo) ? shitloc.lastkillvo : 0) < gettime())
 	{
 		shitloc namespace_f9b02f80::play_pilot_dialog_on_owner("kill", "helicopter_guard", shitloc.killstreak_id);
-		shitloc.var_6ac0633e = gettime() + 5000;
+		shitloc.lastkillvo = gettime() + 5000;
 	}
 }
 

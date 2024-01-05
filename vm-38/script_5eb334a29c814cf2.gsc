@@ -1,20 +1,20 @@
-#using script_27137b97a4a2215f;
-#using script_3819e7a1427df6d2;
-#using script_6809bf766eba194a;
+#using scripts\zm\archetype\archetype_zod_companion.gsc;
 #using script_ed50e9299d3e143;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_player.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
 #using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
+#using scripts\zm_common\zm_player.gsc;
+#using scripts\zm_common\zm_devgui.gsc;
+#using scripts\core_common\aat_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_3819e7a1427df6d2;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_ca8676a3;
 
@@ -33,7 +33,7 @@ function private autoexec function_2f645b92()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_ca8676a3
 	Checksum: 0x6762A12D
 	Offset: 0x248
@@ -41,7 +41,7 @@ function private autoexec function_2f645b92()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_217942543a3e669b", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -82,7 +82,7 @@ function private function_10c92445()
 	self.var_135f3e2e = &function_2abc1fe5;
 	self.var_b98a92a2 = 1000;
 	self.var_ab38d331 = 0;
-	self val::set(#"hash_744f2f9219624cba", "takedamage", 0);
+	self val::set(#"mannequin_ally", "takedamage", 0);
 	self.var_7c4488fd = 1;
 	self.var_535fbaa3 = 1200;
 	self namespace_47c5b560::function_904442b2();
@@ -262,7 +262,7 @@ function function_8996b315(var_ac5f535, bomb_model)
 	self zodcompanionutility::function_60dcf99d(var_ac5f535);
 	if(is_true(var_ac5f535))
 	{
-		self val::reset(#"hash_744f2f9219624cba", "takedamage");
+		self val::reset(#"mannequin_ally", "takedamage");
 		self val::set(#"zod_companion", "ignoreall", 1);
 		level flag::set(#"hash_66eb1b5632f46da8");
 		if(isdefined(self.weapon))
@@ -277,7 +277,7 @@ function function_8996b315(var_ac5f535, bomb_model)
 	}
 	else
 	{
-		self val::set(#"hash_744f2f9219624cba", "takedamage", 0);
+		self val::set(#"mannequin_ally", "takedamage", 0);
 		self val::reset(#"zod_companion", "ignoreall");
 		level flag::clear(#"hash_66eb1b5632f46da8");
 		if(isdefined(self.last_weapon_name))

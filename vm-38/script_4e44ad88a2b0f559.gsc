@@ -1,4 +1,4 @@
-#using script_2255a7ad3edc838f;
+#using scripts\core_common\bots\bot.gsc;
 
 #namespace namespace_87549638;
 
@@ -13,7 +13,7 @@
 */
 function private autoexec function_58c09bde()
 {
-	level notify(1115548552);
+	level notify(-1115548552);
 }
 
 /*
@@ -233,7 +233,7 @@ function private function_b21ea513()
 	{
 		return false;
 	}
-	enemies = self function_bdda420f(self.origin, 1000);
+	enemies = self getenemiesinradius(self.origin, 1000);
 	var_8a75d6bc = undefined;
 	var_6e4e5c17 = undefined;
 	foreach(enemy in enemies)

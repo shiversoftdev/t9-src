@@ -17,7 +17,7 @@ function private autoexec function_433a07b0()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: classicmode
 	Checksum: 0x4E9E2709
 	Offset: 0x88
@@ -25,7 +25,7 @@ function private autoexec function_433a07b0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"classicmode", &function_70a657d8, undefined, undefined, undefined);
 }

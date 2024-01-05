@@ -55,7 +55,7 @@ function private function_6e561a85(&var_c4d527a6, exploders)
 	{
 		foreach(exploder in exploders)
 		{
-			if(isstring(exploder) || function_7a600918(exploder))
+			if(isstring(exploder) || ishash(exploder))
 			{
 				if(!isdefined(var_c4d527a6))
 				{
@@ -72,7 +72,7 @@ function private function_6e561a85(&var_c4d527a6, exploders)
 			}
 		}
 	}
-	else if(isstring(exploders) || function_7a600918(exploders))
+	else if(isstring(exploders) || ishash(exploders))
 	{
 		if(!isdefined(var_c4d527a6))
 		{

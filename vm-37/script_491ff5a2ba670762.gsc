@@ -1,13 +1,13 @@
-#using script_7d712f77ab8d0c16;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using script_7d712f77ab8d0c16;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace spawning;
 
@@ -22,7 +22,7 @@
 */
 function function_d9deb7d7()
 {
-	level.var_8a38cf55 = sessionmodeismultiplayergame() || function_f99d2668();
+	level.var_8a38cf55 = sessionmodeismultiplayergame() || sessionmodeiswarzonegame();
 	if(!isdefined(level.var_e1a685a6))
 	{
 		level.var_e1a685a6 = [];

@@ -1,7 +1,7 @@
 #using script_5f261a5d57de5f7c;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace namespace_42457a0;
 

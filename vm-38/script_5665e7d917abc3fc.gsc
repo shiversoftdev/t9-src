@@ -1,9 +1,9 @@
 #using script_19f3d8b7a687a3f1;
 #using script_3f2bc2eef03cbecc;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_dd7e54e3;
 
@@ -22,7 +22,7 @@ function private autoexec function_5622bb00()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_dd7e54e3
 	Checksum: 0xAB70601B
 	Offset: 0x118
@@ -30,7 +30,7 @@ function private autoexec function_5622bb00()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7da9887a9375293", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -77,7 +77,7 @@ function function_af3e97c(localclientnum, oldval, newval, bnewent, binitialsnap,
 {
 	if(bwastimejump)
 	{
-		self function_bf9d3071(#"hash_67554d3a2940aec6");
+		self playrenderoverridebundle(#"hash_67554d3a2940aec6");
 		if(!isdefined(self.var_89e0f17d))
 		{
 			self.var_89e0f17d = playfx(fieldname, #"zombie/fx9_armor_station_idle", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
@@ -129,7 +129,7 @@ function function_af3e97c(localclientnum, oldval, newval, bnewent, binitialsnap,
 	}
 	else
 	{
-		self function_5d482e78(#"hash_67554d3a2940aec6");
+		self stoprenderoverridebundle(#"hash_67554d3a2940aec6");
 		if(isdefined(self.var_89e0f17d))
 		{
 			stopfx(fieldname, self.var_89e0f17d);

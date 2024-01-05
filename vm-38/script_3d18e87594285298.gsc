@@ -1,20 +1,20 @@
-#using script_3626f1b2cf51a99c;
-#using script_52da18c20f45c56a;
-#using script_5431e074c1428743;
-#using script_59f07c660e6710a5;
+#using scripts\cp_common\bb.gsc;
 #using script_7d0013bbc05623b9;
+#using scripts\cp_common\util.gsc;
+#using script_5431e074c1428743;
 #using script_9bfd3d8a6a89e5e;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
+#using script_52da18c20f45c56a;
+#using script_3626f1b2cf51a99c;
+#using script_59f07c660e6710a5;
 #using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\doors_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_e1cd3aae;
 
@@ -33,7 +33,7 @@ function private autoexec function_fb327b2b()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e1cd3aae
 	Checksum: 0x4AB3EC91
 	Offset: 0x4E8
@@ -41,7 +41,7 @@ function private autoexec function_fb327b2b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_63ef0cf11243d45a", &function_70a657d8, undefined, undefined, #"hash_7ee44bf733d7a7ac");
 }
@@ -117,10 +117,10 @@ function function_dcc1570d(action)
 function function_a471f3b0(action)
 {
 	self endon(action.ender);
-	self thread function_b6bc0788(action);
+	self childthread function_b6bc0788(action);
 	if(isdefined(self.takedown.body))
 	{
-		self.takedown.body thread function_dc160233(action);
+		self.takedown.body childthread function_dc160233(action);
 	}
 	while(true)
 	{

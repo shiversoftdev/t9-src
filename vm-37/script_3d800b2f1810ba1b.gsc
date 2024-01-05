@@ -1,11 +1,11 @@
-#using script_120938d3a8d642ae;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using script_120938d3a8d642ae;
 
 #namespace namespace_1e5d913d;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1e5d913d
 	Checksum: 0xE9F16E9C
 	Offset: 0x160
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_9fe6dae6d685563", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -69,7 +69,7 @@ function private function_5a46c509(var_2fe0d693)
 			if(old_value != getdvarint(#"hash_5b0267c7f7e8d42", 0))
 			{
 				old_value = getdvarint(#"hash_5b0267c7f7e8d42", 0);
-				setdvar(#"hash_1c45750e4f6818eb", old_value);
+				setdvar(#"g_drawdebuginfovolumes", old_value);
 				if(old_value)
 				{
 					foreach(ent in var_2fe0d693)
@@ -197,19 +197,19 @@ function private function_8f050823()
 			/#
 				if(getdvarint(#"hash_2a6bc2c12ee6a9b4", 0))
 				{
-					var_c167c750 = strtok("" + data.var_78e64a1a, "");
-					var_78e64a1a = var_c167c750[0];
+					str_array = strtok("" + data.var_78e64a1a, "");
+					var_78e64a1a = str_array[0];
 					var_5d8d813a = "";
-					if(var_c167c750.size > 1)
+					if(str_array.size > 1)
 					{
-						var_5d8d813a = getsubstr(var_c167c750[1], 0, 1);
+						var_5d8d813a = getsubstr(str_array[1], 0, 1);
 					}
-					var_c167c750 = strtok("" + data.var_141b25f, "");
-					var_141b25f = var_c167c750[0];
+					str_array = strtok("" + data.var_141b25f, "");
+					var_141b25f = str_array[0];
 					var_68be928f = "";
-					if(var_c167c750.size > 1)
+					if(str_array.size > 1)
 					{
-						var_68be928f = getsubstr(var_c167c750[1], 0, 1);
+						var_68be928f = getsubstr(str_array[1], 0, 1);
 					}
 					print3d(self.origin + (0, 0, bounds[2] + 12), (((((("" + var_78e64a1a) + "") + var_5d8d813a) + "") + var_141b25f) + "") + var_68be928f, undefined, undefined, 0.1);
 				}
@@ -511,7 +511,7 @@ function private function_2138c62(var_1e5d913d, damage_data, var_b33be77)
 			{
 				lifetime = lifetime + randomfloat(var_2cc6e886.var_3478ebdf);
 			}
-			self thread function_479d351(var_2cc6e886.start_sound, var_2cc6e886.loop_sound, var_2cc6e886.var_2fc34bba, damage_data.position, lifetime, var_2cc6e886.var_d560194f);
+			self thread function_479d351(var_2cc6e886.start_sound, var_2cc6e886.loop_sound, var_2cc6e886.end_sound, damage_data.position, lifetime, var_2cc6e886.var_d560194f);
 			self thread function_7f273dfd(var_2cc6e886.var_fc9e755a, damage_data.position, forward, lifetime);
 			self thread namespace_e64042f6::do_damage(var_2cc6e886.var_a744e12b, damage_data.position, forward, lifetime);
 			if(lifetime > 0)
@@ -580,7 +580,7 @@ function private function_a4507e23(fx_ent, var_1e5d913d, lifetime, damage_data)
 	Parameters: 6
 	Flags: Private
 */
-function private function_479d351(start_sound, loop_sound, var_2fc34bba, position, lifetime, fade_time)
+function private function_479d351(start_sound, loop_sound, end_sound, position, lifetime, fade_time)
 {
 	if((isdefined(start_sound) ? start_sound : "") != "")
 	{
@@ -613,13 +613,13 @@ function private function_479d351(start_sound, loop_sound, var_2fc34bba, positio
 				sound_ent stoploopsound();
 			}
 		}
-		if((isdefined(var_2fc34bba) ? var_2fc34bba : "") != "")
+		if((isdefined(end_sound) ? end_sound : "") != "")
 		{
 			if(!isdefined(sound_ent))
 			{
 				sound_ent = spawn("script_origin", position);
 			}
-			sound_ent playsoundwithnotify(var_2fc34bba, "sound_end");
+			sound_ent playsoundwithnotify(end_sound, "sound_end");
 			sound_ent waittill(#"sound_end");
 			waitframe(1);
 			sound_ent delete();
@@ -666,7 +666,7 @@ function private function_f80632da(range, var_2b88ddd3, attacker, position, forw
 {
 	if(range > 0)
 	{
-		var_ff38f326 = attacker function_bdda420f(position, range);
+		var_ff38f326 = attacker getenemiesinradius(position, range);
 		foreach(var_f39b1a24 in var_ff38f326)
 		{
 			mins = var_f39b1a24 getabsmins();

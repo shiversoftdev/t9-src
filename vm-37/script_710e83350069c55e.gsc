@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_276088fe : class_6aaccc24
+class cluielem_entity_bar : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_276088fe
+		Namespace: cluielem_entity_bar
 		Checksum: 0xB71E9A2
 		Offset: 0x380
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_276088fe : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_276088fe
+		Namespace: cluielem_entity_bar
 		Checksum: 0x1DB20027
 		Offset: 0x960
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_276088fe : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_276088fe
+		Namespace: cluielem_entity_bar
 		Checksum: 0xFCFE03E
 		Offset: 0x508
 		Size: 0x3C
@@ -47,26 +47,26 @@ class class_276088fe : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_4f6e830d
-		Namespace: namespace_276088fe
+		Name: set_offset_y
+		Namespace: cluielem_entity_bar
 		Checksum: 0x6D632FAC
 		Offset: 0x820
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4f6e830d(player, value)
+	function set_offset_y(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "offset_y", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_276088fe
+		Namespace: cluielem_entity_bar
 		Checksum: 0x62C9239B
 		Offset: 0x550
 		Size: 0x24
@@ -75,40 +75,40 @@ class class_276088fe : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_61312692
-		Namespace: namespace_276088fe
+		Name: set_offset_x
+		Namespace: cluielem_entity_bar
 		Checksum: 0xC74D9AC0
 		Offset: 0x7D0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_61312692(player, value)
+	function set_offset_x(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "offset_x", value);
 	}
 
 	/*
-		Name: function_7ddfdfef
-		Namespace: namespace_276088fe
+		Name: set_offset_z
+		Namespace: cluielem_entity_bar
 		Checksum: 0x830174F7
 		Offset: 0x870
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_7ddfdfef(player, value)
+	function set_offset_z(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "offset_z", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_276088fe
+		Namespace: cluielem_entity_bar
 		Checksum: 0x2A1E2333
 		Offset: 0x3A0
 		Size: 0x15C
@@ -117,48 +117,48 @@ class class_276088fe : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("LUIelem_entity_bar");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 3, "int");
-		namespace_6aaccc24::function_da693cbe("progress_percent", 1, 7, "float");
-		namespace_6aaccc24::function_da693cbe("entnum", 1, 7, "int");
-		namespace_6aaccc24::function_da693cbe("offset_x", 1, 6, "int");
-		namespace_6aaccc24::function_da693cbe("offset_y", 1, 6, "int");
-		namespace_6aaccc24::function_da693cbe("offset_z", 1, 6, "int");
-		namespace_6aaccc24::function_da693cbe("entityClamp", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("entityScale", 1, 1, "int");
+		cluielem::setup_clientfields("LUIelem_entity_bar");
+		cluielem::add_clientfield("_state", 1, 3, "int");
+		cluielem::add_clientfield("progress_percent", 1, 7, "float");
+		cluielem::add_clientfield("entnum", 1, 7, "int");
+		cluielem::add_clientfield("offset_x", 1, 6, "int");
+		cluielem::add_clientfield("offset_y", 1, 6, "int");
+		cluielem::add_clientfield("offset_z", 1, 6, "int");
+		cluielem::add_clientfield("entityClamp", 1, 1, "int");
+		cluielem::add_clientfield("entityScale", 1, 1, "int");
 	}
 
 	/*
-		Name: function_a9793a65
-		Namespace: namespace_276088fe
+		Name: set_entityscale
+		Namespace: cluielem_entity_bar
 		Checksum: 0xB3C446B0
 		Offset: 0x910
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a9793a65(player, value)
+	function set_entityscale(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "entityScale", value);
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_276088fe
+		Name: set_entnum
+		Namespace: cluielem_entity_bar
 		Checksum: 0xD7A0BEC0
 		Offset: 0x780
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c8350e33(player, value)
+	function set_entnum(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "entnum", value);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_276088fe
+		Namespace: cluielem_entity_bar
 		Checksum: 0x27EC2CEC
 		Offset: 0x580
 		Size: 0x1A4
@@ -210,29 +210,29 @@ class class_276088fe : class_6aaccc24
 	}
 
 	/*
-		Name: function_dfed4b05
-		Namespace: namespace_276088fe
+		Name: set_entityclamp
+		Namespace: cluielem_entity_bar
 		Checksum: 0x1CE6928D
 		Offset: 0x8C0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_dfed4b05(player, value)
+	function set_entityclamp(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "entityClamp", value);
 	}
 
 	/*
-		Name: function_ecacbaa5
-		Namespace: namespace_276088fe
+		Name: set_progress_percent
+		Namespace: cluielem_entity_bar
 		Checksum: 0xE44BD23D
 		Offset: 0x730
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_ecacbaa5(player, value)
+	function set_progress_percent(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "progress_percent", value);
 	}
@@ -252,7 +252,7 @@ class class_276088fe : class_6aaccc24
 */
 function register()
 {
-	elem = new class_276088fe();
+	elem = new cluielem_entity_bar();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -318,7 +318,7 @@ function set_state(player, state_name)
 }
 
 /*
-	Name: function_ecacbaa5
+	Name: set_progress_percent
 	Namespace: luielem_entity_bar
 	Checksum: 0xA94C1787
 	Offset: 0x230
@@ -326,13 +326,13 @@ function set_state(player, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_ecacbaa5(player, value)
+function set_progress_percent(player, value)
 {
-	[[ self ]]->function_ecacbaa5(player, value);
+	[[ self ]]->set_progress_percent(player, value);
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: luielem_entity_bar
 	Checksum: 0x417EF9D8
 	Offset: 0x260
@@ -340,13 +340,13 @@ function function_ecacbaa5(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c8350e33(player, value)
+function set_entnum(player, value)
 {
-	[[ self ]]->function_c8350e33(player, value);
+	[[ self ]]->set_entnum(player, value);
 }
 
 /*
-	Name: function_61312692
+	Name: set_offset_x
 	Namespace: luielem_entity_bar
 	Checksum: 0xDA9C630
 	Offset: 0x290
@@ -354,13 +354,13 @@ function function_c8350e33(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_61312692(player, value)
+function set_offset_x(player, value)
 {
-	[[ self ]]->function_61312692(player, value);
+	[[ self ]]->set_offset_x(player, value);
 }
 
 /*
-	Name: function_4f6e830d
+	Name: set_offset_y
 	Namespace: luielem_entity_bar
 	Checksum: 0x568A41F6
 	Offset: 0x2C0
@@ -368,13 +368,13 @@ function function_61312692(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4f6e830d(player, value)
+function set_offset_y(player, value)
 {
-	[[ self ]]->function_4f6e830d(player, value);
+	[[ self ]]->set_offset_y(player, value);
 }
 
 /*
-	Name: function_7ddfdfef
+	Name: set_offset_z
 	Namespace: luielem_entity_bar
 	Checksum: 0x38E0E6F8
 	Offset: 0x2F0
@@ -382,13 +382,13 @@ function function_4f6e830d(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_7ddfdfef(player, value)
+function set_offset_z(player, value)
 {
-	[[ self ]]->function_7ddfdfef(player, value);
+	[[ self ]]->set_offset_z(player, value);
 }
 
 /*
-	Name: function_dfed4b05
+	Name: set_entityclamp
 	Namespace: luielem_entity_bar
 	Checksum: 0x5420A669
 	Offset: 0x320
@@ -396,13 +396,13 @@ function function_7ddfdfef(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_dfed4b05(player, value)
+function set_entityclamp(player, value)
 {
-	[[ self ]]->function_dfed4b05(player, value);
+	[[ self ]]->set_entityclamp(player, value);
 }
 
 /*
-	Name: function_a9793a65
+	Name: set_entityscale
 	Namespace: luielem_entity_bar
 	Checksum: 0xABF6131E
 	Offset: 0x350
@@ -410,8 +410,8 @@ function function_dfed4b05(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_a9793a65(player, value)
+function set_entityscale(player, value)
 {
-	[[ self ]]->function_a9793a65(player, value);
+	[[ self ]]->set_entityscale(player, value);
 }
 

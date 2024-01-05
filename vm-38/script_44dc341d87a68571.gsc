@@ -1,47 +1,47 @@
-#using script_164a456ce05c3483;
-#using script_178024232e91b0a1;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c5daa95f8fec03c;
-#using script_317aa6153a75c589;
-#using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
-#using script_3faf478d5b0850fe;
-#using script_41fe08c37d53a635;
 #using script_47851dbeea22fe66;
-#using script_489b835a247c990e;
-#using script_4bf952f6ba31bb17;
-#using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_556e19065f09f8a2;
-#using script_5701633066d199f2;
-#using script_57f7003580bb15e0;
-#using script_59f07c660e6710a5;
+#using script_3faf478d5b0850fe;
+#using script_2a5bf5b4a00cee0d;
+#using script_164a456ce05c3483;
+#using script_1ee011cd0961afd7;
 #using script_5f20d3b434d24884;
-#using script_6809bf766eba194a;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using script_35598499769dbb3d;
 #using script_71dfbfdfba4489a0;
-#using script_7b7ed6e4bc963a51;
-#using script_bd2b8aaa388dcce;
+#using script_2c5daa95f8fec03c;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using script_178024232e91b0a1;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using script_4d85e8de54b02198;
+#using script_4bf952f6ba31bb17;
+#using script_59f07c660e6710a5;
+#using script_7b7ed6e4bc963a51;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\ai\zombie.gsc;
+#using scripts\core_common\ai\archetype_mocomps_utility.gsc;
+#using script_489b835a247c990e;
+#using script_3819e7a1427df6d2;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_556e19065f09f8a2;
+#using script_41fe08c37d53a635;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace namespace_146875e;
 
@@ -77,8 +77,8 @@ function init()
 	registergladiatorinterfaceattributes();
 	clientfield::register("toplayer", "gladiator_melee_effect", 1, 1, "counter");
 	clientfield::register("actor", "gladiator_arm_effect", 1, 2, "int");
-	animationstatenetwork::registernotetrackhandlerfunction("dropgun_left", &function_ce148f14);
-	animationstatenetwork::registernotetrackhandlerfunction("dropgun_right", &function_80a0580b);
+	animationstatenetwork::registernotetrackhandlerfunction("dropgun_left", &detachleft);
+	animationstatenetwork::registernotetrackhandlerfunction("dropgun_right", &detachright);
 }
 
 /*
@@ -98,7 +98,7 @@ function registergladiatorinterfaceattributes()
 }
 
 /*
-	Name: function_ce148f14
+	Name: detachleft
 	Namespace: namespace_146875e
 	Checksum: 0x5C0B8F5E
 	Offset: 0xA70
@@ -106,7 +106,7 @@ function registergladiatorinterfaceattributes()
 	Parameters: 1
 	Flags: Linked
 */
-function function_ce148f14(entity)
+function detachleft(entity)
 {
 	if(is_true(self.var_fe593357))
 	{
@@ -115,7 +115,7 @@ function function_ce148f14(entity)
 }
 
 /*
-	Name: function_80a0580b
+	Name: detachright
 	Namespace: namespace_146875e
 	Checksum: 0x2D70526A
 	Offset: 0xAC8
@@ -123,7 +123,7 @@ function function_ce148f14(entity)
 	Parameters: 1
 	Flags: Linked
 */
-function function_80a0580b(entity)
+function detachright(entity)
 {
 	if(is_true(self.var_88d88318))
 	{
@@ -203,9 +203,9 @@ function registerbehaviorscriptfunctions()
 	#/
 	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_19966227fe912af8", &function_7468904d);
 	/#
-		assert(isscriptfunctionptr(&function_a7bbb8e4));
+		assert(isscriptfunctionptr(&gladiatorshouldreact));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_359e69141220779c", &function_a7bbb8e4);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"gladiatorshouldreact", &gladiatorshouldreact);
 	/#
 		assert(isscriptfunctionptr(&function_c1b97472));
 	#/
@@ -215,13 +215,13 @@ function registerbehaviorscriptfunctions()
 	#/
 	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7114ad7e891644ce", &function_fe0ecd9f);
 	/#
-		assert(isscriptfunctionptr(&function_ceea5a43));
+		assert(isscriptfunctionptr(&gladiatorpickaxe));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_3e4e8836668c7ddd", &function_ceea5a43);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"gladiatorpickaxe", &gladiatorpickaxe);
 	/#
-		assert(isscriptfunctionptr(&function_ceea5a43));
+		assert(isscriptfunctionptr(&gladiatorpickaxe));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_3e4e8836668c7ddd", &function_ceea5a43);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"gladiatorpickaxe", &gladiatorpickaxe);
 	/#
 		assert(isscriptfunctionptr(&function_7891bd9b));
 	#/
@@ -319,11 +319,11 @@ function private gladiatortargetservice(entity)
 				var_2ddabcd3 = (var_2ddabcd3[0], var_2ddabcd3[1], 0);
 				gladiator_right = anglestoright(entity.angles);
 				gladiator_right = (gladiator_right[0], gladiator_right[1], 0);
-				var_f67f7d03 = vectordot(var_2ddabcd3, to_enemy);
+				dot_forward = vectordot(var_2ddabcd3, to_enemy);
 				dot_right = vectordot(gladiator_right, to_enemy);
-				if(abs(var_f67f7d03) > abs(dot_right))
+				if(abs(dot_forward) > abs(dot_right))
 				{
-					dot = var_f67f7d03;
+					dot = dot_forward;
 					directions = array("front", "back");
 				}
 				else
@@ -410,7 +410,7 @@ function private function_4660925e(entity)
 }
 
 /*
-	Name: function_ceea5a43
+	Name: gladiatorpickaxe
 	Namespace: namespace_146875e
 	Checksum: 0xA476E64A
 	Offset: 0x1ED0
@@ -418,7 +418,7 @@ function private function_4660925e(entity)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_ceea5a43(entity)
+function private gladiatorpickaxe(entity)
 {
 	if(math::cointoss())
 	{
@@ -485,7 +485,7 @@ function private function_edd0777f(entity)
 	{
 		return false;
 	}
-	if(!entity.var_d9b1cc0e || !entity.var_4e00bc1)
+	if(!entity.has_left_arm || !entity.has_right_arm)
 	{
 		return false;
 	}
@@ -636,7 +636,7 @@ function function_13f886a2(entity)
 	{
 		return false;
 	}
-	if(!self.var_d9b1cc0e || !self.var_4e00bc1)
+	if(!self.has_left_arm || !self.has_right_arm)
 	{
 		return false;
 	}
@@ -706,7 +706,7 @@ function function_61e7d5f5(entity)
 	{
 		return false;
 	}
-	if(self.var_d9b1cc0e && self.var_4e00bc1)
+	if(self.has_left_arm && self.has_right_arm)
 	{
 		return false;
 	}
@@ -830,7 +830,7 @@ function private function_7468904d(entity)
 }
 
 /*
-	Name: function_a7bbb8e4
+	Name: gladiatorshouldreact
 	Namespace: namespace_146875e
 	Checksum: 0x10ABF6EB
 	Offset: 0x2900
@@ -838,7 +838,7 @@ function private function_7468904d(entity)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_a7bbb8e4(entity)
+function private gladiatorshouldreact(entity)
 {
 	if(is_true(entity.var_908a5d30))
 	{
@@ -1105,9 +1105,9 @@ function function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompani
 		}
 		var_83fd29ee = vectornormalize(predictedenemypos - mocompanimflag.origin);
 		var_1efb2395 = predictedenemypos - (var_83fd29ee * mocompanimflag getpathfindingradius());
-		self.var_cd8354e0.var_736d2cce = var_1efb2395;
-		var_776ddabf = distancesquared(self.var_cd8354e0.var_cb28f380, self.var_cd8354e0.var_736d2cce);
-		var_65cbfb52 = distancesquared(self.var_cd8354e0.var_9bfa8497, self.var_cd8354e0.var_736d2cce);
+		self.var_cd8354e0.adjustedendpos = var_1efb2395;
+		var_776ddabf = distancesquared(self.var_cd8354e0.var_cb28f380, self.var_cd8354e0.adjustedendpos);
+		var_65cbfb52 = distancesquared(self.var_cd8354e0.var_9bfa8497, self.var_cd8354e0.adjustedendpos);
 		if(var_776ddabf <= sqr(20))
 		{
 			self.var_cd8354e0.var_425c4c8b = 0;
@@ -1125,19 +1125,19 @@ function function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompani
 		}
 		if(self.var_cd8354e0.var_425c4c8b)
 		{
-			var_776ddabf = distancesquared(self.var_cd8354e0.var_cb28f380, self.var_cd8354e0.var_736d2cce);
+			var_776ddabf = distancesquared(self.var_cd8354e0.var_cb28f380, self.var_cd8354e0.adjustedendpos);
 			var_beabc994 = anglestoforward(self.angles);
 			var_1c3641f2 = (mocompanimflag.favoriteenemy.origin[0], mocompanimflag.favoriteenemy.origin[1], mocompanimflag.origin[2]);
 			dirtoenemy = vectornormalize(var_1c3641f2 - mocompanimflag.origin);
 			zdiff = self.var_cd8354e0.var_cb28f380[2] - mocompanimflag.favoriteenemy.origin[2];
 			var_6738a702 = abs(zdiff) <= 45;
-			var_175919d1 = vectordot(var_beabc994, dirtoenemy) > cos(30);
-			var_7948b2f3 = var_6738a702 && var_175919d1;
+			withinfov = vectordot(var_beabc994, dirtoenemy) > cos(30);
+			var_7948b2f3 = var_6738a702 && withinfov;
 			isvisible = bullettracepassed(mocompanimflag.origin, mocompanimflag.favoriteenemy.origin, 0, self);
 			var_425c4c8b = isvisible && var_7948b2f3;
 			if(var_425c4c8b)
 			{
-				var_90c3cdd2 = length(self.var_cd8354e0.var_736d2cce - self.var_cd8354e0.var_cb28f380);
+				var_90c3cdd2 = length(self.var_cd8354e0.adjustedendpos - self.var_cd8354e0.var_cb28f380);
 				timestep = function_60d95f53();
 				animlength = getanimlength(mocompduration) * 1000;
 				starttime = self.var_cd8354e0.var_98bc84b7 * animlength;
@@ -1145,7 +1145,7 @@ function function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompani
 				starttime = floor(starttime / timestep);
 				stoptime = floor(stoptime / timestep);
 				adjustduration = stoptime - starttime;
-				self.var_cd8354e0.var_10b8b6d1 = vectornormalize(self.var_cd8354e0.var_736d2cce - self.var_cd8354e0.var_cb28f380);
+				self.var_cd8354e0.var_10b8b6d1 = vectornormalize(self.var_cd8354e0.adjustedendpos - self.var_cd8354e0.var_cb28f380);
 				self.var_cd8354e0.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
 				self.var_cd8354e0.var_425c4c8b = 1;
 				self.var_cd8354e0.adjustmentstarted = 1;
@@ -1378,7 +1378,7 @@ function private function_894d3d57(entity)
 	{
 		if(isdefined(entity.axe_model))
 		{
-			entity notify(#"hash_78e94482c724d141");
+			entity notify(#"arm_destroyed");
 			entity.axe_model delete();
 		}
 	}
@@ -1463,8 +1463,8 @@ function function_5af2c5ef()
 	namespace_81245006::initweakpoints(self);
 	self function_104b8cc1();
 	self.var_844453ff = gettime() + 3000;
-	self.var_d9b1cc0e = 1;
-	self.var_4e00bc1 = 1;
+	self.has_left_arm = 1;
+	self.has_right_arm = 1;
 	self.var_ba481973 = 0;
 	self.var_8c28b842 = 1;
 	self.var_7672fb41 = 1;
@@ -1571,12 +1571,12 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
 						{
 							if(var_dd54fdb1.hitlocs[0] == "left_arm_lower")
 							{
-								self.var_d9b1cc0e = 0;
+								self.has_left_arm = 0;
 								if(!gibserverutils::isgibbed(self, 32))
 								{
 									gibserverutils::gibleftarm(self, 0);
 								}
-								if(!self.var_4e00bc1)
+								if(!self.has_right_arm)
 								{
 									self thread namespace_ec06fe4a::function_570729f0(0.1, attacker, meansofdeath, weapon);
 								}
@@ -1585,9 +1585,9 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
 									self ai::set_behavior_attribute("run", 1);
 									self setblackboardattribute("_gladiator_arm", "right_arm");
 								}
-								if(!self isattached(#"hash_3634f266929240d1"))
+								if(!self isattached(#"c_t8_zmb_dlc0_zombie_destroyer_larm1_dam"))
 								{
-									self attach(#"hash_3634f266929240d1");
+									self attach(#"c_t8_zmb_dlc0_zombie_destroyer_larm1_dam");
 								}
 								self.var_9b959f19 = 1;
 								self clientfield::set("gladiator_arm_effect", 1);
@@ -1596,12 +1596,12 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
 							}
 							else if(var_dd54fdb1.hitlocs[0] == "right_arm_lower")
 							{
-								self.var_4e00bc1 = 0;
+								self.has_right_arm = 0;
 								if(!gibserverutils::isgibbed(self, 16))
 								{
 									gibserverutils::gibrightarm(self, 0);
 								}
-								if(!self.var_d9b1cc0e)
+								if(!self.has_left_arm)
 								{
 									self thread namespace_ec06fe4a::function_570729f0(0.1, attacker, meansofdeath, weapon);
 								}
@@ -1609,9 +1609,9 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
 								{
 									self setblackboardattribute("_gladiator_arm", "left_arm");
 								}
-								if(!self isattached(#"hash_2c9ad2bed0d2bcdf"))
+								if(!self isattached(#"c_t8_zmb_dlc0_zombie_destroyer_rarm1_dam"))
 								{
-									self attach(#"hash_2c9ad2bed0d2bcdf");
+									self attach(#"c_t8_zmb_dlc0_zombie_destroyer_rarm1_dam");
 								}
 								self.var_9b959f19 = 1;
 								self clientfield::set("gladiator_arm_effect", 2);
@@ -1718,15 +1718,15 @@ function private function_3b8907b9(s_params)
 	Parameters: 2
 	Flags: Linked, Private
 */
-function private function_fbc2806e(var_a4388d06, var_9e7687f8)
+function private function_fbc2806e(var_a4388d06, spin_dir)
 {
-	self endon(#"death", #"hash_78e94482c724d141");
+	self endon(#"death", #"arm_destroyed");
 	var_23f0c5b3 = self gettagorigin(var_a4388d06);
 	var_ecc54f32 = self gettagangles(var_a4388d06);
 	invert = 1;
-	if(isdefined(var_9e7687f8))
+	if(isdefined(spin_dir))
 	{
-		invert = invert * var_9e7687f8;
+		invert = invert * spin_dir;
 	}
 	var_ecc54f32 = (0, self.angles[1], 0);
 	axe = namespace_ec06fe4a::function_e22ae9b3(var_23f0c5b3, "tag_origin");
@@ -1769,7 +1769,7 @@ function private function_fbc2806e(var_a4388d06, var_9e7687f8)
 			break;
 		}
 	}
-	self function_137ed431(axe, var_a4388d06, var_9e7687f8);
+	self function_137ed431(axe, var_a4388d06, spin_dir);
 }
 
 /*
@@ -1858,10 +1858,10 @@ function private function_c3712093(axe, var_a4388d06, var_bb95ea0c)
 	Parameters: 3
 	Flags: Linked, Private
 */
-function private function_137ed431(axe, var_a4388d06, var_9e7687f8)
+function private function_137ed431(axe, var_a4388d06, spin_dir)
 {
-	tag_pos = self gettagorigin(var_9e7687f8);
-	var_c6488229 = self gettagangles(var_9e7687f8);
+	tag_pos = self gettagorigin(spin_dir);
+	tag_ang = self gettagangles(spin_dir);
 	var_bf72b943 = distance(var_a4388d06.origin, tag_pos);
 	var_bb95ea0c = 500;
 	interval_dist = var_bb95ea0c * 0.1;
@@ -1871,10 +1871,10 @@ function private function_137ed431(axe, var_a4388d06, var_9e7687f8)
 	var_7900b267 = vectornormalize(tag_pos - var_a4388d06.origin);
 	new_yaw = absangleclamp360(var_a4388d06.angles[1] + 180);
 	var_a4388d06.angles = (0, new_yaw, 0);
-	self thread function_c3712093(var_a4388d06, var_9e7687f8, var_bb95ea0c);
+	self thread function_c3712093(var_a4388d06, spin_dir, var_bb95ea0c);
 	while(true)
 	{
-		tag_pos = self gettagorigin(var_9e7687f8);
+		tag_pos = self gettagorigin(spin_dir);
 		var_7900b267 = vectornormalize(tag_pos - var_a4388d06.origin);
 		move_pos = var_a4388d06.origin + (var_7900b267 * interval_dist);
 		self function_88d65504(var_a4388d06, var_7900b267, move_pos);
@@ -1889,7 +1889,7 @@ function private function_137ed431(axe, var_a4388d06, var_9e7687f8)
 	var_a4388d06 namespace_83eb6304::turnofffx("axe_trail");
 	var_a4388d06 namespace_83eb6304::turnofffx("red_shield");
 	var_a4388d06 namespace_e32bb68::function_ae271c0b("zmb_ai_gladiator_axe_lp");
-	self.var_9a9a0311[var_9e7687f8] = undefined;
+	self.var_9a9a0311[spin_dir] = undefined;
 	var_a4388d06 delete();
 	self function_5be18f96();
 	self.var_ba481973 = 0;
@@ -1968,7 +1968,7 @@ function private function_5be18f96(display)
 	{
 		if(display)
 		{
-			if(self.var_d9b1cc0e && is_true(self.var_fe593357))
+			if(self.has_left_arm && is_true(self.var_fe593357))
 			{
 				if(self isattached("c_t8_zmb_dlc0_zombie_destroyer_axe1", "tag_weapon_left"))
 				{
@@ -1978,7 +1978,7 @@ function private function_5be18f96(display)
 			}
 			self attach("c_t8_zmb_dlc0_zombie_destroyer_axe1", "tag_weapon_right");
 			self.var_88d88318 = 1;
-			if(self.var_d9b1cc0e)
+			if(self.has_left_arm)
 			{
 				self attach("c_t8_zmb_dlc0_zombie_destroyer_axe1", "tag_weapon_left");
 				self.var_fe593357 = 1;

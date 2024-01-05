@@ -1,4 +1,4 @@
-#using script_2efbf80b6e18c0ab;
+#using scripts\mp_common\teams\teamset.gsc;
 
 #namespace namespace_6f4abfc0;
 
@@ -13,7 +13,7 @@
 */
 function private autoexec function_d412c3ff()
 {
-	level notify(1242063117);
+	level notify(-1242063117);
 }
 
 /*

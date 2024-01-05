@@ -1,19 +1,19 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace ui;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: ui
 	Checksum: 0x87474F5F
 	Offset: 0x280
@@ -21,7 +21,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ui", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -42,7 +42,7 @@ function private function_70a657d8()
 		level.var_ef4974d7 = [];
 	}
 	/#
-		level thread function_5f747d5a();
+		level thread devgui_loop();
 	#/
 }
 
@@ -76,7 +76,7 @@ function game_time()
 }
 
 /*
-	Name: function_ebd7bf6a
+	Name: countdown_timer
 	Namespace: ui
 	Checksum: 0x82F6C883
 	Offset: 0x380
@@ -84,7 +84,7 @@ function game_time()
 	Parameters: 10
 	Flags: None
 */
-function function_ebd7bf6a(var_753cb060, var_3b192471, str_team, var_9c038d31, var_f27011e3, var_3efd443d, var_edf9778a, var_72f304a8, var_243f2dbe, var_f2a3a140)
+function countdown_timer(var_753cb060, var_3b192471, str_team, var_9c038d31, var_f27011e3, var_3efd443d, var_edf9778a, var_72f304a8, var_243f2dbe, var_f2a3a140)
 {
 	if(!isdefined(var_3b192471))
 	{
@@ -583,7 +583,7 @@ function game_result(str_winning_team)
 }
 
 /*
-	Name: function_5f747d5a
+	Name: devgui_loop
 	Namespace: ui
 	Checksum: 0xEB655389
 	Offset: 0x1610
@@ -591,7 +591,7 @@ function game_result(str_winning_team)
 	Parameters: 0
 	Flags: Private
 */
-function private function_5f747d5a()
+function private devgui_loop()
 {
 	/#
 		while(true)

@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_5c5263e2 : class_6aaccc24
+class cremote_missile_targets : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_5c5263e2
+		Namespace: cremote_missile_targets
 		Checksum: 0xCFEB7292
 		Offset: 0x420
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_5c5263e2 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_5c5263e2
+		Namespace: cremote_missile_targets
 		Checksum: 0xE390816E
 		Offset: 0x700
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_5c5263e2 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_5c5263e2
+		Namespace: cremote_missile_targets
 		Checksum: 0x2F5F7F5D
 		Offset: 0x5F0
 		Size: 0x24
@@ -40,54 +40,54 @@ class class_5c5263e2 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_46609401
-		Namespace: namespace_5c5263e2
+		Name: set_player_target_active
+		Namespace: cremote_missile_targets
 		Checksum: 0xA92E0B86
 		Offset: 0x620
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_46609401(localclientnum, value)
+	function set_player_target_active(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "player_target_active", value);
+		[[ self ]]->set_data(localclientnum, "player_target_active", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_5c5263e2
+		Name: register_clientside
+		Namespace: cremote_missile_targets
 		Checksum: 0xCDCFF202
 		Offset: 0x528
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("remote_missile_targets");
+		cluielem::register_clientside("remote_missile_targets");
 	}
 
 	/*
-		Name: function_808f0a7c
-		Namespace: namespace_5c5263e2
+		Name: set_extra_target_2
+		Namespace: cremote_missile_targets
 		Checksum: 0xBE3861D1
 		Offset: 0x690
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_808f0a7c(localclientnum, value)
+	function set_extra_target_2(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "extra_target_2", value);
+		[[ self ]]->set_data(localclientnum, "extra_target_2", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_5c5263e2
+		Namespace: cremote_missile_targets
 		Checksum: 0xB7A83FAB
 		Offset: 0x440
 		Size: 0xDC
@@ -96,44 +96,44 @@ class class_5c5263e2 : class_6aaccc24
 	*/
 	function setup_clientfields(var_9318c80d, var_82a5247c, var_afbc846a, var_4c87c083)
 	{
-		namespace_6aaccc24::setup_clientfields("remote_missile_targets");
-		namespace_6aaccc24::function_da693cbe("player_target_active", 1, 16, "int", var_9318c80d);
-		namespace_6aaccc24::function_da693cbe("extra_target_1", 1, 10, "int", var_82a5247c);
-		namespace_6aaccc24::function_da693cbe("extra_target_2", 1, 10, "int", var_afbc846a);
-		namespace_6aaccc24::function_da693cbe("extra_target_3", 1, 10, "int", var_4c87c083);
+		cluielem::setup_clientfields("remote_missile_targets");
+		cluielem::add_clientfield("player_target_active", 1, 16, "int", var_9318c80d);
+		cluielem::add_clientfield("extra_target_1", 1, 10, "int", var_82a5247c);
+		cluielem::add_clientfield("extra_target_2", 1, 10, "int", var_afbc846a);
+		cluielem::add_clientfield("extra_target_3", 1, 10, "int", var_4c87c083);
 	}
 
 	/*
-		Name: function_d798388d
-		Namespace: namespace_5c5263e2
+		Name: set_extra_target_1
+		Namespace: cremote_missile_targets
 		Checksum: 0xDE90946F
 		Offset: 0x658
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_d798388d(localclientnum, value)
+	function set_extra_target_1(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "extra_target_1", value);
+		[[ self ]]->set_data(localclientnum, "extra_target_1", value);
 	}
 
 	/*
-		Name: function_ec1de198
-		Namespace: namespace_5c5263e2
+		Name: set_extra_target_3
+		Namespace: cremote_missile_targets
 		Checksum: 0xF4988883
 		Offset: 0x6C8
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_ec1de198(localclientnum, value)
+	function set_extra_target_3(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "extra_target_3", value);
+		[[ self ]]->set_data(localclientnum, "extra_target_3", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_5c5263e2
+		Namespace: cremote_missile_targets
 		Checksum: 0x963EA72B
 		Offset: 0x550
 		Size: 0x94
@@ -142,11 +142,11 @@ class class_5c5263e2 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "player_target_active", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "extra_target_1", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "extra_target_2", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "extra_target_3", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "player_target_active", 0);
+		[[ self ]]->set_data(localclientnum, "extra_target_1", 0);
+		[[ self ]]->set_data(localclientnum, "extra_target_2", 0);
+		[[ self ]]->set_data(localclientnum, "extra_target_3", 0);
 	}
 
 }
@@ -164,7 +164,7 @@ class class_5c5263e2 : class_6aaccc24
 */
 function register(var_9318c80d, var_82a5247c, var_afbc846a, var_4c87c083)
 {
-	elem = new class_5c5263e2();
+	elem = new cremote_missile_targets();
 	[[ elem ]]->setup_clientfields(var_9318c80d, var_82a5247c, var_afbc846a, var_4c87c083);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -186,7 +186,7 @@ function register(var_9318c80d, var_82a5247c, var_afbc846a, var_4c87c083)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: remote_missile_targets
 	Checksum: 0xF7FB098D
 	Offset: 0x2A8
@@ -194,10 +194,10 @@ function register(var_9318c80d, var_82a5247c, var_afbc846a, var_4c87c083)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_5c5263e2();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cremote_missile_targets();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -244,7 +244,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_46609401
+	Name: set_player_target_active
 	Namespace: remote_missile_targets
 	Checksum: 0xDC0742BC
 	Offset: 0x360
@@ -252,13 +252,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_46609401(localclientnum, value)
+function set_player_target_active(localclientnum, value)
 {
-	[[ self ]]->function_46609401(localclientnum, value);
+	[[ self ]]->set_player_target_active(localclientnum, value);
 }
 
 /*
-	Name: function_d798388d
+	Name: set_extra_target_1
 	Namespace: remote_missile_targets
 	Checksum: 0x33667506
 	Offset: 0x390
@@ -266,13 +266,13 @@ function function_46609401(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_d798388d(localclientnum, value)
+function set_extra_target_1(localclientnum, value)
 {
-	[[ self ]]->function_d798388d(localclientnum, value);
+	[[ self ]]->set_extra_target_1(localclientnum, value);
 }
 
 /*
-	Name: function_808f0a7c
+	Name: set_extra_target_2
 	Namespace: remote_missile_targets
 	Checksum: 0x150BA87
 	Offset: 0x3C0
@@ -280,13 +280,13 @@ function function_d798388d(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_808f0a7c(localclientnum, value)
+function set_extra_target_2(localclientnum, value)
 {
-	[[ self ]]->function_808f0a7c(localclientnum, value);
+	[[ self ]]->set_extra_target_2(localclientnum, value);
 }
 
 /*
-	Name: function_ec1de198
+	Name: set_extra_target_3
 	Namespace: remote_missile_targets
 	Checksum: 0xC4AE300D
 	Offset: 0x3F0
@@ -294,8 +294,8 @@ function function_808f0a7c(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_ec1de198(localclientnum, value)
+function set_extra_target_3(localclientnum, value)
 {
-	[[ self ]]->function_ec1de198(localclientnum, value);
+	[[ self ]]->set_extra_target_3(localclientnum, value);
 }
 

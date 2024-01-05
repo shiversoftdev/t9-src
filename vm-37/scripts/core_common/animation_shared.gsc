@@ -1,19 +1,19 @@
 #using script_6c2a6f88ebaa044;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\string_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\animation_debug_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\string_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 
 #namespace animation;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: animation
 	Checksum: 0x2025734A
 	Offset: 0x458
@@ -21,7 +21,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"animation", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -107,10 +107,10 @@ function play_siege(str_anim, n_rate)
 	{
 		n_rate = 1;
 	}
-	self notify(#"hash_10506de382288d3");
-	self endon(#"death", #"scene_stop", #"hash_10506de382288d3");
+	self notify(#"stop_siege_anim");
+	self endon(#"death", #"scene_stop", #"stop_siege_anim");
 	/#
-		if(sessionmodeismultiplayergame() || function_f99d2668())
+		if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame())
 		{
 			iprintlnbold(("" + function_9e72a96(str_anim)) + "");
 			println(("" + function_9e72a96(str_anim)) + "");
@@ -128,7 +128,7 @@ function play_siege(str_anim, n_rate)
 	self function_cf6be307(str_anim, "default", n_rate, b_loop);
 	if(b_loop)
 	{
-		self waittill(#"hash_10506de382288d3");
+		self waittill(#"stop_siege_anim");
 	}
 	else
 	{
@@ -730,11 +730,11 @@ function _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disabl
 			self thread debug_anim_reach(v_goal, animation);
 		#/
 		self thread function_ba45bb6c();
-		self thread function_d7627522(animation, v_goal);
-		var_be17187b = undefined;
-		var_be17187b = self waittill(#"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim", #"reach_timed_out");
+		self childthread function_d7627522(animation, v_goal);
+		s_waitresult = undefined;
+		s_waitresult = self waittill(#"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim", #"reach_timed_out");
 		/#
-			if(var_be17187b._notify === "")
+			if(s_waitresult._notify === "")
 			{
 				iprintlnbold((("" + function_9e72a96(animation)) + "") + v_goal);
 				println((("" + function_9e72a96(animation)) + "") + v_goal);
@@ -790,8 +790,8 @@ function function_d7627522(animation, v_goal, radius)
 		waitframe(1);
 	}
 	self function_2ce879d2(var_f11838cd);
-	var_be17187b = undefined;
-	var_be17187b = self waittill(#"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim", #"reach_timed_out");
+	s_waitresult = undefined;
+	s_waitresult = self waittill(#"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim", #"reach_timed_out");
 	self function_9ae1c50();
 }
 
@@ -1388,10 +1388,10 @@ function function_eb0aa7cf(n_pulse, bone)
 		}
 		else
 		{
-			var_57a69262 = (math::cointoss() ? 1 : -1);
-			var_2059cf18 = (math::cointoss() ? 1 : -1);
-			var_f98659c0 = (math::cointoss() ? 1 : -1);
-			var_236556ec = vectorscale((var_57a69262, var_2059cf18, var_f98659c0), n_pulse);
+			x_dir = (math::cointoss() ? 1 : -1);
+			y_dir = (math::cointoss() ? 1 : -1);
+			z_dir = (math::cointoss() ? 1 : -1);
+			var_236556ec = vectorscale((x_dir, y_dir, z_dir), n_pulse);
 			color = (1, 1, 0);
 		}
 		self physicslaunch(var_8ef160cb, var_236556ec);

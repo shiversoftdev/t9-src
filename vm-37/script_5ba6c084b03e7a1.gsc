@@ -28,8 +28,8 @@ function autoexec __init__()
 */
 function function_22c36a1e()
 {
-	var_87d0eef8 = &namespace_b0722f43::function_63bfe27;
-	var_74257310 = &namespace_b0722f43::function_6da5e673;
-	var_f8a4c541 = &namespace_b0722f43::function_6991057;
+	var_87d0eef8 = &item_world_fixup::remove_item;
+	var_74257310 = &item_world_fixup::add_item_replacement;
+	var_f8a4c541 = &item_world_fixup::function_6991057;
 }
 

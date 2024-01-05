@@ -1,14 +1,14 @@
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
 #using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace persistence;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: persistence
 	Checksum: 0x27B522A0
 	Offset: 0xA0
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"persistence", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -304,13 +304,13 @@ function initialize_match_stats()
 	{
 		return;
 	}
-	if(function_f99d2668() || sessionmodeismultiplayergame())
+	if(sessionmodeiswarzonegame() || sessionmodeismultiplayergame())
 	{
 		self stats::function_bb7eedf0(#"total_games_played", 1);
 		if(is_true(level.hardcoremode))
 		{
-			var_6eba998 = self stats::get_stat(#"playerstatslist", #"hash_bbe0d2619357e0a", #"statvalue") + 1;
-			self stats::set_stat(#"playerstatslist", #"hash_bbe0d2619357e0a", #"statvalue", var_6eba998);
+			hc_games_played = self stats::get_stat(#"playerstatslist", #"hc_games_played", #"statvalue") + 1;
+			self stats::set_stat(#"playerstatslist", #"hc_games_played", #"statvalue", hc_games_played);
 		}
 	}
 	if(isdefined(level.var_12323003))
@@ -396,7 +396,7 @@ function challenge_complete(eventstruct)
 	var_c4e9517b = tablenumber + 1;
 	if(currentsessionmode() == 0)
 	{
-		tablename = (#"hash_34a621a5800b5b4a" + var_c4e9517b) + ".csv";
+		tablename = ((#"gamedata/stats/zm/statsmilestones") + var_c4e9517b) + ".csv";
 		if(var_c4e9517b == 2)
 		{
 			var_a05af556 = tablelookupcolumnforrow(tablename, row, 9);
@@ -406,7 +406,7 @@ function challenge_complete(eventstruct)
 			}
 			if(getdvarint(#"hash_730fab929626f598", 0) == 0)
 			{
-				if(var_a05af556 === #"camo_gold" || var_a05af556 === #"hash_2dcaf4647cd4e672" || var_a05af556 === #"hash_229b17b6185be37")
+				if(var_a05af556 === #"camo_gold" || var_a05af556 === #"camo_diamond" || var_a05af556 === #"camo_darkmatter")
 				{
 					return;
 				}
@@ -415,7 +415,7 @@ function challenge_complete(eventstruct)
 	}
 	else
 	{
-		tablename = (#"hash_287cf26422669b76" + var_c4e9517b) + ".csv";
+		tablename = ((#"gamedata/stats/mp/statsmilestones") + var_c4e9517b) + ".csv";
 	}
 	var_eb67c133 = tablelookupcolumnforrow(tablename, row, 5);
 	if(isdefined(var_eb67c133) && (var_eb67c133 == #"hash_5a619f94abe000b" || var_eb67c133 == #"hash_4a80d584aac2e7d0"))
@@ -435,8 +435,8 @@ function challenge_complete(eventstruct)
 		var_5d5d13c3 = getdvarstring(#"hash_5941150fef84419c", "");
 		if(var_5d5d13c3 != "")
 		{
-			var_46e31744 = tablelookupcolumnforrow(tablename, row, 4);
-			var_40fdd9a5 = (function_7a600918(var_46e31744) ? function_9e72a96(var_46e31744) : var_46e31744);
+			challengestat = tablelookupcolumnforrow(tablename, row, 4);
+			var_40fdd9a5 = (ishash(challengestat) ? function_9e72a96(challengestat) : challengestat);
 			if(!issubstr(tolower(var_40fdd9a5), tolower(var_5d5d13c3)))
 			{
 				return;
@@ -474,13 +474,13 @@ function challenge_complete(eventstruct)
 			{
 				if(challengetype == 3)
 				{
-					challengestring = function_ea13f55(challengestring, "", "" + function_60394171(#"challenge", 3, itemindex));
+					challengestring = strreplace(challengestring, "", "" + function_60394171(#"challenge", 3, itemindex));
 					var_33b913f5 = "";
 				}
 			}
 			if(issubstr(challengestring, ""))
 			{
-				challengestring = function_ea13f55(challengestring, "", "" + tiertext);
+				challengestring = strreplace(challengestring, "", "" + tiertext);
 			}
 			if(var_33b913f5 == "")
 			{

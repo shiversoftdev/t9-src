@@ -1,18 +1,18 @@
-#using script_24c32478acf44108;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\zm_common\zm_utility.gsc;
 #using script_35598499769dbb3d;
-#using script_3f9e0dc8454d98e1;
-#using script_556e19065f09f8a2;
-#using script_8988fdbc78d6c53;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_556e19065f09f8a2;
+#using scripts\zm_common\zm.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using script_24c32478acf44108;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
 
 #namespace namespace_b376a999;
 
@@ -27,11 +27,11 @@
 */
 function private autoexec function_5e9eaea5()
 {
-	level notify(704606122);
+	level notify(-704606122);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_b376a999
 	Checksum: 0xCD1E5B34
 	Offset: 0x2D0
@@ -39,7 +39,7 @@ function private autoexec function_5e9eaea5()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_36cdf1547e49b57a", &function_70a657d8, &function_8ac3bea9, undefined, "zm_weapons");
 }
@@ -74,7 +74,7 @@ function private function_70a657d8()
 		level.var_1a4cc228[#"hash_6904f5c7bef64405"] = [0:#"hash_5eafd160d077670d"];
 		level.var_1a4cc228[#"hash_7f957e36b4f6160f"] = [0:#"hash_61df3be05096e9e2"];
 	}
-	else if(util::function_53bbf9d2() == "zm_silver")
+	else if(util::get_map_name() == "zm_silver")
 	{
 		level.var_1a4cc228[#"hash_5214ebcccbd95a36"] = [6:#"hash_c71860858c9efd0", 5:#"hash_3b3eb000bcfc5389", 4:#"hash_5c0877f0bdec3739", 3:#"hash_2de8c613f642c492", 2:#"hash_161f9bdf4e9e092f", 1:#"hash_725982139f7312b6", 0:#"hash_6137ec0a60179183"];
 		level.var_1a4cc228[#"hash_bc5dffd7824c28f"] = level.var_1a4cc228[#"hash_5214ebcccbd95a36"];
@@ -92,12 +92,12 @@ function private function_70a657d8()
 	level.var_fb37bf51 = getweapon(#"hash_6e0b27b854e591a3");
 	weaponobjects::function_e6400478(#"hash_6e0b27b854e591a3", &function_47c38bc8, 1);
 	zombie_utility::add_zombie_gib_weapon_callback(#"hash_6e0b27b854e591a3", &function_7a7d85a4, &function_7a7d85a4);
-	callback::function_34dea974(level.var_fb37bf51, &function_c8adf16f);
+	callback::add_weapon_fired(level.var_fb37bf51, &function_c8adf16f);
 	zm_weapons::function_90953640(level.var_fb37bf51, 5, float(function_60d95f53()) / 1000);
 	level.var_12b450dc = getweapon(#"hash_72796957033e2e4a");
 	weaponobjects::function_e6400478(#"hash_72796957033e2e4a", &function_3c39516d, 1);
 	zm::function_84d343d(level.var_12b450dc.name, &function_fd195372);
-	callback::function_34dea974(level.var_12b450dc, &function_d6ae76f5);
+	callback::add_weapon_fired(level.var_12b450dc, &function_d6ae76f5);
 	clientfield::register("actor", "" + #"hash_77e641a4db48ad0f", 1, 2, "int");
 	clientfield::register("allplayers", "" + #"hash_492f4817c4296ddf", 1, 1, "counter");
 	clientfield::register("allplayers", "" + #"hash_89386ef1bb99cdf", 1, 2, "int");
@@ -111,7 +111,7 @@ function private function_70a657d8()
 	clientfield::register("missile", "" + #"hash_685e6cfaf658518e", 1, 1, "int");
 	level.var_e0be56c0 = getweapon(#"hash_5dd5741f21fd680d");
 	function_efcce3c1();
-	callback::function_34dea974(level.var_e0be56c0, &function_5a9a8abc);
+	callback::add_weapon_fired(level.var_e0be56c0, &function_5a9a8abc);
 	clientfield::register("allplayers", "" + #"hash_2eb1021a0e4110d1", 1, 2, "int");
 	namespace_9ff9f642::register_slowdown(#"hash_659e542bc102c218", 0.8, 0.5);
 	namespace_9ff9f642::register_slowdown(#"hash_e5fddce96190022", 1, 0);
@@ -222,7 +222,7 @@ function function_18fbdeee()
 		{
 			continue;
 		}
-		max_ammo = self function_f09c133d(weapon);
+		max_ammo = self getweaponammoclipsize(weapon);
 		cur_ammo = self getweaponammoclip(weapon);
 		if(cur_ammo < max_ammo && !isdefined(self.crystal))
 		{
@@ -1198,7 +1198,7 @@ function function_f0c18475(weapon)
 		}
 	}
 	current_weapon = self getcurrentweapon();
-	while(self throwbuttonpressed() && function_5fef4201(current_weapon) && self getweaponammoclip(current_weapon) < self function_f09c133d(current_weapon))
+	while(self throwbuttonpressed() && function_5fef4201(current_weapon) && self getweaponammoclip(current_weapon) < self getweaponammoclipsize(current_weapon))
 	{
 		targets = self function_13da7675();
 		count = 0;
@@ -1355,7 +1355,7 @@ function function_6dbf1bb3(player, var_77c89bbd, start_pos)
 function function_96db9f3(weapon, delta)
 {
 	var_ac1c1bdc = self getweaponammoclip(weapon) + delta;
-	max_ammo = self function_f09c133d(weapon);
+	max_ammo = self getweaponammoclipsize(weapon);
 	if(var_ac1c1bdc < 0)
 	{
 		var_ac1c1bdc = 0;
@@ -1471,7 +1471,7 @@ function function_cdb97cd1(watcher, player)
 function function_8811e4ff(owner)
 {
 	self endon(#"death");
-	var_b4801e76 = [];
+	ai_damaged = [];
 	var_ef1d7300 = [];
 	while(true)
 	{
@@ -1479,20 +1479,20 @@ function function_8811e4ff(owner)
 		a_targets = getentitiesinradius(self.origin, 150, 15);
 		foreach(ai in a_targets)
 		{
-			if(!isalive(ai) || ai getteam() !== level.zombie_team || isinarray(var_b4801e76, ai))
+			if(!isalive(ai) || ai getteam() !== level.zombie_team || isinarray(ai_damaged, ai))
 			{
 				continue;
 			}
 			ai dodamage(15000, self.origin, owner, undefined, undefined, "MOD_PROJECTILE", 0, level.var_652bc5ed);
-			if(!isdefined(var_b4801e76))
+			if(!isdefined(ai_damaged))
 			{
-				var_b4801e76 = [];
+				ai_damaged = [];
 			}
-			else if(!isarray(var_b4801e76))
+			else if(!isarray(ai_damaged))
 			{
-				var_b4801e76 = array(var_b4801e76);
+				ai_damaged = array(ai_damaged);
 			}
-			var_b4801e76[var_b4801e76.size] = ai;
+			ai_damaged[ai_damaged.size] = ai;
 			var_98c4a170++;
 			if(var_98c4a170 >= 3)
 			{
@@ -2147,15 +2147,15 @@ function private function_48c9861b(var_66284057)
 	level endon(#"end_game");
 	self.var_ca98503 = var_66284057 + 0.4;
 	function_74be4c3e(1);
-	var_fc296337 = gettime();
-	while(var_fc296337 < self.var_ca98503)
+	time_now = gettime();
+	while(time_now < self.var_ca98503)
 	{
-		wait(self.var_ca98503 - var_fc296337);
+		wait(self.var_ca98503 - time_now);
 		if(!isdefined(self))
 		{
 			return;
 		}
-		var_fc296337 = gettime();
+		time_now = gettime();
 	}
 	if(isalive(self))
 	{
@@ -2439,9 +2439,9 @@ function function_5a9a8abc(weapon)
 	}
 	else
 	{
-		var_fc296337 = gettime();
-		self.var_9cb64422 = self.var_9cb64422 + (var_fc296337 - self.var_7c223de7);
-		self.var_7c223de7 = var_fc296337;
+		time_now = gettime();
+		self.var_9cb64422 = self.var_9cb64422 + (time_now - self.var_7c223de7);
+		self.var_7c223de7 = time_now;
 		if(isdefined(level.var_284e25d2[self.var_c627b034].var_4a0c6d55) && self.var_9cb64422 > level.var_284e25d2[self.var_c627b034].var_4a0c6d55)
 		{
 			self.var_c627b034 = self.var_c627b034 + 1;
@@ -2466,7 +2466,7 @@ function private get_closest_tag(v_pos)
 	{
 		zombie_utility::init_gib_tags();
 	}
-	var_144ac6c7 = undefined;
+	tag_closest = undefined;
 	var_9aabd9de = arraycopy(level.gib_tags);
 	if(!isdefined(var_9aabd9de))
 	{
@@ -2482,23 +2482,23 @@ function private get_closest_tag(v_pos)
 	}
 	for(i = 0; i < var_9aabd9de.size; i++)
 	{
-		if(!isdefined(var_144ac6c7))
+		if(!isdefined(tag_closest))
 		{
-			var_144ac6c7 = var_9aabd9de[i];
+			tag_closest = var_9aabd9de[i];
 			continue;
 		}
 		var_abe265db = self gettagorigin(var_9aabd9de[i]);
-		var_2cd7818f = self gettagorigin(var_144ac6c7);
+		var_2cd7818f = self gettagorigin(tag_closest);
 		if(!isdefined(var_abe265db) || !isdefined(var_2cd7818f))
 		{
 			continue;
 		}
 		if(distancesquared(v_pos, var_abe265db) < distancesquared(v_pos, var_2cd7818f))
 		{
-			var_144ac6c7 = var_9aabd9de[i];
+			tag_closest = var_9aabd9de[i];
 		}
 	}
-	return tolower(var_144ac6c7);
+	return tolower(tag_closest);
 }
 
 /*

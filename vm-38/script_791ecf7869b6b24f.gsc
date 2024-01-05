@@ -1,8 +1,8 @@
-#using script_31816d064a53f516;
 #using script_7d6dc1eb458198d1;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
+#using script_31816d064a53f516;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_f7b3ed9;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_cd25a68()
 {
-	level notify(1795003319);
+	level notify(-1795003319);
 }
 
 /*
@@ -40,7 +40,7 @@ function init()
 	clientfield::register("scriptmover", "" + #"hash_48cdaba6cfee3ee8", 16000, 1, "int", &function_4c4184dd, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_11d9c3835adcaece", 16000, 1, "int", &function_6909812d, 0, 0);
 	clientfield::register("actor", "" + #"zombie_soul", 16000, 1, "int", &function_bb5d646a, 0, 0);
-	namespace_72133e5::register();
+	zm_control_point_hud::register();
 }
 
 /*
@@ -192,7 +192,7 @@ function function_33827fb9(localclientnum, oldval, newval, bnewent, binitialsnap
 */
 function function_773683a7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump)
 {
-	playfx(bwasdemojump, #"hash_2fc05993f58131bf", self.origin + vectorscale((0, 0, 1), 32), anglestoforward(self.angles), anglestoup(self.angles));
+	playfx(bwasdemojump, #"sr/fx9_obj_console_defend_dmg_os", self.origin + vectorscale((0, 0, 1), 32), anglestoforward(self.angles), anglestoup(self.angles));
 }
 
 /*
@@ -213,7 +213,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
 		return;
 	}
 	self zombie_eye_glow::good_barricade_damaged(bwasdemojump);
-	self function_bf9d3071(#"hash_9f31d2c3b11a51c");
+	self playrenderoverridebundle(#"hash_9f31d2c3b11a51c");
 	e_fx = util::spawn_model(bwasdemojump, "tag_origin", self gettagorigin("J_Spine4"));
 	playsound(bwasdemojump, #"hash_61be08677fe8683", e_fx.origin);
 	var_5e7d1e09 = struct::get_array("satellite_pos", "script_noteworthy");

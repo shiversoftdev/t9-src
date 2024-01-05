@@ -1,14 +1,14 @@
-#using script_3f9e0dc8454d98e1;
-#using script_6021ce59143452c3;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\rat_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_player.gsc;
-#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_trial.gsc;
 #using scripts\zm_common\zm_unitrigger.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_player.gsc;
+#using scripts\zm_common\zm_devgui.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\rat_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace rat;
 
@@ -23,11 +23,11 @@
 */
 function private autoexec function_3f3f1ff()
 {
-	level notify(1712984425);
+	level notify(-1712984425);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: rat
 	Checksum: 0xD5463D36
 	Offset: 0xD8
@@ -35,7 +35,7 @@ function private autoexec function_3f3f1ff()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"rat", &function_70a657d8, undefined, undefined, undefined);
@@ -120,7 +120,7 @@ function function_303319e9(params)
 {
 	/#
 		zombies = getaiarchetypearray("", level.zombie_team);
-		player = function_4337d833(params);
+		player = getplayer(params);
 		forward = anglestoforward(player.angles);
 		distance = 31;
 		if(isdefined(params.distance))
@@ -303,7 +303,7 @@ function function_d87f9fe1(params)
 function function_6ea9a113(params)
 {
 	/#
-		foreach(items in level.var_223728ac)
+		foreach(items in level.item_spawns)
 		{
 			foreach(item in items)
 			{
@@ -391,9 +391,9 @@ function function_5b9ddfdb(params)
 function function_e2143adf(params)
 {
 	/#
-		if(isdefined(level.var_b376ff3f))
+		if(isdefined(level.item_inventory))
 		{
-			return level.var_b376ff3f.size;
+			return level.item_inventory.size;
 		}
 		return 0;
 	#/
@@ -411,7 +411,7 @@ function function_e2143adf(params)
 function function_1bd3da0f(params)
 {
 	/#
-		chunks = level.s_pap_quest.var_e770eb55;
+		chunks = level.s_pap_quest.a_s_locations;
 		if(isdefined(chunks))
 		{
 			foreach(chunk in chunks)

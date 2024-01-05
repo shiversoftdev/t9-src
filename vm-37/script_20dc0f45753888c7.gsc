@@ -1,25 +1,25 @@
-#using script_24c32478acf44108;
-#using script_47fb62300ac0bd60;
-#using script_57f7003580bb15e0;
-#using script_5f261a5d57de5f7c;
 #using script_62caa307a394c18c;
-#using script_6809bf766eba194a;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\scoreevents.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_5f261a5d57de5f7c;
+#using script_24c32478acf44108;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace zombie_dog_toxic_cloud;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zombie_dog_toxic_cloud
 	Checksum: 0x71D442E8
 	Offset: 0x1D8
@@ -27,7 +27,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_33449a50d9656246", &init_shared, undefined, undefined, undefined);
 }
@@ -66,7 +66,7 @@ function function_4f3cd1f0()
 	{
 		self.var_90d0c0ff = "anim_spawn_plaguehound";
 		self clientfield::set("pustule_pulse_plague", 1);
-		self callback::function_d8abfc3d(#"hash_46a032931418eecf", &function_a6c93300);
+		self callback::function_d8abfc3d(#"on_dog_killed", &function_a6c93300);
 	}
 }
 
@@ -119,7 +119,7 @@ function function_659d1778(attacker)
 	self endon(#"death");
 	var_9a4ca881 = gettime() + 5000;
 	var_7e6e7f9f = getweapon(#"tear_gas");
-	params = function_4d1e7b48("dot_toxic_cloud");
+	params = getstatuseffect("dot_toxic_cloud");
 	while(true)
 	{
 		alive_players = function_a1ef346b(undefined, self.origin, 110);
@@ -129,7 +129,7 @@ function function_659d1778(attacker)
 			{
 				if(player namespace_e86ffa8::function_3623f9d1(1))
 				{
-					params = function_4d1e7b48("dot_toxic_cloud_staminup");
+					params = getstatuseffect("dot_toxic_cloud_staminup");
 				}
 				player status_effect::status_effect_apply(params, var_7e6e7f9f, self);
 				player clientfield::increment_to_player("" + #"hash_313a6af163e4bef1", 1);

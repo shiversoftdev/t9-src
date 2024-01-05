@@ -1,17 +1,17 @@
-#using script_101d8280497ff416;
-#using script_1611421ee9b880d3;
-#using script_1ca35695cd4aeeea;
-#using script_3d35e2ff167b3a82;
-#using script_618d6f5ff5d18933;
-#using script_680dddbda86931fa;
-#using script_709bf7c56eb65adf;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\zm_common\zm_wallbuy.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\zm_common\zm_loadout.csc;
+#using scripts\weapons\weapons.csc;
+#using script_680dddbda86931fa;
+#using script_101d8280497ff416;
+#using script_618d6f5ff5d18933;
+#using script_3d35e2ff167b3a82;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace zm_weapons;
 
@@ -26,11 +26,11 @@
 */
 function private autoexec function_59f5f6e3()
 {
-	level notify(1333481706);
+	level notify(-1333481706);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_weapons
 	Checksum: 0x2EA2E787
 	Offset: 0x150
@@ -38,7 +38,7 @@ function private autoexec function_59f5f6e3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_weapons", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -210,7 +210,7 @@ function private on_player_connect(localclientnum)
 	}
 	resetweaponcosts(localclientnum);
 	level flag::wait_till("weapon_table_loaded");
-	if(getgametypesetting(#"hash_51a2cf319e12d9ae"))
+	if(getgametypesetting(#"zmwallbuysenabled"))
 	{
 		level flag::wait_till("weapon_wallbuys_created");
 	}
@@ -463,11 +463,11 @@ function function_15827c82(var_904df15f)
 {
 	if(var_904df15f.type === "itemspawnlist")
 	{
-		foreach(var_b67f9e10 in var_904df15f.itemlist)
+		foreach(s_item in var_904df15f.itemlist)
 		{
-			if(var_b67f9e10.type === "itemspawnlist")
+			if(s_item.type === "itemspawnlist")
 			{
-				function_15827c82(var_b67f9e10);
+				function_15827c82(s_item);
 				continue;
 			}
 			if(!isdefined(level.var_8bd4028f))
@@ -478,7 +478,7 @@ function function_15827c82(var_904df15f)
 			{
 				level.var_8bd4028f = array(level.var_8bd4028f);
 			}
-			level.var_8bd4028f[level.var_8bd4028f.size] = var_b67f9e10.var_a6762160;
+			level.var_8bd4028f[level.var_8bd4028f.size] = s_item.var_a6762160;
 		}
 	}
 }
@@ -499,11 +499,11 @@ function private function_350ee41()
 		level.var_82b76a68 = "zm_magicbox_item_list";
 	}
 	s_bundle = getscriptbundle(level.var_82b76a68);
-	foreach(var_b67f9e10 in s_bundle.itemlist)
+	foreach(s_item in s_bundle.itemlist)
 	{
-		if(var_b67f9e10.type === "itemspawnlist")
+		if(s_item.type === "itemspawnlist")
 		{
-			function_15827c82(var_b67f9e10);
+			function_15827c82(s_item);
 		}
 		if(!isdefined(level.var_8bd4028f))
 		{
@@ -513,9 +513,9 @@ function private function_350ee41()
 		{
 			level.var_8bd4028f = array(level.var_8bd4028f);
 		}
-		level.var_8bd4028f[level.var_8bd4028f.size] = var_b67f9e10.var_a6762160;
-		var_89230090 = getscriptbundle(var_b67f9e10.var_a6762160);
-		weapon = namespace_ad5a0cd6::function_35e06774(var_89230090, isdefined(var_89230090.attachments));
+		level.var_8bd4028f[level.var_8bd4028f.size] = s_item.var_a6762160;
+		var_89230090 = getscriptbundle(s_item.var_a6762160);
+		weapon = item_world_util::function_35e06774(var_89230090, isdefined(var_89230090.attachments));
 		if(isweapon(weapon))
 		{
 			if(!isdefined(level.var_c8b5248e))
@@ -546,7 +546,7 @@ function private function_350ee41()
 */
 function load_weapon_spec_from_table(table, first_row)
 {
-	gametype = util::function_5df4294();
+	gametype = util::get_game_type();
 	index = first_row;
 	row = tablelookuprow(table, index);
 	while(isdefined(row))

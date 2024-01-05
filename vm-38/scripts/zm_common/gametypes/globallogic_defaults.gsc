@@ -1,13 +1,13 @@
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\zm_common\gametypes\spawnlogic.gsc;
+#using scripts\zm_common\gametypes\globallogic_utils.gsc;
+#using scripts\zm_common\gametypes\globallogic_score.gsc;
+#using scripts\zm_common\gametypes\globallogic_audio.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\gametypes\globallogic_audio.gsc;
-#using scripts\zm_common\gametypes\globallogic_score.gsc;
-#using scripts\zm_common\gametypes\globallogic_utils.gsc;
-#using scripts\zm_common\gametypes\spawnlogic.gsc;
-#using scripts\zm_common\util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace globallogic_defaults;
 
@@ -55,9 +55,9 @@ function getwinningteamfromloser(losing_team)
 function default_onforfeit(team)
 {
 	level.gameforfeited = 1;
-	level notify(#"hash_7c63ed1f465e8e8e");
-	level endon(#"hash_7c63ed1f465e8e8e");
-	level endon(#"hash_39a00a79045884ca");
+	level notify(#"forfeit in progress");
+	level endon(#"forfeit in progress");
+	level endon(#"abort forfeit");
 	forfeit_delay = 20;
 	announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
 	wait(10);
@@ -114,7 +114,7 @@ function default_onforfeit(team)
 */
 function default_ondeadevent(team)
 {
-	level callback::callback(#"hash_4b1a02a87458f191", team);
+	level callback::callback(#"on_team_eliminated", team);
 	if(isdefined(level.teams[team]))
 	{
 		eliminatedstring = game.strings[team + "_eliminated"];

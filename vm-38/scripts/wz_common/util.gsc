@@ -1,5 +1,5 @@
 #using script_1cc417743d7c262d;
-#using script_70a43d6ba27cff6a;
+#using scripts\core_common\globallogic\globallogic_player.gsc;
 #using scripts\core_common\death_circle.gsc;
 
 #namespace util;
@@ -48,7 +48,7 @@ function function_8076d591(event, params)
 	Parameters: 2
 	Flags: None
 */
-function function_de15dc32(killed_player, var_67bb0009)
+function function_de15dc32(killed_player, disconnected_player)
 {
 	player_count = {#alive:0, #total:0};
 	var_77cfc33d = game.state == #"pregame" || function_47851c07();
@@ -63,7 +63,7 @@ function function_de15dc32(killed_player, var_67bb0009)
 		var_ead60f69 = 0;
 		foreach(player in players)
 		{
-			if(var_67bb0009 === player)
+			if(disconnected_player === player)
 			{
 				continue;
 			}
@@ -105,9 +105,9 @@ function function_47851c07()
 	{
 		return false;
 	}
-	if(is_true(level.spawnsystem.var_f220c297))
+	if(is_true(level.spawnsystem.deathcirclerespawn))
 	{
-		var_3db6ed91 = level.var_fb91af8.size - 2;
+		var_3db6ed91 = level.deathcircles.size - 2;
 		if(var_3db6ed91 < 0)
 		{
 			var_3db6ed91 = 0;

@@ -13,13 +13,13 @@
 */
 function private autoexec function_eaf2d2de()
 {
-	level notify(1005502750);
+	level notify(-1005502750);
 }
 
 #namespace namespace_e64042f6;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e64042f6
 	Checksum: 0xCD1840F9
 	Offset: 0xA0
@@ -27,7 +27,7 @@ function private autoexec function_eaf2d2de()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7ed2df741d2c106c", &function_70a657d8, undefined, undefined, undefined);
 }

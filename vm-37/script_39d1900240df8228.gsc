@@ -1,13 +1,13 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\load_shared.csc;
 #using scripts\core_common\scene_shared.csc;
+#using scripts\core_common\load_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
-#namespace namespace_94c51214;
+#namespace mp_nuketown6;
 
 /*
 	Name: main
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0xCB8AB5FE
 	Offset: 0x110
 	Size: 0x144
@@ -21,7 +21,7 @@ event main(eventstruct)
 	setsaveddvar(#"wind_global_low_altitude", 0);
 	setsaveddvar(#"wind_global_hi_altitude", 10000);
 	setsaveddvar(#"wind_global_low_strength_percent", 100);
-	callback::function_d46d9315(&function_d46d9315);
+	callback::on_gameplay_started(&on_gameplay_started);
 	level thread function_b02d88a3();
 	level thread function_a6101b7();
 	load::main();
@@ -29,15 +29,15 @@ event main(eventstruct)
 }
 
 /*
-	Name: function_d46d9315
-	Namespace: namespace_94c51214
+	Name: on_gameplay_started
+	Namespace: mp_nuketown6
 	Checksum: 0xF4742B9E
 	Offset: 0x260
 	Size: 0x8C
 	Parameters: 1
 	Flags: Linked
 */
-function function_d46d9315(localclientnum)
+function on_gameplay_started(localclientnum)
 {
 	waitframe(1);
 	var_7075c004 = 500;
@@ -52,7 +52,7 @@ function function_d46d9315(localclientnum)
 
 /*
 	Name: function_b02d88a3
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0xB19DB642
 	Offset: 0x2F8
 	Size: 0x108
@@ -62,7 +62,7 @@ function function_d46d9315(localclientnum)
 function function_b02d88a3()
 {
 	var_f7d8aaa7 = strtok("dom dom10v10 war war12v12 sd control dropkick vip sd_hc dom_hc control_hc", " ");
-	gametype = util::function_5df4294();
+	gametype = util::get_game_type();
 	if(!isinarray(var_f7d8aaa7, gametype))
 	{
 		indices = findvolumedecalindexarray("dom_bounds");
@@ -75,7 +75,7 @@ function function_b02d88a3()
 
 /*
 	Name: function_a6101b7
-	Namespace: namespace_94c51214
+	Namespace: mp_nuketown6
 	Checksum: 0xF172B043
 	Offset: 0x408
 	Size: 0x26C

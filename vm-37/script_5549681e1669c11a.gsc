@@ -1,41 +1,41 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
 #using script_2440f86f9cd325ac;
-#using script_2474a362752098d2;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c9915120c137848;
-#using script_350cffecd05ef6cf;
-#using script_3bbf85ab4cb9f3c2;
-#using script_3faf478d5b0850fe;
-#using script_40f967ad5d18ea74;
-#using script_47851dbeea22fe66;
-#using script_4d748e58ce25b60c;
-#using script_50fca1a24ae351;
-#using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_634ae70c663d1cc9;
 #using script_683a55734f15d50e;
-#using script_68cdf0ca5df5e;
-#using script_6b6510e124bad778;
-#using script_74a56359b7d02ab6;
+#using script_2c9915120c137848;
+#using script_2474a362752098d2;
 #using script_77357b2d180aa2b8;
+#using script_50fca1a24ae351;
+#using script_1a9763988299e68d;
+#using script_2a5bf5b4a00cee0d;
+#using script_3bbf85ab4cb9f3c2;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
 #using script_774302f762d76254;
+#using script_6b6510e124bad778;
+#using script_1b0b07ff57d1dde3;
+#using script_634ae70c663d1cc9;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_74a56359b7d02ab6;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
+#using script_68cdf0ca5df5e;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_5a917022;
 
@@ -121,7 +121,7 @@ function init()
 		#/
 		var_663588d = "Zombietron/Debug/AutoTesting/BonusRoomSoak/";
 		var_59ea00e = ("scr_bonus_room_activate " + room.name) + "; zombie_devgui bonusroomsoak";
-		util::function_e2e9d901(var_663588d + room.name, var_59ea00e);
+		util::add_devgui(var_663588d + room.name, var_59ea00e);
 	}
 }
 
@@ -172,11 +172,11 @@ function function_85615bbb()
 	util::function_85c62761(var_663588d);
 	util::wait_network_frame();
 	label = (is_true(level.doa.var_206393b4) ? "Disable Room Timeouts (TRUE):0" : "Disable Room Timeouts (FALSE):0");
-	util::function_e2e9d901(var_663588d + label, "zombie_devgui bonusTimeoutDisableToggle");
+	util::add_devgui(var_663588d + label, "zombie_devgui bonusTimeoutDisableToggle");
 	foreach(room in rooms)
 	{
 		var_59ea00e = ("scr_bonus_room_activate " + room.name) + "; zombie_devgui bonusroom";
-		util::function_e2e9d901(var_663588d + room.name, var_59ea00e);
+		util::add_devgui(var_663588d + room.name, var_59ea00e);
 	}
 }
 
@@ -233,7 +233,7 @@ function function_19e7d0fc(name)
 		{
 			return &function_4d16b7a9;
 		}
-		case "hash_730edee5e3aafd52":
+		case "snaketemple":
 		{
 			return &function_ab6edfa3;
 		}
@@ -241,7 +241,7 @@ function function_19e7d0fc(name)
 		{
 			return &function_7cbb4f99;
 		}
-		case "hash_a0bac19611189ec":
+		case "roj":
 		{
 			return &function_b2706226;
 		}
@@ -320,7 +320,7 @@ function function_b3411080(name)
 		{
 			return 5;
 		}
-		case "hash_730edee5e3aafd52":
+		case "snaketemple":
 		{
 			return 6;
 		}
@@ -348,7 +348,7 @@ function function_b3411080(name)
 		{
 			return 12;
 		}
-		case "hash_a0bac19611189ec":
+		case "roj":
 		{
 			return 13;
 		}
@@ -394,7 +394,7 @@ function function_d496f180(name)
 		{
 			return 19;
 		}
-		case "hash_730edee5e3aafd52":
+		case "snaketemple":
 		{
 			return 20;
 		}
@@ -416,7 +416,7 @@ function function_d496f180(name)
 		{
 			return 24;
 		}
-		case "hash_a0bac19611189ec":
+		case "roj":
 		{
 			return 50;
 		}
@@ -551,7 +551,7 @@ function function_8dd06da3()
 		level.doa.var_c2648383 = arraysortclosest(level.doa.var_c2648383, level.doa.var_187ed224.origin);
 		furthest = level.doa.var_c2648383[level.doa.var_c2648383.size - 1];
 		level.doa.var_c2648383 = [];
-		level.doa.var_9f48249a = doa_pickups::function_d080f0db(doa_pickups::function_2c9923d7(39), furthest.origin, undefined, undefined, 1);
+		level.doa.var_9f48249a = doa_pickups::itemspawn(doa_pickups::function_2c9923d7(39), furthest.origin, undefined, undefined, 1);
 		if(isdefined(level.doa.var_9f48249a))
 		{
 			level.doa.var_9f48249a clientfield::set("set_icon", 9);
@@ -1051,7 +1051,7 @@ function function_edc2fabf(item, var_74606c86, var_7d320f40)
 		def = doa_pickups::function_6265bde4(choice);
 		if(isdefined(def))
 		{
-			pickup = doa_pickups::function_d080f0db(def, item.origin, item.angles, undefined, 1, "none", undefined, undefined, undefined, undefined, 0);
+			pickup = doa_pickups::itemspawn(def, item.origin, item.angles, undefined, 1, "none", undefined, undefined, undefined, undefined, 0);
 		}
 		else
 		{
@@ -1087,7 +1087,7 @@ function function_edc2fabf(item, var_74606c86, var_7d320f40)
 		}
 		else
 		{
-			pickup = doa_pickups::function_d080f0db(def, item.origin, item.angles, undefined, 1, "none", undefined, undefined, undefined, undefined, 0);
+			pickup = doa_pickups::itemspawn(def, item.origin, item.angles, undefined, 1, "none", undefined, undefined, undefined, undefined, 0);
 		}
 	}
 	if(isdefined(pickup))
@@ -1318,7 +1318,7 @@ function function_170eefc7(room, aicount)
 	{
 		foreach(player in getplayers())
 		{
-			player notify(#"hash_432f04354a59ffb1");
+			player notify(#"lantern_terminated");
 		}
 	}
 	if(namespace_4dae815d::function_59a9cf1d() == 0 && isdefined(level.doa.var_39e3fa99))
@@ -1344,7 +1344,7 @@ function function_170eefc7(room, aicount)
 */
 function function_f11b0e51()
 {
-	self.var_42abd8e = self.var_42abd8e || is_true(self.var_d55f22cb);
+	self.shouldspawn = self.shouldspawn || is_true(self.var_d55f22cb);
 	self.var_227e7c79 = 1;
 	self.maxhealth = 1000;
 	self.health = self.maxhealth;
@@ -1760,7 +1760,7 @@ function function_af1f8cd5(color)
 			}
 			else
 			{
-				if(self.doa.score.var_7a3c00a0 < 4)
+				if(self.doa.score.boosts < 4)
 				{
 					reward = "boosts";
 				}
@@ -1774,62 +1774,62 @@ function function_af1f8cd5(color)
 		{
 			case "lives":
 			{
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
 				break;
 			}
 			case "bombs":
 			{
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
 				break;
 			}
-			case "hash_5d1b6f8121c0fc8d":
+			case "boosts":
 			{
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
 				break;
 			}
 			case "weapon":
 			{
 				def = doa_pickups::function_57160cba(6);
-				level thread doa_pickups::function_d080f0db(def, self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(def, self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(def, self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(def, self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
-				level thread doa_pickups::function_d080f0db(def, self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level thread doa_pickups::itemspawn(def, self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				wait(0.5);
 				self.doa.var_909a4dd5 = gettime() + 420000;
 				break;
 			}
 		}
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 	}
 	else
 	{
@@ -1852,15 +1852,15 @@ function function_af1f8cd5(color)
 				}
 			}
 		}
-		if(self.doa.score.var_7a3c00a0 > 0)
+		if(self.doa.score.boosts > 0)
 		{
-			for(take = 4; self.doa.score.var_7a3c00a0 > 0 && take > 0; take--)
+			for(take = 4; self.doa.score.boosts > 0 && take > 0; take--)
 			{
 				model = namespace_ec06fe4a::function_e22ae9b3(self.origin + vectorscale((0, 0, 1), 70), "zombietron_boost", undefined, "doom door boost");
 				if(isdefined(model))
 				{
 					model setscale(1.5);
-					self.doa.score.var_7a3c00a0--;
+					self.doa.score.boosts--;
 					model moveto(model.origin + vectorscale((0, 0, 1), 2000), 3);
 					model thread namespace_ec06fe4a::function_52afe5df(3);
 					wait(0.25);

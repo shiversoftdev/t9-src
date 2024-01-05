@@ -1,6 +1,6 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace entityheadicons_shared;
 

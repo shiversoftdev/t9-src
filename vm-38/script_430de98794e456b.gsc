@@ -1,8 +1,8 @@
 #using script_41123605e9d4d6ac;
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\beam_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_b7a7e548;
 
@@ -100,8 +100,8 @@ function private function_ea74c7dc(localclientnum, oldval, newval, bnewent, bini
 	if(bwastimejump == 1)
 	{
 		self playsound(fieldname, #"hash_44071fbabf0a1211");
-		level.var_66477fdf = playfx(fieldname, #"hash_38c212dea1c32d51", self.origin + vectorscale((0, 0, 1), 7000), anglestoforward(self.angles), anglestoup(self.angles + vectorscale((1, 0, 0), 90)));
-		level.var_636214dd = playfx(fieldname, #"hash_3a2680041b2dde0c", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+		level.var_66477fdf = playfx(fieldname, #"zm_ai/fx9_orda_spawn_portal_c", self.origin + vectorscale((0, 0, 1), 7000), anglestoforward(self.angles), anglestoup(self.angles + vectorscale((1, 0, 0), 90)));
+		level.var_636214dd = playfx(fieldname, #"sr/fx9_orda_aether_portal_beam", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
 	}
 	else
 	{
@@ -137,7 +137,7 @@ function function_773a9730(localclientnum, oldval, newval, bnewent, binitialsnap
 		}
 		return;
 	}
-	a_s_origins = struct::get_array(#"hash_1825c81c13f9ebf6");
+	a_s_origins = struct::get_array(#"control_point_pos");
 	foreach(s_origin in a_s_origins)
 	{
 		if(s_origin.script_int == bwastimejump)
@@ -195,9 +195,9 @@ function function_81fad569(localclientnum, oldval, newval, bnewent, binitialsnap
 	v_origin = self.origin;
 	v_forward = anglestoforward(self.angles);
 	v_up = anglestoup(self.angles);
-	n_fx = playfx(bwasdemojump, #"hash_6c4153052b14bf8b", v_origin, v_forward, v_up);
+	n_fx = playfx(bwasdemojump, #"sr/fx9_obj_payload_aether_rift", v_origin, v_forward, v_up);
 	wait(1);
-	playfx(bwasdemojump, #"hash_4d69a24c0a6648e0", v_origin, v_forward, v_up);
+	playfx(bwasdemojump, #"sr/fx9_obj_payload_aether_rift_close", v_origin, v_forward, v_up);
 	killfx(bwasdemojump, n_fx);
 }
 
@@ -281,11 +281,11 @@ function function_f68e78d1(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwasdemojump == 1)
 	{
-		self function_bf9d3071("rob_orda_dissolve");
+		self playrenderoverridebundle("rob_orda_dissolve");
 	}
 	else
 	{
-		self function_5d482e78("rob_orda_dissolve");
+		self stoprenderoverridebundle("rob_orda_dissolve");
 	}
 	self thread namespace_cc727a3b::function_5565725d(fieldname, bwasdemojump, "rob_orda_dissolve");
 }

@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_44eccfcc : class_6aaccc24
+class cstim_count : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_44eccfcc
+		Namespace: cstim_count
 		Checksum: 0xC1C69FCE
 		Offset: 0x318
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_44eccfcc : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_44eccfcc
+		Namespace: cstim_count
 		Checksum: 0x297A5532
 		Offset: 0x468
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_44eccfcc : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_44eccfcc
+		Namespace: cstim_count
 		Checksum: 0xF7BE7806
 		Offset: 0x400
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_44eccfcc : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_44eccfcc
+		Name: register_clientside
+		Namespace: cstim_count
 		Checksum: 0x7AEED724
 		Offset: 0x390
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("stim_count");
+		cluielem::register_clientside("stim_count");
 	}
 
 	/*
-		Name: function_6eef7f4f
-		Namespace: namespace_44eccfcc
+		Name: set_stim_count
+		Namespace: cstim_count
 		Checksum: 0xBFCF0CBD
 		Offset: 0x430
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_6eef7f4f(localclientnum, value)
+	function set_stim_count(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "stim_count", value);
+		[[ self ]]->set_data(localclientnum, "stim_count", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_44eccfcc
+		Namespace: cstim_count
 		Checksum: 0x5C38DE92
 		Offset: 0x338
 		Size: 0x4C
@@ -82,13 +82,13 @@ class class_44eccfcc : class_6aaccc24
 	*/
 	function setup_clientfields(var_ce21941e)
 	{
-		namespace_6aaccc24::setup_clientfields("stim_count");
-		namespace_6aaccc24::function_da693cbe("stim_count", 1, 4, "int", var_ce21941e);
+		cluielem::setup_clientfields("stim_count");
+		cluielem::add_clientfield("stim_count", 1, 4, "int", var_ce21941e);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_44eccfcc
+		Namespace: cstim_count
 		Checksum: 0x3424B1DC
 		Offset: 0x3B8
 		Size: 0x40
@@ -97,8 +97,8 @@ class class_44eccfcc : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "stim_count", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "stim_count", 0);
 	}
 
 }
@@ -116,7 +116,7 @@ class class_44eccfcc : class_6aaccc24
 */
 function register(var_ce21941e)
 {
-	elem = new class_44eccfcc();
+	elem = new cstim_count();
 	[[ elem ]]->setup_clientfields(var_ce21941e);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -138,7 +138,7 @@ function register(var_ce21941e)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: stim_count
 	Checksum: 0x557754EB
 	Offset: 0x230
@@ -146,10 +146,10 @@ function register(var_ce21941e)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_44eccfcc();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cstim_count();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -196,7 +196,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_6eef7f4f
+	Name: set_stim_count
 	Namespace: stim_count
 	Checksum: 0xF5BF9839
 	Offset: 0x2E8
@@ -204,8 +204,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_6eef7f4f(localclientnum, value)
+function set_stim_count(localclientnum, value)
 {
-	[[ self ]]->function_6eef7f4f(localclientnum, value);
+	[[ self ]]->set_stim_count(localclientnum, value);
 }
 

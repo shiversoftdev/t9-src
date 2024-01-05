@@ -1,15 +1,15 @@
-#using script_3d4e88c949caf53e;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\zm_common\zm_bgb_pack.csc;
 #using scripts\zm_common\load.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace bgb;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: bgb
 	Checksum: 0x91A30D4E
 	Offset: 0x1D0
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"bgb", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -41,12 +41,12 @@ function private function_70a657d8()
 	callback::on_localclient_connect(&on_player_connect);
 	level.bgb = [];
 	level.bgb_pack = [];
-	clientfield::function_a8bbc967("zmhud.bgb_current", #"zm_hud", #"bgb_current", 1, 8, "int", &function_d9afd5ee, 0, 0);
-	clientfield::function_a8bbc967("zmhud.bgb_display", #"zm_hud", #"bgb_display", 1, 1, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("zmhud.bgb_timer", #"zm_hud", #"bgb_timer", 1, 8, "float", undefined, 0, 0);
-	clientfield::function_a8bbc967("zmhud.bgb_activations_remaining", #"zm_hud", #"bgb_activations_remaining", 1, 3, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("zmhud.bgb_invalid_use", #"zm_hud", #"bgb_invalid_use", 1, 1, "counter", undefined, 0, 0);
-	clientfield::function_a8bbc967("zmhud.bgb_one_shot_use", #"zm_hud", #"bgb_one_shot_use", 1, 1, "counter", undefined, 0, 0);
+	clientfield::register_clientuimodel("zmhud.bgb_current", #"zm_hud", #"bgb_current", 1, 8, "int", &function_d9afd5ee, 0, 0);
+	clientfield::register_clientuimodel("zmhud.bgb_display", #"zm_hud", #"bgb_display", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("zmhud.bgb_timer", #"zm_hud", #"bgb_timer", 1, 8, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("zmhud.bgb_activations_remaining", #"zm_hud", #"bgb_activations_remaining", 1, 3, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("zmhud.bgb_invalid_use", #"zm_hud", #"bgb_invalid_use", 1, 1, "counter", undefined, 0, 0);
+	clientfield::register_clientuimodel("zmhud.bgb_one_shot_use", #"zm_hud", #"bgb_one_shot_use", 1, 1, "counter", undefined, 0, 0);
 	clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", &bgb_blow_bubble, 0, 0);
 	level._effect[#"bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
 }
@@ -157,11 +157,11 @@ function private bgb_finalize()
 			#/
 			continue;
 		}
-		if(!isdefined(var_5415dfb9.var_f5aaa47e))
+		if(!isdefined(var_5415dfb9.bgbrarity))
 		{
-			var_5415dfb9.var_f5aaa47e = 0;
+			var_5415dfb9.bgbrarity = 0;
 		}
-		v.rarity = var_5415dfb9.var_f5aaa47e;
+		v.rarity = var_5415dfb9.bgbrarity;
 		if(0 == v.rarity || 1 == v.rarity)
 		{
 			v.consumable = 0;

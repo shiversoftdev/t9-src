@@ -13,7 +13,7 @@
 */
 function private autoexec function_be4e0d4()
 {
-	level notify(1681247944);
+	level notify(-1681247944);
 }
 
 #namespace namespace_679a22ba;
@@ -52,7 +52,7 @@ function function_77be8a83(var_e98de867)
 	#/
 	bundle = getscriptbundle(var_e98de867);
 	/#
-		assert(isdefined(bundle), "" + (function_7a600918(var_e98de867) ? function_9e72a96(var_e98de867) : var_e98de867));
+		assert(isdefined(bundle), "" + (ishash(var_e98de867) ? function_9e72a96(var_e98de867) : var_e98de867));
 	#/
 	var_89592ba7 = {#hash_b0abb10e:(isdefined(bundle.var_d961aeb3) ? bundle.var_d961aeb3 : 0), #hash_7c88c117:[]};
 	foreach(var_c1d870ac in bundle.ailist)
@@ -80,7 +80,7 @@ function function_ca209564(var_e98de867, var_ddb02c2b)
 	{
 		var_3561dd4b = getscriptbundle(var_e98de867);
 		/#
-			assert(isdefined(var_3561dd4b), "" + (function_7a600918(var_e98de867) ? function_9e72a96(var_e98de867) : var_e98de867));
+			assert(isdefined(var_3561dd4b), "" + (ishash(var_e98de867) ? function_9e72a96(var_e98de867) : var_e98de867));
 		#/
 		if(isdefined(var_ddb02c2b))
 		{
@@ -106,7 +106,7 @@ function function_3e7317ca(var_e98de867)
 	#/
 	var_3561dd4b = getscriptbundle(var_e98de867);
 	/#
-		assert(isdefined(var_3561dd4b), "" + (function_7a600918(var_e98de867) ? function_9e72a96(var_e98de867) : var_e98de867));
+		assert(isdefined(var_3561dd4b), "" + (ishash(var_e98de867) ? function_9e72a96(var_e98de867) : var_e98de867));
 	#/
 	var_29556c1a = [];
 	function_cbafbbab(var_3561dd4b.ailist, var_29556c1a);

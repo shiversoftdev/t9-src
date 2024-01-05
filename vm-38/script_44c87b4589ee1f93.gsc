@@ -1,12 +1,12 @@
-#using script_3b78d6d26bf3ec83;
-#using scripts\core_common\ai_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\abilities\gadgets\gadget_jammer_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\array_shared.csc;
 #using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace zombie_dog_toxic_cloud;
 
@@ -21,11 +21,11 @@
 */
 function private autoexec function_f203995b()
 {
-	level notify(1871914716);
+	level notify(-1871914716);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zombie_dog_toxic_cloud
 	Checksum: 0x254B7AFC
 	Offset: 0x150
@@ -33,7 +33,7 @@ function private autoexec function_f203995b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_33449a50d9656246", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -248,7 +248,7 @@ function function_a17af3df(localclientnum, oldval, newval, bnewent, binitialsnap
 	}
 	if(bwastimejump)
 	{
-		self function_bf9d3071(#"hash_254bc28c3959a2ec");
+		self playrenderoverridebundle(#"hash_254bc28c3959a2ec");
 		self callback::on_shutdown(&function_c88acbea);
 	}
 	else
@@ -268,6 +268,6 @@ function function_a17af3df(localclientnum, oldval, newval, bnewent, binitialsnap
 */
 function function_c88acbea(params)
 {
-	self function_5d482e78(#"hash_254bc28c3959a2ec");
+	self stoprenderoverridebundle(#"hash_254bc28c3959a2ec");
 }
 

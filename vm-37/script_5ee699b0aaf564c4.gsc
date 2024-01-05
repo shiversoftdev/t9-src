@@ -1,23 +1,23 @@
-#using script_18f0d22c75b141a7;
-#using script_1cc417743d7c262d;
-#using script_2da073d4aa78c206;
-#using script_305d57cf0618009d;
-#using script_44b0b8420eabacad;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
 #using script_75da5547b1822294;
-#using script_7dc3a36c222eaf22;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\oob.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_44b0b8420eabacad;
 #using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\spectating.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
+#using script_7dc3a36c222eaf22;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using script_305d57cf0618009d;
+#using scripts\core_common\player\player_insertion.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_aaddef5a;
 
@@ -273,7 +273,7 @@ function function_70f1d702()
 		{
 			continue;
 		}
-		if(player namespace_67838d10::function_51350a25())
+		if(player player_insertion::function_51350a25())
 		{
 			continue;
 		}
@@ -363,7 +363,7 @@ function function_2613549d(origin, angles)
 		vehicle deletedelay();
 	}
 	self setplayerangles((85, angles[1], 0));
-	self namespace_67838d10::start_freefall(launchvelocity, 1);
+	self player_insertion::start_freefall(launchvelocity, 1);
 	self function_c147c6c5();
 	level thread function_5d5011dc(self);
 }

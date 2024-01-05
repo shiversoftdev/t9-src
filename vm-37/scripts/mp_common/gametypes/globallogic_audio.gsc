@@ -1,25 +1,25 @@
+#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\outcome.gsc;
+#using scripts\mp_common\gametypes\match.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_audio.gsc;
 #using script_1cc417743d7c262d;
 #using script_396f7d71538c9677;
-#using script_6350c209b3d1b07d;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\audio_shared.gsc;
 #using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\globallogic_audio.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
-#using scripts\mp_common\gametypes\match.gsc;
-#using scripts\mp_common\gametypes\outcome.gsc;
-#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\sound_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\map.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\audio_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace globallogic_audio;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: globallogic_audio
 	Checksum: 0xFFFE39CD
 	Offset: 0x530
@@ -27,7 +27,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_410d0d4132d5f263", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -396,7 +396,7 @@ function announce_round_winner(delay)
 	{
 		wait(delay);
 	}
-	winner = round::function_9b24638f();
+	winner = round::get_winner();
 	if(!isdefined(winner) || isplayer(winner))
 	{
 		return;
@@ -441,14 +441,14 @@ function announce_game_winner(outcome)
 	wait(battlechatter::mpdialog_value("announceWinnerDelay", 0));
 	if(level.teambased)
 	{
-		if(outcome::function_5f24faac(outcome, "tie") || !match::function_c10174e7())
+		if(outcome::get_flag(outcome, "tie") || !match::function_c10174e7())
 		{
 			leader_dialog("gameDraw", undefined, undefined, undefined, undefined, 1);
 		}
 		else
 		{
-			leader_dialog("gameWon", outcome::function_9b24638f(outcome), undefined, undefined, undefined, 1);
-			leader_dialog_for_other_teams("gameLost", outcome::function_9b24638f(outcome), undefined, undefined, undefined, 1);
+			leader_dialog("gameWon", outcome::get_winner(outcome), undefined, undefined, undefined, 1);
+			leader_dialog_for_other_teams("gameLost", outcome::get_winner(outcome), undefined, undefined, undefined, 1);
 		}
 	}
 }
@@ -600,9 +600,9 @@ function function_13bcae23()
 	{
 		var_ffe73385 = 1;
 	}
-	var_be17187b = undefined;
-	var_be17187b = level waittill(#"hash_15b8b6edc4ed3032");
-	if(!is_true(var_be17187b.var_7090bf53))
+	s_waitresult = undefined;
+	s_waitresult = level waittill(#"hash_15b8b6edc4ed3032");
+	if(!is_true(s_waitresult.var_7090bf53))
 	{
 		level notify(#"hash_d50c83061fcd561");
 	}
@@ -629,11 +629,11 @@ function function_13bcae23()
 function function_913f483f()
 {
 	level endon(#"game_ended", #"hash_d50c83061fcd561");
-	var_be17187b = undefined;
-	var_be17187b = level waittill(#"hash_28434e94a8844dc5");
-	if(isdefined(var_be17187b.n_delay))
+	s_waitresult = undefined;
+	s_waitresult = level waittill(#"hash_28434e94a8844dc5");
+	if(isdefined(s_waitresult.n_delay))
 	{
-		wait(var_be17187b.n_delay);
+		wait(s_waitresult.n_delay);
 	}
 	if(!is_true(level.var_a8b23f5a))
 	{
@@ -707,21 +707,21 @@ function function_91d557d3(outcome)
 		level thread [[level.var_a4947666]](outcome);
 		return;
 	}
-	if(outcome::function_5f24faac(outcome, "tie") || !match::function_c10174e7())
+	if(outcome::get_flag(outcome, "tie") || !match::function_c10174e7())
 	{
 		level thread set_music_global("matchend_draw");
 		return;
 	}
 	if(level.teambased)
 	{
-		level thread set_music_on_team("matchend_win", outcome::function_9b24638f(outcome));
-		level thread function_89fe8163("matchend_lose", outcome::function_9b24638f(outcome));
+		level thread set_music_on_team("matchend_win", outcome::get_winner(outcome));
+		level thread function_89fe8163("matchend_lose", outcome::get_winner(outcome));
 	}
 	else
 	{
 		foreach(player in level.players)
 		{
-			if(player === outcome::function_9b24638f(outcome))
+			if(player === outcome::get_winner(outcome))
 			{
 				player thread set_music_on_player("matchend_win");
 				continue;
@@ -743,7 +743,7 @@ function function_91d557d3(outcome)
 function function_2685981b()
 {
 	var_5d9df74c = 0;
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	switch(str_gametype)
 	{
 		case "control":

@@ -1,23 +1,23 @@
-#using script_135d639e83b15d2f;
-#using script_16b1b77a76492c6a;
-#using script_3411bb48d41bd3b;
 #using script_34ab99a4ca1a43d;
-#using script_35598499769dbb3d;
-#using script_5bb072c3abf4652c;
-#using script_7fc996fe8678852;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using script_16b1b77a76492c6a;
 #using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_vo.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_3411bb48d41bd3b;
+#using script_135d639e83b15d2f;
+#using script_35598499769dbb3d;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_13c9b452;
 
@@ -38,7 +38,7 @@ function private autoexec function_e4cca549()
 #namespace namespace_5cc6d100;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_5cc6d100
 	Checksum: 0xB28ECC83
 	Offset: 0x290
@@ -46,7 +46,7 @@ function private autoexec function_e4cca549()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_24e8e2e7c9881782", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -106,7 +106,7 @@ function function_4d243036(instance)
 	instance.trigger = trigger;
 	t_proximity = spawn("trigger_radius", s_chest.origin - (0, 0, 128 / 2), 0, 350, 128);
 	t_proximity.instance = instance;
-	t_proximity callback::function_35a12f19(&function_29d2d6a4);
+	t_proximity callback::on_trigger(&function_29d2d6a4);
 }
 
 /*
@@ -159,7 +159,7 @@ function private function_b0c8ef74(eventstruct)
 		self.instance.var_85c920d0 = namespace_8b6a9d79::spawn_script_model(s_chest, #"hash_2641cfb5c2cdcc85");
 		self.instance.var_85c920d0 clientfield::set("sr_demented_echo_fx", 1);
 		self.instance.var_85c920d0 playsound(#"hash_36ac898552727197");
-		self.instance.var_85c920d0 playloopsound(#"hash_30767a100d1618f");
+		self.instance.var_85c920d0 playloopsound(#"evt_sur_we_bc_ghost_lp");
 		s_chest thread scene::play(#"hash_736661ee1ae2dc67", self.instance.var_85c920d0);
 		level thread function_7914c7ef(self.instance.var_85c920d0, s_chest);
 		eventstruct.activator function_bc82f900("damage_heavy");
@@ -315,7 +315,7 @@ function private function_ed1e62c9(instance, var_5ec5a681, s_spawn)
 	trigger = spawn("trigger_radius", var_5ec5a681.origin + (0, 0, 128 * -1), 0, 450, 128 * 2);
 	trigger.var_d4358084 = var_d4358084;
 	var_d4358084.trigger = trigger;
-	trigger callback::function_35a12f19(&function_e03c6f84);
+	trigger callback::on_trigger(&function_e03c6f84);
 	var_d4358084.n_obj_id = zm_utility::function_f5a222a8(#"hash_4b8c0ed5c08eb78e", var_d4358084);
 	n_move_time = distance(var_d4358084.origin, var_5ec5a681.origin) / 850;
 	var_d4358084 moveto(var_5ec5a681.origin, n_move_time);

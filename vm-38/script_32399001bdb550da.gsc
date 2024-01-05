@@ -1,15 +1,15 @@
-#using script_256b8879317373de;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\oob.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\skipto.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace save;
 
@@ -24,13 +24,13 @@
 */
 function private autoexec function_58f6a662()
 {
-	level notify(1305084861);
+	level notify(-1305084861);
 }
 
 #namespace savegame;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: savegame
 	Checksum: 0x3F228CFE
 	Offset: 0x210
@@ -38,7 +38,7 @@ function private autoexec function_58f6a662()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"save", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -780,7 +780,7 @@ function private function_655f1326(var_62a2ec8e, var_a8976c31, stealth_check)
 			wait(0.1);
 			checkpointcreate();
 			wait(6);
-			for(var_ff951b7a = 0; var_ff951b7a < 5; var_ff951b7a++)
+			for(check_count = 0; check_count < 5; check_count++)
 			{
 				if(function_68cfab84())
 				{
@@ -788,7 +788,7 @@ function private function_655f1326(var_62a2ec8e, var_a8976c31, stealth_check)
 				}
 				wait(1);
 			}
-			if(var_ff951b7a == 5)
+			if(check_count == 5)
 			{
 				continue;
 			}

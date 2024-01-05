@@ -1,18 +1,18 @@
 #using script_3aa0f32b70d4f7cb;
-#using script_638bbfbdda7eff95;
-#using script_6809bf766eba194a;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\ai\archetype_civilian.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_f592a7b;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_f592a7b
 	Checksum: 0x5480A4FE
 	Offset: 0x2D8
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2846a4f4bd094545", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

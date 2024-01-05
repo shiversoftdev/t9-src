@@ -132,7 +132,7 @@ function private function_c72eb508()
 		return self.var_9f20891;
 	}
 	count = function_3045dd71();
-	self.var_9f20891 = function_d59c2d03(count, level.var_cca3647d + self getentitynumber());
+	self.var_9f20891 = function_d59c2d03(count, level.item_spawn_seed + self getentitynumber());
 	return self.var_9f20891;
 }
 
@@ -223,7 +223,7 @@ function function_3c54cdb1()
 }
 
 /*
-	Name: function_2328db2c
+	Name: get_trailfx
 	Namespace: namespace_eb06e24d
 	Checksum: 0x7F416C2
 	Offset: 0x5B8
@@ -231,7 +231,7 @@ function function_3c54cdb1()
 	Parameters: 0
 	Flags: None
 */
-function function_2328db2c()
+function get_trailfx()
 {
 	return function_6452f9c5(self function_37ae175b(1));
 }

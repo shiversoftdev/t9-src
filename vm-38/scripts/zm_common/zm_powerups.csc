@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace zm_powerups;
 
@@ -133,8 +133,8 @@ function add_zombie_powerup(powerup_name, client_field_name, clientfield_version
 	{
 		var_4e6e65fa = ("hudItems.zmPowerUps." + client_field_name) + ".state";
 		var_d75767cb = ("hudItems.zmPowerUps." + client_field_name) + ".timeRemaining";
-		clientfield::function_a8bbc967(var_4e6e65fa, #"hash_6bba1b88c856cfdf", [1:#"state", 0:hash(client_field_name)], clientfield_version, 2, "int", &powerup_state_callback, 0, 1);
-		clientfield::function_a8bbc967(var_d75767cb, #"hash_6bba1b88c856cfdf", [1:#"timeremaining", 0:hash(client_field_name)], clientfield_version, 8, "int", undefined, 0, 1);
+		clientfield::register_clientuimodel(var_4e6e65fa, #"hash_6bba1b88c856cfdf", [1:#"state", 0:hash(client_field_name)], clientfield_version, 2, "int", &powerup_state_callback, 0, 1);
+		clientfield::register_clientuimodel(var_d75767cb, #"hash_6bba1b88c856cfdf", [1:#"timeremaining", 0:hash(client_field_name)], clientfield_version, 8, "int", undefined, 0, 1);
 		struct.client_field_name = var_4e6e65fa;
 		struct.var_b79536ad = var_d75767cb;
 	}
@@ -398,6 +398,6 @@ function private play_powerup_fx(localclientnum, str_fx, var_6df65756)
 */
 function function_cc33adc8()
 {
-	return util::function_5df4294() != "zcleansed";
+	return util::get_game_type() != "zcleansed";
 }
 

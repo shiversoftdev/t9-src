@@ -1,24 +1,24 @@
-#using script_263b7f2982258785;
-#using script_2d443451ce681a;
+#using scripts\cp_common\objectives.gsc;
 #using script_31e9b35aaacbbd93;
 #using script_3dc93ca9902a9cda;
-#using script_70b6424f429d140;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_263b7f2982258785;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_ai_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
-#using scripts\core_common\vehicleriders_shared.gsc;
+#using script_70b6424f429d140;
+#using scripts\core_common\array_shared.gsc;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
+#using script_2d443451ce681a;
 #using scripts\cp_common\skipto.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\vehicleriders_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_1e07c90b;
 
@@ -33,7 +33,7 @@
 */
 function private autoexec function_9beebdf4()
 {
-	level notify(1367807602);
+	level notify(-1367807602);
 }
 
 #namespace namespace_cb0d537d;

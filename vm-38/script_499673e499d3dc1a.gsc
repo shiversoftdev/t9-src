@@ -1,26 +1,26 @@
-#using script_1292451e284848cc;
-#using script_31e9b35aaacbbd93;
-#using script_35e4637ff0faed7f;
 #using script_3dc93ca9902a9cda;
-#using script_45e09f634c49fdba;
-#using script_4937c6974f43bb71;
-#using script_61cfc2ab8e60625;
+#using script_1292451e284848cc;
 #using script_7cf3e180e994d17f;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using script_31e9b35aaacbbd93;
+#using scripts\cp_common\util.gsc;
+#using script_61cfc2ab8e60625;
+#using script_35e4637ff0faed7f;
+#using script_45e09f634c49fdba;
 #using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_4937c6974f43bb71;
 #using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\vehicle_death_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\skipto.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_f74d9fde;
 
@@ -38,11 +38,11 @@ function private autoexec function_10c94fcf()
 	level notify(690894116);
 }
 
-#namespace namespace_38d05c38;
+#namespace tkdn_af_skid;
 
 /*
 	Name: starting
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0xD4122EAE
 	Offset: 0x2E0
 	Size: 0x19C
@@ -59,7 +59,7 @@ function starting(str_skipto)
 	level.var_49a5d2a4 vehicle::lights_on();
 	level.var_49a5d2a4 vehicle::toggle_force_driver_taillights(1);
 	level.var_49a5d2a4 namespace_db2381c4::function_4c265dee();
-	namespace_7d4dd7f0::function_a2015343();
+	tkdn_af_hill::function_a2015343();
 	var_7e4a7b32 = getweapon(#"ar_accurate_t9");
 	level.adler setweapon(var_7e4a7b32);
 	level flag::set("af_start_enemy_crash_vehs");
@@ -69,7 +69,7 @@ function starting(str_skipto)
 
 /*
 	Name: main
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0x698A3CF9
 	Offset: 0x488
 	Size: 0x1D4
@@ -102,7 +102,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: cleanup
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0x5C5190CD
 	Offset: 0x668
 	Size: 0x44
@@ -116,7 +116,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0x3E746F33
 	Offset: 0x6B8
 	Size: 0x44
@@ -131,7 +131,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0x80F724D1
 	Offset: 0x708
 	Size: 0x4
@@ -144,7 +144,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0x80F724D1
 	Offset: 0x718
 	Size: 0x4
@@ -157,7 +157,7 @@ function init_scenes()
 
 /*
 	Name: function_def1eb14
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0xBA18B4A3
 	Offset: 0x728
 	Size: 0xD0
@@ -177,7 +177,7 @@ function function_def1eb14(name_array)
 
 /*
 	Name: function_c5eaa394
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0xCD0A511E
 	Offset: 0x800
 	Size: 0x74
@@ -193,12 +193,12 @@ function function_c5eaa394()
 	}
 	self vehicle::lights_on();
 	self vehicle::toggle_force_driver_taillights(1);
-	self thread namespace_38c39f5::function_6b9d341b();
+	self thread tkdn_af_chase::function_6b9d341b();
 }
 
 /*
 	Name: function_243c9d46
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0xAE1FAA73
 	Offset: 0x880
 	Size: 0x574
@@ -260,7 +260,7 @@ function function_243c9d46(player)
 
 /*
 	Name: function_c0f9442c
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0x5E2CF205
 	Offset: 0xE00
 	Size: 0x54
@@ -276,7 +276,7 @@ function function_c0f9442c()
 
 /*
 	Name: function_71a64494
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0xC858E1E3
 	Offset: 0xE60
 	Size: 0x70
@@ -293,7 +293,7 @@ function function_71a64494(player, guy)
 
 /*
 	Name: function_c2f81a50
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0xA36F5040
 	Offset: 0xED8
 	Size: 0x5E
@@ -310,7 +310,7 @@ function function_c2f81a50(notification)
 
 /*
 	Name: function_e99dbb58
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0xFCC36CBA
 	Offset: 0xF40
 	Size: 0x1B4
@@ -341,7 +341,7 @@ function function_e99dbb58(player)
 
 /*
 	Name: function_c9f7e2d2
-	Namespace: namespace_38d05c38
+	Namespace: tkdn_af_skid
 	Checksum: 0x5C4B7076
 	Offset: 0x1100
 	Size: 0x26

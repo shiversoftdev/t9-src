@@ -1,8 +1,8 @@
-#namespace namespace_140b10cf;
+#namespace ostdm;
 
 /*
 	Name: main
-	Namespace: namespace_140b10cf
+	Namespace: ostdm
 	Checksum: 0x4A83C599
 	Offset: 0x60
 	Size: 0xC

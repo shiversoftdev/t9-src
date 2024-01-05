@@ -1,12 +1,12 @@
-#using script_3f6516099f1d5ff1;
-#using script_4e261fd4bc49e992;
-#using script_71f2f8a6fc184b69;
-#using script_7f431c02afd98cf0;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\mp_common\laststand.csc;
-#using scripts\wz_common\hud.csc;
+#using scripts\wz_common\wz_ignore_systems.csc;
 #using scripts\wz_common\vehicle.csc;
+#using scripts\wz_common\hud.csc;
+#using scripts\mp_common\laststand.csc;
+#using scripts\core_common\player\player_insertion.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\map.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using script_71f2f8a6fc184b69;
 
 #namespace namespace_17baa64d;
 
@@ -21,7 +21,7 @@
 */
 function private autoexec function_770aabd0()
 {
-	level notify(237146273);
+	level notify(-237146273);
 }
 
 /*
@@ -38,9 +38,9 @@ function init()
 	insertion_passenger_count::register();
 	hud::function_9b9cecdf();
 	callback::on_localplayer_spawned(&on_player_spawned);
-	callback::function_e9e16e2f(&function_e9e16e2f);
-	callback::function_4f6cafea(&function_4f6cafea);
-	callback::function_d46d9315(&function_1bcd6e1e);
+	callback::on_killcam_begin(&on_killcam_begin);
+	callback::on_killcam_end(&on_killcam_end);
+	callback::on_gameplay_started(&start_warzone);
 	function_41f9de03();
 	function_f6b076db();
 	level.var_f2814a96 = (isdefined(getgametypesetting(#"hash_6be1c95551e78384")) ? getgametypesetting(#"hash_6be1c95551e78384") : 0);
@@ -52,7 +52,7 @@ function init()
 }
 
 /*
-	Name: function_1bcd6e1e
+	Name: start_warzone
 	Namespace: namespace_17baa64d
 	Checksum: 0x8409689
 	Offset: 0x318
@@ -60,7 +60,7 @@ function init()
 	Parameters: 1
 	Flags: None
 */
-function function_1bcd6e1e(localclientnum)
+function start_warzone(localclientnum)
 {
 	if(!is_true(getgametypesetting(#"hash_7532afe3ef8b4332")))
 	{
@@ -177,7 +177,7 @@ function function_f6b076db()
 }
 
 /*
-	Name: function_e9e16e2f
+	Name: on_killcam_begin
 	Namespace: namespace_17baa64d
 	Checksum: 0xF8E2A2F4
 	Offset: 0x840
@@ -185,13 +185,13 @@ function function_f6b076db()
 	Parameters: 1
 	Flags: None
 */
-function function_e9e16e2f(params)
+function on_killcam_begin(params)
 {
 	function_c6878ba5();
 }
 
 /*
-	Name: function_4f6cafea
+	Name: on_killcam_end
 	Namespace: namespace_17baa64d
 	Checksum: 0x1CEDE428
 	Offset: 0x868
@@ -199,7 +199,7 @@ function function_e9e16e2f(params)
 	Parameters: 1
 	Flags: None
 */
-function function_4f6cafea(params)
+function on_killcam_end(params)
 {
 	function_f6b076db();
 }
@@ -353,7 +353,7 @@ function function_a1aaf8c0()
 	{
 		waitresult = undefined;
 		waitresult = level waittill(#"hash_5af34d08eac79f88");
-		function_2dba6c5(waitresult.localclientnum, waitresult.var_edf90e4e);
+		function_2dba6c5(waitresult.localclientnum, waitresult.teammateindex);
 	}
 }
 

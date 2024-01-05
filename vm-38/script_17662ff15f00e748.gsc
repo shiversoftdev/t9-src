@@ -1,22 +1,22 @@
-#using script_17dcb1172e441bf6;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
 #using script_47851dbeea22fe66;
-#using script_57f7003580bb15e0;
-#using script_634ae70c663d1cc9;
 #using script_774302f762d76254;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
+#using script_1ee011cd0961afd7;
+#using script_1b0b07ff57d1dde3;
+#using script_634ae70c663d1cc9;
+#using script_17dcb1172e441bf6;
+#using script_2a5bf5b4a00cee0d;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_3c9cfcff;
 
@@ -124,7 +124,7 @@ function function_54989f74(trap, paged)
 	trap.script_model = hazard;
 	trap.damage = 50;
 	trap.tickrate = 1;
-	trap.var_2e485cc = function_4d1e7b48(#"hash_69374f563cb01313");
+	trap.var_2e485cc = getstatuseffect(#"hash_69374f563cb01313");
 	trap.paged = paged;
 	trap thread function_b853a1c6();
 	return trap;

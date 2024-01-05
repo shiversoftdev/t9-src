@@ -1,5 +1,5 @@
-#using script_47fb62300ac0bd60;
-#using script_8988fdbc78d6c53;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\util_shared.gsc;
 
 #namespace namespace_4c668920;
@@ -15,7 +15,7 @@
 */
 function private autoexec function_2cab27ff()
 {
-	level notify(1168453783);
+	level notify(-1168453783);
 }
 
 #namespace weaponobjects;
@@ -38,7 +38,7 @@ function function_b455d5d8()
 	function_e6400478(#"tr_flechette_t8", &function_1eaa3e20);
 	if(is_true(level.var_b68902c4))
 	{
-		function_e6400478(#"hash_24c644460c2b5642", &function_1eaa3e20);
+		function_e6400478(#"tr_flechette_t8_upgraded", &function_1eaa3e20);
 	}
 }
 

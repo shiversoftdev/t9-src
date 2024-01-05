@@ -1,14 +1,14 @@
-#using script_396f7d71538c9677;
-#using script_725554a59d6a75b9;
+#using scripts\core_common\visionset_mgr_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
+#using script_396f7d71538c9677;
+#using script_725554a59d6a75b9;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\visionset_mgr_shared.gsc;
 
 #namespace drown;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: drown
 	Checksum: 0x2B059833
 	Offset: 0x108
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"drown", &function_70a657d8, undefined, undefined, undefined);
 }

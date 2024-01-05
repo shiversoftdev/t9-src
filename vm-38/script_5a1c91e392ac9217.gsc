@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_2943ccdc;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_c51c9b65()
 {
-	level notify(244390841);
+	level notify(-244390841);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2943ccdc
 	Checksum: 0x2950AD4A
 	Offset: 0x168
@@ -28,7 +28,7 @@ function private autoexec function_c51c9b65()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_ee64d6a280a2e42", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -64,7 +64,7 @@ function private function_831986b(localclientnum, oldval, newval, bnewent, binit
 	}
 	else
 	{
-		self notify(#"hash_7d0c549b3fac0991");
+		self notify(#"close_interactive_map");
 	}
 }
 
@@ -80,7 +80,7 @@ function private function_831986b(localclientnum, oldval, newval, bnewent, binit
 function private function_f4804ac(localclientnum)
 {
 	self notify("736d32590bdc259");
-	self endon(#"death", "36e6f79cf9fe7521", #"hash_7d0c549b3fac0991");
+	self endon(#"death", "36e6f79cf9fe7521", #"close_interactive_map");
 	while(!isdefined(function_fecfab51("x")))
 	{
 		waitframe(1);

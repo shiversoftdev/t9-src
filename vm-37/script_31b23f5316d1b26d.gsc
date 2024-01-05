@@ -104,7 +104,7 @@ function function_2ff463e2(name)
 			var_4a14890d = spawnstruct();
 			var_4a14890d.type = room_struct.rg_tag_type;
 			var_4a14890d.id = room_struct.var_d0971441;
-			var_4a14890d.origin = function_e2ee5807(room_struct.origin, var_64f87a02.var_d19720ad, var_64f87a02.var_66b667b0);
+			var_4a14890d.origin = coordtransformtranspose(room_struct.origin, var_64f87a02.var_d19720ad, var_64f87a02.var_66b667b0);
 			var_4a14890d.angles = function_bdd10bae(room_struct.angles, var_64f87a02.var_66b667b0);
 			function_e667ba34(var_4a14890d, room_struct);
 			var_64f87a02.tags[var_64f87a02.tags.size] = var_4a14890d;

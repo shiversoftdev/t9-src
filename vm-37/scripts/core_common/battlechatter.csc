@@ -1,15 +1,15 @@
-#using script_3f6516099f1d5ff1;
 #using script_59f62971655f7103;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\array_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\map.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace battlechatter;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: battlechatter
 	Checksum: 0x177FEE31
 	Offset: 0x3E8
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"battlechatter", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -238,14 +238,14 @@ function get_death_vox(playerbundle, meansofdeath)
 	Parameters: 6
 	Flags: Linked
 */
-function function_d2f35e13(localclientnum, var_c1a2172e, weapon, var_6ac148bc, var_5d738b56, seed)
+function function_d2f35e13(localclientnum, successplayer, weapon, var_6ac148bc, var_5d738b56, seed)
 {
 	while(isdefined(var_6ac148bc) && soundplaying(var_6ac148bc))
 	{
 		waitframe(1);
 	}
 	wait(0.4);
-	if(!isdefined(var_c1a2172e))
+	if(!isdefined(successplayer))
 	{
 		return;
 	}
@@ -257,14 +257,14 @@ function function_d2f35e13(localclientnum, var_c1a2172e, weapon, var_6ac148bc, v
 	successreactionradius = mpdialog_value("SuccessReactionRadius", 500);
 	if((isdefined(var_5c238c21.var_506f762f) ? var_5c238c21.var_506f762f : 0) && isdefined(var_5d738b56) && isplayer(var_5d738b56))
 	{
-		if(function_d804d2f0(localclientnum, var_c1a2172e, var_5d738b56, successreactionradius * successreactionradius))
+		if(function_d804d2f0(localclientnum, successplayer, var_5d738b56, successreactionradius * successreactionradius))
 		{
 			var_8a6b001a = var_5d738b56;
 		}
 	}
 	else
 	{
-		var_8a6b001a = function_db89c38f(localclientnum, var_c1a2172e, successreactionradius * successreactionradius);
+		var_8a6b001a = function_db89c38f(localclientnum, successplayer, successreactionradius * successreactionradius);
 	}
 	if(!isdefined(var_8a6b001a))
 	{
@@ -518,160 +518,160 @@ function function_c8663dbc(weapon, player)
 	}
 	switch(weapon.name)
 	{
-		case "hash_21b346649d376bf3":
+		case "eq_emp_grenade":
 		{
-			var_60d3002f = "jammerWeaponHacked";
+			taacomdialog = "jammerWeaponHacked";
 			break;
 		}
 		case "eq_tripwire":
 		{
-			var_60d3002f = "meshMineWeaponHacked";
+			taacomdialog = "meshMineWeaponHacked";
 			break;
 		}
-		case "hash_4a4ba36128b6582f":
+		case "eq_seeker_mine":
 		{
-			var_60d3002f = "seekerMineWeaponHacked";
+			taacomdialog = "seekerMineWeaponHacked";
 			break;
 		}
 		case "eq_sensor":
 		{
-			var_60d3002f = "sensorDartHacked";
+			taacomdialog = "sensorDartHacked";
 			break;
 		}
 		case "ability_smart_cover":
-		case "hash_1fb0b26684caee0f":
+		case "gadget_smart_cover":
 		{
-			var_60d3002f = "smartCoverHacked";
+			taacomdialog = "smartCoverHacked";
 			break;
 		}
 		case "gadget_spawnbeacon":
 		{
-			var_60d3002f = "spawnBeaconHacked";
+			taacomdialog = "spawnBeaconHacked";
 			break;
 		}
 		case "gadget_supplypod":
 		{
-			var_60d3002f = "supplyPodHacked";
+			taacomdialog = "supplyPodHacked";
 			break;
 		}
 		case "trophy_system":
 		{
-			var_60d3002f = "trophyWeaponHacked";
+			taacomdialog = "trophyWeaponHacked";
 			break;
 		}
-		case "hash_459c0007ec5e2470":
+		case "inventory_ac130":
 		case "ac130":
 		{
-			var_60d3002f = "ac130Hacked";
+			taacomdialog = "ac130Hacked";
 			break;
 		}
-		case "hash_1bf811fa5d684607":
+		case "inventory_chopper_gunner":
 		case "chopper_gunner":
 		{
-			var_60d3002f = "chopperGunnerHacked";
+			taacomdialog = "chopperGunnerHacked";
 			break;
 		}
 		case "tank_robot":
 		case "inventory_tank_robot":
 		case "ai_tank_marker":
 		{
-			var_60d3002f = "aiTankHacked";
+			taacomdialog = "aiTankHacked";
 			break;
 		}
 		case "cobra_20mm_comlink":
 		case "helicopter_comlink":
 		case "inventory_helicopter_comlink":
 		{
-			var_60d3002f = "attackChopperHacked";
+			taacomdialog = "attackChopperHacked";
 			break;
 		}
 		case "inventory_helicopter_guard":
 		case "helicopter_guard":
 		{
-			var_60d3002f = "heavyAttackChopperHacked";
+			taacomdialog = "heavyAttackChopperHacked";
 			break;
 		}
 		case "counteruav":
 		{
-			var_60d3002f = "cuavHacked";
+			taacomdialog = "cuavHacked";
 			break;
 		}
 		case "dart":
 		case "inventory_dart":
 		{
-			var_60d3002f = "dartHacked";
+			taacomdialog = "dartHacked";
 			break;
 		}
 		case "drone_squadron":
-		case "hash_3447a6457d26a42e":
+		case "inventory_drone_squadron":
 		{
-			var_60d3002f = "droneSquadHacked";
+			taacomdialog = "droneSquadHacked";
 			break;
 		}
 		case "hoverjet":
-		case "hash_511b5c81a984baf9":
+		case "inventory_hoverjet":
 		{
-			var_60d3002f = "hoverJetHacked";
+			taacomdialog = "hoverJetHacked";
 			break;
 		}
 		case "recon_car":
 		case "inventory_recon_car":
 		{
-			var_60d3002f = "reconCarHacked";
+			taacomdialog = "reconCarHacked";
 			break;
 		}
-		case "hash_62a2088c3368ea":
+		case "inventory_recon_plane":
 		case "recon_plane":
 		{
-			var_60d3002f = "reconPlaneHacked";
+			taacomdialog = "reconPlaneHacked";
 			break;
 		}
 		case "remote_missile":
 		case "inventory_remote_missile":
 		{
-			var_60d3002f = "hellstormHacked";
+			taacomdialog = "hellstormHacked";
 			break;
 		}
 		case "inventory_planemortar":
 		case "planemortar":
 		{
-			var_60d3002f = "lightningStrikeHacked";
+			taacomdialog = "lightningStrikeHacked";
 			break;
 		}
 		case "overwatch_helicopter":
-		case "hash_74ea4af18853e9af":
+		case "inventory_overwatch_helicopter":
 		{
-			var_60d3002f = "overwatchHelicopterHacked";
+			taacomdialog = "overwatchHelicopterHacked";
 			break;
 		}
-		case "hash_4307d5aaa7ce21d4":
+		case "inventory_straferun":
 		case "straferun":
 		{
-			var_60d3002f = "strafeRunHacked";
+			taacomdialog = "strafeRunHacked";
 			break;
 		}
 		case "supplydrop":
 		{
-			var_60d3002f = "supplyDropHacked";
+			taacomdialog = "supplyDropHacked";
 			break;
 		}
 		case "uav":
 		{
-			var_60d3002f = "uavHacked";
+			taacomdialog = "uavHacked";
 			break;
 		}
 		case "ultimate_turret":
 		case "inventory_ultimate_turret":
 		{
-			var_60d3002f = "sentryHacked";
+			taacomdialog = "sentryHacked";
 			break;
 		}
 	}
-	if(!isdefined(var_60d3002f))
+	if(!isdefined(taacomdialog))
 	{
 		return undefined;
 	}
-	dialogalias = taacombundle.(var_60d3002f);
+	dialogalias = taacombundle.(taacomdialog);
 	return dialogalias;
 }
 
@@ -793,10 +793,10 @@ function function_ee8935da(player)
 */
 function function_ad01601e(localclientnum, characterindex)
 {
-	var_bacff7f = getcharacterfields(characterindex, currentsessionmode());
-	if(isdefined(var_bacff7f) && isdefined(var_bacff7f.mpdialog))
+	characterfields = getcharacterfields(characterindex, currentsessionmode());
+	if(isdefined(characterfields) && isdefined(characterfields.mpdialog))
 	{
-		dialogbundle = getscriptbundle(var_bacff7f.mpdialog);
+		dialogbundle = getscriptbundle(characterfields.mpdialog);
 		alias = get_dialog_bundle_alias(dialogbundle, "characterSelect");
 		if(isdefined(alias))
 		{
@@ -901,9 +901,9 @@ function private function_edf14b78(var_726a8c2e, var_cc6c1b8f, localclientnum, w
 	Parameters: 3
 	Flags: Linked
 */
-function function_6bed8fc0(var_70b80ca6, var_76787d10, seed)
+function function_6bed8fc0(speakingplayer, var_76787d10, seed)
 {
-	if(!isdefined(var_70b80ca6) || !isplayer(var_70b80ca6))
+	if(!isdefined(speakingplayer) || !isplayer(speakingplayer))
 	{
 		return;
 	}
@@ -911,7 +911,7 @@ function function_6bed8fc0(var_70b80ca6, var_76787d10, seed)
 	{
 		return;
 	}
-	var_20fbd263 = function_b59a25c5(var_70b80ca6);
+	var_20fbd263 = function_b59a25c5(speakingplayer);
 	if(!isdefined(var_20fbd263))
 	{
 		return;
@@ -922,7 +922,7 @@ function function_6bed8fc0(var_70b80ca6, var_76787d10, seed)
 		return;
 	}
 	dialogkey = var_20fbd263 + var_2708cdb2.var_ff5e0d8e;
-	var_a874c58 = var_70b80ca6 function_4b126e4c(0, dialogkey, seed);
+	var_a874c58 = speakingplayer function_4b126e4c(0, dialogkey, seed);
 }
 
 /*
@@ -934,7 +934,7 @@ function function_6bed8fc0(var_70b80ca6, var_76787d10, seed)
 	Parameters: 4
 	Flags: Linked
 */
-function function_6afb2bd4(var_70b80ca6, weapon, localclientnum, seed)
+function function_6afb2bd4(speakingplayer, weapon, localclientnum, seed)
 {
 	weapon function_edf14b78("useAlias", "useFutzAlias", 0, localclientnum, seed);
 }
@@ -948,7 +948,7 @@ function function_6afb2bd4(var_70b80ca6, weapon, localclientnum, seed)
 	Parameters: 4
 	Flags: Linked
 */
-function function_2ddd5b7d(var_70b80ca6, weapon, localclientnum, seed)
+function function_2ddd5b7d(speakingplayer, weapon, localclientnum, seed)
 {
 	weapon function_edf14b78("equipAlias", undefined, 0, localclientnum, seed);
 }
@@ -962,7 +962,7 @@ function function_2ddd5b7d(var_70b80ca6, weapon, localclientnum, seed)
 	Parameters: 4
 	Flags: Linked
 */
-function function_22ea6c18(var_70b80ca6, weapon, localclientnum, seed)
+function function_22ea6c18(speakingplayer, weapon, localclientnum, seed)
 {
 	weapon function_edf14b78("deployAlias", "deployFutzAlias", 0, localclientnum, seed);
 }
@@ -976,7 +976,7 @@ function function_22ea6c18(var_70b80ca6, weapon, localclientnum, seed)
 	Parameters: 4
 	Flags: Linked
 */
-function function_7d29bb1e(var_70b80ca6, weapon, localclientnum, seed)
+function function_7d29bb1e(speakingplayer, weapon, localclientnum, seed)
 {
 	weapon function_edf14b78("destroyedAlias", "deployFutzAlias", 0, localclientnum, seed);
 }
@@ -990,14 +990,14 @@ function function_7d29bb1e(var_70b80ca6, weapon, localclientnum, seed)
 	Parameters: 3
 	Flags: Linked
 */
-function function_f47a0e3b(localclientnum, var_70b80ca6, dialogkey)
+function function_f47a0e3b(localclientnum, speakingplayer, dialogkey)
 {
-	if(!isdefined(dialogkey) || dialogkey == "" || !isalive(var_70b80ca6) || var_70b80ca6 inlaststand() || ((isdefined(var_70b80ca6.var_20af9a03) ? var_70b80ca6.var_20af9a03 : 0) + 5000) > gettime())
+	if(!isdefined(dialogkey) || dialogkey == "" || !isalive(speakingplayer) || speakingplayer inlaststand() || ((isdefined(speakingplayer.var_20af9a03) ? speakingplayer.var_20af9a03 : 0) + 5000) > gettime())
 	{
 		return;
 	}
-	playerbundle = function_58c93260(var_70b80ca6);
-	if(function_7a600918(dialogkey) || sessionmodeiszombiesgame())
+	playerbundle = function_58c93260(speakingplayer);
+	if(ishash(dialogkey) || sessionmodeiszombiesgame())
 	{
 		if(isdefined(level.var_4edd846))
 		{
@@ -1026,7 +1026,7 @@ function function_f47a0e3b(localclientnum, var_70b80ca6, dialogkey)
 	{
 		return;
 	}
-	var_70b80ca6 playsound(localclientnum, dialogalias);
-	var_70b80ca6.var_20af9a03 = gettime();
+	speakingplayer playsound(localclientnum, dialogalias);
+	speakingplayer.var_20af9a03 = gettime();
 }
 

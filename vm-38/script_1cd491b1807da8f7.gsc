@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\gestures.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gestures.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace dynent_use;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_eadd3843()
 {
-	level notify(1896031369);
+	level notify(-1896031369);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: dynent_use
 	Checksum: 0x5AF52B67
 	Offset: 0x120
@@ -28,7 +28,7 @@ function private autoexec function_eadd3843()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"dynent_use", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -44,13 +44,13 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(currentsessionmode() == 4 || !(isdefined(getgametypesetting(#"hash_56ab3c042b783de6")) ? getgametypesetting(#"hash_56ab3c042b783de6") : 0))
+	if(currentsessionmode() == 4 || !(isdefined(getgametypesetting(#"usabledynents")) ? getgametypesetting(#"usabledynents") : 0))
 	{
 		return;
 	}
-	clientfield::function_a8bbc967("hudItems.dynentUseHoldProgress", 13000, 5, "float", 0);
+	clientfield::register_clientuimodel("hudItems.dynentUseHoldProgress", 13000, 5, "float", 0);
 	/#
-		level thread function_5f747d5a();
+		level thread devgui_loop();
 	#/
 	level thread update_loop();
 	callback::on_connect(&on_player_connect);
@@ -71,7 +71,7 @@ function private function_70a657d8()
 */
 function private on_player_connect()
 {
-	usetrigger = function_938bdf98();
+	usetrigger = create_use_trigger();
 	self clientclaimtrigger(usetrigger);
 	self.var_8a022726 = usetrigger;
 	/#
@@ -114,7 +114,7 @@ function private on_player_killed(params)
 }
 
 /*
-	Name: function_938bdf98
+	Name: create_use_trigger
 	Namespace: dynent_use
 	Checksum: 0xE595B82A
 	Offset: 0x3C0
@@ -122,7 +122,7 @@ function private on_player_killed(params)
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_938bdf98()
+function private create_use_trigger()
 {
 	usetrigger = spawn("trigger_radius_use", vectorscale((0, 0, -1), 10000), 0, 128, 64, 1);
 	usetrigger.targetname = "dynent_use";
@@ -137,7 +137,7 @@ function private function_938bdf98()
 	usetrigger function_c96c67a5(0);
 	usetrigger function_89fca53b(1);
 	usetrigger function_49462027(1, (1 | 16) | 1024);
-	usetrigger callback::function_a04381e0(&function_46502841);
+	usetrigger callback::on_trigger_once(&function_46502841);
 	return usetrigger;
 }
 
@@ -201,7 +201,7 @@ function private function_2f394f36()
 	viewheight = self getplayerviewheight();
 	vieworigin = self.origin + (0, 0, viewheight);
 	viewangles = self getplayerangles();
-	var_7303a80a = anglestoforward(viewangles);
+	viewforward = anglestoforward(viewangles);
 	var_e86a4d9 = function_db4bc717(var_5ed7231a, bounds);
 	var_c61b7280 = undefined;
 	var_97684497 = undefined;
@@ -211,7 +211,7 @@ function private function_2f394f36()
 		centroid = function_c5689a6a(dynent);
 		var_966ddbb9 = centroid - vieworigin;
 		var_966ddbb9 = vectornormalize((var_966ddbb9[0], var_966ddbb9[1], 0));
-		var_755fcbbd = vectordot(var_7303a80a, var_966ddbb9);
+		var_755fcbbd = vectordot(viewforward, var_966ddbb9);
 		/#
 			if(debug)
 			{
@@ -234,7 +234,7 @@ function private function_2f394f36()
 		}
 		stateindex = function_ffdbe8c2(dynent);
 		bundle = function_489009c1(dynent);
-		if(isdefined(bundle) && isdefined(bundle.var_c14aa186) && isdefined(bundle.var_c14aa186[stateindex]) && (is_true(bundle.var_c14aa186[stateindex].var_efabe801) || (level.inprematchperiod && !is_true(bundle.var_c14aa186[stateindex].var_4a78f198))))
+		if(isdefined(bundle) && isdefined(bundle.dynentstates) && isdefined(bundle.dynentstates[stateindex]) && (is_true(bundle.dynentstates[stateindex].var_efabe801) || (level.inprematchperiod && !is_true(bundle.dynentstates[stateindex].var_4a78f198))))
 		{
 			/#
 				if(debug)
@@ -248,7 +248,7 @@ function private function_2f394f36()
 		{
 			continue;
 		}
-		if(self function_662eb91e(dynent, vieworigin, var_7303a80a, 5))
+		if(self function_662eb91e(dynent, vieworigin, viewforward, 5))
 		{
 			var_c61b7280 = undefined;
 			break;
@@ -266,13 +266,13 @@ function private function_2f394f36()
 	}
 	trigger = self.var_8a022726;
 	state = function_ffdbe8c2(var_c61b7280);
-	if(trigger.var_a9309589 === var_c61b7280 && trigger.var_9680a0e4 === state)
+	if(trigger.var_a9309589 === var_c61b7280 && trigger.dynentstate === state)
 	{
 		trigger triggerenable(1);
 		return;
 	}
 	trigger.var_a9309589 = var_c61b7280;
-	trigger.var_9680a0e4 = state;
+	trigger.dynentstate = state;
 	bundle = function_489009c1(var_c61b7280);
 	v_offset = ((isdefined(bundle.var_aa0fba03) ? bundle.var_aa0fba03 : 0), (isdefined(bundle.var_f8525687) ? bundle.var_f8525687 : 0), (isdefined(bundle.var_54b28eee) ? bundle.var_54b28eee : 0));
 	v_offset = rotatepoint(v_offset, var_c61b7280.angles);
@@ -291,7 +291,7 @@ function private function_2f394f36()
 	Parameters: 4
 	Flags: Linked
 */
-function function_662eb91e(dynent, vieworigin, var_7303a80a, var_7c927bcc)
+function function_662eb91e(dynent, vieworigin, viewforward, var_7c927bcc)
 {
 	if(!isdefined(var_7c927bcc))
 	{
@@ -311,7 +311,7 @@ function function_662eb91e(dynent, vieworigin, var_7303a80a, var_7c927bcc)
 		var_ed0847f8 = var_806e6091.origin + rotatepoint(var_75b2d824, var_806e6091.angles);
 		var_7113bae6 = var_ed0847f8 - vieworigin;
 		var_5a188b65 = vectornormalize(var_7113bae6);
-		var_99957205 = vectordot(var_7303a80a, var_5a188b65);
+		var_99957205 = vectordot(viewforward, var_5a188b65);
 		if(var_99957205 <= 0.7 || !bullettracepassed(vieworigin, var_ed0847f8, 0, self, var_806e6091))
 		{
 			continue;
@@ -347,9 +347,9 @@ function function_662eb91e(dynent, vieworigin, var_7303a80a, var_7c927bcc)
 function function_836af3b3(bundle, state)
 {
 	hintstring = #"";
-	if(isdefined(bundle) && isdefined(bundle.var_c14aa186) && isdefined(bundle.var_c14aa186[state]) && isdefined(bundle.var_c14aa186[state].hintstring))
+	if(isdefined(bundle) && isdefined(bundle.dynentstates) && isdefined(bundle.dynentstates[state]) && isdefined(bundle.dynentstates[state].hintstring))
 	{
-		hintstring = bundle.var_c14aa186[state].hintstring;
+		hintstring = bundle.dynentstates[state].hintstring;
 	}
 	self sethintstring(hintstring);
 }
@@ -423,7 +423,7 @@ function private function_2b9e2224(trigger)
 			if(gettime() >= endtime)
 			{
 				success = 1;
-				var_a852a7dd = trigger function_bf7b8a27(dynent, self);
+				var_a852a7dd = trigger use_dynent(dynent, self);
 				dynent.var_a548ec11 = gettime() + (var_a852a7dd * 1000);
 				trigger triggerenable(0);
 				break;
@@ -436,9 +436,9 @@ function private function_2b9e2224(trigger)
 			}
 			waitframe(1);
 		}
-		if(isdefined(dynent.var_45f1d6af) && !success)
+		if(isdefined(dynent.onusecancel) && !success)
 		{
-			dynent thread [[dynent.var_45f1d6af]](self);
+			dynent thread [[dynent.onusecancel]](self);
 		}
 	}
 	self clientfield::set_player_uimodel("hudItems.dynentUseHoldProgress", 0);
@@ -511,7 +511,7 @@ function private function_e882de59(trigger)
 	{
 		waitframe(1);
 	}
-	trigger callback::function_a04381e0(&function_46502841);
+	trigger callback::on_trigger_once(&function_46502841);
 }
 
 /*
@@ -529,12 +529,12 @@ function function_7f2040e8()
 	{
 		return;
 	}
-	self.var_8a022726 callback::function_3507ed1f(&function_46502841);
+	self.var_8a022726 callback::remove_on_trigger_once(&function_46502841);
 	self thread function_e882de59(self.var_8a022726);
 }
 
 /*
-	Name: function_bf7b8a27
+	Name: use_dynent
 	Namespace: dynent_use
 	Checksum: 0xA5A9FE89
 	Offset: 0x1790
@@ -542,11 +542,11 @@ function function_7f2040e8()
 	Parameters: 5
 	Flags: Linked
 */
-function function_bf7b8a27(dynent, activator, var_b731b99b, var_8155e7f, var_c78a0afc)
+function use_dynent(dynent, activator, var_b731b99b, disablegesture, var_c78a0afc)
 {
-	if(!isdefined(var_8155e7f))
+	if(!isdefined(disablegesture))
 	{
-		var_8155e7f = 0;
+		disablegesture = 0;
 	}
 	if(!isdefined(var_c78a0afc))
 	{
@@ -555,9 +555,9 @@ function function_bf7b8a27(dynent, activator, var_b731b99b, var_8155e7f, var_c78
 	stateindex = function_ffdbe8c2(dynent);
 	bundle = function_489009c1(dynent);
 	var_9bdcfcd8 = undefined;
-	if(isdefined(bundle) && isdefined(bundle.var_c14aa186) && isdefined(bundle.var_c14aa186[stateindex]))
+	if(isdefined(bundle) && isdefined(bundle.dynentstates) && isdefined(bundle.dynentstates[stateindex]))
 	{
-		state = bundle.var_c14aa186[stateindex];
+		state = bundle.dynentstates[stateindex];
 		var_9bdcfcd8 = (isdefined(var_b731b99b) ? var_b731b99b : (isdefined(state.var_8a7fcb87) ? state.var_8a7fcb87 : 0));
 		if(!isdefined(var_b731b99b) && isdefined(activator))
 		{
@@ -574,7 +574,7 @@ function function_bf7b8a27(dynent, activator, var_b731b99b, var_8155e7f, var_c78
 				var_9bdcfcd8 = (isdefined(state.var_afc94db1) ? state.var_afc94db1 : 0);
 			}
 		}
-		if(!var_8155e7f && isplayer(activator) && isdefined(state.var_20630681))
+		if(!disablegesture && isplayer(activator) && isdefined(state.var_20630681))
 		{
 			activator gestures::function_56e00fbf(state.var_20630681, undefined, 0);
 		}
@@ -595,7 +595,7 @@ function function_bf7b8a27(dynent, activator, var_b731b99b, var_8155e7f, var_c78
 }
 
 /*
-	Name: function_5f747d5a
+	Name: devgui_loop
 	Namespace: dynent_use
 	Checksum: 0x8D68C7D7
 	Offset: 0x1AD8
@@ -603,7 +603,7 @@ function function_bf7b8a27(dynent, activator, var_b731b99b, var_8155e7f, var_c78
 	Parameters: 0
 	Flags: Private
 */
-function private function_5f747d5a()
+function private devgui_loop()
 {
 	/#
 		level endon(#"game_ended");

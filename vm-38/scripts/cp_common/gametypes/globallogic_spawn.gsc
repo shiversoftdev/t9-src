@@ -1,24 +1,24 @@
-#using script_256b8879317373de;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using script_32399001bdb550da;
-#using script_44b0b8420eabacad;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_message_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spectating.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_defaults.gsc;
-#using scripts\cp_common\gametypes\globallogic_player.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\gametypes\globallogic_utils.gsc;
 #using scripts\cp_common\gametypes\loadout.gsc;
+#using scripts\cp_common\gametypes\globallogic_utils.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\gametypes\globallogic_player.gsc;
+#using scripts\cp_common\gametypes\globallogic_defaults.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spectating.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\hud_message_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace globallogic_spawn;
 
@@ -311,7 +311,7 @@ function spawnplayer()
 	hadspawned = self.hasspawned;
 	self player::spawn_player();
 	self setcharacterbodytype(0);
-	self function_8fd843dd(0);
+	self setcharacteroutfit(0);
 	self hud_message::clearlowermessage();
 	self.nextkillstreakfree = undefined;
 	self.activeuavs = 0;
@@ -438,7 +438,7 @@ function spawnplayer()
 	self util::set_sun_shadow_split_distance();
 	self.firstspawn = 0;
 	self.var_88f8dfe3 = gettime();
-	self thread util::function_419f0c21();
+	self thread util::cleanup_fancycam();
 }
 
 /*

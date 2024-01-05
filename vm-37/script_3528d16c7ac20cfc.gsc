@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_32689523 : class_6aaccc24
+class cmp_laststand_client : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xC0A6ABC9
 		Offset: 0x380
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_32689523 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xFA990194
 		Offset: 0x568
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_32689523 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xFADFBE0B
 		Offset: 0x4C8
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_32689523 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_32689523
+		Name: register_clientside
+		Namespace: cmp_laststand_client
 		Checksum: 0x3DF2C520
 		Offset: 0x428
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_laststand_client");
+		cluielem::register_clientside("mp_laststand_client");
 	}
 
 	/*
-		Name: function_67bdfe40
-		Namespace: namespace_32689523
+		Name: set_bleedout_progress
+		Namespace: cmp_laststand_client
 		Checksum: 0xD7FF7043
 		Offset: 0x4F8
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_67bdfe40(localclientnum, value)
+	function set_bleedout_progress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "bleedout_progress", value);
+		[[ self ]]->set_data(localclientnum, "bleedout_progress", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0x3958D5F6
 		Offset: 0x3A0
 		Size: 0x7C
@@ -82,28 +82,28 @@ class class_32689523 : class_6aaccc24
 	*/
 	function setup_clientfields(var_a9a4e140, var_e97e7153)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_laststand_client");
-		namespace_6aaccc24::function_da693cbe("bleedout_progress", 1, 6, "float", var_a9a4e140);
-		namespace_6aaccc24::function_da693cbe("revive_progress", 1, 5, "float", var_e97e7153);
+		cluielem::setup_clientfields("mp_laststand_client");
+		cluielem::add_clientfield("bleedout_progress", 1, 6, "float", var_a9a4e140);
+		cluielem::add_clientfield("revive_progress", 1, 5, "float", var_e97e7153);
 	}
 
 	/*
-		Name: function_d50fdde9
-		Namespace: namespace_32689523
+		Name: set_revive_progress
+		Namespace: cmp_laststand_client
 		Checksum: 0x3F47F408
 		Offset: 0x530
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_d50fdde9(localclientnum, value)
+	function set_revive_progress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "revive_progress", value);
+		[[ self ]]->set_data(localclientnum, "revive_progress", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xA7C99903
 		Offset: 0x450
 		Size: 0x6C
@@ -112,9 +112,9 @@ class class_32689523 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "bleedout_progress", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "revive_progress", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "bleedout_progress", 0);
+		[[ self ]]->set_data(localclientnum, "revive_progress", 0);
 	}
 
 }
@@ -132,7 +132,7 @@ class class_32689523 : class_6aaccc24
 */
 function register(var_a9a4e140, var_e97e7153)
 {
-	elem = new class_32689523();
+	elem = new cmp_laststand_client();
 	[[ elem ]]->setup_clientfields(var_a9a4e140, var_e97e7153);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -154,7 +154,7 @@ function register(var_a9a4e140, var_e97e7153)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_laststand_client
 	Checksum: 0xFB05A285
 	Offset: 0x268
@@ -162,10 +162,10 @@ function register(var_a9a4e140, var_e97e7153)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_32689523();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cmp_laststand_client();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -212,7 +212,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_67bdfe40
+	Name: set_bleedout_progress
 	Namespace: mp_laststand_client
 	Checksum: 0xB13482E7
 	Offset: 0x320
@@ -220,13 +220,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_67bdfe40(localclientnum, value)
+function set_bleedout_progress(localclientnum, value)
 {
-	[[ self ]]->function_67bdfe40(localclientnum, value);
+	[[ self ]]->set_bleedout_progress(localclientnum, value);
 }
 
 /*
-	Name: function_d50fdde9
+	Name: set_revive_progress
 	Namespace: mp_laststand_client
 	Checksum: 0x9F99E539
 	Offset: 0x350
@@ -234,8 +234,8 @@ function function_67bdfe40(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_d50fdde9(localclientnum, value)
+function set_revive_progress(localclientnum, value)
 {
-	[[ self ]]->function_d50fdde9(localclientnum, value);
+	[[ self ]]->set_revive_progress(localclientnum, value);
 }
 

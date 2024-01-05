@@ -15,7 +15,7 @@
 */
 function private autoexec function_ebad0092()
 {
-	level notify(103865433);
+	level notify(-103865433);
 }
 
 /*

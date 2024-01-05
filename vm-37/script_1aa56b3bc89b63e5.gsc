@@ -1,17 +1,17 @@
-#using script_1478fbd17fe393cf;
-#using script_27ef3076a14eb66a;
-#using script_35ae72be7b4fec10;
 #using script_3819e7a1427df6d2;
-#using scripts\core_common\clientfield_shared.gsc;
+#using script_27ef3076a14eb66a;
+#using script_1478fbd17fe393cf;
+#using script_35ae72be7b4fec10;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace snipercam;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: snipercam
 	Checksum: 0x6FFED3D8
 	Offset: 0x180
@@ -19,7 +19,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("snipercam", &function_f64316de, undefined, undefined, undefined);
 }
@@ -183,7 +183,7 @@ function private function_856a28c3(var_afe2c3af, einflictor, eattacker, idamage,
 	player val::set(#"snipercam", "show_hit_marker", 0);
 	player val::set(#"snipercam", "show_compass", 0);
 	player val::set(#"snipercam", "show_crosshair", 0);
-	namespace_fe8e9929::function_57a24ab5(0);
+	hint_tutorial::function_57a24ab5(0);
 	parms = get_parms(player, player geteye(), player getplayerangles(), self, self.var_ca3bd64e);
 	player.holdingbreath = undefined;
 	setslowmotion(1, 0.5, 0);
@@ -207,7 +207,7 @@ function private function_856a28c3(var_afe2c3af, einflictor, eattacker, idamage,
 	self clientfield::set("stop_snipercam", 1);
 	wait(0.1);
 	self notify(#"hash_377b8997737880e7");
-	namespace_fe8e9929::function_57a24ab5(1);
+	hint_tutorial::function_57a24ab5(1);
 	player val::reset_all(#"snipercam");
 	player show();
 	self clientfield::set("stop_snipercam", 0);

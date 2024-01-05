@@ -1,29 +1,29 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
 #using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
 #using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_7510272;
 
@@ -38,7 +38,7 @@
 */
 function private autoexec function_7a1f39d2()
 {
-	level notify(797955722);
+	level notify(-797955722);
 }
 
 #namespace namespace_e8bada13;
@@ -54,18 +54,18 @@ function private autoexec function_7a1f39d2()
 */
 function function_a53db30e(owner, origin)
 {
-	var_d225b2a2 = namespace_ec06fe4a::function_e22ae9b3(origin, "zombietron_monkey_bomb");
-	if(!isdefined(var_d225b2a2))
+	monkey_bomb = namespace_ec06fe4a::function_e22ae9b3(origin, "zombietron_monkey_bomb");
+	if(!isdefined(monkey_bomb))
 	{
 		return;
 	}
-	var_d225b2a2.owner = owner;
-	var_d225b2a2.var_7f3187c5 = sqr(300);
+	monkey_bomb.owner = owner;
+	monkey_bomb.var_7f3187c5 = sqr(300);
 	arrayremovevalue(level.doa.var_af6d47dd, undefined);
-	level.doa.var_af6d47dd[level.doa.var_af6d47dd.size] = var_d225b2a2;
-	var_d225b2a2 namespace_e32bb68::function_3a59ec34("evt_doa_pickup_monkeybomb_music");
-	var_d225b2a2 namespace_83eb6304::function_3ecfde67("monkey_light");
-	var_d225b2a2 thread function_b9934c1d();
+	level.doa.var_af6d47dd[level.doa.var_af6d47dd.size] = monkey_bomb;
+	monkey_bomb namespace_e32bb68::function_3a59ec34("evt_doa_pickup_monkeybomb_music");
+	monkey_bomb namespace_83eb6304::function_3ecfde67("monkey_light");
+	monkey_bomb thread function_b9934c1d();
 }
 
 /*

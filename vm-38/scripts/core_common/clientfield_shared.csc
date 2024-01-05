@@ -11,7 +11,7 @@
 */
 function private autoexec function_847db55e()
 {
-	level notify(2143593433);
+	level notify(-2143593433);
 }
 
 #namespace clientfield;
@@ -45,7 +45,7 @@ function function_5b7d846d(str_name, var_91c404f, path, n_version, n_bits, str_t
 }
 
 /*
-	Name: function_a8bbc967
+	Name: register_clientuimodel
 	Namespace: clientfield
 	Checksum: 0xE8A6D2BE
 	Offset: 0x1B0
@@ -53,13 +53,13 @@ function function_5b7d846d(str_name, var_91c404f, path, n_version, n_bits, str_t
 	Parameters: 9
 	Flags: Linked
 */
-function function_a8bbc967(str_name, var_91c404f, path, n_version, n_bits, str_type, func_callback, b_host, b_callback_for_zero_when_new)
+function register_clientuimodel(str_name, var_91c404f, path, n_version, n_bits, str_type, func_callback, b_host, b_callback_for_zero_when_new)
 {
 	function_c750339b("clientuimodel", str_name, var_91c404f, path, n_version, n_bits, str_type, func_callback, b_host, b_callback_for_zero_when_new);
 }
 
 /*
-	Name: function_346f95ba
+	Name: register_luielem
 	Namespace: clientfield
 	Checksum: 0x71DABE89
 	Offset: 0x230
@@ -67,13 +67,13 @@ function function_a8bbc967(str_name, var_91c404f, path, n_version, n_bits, str_t
 	Parameters: 10
 	Flags: Linked
 */
-function function_346f95ba(str_name, menu_name, var_483e93f7, path, n_version, n_bits, str_type, func_callback, b_host, b_callback_for_zero_when_new)
+function register_luielem(str_name, menu_name, var_483e93f7, path, n_version, n_bits, str_type, func_callback, b_host, b_callback_for_zero_when_new)
 {
 	function_e231bfd4(str_name, menu_name, var_483e93f7, path, n_version, n_bits, str_type, func_callback, b_host, b_callback_for_zero_when_new);
 }
 
 /*
-	Name: function_78175813
+	Name: register_bgcache
 	Namespace: clientfield
 	Checksum: 0x18815BB9
 	Offset: 0x2B8
@@ -81,7 +81,7 @@ function function_346f95ba(str_name, menu_name, var_483e93f7, path, n_version, n
 	Parameters: 7
 	Flags: None
 */
-function function_78175813(poolname, var_b693fec6, uniqueid, version, func_callback, b_host, b_callback_for_zero_when_new)
+function register_bgcache(poolname, var_b693fec6, uniqueid, version, func_callback, b_host, b_callback_for_zero_when_new)
 {
 	function_3ff577e6(poolname, var_b693fec6, uniqueid, version, func_callback, b_host, b_callback_for_zero_when_new);
 }
@@ -183,8 +183,8 @@ function get_player_uimodel(field_name)
 	Parameters: 2
 	Flags: None
 */
-function function_f7ae6994(var_a832fdfa, str_field_name)
+function function_f7ae6994(unique_name, str_field_name)
 {
-	return codegetuimodelclientfield(self, (("luielement." + var_a832fdfa) + ".") + str_field_name);
+	return codegetuimodelclientfield(self, (("luielement." + unique_name) + ".") + str_field_name);
 }
 

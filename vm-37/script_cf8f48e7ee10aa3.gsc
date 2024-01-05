@@ -1,7 +1,7 @@
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 class class_5f632c1e 
 {
@@ -176,7 +176,7 @@ class class_5f632c1e
 #namespace aisquads;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: aisquads
 	Checksum: 0xFC995B3B
 	Offset: 0xA8
@@ -184,7 +184,7 @@ class class_5f632c1e
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ai_squads", &function_70a657d8, undefined, undefined, undefined);
 }

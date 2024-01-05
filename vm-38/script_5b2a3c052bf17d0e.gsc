@@ -1,20 +1,20 @@
 #using script_215d7818c548cb51;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using script_4108035fe400ce67;
 #using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\visionset_mgr_shared.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 
 #namespace namespace_957938f0;
 
@@ -33,7 +33,7 @@ function private autoexec function_3c8b813b()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_957938f0
 	Checksum: 0x52782373
 	Offset: 0x238
@@ -41,7 +41,7 @@ function private autoexec function_3c8b813b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3256c1e06451aec4", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -374,7 +374,7 @@ function function_e6d9e6cd()
 		return;
 	}
 	v_trigger_offset = vectorscale((0, 0, -1), 32);
-	var_eb3b90d = struct::get_array(self.targetname, "target");
+	a_s_spawns = struct::get_array(self.targetname, "target");
 	foreach(s_spawn in self.var_e2d1273)
 	{
 		var_88f24b00 = namespace_8b6a9d79::spawn_script_model(s_spawn, #"p9_sur_essence_container");
@@ -383,7 +383,7 @@ function function_e6d9e6cd()
 		var_88f24b00 bobbing((0, 0, 1), 3, 1);
 		var_88f24b00 rotate(vectorscale((1, 0, 1), 6));
 		s_spawn.trigger = spawn("trigger_radius", s_spawn.origin + v_trigger_offset, 0, 32, 48);
-		s_spawn.trigger callback::function_35a12f19(&function_90c8355);
+		s_spawn.trigger callback::on_trigger(&function_90c8355);
 		s_spawn.trigger.var_88f24b00 = var_88f24b00;
 		waitframe(randomintrange(1, 5));
 	}

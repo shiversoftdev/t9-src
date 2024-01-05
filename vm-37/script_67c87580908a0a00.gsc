@@ -9,17 +9,17 @@
 	Parameters: 1
 	Flags: Linked
 */
-function function_b259f3e0(var_e827f698)
+function function_b259f3e0(camoweapon)
 {
 	/#
-		assert(isdefined(var_e827f698));
+		assert(isdefined(camoweapon));
 	#/
-	var_e69cf15d = function_3786d342(var_e827f698);
+	var_e69cf15d = function_3786d342(camoweapon);
 	if(isdefined(var_e69cf15d) && var_e69cf15d != level.weaponnone)
 	{
-		var_e827f698 = var_e69cf15d;
+		camoweapon = var_e69cf15d;
 	}
-	return var_e827f698;
+	return camoweapon;
 }
 
 /*
@@ -107,7 +107,7 @@ function function_94c2605(weapon)
 function function_13e12ab1(camoindex)
 {
 	var_f4eb4a50 = undefined;
-	activecamoname = function_11c873a(camoindex);
+	activecamoname = getactivecamo(camoindex);
 	if(isdefined(activecamoname) && activecamoname != #"")
 	{
 		var_f4eb4a50 = getscriptbundle(activecamoname);
@@ -142,6 +142,6 @@ function function_edd6511(var_6f2ae9c0)
 function function_5af7df72(var_6f2ae9c0)
 {
 	camoindex = getcamoindex(var_6f2ae9c0);
-	return function_11c873a(camoindex);
+	return getactivecamo(camoindex);
 }
 

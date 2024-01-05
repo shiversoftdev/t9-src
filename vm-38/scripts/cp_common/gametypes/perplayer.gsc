@@ -13,7 +13,7 @@
 */
 function private autoexec function_67ca5699()
 {
-	level notify(1006060055);
+	level notify(-1006060055);
 }
 
 /*

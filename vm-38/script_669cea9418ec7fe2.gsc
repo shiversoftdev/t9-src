@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_c982469d : class_6aaccc24
+class class_c982469d : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_c982469d : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_c982469d
 		Checksum: 0x4EEB1B5D
 		Offset: 0x4B8
@@ -52,13 +52,13 @@ class class_c982469d : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_corrupted_health_bar");
+		cluielem::register_clientside("zm_corrupted_health_bar");
 	}
 
 	/*
-		Name: function_74adcd8a
+		Name: set_armor_vis
 		Namespace: namespace_c982469d
 		Checksum: 0xA8CD27EA
 		Offset: 0x610
@@ -66,9 +66,9 @@ class class_c982469d : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_74adcd8a(localclientnum, value)
+	function set_armor_vis(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "armor_vis", value);
+		[[ self ]]->set_data(localclientnum, "armor_vis", value);
 	}
 
 	/*
@@ -80,12 +80,12 @@ class class_c982469d : class_6aaccc24
 		Parameters: 3
 		Flags: None
 	*/
-	function setup_clientfields(var_663a86fa, var_4ec2b207, var_ed81ff07)
+	function setup_clientfields(healthcallback, var_4ec2b207, var_ed81ff07)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_corrupted_health_bar");
-		namespace_6aaccc24::function_da693cbe("health", 4000, 7, "float", var_663a86fa);
-		namespace_6aaccc24::function_da693cbe("armor", 4000, 7, "float", var_4ec2b207);
-		namespace_6aaccc24::function_da693cbe("armor_vis", 4000, 1, "int", var_ed81ff07);
+		cluielem::setup_clientfields("zm_corrupted_health_bar");
+		cluielem::add_clientfield("health", 4000, 7, "float", healthcallback);
+		cluielem::add_clientfield("armor", 4000, 7, "float", var_4ec2b207);
+		cluielem::add_clientfield("armor_vis", 4000, 1, "int", var_ed81ff07);
 	}
 
 	/*
@@ -99,7 +99,7 @@ class class_c982469d : class_6aaccc24
 	*/
 	function set_armor(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "armor", value);
+		[[ self ]]->set_data(localclientnum, "armor", value);
 	}
 
 	/*
@@ -113,7 +113,7 @@ class class_c982469d : class_6aaccc24
 	*/
 	function set_health(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "health", value);
+		[[ self ]]->set_data(localclientnum, "health", value);
 	}
 
 	/*
@@ -127,19 +127,19 @@ class class_c982469d : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "health", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "armor", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "armor_vis", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "health", 0);
+		[[ self ]]->set_data(localclientnum, "armor", 0);
+		[[ self ]]->set_data(localclientnum, "armor_vis", 0);
 	}
 
 }
 
-#namespace namespace_d0cd3b4a;
+#namespace zm_corrupted_health_bar;
 
 /*
 	Name: function_e9b6493a
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x8492187C
 	Offset: 0xE0
 	Size: 0x14
@@ -148,60 +148,60 @@ class class_c982469d : class_6aaccc24
 */
 function private autoexec function_e9b6493a()
 {
-	level notify(420585340);
+	level notify(-420585340);
 }
 
 /*
 	Name: register
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0xA0D5B6F8
 	Offset: 0x100
 	Size: 0x18E
 	Parameters: 3
 	Flags: None
 */
-function register(var_663a86fa, var_4ec2b207, var_ed81ff07)
+function register(healthcallback, var_4ec2b207, var_ed81ff07)
 {
 	elem = new class_c982469d();
-	[[ elem ]]->setup_clientfields(var_663a86fa, var_4ec2b207, var_ed81ff07);
+	[[ elem ]]->setup_clientfields(healthcallback, var_4ec2b207, var_ed81ff07);
 	if(!isdefined(level.var_ae746e8f))
 	{
 		level.var_ae746e8f = associativearray();
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_33a4fb36c458f0c0"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_corrupted_health_bar"]))
 	{
-		level.var_ae746e8f[#"hash_33a4fb36c458f0c0"] = [];
+		level.var_ae746e8f[#"zm_corrupted_health_bar"] = [];
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_33a4fb36c458f0c0"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_corrupted_health_bar"]))
 	{
-		level.var_ae746e8f[#"hash_33a4fb36c458f0c0"] = [];
+		level.var_ae746e8f[#"zm_corrupted_health_bar"] = [];
 	}
-	else if(!isarray(level.var_ae746e8f[#"hash_33a4fb36c458f0c0"]))
+	else if(!isarray(level.var_ae746e8f[#"zm_corrupted_health_bar"]))
 	{
-		level.var_ae746e8f[#"hash_33a4fb36c458f0c0"] = array(level.var_ae746e8f[#"hash_33a4fb36c458f0c0"]);
+		level.var_ae746e8f[#"zm_corrupted_health_bar"] = array(level.var_ae746e8f[#"zm_corrupted_health_bar"]);
 	}
-	level.var_ae746e8f[#"hash_33a4fb36c458f0c0"][level.var_ae746e8f[#"hash_33a4fb36c458f0c0"].size] = elem;
+	level.var_ae746e8f[#"zm_corrupted_health_bar"][level.var_ae746e8f[#"zm_corrupted_health_bar"].size] = elem;
 }
 
 /*
-	Name: function_5c1bb138
-	Namespace: namespace_d0cd3b4a
+	Name: register_clientside
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x6FE368B5
 	Offset: 0x298
 	Size: 0x34
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_c982469d();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x81FAE813
 	Offset: 0x2D8
 	Size: 0x1C
@@ -215,7 +215,7 @@ function open(player)
 
 /*
 	Name: close
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x7382A142
 	Offset: 0x300
 	Size: 0x1C
@@ -229,7 +229,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0xF859143F
 	Offset: 0x328
 	Size: 0x1A
@@ -243,7 +243,7 @@ function is_open(localclientnum)
 
 /*
 	Name: set_health
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x4A40A87E
 	Offset: 0x350
 	Size: 0x28
@@ -257,7 +257,7 @@ function set_health(localclientnum, value)
 
 /*
 	Name: set_armor
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x13351E94
 	Offset: 0x380
 	Size: 0x28
@@ -270,16 +270,16 @@ function set_armor(localclientnum, value)
 }
 
 /*
-	Name: function_74adcd8a
-	Namespace: namespace_d0cd3b4a
+	Name: set_armor_vis
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0xF04C075D
 	Offset: 0x3B0
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_74adcd8a(localclientnum, value)
+function set_armor_vis(localclientnum, value)
 {
-	[[ self ]]->function_74adcd8a(localclientnum, value);
+	[[ self ]]->set_armor_vis(localclientnum, value);
 }
 

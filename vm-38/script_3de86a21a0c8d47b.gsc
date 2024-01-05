@@ -1,26 +1,26 @@
-#using script_13114d8a31c6152a;
-#using script_256b8879317373de;
-#using script_35ae72be7b4fec10;
-#using script_37f9ff47f340fbe8;
-#using script_4937c6974f43bb71;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\serverfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using script_13114d8a31c6152a;
+#using script_35ae72be7b4fec10;
+#using script_4937c6974f43bb71;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_37f9ff47f340fbe8;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
 
-#namespace namespace_3bb22a53;
+#namespace spy_camera;
 
 /*
 	Name: function_927937ca
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xE5983A30
 	Offset: 0x310
 	Size: 0x14
@@ -29,26 +29,26 @@
 */
 function private autoexec function_927937ca()
 {
-	level notify(1093478414);
+	level notify(-1093478414);
 }
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_3bb22a53
+	Name: __init__system__
+	Namespace: spy_camera
 	Checksum: 0x29B09891
 	Offset: 0x330
 	Size: 0x34
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("spy_camera", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xCAB31A7B
 	Offset: 0x370
 	Size: 0x20C
@@ -57,7 +57,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	callback::function_f77ced93(&function_f77ced93);
+	callback::on_weapon_change(&on_weapon_change);
 	callback::on_spawned(&function_ab7ec803);
 	clientfield::register("toplayer", "spy_camera_state", 1, 2, "int");
 	clientfield::register("toplayer", "binoculars_overlay", 1, 1, "int");
@@ -74,7 +74,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_f785d9e9
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x15ACE8A2
 	Offset: 0x588
 	Size: 0x150
@@ -113,7 +113,7 @@ function function_f785d9e9(objects, var_7eb1c6be, var_354b19f1)
 
 /*
 	Name: function_654fa552
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xD8198ADB
 	Offset: 0x6E0
 	Size: 0x90
@@ -133,7 +133,7 @@ function private function_654fa552(var_57e553fd)
 
 /*
 	Name: function_a6928964
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xC3FEBA2F
 	Offset: 0x778
 	Size: 0xAC
@@ -156,7 +156,7 @@ function private function_a6928964(var_57e553fd)
 
 /*
 	Name: function_b28ab5a9
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x6C69014
 	Offset: 0x830
 	Size: 0x40
@@ -171,7 +171,7 @@ function function_b28ab5a9(object)
 
 /*
 	Name: function_69190c4e
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x91B1AC10
 	Offset: 0x878
 	Size: 0x24
@@ -185,7 +185,7 @@ function function_69190c4e()
 
 /*
 	Name: function_c11bdcc0
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xE63F543D
 	Offset: 0x8A8
 	Size: 0x1C
@@ -198,15 +198,15 @@ function function_c11bdcc0()
 }
 
 /*
-	Name: function_f77ced93
-	Namespace: namespace_3bb22a53
+	Name: on_weapon_change
+	Namespace: spy_camera
 	Checksum: 0x68C7672A
 	Offset: 0x8D0
 	Size: 0x1BC
 	Parameters: 1
 	Flags: Linked
 */
-function function_f77ced93(params)
+function on_weapon_change(params)
 {
 	var_b67a0cc6 = is_true(self.var_340d4e74) || (params.last_weapon !== level.weaponnone && (params.last_weapon === level.var_e3f5eafc || params.last_weapon === level.var_42db149f));
 	if(var_b67a0cc6 || (params.last_weapon === level.weaponnone && self clientfield::get_to_player("spy_camera_state") != 0))
@@ -230,7 +230,7 @@ function function_f77ced93(params)
 
 /*
 	Name: function_ab7ec803
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xE0792B0E
 	Offset: 0xA98
 	Size: 0x2C
@@ -244,7 +244,7 @@ function function_ab7ec803()
 
 /*
 	Name: function_6de171e9
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x1C209E09
 	Offset: 0xAD0
 	Size: 0x9A
@@ -267,7 +267,7 @@ function function_6de171e9(slot)
 
 /*
 	Name: function_8606cd15
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x21359364
 	Offset: 0xB78
 	Size: 0x9A
@@ -290,7 +290,7 @@ function function_8606cd15(slot)
 
 /*
 	Name: function_b83af2a9
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x24A82337
 	Offset: 0xC20
 	Size: 0xC6
@@ -321,7 +321,7 @@ function function_b83af2a9()
 
 /*
 	Name: remove_binoculars
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xC438A072
 	Offset: 0xCF0
 	Size: 0xC6
@@ -352,7 +352,7 @@ function remove_binoculars()
 
 /*
 	Name: function_f91a82ef
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x3B629567
 	Offset: 0xDC0
 	Size: 0xFC
@@ -386,7 +386,7 @@ function function_f91a82ef(b_enabled, var_b3649521, initial_delay, var_34487abc)
 
 /*
 	Name: function_de6d9b74
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x78928DF2
 	Offset: 0xEC8
 	Size: 0x100
@@ -396,7 +396,7 @@ function function_f91a82ef(b_enabled, var_b3649521, initial_delay, var_34487abc)
 function function_de6d9b74(prompts)
 {
 	/#
-		assert(isarray(prompts) || function_7a600918(prompts));
+		assert(isarray(prompts) || ishash(prompts));
 	#/
 	level.var_af143f1d = [];
 	if(isarray(prompts))
@@ -419,7 +419,7 @@ function function_de6d9b74(prompts)
 
 /*
 	Name: function_b917e313
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x5ED48C8B
 	Offset: 0xFD0
 	Size: 0xB20
@@ -429,9 +429,9 @@ function function_de6d9b74(prompts)
 function private function_b917e313(camera, var_e047216a, var_c5c03b2)
 {
 	self endon(#"death", #"hash_84ab457ebc19a5a");
-	if(!isdefined(self.var_3bb22a53))
+	if(!isdefined(self.spy_camera))
 	{
-		self.var_3bb22a53 = spawnstruct();
+		self.spy_camera = spawnstruct();
 	}
 	var_f94537f6 = 0;
 	var_d587d9d3 = 0;
@@ -447,11 +447,11 @@ function private function_b917e313(camera, var_e047216a, var_c5c03b2)
 	{
 		self notify(#"hash_2afde4f84491f78a");
 		self thread function_2d8ba5c4();
-		setuimodelvalue(getuimodel(function_90d058e8(#"hash_3b49d2db23128dc5"), "stream"), 1);
+		setuimodelvalue(getuimodel(function_90d058e8(#"spy_camera"), "stream"), 1);
 	}
 	else
 	{
-		setuimodelvalue(getuimodel(function_90d058e8(#"hash_3b49d2db23128dc5"), "stream"), 2);
+		setuimodelvalue(getuimodel(function_90d058e8(#"spy_camera"), "stream"), 2);
 	}
 	while(true)
 	{
@@ -597,7 +597,7 @@ function private function_b917e313(camera, var_e047216a, var_c5c03b2)
 
 /*
 	Name: function_376f686f
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x59105788
 	Offset: 0x1AF8
 	Size: 0x148
@@ -612,7 +612,7 @@ function private function_376f686f()
 	while(true)
 	{
 		ret = undefined;
-		ret = self waittill(#"hash_158f4ec720008ac2", #"hash_35101c34998acadc");
+		ret = self waittill(#"toggle_stance", #"go_stand");
 		if(ret._notify == "go_stand" || self getstance() != "stand")
 		{
 			self setstance("stand");
@@ -627,7 +627,7 @@ function private function_376f686f()
 
 /*
 	Name: function_d704edcd
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x6A41F88A
 	Offset: 0x1C48
 	Size: 0x254
@@ -650,18 +650,18 @@ function private function_d704edcd(var_c5c03b2)
 	}
 	self notify(#"hash_2977cbecfddfcab6");
 	self notify(#"hash_167fe97f3e95d4c2");
-	self notify(#"hash_31eeefcdd1870ad5");
+	self notify(#"hide_camera_unequip_hint");
 	level.var_af143f1d = [];
 	self showviewmodel();
 	self val::reset_all("spy_camera");
 	self notifyonplayercommandremove("toggle_stance", "+stance");
 	self notifyonplayercommandremove("go_stand", "+gostand");
-	setuimodelvalue(getuimodel(function_90d058e8(#"hash_3b49d2db23128dc5"), "stream"), 0);
+	setuimodelvalue(getuimodel(function_90d058e8(#"spy_camera"), "stream"), 0);
 }
 
 /*
 	Name: function_2d8ba5c4
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xCB122B39
 	Offset: 0x1EA8
 	Size: 0x2CC
@@ -701,7 +701,7 @@ function private function_2d8ba5c4()
 			wait(1);
 			var_acca0715 = gettime();
 		}
-		if(self isgestureplaying(#"hash_56d282b2049f223e"))
+		if(self isgestureplaying(#"ges_spy_camera_ads"))
 		{
 			self waittill(#"hash_2c04af2e3bf6a169");
 			var_acca0715 = gettime();

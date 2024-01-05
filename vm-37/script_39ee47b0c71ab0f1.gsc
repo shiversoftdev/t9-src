@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_12bf89f7 : class_6aaccc24
+class czm_trial_weapon_locked : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_12bf89f7
+		Namespace: czm_trial_weapon_locked
 		Checksum: 0xBBD0A668
 		Offset: 0x328
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_12bf89f7 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_12bf89f7
+		Namespace: czm_trial_weapon_locked
 		Checksum: 0xCF9FA462
 		Offset: 0x4B8
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_12bf89f7 : class_6aaccc24
 
 	/*
 		Name: function_1e74977
-		Namespace: namespace_12bf89f7
+		Namespace: czm_trial_weapon_locked
 		Checksum: 0x1A9BB768
 		Offset: 0x440
 		Size: 0x6C
@@ -40,14 +40,14 @@ class class_12bf89f7 : class_6aaccc24
 	*/
 	function function_1e74977(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "show_icon");
+		current_val = [[ self ]]->get_data(localclientnum, "show_icon");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "show_icon", new_val);
+		[[ self ]]->set_data(localclientnum, "show_icon", new_val);
 	}
 
 	/*
 		Name: open
-		Namespace: namespace_12bf89f7
+		Namespace: czm_trial_weapon_locked
 		Checksum: 0xBAAA93F7
 		Offset: 0x410
 		Size: 0x24
@@ -56,26 +56,26 @@ class class_12bf89f7 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_12bf89f7
+		Name: register_clientside
+		Namespace: czm_trial_weapon_locked
 		Checksum: 0x51B4FE0
 		Offset: 0x3A0
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_trial_weapon_locked");
+		cluielem::register_clientside("zm_trial_weapon_locked");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_12bf89f7
+		Namespace: czm_trial_weapon_locked
 		Checksum: 0x8C7F5CE6
 		Offset: 0x348
 		Size: 0x4C
@@ -84,13 +84,13 @@ class class_12bf89f7 : class_6aaccc24
 	*/
 	function setup_clientfields(var_18c795d0)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_trial_weapon_locked");
-		namespace_6aaccc24::function_da693cbe("show_icon", 1, 1, "counter", var_18c795d0);
+		cluielem::setup_clientfields("zm_trial_weapon_locked");
+		cluielem::add_clientfield("show_icon", 1, 1, "counter", var_18c795d0);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_12bf89f7
+		Namespace: czm_trial_weapon_locked
 		Checksum: 0xAC08602C
 		Offset: 0x3C8
 		Size: 0x40
@@ -99,8 +99,8 @@ class class_12bf89f7 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "show_icon", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "show_icon", 0);
 	}
 
 }
@@ -118,7 +118,7 @@ class class_12bf89f7 : class_6aaccc24
 */
 function register(var_18c795d0)
 {
-	elem = new class_12bf89f7();
+	elem = new czm_trial_weapon_locked();
 	[[ elem ]]->setup_clientfields(var_18c795d0);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -140,7 +140,7 @@ function register(var_18c795d0)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: zm_trial_weapon_locked
 	Checksum: 0x42E5545B
 	Offset: 0x248
@@ -148,10 +148,10 @@ function register(var_18c795d0)
 	Parameters: 0
 	Flags: Linked
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_12bf89f7();
-	[[ elem ]]->function_5c1bb138();
+	elem = new czm_trial_weapon_locked();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

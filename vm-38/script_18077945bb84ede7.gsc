@@ -1,9 +1,9 @@
 #using script_113dd7f0ea2a1d4f;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace sr_scrap;
 
@@ -18,7 +18,7 @@
 */
 function private autoexec function_5f09c3ff()
 {
-	level notify(1749189941);
+	level notify(-1749189941);
 }
 
 /*
@@ -33,9 +33,9 @@ function private autoexec function_5f09c3ff()
 function init()
 {
 	callback::on_connect(&on_player_connect);
-	callback::function_10a4dd0a(&function_10a4dd0a);
+	callback::on_item_pickup(&on_item_pickup);
 	/#
-		level thread function_e2e9d901();
+		level thread add_devgui();
 	#/
 }
 
@@ -55,7 +55,7 @@ function on_player_connect()
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: sr_scrap
 	Checksum: 0x199E6103
 	Offset: 0x168
@@ -63,7 +63,7 @@ function on_player_connect()
 	Parameters: 1
 	Flags: Linked
 */
-function function_10a4dd0a(s_params)
+function on_item_pickup(s_params)
 {
 	var_a6762160 = s_params.item.var_a6762160;
 	if(var_a6762160.itemtype === #"hash_3a094c949a87214d")
@@ -351,7 +351,7 @@ function function_b802c7fc(var_af05f9a2, take, var_60460256)
 }
 
 /*
-	Name: function_e2e9d901
+	Name: add_devgui
 	Namespace: sr_scrap
 	Checksum: 0x68A6B4D2
 	Offset: 0x830
@@ -359,7 +359,7 @@ function function_b802c7fc(var_af05f9a2, take, var_60460256)
 	Parameters: 0
 	Flags: None
 */
-function function_e2e9d901()
+function add_devgui()
 {
 	/#
 		util::waittill_can_add_debug_command();

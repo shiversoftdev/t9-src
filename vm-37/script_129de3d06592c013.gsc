@@ -1,19 +1,19 @@
 #using script_1cc417743d7c262d;
-#using script_47fb62300ac0bd60;
-#using script_79a7e1c31a3e8cc;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\weapons\deployable.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\battlechatter.gsc;
 
 #namespace listening_device;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: listening_device
 	Checksum: 0xBCE46BF
 	Offset: 0x180
@@ -21,7 +21,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"listening_device", &init_shared, undefined, undefined, undefined);
 }
@@ -40,12 +40,12 @@ function init_shared()
 	weaponobjects::function_e6400478("listening_device", &function_2111cf41, 0);
 	level.var_81286410 = &function_23fef963;
 	level.var_5be42934 = &function_f38fc2a8;
-	callback::function_98a0917d(&function_98a0917d);
-	callback::function_78ccee50(&function_78ccee50);
+	callback::on_game_playing(&on_game_playing);
+	callback::on_weapon_fired(&on_weapon_fired);
 	level.var_8ddf6d3d = getscriptbundle(#"listeningdevicesettings");
 	level.var_96492769 = getscriptbundle(#"listeningdevicesettings_deadsilence");
 	callback::on_finalize_initialization(&function_1c601b99);
-	deployable::function_2e088f73(getweapon("listening_device"));
+	deployable::register_deployable(getweapon("listening_device"));
 	clientfield::register("missile", "listening_device_hacked", 1, 1, "counter");
 }
 
@@ -75,24 +75,24 @@ function function_1c601b99()
 	Parameters: 2
 	Flags: Linked
 */
-function function_bff5c062(listening_device, var_dbd1a594)
+function function_bff5c062(listening_device, attackingplayer)
 {
 	var_f3ab6571 = listening_device.owner weaponobjects::function_8481fc06(listening_device.weapon) > 1;
 	listening_device.owner thread globallogic_audio::function_a2cde53d(listening_device.weapon, var_f3ab6571);
-	listening_device.team = var_dbd1a594.team;
-	listening_device setteam(var_dbd1a594.team);
-	listening_device.owner = var_dbd1a594;
-	listening_device setowner(var_dbd1a594);
+	listening_device.team = attackingplayer.team;
+	listening_device setteam(attackingplayer.team);
+	listening_device.owner = attackingplayer;
+	listening_device setowner(attackingplayer);
 	if(isdefined(listening_device) && isdefined(level.var_f1edf93f))
 	{
 		_station_up_to_detention_center_triggers = [[level.var_f1edf93f]]();
 		if((isdefined(_station_up_to_detention_center_triggers) ? _station_up_to_detention_center_triggers : 0))
 		{
-			listening_device notify(#"hash_602ae7ca650d6287");
+			listening_device notify(#"cancel_timeout");
 			listening_device thread weaponobjects::weapon_object_timeout(listening_device.var_2d045452, _station_up_to_detention_center_triggers);
 		}
 	}
-	listening_device thread weaponobjects::function_6d8aa6a0(var_dbd1a594, listening_device.var_2d045452);
+	listening_device thread weaponobjects::function_6d8aa6a0(attackingplayer, listening_device.var_2d045452);
 	listening_device clientfield::increment("listening_device_hacked");
 }
 
@@ -118,9 +118,9 @@ function function_2111cf41(watcher)
 	watcher.immunespecialty = "specialty_immunetriggerbetty";
 	watcher.var_8eda8949 = (0, 0, 0);
 	var_167da8cf = getweapon(#"listening_device");
-	if(isdefined(var_167da8cf.var_4dd46f8a))
+	if(isdefined(var_167da8cf.customsettings))
 	{
-		var_e6fbac16 = getscriptbundle(var_167da8cf.var_4dd46f8a);
+		var_e6fbac16 = getscriptbundle(var_167da8cf.customsettings);
 		/#
 			assert(isdefined(var_e6fbac16));
 		#/
@@ -209,13 +209,13 @@ function function_8bdff396(watcher, player)
 	Parameters: 2
 	Flags: Linked
 */
-function function_8af865a6(attacker, var_61dedb9f)
+function function_8af865a6(attacker, callback_data)
 {
-	weaponobjects::proximitydetonate(var_61dedb9f);
-	if(isplayer(var_61dedb9f) && var_61dedb9f != self.owner && var_61dedb9f.team != self.team)
+	weaponobjects::proximitydetonate(callback_data);
+	if(isplayer(callback_data) && callback_data != self.owner && callback_data.team != self.team)
 	{
-		scoreevents::processscoreevent(#"hash_20263a44bc86ab70", var_61dedb9f);
-		self thread battlechatter::function_d2600afc(var_61dedb9f, self.owner, self.weapon);
+		scoreevents::processscoreevent(#"hash_20263a44bc86ab70", callback_data);
+		self thread battlechatter::function_d2600afc(callback_data, self.owner, self.weapon);
 		var_f3ab6571 = self.owner weaponobjects::function_8481fc06(self.weapon) > 1;
 		self.owner thread globallogic_audio::function_6daffa93(self.weapon, var_f3ab6571);
 	}
@@ -271,7 +271,7 @@ function function_23fef963()
 }
 
 /*
-	Name: function_98a0917d
+	Name: on_game_playing
 	Namespace: listening_device
 	Checksum: 0x65795E49
 	Offset: 0xC38
@@ -279,13 +279,13 @@ function function_23fef963()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_98a0917d()
+function private on_game_playing()
 {
 	level thread function_d993c135();
 }
 
 /*
-	Name: function_78ccee50
+	Name: on_weapon_fired
 	Namespace: listening_device
 	Checksum: 0x37F6594B
 	Offset: 0xC60
@@ -293,7 +293,7 @@ function private function_98a0917d()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_78ccee50(params)
+function private on_weapon_fired(params)
 {
 	self.var_bb20a522 = gettime();
 	self.var_8c3b7f1a = self.origin;
@@ -542,8 +542,8 @@ function function_f38fc2a8(data)
 				attacker stats::function_dad108fa(#"hash_15da16b6b9032af", 1);
 				attacker stats::function_dad108fa(#"hash_d9fe863a1e9e4d8", 1);
 				attacker challenges::function_38ad2427(#"hash_4808274db2565c0d", 1);
-				attacker contracts::function_a54e2068(#"hash_327ba388df6e6793");
-				attacker contracts::function_a54e2068(#"hash_3ff1fe889b516cc3");
+				attacker contracts::increment_contract(#"hash_327ba388df6e6793");
+				attacker contracts::increment_contract(#"hash_3ff1fe889b516cc3");
 				if(isdefined(data.weapon) && data.weapon !== level.weaponnone)
 				{
 					attacker stats::function_e24eec31(data.weapon, #"kill_detected_stunned_blinded", 1);

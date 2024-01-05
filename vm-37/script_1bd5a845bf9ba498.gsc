@@ -1,10 +1,10 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_14c21b91;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_14c21b91
 	Checksum: 0xAF0A1B05
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_e77f876300a38be", &function_70a657d8, undefined, undefined, undefined);
 }

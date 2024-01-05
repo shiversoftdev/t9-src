@@ -1,21 +1,21 @@
-#using script_35ae72be7b4fec10;
-#using script_37f9ff47f340fbe8;
-#using script_4ccd0c3512b52a10;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
 #using scripts\cp_common\util.gsc;
+#using script_35ae72be7b4fec10;
+#using script_4ccd0c3512b52a10;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_37f9ff47f340fbe8;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace prompts;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: prompts
 	Checksum: 0x578B9F57
 	Offset: 0x398
@@ -23,7 +23,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"prompts", &preload, undefined, undefined, undefined);
 }
@@ -406,7 +406,7 @@ function function_92127496(var_80534db1, var_a5ce465f)
 }
 
 /*
-	Name: function_d5ea17f0
+	Name: set_text
 	Namespace: prompts
 	Checksum: 0x8F65FFF1
 	Offset: 0x1E60
@@ -414,7 +414,7 @@ function function_92127496(var_80534db1, var_a5ce465f)
 	Parameters: 1
 	Flags: None
 */
-function function_d5ea17f0(text)
+function set_text(text)
 {
 	/#
 		assert(isdefined(self.var_3e95b88f), "");
@@ -422,7 +422,7 @@ function function_d5ea17f0(text)
 	self.var_3e95b88f.text = text;
 	if(isdefined(self.var_3e95b88f.uid))
 	{
-		namespace_61e6d095::function_d5ea17f0(self.var_3e95b88f.uid, text);
+		namespace_61e6d095::set_text(self.var_3e95b88f.uid, text);
 	}
 }
 
@@ -1935,7 +1935,7 @@ function private function_e8006b47()
 		}
 		if(var_c6668915 !== alpha)
 		{
-			namespace_61e6d095::function_aa5c711d((isdefined(self.var_3e95b88f.var_b003a020) ? self.var_3e95b88f.var_b003a020 : uid), alpha);
+			namespace_61e6d095::set_alpha((isdefined(self.var_3e95b88f.var_b003a020) ? self.var_3e95b88f.var_b003a020 : uid), alpha);
 			var_c6668915 = alpha;
 		}
 		if(old_state != state)
@@ -2510,14 +2510,14 @@ function private function_a6104953()
 	{
 		if(isdefined(self.var_3e95b88f.text))
 		{
-			namespace_61e6d095::function_d5ea17f0(var_3a6b0af4, self.var_3e95b88f.text);
+			namespace_61e6d095::set_text(var_3a6b0af4, self.var_3e95b88f.text);
 		}
 		if(isdefined(self.var_3e95b88f.image))
 		{
 			namespace_61e6d095::function_309bf7c2(var_3a6b0af4, self.var_3e95b88f.image);
 		}
-		namespace_61e6d095::function_aa5c711d(var_3a6b0af4, 0);
-		namespace_61e6d095::function_6e0fad3b(var_3a6b0af4, self);
+		namespace_61e6d095::set_alpha(var_3a6b0af4, 0);
+		namespace_61e6d095::set_ent(var_3a6b0af4, self);
 		offset = (isdefined(self.var_3e95b88f.offset) ? self.var_3e95b88f.offset : (0, 0, 0));
 		if(!self function_5a11b8f6())
 		{

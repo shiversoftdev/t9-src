@@ -1,10 +1,10 @@
-#using script_14d2d89964cae0b1;
+#using scripts\zm_common\zm_weapons.csc;
 #using scripts\core_common\beam_shared.csc;
+#using scripts\zm_common\zm_utility.csc;
+#using script_14d2d89964cae0b1;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
-#using scripts\zm_common\zm_weapons.csc;
 
 #namespace namespace_b376a999;
 
@@ -19,11 +19,11 @@
 */
 function private autoexec function_511a439a()
 {
-	level notify(1058828515);
+	level notify(-1058828515);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_b376a999
 	Checksum: 0xAD6A3D72
 	Offset: 0x3A8
@@ -31,7 +31,7 @@ function private autoexec function_511a439a()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_36cdf1547e49b57a", &function_70a657d8, &function_8ac3bea9, undefined, "zm_weapons");
 }
@@ -131,7 +131,7 @@ function function_8964c489(localclientnum, oldval, newval, bnewent, binitialsnap
 	if(bwastimejump && bwastimejump < (var_a04a4858.size + 1))
 	{
 		self.var_da783696 = var_a04a4858[bwastimejump - 1];
-		self function_bf9d3071(self.var_da783696);
+		self playrenderoverridebundle(self.var_da783696);
 	}
 }
 
@@ -989,7 +989,7 @@ function function_f8ed548c(b_freeze)
 		wait(0.1);
 		if(isdefined(self))
 		{
-			self function_bf9d3071("rob_test_character_ice");
+			self playrenderoverridebundle("rob_test_character_ice");
 		}
 	}
 	if(isdefined(self) && !isdefined(self.var_82fb67e7))
@@ -1013,7 +1013,7 @@ function function_f8ed548c(b_freeze)
 		}
 		else if(self.var_82fb67e7 <= 0)
 		{
-			self function_5d482e78("rob_test_character_ice");
+			self stoprenderoverridebundle("rob_test_character_ice");
 			break;
 		}
 		wait(0.1);
@@ -1281,7 +1281,7 @@ function function_aaa79dd8(localclientnum, newval)
 		return;
 	}
 	self endon(#"death", #"hash_7b232faa08bb9788");
-	var_be18b9fb = "beam9_zm_ieu_electrical_lv1";
+	str_beam = "beam9_zm_ieu_electrical_lv1";
 	switch(newval)
 	{
 		default:
@@ -1290,19 +1290,19 @@ function function_aaa79dd8(localclientnum, newval)
 		}
 		case 2:
 		{
-			var_be18b9fb = "beam9_zm_ieu_electrical_lv2";
+			str_beam = "beam9_zm_ieu_electrical_lv2";
 			break;
 		}
 		case 3:
 		{
-			var_be18b9fb = "beam9_zm_ieu_electrical";
+			str_beam = "beam9_zm_ieu_electrical";
 			break;
 		}
 	}
 	if(!self zm_utility::function_f8796df3(localclientnum))
 	{
-		var_be18b9fb = var_be18b9fb + "_3p";
-		self.var_59e057ab = level beam::function_cfb2f62a(localclientnum, self, "tag_flash", undefined, "tag_origin", var_be18b9fb);
+		str_beam = str_beam + "_3p";
+		self.var_59e057ab = level beam::function_cfb2f62a(localclientnum, self, "tag_flash", undefined, "tag_origin", str_beam);
 		while(isdefined(self.var_59e057ab))
 		{
 			waitframe(1);
@@ -1311,14 +1311,14 @@ function function_aaa79dd8(localclientnum, newval)
 	else
 	{
 		cam_pos = self getcampos();
-		var_85e6dc61 = (isdefined(cam_pos) ? cam_pos : self.origin) + (1000 * anglestoforward(self getplayerangles()));
-		self.var_f28be0bb = util::spawn_model(localclientnum, "tag_origin", var_85e6dc61);
-		self.var_59e057ab = level beam::function_cfb2f62a(localclientnum, self, "tag_flash", self.var_f28be0bb, "tag_origin", var_be18b9fb);
+		target_location = (isdefined(cam_pos) ? cam_pos : self.origin) + (1000 * anglestoforward(self getplayerangles()));
+		self.var_f28be0bb = util::spawn_model(localclientnum, "tag_origin", target_location);
+		self.var_59e057ab = level beam::function_cfb2f62a(localclientnum, self, "tag_flash", self.var_f28be0bb, "tag_origin", str_beam);
 		while(isdefined(self.var_f28be0bb))
 		{
 			cam_pos = self getcampos();
-			var_85e6dc61 = (isdefined(cam_pos) ? cam_pos : self.origin) + (1000 * anglestoforward(self getplayerangles()));
-			self.var_f28be0bb.origin = var_85e6dc61;
+			target_location = (isdefined(cam_pos) ? cam_pos : self.origin) + (1000 * anglestoforward(self getplayerangles()));
+			self.var_f28be0bb.origin = target_location;
 			waitframe(1);
 		}
 	}

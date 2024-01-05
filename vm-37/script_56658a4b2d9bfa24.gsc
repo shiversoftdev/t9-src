@@ -1,16 +1,16 @@
-#using script_2255a7ad3edc838f;
-#using script_256b8879317373de;
-#using scripts\core_common\bots\bot_action.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\dev_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\dev_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\bots\bot_action.gsc;
+#using scripts\core_common\bots\bot.gsc;
 
 #namespace namespace_1f0cb9eb;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1f0cb9eb
 	Checksum: 0xA1FD004C
 	Offset: 0x578
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6540387fe939dd65", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -34,7 +34,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(function_59116c33() || currentsessionmode() == 4 || currentsessionmode() == 2)
+	if(isshipbuild() || currentsessionmode() == 4 || currentsessionmode() == 2)
 	{
 		return;
 	}
@@ -46,7 +46,7 @@ function private function_70a657d8()
 	/#
 		level thread function_d3901b82();
 	#/
-	level thread function_5f747d5a();
+	level thread devgui_loop();
 }
 
 /*
@@ -181,7 +181,7 @@ function private function_40dbe923(dvarstr)
 		}
 		case "ignoreall":
 		{
-			level function_7f17c614(host, args[1], int(args[2]));
+			level devgui_ignoreall(host, args[1], int(args[2]));
 			break;
 		}
 		case "force_press_button":
@@ -221,7 +221,7 @@ function private function_40dbe923(dvarstr)
 		}
 		case "tpose":
 		{
-			level function_41f90224(host, args[1]);
+			level devgui_tpose(host, args[1]);
 			break;
 		}
 	}
@@ -241,7 +241,7 @@ function private function_40dbe923(dvarstr)
 			}
 			case "set_target":
 			{
-				host function_f3b40e82(args[1], args[2]);
+				host devgui_set_target(args[1], args[2]);
 				break;
 			}
 			case "goal":
@@ -281,7 +281,7 @@ function private function_40dbe923(dvarstr)
 }
 
 /*
-	Name: function_5f747d5a
+	Name: devgui_loop
 	Namespace: namespace_1f0cb9eb
 	Checksum: 0x92233D93
 	Offset: 0xFA0
@@ -289,7 +289,7 @@ function private function_40dbe923(dvarstr)
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_5f747d5a()
+function private devgui_loop()
 {
 	while(true)
 	{
@@ -482,9 +482,9 @@ function private function_d3901b82()
 				assetname = function_9e72a96(getcharacterassetname(index, sessionmode));
 				name = ((displayname + "") + assetname) + "";
 				cmd = ((((("" + name) + "") + index) + "") + index) + "";
-				util::function_345e5b9a(cmd);
+				util::add_debug_command(cmd);
 				cmd = ((((("" + name) + "") + index) + "") + index) + "";
-				util::function_345e5b9a(cmd);
+				util::add_debug_command(cmd);
 			}
 		}
 	#/
@@ -566,7 +566,7 @@ function private add_bot_devgui_cmd(entnum, path, sortkey, devguiarg, cmdargs)
 		cmdargs = "";
 	}
 	cmd = ((((((((((((((("devgui_cmd \"Bots/") + entnum) + " ") + self.name) + ":") + entnum) + ("/") + path) + ":") + sortkey) + "\" \"set devgui_bot ") + devguiarg) + " ") + entnum) + " ") + cmdargs) + "\"";
-	util::function_345e5b9a(cmd);
+	util::add_debug_command(cmd);
 }
 
 /*
@@ -578,10 +578,10 @@ function private add_bot_devgui_cmd(entnum, path, sortkey, devguiarg, cmdargs)
 	Parameters: 5
 	Flags: Linked, Private
 */
-function private function_f105dc20(entnum, var_eeb5e4bd, var_8a5cf3f4, var_1e443b4, var_71f9ccb1)
+function private function_f105dc20(entnum, var_eeb5e4bd, var_8a5cf3f4, var_1e443b4, buttonbit)
 {
-	self add_bot_devgui_cmd(entnum, (((("Force Button:" + var_eeb5e4bd) + ("/") + var_8a5cf3f4) + ":") + var_1e443b4) + ("/Press"), 0, "force_press_button", var_71f9ccb1);
-	self add_bot_devgui_cmd(entnum, (((("Force Button:" + var_eeb5e4bd) + ("/") + var_8a5cf3f4) + ":") + var_1e443b4) + ("/Toggle"), 1, "force_toggle_button", var_71f9ccb1);
+	self add_bot_devgui_cmd(entnum, (((("Force Button:" + var_eeb5e4bd) + ("/") + var_8a5cf3f4) + ":") + var_1e443b4) + ("/Press"), 0, "force_press_button", buttonbit);
+	self add_bot_devgui_cmd(entnum, (((("Force Button:" + var_eeb5e4bd) + ("/") + var_8a5cf3f4) + ":") + var_1e443b4) + ("/Toggle"), 1, "force_toggle_button", buttonbit);
 }
 
 /*
@@ -646,7 +646,7 @@ function clear_bot_devgui_menu()
 		return;
 	}
 	cmd = (((("devgui_remove \"Bots/") + entnum) + " ") + self.name) + "\"";
-	util::function_345e5b9a(cmd);
+	util::add_debug_command(cmd);
 }
 
 /*
@@ -704,18 +704,18 @@ function private function_5aef57f5(host, botarg)
 	Parameters: 3
 	Flags: Linked, Private
 */
-function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, var_8baa0e51)
+function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg)
 {
 	team = function_881d3aa(self, botarg);
 	if(!isdefined(team))
 	{
 		return;
 	}
-	if(!isdefined(var_8baa0e51))
+	if(!isdefined(countarg))
 	{
-		var_8baa0e51 = 1;
+		countarg = 1;
 	}
-	original_count = max(int(var_8baa0e51), 1);
+	original_count = max(int(countarg), 1);
 	count = original_count;
 	players = getplayers(team);
 	max_players = player::function_d36b6597();
@@ -731,13 +731,13 @@ function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, var_8baa0e51)
 	{
 		var_b27e53da = -1;
 	}
-	var_f11eb5f2 = int(var_b27e53da);
+	roleindex = int(var_b27e53da);
 	trace = self eye_trace(0, 1);
 	spawndir = self.origin - trace[#"position"];
 	spawnangles = vectortoangles(spawndir);
 	offset = vectorscale((0, 0, 1), 5);
 	origin = trace[#"position"] + offset;
-	bots = function_bd48ef10(team, count, origin, spawnangles[1], var_f11eb5f2);
+	bots = function_bd48ef10(team, count, origin, spawnangles[1], roleindex);
 	vehicle = trace[#"entity"];
 	if(isvehicle(vehicle))
 	{
@@ -765,18 +765,18 @@ function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, var_8baa0e51)
 	Parameters: 5
 	Flags: Linked, Private
 */
-function private function_57d0759d(botarg, var_b27e53da, var_8baa0e51, origin, angle)
+function private function_57d0759d(botarg, var_b27e53da, countarg, origin, angle)
 {
 	team = function_881d3aa(self, botarg);
 	if(!isdefined(team))
 	{
 		return;
 	}
-	if(!isdefined(var_8baa0e51))
+	if(!isdefined(countarg))
 	{
-		var_8baa0e51 = 1;
+		countarg = 1;
 	}
-	count = max(int(var_8baa0e51), 1);
+	count = max(int(countarg), 1);
 	players = getplayers(team);
 	max_players = player::function_d36b6597();
 	if(max_players > 0)
@@ -791,10 +791,10 @@ function private function_57d0759d(botarg, var_b27e53da, var_8baa0e51, origin, a
 	{
 		var_b27e53da = -1;
 	}
-	var_f11eb5f2 = int(var_b27e53da);
+	roleindex = int(var_b27e53da);
 	offset = vectorscale((0, 0, 1), 5);
 	origin = origin + offset;
-	bots = function_bd48ef10(team, count, origin, angle, var_f11eb5f2);
+	bots = function_bd48ef10(team, count, origin, angle, roleindex);
 }
 
 /*
@@ -806,7 +806,7 @@ function private function_57d0759d(botarg, var_b27e53da, var_8baa0e51, origin, a
 	Parameters: 5
 	Flags: Linked, Private
 */
-function private function_bd48ef10(team, count, origin, yaw, var_f11eb5f2)
+function private function_bd48ef10(team, count, origin, yaw, roleindex)
 {
 	bots = [];
 	if(!isdefined(bots))
@@ -817,7 +817,7 @@ function private function_bd48ef10(team, count, origin, yaw, var_f11eb5f2)
 	{
 		bots = array(bots);
 	}
-	bots[bots.size] = self bot::add_fixed_spawn_bot(team, origin, yaw, var_f11eb5f2);
+	bots[bots.size] = self bot::add_fixed_spawn_bot(team, origin, yaw, roleindex);
 	/#
 		spiral = dev::function_a4ccb933(origin, yaw);
 		for(i = 0; i < count - 1; i++)
@@ -833,7 +833,7 @@ function private function_bd48ef10(team, count, origin, yaw, var_f11eb5f2)
 			{
 				bots = array(bots);
 			}
-			bots[bots.size] = self bot::add_fixed_spawn_bot(team, origin, angle, var_f11eb5f2);
+			bots[bots.size] = self bot::add_fixed_spawn_bot(team, origin, angle, roleindex);
 		}
 	#/
 	return bots;
@@ -919,7 +919,7 @@ function private devgui_remove_bots(host, botarg)
 }
 
 /*
-	Name: function_7f17c614
+	Name: devgui_ignoreall
 	Namespace: namespace_1f0cb9eb
 	Checksum: 0xFACA56DD
 	Offset: 0x2E90
@@ -927,7 +927,7 @@ function private devgui_remove_bots(host, botarg)
 	Parameters: 3
 	Flags: Linked, Private
 */
-function private function_7f17c614(host, botarg, cmdarg)
+function private devgui_ignoreall(host, botarg, cmdarg)
 {
 	bots = function_9a819607(host, botarg);
 	foreach(bot in bots)
@@ -937,7 +937,7 @@ function private function_7f17c614(host, botarg, cmdarg)
 }
 
 /*
-	Name: function_f3b40e82
+	Name: devgui_set_target
 	Namespace: namespace_1f0cb9eb
 	Checksum: 0xB44888BD
 	Offset: 0x2F50
@@ -945,7 +945,7 @@ function private function_7f17c614(host, botarg, cmdarg)
 	Parameters: 2
 	Flags: Linked, Private
 */
-function private function_f3b40e82(botarg, cmdarg)
+function private devgui_set_target(botarg, cmdarg)
 {
 	target = undefined;
 	switch(cmdarg)
@@ -1107,7 +1107,7 @@ function private function_417ef9e7(botarg)
 	trace = self eye_trace(1);
 	bots = function_9a819607(self, botarg);
 	pos = trace[#"position"];
-	point = function_ad6356f5(pos);
+	point = getclosesttacpoint(pos);
 	if(!isdefined(point))
 	{
 		return;
@@ -1504,7 +1504,7 @@ function private function_2e08087e(player)
 }
 
 /*
-	Name: function_41f90224
+	Name: devgui_tpose
 	Namespace: namespace_1f0cb9eb
 	Checksum: 0x6AF2F51B
 	Offset: 0x4778
@@ -1512,12 +1512,12 @@ function private function_2e08087e(player)
 	Parameters: 2
 	Flags: Linked
 */
-function function_41f90224(host, botarg)
+function devgui_tpose(host, botarg)
 {
 	bots = function_9a819607(host, botarg);
 	foreach(bot in bots)
 	{
-		setdvar(#"hash_6028c4687677bbc9", 1);
+		setdvar(#"bg_boastenabled", 1);
 		bot function_c6775cf9("dev_boast_tpose");
 	}
 }

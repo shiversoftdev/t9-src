@@ -1,9 +1,9 @@
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\zm_common\zm_utility.csc;
 #using script_17a9d06bf819b2d3;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\audio_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
 
 #namespace namespace_9f845210;
 
@@ -22,7 +22,7 @@ function private autoexec function_e49a36fd()
 }
 
 /*
-	Name: function_842831cf
+	Name: init_clientfield
 	Namespace: namespace_9f845210
 	Checksum: 0x84EFBB1F
 	Offset: 0x218
@@ -30,12 +30,12 @@ function private autoexec function_e49a36fd()
 	Parameters: 0
 	Flags: Linked
 */
-function function_842831cf()
+function init_clientfield()
 {
 	clientfield::register("world", "" + #"hash_27895772c4825a7a", 1, 1, "int", &function_619cd4e5, 0, 0);
 	clientfield::register("allplayers", "" + #"hash_63af42145e260fb5", 1, 2, "int", &function_4fd00e1f, 0, 0);
 	clientfield::register("toplayer", "" + #"hash_14ba797c22b75dda", 1, 1, "counter", &function_483f3ae0, 0, 0);
-	if(getgametypesetting(#"hash_19d48a0d4490b0a2") !== 1)
+	if(getgametypesetting(#"zmpapenabled") !== 1)
 	{
 		return;
 	}

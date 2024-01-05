@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_ec90ce81 : class_6aaccc24
+class csr_weapon_upgrade_menu : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x467B1168
 		Offset: 0x2E0
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x143F04C3
 		Offset: 0x3B0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x120E04A5
 		Offset: 0x380
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_ec90ce81
+		Name: register_clientside
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x3F426332
 		Offset: 0x328
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_weapon_upgrade_menu");
+		cluielem::register_clientside("sr_weapon_upgrade_menu");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xB43775F5
 		Offset: 0x300
 		Size: 0x1C
@@ -68,12 +68,12 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_weapon_upgrade_menu");
+		cluielem::setup_clientfields("sr_weapon_upgrade_menu");
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xB96C3F2B
 		Offset: 0x350
 		Size: 0x24
@@ -82,7 +82,7 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -100,7 +100,7 @@ class class_ec90ce81 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_ec90ce81();
+	elem = new csr_weapon_upgrade_menu();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: sr_weapon_upgrade_menu
 	Checksum: 0x20E9CF59
 	Offset: 0x228
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_ec90ce81();
-	[[ elem ]]->function_5c1bb138();
+	elem = new csr_weapon_upgrade_menu();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

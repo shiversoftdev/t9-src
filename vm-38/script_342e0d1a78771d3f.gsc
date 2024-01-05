@@ -1,13 +1,13 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_24ac3512 : class_6aaccc24
+class cremote_missile_target_lockon : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_24ac3512
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0x4ED14D0E
 		Offset: 0x298
 		Size: 0x14
@@ -20,7 +20,7 @@ class class_24ac3512 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_24ac3512
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0xF3461FEF
 		Offset: 0x510
 		Size: 0x14
@@ -33,7 +33,7 @@ class class_24ac3512 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_24ac3512
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0x3B7D76BD
 		Offset: 0x2E0
 		Size: 0x3C
@@ -46,54 +46,54 @@ class class_24ac3512 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_2ecbc83c
-		Namespace: namespace_24ac3512
+		Name: set_target_locked
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0xC24CA9E
 		Offset: 0x3B0
 		Size: 0x4C
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_2ecbc83c(player, value)
+	function set_target_locked(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 2, value, 0);
 	}
 
 	/*
-		Name: function_3b7b386a
-		Namespace: namespace_24ac3512
+		Name: set_clientnum
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0xEBA581AE
 		Offset: 0x358
 		Size: 0x4C
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_3b7b386a(player, value)
+	function set_clientnum(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 1, value, 0);
 	}
 
 	/*
-		Name: function_505f092a
-		Namespace: namespace_24ac3512
+		Name: set_ishawktag
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0x65D80C31
 		Offset: 0x408
 		Size: 0x4C
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_505f092a(player, value)
+	function set_ishawktag(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 3, value, 0);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_24ac3512
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0xC8276047
 		Offset: 0x328
 		Size: 0x24
@@ -102,26 +102,26 @@ class class_24ac3512 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_7c227f6d
-		Namespace: namespace_24ac3512
+		Name: set_isvehicle
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0x900360B8
 		Offset: 0x4B8
 		Size: 0x4C
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_7c227f6d(player, value)
+	function set_isvehicle(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 5, value, 0);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_24ac3512
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0x2C843164
 		Offset: 0x2B8
 		Size: 0x1C
@@ -130,19 +130,19 @@ class class_24ac3512 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("remote_missile_target_lockon");
+		cluielem::setup_clientfields("remote_missile_target_lockon");
 	}
 
 	/*
-		Name: function_b9d6aaa7
-		Namespace: namespace_24ac3512
+		Name: set_killed
+		Namespace: cremote_missile_target_lockon
 		Checksum: 0x890E8632
 		Offset: 0x460
 		Size: 0x4C
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_b9d6aaa7(player, value)
+	function set_killed(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 4, value, 0);
 	}
@@ -162,7 +162,7 @@ class class_24ac3512 : class_6aaccc24
 */
 function private autoexec function_427aa51a()
 {
-	level notify(1141273591);
+	level notify(-1141273591);
 }
 
 /*
@@ -176,7 +176,7 @@ function private autoexec function_427aa51a()
 */
 function register()
 {
-	elem = new class_24ac3512();
+	elem = new cremote_missile_target_lockon();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -228,7 +228,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_3b7b386a
+	Name: set_clientnum
 	Namespace: remote_missile_target_lockon
 	Checksum: 0xA07519F
 	Offset: 0x1A8
@@ -236,13 +236,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: Linked
 */
-function function_3b7b386a(player, value)
+function set_clientnum(player, value)
 {
-	[[ self ]]->function_3b7b386a(player, value);
+	[[ self ]]->set_clientnum(player, value);
 }
 
 /*
-	Name: function_2ecbc83c
+	Name: set_target_locked
 	Namespace: remote_missile_target_lockon
 	Checksum: 0x5FC3158B
 	Offset: 0x1D8
@@ -250,13 +250,13 @@ function function_3b7b386a(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_2ecbc83c(player, value)
+function set_target_locked(player, value)
 {
-	[[ self ]]->function_2ecbc83c(player, value);
+	[[ self ]]->set_target_locked(player, value);
 }
 
 /*
-	Name: function_505f092a
+	Name: set_ishawktag
 	Namespace: remote_missile_target_lockon
 	Checksum: 0x811AEAD5
 	Offset: 0x208
@@ -264,13 +264,13 @@ function function_2ecbc83c(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_505f092a(player, value)
+function set_ishawktag(player, value)
 {
-	[[ self ]]->function_505f092a(player, value);
+	[[ self ]]->set_ishawktag(player, value);
 }
 
 /*
-	Name: function_b9d6aaa7
+	Name: set_killed
 	Namespace: remote_missile_target_lockon
 	Checksum: 0xF0DA9298
 	Offset: 0x238
@@ -278,13 +278,13 @@ function function_505f092a(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_b9d6aaa7(player, value)
+function set_killed(player, value)
 {
-	[[ self ]]->function_b9d6aaa7(player, value);
+	[[ self ]]->set_killed(player, value);
 }
 
 /*
-	Name: function_7c227f6d
+	Name: set_isvehicle
 	Namespace: remote_missile_target_lockon
 	Checksum: 0x3E4BA7B1
 	Offset: 0x268
@@ -292,8 +292,8 @@ function function_b9d6aaa7(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_7c227f6d(player, value)
+function set_isvehicle(player, value)
 {
-	[[ self ]]->function_7c227f6d(player, value);
+	[[ self ]]->set_isvehicle(player, value);
 }
 

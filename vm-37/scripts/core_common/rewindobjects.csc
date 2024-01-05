@@ -3,7 +3,7 @@
 #namespace rewindobjects;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: rewindobjects
 	Checksum: 0x33C96A10
 	Offset: 0x90
@@ -11,7 +11,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"rewindobjects", &function_70a657d8, undefined, undefined, undefined);
 }

@@ -1,12 +1,12 @@
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\vehicle_death_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace vehicle;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: vehicle
 	Checksum: 0x187FBBA8
 	Offset: 0xC0
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"vehicle", &function_70a657d8, undefined, undefined, undefined);
 }

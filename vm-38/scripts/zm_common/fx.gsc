@@ -1,8 +1,8 @@
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\zm_common\util.gsc;
+#using scripts\core_common\sound_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace fx;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_6ed4574c()
 {
-	level notify(407758150);
+	level notify(-407758150);
 }
 
 /*

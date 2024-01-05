@@ -1,12 +1,12 @@
-#using script_52da18c20f45c56a;
-#using script_5399f402045d7abd;
+#using scripts\weapons\weapon_utils.gsc;
 #using script_7d0013bbc05623b9;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_52da18c20f45c56a;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 #namespace actions;
 
@@ -25,7 +25,7 @@ function private autoexec function_9e163fa3()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: actions
 	Checksum: 0xC11071BC
 	Offset: 0x290
@@ -33,7 +33,7 @@ function private autoexec function_9e163fa3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"actions", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -1014,7 +1014,7 @@ function function_e3401e0e(name)
 	self.var_2cb06cc6.var_43769020 = undefined;
 	foreach(child in action.children)
 	{
-		self thread function_2fc00159(name, child);
+		self childthread function_2fc00159(name, child);
 	}
 	action.var_1eb98b2a = arraycopy(action.children);
 	if(!isdefined(action.var_1eb98b2a))
@@ -1047,7 +1047,7 @@ function function_e3401e0e(name)
 			}
 			if(action.name == "root")
 			{
-				self thread function_2fc00159(name, var_2b8c0efb);
+				self childthread function_2fc00159(name, var_2b8c0efb);
 				continue;
 			}
 			arrayremovevalue(action.var_1eb98b2a, var_2b8c0efb);

@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_d4941e5e : class_6aaccc24
+class cstealth_meter_display : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0x5075BD65
 		Offset: 0x478
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_d4941e5e : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0x63A25521
 		Offset: 0x7E8
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_d4941e5e : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0x4BF0982B
 		Offset: 0x6A0
 		Size: 0x24
@@ -40,68 +40,68 @@ class class_d4941e5e : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_18066380
-		Namespace: namespace_d4941e5e
+		Name: set_direction
+		Namespace: cstealth_meter_display
 		Checksum: 0x65BF2179
 		Offset: 0x778
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_18066380(localclientnum, value)
+	function set_direction(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "direction", value);
+		[[ self ]]->set_data(localclientnum, "direction", value);
 	}
 
 	/*
-		Name: function_4d628707
-		Namespace: namespace_d4941e5e
+		Name: set_awarenessstate
+		Namespace: cstealth_meter_display
 		Checksum: 0x1270E340
 		Offset: 0x708
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_4d628707(localclientnum, value)
+	function set_awarenessstate(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "awarenessState", value);
+		[[ self ]]->set_data(localclientnum, "awarenessState", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_d4941e5e
+		Name: register_clientside
+		Namespace: cstealth_meter_display
 		Checksum: 0x28F6635A
 		Offset: 0x5B0
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("stealth_meter_display");
+		cluielem::register_clientside("stealth_meter_display");
 	}
 
 	/*
-		Name: function_7425637b
-		Namespace: namespace_d4941e5e
+		Name: set_awarenessprogress
+		Namespace: cstealth_meter_display
 		Checksum: 0xF7E59CA9
 		Offset: 0x740
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_7425637b(localclientnum, value)
+	function set_awarenessprogress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "awarenessProgress", value);
+		[[ self ]]->set_data(localclientnum, "awarenessProgress", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0x2061EAF0
 		Offset: 0x498
 		Size: 0x10C
@@ -110,31 +110,31 @@ class class_d4941e5e : class_6aaccc24
 	*/
 	function setup_clientfields(var_5a7b4b38, var_579b061b, var_f10a04a3, var_f228b5fa, var_bda3bf84)
 	{
-		namespace_6aaccc24::setup_clientfields("stealth_meter_display");
-		namespace_6aaccc24::function_da693cbe("entNum", 1, 10, "int", var_5a7b4b38);
-		namespace_6aaccc24::function_da693cbe("awarenessState", 1, 4, "int", var_579b061b);
-		namespace_6aaccc24::function_da693cbe("awarenessProgress", 1, 4, "float", var_f10a04a3);
-		namespace_6aaccc24::function_da693cbe("direction", 1, 4, "float", var_f228b5fa);
-		namespace_6aaccc24::function_da693cbe("clamped", 1, 1, "int", var_bda3bf84);
+		cluielem::setup_clientfields("stealth_meter_display");
+		cluielem::add_clientfield("entNum", 1, 10, "int", var_5a7b4b38);
+		cluielem::add_clientfield("awarenessState", 1, 4, "int", var_579b061b);
+		cluielem::add_clientfield("awarenessProgress", 1, 4, "float", var_f10a04a3);
+		cluielem::add_clientfield("direction", 1, 4, "float", var_f228b5fa);
+		cluielem::add_clientfield("clamped", 1, 1, "int", var_bda3bf84);
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_d4941e5e
+		Name: set_entnum
+		Namespace: cstealth_meter_display
 		Checksum: 0x5C125907
 		Offset: 0x6D0
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_c8350e33(localclientnum, value)
+	function set_entnum(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "entNum", value);
+		[[ self ]]->set_data(localclientnum, "entNum", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_d4941e5e
+		Namespace: cstealth_meter_display
 		Checksum: 0xC204E87E
 		Offset: 0x5D8
 		Size: 0xC0
@@ -143,26 +143,26 @@ class class_d4941e5e : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "entNum", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "awarenessState", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "awarenessProgress", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "direction", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "clamped", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "entNum", 0);
+		[[ self ]]->set_data(localclientnum, "awarenessState", 0);
+		[[ self ]]->set_data(localclientnum, "awarenessProgress", 0);
+		[[ self ]]->set_data(localclientnum, "direction", 0);
+		[[ self ]]->set_data(localclientnum, "clamped", 0);
 	}
 
 	/*
-		Name: function_fae2a569
-		Namespace: namespace_d4941e5e
+		Name: set_clamped
+		Namespace: cstealth_meter_display
 		Checksum: 0xB5E228BC
 		Offset: 0x7B0
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_fae2a569(localclientnum, value)
+	function set_clamped(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "clamped", value);
+		[[ self ]]->set_data(localclientnum, "clamped", value);
 	}
 
 }
@@ -194,7 +194,7 @@ function private autoexec function_7308a8ab()
 */
 function register(var_5a7b4b38, var_579b061b, var_f10a04a3, var_f228b5fa, var_bda3bf84)
 {
-	elem = new class_d4941e5e();
+	elem = new cstealth_meter_display();
 	[[ elem ]]->setup_clientfields(var_5a7b4b38, var_579b061b, var_f10a04a3, var_f228b5fa, var_bda3bf84);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -216,7 +216,7 @@ function register(var_5a7b4b38, var_579b061b, var_f10a04a3, var_f228b5fa, var_bd
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: stealth_meter_display
 	Checksum: 0x6792CB88
 	Offset: 0x2D0
@@ -224,10 +224,10 @@ function register(var_5a7b4b38, var_579b061b, var_f10a04a3, var_f228b5fa, var_bd
 	Parameters: 0
 	Flags: Linked
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_d4941e5e();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cstealth_meter_display();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -274,7 +274,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: stealth_meter_display
 	Checksum: 0x4C2BEDA4
 	Offset: 0x388
@@ -282,13 +282,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: Linked
 */
-function function_c8350e33(localclientnum, value)
+function set_entnum(localclientnum, value)
 {
-	[[ self ]]->function_c8350e33(localclientnum, value);
+	[[ self ]]->set_entnum(localclientnum, value);
 }
 
 /*
-	Name: function_4d628707
+	Name: set_awarenessstate
 	Namespace: stealth_meter_display
 	Checksum: 0x605138CB
 	Offset: 0x3B8
@@ -296,13 +296,13 @@ function function_c8350e33(localclientnum, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_4d628707(localclientnum, value)
+function set_awarenessstate(localclientnum, value)
 {
-	[[ self ]]->function_4d628707(localclientnum, value);
+	[[ self ]]->set_awarenessstate(localclientnum, value);
 }
 
 /*
-	Name: function_7425637b
+	Name: set_awarenessprogress
 	Namespace: stealth_meter_display
 	Checksum: 0x534A825F
 	Offset: 0x3E8
@@ -310,13 +310,13 @@ function function_4d628707(localclientnum, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_7425637b(localclientnum, value)
+function set_awarenessprogress(localclientnum, value)
 {
-	[[ self ]]->function_7425637b(localclientnum, value);
+	[[ self ]]->set_awarenessprogress(localclientnum, value);
 }
 
 /*
-	Name: function_18066380
+	Name: set_direction
 	Namespace: stealth_meter_display
 	Checksum: 0x424CFC5D
 	Offset: 0x418
@@ -324,13 +324,13 @@ function function_7425637b(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_18066380(localclientnum, value)
+function set_direction(localclientnum, value)
 {
-	[[ self ]]->function_18066380(localclientnum, value);
+	[[ self ]]->set_direction(localclientnum, value);
 }
 
 /*
-	Name: function_fae2a569
+	Name: set_clamped
 	Namespace: stealth_meter_display
 	Checksum: 0x1ACD70FD
 	Offset: 0x448
@@ -338,8 +338,8 @@ function function_18066380(localclientnum, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_fae2a569(localclientnum, value)
+function set_clamped(localclientnum, value)
 {
-	[[ self ]]->function_fae2a569(localclientnum, value);
+	[[ self ]]->set_clamped(localclientnum, value);
 }
 

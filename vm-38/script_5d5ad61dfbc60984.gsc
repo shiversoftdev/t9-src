@@ -1,15 +1,15 @@
-#using script_2c49ae69cd8ce30c;
-#using script_335d0650ed05d36d;
-#using script_b9a55edd207e4ca;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
 #using scripts\mp_common\gametypes\globallogic.gsc;
+#using script_b9a55edd207e4ca;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using script_335d0650ed05d36d;
 #using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_3f3933bc;
 
@@ -24,7 +24,7 @@
 */
 function private autoexec function_a35548cd()
 {
-	level notify(835077835);
+	level notify(-835077835);
 }
 
 /*
@@ -144,7 +144,7 @@ function function_4427fb0e()
 }
 
 /*
-	Name: function_c89d0204
+	Name: startgametype
 	Namespace: namespace_3f3933bc
 	Checksum: 0xFDB40906
 	Offset: 0x9C0
@@ -152,7 +152,7 @@ function function_4427fb0e()
 	Parameters: 1
 	Flags: Event
 */
-event function_c89d0204(eventstruct)
+event startgametype(eventstruct)
 {
 	function_ba34436e();
 	function_38411346();
@@ -466,8 +466,8 @@ function function_bc2f89f7(truck, endtime, var_3ff0d499, var_172fbf6f)
 	truck.var_9a2087f6 = 0;
 	while(gettime() < endtime)
 	{
-		var_cbc2cea3 = gettime() - lasttime;
-		missile.var_f990f05b = (var_cbc2cea3 * var_d223b230) + missile.var_f990f05b;
+		framedelta = gettime() - lasttime;
+		missile.var_f990f05b = (framedelta * var_d223b230) + missile.var_f990f05b;
 		angles = (missile.var_f990f05b, 0, 0);
 		missile linktoupdateoffset(level.var_43c634a2, angles);
 		lasttime = gettime();

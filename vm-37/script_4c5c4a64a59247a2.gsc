@@ -1,7 +1,7 @@
-#using script_5dfa1afaab9c1935;
-#using script_6809bf766eba194a;
-#using script_7bafaa95bb1b427e;
+#using scripts\weapons\weapons.gsc;
 #using scripts\core_common\throttle_shared.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_5dfa1afaab9c1935;
 
 #namespace shared;
 
@@ -81,7 +81,7 @@ function stowweapon(weapon, positionoffset, orientationoffset)
 function placeweaponon(weapon, position)
 {
 	self notify(#"weapon_position_change");
-	if(isstring(weapon) || function_7a600918(weapon))
+	if(isstring(weapon) || ishash(weapon))
 	{
 		weapon = getweapon(weapon);
 	}

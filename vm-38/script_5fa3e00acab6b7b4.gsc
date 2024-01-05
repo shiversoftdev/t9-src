@@ -1,13 +1,13 @@
-#using script_18f0d22c75b141a7;
-#using script_3f27a7b2232674db;
-#using script_47fb62300ac0bd60;
-#using script_6167e26342be354b;
-#using script_68d2ee1489345a1d;
-#using script_7a8059ca02b7b09e;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\mp_common\gametypes\overtime.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\system_shared.gsc;
+#using script_6167e26342be354b;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
 
 #namespace namespace_a77a81df;
 
@@ -22,11 +22,11 @@
 */
 function private autoexec function_da95c595()
 {
-	level notify(627657634);
+	level notify(-627657634);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_a77a81df
 	Checksum: 0x38D2272B
 	Offset: 0x138
@@ -34,7 +34,7 @@ function private autoexec function_da95c595()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_ac6037cb01da0d4", &function_70a657d8, undefined, undefined, #"hash_53528dbbf6cd15c4");
 }
@@ -51,7 +51,7 @@ function private autoexec function_89f2df9()
 function private function_70a657d8()
 {
 	level.var_46821767 = getdvarint(#"hash_661461deeee00da6", 0);
-	telemetry::add_callback(#"hash_361e06db4b210e", &function_72c32279);
+	telemetry::add_callback(#"on_game_playing", &function_72c32279);
 	telemetry::add_callback(#"hash_3ca80e35288a78d0", &function_d519e318);
 	telemetry::add_callback(#"on_end_game", &function_f0ffff28);
 	telemetry::add_callback(#"on_player_connect", &on_player_connect);
@@ -80,7 +80,7 @@ function function_72c32279()
 	{
 		/#
 			println("" + getutc());
-			println("" + util::function_53bbf9d2());
+			println("" + util::get_map_name());
 			println("" + level.gametype);
 			println("" + sessionmodeisprivateonlinegame());
 			println("" + sessionmodeissystemlink());
@@ -94,7 +94,7 @@ function function_72c32279()
 		}
 		matchstart = {};
 		matchstart.utc_start_time_s = utc;
-		matchstart.map = hash(util::function_53bbf9d2());
+		matchstart.map = hash(util::get_map_name());
 		matchstart.game_type = hash(level.gametype);
 		matchstart.var_c8019fa4 = sessionmodeisprivateonlinegame();
 		matchstart.is_offline = sessionmodeissystemlink();
@@ -132,7 +132,7 @@ function function_d519e318()
 		/#
 			println("" + function_f8d53445());
 			println("" + gettime());
-			println("" + util::function_53bbf9d2());
+			println("" + util::get_map_name());
 			println("" + level.gametype);
 			println("" + getutc());
 		#/
@@ -140,7 +140,7 @@ function function_d519e318()
 		matchend = {};
 		matchend.utc_start_time_s = 0;
 		matchend.utc_end_time_s = utc;
-		matchend.map = hash(util::function_53bbf9d2());
+		matchend.map = hash(util::get_map_name());
 		matchend.game_type = hash(level.gametype);
 		matchend.var_c8019fa4 = sessionmodeisprivateonlinegame();
 		matchend.is_offline = sessionmodeissystemlink();
@@ -347,19 +347,19 @@ function on_player_disconnect()
 	playerdata.objectives = (isdefined(self.objectives) ? self.objectives : 0);
 	if(!is_true(level.disablestattracking))
 	{
-		playerdata.var_9ffd4086 = self stats::function_441050ca(#"kills");
-		playerdata.var_56c22769 = self stats::function_441050ca(#"deaths");
-		playerdata.var_3c57e59 = self stats::function_441050ca(#"wins");
-		playerdata.var_e42ad7c9 = self stats::function_441050ca(#"losses");
-		playerdata.var_270e8e42 = self stats::function_441050ca(#"ties");
-		playerdata.var_4c4d425a = self stats::function_441050ca(#"hits");
-		playerdata.var_5197016d = self stats::function_441050ca(#"misses");
-		playerdata.var_359ee86a = self stats::function_441050ca(#"time_played_total");
-		playerdata.var_4ab9220a = self stats::function_441050ca(#"score");
+		playerdata.var_9ffd4086 = self stats::get_stat_global(#"kills");
+		playerdata.var_56c22769 = self stats::get_stat_global(#"deaths");
+		playerdata.var_3c57e59 = self stats::get_stat_global(#"wins");
+		playerdata.var_e42ad7c9 = self stats::get_stat_global(#"losses");
+		playerdata.var_270e8e42 = self stats::get_stat_global(#"ties");
+		playerdata.var_4c4d425a = self stats::get_stat_global(#"hits");
+		playerdata.var_5197016d = self stats::get_stat_global(#"misses");
+		playerdata.var_359ee86a = self stats::get_stat_global(#"time_played_total");
+		playerdata.var_4ab9220a = self stats::get_stat_global(#"score");
 	}
 	playerdata.operator = 0;
 	role = self player_role::get();
-	if(sessionmodeismultiplayergame() || function_f99d2668())
+	if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame())
 	{
 		var_a791abd1 = function_b14806c6(role, currentsessionmode());
 		playerdata.operator = (isdefined(var_a791abd1) ? var_a791abd1 : 0);
@@ -738,27 +738,27 @@ function function_6d57b52a(player, var_6165a2d8, var_cc4bc1dd)
 			case 6:
 			default:
 			{
-				var_2153b0fe.perks[5] = var_cc4bc1dd[5].var_3cf2d21;
+				var_2153b0fe.perks[5] = var_cc4bc1dd[5].namehash;
 			}
 			case 5:
 			{
-				var_2153b0fe.perks[4] = var_cc4bc1dd[4].var_3cf2d21;
+				var_2153b0fe.perks[4] = var_cc4bc1dd[4].namehash;
 			}
 			case 4:
 			{
-				var_2153b0fe.perks[3] = var_cc4bc1dd[3].var_3cf2d21;
+				var_2153b0fe.perks[3] = var_cc4bc1dd[3].namehash;
 			}
 			case 3:
 			{
-				var_2153b0fe.perks[2] = var_cc4bc1dd[2].var_3cf2d21;
+				var_2153b0fe.perks[2] = var_cc4bc1dd[2].namehash;
 			}
 			case 2:
 			{
-				var_2153b0fe.perks[1] = var_cc4bc1dd[1].var_3cf2d21;
+				var_2153b0fe.perks[1] = var_cc4bc1dd[1].namehash;
 			}
 			case 1:
 			{
-				var_2153b0fe.perks[0] = var_cc4bc1dd[0].var_3cf2d21;
+				var_2153b0fe.perks[0] = var_cc4bc1dd[0].namehash;
 			}
 			case 0:
 			{

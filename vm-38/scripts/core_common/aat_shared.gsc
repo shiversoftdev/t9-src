@@ -1,13 +1,13 @@
-#using script_1c65dbfc2f1c8d8f;
+#using scripts\core_common\player\player_stats.gsc;
 #using script_35598499769dbb3d;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\item_inventory.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\popups_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
 
 #namespace aat_shared;
@@ -23,13 +23,13 @@
 */
 function private autoexec function_2466cf93()
 {
-	level notify(1107658620);
+	level notify(-1107658620);
 }
 
 #namespace aat;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: aat
 	Checksum: 0xC805F809
 	Offset: 0x1E8
@@ -37,7 +37,7 @@ function private autoexec function_2466cf93()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"aat", &function_70a657d8, &finalize_clientfields, undefined, undefined);
 }
@@ -62,7 +62,7 @@ function private function_70a657d8()
 		level.aat = [];
 	}
 	clientfield::register("toplayer", "rob_ammo_mod_ready", 1, 1, "int");
-	clientfield::function_a8bbc967("hud_items.gibDismembermentType", 16000, 3, "int", 0);
+	clientfield::register_clientuimodel("hud_items.gibDismembermentType", 16000, 3, "int", 0);
 	level.aat[#"none"] = spawnstruct();
 	level.aat[#"none"].name = "none";
 	level.aat_reroll = [];
@@ -227,7 +227,7 @@ function private aat_devgui_think()
 						if(sessionmodeiszombiesgame())
 						{
 							weapon = level.players[i] getcurrentweapon();
-							item = level.players[i] namespace_b376ff3f::function_230ceec4(weapon);
+							item = level.players[i] item_inventory::function_230ceec4(weapon);
 							if(isdefined(item.aat))
 							{
 								item.aat = undefined;
@@ -240,7 +240,7 @@ function private aat_devgui_think()
 						if(sessionmodeiszombiesgame())
 						{
 							weapon = level.players[i] getcurrentweapon();
-							item = level.players[i] namespace_b376ff3f::function_230ceec4(weapon);
+							item = level.players[i] item_inventory::function_230ceec4(weapon);
 							if(isdefined(item))
 							{
 								item.aat = aat_name;
@@ -1015,7 +1015,7 @@ function watch_weapon_changes()
 		weapon = waitresult.weapon;
 		if(sessionmodeiszombiesgame())
 		{
-			item = namespace_b376ff3f::function_230ceec4(weapon);
+			item = item_inventory::function_230ceec4(weapon);
 			if(isdefined(item.aat))
 			{
 				name = item.aat;
@@ -1040,7 +1040,7 @@ function watch_weapon_changes()
 }
 
 /*
-	Name: function_c5abc232
+	Name: has_aat
 	Namespace: aat
 	Checksum: 0x34D5D79C
 	Offset: 0x2D98
@@ -1048,7 +1048,7 @@ function watch_weapon_changes()
 	Parameters: 1
 	Flags: Linked
 */
-function function_c5abc232(w_current)
+function has_aat(w_current)
 {
 	if(!is_true(level.aat_in_use))
 	{
@@ -1082,7 +1082,7 @@ function function_7a12b737(stat_name, amount)
 		return;
 	}
 	/#
-		assert(function_7a600918(stat_name), "");
+		assert(ishash(stat_name), "");
 	#/
 	if(!level.onlinegame || is_true(level.zm_disable_recording_stats))
 	{
@@ -1094,7 +1094,7 @@ function function_7a12b737(stat_name, amount)
 	}
 	self stats::function_dad108fa(stat_name, amount);
 	/#
-		var_ba1fb8c1 = self stats::function_441050ca(stat_name);
+		var_ba1fb8c1 = self stats::get_stat_global(stat_name);
 		if(isdefined(var_ba1fb8c1))
 		{
 			if(isdefined(self.entity_num))

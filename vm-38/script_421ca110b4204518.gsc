@@ -1,22 +1,22 @@
-#using script_24c32478acf44108;
-#using script_256b8879317373de;
-#using script_47fb62300ac0bd60;
-#using script_72401f526ba71638;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\perks.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_player.gsc;
 #using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_player.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using script_24c32478acf44108;
+#using script_72401f526ba71638;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\perks.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_2ab93693;
 
@@ -31,11 +31,11 @@
 */
 function private autoexec function_9375e012()
 {
-	level notify(1629905690);
+	level notify(-1629905690);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2ab93693
 	Checksum: 0xB6256AE3
 	Offset: 0x2B8
@@ -43,7 +43,7 @@ function private autoexec function_9375e012()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_662c938bd03bd1ad", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }
@@ -77,12 +77,12 @@ function private function_70a657d8()
 	namespace_1b527536::function_dbd391bf(#"hash_631a023758cd5c4", &function_309daad7);
 	namespace_1b527536::function_dbd391bf(#"hash_6319f23758cd411", &function_309daad7);
 	namespace_1b527536::function_dbd391bf(#"hash_6319e23758cd25e", &function_309daad7);
-	namespace_9ff9f642::function_9d45c058(#"ring_of_fire", 25, 5, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
-	namespace_9ff9f642::function_9d45c058(#"hash_631a223758cd92a", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
-	namespace_9ff9f642::function_9d45c058(#"hash_631a123758cd777", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
-	namespace_9ff9f642::function_9d45c058(#"hash_631a023758cd5c4", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
-	namespace_9ff9f642::function_9d45c058(#"hash_6319f23758cd411", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
-	namespace_9ff9f642::function_9d45c058(#"hash_6319e23758cd25e", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+	namespace_9ff9f642::register_burn(#"ring_of_fire", 25, 5, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+	namespace_9ff9f642::register_burn(#"hash_631a223758cd92a", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+	namespace_9ff9f642::register_burn(#"hash_631a123758cd777", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+	namespace_9ff9f642::register_burn(#"hash_631a023758cd5c4", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+	namespace_9ff9f642::register_burn(#"hash_6319f23758cd411", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+	namespace_9ff9f642::register_burn(#"hash_6319e23758cd25e", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
 	zm_equipment::function_76beede2(#"ring_of_fire", "MOD_BURNED");
 	zm_equipment::function_76beede2(#"hash_631a223758cd92a", "MOD_BURNED");
 	zm_equipment::function_76beede2(#"hash_631a123758cd777", "MOD_BURNED");
@@ -260,7 +260,7 @@ function private function_1cbc22b0(weapon, n_radius)
 		{
 			if(isdefined(self))
 			{
-				a_ai = self function_bdda420f(var_3889eb68.origin, n_radius);
+				a_ai = self getenemiesinradius(var_3889eb68.origin, n_radius);
 				a_ai = arraysortclosest(a_ai, var_3889eb68.origin);
 			}
 			else
@@ -419,15 +419,15 @@ function private function_64a3f9c6(var_dfbbc9a0, var_feefd408, var_cf53ab1f)
 				arrayremovevalue(player.var_d93ab65, undefined);
 				if(player.var_d93ab65.size)
 				{
-					if(!player perks::function_be94fe26(#"specialty_ammodrainsfromstockfirst"))
+					if(!player perks::perk_hasperk(#"specialty_ammodrainsfromstockfirst"))
 					{
-						player perks::function_7637bafa(#"specialty_ammodrainsfromstockfirst");
+						player perks::perk_setperk(#"specialty_ammodrainsfromstockfirst");
 					}
 					continue;
 				}
-				if(player perks::function_be94fe26(#"specialty_ammodrainsfromstockfirst"))
+				if(player perks::perk_hasperk(#"specialty_ammodrainsfromstockfirst"))
 				{
-					player perks::function_45d12554(#"specialty_ammodrainsfromstockfirst");
+					player perks::perk_unsetperk(#"specialty_ammodrainsfromstockfirst");
 				}
 			}
 		}
@@ -468,9 +468,9 @@ function private function_64a3f9c6(var_dfbbc9a0, var_feefd408, var_cf53ab1f)
 		arrayremovevalue(player.var_d93ab65, undefined);
 		if(!player.var_d93ab65.size)
 		{
-			if(player perks::function_be94fe26("specialty_ammodrainsfromstockfirst"))
+			if(player perks::perk_hasperk("specialty_ammodrainsfromstockfirst"))
 			{
-				player perks::function_45d12554("specialty_ammodrainsfromstockfirst");
+				player perks::perk_unsetperk("specialty_ammodrainsfromstockfirst");
 			}
 			player clientfield::set_to_player("" + #"hash_717ed5a81b281ebd", 0);
 		}

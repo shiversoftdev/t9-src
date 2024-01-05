@@ -11,7 +11,7 @@
 */
 function private autoexec function_dc3b704b()
 {
-	level notify(332587434);
+	level notify(-332587434);
 }
 
 #namespace loadout;

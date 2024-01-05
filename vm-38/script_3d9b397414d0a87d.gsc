@@ -1,12 +1,12 @@
-#using script_18f0d22c75b141a7;
-#using script_7a8059ca02b7b09e;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
-#using scripts\mp_common\gametypes\round.gsc;
 #using scripts\mp_common\scoreevents.gsc;
+#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\player\player_loadout.gsc;
 
 #namespace namespace_4b798cb0;
 
@@ -21,11 +21,11 @@
 */
 function private autoexec function_590a0604()
 {
-	level notify(1559722047);
+	level notify(-1559722047);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4b798cb0
 	Checksum: 0x84B584A5
 	Offset: 0x258
@@ -33,7 +33,7 @@ function private autoexec function_590a0604()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4b859fe530bf291d", &function_70a657d8, undefined, undefined, #"hash_53528dbbf6cd15c4");
 }
@@ -56,10 +56,10 @@ function private function_70a657d8()
 	level.var_73f51b52 = {};
 	level.var_73f51b52.teams = [];
 	level.var_268c70a7 = 1;
-	level.map_name = util::function_53bbf9d2();
+	level.map_name = util::get_map_name();
 	level.var_73f51b52.var_49d3ced6 = getdvarint(#"hash_61fde65a22e1f290", 5);
 	telemetry::add_callback(#"on_start_gametype", &on_start_gametype);
-	telemetry::add_callback(#"hash_361e06db4b210e", &function_e2603d58);
+	telemetry::add_callback(#"on_game_playing", &function_e2603d58);
 	telemetry::add_callback(#"hash_3ca80e35288a78d0", &function_84b3ab79);
 	telemetry::add_callback(#"on_end_game", &function_a6efe6c9);
 	telemetry::add_callback(#"on_player_connect", &function_5a676b2c);
@@ -471,7 +471,7 @@ function function_e2603d58()
 function function_84b3ab79()
 {
 	util::function_64ebd94d();
-	self function_189f87c1();
+	self on_round_end();
 	if(util::isoneround() || util::waslastround())
 	{
 		self function_d519e318();
@@ -853,7 +853,7 @@ function on_player_killed(data)
 	victimweapon = data.victimweapon;
 	var_6d0087b5 = {#weapon_attachments:function_8d2c5f27(victimweapon.attachments), #weapon:victimweapon.name, #hash_e88b9d9:var_5fceefd4[2], #hash_c91e5a:var_5fceefd4[1], #hash_231262ec:var_5fceefd4[0], #hash_58c899fa:var_48dd40c2[2], #hash_6e78c55a:var_48dd40c2[1], #hash_ef0c4683:var_48dd40c2[0], #team:victim.var_b2ca7b2b, #name:victim.name};
 	var_61e89f84 = {#hash_4aca04c6:data.var_30db4425, #is_flashed:data.var_e020b97e, #is_ads:data.var_f0b3c772 > 0.5};
-	var_ce72ff21 = {#hash_cc573225:(isdefined(results.var_adfa5654) ? results.var_adfa5654 : 0), #means_of_death:data.smeansofdeath, #match_time:function_f8d53445()};
+	var_ce72ff21 = {#hash_cc573225:(isdefined(results.kill_distance) ? results.kill_distance : 0), #means_of_death:data.smeansofdeath, #match_time:function_f8d53445()};
 	victim function_678f57c8(#"hash_36ba9c8216e49683", #"info", var_ce72ff21, #"attacker", var_c4b07a31, #"hash_22188ea5740f5555", var_ebf88f4, #"victim", var_6d0087b5, #"hash_11d3bd3693fea440", var_61e89f84, #"hash_77050fd9e402347d", var_15b3531);
 }
 
@@ -936,7 +936,7 @@ function function_2fda590d()
 }
 
 /*
-	Name: function_189f87c1
+	Name: on_round_end
 	Namespace: namespace_4b798cb0
 	Checksum: 0xBB466D78
 	Offset: 0x3400
@@ -944,10 +944,10 @@ function function_2fda590d()
 	Parameters: 0
 	Flags: None
 */
-function function_189f87c1()
+function on_round_end()
 {
-	var_48c6ec2e = function_d757edb5();
-	var_fb5fbbb8 = {#hash_c7a20fbb:function_1674a96a(var_48c6ec2e.var_c7a20fbb), #hash_9bfeafed:function_1674a96a(var_48c6ec2e.var_9bfeafed), #map_name:level.map_name, #game_type:level.gametype, #match_time:function_f8d53445(), #hash_77a9bf99:var_48c6ec2e.side, #result:function_3d01c1b3()};
+	round_info = function_d757edb5();
+	var_fb5fbbb8 = {#hash_c7a20fbb:function_1674a96a(round_info.var_c7a20fbb), #hash_9bfeafed:function_1674a96a(round_info.var_9bfeafed), #map_name:level.map_name, #game_type:level.gametype, #match_time:function_f8d53445(), #hash_77a9bf99:round_info.side, #result:function_3d01c1b3()};
 	function_92d1707f(#"hash_1d858c5e8f79303a", var_fb5fbbb8);
 }
 

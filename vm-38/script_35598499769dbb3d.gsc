@@ -1,9 +1,9 @@
-#using script_41fe08c37d53a635;
-#using script_4c5c4a64a59247a2;
 #using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\throttle_shared.gsc;
+#using script_4c5c4a64a59247a2;
+#using script_41fe08c37d53a635;
 #using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\throttle_shared.gsc;
 
 #namespace gib;
 
@@ -91,7 +91,7 @@ function private function_3aa023f1(entity, var_c3317960)
 	gibpiecelookup[32] = "leftarm";
 	gibpiecelookup[128] = "rightleg";
 	gibpiecelookup[256] = "leftleg";
-	var_90aba050 = [];
+	gibpieces = [];
 	foreach(gibflag, gibpiece in gibpiecelookup)
 	{
 		if(!isdefined(gibpiece))
@@ -110,10 +110,10 @@ function private function_3aa023f1(entity, var_c3317960)
 		gibstruct.gibcinematicfx = definition.(gibpiece + "_gibcinematicfx");
 		gibstruct.gibsound = definition.(gibpiece + "_gibsound");
 		gibstruct.gibhidetag = definition.(gibpiece + "_gibhidetag");
-		var_90aba050[gibflag] = gibstruct;
+		gibpieces[gibflag] = gibstruct;
 	}
-	level.var_ad0f5efa[name] = var_90aba050;
-	return var_90aba050;
+	level.var_ad0f5efa[name] = gibpieces;
+	return gibpieces;
 }
 
 /*
@@ -127,8 +127,8 @@ function private function_3aa023f1(entity, var_c3317960)
 */
 function private function_69db754(entity, gibflag, var_c3317960)
 {
-	var_90aba050 = function_3aa023f1(entity, var_c3317960);
-	return var_90aba050[gibflag];
+	gibpieces = function_3aa023f1(entity, var_c3317960);
+	return gibpieces[gibflag];
 }
 
 /*
@@ -794,8 +794,8 @@ function reapplyhiddengibpieces(entity, var_c3317960)
 	{
 		return;
 	}
-	var_90aba050 = function_3aa023f1(entity, var_c3317960);
-	foreach(gib in var_90aba050)
+	gibpieces = function_3aa023f1(entity, var_c3317960);
+	foreach(gib in gibpieces)
 	{
 		if(!isgibbed(entity, gibflag))
 		{
@@ -830,8 +830,8 @@ function showhiddengibpieces(entity, var_c3317960)
 	{
 		return;
 	}
-	var_90aba050 = function_3aa023f1(entity, var_c3317960);
-	foreach(gib in var_90aba050)
+	gibpieces = function_3aa023f1(entity, var_c3317960);
+	foreach(gib in gibpieces)
 	{
 		if(!isdefined(gib))
 		{

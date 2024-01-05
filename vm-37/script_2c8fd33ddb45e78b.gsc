@@ -1,15 +1,15 @@
-#using script_240ef62ff60b2694;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\scene_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\scene_shared.csc;
+#using scripts\core_common\player\player_stats.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_4abf1500;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4abf1500
 	Checksum: 0xB5449563
 	Offset: 0x120
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_63e00d742a373f5f", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -60,7 +60,7 @@ function function_7bd1ca93(localclientnum, str_targetname, player)
 	if(isdefined(var_99bf2e73.scriptbundlename) && !isdefined(var_99bf2e73.var_bdb97676) && player function_f0f36d47(localclientnum, var_99bf2e73.scriptbundlename))
 	{
 		s_bundle = getscriptbundle(var_99bf2e73.scriptbundlename);
-		if(isdefined(s_bundle.model) && s_bundle.var_9be0526e === #"hash_38c50405421ca2a5")
+		if(isdefined(s_bundle.model) && s_bundle.var_9be0526e === #"audiolog")
 		{
 			var_99bf2e73.var_bdb97676 = util::spawn_anim_model(localclientnum, s_bundle.model, var_99bf2e73.origin, var_99bf2e73.angles);
 			var_99bf2e73.var_bdb97676.var_2b372cf6 = s_bundle.var_9be0526e;
@@ -72,7 +72,7 @@ function function_7bd1ca93(localclientnum, str_targetname, player)
 		{
 			return;
 		}
-		if(var_99bf2e73.var_bdb97676.var_2b372cf6 === #"hash_38c50405421ca2a5")
+		if(var_99bf2e73.var_bdb97676.var_2b372cf6 === #"audiolog")
 		{
 			switch(var_99bf2e73.var_bdb97676.str_faction)
 			{
@@ -312,7 +312,7 @@ function function_88645994(var_6f94d397, var_c14aedb3, var_539eabc0, var_765715e
 */
 function function_f0f36d47(localclientnum, var_d5fa8477)
 {
-	if(self === function_27673a7(localclientnum) && isdefined(var_d5fa8477) && stats::function_c9d32eb9(localclientnum, 0, #"hash_118b6e7581ca3893", var_d5fa8477))
+	if(self === function_27673a7(localclientnum) && isdefined(var_d5fa8477) && stats::get_match_stat(localclientnum, 0, #"hash_118b6e7581ca3893", var_d5fa8477))
 	{
 		return true;
 	}
@@ -456,7 +456,7 @@ function function_ded2880a(localclientnum)
 	/#
 		util::init_dvar(#"hash_42041dee5640342d", "", &function_fd0c6ab2);
 		util::init_dvar(#"hash_472c425964c7d41e", "", &function_fd0c6ab2);
-		var_3132e3d3 = util::function_53bbf9d2();
+		var_3132e3d3 = util::get_map_name();
 		var_65679637 = getscriptbundlenames("");
 		foreach(var_d5fa8477 in var_65679637)
 		{
@@ -466,10 +466,10 @@ function function_ded2880a(localclientnum)
 			{
 				continue;
 			}
-			util::function_e2e9d901(localclientnum, ("" + var_d5fa8477) + "", ("" + var_d5fa8477) + "");
+			util::add_devgui(localclientnum, ("" + var_d5fa8477) + "", ("" + var_d5fa8477) + "");
 			if(var_19a3087c.var_ad4ad686 === #"dark_aether")
 			{
-				util::function_e2e9d901(localclientnum, ("" + var_d5fa8477) + "", ("" + var_d5fa8477) + "");
+				util::add_devgui(localclientnum, ("" + var_d5fa8477) + "", ("" + var_d5fa8477) + "");
 			}
 		}
 	#/

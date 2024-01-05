@@ -1,8 +1,8 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\zm_common\callbacks.gsc;
 #using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\callbacks.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_c3c0ef6f;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_bb11b5be()
 {
-	level notify(395894905);
+	level notify(-395894905);
 }
 
 /*
@@ -178,7 +178,7 @@ function function_9a4f865b()
 {
 	self endon(#"disconnect");
 	level endon(#"end_game");
-	level waittill(#"hash_4b00aa230ebbe82b");
+	level waittill(#"main_quest_completed");
 	self zm_utility::give_achievement(#"hash_5fb48c8391ec697a");
 }
 

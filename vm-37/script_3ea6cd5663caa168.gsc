@@ -1,4 +1,4 @@
-#using script_2efbf80b6e18c0ab;
+#using scripts\mp_common\teams\teamset.gsc;
 
 #namespace namespace_6f4abfc0;
 

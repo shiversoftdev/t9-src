@@ -1,12 +1,12 @@
-#using script_1f41849126bfc83d;
-#using script_26187575f84f8d07;
 #using script_c8d806d2487b617;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\perks.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_1f41849126bfc83d;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_26187575f84f8d07;
+#using scripts\core_common\perks.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace radiation;
 
@@ -21,11 +21,11 @@
 */
 function private autoexec function_6b39cef3()
 {
-	level notify(582150525);
+	level notify(-582150525);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: radiation
 	Checksum: 0x5BB788E4
 	Offset: 0x118
@@ -33,7 +33,7 @@ function private autoexec function_6b39cef3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"radiation", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -54,7 +54,7 @@ function private function_70a657d8()
 		return;
 	}
 	level thread function_1e3ac913();
-	callback::on_spawned(&function_e4a4b07b);
+	callback::on_spawned(&_on_player_spawned);
 	callback::on_player_killed(&function_9dece272);
 	clientfield::register("toplayer", "ftdb_inZone", 1, 1, "int");
 }
@@ -94,7 +94,7 @@ function private function_3c3e40b6()
 }
 
 /*
-	Name: function_e4a4b07b
+	Name: _on_player_spawned
 	Namespace: radiation
 	Checksum: 0x51449809
 	Offset: 0x308
@@ -102,7 +102,7 @@ function private function_3c3e40b6()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_e4a4b07b()
+function private _on_player_spawned()
 {
 	if(!namespace_956bd4dd::function_ab99e60c())
 	{
@@ -342,28 +342,28 @@ function function_6ade1bbf(timedelay)
 		{
 		}
 		self.heal.var_c8777194 = 1;
-		self.var_edd3eb35 = 9;
+		self.n_regen_delay = 9;
 		namespace_6615ea91::function_59621e3c(self, #"hash_53d8a06b13ec49d9");
 	}
 	else
 	{
-		self.var_edd3eb35 = 1;
+		self.n_regen_delay = 1;
 	}
 	if(self.radiation.var_32adf91d >= 1)
 	{
 		self function_e6f9e3cd();
-		self perks::function_3cd6f625();
+		self perks::perk_reset_all();
 		self function_b5feff95(#"specialty_sprint");
 		self function_b5feff95(#"specialty_sprintreload");
 		self function_b5feff95(#"specialty_forwardspawninteract");
 		self function_b5feff95(#"specialty_slide");
 		self function_b5feff95(#"specialty_sprintheal");
-		self perks::function_7637bafa(#"specialty_sprint");
-		self perks::function_7637bafa(#"specialty_sprintreload");
-		self perks::function_7637bafa(#"specialty_forwardspawninteract");
-		self perks::function_7637bafa(#"specialty_slide");
-		self perks::function_7637bafa(#"specialty_sprintheal");
-		namespace_6615ea91::function_59621e3c(self, #"hash_376aa98c6fac7859");
+		self perks::perk_setperk(#"specialty_sprint");
+		self perks::perk_setperk(#"specialty_sprintreload");
+		self perks::perk_setperk(#"specialty_forwardspawninteract");
+		self perks::perk_setperk(#"specialty_slide");
+		self perks::perk_setperk(#"specialty_sprintheal");
+		namespace_6615ea91::function_59621e3c(self, #"disable_perks");
 	}
 	else if(isdefined(level.var_eada15e7))
 	{
@@ -424,7 +424,7 @@ function private function_f68871f2(player, sickness)
 		#/
 		return;
 	}
-	if(!function_7a600918(sickness))
+	if(!ishash(sickness))
 	{
 		/#
 			assert(0);

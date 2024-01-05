@@ -1,7 +1,7 @@
-#using script_3f9e0dc8454d98e1;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\zm_common\zm_utility.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 
 #namespace zm_ffotd;
 

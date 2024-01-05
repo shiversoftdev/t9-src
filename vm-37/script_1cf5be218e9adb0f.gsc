@@ -1,37 +1,37 @@
-#using script_140d5347de8af85c;
-#using script_1cd690a97dfca36e;
 #using script_28e27ee9b45fd02d;
 #using script_31671175564a93b7;
+#using script_1cd690a97dfca36e;
 #using script_3318f11e3a1b2358;
-#using script_65fbfb5ecb1f899e;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\serverfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\serverfield_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using script_65fbfb5ecb1f899e;
+#using script_140d5347de8af85c;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
-#namespace namespace_3bb22a53;
+#namespace spy_camera;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_3bb22a53
+	Name: __init__system__
+	Namespace: spy_camera
 	Checksum: 0x8D7D7549
 	Offset: 0x2A0
 	Size: 0x34
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("spy_camera", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xB214879E
 	Offset: 0x2E0
 	Size: 0x31C
@@ -66,7 +66,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_db698ba5
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x3979692
 	Offset: 0x608
 	Size: 0x88
@@ -89,7 +89,7 @@ function private function_db698ba5(dvar)
 
 /*
 	Name: function_6b8f99c7
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xC06835AD
 	Offset: 0x698
 	Size: 0x52
@@ -111,7 +111,7 @@ function function_6b8f99c7(var_aa5b3320)
 
 /*
 	Name: function_1323f7ed
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xD2819B50
 	Offset: 0x6F8
 	Size: 0x22
@@ -125,7 +125,7 @@ function function_1323f7ed(var_f3dc27c4)
 
 /*
 	Name: function_cd91501d
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x7BBB8302
 	Offset: 0x728
 	Size: 0x22
@@ -139,7 +139,7 @@ function function_cd91501d(var_7c7f12fe)
 
 /*
 	Name: function_b25b398f
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x35BB932
 	Offset: 0x758
 	Size: 0x22
@@ -153,7 +153,7 @@ function function_b25b398f(var_c0458ce3)
 
 /*
 	Name: function_3819321e
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x1416B432
 	Offset: 0x788
 	Size: 0x22
@@ -167,7 +167,7 @@ function function_3819321e(var_e2472115)
 
 /*
 	Name: function_1a686ec3
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x1BCB4364
 	Offset: 0x7B8
 	Size: 0x22
@@ -181,7 +181,7 @@ function function_1a686ec3(var_c5e6882c)
 
 /*
 	Name: function_7e711267
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x7C75F621
 	Offset: 0x7E8
 	Size: 0x22
@@ -195,7 +195,7 @@ function function_7e711267(var_b4e32e95)
 
 /*
 	Name: function_f31f3835
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x513812E
 	Offset: 0x818
 	Size: 0x74
@@ -216,7 +216,7 @@ function function_f31f3835(localclientnum, oldval, newval, bnewent, binitialsnap
 
 /*
 	Name: function_cdfa0362
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xDC48A7A3
 	Offset: 0x898
 	Size: 0xBE
@@ -245,7 +245,7 @@ function private function_cdfa0362(localclientnum, oldval, newval, bnewent, bini
 
 /*
 	Name: function_6e0dbd75
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x10202C89
 	Offset: 0x960
 	Size: 0x35A
@@ -323,7 +323,7 @@ function private function_6e0dbd75(localclientnum, oldval, newval, bnewent, bini
 
 /*
 	Name: function_fd29dc97
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xBCBFE62C
 	Offset: 0xCC8
 	Size: 0x86
@@ -340,7 +340,7 @@ function private function_fd29dc97(localclientnum, oldval, newval, bnewent, bini
 
 /*
 	Name: function_38401b6f
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x95754CED
 	Offset: 0xD58
 	Size: 0xD26
@@ -537,7 +537,7 @@ function private function_38401b6f(localclientnum)
 
 /*
 	Name: function_b0af17c8
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x4D259561
 	Offset: 0x1A88
 	Size: 0x4E
@@ -553,7 +553,7 @@ function private function_b0af17c8(fov)
 
 /*
 	Name: function_48d47618
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x6F84413E
 	Offset: 0x1B10
 	Size: 0x3B2
@@ -632,7 +632,7 @@ function private function_48d47618(localclientnum, ent, eye_pos, var_753686d6, v
 
 /*
 	Name: function_a259ab2b
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xC86B4066
 	Offset: 0x1ED0
 	Size: 0x2A8
@@ -664,7 +664,7 @@ function private function_a259ab2b(localclientnum)
 
 /*
 	Name: function_c3f05233
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xEE302AAB
 	Offset: 0x2180
 	Size: 0xB6
@@ -679,15 +679,15 @@ function private function_c3f05233()
 		rob = #"hash_44adc567f9f60d61";
 	}
 	self.highlighted = 1;
-	self function_bf9d3071(rob);
+	self playrenderoverridebundle(rob);
 	self waittill(#"death", #"hash_c2721e96b517b9a");
-	self function_5d482e78(rob);
+	self stoprenderoverridebundle(rob);
 	self.highlighted = 0;
 }
 
 /*
 	Name: take_picture
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xAF0D2733
 	Offset: 0x2240
 	Size: 0x30C
@@ -729,7 +729,7 @@ function private take_picture(localclientnum)
 
 /*
 	Name: function_7415d8f9
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xAEA86856
 	Offset: 0x2558
 	Size: 0x134
@@ -760,7 +760,7 @@ function private function_7415d8f9(localclientnum, oldval, newval, bnewent, bini
 
 /*
 	Name: function_80847fa6
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x750D57AC
 	Offset: 0x2698
 	Size: 0x2A
@@ -769,12 +769,12 @@ function private function_7415d8f9(localclientnum, oldval, newval, bnewent, bini
 */
 function private function_80847fa6(localclientnum)
 {
-	return function_1df4c3b0(localclientnum, #"hash_3b49d2db23128dc5");
+	return function_1df4c3b0(localclientnum, #"spy_camera");
 }
 
 /*
 	Name: function_ef02d214
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0x154FEE1A
 	Offset: 0x26D0
 	Size: 0xAC
@@ -799,7 +799,7 @@ function private function_ef02d214(localclientnum, active)
 
 /*
 	Name: function_612f81a4
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xE9CF6775
 	Offset: 0x2788
 	Size: 0x84
@@ -818,7 +818,7 @@ function private function_612f81a4(localclientnum, hide)
 
 /*
 	Name: function_65b4e0a9
-	Namespace: namespace_3bb22a53
+	Namespace: spy_camera
 	Checksum: 0xE6EA2A08
 	Offset: 0x2818
 	Size: 0xAC

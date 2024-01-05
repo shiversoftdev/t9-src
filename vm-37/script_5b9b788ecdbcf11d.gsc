@@ -1,12 +1,12 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace nightingale;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: nightingale
 	Checksum: 0x8834E7E2
 	Offset: 0xA8
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"nightingale", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -38,7 +38,7 @@ function private function_70a657d8()
 	}
 	callback::add_weapon_type(#"nightingale", &function_85f37224);
 	level.var_4977c64a = getweapon(#"nightingale");
-	level.nightingale_custom_settings = getscriptbundle(level.var_4977c64a.var_4dd46f8a);
+	level.nightingale_custom_settings = getscriptbundle(level.var_4977c64a.customsettings);
 }
 
 /*

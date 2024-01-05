@@ -1,5 +1,5 @@
-#using scripts\mp_common\gametypes\outcome.gsc;
 #using scripts\mp_common\gametypes\overtime.gsc;
+#using scripts\mp_common\gametypes\outcome.gsc;
 
 #namespace round;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_35ba17c8()
 {
-	level notify(153113338);
+	level notify(-153113338);
 }
 
 /*
@@ -48,7 +48,7 @@ function function_f37f02fc()
 }
 
 /*
-	Name: function_6343685
+	Name: round_stats_init
 	Namespace: round
 	Checksum: 0x7A978351
 	Offset: 0x118
@@ -56,14 +56,14 @@ function function_f37f02fc()
 	Parameters: 0
 	Flags: Linked
 */
-function function_6343685()
+function round_stats_init()
 {
 	if(!isdefined(game.roundsplayed))
 	{
 		game.roundsplayed = 0;
 	}
 	setroundsplayed(game.roundsplayed + overtime::get_rounds_played());
-	overtime::function_6343685();
+	overtime::round_stats_init();
 	if(!isdefined(game.roundwinner))
 	{
 		game.roundwinner = [];
@@ -105,7 +105,7 @@ function set_flag(flag)
 }
 
 /*
-	Name: function_5f24faac
+	Name: get_flag
 	Namespace: round
 	Checksum: 0x1C3C614C
 	Offset: 0x350
@@ -113,13 +113,13 @@ function set_flag(flag)
 	Parameters: 1
 	Flags: Linked
 */
-function function_5f24faac(flag)
+function get_flag(flag)
 {
-	return outcome::function_5f24faac(game.outcome.var_aefc8b8d, flag);
+	return outcome::get_flag(game.outcome.var_aefc8b8d, flag);
 }
 
 /*
-	Name: function_46cb766c
+	Name: clear_flag
 	Namespace: round
 	Checksum: 0xD1E3781C
 	Offset: 0x390
@@ -127,9 +127,9 @@ function function_5f24faac(flag)
 	Parameters: 1
 	Flags: None
 */
-function function_46cb766c(flag)
+function clear_flag(flag)
 {
-	return outcome::function_46cb766c(game.outcome.var_aefc8b8d, flag);
+	return outcome::clear_flag(game.outcome.var_aefc8b8d, flag);
 }
 
 /*
@@ -189,7 +189,7 @@ function function_b5f4c9d8()
 }
 
 /*
-	Name: function_9b24638f
+	Name: get_winner
 	Namespace: round
 	Checksum: 0xAD96D853
 	Offset: 0x4A0
@@ -197,9 +197,9 @@ function function_b5f4c9d8()
 	Parameters: 0
 	Flags: Linked
 */
-function function_9b24638f()
+function get_winner()
 {
-	return outcome::function_9b24638f(game.outcome.var_aefc8b8d);
+	return outcome::get_winner(game.outcome.var_aefc8b8d);
 }
 
 /*
@@ -211,13 +211,13 @@ function function_9b24638f()
 	Parameters: 1
 	Flags: None
 */
-function is_winner(var_512330f1)
+function is_winner(team_or_player)
 {
-	return outcome::is_winner(game.outcome.var_aefc8b8d, var_512330f1);
+	return outcome::is_winner(game.outcome.var_aefc8b8d, team_or_player);
 }
 
 /*
-	Name: function_d1e740f6
+	Name: set_winner
 	Namespace: round
 	Checksum: 0xDA6FC3EB
 	Offset: 0x510
@@ -225,9 +225,9 @@ function is_winner(var_512330f1)
 	Parameters: 1
 	Flags: Linked
 */
-function function_d1e740f6(var_512330f1)
+function set_winner(team_or_player)
 {
-	outcome::function_d1e740f6(game.outcome.var_aefc8b8d, var_512330f1);
+	outcome::set_winner(game.outcome.var_aefc8b8d, team_or_player);
 }
 
 /*

@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_51a06b68 : class_6aaccc24
+class csr_objective_reward_menu : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xB32238A4
 		Offset: 0x328
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_51a06b68 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x2DF6EA90
 		Offset: 0x7D0
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_51a06b68 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x1FD4A3C2
 		Offset: 0x460
 		Size: 0x3C
@@ -47,40 +47,40 @@ class class_51a06b68 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_2d7f3298
-		Namespace: namespace_51a06b68
+		Name: set_gunindex2
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xD0056079
 		Offset: 0x6E0
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_2d7f3298(player, value)
+	function set_gunindex2(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "gunindex2", value);
 	}
 
 	/*
-		Name: function_43ba5f0e
-		Namespace: namespace_51a06b68
+		Name: set_gunindex1
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x4127AC74
 		Offset: 0x690
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_43ba5f0e(player, value)
+	function set_gunindex1(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "gunIndex1", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x51D810AE
 		Offset: 0x4A8
 		Size: 0x24
@@ -89,12 +89,12 @@ class class_51a06b68 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x8E07F8E8
 		Offset: 0x348
 		Size: 0x10C
@@ -103,18 +103,18 @@ class class_51a06b68 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_objective_reward_menu");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("promptProgress", 1, 7, "float");
-		namespace_6aaccc24::function_da693cbe("gunIndex1", 1, 4, "int");
-		namespace_6aaccc24::function_da693cbe("gunindex2", 1, 4, "int");
-		namespace_6aaccc24::function_da693cbe("gunindex3", 1, 4, "int");
-		namespace_6aaccc24::function_da693cbe("color", 1, 2, "int");
+		cluielem::setup_clientfields("sr_objective_reward_menu");
+		cluielem::add_clientfield("_state", 1, 2, "int");
+		cluielem::add_clientfield("promptProgress", 1, 7, "float");
+		cluielem::add_clientfield("gunIndex1", 1, 4, "int");
+		cluielem::add_clientfield("gunindex2", 1, 4, "int");
+		cluielem::add_clientfield("gunindex3", 1, 4, "int");
+		cluielem::add_clientfield("color", 1, 2, "int");
 	}
 
 	/*
 		Name: set_color
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x15A3303F
 		Offset: 0x780
 		Size: 0x44
@@ -127,36 +127,36 @@ class class_51a06b68 : class_6aaccc24
 	}
 
 	/*
-		Name: function_ada8b2f1
-		Namespace: namespace_51a06b68
+		Name: set_gunindex3
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xB6E5963F
 		Offset: 0x730
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_ada8b2f1(player, value)
+	function set_gunindex3(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "gunindex3", value);
 	}
 
 	/*
-		Name: function_b94196b8
-		Namespace: namespace_51a06b68
+		Name: set_promptprogress
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xDEB07104
 		Offset: 0x640
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_b94196b8(player, value)
+	function set_promptprogress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "promptProgress", value);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x1C8577B6
 		Offset: 0x4D8
 		Size: 0x15C
@@ -229,7 +229,7 @@ function private autoexec function_a7ba6c42()
 */
 function register()
 {
-	elem = new class_51a06b68();
+	elem = new csr_objective_reward_menu();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -295,7 +295,7 @@ function set_state(player, state_name)
 }
 
 /*
-	Name: function_b94196b8
+	Name: set_promptprogress
 	Namespace: sr_objective_reward_menu
 	Checksum: 0x2755C0FF
 	Offset: 0x238
@@ -303,13 +303,13 @@ function set_state(player, state_name)
 	Parameters: 2
 	Flags: Linked
 */
-function function_b94196b8(player, value)
+function set_promptprogress(player, value)
 {
-	[[ self ]]->function_b94196b8(player, value);
+	[[ self ]]->set_promptprogress(player, value);
 }
 
 /*
-	Name: function_43ba5f0e
+	Name: set_gunindex1
 	Namespace: sr_objective_reward_menu
 	Checksum: 0xDDEA3D97
 	Offset: 0x268
@@ -317,13 +317,13 @@ function function_b94196b8(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_43ba5f0e(player, value)
+function set_gunindex1(player, value)
 {
-	[[ self ]]->function_43ba5f0e(player, value);
+	[[ self ]]->set_gunindex1(player, value);
 }
 
 /*
-	Name: function_2d7f3298
+	Name: set_gunindex2
 	Namespace: sr_objective_reward_menu
 	Checksum: 0x6A852AE4
 	Offset: 0x298
@@ -331,13 +331,13 @@ function function_43ba5f0e(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_2d7f3298(player, value)
+function set_gunindex2(player, value)
 {
-	[[ self ]]->function_2d7f3298(player, value);
+	[[ self ]]->set_gunindex2(player, value);
 }
 
 /*
-	Name: function_ada8b2f1
+	Name: set_gunindex3
 	Namespace: sr_objective_reward_menu
 	Checksum: 0xE0109913
 	Offset: 0x2C8
@@ -345,9 +345,9 @@ function function_2d7f3298(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_ada8b2f1(player, value)
+function set_gunindex3(player, value)
 {
-	[[ self ]]->function_ada8b2f1(player, value);
+	[[ self ]]->set_gunindex3(player, value);
 }
 
 /*

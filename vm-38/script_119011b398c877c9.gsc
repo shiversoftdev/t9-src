@@ -1,4 +1,4 @@
-#using script_383a3b1bb18ba876;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_db2eee11;
@@ -18,7 +18,7 @@ function private autoexec function_cb3215c8()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_db2eee11
 	Checksum: 0x5683568C
 	Offset: 0xB8
@@ -26,7 +26,7 @@ function private autoexec function_cb3215c8()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1b51a976dc0202c7", &function_70a657d8, undefined, undefined, #"killstreaks");
 }

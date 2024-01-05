@@ -1,8 +1,8 @@
-#using script_14d2d89964cae0b1;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using script_14d2d89964cae0b1;
+#using scripts\core_common\struct.csc;
 
 #namespace destructible_character;
 
@@ -23,7 +23,7 @@ function private autoexec function_c0d8db22()
 #namespace destructclientutils;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: destructclientutils
 	Checksum: 0x760A7A7
 	Offset: 0x1D8
@@ -31,7 +31,7 @@ function private autoexec function_c0d8db22()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"destructible_character", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -67,7 +67,7 @@ function private function_70a657d8()
 				loc_000004F0:
 				piecestruct.gibdir = ((isdefined(destructible.(("piece" + index) + "_gibdirX")) ? destructible.(("piece" + index) + "_gibdirX") : 0), (isdefined(destructible.(("piece" + index) + "_gibdirY")) ? destructible.(("piece" + index) + "_gibdirY") : 0), (isdefined(destructible.(("piece" + index) + "_gibdirZ")) ? destructible.(("piece" + index) + "_gibdirZ") : 0));
 			}
-			piecestruct.var_8e57b530 = destructible.(("piece" + index) + "_gibdirscale");
+			piecestruct.gibdirscale = destructible.(("piece" + index) + "_gibdirscale");
 			piecestruct.gibdynentfx = destructible.(("piece" + index) + "_gibdynentfx");
 			piecestruct.gibfx = destructible.(("piece" + index) + "_gibfx");
 			piecestruct.gibfxtag = destructible.(("piece" + index) + "_gibeffecttag");
@@ -79,18 +79,18 @@ function private function_70a657d8()
 			piecestruct.detachmodel = destructible.(("piece" + index) + "_detachmodel");
 			if(isdefined(destructible.(("piece" + index) + "_hittags")))
 			{
-				piecestruct.var_d8fa3d82 = [];
+				piecestruct.hittags = [];
 				foreach(var_5440c126 in destructible.(("piece" + index) + "_hittags"))
 				{
-					if(!isdefined(piecestruct.var_d8fa3d82))
+					if(!isdefined(piecestruct.hittags))
 					{
-						piecestruct.var_d8fa3d82 = [];
+						piecestruct.hittags = [];
 					}
-					else if(!isarray(piecestruct.var_d8fa3d82))
+					else if(!isarray(piecestruct.hittags))
 					{
-						piecestruct.var_d8fa3d82 = array(piecestruct.var_d8fa3d82);
+						piecestruct.hittags = array(piecestruct.hittags);
 					}
-					piecestruct.var_d8fa3d82[piecestruct.var_d8fa3d82.size] = var_5440c126.var_f16c2276;
+					piecestruct.hittags[piecestruct.hittags.size] = var_5440c126.hittag;
 				}
 			}
 			destructbundle.pieces[destructbundle.pieces.size] = piecestruct;
@@ -177,7 +177,7 @@ function private _destructpiece(localclientnum, entity, piecenumber, shouldspawn
 		{
 			gibclientutils::_playgibfx(localclientnum, entity, piece.gibfx, piece.gibfxtag);
 			gibclientutils::_playgibfx(localclientnum, entity, piece.var_ed372a00, piece.var_e230b617);
-			entity thread gibclientutils::_gibpiece(localclientnum, entity, piece.gibmodel, piece.gibtag, piece.gibdynentfx, piece.gibdir, piece.var_8e57b530, (1 | 2) | 4);
+			entity thread gibclientutils::_gibpiece(localclientnum, entity, piece.gibmodel, piece.gibtag, piece.gibdynentfx, piece.gibdir, piece.gibdirscale, (1 | 2) | 4);
 			gibclientutils::_playgibsound(localclientnum, entity, piece.gibsound);
 		}
 		else if(isdefined(piece.gibfx) && function_9229eb67(piece.gibfx))

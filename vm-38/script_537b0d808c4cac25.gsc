@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_600b033d : class_6aaccc24
+class cself_revive_visuals_rush : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_600b033d
+		Namespace: cself_revive_visuals_rush
 		Checksum: 0x7DB406EC
 		Offset: 0x1F0
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_600b033d : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_600b033d
+		Namespace: cself_revive_visuals_rush
 		Checksum: 0xE4393D0
 		Offset: 0x328
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_600b033d : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_600b033d
+		Namespace: cself_revive_visuals_rush
 		Checksum: 0xFC149B61
 		Offset: 0x260
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_600b033d : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_600b033d
+		Namespace: cself_revive_visuals_rush
 		Checksum: 0x613304B5
 		Offset: 0x2A8
 		Size: 0x24
@@ -61,12 +61,12 @@ class class_600b033d : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_600b033d
+		Namespace: cself_revive_visuals_rush
 		Checksum: 0x665DFBA6
 		Offset: 0x210
 		Size: 0x44
@@ -75,13 +75,13 @@ class class_600b033d : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("self_revive_visuals_rush");
-		namespace_6aaccc24::function_da693cbe("revive_time", 1, 4, "int");
+		cluielem::setup_clientfields("self_revive_visuals_rush");
+		cluielem::add_clientfield("revive_time", 1, 4, "int");
 	}
 
 	/*
 		Name: set_revive_time
-		Namespace: namespace_600b033d
+		Namespace: cself_revive_visuals_rush
 		Checksum: 0x9043E3BA
 		Offset: 0x2D8
 		Size: 0x44
@@ -122,7 +122,7 @@ function private autoexec function_8f4c2f6f()
 */
 function register()
 {
-	elem = new class_600b033d();
+	elem = new cself_revive_visuals_rush();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

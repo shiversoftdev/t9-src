@@ -1,10 +1,10 @@
-#using script_32399001bdb550da;
-#using script_47fb62300ac0bd60;
-#using script_6e46300ab1cb7adb;
 #using script_7d0013bbc05623b9;
-#using scripts\core_common\array_shared.gsc;
+#using script_6e46300ab1cb7adb;
+#using script_32399001bdb550da;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace collectibles;
 
@@ -23,7 +23,7 @@ function private autoexec function_72c8ef00()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: collectibles
 	Checksum: 0x2A7ECDAB
 	Offset: 0xB8
@@ -31,7 +31,7 @@ function private autoexec function_72c8ef00()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"collectibles", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -597,7 +597,7 @@ function function_5d5166dd(var_d13a0347)
 */
 function function_d06c5a39()
 {
-	self prompts::function_d5ea17f0(#"hash_209c49282fbf4594");
+	self prompts::set_text(#"hash_209c49282fbf4594");
 	self prompts::function_309bf7c2(#"hash_1ca962038953ec7a");
 }
 

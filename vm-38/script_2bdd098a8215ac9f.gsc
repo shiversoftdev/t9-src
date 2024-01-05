@@ -1,9 +1,9 @@
 #using script_19f3d8b7a687a3f1;
 #using script_36e0a146280ae23a;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_1cc7b406;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_4318edaf()
 {
-	level notify(818203550);
+	level notify(-818203550);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1cc7b406
 	Checksum: 0xB3000E82
 	Offset: 0x118
@@ -30,7 +30,7 @@ function private autoexec function_4318edaf()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_49e3cc2797ad6fbc", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

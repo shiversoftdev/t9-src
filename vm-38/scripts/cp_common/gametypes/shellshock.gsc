@@ -1,8 +1,8 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using scripts\cp_common\util.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace shellshock;
 
@@ -21,7 +21,7 @@ function private autoexec function_16dad364()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: shellshock
 	Checksum: 0xB6C78ECA
 	Offset: 0x120
@@ -29,7 +29,7 @@ function private autoexec function_16dad364()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"shellshock", &function_70a657d8, undefined, undefined, undefined);
 }

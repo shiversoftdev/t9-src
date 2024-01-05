@@ -13,11 +13,11 @@
 */
 function private autoexec function_10370c53()
 {
-	level notify(634534827);
+	level notify(-634534827);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: teamset
 	Checksum: 0x82B29723
 	Offset: 0x88
@@ -25,7 +25,7 @@ function private autoexec function_10370c53()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"teamset_seals", &function_70a657d8, undefined, undefined, undefined);
 }

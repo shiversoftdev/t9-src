@@ -1,14 +1,14 @@
-#using script_1883fa4e60abbf9f;
-#using script_268625b0934ee2ce;
-#using script_3ad66e3076c279ab;
-#using script_42e8ee8721f5e6ef;
-#using script_6c5ee33879e077f8;
-#using script_7e3221b6c80d8cc4;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\cp_common\gametypes\battlechatter.gsc;
+#using script_268625b0934ee2ce;
+#using script_1883fa4e60abbf9f;
+#using script_7e3221b6c80d8cc4;
+#using script_6c5ee33879e077f8;
+#using script_3ad66e3076c279ab;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_42e8ee8721f5e6ef;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 
 #namespace manager;
 
@@ -28,7 +28,7 @@ function scalevolume(ent, vol)
 #namespace namespace_393f6012;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_393f6012
 	Checksum: 0x5FCB91FF
 	Offset: 0x188
@@ -36,7 +36,7 @@ function scalevolume(ent, vol)
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"stealth", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -190,13 +190,13 @@ function threat_sight_set_state_parameters(statename)
 			self.threatsightratemax = 0.5 * var_8c0a9bbb;
 			break;
 		}
-		case "hash_34309b724f4a2e41":
+		case "investigate_grace_period":
 		{
 			self.threatsightratemin = 1 * var_8c0a9bbb;
 			self.threatsightratemax = 0.8 * var_8c0a9bbb;
 			break;
 		}
-		case "hash_4b55a59a56c4bdb3":
+		case "combat_hunt":
 		{
 			self.threatsightratemin = 1 * var_8c0a9bbb;
 			self.threatsightratemax = 0.8 * var_8c0a9bbb;
@@ -310,18 +310,18 @@ function threat_sight_player_sight_audio(var_56a7a731, maxthreat, var_2107b994)
 		#/
 		foreach(snd_ent in self.stealth.threat_sight_snd_ent)
 		{
-			var_3d454e88 = 1;
+			coef = 1;
 			switch(index)
 			{
 				case 0:
 				{
 					if(maxthreat < 0.75)
 					{
-						var_3d454e88 = cos((var_999aef6a * maxthreat) * 0.666);
+						coef = cos((var_999aef6a * maxthreat) * 0.666);
 					}
 					else
 					{
-						var_3d454e88 = 0;
+						coef = 0;
 					}
 					break;
 				}
@@ -329,17 +329,17 @@ function threat_sight_player_sight_audio(var_56a7a731, maxthreat, var_2107b994)
 				{
 					if(maxthreat < 0.75)
 					{
-						var_3d454e88 = sin((var_999aef6a * maxthreat) * 0.666);
+						coef = sin((var_999aef6a * maxthreat) * 0.666);
 					}
 					else
 					{
 						if(maxthreat < 1)
 						{
-							var_3d454e88 = sin((var_999aef6a * (1 - maxthreat)) * 2);
+							coef = sin((var_999aef6a * (1 - maxthreat)) * 2);
 						}
 						else
 						{
-							var_3d454e88 = 0;
+							coef = 0;
 						}
 					}
 					break;
@@ -348,16 +348,16 @@ function threat_sight_player_sight_audio(var_56a7a731, maxthreat, var_2107b994)
 				{
 					if(maxthreat < 0.75)
 					{
-						var_3d454e88 = 0;
+						coef = 0;
 					}
 					else
 					{
-						var_3d454e88 = cos((var_999aef6a * (1 - maxthreat)) * 2);
+						coef = cos((var_999aef6a * (1 - maxthreat)) * 2);
 					}
 					break;
 				}
 			}
-			vol = math::clamp(self.stealth.threat_sight_snd_vol * var_3d454e88, 0, 1);
+			vol = math::clamp(self.stealth.threat_sight_snd_vol * coef, 0, 1);
 			if(vol > 0)
 			{
 				var_7fe1c557 = 1;
@@ -374,7 +374,7 @@ function threat_sight_player_sight_audio(var_56a7a731, maxthreat, var_2107b994)
 				if(var_2107b994)
 				{
 					debug2dtext((32, 540 + (index * 16), 0), (("" + index) + "") + vol, (1, 1, 1), 1.5);
-					debug2dtext((384, 540 + (index * 16), 0), "" + var_3d454e88, (1, 1, 1), 1.5);
+					debug2dtext((384, 540 + (index * 16), 0), "" + coef, (1, 1, 1), 1.5);
 				}
 			#/
 			index++;
@@ -413,7 +413,7 @@ function addeventplaybcs(eventaction, eventtype, modifier, delay, eventstruct, f
 	switch(force)
 	{
 		case "idle":
-		case "hash_7f696e6d1dbd7282":
+		case "idle_alert":
 		{
 			self.stealth.investigatecallin = 0;
 			var_9c201ccd = "callin";

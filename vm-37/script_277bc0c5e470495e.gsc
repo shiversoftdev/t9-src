@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\wz_common\util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace death_circle;
 

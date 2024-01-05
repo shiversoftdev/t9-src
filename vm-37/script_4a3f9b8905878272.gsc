@@ -1,9 +1,9 @@
-#using script_218f57fb32d9325b;
+#using scripts\core_common\ai\archetype_human_cover.gsc;
 #using script_3aa0f32b70d4f7cb;
-#using script_6809bf766eba194a;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
 #using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace aiutility;
 
@@ -286,11 +286,11 @@ function private supportsleancovercondition(entity)
 	}
 	if(isdefined(entity.node))
 	{
-		if(entity.node.type == #"hash_63cbb4767da2a801" || entity.node.type == #"hash_2a7b1ca393696762")
+		if(entity.node.type == #"cover left" || entity.node.type == #"cover right")
 		{
 			return true;
 		}
-		if(entity.node.type == #"hash_7a0e62fbbe3989d4")
+		if(entity.node.type == #"cover pillar")
 		{
 			if(!(isdefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024) || (!(isdefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048)))
 			{
@@ -317,7 +317,7 @@ function private shouldleanatcovercondition(entity)
 		return 0;
 	}
 	legalaim = 0;
-	if(entity.node.type == #"hash_63cbb4767da2a801")
+	if(entity.node.type == #"cover left")
 	{
 		if(!(isdefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4))
 		{
@@ -330,7 +330,7 @@ function private shouldleanatcovercondition(entity)
 	}
 	else
 	{
-		if(entity.node.type == #"hash_2a7b1ca393696762")
+		if(entity.node.type == #"cover right")
 		{
 			if(!(isdefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4))
 			{
@@ -341,7 +341,7 @@ function private shouldleanatcovercondition(entity)
 				legalaim = function_cfe04a8d(entity, "cover_right_lean");
 			}
 		}
-		else if(entity.node.type == #"hash_7a0e62fbbe3989d4")
+		else if(entity.node.type == #"cover pillar")
 		{
 			supportsleft = !(isdefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024);
 			supportsright = !(isdefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048);
@@ -512,7 +512,7 @@ function private supportsovercovercondition(entity)
 	stance = entity getblackboardattribute("_stance");
 	if(isdefined(entity.node))
 	{
-		if(entity.node.type == #"hash_171465527444ed14" || entity.node.type == #"hash_1bb444d857814e92")
+		if(entity.node.type == #"conceal crouch" || entity.node.type == #"conceal stand")
 		{
 			return true;
 		}
@@ -520,14 +520,14 @@ function private supportsovercovercondition(entity)
 		{
 			return false;
 		}
-		if(entity.node.type == #"hash_63cbb4767da2a801" || entity.node.type == #"hash_2a7b1ca393696762" || (entity.node.type == #"hash_6d8019ab9d39bf96" || entity.node.type == #"hash_280d1247a6abdbae" || entity.node.type == #"hash_171465527444ed14"))
+		if(entity.node.type == #"cover left" || entity.node.type == #"cover right" || (entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch"))
 		{
 			if(stance == "crouch")
 			{
 				return true;
 			}
 		}
-		else if(entity.node.type == #"hash_581529fff05853f0" || entity.node.type == #"hash_1bb444d857814e92")
+		else if(entity.node.type == #"cover stand" || entity.node.type == #"conceal stand")
 		{
 			if(stance == "stand")
 			{
@@ -933,7 +933,7 @@ function isatcovermodenone(entity)
 */
 function function_d18f7e29(entity)
 {
-	if(entity.node.type == #"hash_581529fff05853f0" || entity.node.type == #"hash_1bb444d857814e92")
+	if(entity.node.type == #"cover stand" || entity.node.type == #"conceal stand")
 	{
 		covermode = entity getblackboardattribute("_cover_mode");
 		if(covermode == "cover_over")
@@ -1126,7 +1126,7 @@ function calculatecoverdirection(entity, stepout)
 			stepout = 0;
 		}
 		coverdirection = "cover_front_direction";
-		if(entity.node.type == #"hash_63cbb4767da2a801")
+		if(entity.node.type == #"cover left")
 		{
 			if(entity function_c97b59f8("stand", entity.node) || math::cointoss() || stepout)
 			{
@@ -1135,14 +1135,14 @@ function calculatecoverdirection(entity, stepout)
 		}
 		else
 		{
-			if(entity.node.type == #"hash_2a7b1ca393696762")
+			if(entity.node.type == #"cover right")
 			{
 				if(entity function_c97b59f8("stand", entity.node) || math::cointoss() || stepout)
 				{
 					coverdirection = "cover_right_direction";
 				}
 			}
-			else if(entity.node.type == #"hash_7a0e62fbbe3989d4")
+			else if(entity.node.type == #"cover pillar")
 			{
 				coverdirection = function_f6d48a6a(entity);
 			}
@@ -1150,7 +1150,7 @@ function calculatecoverdirection(entity, stepout)
 		return coverdirection;
 	}
 	coverdirection = "cover_front_direction";
-	if(entity.node.type == #"hash_7a0e62fbbe3989d4")
+	if(entity.node.type == #"cover pillar")
 	{
 		coverdirection = function_f6d48a6a(entity);
 	}

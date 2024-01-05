@@ -1,10 +1,10 @@
-#using script_2255a7ad3edc838f;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\rat_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\bots\bot.gsc;
 #using scripts\mp_common\gametypes\dev.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\core_common\rat_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace rat;
 
@@ -19,11 +19,11 @@
 */
 function private autoexec function_eff1a531()
 {
-	level notify(2052433488);
+	level notify(-2052433488);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: rat
 	Checksum: 0xD5463D36
 	Offset: 0xB8
@@ -31,7 +31,7 @@ function private autoexec function_eff1a531()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"rat", &function_70a657d8, undefined, undefined, undefined);
@@ -141,7 +141,7 @@ function testenemy(team)
 		{
 			params = {#intpayload:0, #response:level.teams[team], #menu:game.menu[#"menu_team"]};
 			self notify(#"menuresponse", params);
-			self callback::callback(#"hash_4e1a50a35ec44bcc", params);
+			self callback::callback(#"menu_response", params);
 		}
 	#/
 }

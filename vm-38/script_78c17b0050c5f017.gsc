@@ -1,8 +1,8 @@
-#using script_ac6a30f1991e105;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using script_ac6a30f1991e105;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_2303c104;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_7b65a23e()
 {
-	level notify(1452141537);
+	level notify(-1452141537);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2303c104
 	Checksum: 0xE8DB73C6
 	Offset: 0xF0
@@ -29,7 +29,7 @@ function private autoexec function_7b65a23e()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1e60252f388011fb", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -73,7 +73,7 @@ function function_4d144c6a(localclientnum, oldval, newval, bnewent, binitialsnap
 		if(self.headlamp_on === 1 && isdefined(self.headlight_fx))
 		{
 			stopfx(fieldname, self.headlight_fx);
-			self.headlight_fx = util::playfxontag(fieldname, #"hash_28ca36ca6183d621", self, "tag_headlamp_FX");
+			self.headlight_fx = util::playfxontag(fieldname, #"zm_ai/fx9_mech_head_light", self, "tag_headlamp_FX");
 			fxclientutils::stopfxbundle(fieldname, self, self.fxdef);
 			fxclientutils::playfxbundle(fieldname, self, self.fxdef);
 		}

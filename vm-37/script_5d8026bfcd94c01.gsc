@@ -1,22 +1,22 @@
-#using script_2c49ae69cd8ce30c;
-#using script_335d0650ed05d36d;
-#using script_44b0b8420eabacad;
-#using script_68d2ee1489345a1d;
 #using script_b9a55edd207e4ca;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\dogtags.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\spawning_shared.gsc;
+#using script_335d0650ed05d36d;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\dogtags.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_f2e23b4a;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_f2e23b4a
 	Checksum: 0x9CF9A62B
 	Offset: 0xE0
@@ -24,7 +24,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_112a74f076cda31", &function_62730899, undefined, undefined, #"territory");
 }

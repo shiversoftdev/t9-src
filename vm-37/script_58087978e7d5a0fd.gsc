@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_d1ed471a : class_6aaccc24
+class class_d1ed471a : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,7 +47,7 @@ class class_d1ed471a : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -61,7 +61,7 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -75,9 +75,9 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_gold_hud");
-		namespace_6aaccc24::function_da693cbe("showTerminal", 1000, 1, "int", 0);
-		namespace_6aaccc24::function_dcb34c80("string", "satelliteInfo", 1000);
+		cluielem::setup_clientfields("zm_gold_hud");
+		cluielem::add_clientfield("showTerminal", 1000, 1, "int", 0);
+		cluielem::function_dcb34c80("string", "satelliteInfo", 1000);
 	}
 
 	/*
@@ -110,11 +110,11 @@ class class_d1ed471a : class_6aaccc24
 
 }
 
-#namespace namespace_82d7691b;
+#namespace zm_gold_hud;
 
 /*
 	Name: register
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x99FBEC9A
 	Offset: 0xE0
 	Size: 0x34
@@ -130,7 +130,7 @@ function register()
 
 /*
 	Name: open
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x555E5116
 	Offset: 0x120
 	Size: 0x38
@@ -148,7 +148,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x2780A85B
 	Offset: 0x160
 	Size: 0x1C
@@ -162,7 +162,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x5FE370E6
 	Offset: 0x188
 	Size: 0x1A
@@ -176,7 +176,7 @@ function is_open(player)
 
 /*
 	Name: function_9dc41635
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x3001427
 	Offset: 0x1B0
 	Size: 0x28
@@ -190,7 +190,7 @@ function function_9dc41635(player, value)
 
 /*
 	Name: function_f308d6bb
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x6F74B9A8
 	Offset: 0x1E0
 	Size: 0x28

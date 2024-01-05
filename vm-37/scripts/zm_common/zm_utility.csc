@@ -1,18 +1,18 @@
-#using script_12282e6b2cc91b42;
-#using script_158d50d476435605;
-#using script_18a9e529264a3d29;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
+#using scripts\zm_common\zm_customgame.csc;
+#using scripts\zm_common\zm_maptable.csc;
 #using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\activecamo_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace zm_utility;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_utility
 	Checksum: 0xB5911E48
 	Offset: 0x270
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_utility", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -36,12 +36,12 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	level._effect[#"hash_7dc0459342cedaa4"] = #"hash_3002526b7ff53cbf";
-	clientfield::function_a8bbc967("hudItems.armorType", #"hud_items", #"hash_789d8c10ac21687c", 1, 2, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.armorPercent", #"hud_items", #"armorpercent", 1, 7, "float", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.scrap", #"hud_items", #"scrap", 1, 16, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.rareScrap", #"hud_items", #"hash_d6fdfc12ead24ba", 1, 16, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("pap_current", #"zm_hud", #"hash_64f2ff2ddddbe9c7", 1, 2, "int", undefined, 0, 0);
+	level._effect[#"zm_zone_edge_marker"] = #"hash_3002526b7ff53cbf";
+	clientfield::register_clientuimodel("hudItems.armorType", #"hud_items", #"hash_789d8c10ac21687c", 1, 2, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.armorPercent", #"hud_items", #"armorpercent", 1, 7, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.scrap", #"hud_items", #"scrap", 1, 16, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.rareScrap", #"hud_items", #"hash_d6fdfc12ead24ba", 1, 16, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("pap_current", #"zm_hud", #"hash_64f2ff2ddddbe9c7", 1, 2, "int", undefined, 0, 0);
 	clientfield::register("toplayer", "zm_zone_out_of_bounds", 1, 1, "int", &zm_zone_out_of_bounds, 0, 0);
 	clientfield::register("actor", "flame_corpse_fx", 1, 1, "int", &flame_corpse_fx, 0, 0);
 	clientfield::register("scriptmover", "model_rarity_rob", 1, 3, "int", &model_rarity_rob, 0, 0);
@@ -242,7 +242,7 @@ function spawn_buildkit_weapon_model(localclientnum, weapon, camo, origin, angle
 */
 function is_classic()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(str_gametype == #"zclassic")
 	{
 		return true;
@@ -261,7 +261,7 @@ function is_classic()
 */
 function is_survival()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(str_gametype == #"zsurvival")
 	{
 		return true;
@@ -280,7 +280,7 @@ function is_survival()
 */
 function is_standard()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(str_gametype == #"zstandard")
 	{
 		return true;
@@ -299,7 +299,7 @@ function is_standard()
 */
 function is_trials()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(str_gametype == #"ztrials" || level flag::exists(#"ztrial"))
 	{
 		return true;
@@ -318,7 +318,7 @@ function is_trials()
 */
 function is_tutorial()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(str_gametype == #"ztutorial")
 	{
 		return true;
@@ -337,7 +337,7 @@ function is_tutorial()
 */
 function is_grief()
 {
-	str_gametype = util::function_5df4294();
+	str_gametype = util::get_game_type();
 	if(str_gametype == #"zgrief")
 	{
 		return true;
@@ -363,7 +363,7 @@ function is_gametype_active(a_gametypes)
 	}
 	for(i = 0; i < a_gametypes.size; i++)
 	{
-		if(util::function_5df4294() == a_gametypes[i])
+		if(util::get_game_type() == a_gametypes[i])
 		{
 			b_is_gametype_active = 1;
 		}
@@ -372,7 +372,7 @@ function is_gametype_active(a_gametypes)
 }
 
 /*
-	Name: function_e51dc2d8
+	Name: is_ee_enabled
 	Namespace: zm_utility
 	Checksum: 0xFC135808
 	Offset: 0xD30
@@ -380,13 +380,13 @@ function is_gametype_active(a_gametypes)
 	Parameters: 0
 	Flags: None
 */
-function function_e51dc2d8()
+function is_ee_enabled()
 {
-	if(!getdvarint(#"hash_2992299f853b2039", 0))
+	if(!getdvarint(#"zm_ee_enabled", 0))
 	{
 		return false;
 	}
-	if(!namespace_59ff1d6c::function_901b751c(#"hash_3c5363541b97ca3e"))
+	if(!zm_custom::function_901b751c(#"hash_3c5363541b97ca3e"))
 	{
 		return false;
 	}
@@ -622,7 +622,7 @@ function function_ae3780f1(localclientnum, n_fx_id, var_3ab46b9)
 }
 
 /*
-	Name: function_90500af5
+	Name: get_cast
 	Namespace: zm_utility
 	Checksum: 0xE5764FA9
 	Offset: 0x16E0
@@ -630,13 +630,13 @@ function function_ae3780f1(localclientnum, n_fx_id, var_3ab46b9)
 	Parameters: 0
 	Flags: None
 */
-function function_90500af5()
+function get_cast()
 {
-	return namespace_cb7cafc3::function_90500af5();
+	return zm_maptable::get_cast();
 }
 
 /*
-	Name: function_166646a6
+	Name: get_story
 	Namespace: zm_utility
 	Checksum: 0xF988CD99
 	Offset: 0x1700
@@ -644,9 +644,9 @@ function function_90500af5()
 	Parameters: 0
 	Flags: Linked
 */
-function function_166646a6()
+function get_story()
 {
-	return namespace_cb7cafc3::function_166646a6();
+	return zm_maptable::get_story();
 }
 
 /*
@@ -759,7 +759,7 @@ function model_rarity_rob(localclientnum, oldval, newval, bnewent, binitialsnap,
 		}
 		case 7:
 		{
-			self.var_d9e5ccb2 = #"hash_7bed6d31a7d8d425";
+			self.var_d9e5ccb2 = #"rob_sr_item_gold";
 			break;
 		}
 		case 0:
@@ -767,14 +767,14 @@ function model_rarity_rob(localclientnum, oldval, newval, bnewent, binitialsnap,
 		{
 			if(isdefined(self.var_d9e5ccb2))
 			{
-				self function_5d482e78(self.var_d9e5ccb2);
+				self stoprenderoverridebundle(self.var_d9e5ccb2);
 				self.var_d9e5ccb2 = undefined;
 			}
 		}
 	}
 	if(isdefined(self.var_d9e5ccb2))
 	{
-		self function_bf9d3071(self.var_d9e5ccb2);
+		self playrenderoverridebundle(self.var_d9e5ccb2);
 	}
 }
 
@@ -1192,19 +1192,19 @@ function private function_538799c4()
 			{
 				i = 0;
 				debug2dtext((325, 200, 0) + (vectorscale((0, 1, 0), 20) * (i + 1)), "", (0, 1, 0));
-				foreach(var_b8055433 in level.var_c427e93b)
+				foreach(e_machine in level.var_c427e93b)
 				{
-					if(isdefined(var_b8055433))
+					if(isdefined(e_machine))
 					{
-						v_midpoint = var_b8055433 function_2cfe56d8();
+						v_midpoint = e_machine function_2cfe56d8();
 						i++;
-						if(is_true(var_b8055433.var_c02c4d66))
+						if(is_true(e_machine.var_c02c4d66))
 						{
-							debug2dtext((325, 200, 0) + (vectorscale((0, 1, 0), 20) * (i + 1)), function_9e72a96(var_b8055433.model), (0, 1, 0));
+							debug2dtext((325, 200, 0) + (vectorscale((0, 1, 0), 20) * (i + 1)), function_9e72a96(e_machine.model), (0, 1, 0));
 							circle(v_midpoint, 64, (0, 1, 0));
 							continue;
 						}
-						debug2dtext((325, 200, 0) + (vectorscale((0, 1, 0), 20) * (i + 1)), function_9e72a96(var_b8055433.model), (1, 0, 0));
+						debug2dtext((325, 200, 0) + (vectorscale((0, 1, 0), 20) * (i + 1)), function_9e72a96(e_machine.model), (1, 0, 0));
 						circle(v_midpoint, 64, (1, 0, 0));
 					}
 				}

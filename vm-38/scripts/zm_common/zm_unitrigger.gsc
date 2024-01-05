@@ -1,14 +1,14 @@
-#using script_50c040e371c1c35f;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_lockdown_util.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_unitrigger;
 
@@ -23,11 +23,11 @@
 */
 function private autoexec function_e752c6d3()
 {
-	level notify(473114813);
+	level notify(-473114813);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_unitrigger
 	Checksum: 0x9D42FB1D
 	Offset: 0x1F8
@@ -35,7 +35,7 @@ function private autoexec function_e752c6d3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_unitrigger", &function_70a657d8, &function_8ac3bea9, undefined, #"zm_zonemgr");
 }
@@ -84,7 +84,7 @@ function create(var_9d80e6ef, var_e0bc0661, func_unitrigger_logic, var_4478092b,
 		}
 		else
 		{
-			if(getdvarint(#"hash_11ad6a9695943217", 0))
+			if(getdvarint(#"zm_debug_ee", 0))
 			{
 				unitrigger_set_hint_string(s_unitrigger, var_9d80e6ef);
 			}
@@ -417,7 +417,7 @@ function unregister_unitrigger_internal(unitrigger_stub, var_a68f8009)
 	}
 	if(var_a68f8009)
 	{
-		namespace_cb42c6c0::function_6b9e848(unitrigger_stub);
+		zm_lockdown_util::function_6b9e848(unitrigger_stub);
 	}
 	unitrigger_stub.registered = 0;
 	if(is_true(unitrigger_stub.trigger_per_player))
@@ -1243,7 +1243,7 @@ function private function_ba088f52(trigger)
 		{
 			if(isdefined(self.current_trigger.stub))
 			{
-				self.current_trigger.stub notify(#"hash_d0ee404fc39206", {#player:self});
+				self.current_trigger.stub notify(#"unitrigger_deactivated", {#player:self});
 			}
 		}
 		self.current_trigger = trigger;
@@ -1251,7 +1251,7 @@ function private function_ba088f52(trigger)
 		{
 			if(isdefined(self.current_trigger.stub))
 			{
-				self.current_trigger.stub notify(#"hash_396aa901be0c0eaf", {#player:self});
+				self.current_trigger.stub notify(#"unitrigger_activated", {#player:self});
 			}
 		}
 	}
@@ -1303,7 +1303,7 @@ function private function_358a2fc7()
 	while(isdefined(self))
 	{
 		waitresult = undefined;
-		waitresult = self waittill(#"hash_2d4daa9e80b86b60");
+		waitresult = self waittill(#"zone_change");
 		self thread function_d7eef1bc(waitresult.zone, waitresult.zone_name);
 	}
 }
@@ -1345,7 +1345,7 @@ function private function_5b353bb7()
 */
 function private function_d7eef1bc(zone, zone_name)
 {
-	self endon(#"hash_2d4daa9e80b86b60");
+	self endon(#"zone_change");
 	function_5b353bb7();
 	candidate_list = level.zones[zone_name].unitrigger_stubs;
 	if(isarray(candidate_list))
@@ -1819,13 +1819,13 @@ function debug_unitriggers()
 							{
 								foreach(var_becdb9c in triggerstub.playertrigger)
 								{
-									function_3fdbe6d3(var_becdb9c, origin, color);
+									debug_trigger(var_becdb9c, origin, color);
 								}
 							}
 						}
 						else
 						{
-							function_3fdbe6d3(triggerstub.trigger, origin, color);
+							debug_trigger(triggerstub.trigger, origin, color);
 						}
 						continue;
 					}
@@ -1860,7 +1860,7 @@ function debug_unitriggers()
 }
 
 /*
-	Name: function_3fdbe6d3
+	Name: debug_trigger
 	Namespace: zm_unitrigger
 	Checksum: 0x45DB0E39
 	Offset: 0x4108
@@ -1868,7 +1868,7 @@ function debug_unitriggers()
 	Parameters: 3
 	Flags: None
 */
-function function_3fdbe6d3(trigger, var_5ca10e3c, color)
+function debug_trigger(trigger, var_5ca10e3c, color)
 {
 	if(isdefined(trigger))
 	{

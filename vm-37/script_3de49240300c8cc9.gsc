@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_1b0cb7b1 : class_6aaccc24
+class cwz_revive_prompt : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0xB3ADB5ED
 		Offset: 0x290
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_1b0cb7b1 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0x4A2D3C05
 		Offset: 0x530
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_1b0cb7b1 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0x9CD447C6
 		Offset: 0x378
 		Size: 0x3C
@@ -47,40 +47,40 @@ class class_1b0cb7b1 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_3b7b386a
-		Namespace: namespace_1b0cb7b1
+		Name: set_clientnum
+		Namespace: cwz_revive_prompt
 		Checksum: 0x66AEB658
 		Offset: 0x3F0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3b7b386a(player, value)
+	function set_clientnum(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "clientnum", value);
 	}
 
 	/*
-		Name: function_4b3fb8b8
-		Namespace: namespace_1b0cb7b1
+		Name: set_reviveprogress
+		Namespace: cwz_revive_prompt
 		Checksum: 0xD2690992
 		Offset: 0x490
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4b3fb8b8(player, value)
+	function set_reviveprogress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "reviveProgress", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0x3CD59A6B
 		Offset: 0x3C0
 		Size: 0x24
@@ -89,12 +89,12 @@ class class_1b0cb7b1 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0xD715ED02
 		Offset: 0x2B0
 		Size: 0xBC
@@ -103,37 +103,37 @@ class class_1b0cb7b1 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("wz_revive_prompt");
-		namespace_6aaccc24::function_da693cbe("clientnum", 1, 7, "int");
-		namespace_6aaccc24::function_da693cbe("progress", 1, 5, "float");
-		namespace_6aaccc24::function_da693cbe("reviveProgress", 1, 5, "float");
-		namespace_6aaccc24::function_da693cbe("cowardsWay", 1, 1, "int");
+		cluielem::setup_clientfields("wz_revive_prompt");
+		cluielem::add_clientfield("clientnum", 1, 7, "int");
+		cluielem::add_clientfield("progress", 1, 5, "float");
+		cluielem::add_clientfield("reviveProgress", 1, 5, "float");
+		cluielem::add_clientfield("cowardsWay", 1, 1, "int");
 	}
 
 	/*
-		Name: function_affe8f61
-		Namespace: namespace_1b0cb7b1
+		Name: set_progress
+		Namespace: cwz_revive_prompt
 		Checksum: 0x4F536927
 		Offset: 0x440
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_affe8f61(player, value)
+	function set_progress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "progress", value);
 	}
 
 	/*
-		Name: function_f52e0186
-		Namespace: namespace_1b0cb7b1
+		Name: set_cowardsway
+		Namespace: cwz_revive_prompt
 		Checksum: 0xDA6E1711
 		Offset: 0x4E0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f52e0186(player, value)
+	function set_cowardsway(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "cowardsWay", value);
 	}
@@ -153,7 +153,7 @@ class class_1b0cb7b1 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_1b0cb7b1();
+	elem = new cwz_revive_prompt();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -205,7 +205,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_3b7b386a
+	Name: set_clientnum
 	Namespace: wz_revive_prompt
 	Checksum: 0x95FB87A0
 	Offset: 0x1D0
@@ -213,13 +213,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_3b7b386a(player, value)
+function set_clientnum(player, value)
 {
-	[[ self ]]->function_3b7b386a(player, value);
+	[[ self ]]->set_clientnum(player, value);
 }
 
 /*
-	Name: function_affe8f61
+	Name: set_progress
 	Namespace: wz_revive_prompt
 	Checksum: 0x7F4A4FC5
 	Offset: 0x200
@@ -227,13 +227,13 @@ function function_3b7b386a(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_affe8f61(player, value)
+function set_progress(player, value)
 {
-	[[ self ]]->function_affe8f61(player, value);
+	[[ self ]]->set_progress(player, value);
 }
 
 /*
-	Name: function_4b3fb8b8
+	Name: set_reviveprogress
 	Namespace: wz_revive_prompt
 	Checksum: 0x8B6F1D5F
 	Offset: 0x230
@@ -241,13 +241,13 @@ function function_affe8f61(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4b3fb8b8(player, value)
+function set_reviveprogress(player, value)
 {
-	[[ self ]]->function_4b3fb8b8(player, value);
+	[[ self ]]->set_reviveprogress(player, value);
 }
 
 /*
-	Name: function_f52e0186
+	Name: set_cowardsway
 	Namespace: wz_revive_prompt
 	Checksum: 0xF05635A5
 	Offset: 0x260
@@ -255,8 +255,8 @@ function function_4b3fb8b8(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_f52e0186(player, value)
+function set_cowardsway(player, value)
 {
-	[[ self ]]->function_f52e0186(player, value);
+	[[ self ]]->set_cowardsway(player, value);
 }
 

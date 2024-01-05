@@ -14,7 +14,7 @@
 */
 function private autoexec function_49c010aa()
 {
-	level notify(566715741);
+	level notify(-566715741);
 }
 
 #namespace fx;
@@ -146,7 +146,7 @@ function play(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_se
 		b_link_to_self = 0;
 	}
 	self notify(str_fx);
-	if(!isdefined(time_to_delete_or_notify) || (!isstring(time_to_delete_or_notify) && !function_7a600918(time_to_delete_or_notify) && time_to_delete_or_notify == -1) && is_true(b_link_to_self) && isdefined(str_tag))
+	if(!isdefined(time_to_delete_or_notify) || (!isstring(time_to_delete_or_notify) && !ishash(time_to_delete_or_notify) && time_to_delete_or_notify == -1) && is_true(b_link_to_self) && isdefined(str_tag))
 	{
 		playfxontag(get(str_fx), self, str_tag, b_ignore_pause_world);
 		return self;
@@ -191,7 +191,7 @@ function _play_fx_delete(ent, time_to_delete_or_notify)
 	{
 		time_to_delete_or_notify = -1;
 	}
-	if(isstring(time_to_delete_or_notify) || function_7a600918(time_to_delete_or_notify))
+	if(isstring(time_to_delete_or_notify) || ishash(time_to_delete_or_notify))
 	{
 		ent waittill(#"death", time_to_delete_or_notify);
 	}

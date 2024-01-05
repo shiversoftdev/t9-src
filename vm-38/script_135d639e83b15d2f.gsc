@@ -1,22 +1,22 @@
-#using script_178024232e91b0a1;
-#using script_2c5daa95f8fec03c;
-#using script_3411bb48d41bd3b;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
-#using script_4d85e8de54b02198;
-#using script_57f7003580bb15e0;
-#using script_6809bf766eba194a;
-#using script_caf007e2a98afa2;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_3411bb48d41bd3b;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_2c5daa95f8fec03c;
+#using script_3aa0f32b70d4f7cb;
+#using script_178024232e91b0a1;
+#using script_caf007e2a98afa2;
+#using script_4d85e8de54b02198;
+#using script_3819e7a1427df6d2;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_3b3d42f;
 
@@ -35,7 +35,7 @@ function private autoexec function_95507df0()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_3b3d42f
 	Checksum: 0xD5B3B08D
 	Offset: 0x520
@@ -43,7 +43,7 @@ function private autoexec function_95507df0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4e5aab38f14a7d66", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -258,7 +258,7 @@ function private function_6ad60d9b(inflictor, attacker, damage, dflags, mod, wea
 	damage_type = 1;
 	adjusted_damage = dir;
 	var_2e1b791b = boneindex;
-	var_3cbf9d23 = modelindex;
+	bi = modelindex;
 	weakpoint = namespace_81245006::function_73ab4754(self, offsettime, 1);
 	if(isdefined(weakpoint) && weakpoint.var_3765e777 === 1 && aiutility::function_69c2d36f(hitloc))
 	{
@@ -348,7 +348,7 @@ function function_2d3b0724()
 */
 function function_6d1daa57(var_cf79a48d)
 {
-	self.var_1564b717 = var_cf79a48d;
+	self.wander_radius = var_cf79a48d;
 }
 
 /*
@@ -442,12 +442,12 @@ function private function_9175afae(animname)
 function private function_11258b29()
 {
 	n_spawns = randomintrange(2, 3);
-	var_8be21cb = namespace_85745671::function_e4791424(self.origin, 32, 400, 250);
+	a_s_pts = namespace_85745671::function_e4791424(self.origin, 32, 400, 250);
 	for(i = 0; i < n_spawns; i++)
 	{
-		if(isdefined(var_8be21cb[i]))
+		if(isdefined(a_s_pts[i]))
 		{
-			ai_spawned = namespace_85745671::function_9d3ad056(#"hash_7cba8a05511ceedf", var_8be21cb[i].origin, self.angles, "hulk_zombie");
+			ai_spawned = namespace_85745671::function_9d3ad056(#"hash_7cba8a05511ceedf", a_s_pts[i].origin, self.angles, "hulk_zombie");
 		}
 		wait(0.1);
 	}
@@ -913,10 +913,10 @@ function private function_53660c1e()
 	self endon(#"death");
 	self.var_a74e60ad = 1;
 	self.zombie_count++;
-	var_8be21cb = namespace_85745671::function_e4791424(self.origin, 32, 400, 250);
-	if(isdefined(var_8be21cb[0]))
+	a_s_pts = namespace_85745671::function_e4791424(self.origin, 32, 400, 250);
+	if(isdefined(a_s_pts[0]))
 	{
-		ai_spawned = namespace_85745671::function_9d3ad056(#"hash_7cba8a05511ceedf", var_8be21cb[0].origin, self.angles, "hulk_zombie");
+		ai_spawned = namespace_85745671::function_9d3ad056(#"hash_7cba8a05511ceedf", a_s_pts[0].origin, self.angles, "hulk_zombie");
 		if(isdefined(ai_spawned))
 		{
 			ai_spawned thread function_5f9f594(self);
@@ -1016,9 +1016,9 @@ function private function_8a252ee4(entity)
 	targetpos = targetpos + vectorscale((0, 0, 1), 36);
 	var_872c6826 = vectortoangles(targetpos - launchpos);
 	angles = function_cc68801f(launchpos, targetpos, 1110, getdvarfloat(#"bg_lowgravity", 0));
-	if(isdefined(angles) && angles[#"hash_1d5798eaa3bed36c"] > 0)
+	if(isdefined(angles) && angles[#"lowangle"] > 0)
 	{
-		dir = anglestoforward((-1 * angles[#"hash_1d5798eaa3bed36c"], var_872c6826[1], var_872c6826[2]));
+		dir = anglestoforward((-1 * angles[#"lowangle"], var_872c6826[1], var_872c6826[2]));
 	}
 	else
 	{
@@ -1301,7 +1301,7 @@ function private function_187bcbe()
 		}
 		if(isdefined(self.target_ent) && isplayer(self.target_ent))
 		{
-			params = function_4d1e7b48("dot_molotov_hulk_fireball");
+			params = getstatuseffect("dot_molotov_hulk_fireball");
 			self.target_ent status_effect::status_effect_apply(params, undefined, self, 0, undefined, undefined, self.origin);
 			self.target_ent clientfield::increment("hs_swarm_damage", 1);
 			health_frac = self.health / self.maxhealth;
@@ -1596,9 +1596,9 @@ function function_95de83c0()
 	/#
 		function_5ac4dc99(#"hash_fed990cce44eb15", "");
 		function_cd140ee9(#"hash_fed990cce44eb15", &function_f895e0b0);
-		util::function_345e5b9a(((("" + "") + "") + "") + "");
-		util::function_345e5b9a(((("" + "") + "") + "") + "");
-		util::function_345e5b9a(((("" + "") + "") + "") + "");
+		util::add_debug_command(((("" + "") + "") + "") + "");
+		util::add_debug_command(((("" + "") + "") + "") + "");
+		util::add_debug_command(((("" + "") + "") + "") + "");
 	#/
 }
 

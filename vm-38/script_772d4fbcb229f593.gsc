@@ -1,20 +1,20 @@
 #using script_221cb3c0b91a347a;
-#using script_5bb072c3abf4652c;
 #using script_b9d273dc917ee1f;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\callbacks.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
 #using scripts\zm_common\zm_unitrigger.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_devgui.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_9771a88f;
 
@@ -72,7 +72,7 @@ function function_9469a0c4()
 	level flag::wait_till(#"intro_scene_done");
 	wait(1);
 	level zm_vo::function_7622cb70(array::random([3:#"hash_6de3a2c3b8452ea", 2:#"hash_6de352c3b844a6b", 1:#"hash_6de342c3b8448b8", 0:#"hash_6de372c3b844dd1"]));
-	level flag::set(#"hash_4ae6b839df55ee2a");
+	level flag::set(#"match_start_vo_done");
 }
 
 /*
@@ -609,7 +609,7 @@ function function_d137d6a0(var_e0c6386f, var_40feefce, var_c4ad7aa9)
 	level endon(#"end_game");
 	switch(level.var_114b6e35)
 	{
-		case "hash_583a7c6fc0d127b0":
+		case "strauss":
 		{
 			self zm_vo::function_7622cb70(var_e0c6386f);
 			break;
@@ -685,13 +685,13 @@ function function_b5b0518b(str_vo, b_wait_if_busy)
 function function_5df7275b()
 {
 	level endon(#"end_game");
-	var_9e8aa2bc = struct::get("s_maxis_audiolog_3");
-	var_a4318688 = struct::get(var_9e8aa2bc.target);
-	var_9e87f151 = util::spawn_model(var_9e8aa2bc.model, var_9e8aa2bc.origin, var_9e8aa2bc.angles);
+	s_audiolog = struct::get("s_maxis_audiolog_3");
+	var_a4318688 = struct::get(s_audiolog.target);
+	var_9e87f151 = util::spawn_model(s_audiolog.model, s_audiolog.origin, s_audiolog.angles);
 	level flag::wait_till(#"hash_65cb00631d191193");
 	wait(1.5);
 	var_9e87f151 notsolid();
-	n_power = length(var_9e8aa2bc.origin - var_a4318688.origin);
+	n_power = length(s_audiolog.origin - var_a4318688.origin);
 	n_wait = var_9e87f151 zm_utility::fake_physicslaunch(var_a4318688.origin, n_power);
 	wait(n_wait);
 	namespace_4abf1500::function_23255935("ww_quest_audiolog");
@@ -713,7 +713,7 @@ function function_5df7275b()
 function function_cd7a3de4()
 {
 	/#
-		util::function_345e5b9a("");
+		util::add_debug_command("");
 		zm_devgui::add_custom_devgui_callback(&cmd);
 	#/
 }

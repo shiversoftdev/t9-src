@@ -1,13 +1,13 @@
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using script_3aa0f32b70d4f7cb;
 #using script_4bf952f6ba31bb17;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_47c5b560;
 
@@ -26,7 +26,7 @@ function private autoexec function_4d940c43()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_47c5b560
 	Checksum: 0xAC30034B
 	Offset: 0x270
@@ -34,7 +34,7 @@ function private autoexec function_4d940c43()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_75d08e0bf3b9e062", &function_70a657d8, &init, undefined, undefined);
 }
@@ -1053,7 +1053,7 @@ function private function_b3069b6c(target)
 	while(true)
 	{
 		waitresult = undefined;
-		waitresult = target waittill(#"hash_2d4daa9e80b86b60");
+		waitresult = target waittill(#"zone_change");
 		if(!isdefined(waitresult.zone_name) || waitresult.zone_name === var_427872c2)
 		{
 			continue;
@@ -1711,7 +1711,7 @@ function private function_512cbdfa(var_5f3b05e8)
 */
 function private function_259b61b6(var_8787728e, var_266a0de8)
 {
-	if(!getdvarint(#"hash_576f5cfc006ef831", 1))
+	if(!getdvarint(#"zm_zone_pathing", 1))
 	{
 		return undefined;
 	}
@@ -1723,8 +1723,8 @@ function private function_259b61b6(var_8787728e, var_266a0de8)
 	{
 		return undefined;
 	}
-	var_5ef1a72c = [];
-	var_5ef1a72c[var_5ef1a72c.size] = [0:{#zone_name:var_266a0de8}];
+	zone_paths = [];
+	zone_paths[zone_paths.size] = [0:{#zone_name:var_266a0de8}];
 	var_d5766a02 = 10;
 	path_depth = 0;
 	while(path_depth < var_d5766a02)
@@ -1732,7 +1732,7 @@ function private function_259b61b6(var_8787728e, var_266a0de8)
 		var_23ca4e6e = [];
 		var_84204f6a = 10;
 		var_4ec884df = -1;
-		foreach(path in var_5ef1a72c)
+		foreach(path in zone_paths)
 		{
 			var_db249865 = function_512cbdfa(path[path.size - 1].zone_name);
 			var_7d8e02e2 = [];
@@ -1798,7 +1798,7 @@ function private function_259b61b6(var_8787728e, var_266a0de8)
 			return array::reverse(var_23ca4e6e[var_4ec884df]);
 		}
 		path_depth++;
-		var_5ef1a72c = var_23ca4e6e;
+		zone_paths = var_23ca4e6e;
 	}
 	return undefined;
 }

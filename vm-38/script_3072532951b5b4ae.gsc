@@ -1,26 +1,26 @@
-#using script_139ae0bb0a87141c;
-#using script_16a28d93ee216f6f;
-#using script_1883fa4e60abbf9f;
-#using script_3ad66e3076c279ab;
-#using script_3eb3df5aef50b41c;
-#using script_42310dfa1362069f;
-#using script_4f58b276cb938e94;
-#using script_5450c003e8a913b7;
-#using script_6809bf766eba194a;
-#using script_68d08b784c92da95;
-#using script_6f8610e78fdd3440;
-#using script_75ce7fc4212a82af;
-#using script_7b68dad851540de;
-#using script_7e3221b6c80d8cc4;
-#using script_7ec0431a754945b3;
 #using script_912160eeb6a2d51;
 #using script_fe983bbff18d77f;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
+#using script_4f58b276cb938e94;
+#using script_3eb3df5aef50b41c;
+#using script_7e3221b6c80d8cc4;
+#using script_5450c003e8a913b7;
+#using script_16a28d93ee216f6f;
+#using script_42310dfa1362069f;
+#using script_139ae0bb0a87141c;
+#using script_1883fa4e60abbf9f;
+#using script_3ad66e3076c279ab;
+#using script_6f8610e78fdd3440;
+#using scripts\core_common\ai\archetype_human_locomotion.gsc;
+#using scripts\core_common\ai\archetype_human.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_68d08b784c92da95;
+#using script_7b68dad851540de;
 #using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace namespace_77fd5d41;
 
@@ -1244,7 +1244,7 @@ function updatesightstate(sightstate)
 	{
 		switch(self.stealth.threat_sight_state)
 		{
-			case "hash_4b55a59a56c4bdb3":
+			case "combat_hunt":
 			{
 				var_839ed558 = sightstate != "hunt" && sightstate != "combat_hunt";
 				break;
@@ -2078,7 +2078,7 @@ function investigate_move_setaimtarget(instancedata, targetpos, eventtype)
 				t = 1000;
 				break;
 			}
-			case "hash_266bce382f322b51":
+			case "light_killed":
 			case "glass_destroyed":
 			{
 				t = 3000;
@@ -4441,19 +4441,19 @@ function setstealthstate(statename, e)
 						case "projectile_impact":
 						case "ally_damaged":
 						case "bulletwhizby":
-						case "hash_60484d1d72fd4ce9":
+						case "ally_killed":
 						case "gunshot":
 						{
 							magnitude = "medium";
 							break;
 						}
 						case "explode":
-						case "hash_70bb20cec150f744":
+						case "grenade danger":
 						{
 							magnitude = "large";
 							break;
 						}
-						case "hash_266bce382f322b51":
+						case "light_killed":
 						case "attack":
 						case "combat":
 						{

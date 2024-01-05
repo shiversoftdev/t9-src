@@ -14,7 +14,7 @@
 */
 function autoexec init()
 {
-	level.var_d43d228 = cp_killcam::function_5c1bb138();
+	level.var_d43d228 = cp_killcam::register_clientside();
 	registerclientfield("playercorpse", "hide_body", 1, 1, "int", &function_961f3093, 0);
 	registerclientfield("toplayer", "killcam_menu", 1, 1, "int", &function_8b7a2341, 0);
 }

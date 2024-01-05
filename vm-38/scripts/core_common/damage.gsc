@@ -1,5 +1,5 @@
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 
 #namespace damage;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_49361d34()
 {
-	level notify(1004455276);
+	level notify(-1004455276);
 }
 
 /*

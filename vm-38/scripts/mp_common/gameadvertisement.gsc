@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\dev.gsc;
 #using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\dev.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace gameadvertisement;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_70649208()
 {
-	level notify(943737818);
+	level notify(-943737818);
 }
 
 /*
@@ -43,7 +43,7 @@ function init()
 	{
 		level.var_a962eeb6 = &default_rules;
 	}
-	callback::function_98a0917d(&sessionadvertisementcheck);
+	callback::on_game_playing(&sessionadvertisementcheck);
 }
 
 /*

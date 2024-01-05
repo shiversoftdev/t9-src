@@ -1,9 +1,9 @@
-#using script_4ccd0c3512b52a10;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using script_4ccd0c3512b52a10;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace objectives;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_4c28b9ac()
 {
-	level notify(1099172488);
+	level notify(-1099172488);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: objectives
 	Checksum: 0x45032D4C
 	Offset: 0x120
@@ -30,7 +30,7 @@ function private autoexec function_4c28b9ac()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"objectives", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -599,7 +599,7 @@ function function_4279fd02()
 }
 
 /*
-	Name: function_affe8f61
+	Name: set_progress
 	Namespace: objectives
 	Checksum: 0x5F61F13E
 	Offset: 0x14F0
@@ -607,13 +607,13 @@ function function_4279fd02()
 	Parameters: 3
 	Flags: None
 */
-function function_affe8f61(str_objective, a_targets, n_progress)
+function set_progress(str_objective, a_targets, n_progress)
 {
 	a_n_objective_ids = get_id_array(str_objective, a_targets);
 	foreach(n_objective_id in a_n_objective_ids)
 	{
 		objective_setprogress(n_objective_id, n_progress);
-		namespace_96850e69::function_affe8f61(n_objective_id, n_progress);
+		namespace_96850e69::set_progress(n_objective_id, n_progress);
 	}
 }
 

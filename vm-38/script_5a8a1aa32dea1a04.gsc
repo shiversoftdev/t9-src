@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_ec90ce81 : class_6aaccc24
+class csr_weapon_upgrade_menu : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x7DB406EC
 		Offset: 0x1F0
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xFD685574
 		Offset: 0x328
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xB22913EC
 		Offset: 0x260
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_ec90ce81 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x40CEC21A
 		Offset: 0x2A8
 		Size: 0x24
@@ -61,26 +61,26 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_83d182e9
-		Namespace: namespace_ec90ce81
+		Name: set_cannotammomod
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x8A14E737
 		Offset: 0x2D8
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_83d182e9(player, value)
+	function set_cannotammomod(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "cannotAmmoMod", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x1E00A198
 		Offset: 0x210
 		Size: 0x44
@@ -89,8 +89,8 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_weapon_upgrade_menu");
-		namespace_6aaccc24::function_da693cbe("cannotAmmoMod", 16000, 1, "int");
+		cluielem::setup_clientfields("sr_weapon_upgrade_menu");
+		cluielem::add_clientfield("cannotAmmoMod", 16000, 1, "int");
 	}
 
 }
@@ -108,7 +108,7 @@ class class_ec90ce81 : class_6aaccc24
 */
 function private autoexec function_5f4e9270()
 {
-	level notify(53323069);
+	level notify(-53323069);
 }
 
 /*
@@ -122,7 +122,7 @@ function private autoexec function_5f4e9270()
 */
 function register()
 {
-	elem = new class_ec90ce81();
+	elem = new csr_weapon_upgrade_menu();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -174,7 +174,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_83d182e9
+	Name: set_cannotammomod
 	Namespace: sr_weapon_upgrade_menu
 	Checksum: 0xD0C609E6
 	Offset: 0x1C0
@@ -182,8 +182,8 @@ function is_open(player)
 	Parameters: 2
 	Flags: Linked
 */
-function function_83d182e9(player, value)
+function set_cannotammomod(player, value)
 {
-	[[ self ]]->function_83d182e9(player, value);
+	[[ self ]]->set_cannotammomod(player, value);
 }
 

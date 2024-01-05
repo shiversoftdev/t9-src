@@ -1,8 +1,8 @@
 #using script_31b23f5316d1b26d;
 #using script_66ccce162b34e288;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_95fdc800;
 

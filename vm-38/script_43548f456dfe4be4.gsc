@@ -1,4 +1,4 @@
-#using script_383a3b1bb18ba876;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
 
 #namespace killstreakrules;
 
@@ -13,7 +13,7 @@
 */
 function private autoexec function_d86f2ccc()
 {
-	level notify(604271126);
+	level notify(-604271126);
 }
 
 /*

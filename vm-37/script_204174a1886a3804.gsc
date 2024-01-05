@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_7c3faeda : class_6aaccc24
+class class_7c3faeda : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,7 +47,7 @@ class class_7c3faeda : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -61,7 +61,7 @@ class class_7c3faeda : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -75,9 +75,9 @@ class class_7c3faeda : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("Incursion_InfiltrationTitleCards");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 4, "int");
-		namespace_6aaccc24::function_da693cbe("SelectedInfiltration", 1, 3, "int");
+		cluielem::setup_clientfields("Incursion_InfiltrationTitleCards");
+		cluielem::add_clientfield("_state", 1, 4, "int");
+		cluielem::add_clientfield("SelectedInfiltration", 1, 3, "int");
 	}
 
 	/*
@@ -197,7 +197,7 @@ class class_7c3faeda : class_6aaccc24
 	}
 
 	/*
-		Name: function_ee0c7ef6
+		Name: set_selectedinfiltration
 		Namespace: namespace_7c3faeda
 		Checksum: 0x3D5FAB1D
 		Offset: 0x768
@@ -205,7 +205,7 @@ class class_7c3faeda : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_ee0c7ef6(player, value)
+	function set_selectedinfiltration(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "SelectedInfiltration", value);
 	}
@@ -291,7 +291,7 @@ function set_state(player, state_name)
 }
 
 /*
-	Name: function_ee0c7ef6
+	Name: set_selectedinfiltration
 	Namespace: incursion_infiltrationtitlecards
 	Checksum: 0xA5CF0AAB
 	Offset: 0x1F0
@@ -299,8 +299,8 @@ function set_state(player, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_ee0c7ef6(player, value)
+function set_selectedinfiltration(player, value)
 {
-	[[ self ]]->function_ee0c7ef6(player, value);
+	[[ self ]]->set_selectedinfiltration(player, value);
 }
 

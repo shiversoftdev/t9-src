@@ -1,16 +1,16 @@
-#using script_1611421ee9b880d3;
-#using script_27ba6748d83412fd;
-#using script_2c5f2d4e7aa698c4;
 #using script_64ba9fcabd6381a1;
-#using script_76b36ed1b7a51ed2;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\load_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm.csc;
-#using scripts\zm_common\zm_pack_a_punch.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using script_2c5f2d4e7aa698c4;
+#using scripts\zm_common\zm_fasttravel.csc;
 #using scripts\zm_common\zm_weapons.csc;
+#using scripts\zm_common\zm_wallbuy.csc;
+#using scripts\zm_common\zm_utility.csc;
+#using scripts\zm_common\zm_ui_inventory.csc;
+#using scripts\zm_common\zm_pack_a_punch.csc;
+#using scripts\zm_common\zm.csc;
+#using scripts\core_common\load_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_c4d353e7;
 
@@ -25,7 +25,7 @@
 */
 function private autoexec function_c97f46ee()
 {
-	level notify(1447466954);
+	level notify(-1447466954);
 }
 
 /*
@@ -39,12 +39,12 @@ function private autoexec function_c97f46ee()
 */
 function init()
 {
-	clientfield::register("world", "" + #"hash_4976dec6e1aa8221", 1, getminbitcountfornum(2), "int", &function_165a271d, 0, 0);
+	clientfield::register("world", "" + #"hide_scene_models", 1, getminbitcountfornum(2), "int", &hide_scene_models, 0, 0);
 	clientfield::register("world", "" + #"hash_763dd8035e80f7c", 1, 1, "int", &function_44dc8dc9, 0, 0);
 }
 
 /*
-	Name: function_165a271d
+	Name: hide_scene_models
 	Namespace: namespace_c4d353e7
 	Checksum: 0x515F7C71
 	Offset: 0x200
@@ -52,7 +52,7 @@ function init()
 	Parameters: 7
 	Flags: Linked
 */
-function function_165a271d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
+function hide_scene_models(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
 	var_94a3aa7c = findstaticmodelindexarray("hide_scene_models");
 	var_fc98dc98 = findstaticmodelindexarray("hide_mid_scene_models");

@@ -1,6 +1,6 @@
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\cp_common\spawn_manager.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace spawn_manager_debug;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_62343780()
 {
-	level notify(515682256);
+	level notify(-515682256);
 }
 
 #namespace spawn_manager;

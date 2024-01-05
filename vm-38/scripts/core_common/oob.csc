@@ -1,7 +1,7 @@
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 
 #namespace oob;
 
@@ -20,7 +20,7 @@ function private autoexec function_1f552ecc()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: oob
 	Checksum: 0xA4F42711
 	Offset: 0xF8
@@ -28,7 +28,7 @@ function private autoexec function_1f552ecc()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"out_of_bounds", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -52,7 +52,7 @@ function private function_70a657d8()
 	}
 	else
 	{
-		if(function_f99d2668())
+		if(sessionmodeiswarzonegame())
 		{
 			level.var_dcb68d74 = 1;
 			level.oob_timelimit_ms = getdvarint(#"oob_timelimit_ms", 10000);
@@ -145,20 +145,20 @@ function on_localplayer_shutdown(localclientnum)
 	Parameters: 1
 	Flags: Linked
 */
-function function_a880899e(var_aa127355)
+function function_a880899e(eventparams)
 {
-	localplayer = function_5c10bd79(var_aa127355.localclientnum);
+	localplayer = function_5c10bd79(eventparams.localclientnum);
 	if(!isdefined(localplayer.oob_effect_enabled))
 	{
 		return;
 	}
-	if(var_aa127355.enabled)
+	if(eventparams.enabled)
 	{
-		function_d36db451(var_aa127355.localclientnum);
+		function_d36db451(eventparams.localclientnum);
 	}
 	else
 	{
-		function_52b5ffe3(var_aa127355.localclientnum);
+		function_52b5ffe3(eventparams.localclientnum);
 	}
 }
 
@@ -175,11 +175,11 @@ function function_95c61f07(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwastimejump > 0)
 	{
-		self.var_f043b10a = 1;
+		self.nonplayeroobusage = 1;
 	}
 	else
 	{
-		self.var_f043b10a = undefined;
+		self.nonplayeroobusage = undefined;
 	}
 }
 
@@ -233,7 +233,7 @@ function onoutofboundschange(localclientnum, oldval, newval, bnewent, binitialsn
 			}
 			self.oob_active_duration = self.oob_active_duration + (self.oob_end_time - self.oob_start_time);
 		}
-		if(is_true(self.var_f043b10a))
+		if(is_true(self.nonplayeroobusage))
 		{
 			self.oob_active_duration = undefined;
 		}
@@ -260,7 +260,7 @@ function function_52b5ffe3(localclientnum)
 	{
 		return;
 	}
-	if(util::function_5df4294() === #"zstandard")
+	if(util::get_game_type() === #"zstandard")
 	{
 		level.var_5b8ec4d[localclientnum] = function_604c9983(localclientnum, #"hash_6da7ae12f538ef5e", 0.5);
 	}

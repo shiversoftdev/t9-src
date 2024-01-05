@@ -1,12 +1,12 @@
+#using scripts\zm_common\gametypes\globallogic_utils.gsc;
+#using scripts\zm_common\gametypes\globallogic_player.gsc;
+#using scripts\zm_common\bb.gsc;
+#using scripts\core_common\globallogic\globallogic_player.gsc;
 #using script_35598499769dbb3d;
 #using script_41fe08c37d53a635;
-#using script_70a43d6ba27cff6a;
-#using scripts\core_common\challenges_shared.gsc;
 #using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\zm_common\bb.gsc;
-#using scripts\zm_common\gametypes\globallogic_player.gsc;
-#using scripts\zm_common\gametypes\globallogic_utils.gsc;
 
 #namespace globallogic_actor;
 
@@ -21,7 +21,7 @@
 */
 function private autoexec function_12731c35()
 {
-	level notify(1479552922);
+	level notify(-1479552922);
 }
 
 /*

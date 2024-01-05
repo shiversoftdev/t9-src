@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_a0be59de : class_6aaccc24
+class class_a0be59de : cluielem
 {
 
 	/*
@@ -30,7 +30,7 @@ class class_a0be59de : class_6aaccc24
 	}
 
 	/*
-		Name: function_ad9c4f0
+		Name: set_binlocation
 		Namespace: namespace_a0be59de
 		Checksum: 0x224122F1
 		Offset: 0xAF8
@@ -38,9 +38,9 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_ad9c4f0(localclientnum, value)
+	function set_binlocation(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "bInLocation", value);
+		[[ self ]]->set_data(localclientnum, "bInLocation", value);
 	}
 
 	/*
@@ -54,7 +54,7 @@ class class_a0be59de : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
@@ -68,11 +68,11 @@ class class_a0be59de : class_6aaccc24
 	*/
 	function function_1097decc(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "showChallenge", value);
+		[[ self ]]->set_data(localclientnum, "showChallenge", value);
 	}
 
 	/*
-		Name: function_1c836e71
+		Name: set_challengetext
 		Namespace: namespace_a0be59de
 		Checksum: 0xEE0AAD98
 		Offset: 0xA88
@@ -80,13 +80,13 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_1c836e71(localclientnum, value)
+	function set_challengetext(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "challengeText", value);
+		[[ self ]]->set_data(localclientnum, "challengeText", value);
 	}
 
 	/*
-		Name: function_2dde4d6c
+		Name: set_bottomtext
 		Namespace: namespace_a0be59de
 		Checksum: 0x4480CD71
 		Offset: 0xAC0
@@ -94,13 +94,13 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_2dde4d6c(localclientnum, value)
+	function set_bottomtext(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "bottomText", value);
+		[[ self ]]->set_data(localclientnum, "bottomText", value);
 	}
 
 	/*
-		Name: function_3fdd9da7
+		Name: set_rewardhidden
 		Namespace: namespace_a0be59de
 		Checksum: 0xC55702D6
 		Offset: 0xBE0
@@ -108,13 +108,13 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_3fdd9da7(localclientnum, value)
+	function set_rewardhidden(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "rewardHidden", value);
+		[[ self ]]->set_data(localclientnum, "rewardHidden", value);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_a0be59de
 		Checksum: 0x7F1B2EF
 		Offset: 0x8A8
@@ -122,9 +122,9 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_dac_challenges_hud");
+		cluielem::register_clientside("zm_dac_challenges_hud");
 	}
 
 	/*
@@ -138,22 +138,22 @@ class class_a0be59de : class_6aaccc24
 	*/
 	function setup_clientfields(var_be2ad4d, var_a7896263, var_4866daed, var_afaddf7a, var_5d7491df, var_26df3d64, var_90359ec7, var_2404f6c6, var_74cf4193, var_e89bb89d, var_2c511278)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_dac_challenges_hud");
-		namespace_6aaccc24::function_dcb34c80("string", "challengeText", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "bottomText", 1);
-		namespace_6aaccc24::function_da693cbe("bInLocation", 1, 1, "int", var_afaddf7a);
-		namespace_6aaccc24::function_da693cbe("progress", 1, 1, "counter", var_5d7491df);
-		namespace_6aaccc24::function_da693cbe("tributeAvailable", 1, 3, "int", var_26df3d64);
-		namespace_6aaccc24::function_da693cbe("rewardHidden", 1, 1, "int", var_90359ec7);
-		namespace_6aaccc24::function_da693cbe("challengeFailing", 1, 1, "int", var_2404f6c6);
-		namespace_6aaccc24::function_dcb34c80("string", "rewardText", 1);
-		namespace_6aaccc24::function_da693cbe("challengeTypeText", 1, 1, "int", var_74cf4193);
-		namespace_6aaccc24::function_da693cbe("showIntelRewardText", 1, 1, "int", var_e89bb89d);
-		namespace_6aaccc24::function_da693cbe("showChallenge", 8000, 1, "int", var_2c511278);
+		cluielem::setup_clientfields("zm_dac_challenges_hud");
+		cluielem::function_dcb34c80("string", "challengeText", 1);
+		cluielem::function_dcb34c80("string", "bottomText", 1);
+		cluielem::add_clientfield("bInLocation", 1, 1, "int", var_afaddf7a);
+		cluielem::add_clientfield("progress", 1, 1, "counter", var_5d7491df);
+		cluielem::add_clientfield("tributeAvailable", 1, 3, "int", var_26df3d64);
+		cluielem::add_clientfield("rewardHidden", 1, 1, "int", var_90359ec7);
+		cluielem::add_clientfield("challengeFailing", 1, 1, "int", var_2404f6c6);
+		cluielem::function_dcb34c80("string", "rewardText", 1);
+		cluielem::add_clientfield("challengeTypeText", 1, 1, "int", var_74cf4193);
+		cluielem::add_clientfield("showIntelRewardText", 1, 1, "int", var_e89bb89d);
+		cluielem::add_clientfield("showChallenge", 8000, 1, "int", var_2c511278);
 	}
 
 	/*
-		Name: function_96972b9c
+		Name: increment_progress
 		Namespace: namespace_a0be59de
 		Checksum: 0x6E342B61
 		Offset: 0xB30
@@ -161,15 +161,15 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 1
 		Flags: Linked
 	*/
-	function function_96972b9c(localclientnum)
+	function increment_progress(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "progress");
+		current_val = [[ self ]]->get_data(localclientnum, "progress");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "progress", new_val);
+		[[ self ]]->set_data(localclientnum, "progress", new_val);
 	}
 
 	/*
-		Name: function_ac67ad85
+		Name: set_tributeavailable
 		Namespace: namespace_a0be59de
 		Checksum: 0xF5B9AD06
 		Offset: 0xBA8
@@ -177,9 +177,9 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_ac67ad85(localclientnum, value)
+	function set_tributeavailable(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "tributeAvailable", value);
+		[[ self ]]->set_data(localclientnum, "tributeAvailable", value);
 	}
 
 	/*
@@ -193,7 +193,7 @@ class class_a0be59de : class_6aaccc24
 	*/
 	function function_c079b98b(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "challengeTypeText", value);
+		[[ self ]]->set_data(localclientnum, "challengeTypeText", value);
 	}
 
 	/*
@@ -207,11 +207,11 @@ class class_a0be59de : class_6aaccc24
 	*/
 	function function_c21d733d(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "showIntelRewardText", value);
+		[[ self ]]->set_data(localclientnum, "showIntelRewardText", value);
 	}
 
 	/*
-		Name: function_c6703876
+		Name: set_challengefailing
 		Namespace: namespace_a0be59de
 		Checksum: 0x480B95ED
 		Offset: 0xC18
@@ -219,9 +219,9 @@ class class_a0be59de : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_c6703876(localclientnum, value)
+	function set_challengefailing(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "challengeFailing", value);
+		[[ self ]]->set_data(localclientnum, "challengeFailing", value);
 	}
 
 	/*
@@ -235,7 +235,7 @@ class class_a0be59de : class_6aaccc24
 	*/
 	function function_f63ec96b(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "rewardText", value);
+		[[ self ]]->set_data(localclientnum, "rewardText", value);
 	}
 
 	/*
@@ -249,18 +249,18 @@ class class_a0be59de : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "challengeText", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "bottomText", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "bInLocation", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "progress", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "tributeAvailable", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "rewardHidden", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "challengeFailing", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "rewardText", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "challengeTypeText", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "showIntelRewardText", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "showChallenge", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "challengeText", #"");
+		[[ self ]]->set_data(localclientnum, "bottomText", #"");
+		[[ self ]]->set_data(localclientnum, "bInLocation", 0);
+		[[ self ]]->set_data(localclientnum, "progress", 0);
+		[[ self ]]->set_data(localclientnum, "tributeAvailable", 0);
+		[[ self ]]->set_data(localclientnum, "rewardHidden", 0);
+		[[ self ]]->set_data(localclientnum, "challengeFailing", 0);
+		[[ self ]]->set_data(localclientnum, "rewardText", #"");
+		[[ self ]]->set_data(localclientnum, "challengeTypeText", 0);
+		[[ self ]]->set_data(localclientnum, "showIntelRewardText", 0);
+		[[ self ]]->set_data(localclientnum, "showChallenge", 0);
 	}
 
 }
@@ -278,7 +278,7 @@ class class_a0be59de : class_6aaccc24
 */
 function private autoexec function_34cfc716()
 {
-	level notify(1161059368);
+	level notify(-1161059368);
 }
 
 /*
@@ -314,7 +314,7 @@ function register(var_be2ad4d, var_a7896263, var_4866daed, var_afaddf7a, var_5d7
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0x51B30347
 	Offset: 0x390
@@ -322,10 +322,10 @@ function register(var_be2ad4d, var_a7896263, var_4866daed, var_afaddf7a, var_5d7
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_a0be59de();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -372,7 +372,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_1c836e71
+	Name: set_challengetext
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0x759A3E22
 	Offset: 0x448
@@ -380,13 +380,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_1c836e71(localclientnum, value)
+function set_challengetext(localclientnum, value)
 {
-	[[ self ]]->function_1c836e71(localclientnum, value);
+	[[ self ]]->set_challengetext(localclientnum, value);
 }
 
 /*
-	Name: function_2dde4d6c
+	Name: set_bottomtext
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0xAA074C66
 	Offset: 0x478
@@ -394,13 +394,13 @@ function function_1c836e71(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_2dde4d6c(localclientnum, value)
+function set_bottomtext(localclientnum, value)
 {
-	[[ self ]]->function_2dde4d6c(localclientnum, value);
+	[[ self ]]->set_bottomtext(localclientnum, value);
 }
 
 /*
-	Name: function_ad9c4f0
+	Name: set_binlocation
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0x7599EBB7
 	Offset: 0x4A8
@@ -408,13 +408,13 @@ function function_2dde4d6c(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_ad9c4f0(localclientnum, value)
+function set_binlocation(localclientnum, value)
 {
-	[[ self ]]->function_ad9c4f0(localclientnum, value);
+	[[ self ]]->set_binlocation(localclientnum, value);
 }
 
 /*
-	Name: function_96972b9c
+	Name: increment_progress
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0xBACAFB27
 	Offset: 0x4D8
@@ -422,13 +422,13 @@ function function_ad9c4f0(localclientnum, value)
 	Parameters: 1
 	Flags: None
 */
-function function_96972b9c(localclientnum)
+function increment_progress(localclientnum)
 {
-	[[ self ]]->function_96972b9c(localclientnum);
+	[[ self ]]->increment_progress(localclientnum);
 }
 
 /*
-	Name: function_ac67ad85
+	Name: set_tributeavailable
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0x54782583
 	Offset: 0x500
@@ -436,13 +436,13 @@ function function_96972b9c(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_ac67ad85(localclientnum, value)
+function set_tributeavailable(localclientnum, value)
 {
-	[[ self ]]->function_ac67ad85(localclientnum, value);
+	[[ self ]]->set_tributeavailable(localclientnum, value);
 }
 
 /*
-	Name: function_3fdd9da7
+	Name: set_rewardhidden
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0x875C39A9
 	Offset: 0x530
@@ -450,13 +450,13 @@ function function_ac67ad85(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_3fdd9da7(localclientnum, value)
+function set_rewardhidden(localclientnum, value)
 {
-	[[ self ]]->function_3fdd9da7(localclientnum, value);
+	[[ self ]]->set_rewardhidden(localclientnum, value);
 }
 
 /*
-	Name: function_c6703876
+	Name: set_challengefailing
 	Namespace: zm_dac_challenges_hud
 	Checksum: 0x9670181B
 	Offset: 0x560
@@ -464,9 +464,9 @@ function function_3fdd9da7(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c6703876(localclientnum, value)
+function set_challengefailing(localclientnum, value)
 {
-	[[ self ]]->function_c6703876(localclientnum, value);
+	[[ self ]]->set_challengefailing(localclientnum, value);
 }
 
 /*

@@ -1,17 +1,17 @@
-#using script_3cebb48c37fc271;
-#using script_5bb072c3abf4652c;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm\zm_silver_pap_quest.gsc;
-#using scripts\zm_common\callbacks.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_fasttravel.gsc;
 #using scripts\zm_common\gametypes\globallogic.gsc;
 #using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\callbacks.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_9d3ef6c5;
 
@@ -26,11 +26,11 @@
 */
 function private autoexec function_2efc7db5()
 {
-	level notify(1684961131);
+	level notify(-1684961131);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9d3ef6c5
 	Checksum: 0x9DB6497F
 	Offset: 0x248
@@ -38,7 +38,7 @@ function private autoexec function_2efc7db5()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3c412421c33b7764", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -561,7 +561,7 @@ function function_b5f4f0c()
 	while(true)
 	{
 		s_notify = undefined;
-		s_notify = level waittill(#"hash_e66663be8ba322f");
+		s_notify = level waittill(#"fasttravel_bought");
 		s_notify.player zm_vo::function_604084ea();
 		if(!isdefined(level.var_a43447e4))
 		{
@@ -591,7 +591,7 @@ function function_b5f4f0c()
 function function_8b483cee()
 {
 	self endon(#"disconnect");
-	self waittill(#"hash_66790eb1100e11a2");
+	self waittill(#"fasttravel_finished");
 	while(is_true(level.var_f6ea0657))
 	{
 		waitframe(1);

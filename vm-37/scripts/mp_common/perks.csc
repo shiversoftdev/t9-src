@@ -1,12 +1,12 @@
 #using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace perks;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: perks
 	Checksum: 0xA770199A
 	Offset: 0x200
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"perks", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -53,7 +53,7 @@ function private function_70a657d8()
 	level.sitrepscan2_setradius = getdvarint(#"scr_sitrepscan2_setradius", 50000);
 	level.sitrepscan2_setfalloff = getdvarfloat(#"scr_sitrepscan2_setfalloff", 0.01);
 	level.sitrepscan2_setdesat = getdvarfloat(#"scr_sitrepscan2_setdesat", 0.4);
-	callback::function_d46d9315(&function_d46d9315);
+	callback::on_gameplay_started(&on_gameplay_started);
 	level.var_6fc25f5c = getscriptbundle(#"awareness");
 	level.var_842a5e1f = getscriptbundle(#"hash_7223a3f0f10bc07c");
 	/#
@@ -159,7 +159,7 @@ function on_localplayer_spawned(local_client_num)
 }
 
 /*
-	Name: function_d46d9315
+	Name: on_gameplay_started
 	Namespace: perks
 	Checksum: 0x8F4FC44D
 	Offset: 0xA90
@@ -167,7 +167,7 @@ function on_localplayer_spawned(local_client_num)
 	Parameters: 1
 	Flags: Linked
 */
-function function_d46d9315(local_client_num)
+function on_gameplay_started(local_client_num)
 {
 	if(sessionmodeismultiplayergame() && !isdefined(level.var_783d3911))
 	{
@@ -735,13 +735,13 @@ function function_365c39ef(var_c91d7aa9, bundle)
 	Parameters: 4
 	Flags: Linked
 */
-function function_255fe01d(var_bf36ab55, var_56a8d7eb, playerforward, var_a82b48d6)
+function function_255fe01d(var_bf36ab55, var_56a8d7eb, playerforward, playerright)
 {
 	vector = var_bf36ab55 - var_56a8d7eb;
 	vectorflat = vectornormalize((vector[0], vector[1], 0));
 	var_451ea257 = vectordot(vectorflat, playerforward);
 	var_2f93b65 = var_451ea257 > 0;
-	var_8add8d51 = vectordot(vectorflat, var_a82b48d6);
+	var_8add8d51 = vectordot(vectorflat, playerright);
 	var_b1d7b2f5 = var_8add8d51 > 0;
 	if(var_2f93b65)
 	{

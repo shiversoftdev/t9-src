@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\wz_common\util.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace hud;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_d5e80cb0()
 {
-	level notify(892291822);
+	level notify(-892291822);
 }
 
 /*
@@ -30,27 +30,27 @@ function private autoexec function_d5e80cb0()
 function function_9b9cecdf()
 {
 	clientfield::function_5b7d846d("hudItems.warzone.reinsertionPassengerCount", 1, 7, "int");
-	clientfield::function_a8bbc967("hudItems.alivePlayerCount", 1, 7, "int", 0);
-	clientfield::function_a8bbc967("hudItems.alivePlayerCountEnemy", 1, 7, "int", 0);
-	clientfield::function_a8bbc967("hudItems.aliveTeammateCount", 1, 7, "int", 1);
-	clientfield::function_a8bbc967("hudItems.spectatorsCount", 1, 7, "int", 1);
-	clientfield::function_a8bbc967("hudItems.playerKills", 1, 7, "int", 0);
-	clientfield::function_a8bbc967("hudItems.playerCleanUps", 1, 7, "int", 0);
-	clientfield::function_a8bbc967("presence.modeparam", 1, 7, "int", 1);
-	clientfield::function_a8bbc967("hudItems.hasBackpack", 1, 1, "int", 0);
-	clientfield::function_a8bbc967("hudItems.armorType", 1, 2, "int", 0);
-	clientfield::function_a8bbc967("hudItems.streamerLoadFraction", 1, 5, "float", 1);
-	clientfield::function_a8bbc967("hudItems.wzLoadFinished", 1, 1, "int", 1);
-	clientfield::function_a8bbc967("hudItems.showReinsertionPassengerCount", 1, 1, "int", 0);
-	clientfield::function_a8bbc967("hudItems.playerLivesRemaining", 7000, 4, "int");
-	clientfield::function_a8bbc967("hudItems.playerCanRedeploy", 7000, 1, "int");
+	clientfield::register_clientuimodel("hudItems.alivePlayerCount", 1, 7, "int", 0);
+	clientfield::register_clientuimodel("hudItems.alivePlayerCountEnemy", 1, 7, "int", 0);
+	clientfield::register_clientuimodel("hudItems.aliveTeammateCount", 1, 7, "int", 1);
+	clientfield::register_clientuimodel("hudItems.spectatorsCount", 1, 7, "int", 1);
+	clientfield::register_clientuimodel("hudItems.playerKills", 1, 7, "int", 0);
+	clientfield::register_clientuimodel("hudItems.playerCleanUps", 1, 7, "int", 0);
+	clientfield::register_clientuimodel("presence.modeparam", 1, 7, "int", 1);
+	clientfield::register_clientuimodel("hudItems.hasBackpack", 1, 1, "int", 0);
+	clientfield::register_clientuimodel("hudItems.armorType", 1, 2, "int", 0);
+	clientfield::register_clientuimodel("hudItems.streamerLoadFraction", 1, 5, "float", 1);
+	clientfield::register_clientuimodel("hudItems.wzLoadFinished", 1, 1, "int", 1);
+	clientfield::register_clientuimodel("hudItems.showReinsertionPassengerCount", 1, 1, "int", 0);
+	clientfield::register_clientuimodel("hudItems.playerLivesRemaining", 7000, 4, "int");
+	clientfield::register_clientuimodel("hudItems.playerCanRedeploy", 7000, 1, "int");
 	clientfield::register("toplayer", "realtime_multiplay", 1, 1, "int");
 	clientfield::function_5b7d846d("hudItems.warzone.collapse", 7000, 21, "int");
 	clientfield::function_5b7d846d("hudItems.warzone.waveRespawnTimer", 7000, 21, "int");
 	clientfield::function_5b7d846d("hudItems.warzone.collapseIndex", 1, 3, "int");
 	clientfield::function_5b7d846d("hudItems.warzone.collapseCount", 1, 3, "int");
 	clientfield::function_5b7d846d("hudItems.warzone.reinsertionIndex", 1, 3, "int");
-	clientfield::function_a8bbc967("hudItems.skydiveAltimeterVisible", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.skydiveAltimeterVisible", 1, 1, "int");
 	clientfield::function_5b7d846d("hudItems.skydiveAltimeterHeight", 1, 16, "int");
 	clientfield::function_5b7d846d("hudItems.skydiveAltimeterSeaHeight", 1, 16, "int");
 }
@@ -159,8 +159,8 @@ function function_e91890a7()
 		player clientfield::set_player_uimodel("presence.modeparam", var_dcf52474);
 		player clientfield::set_player_uimodel("hudItems.alivePlayerCount", var_dcf52474);
 		var_31cc0ff8 = 0;
-		var_7102d43a = getplayers(player.team);
-		foreach(member in var_7102d43a)
+		teammembers = getplayers(player.team);
+		foreach(member in teammembers)
 		{
 			if(isalive(member) && member != player)
 			{

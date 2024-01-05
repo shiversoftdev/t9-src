@@ -1,63 +1,63 @@
-#using script_14f4a3c583c77d4b;
-#using script_178024232e91b0a1;
-#using script_1940fc077a028a81;
-#using script_1b10fdf0addd52e;
-#using script_1e72c148eb0b32d2;
-#using script_2c5daa95f8fec03c;
-#using script_317aa6153a75c589;
-#using script_3411bb48d41bd3b;
-#using script_35598499769dbb3d;
-#using script_36f4be19da8eb6d0;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
 #using script_3d3c03b88e16a244;
-#using script_3f9e0dc8454d98e1;
-#using script_41fe08c37d53a635;
-#using script_489b835a247c990e;
-#using script_4bf952f6ba31bb17;
-#using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_57f7003580bb15e0;
-#using script_58c342edd81589fb;
-#using script_59f07c660e6710a5;
-#using script_5bb072c3abf4652c;
-#using script_6809bf766eba194a;
-#using script_71dfbfdfba4489a0;
-#using script_7b7ed6e4bc963a51;
-#using script_7e59d7bba853fe4b;
-#using script_bd2b8aaa388dcce;
-#using script_caf007e2a98afa2;
-#using script_db06eb511bd9b36;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
+#using scripts\zm\powerup\zm_powerup_nuke.gsc;
+#using script_36f4be19da8eb6d0;
+#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_vo.gsc;
 #using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_behavior.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_pack_a_punch.gsc;
-#using scripts\zm_common\zm_pack_a_punch_util.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
-#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_round_spawning.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\zm_transformation.gsc;
 #using scripts\zm_common\zm_spawner.gsc;
 #using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_unitrigger.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
+#using scripts\zm_common\zm_pack_a_punch_util.gsc;
+#using scripts\zm_common\zm_pack_a_punch.gsc;
+#using scripts\zm_common\zm_loadout.gsc;
+#using scripts\zm_common\zm_devgui.gsc;
+#using scripts\zm_common\zm_cleanup_mgr.gsc;
+#using scripts\zm_common\zm_behavior.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using script_1940fc077a028a81;
+#using script_3411bb48d41bd3b;
+#using scripts\core_common\struct.gsc;
+#using script_2c5daa95f8fec03c;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\ai\zombie.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_41fe08c37d53a635;
+#using script_59f07c660e6710a5;
+#using scripts\core_common\ai\archetype_mocomps_utility.gsc;
+#using script_35598499769dbb3d;
+#using script_71dfbfdfba4489a0;
+#using script_7b7ed6e4bc963a51;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using script_489b835a247c990e;
+#using script_3819e7a1427df6d2;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_178024232e91b0a1;
+#using script_4bf952f6ba31bb17;
+#using script_caf007e2a98afa2;
+#using script_4d85e8de54b02198;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace namespace_88795f45;
 
@@ -76,7 +76,7 @@ function private autoexec function_e1a65ec8()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_88795f45
 	Checksum: 0xCF8CA5D
 	Offset: 0x6F8
@@ -84,7 +84,7 @@ function private autoexec function_e1a65ec8()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_338a74f5c94ba66a", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -119,8 +119,8 @@ function private function_70a657d8()
 	callback::on_player_damage(&function_bc9fe637);
 	zm_utility::function_d0f02e71(#"hash_7c0d83ac1e845ac2");
 	zm_cleanup::function_cdf5a512(#"hash_7c0d83ac1e845ac2", &function_99c14949);
-	namespace_c3287616::register_archetype(#"hash_7c0d83ac1e845ac2", &function_f4788553, &round_spawn, undefined, 100);
-	namespace_c3287616::function_306ce518(#"hash_7c0d83ac1e845ac2", &function_3ced6468);
+	zm_round_spawning::register_archetype(#"hash_7c0d83ac1e845ac2", &function_f4788553, &round_spawn, undefined, 100);
+	zm_round_spawning::function_306ce518(#"hash_7c0d83ac1e845ac2", &function_3ced6468);
 	zm::function_84d343d(#"hash_2b47921791da6f0", &function_7709f2df);
 	zm::function_84d343d(#"hash_67307aa00ad6f686", &function_7ff0ce68);
 }
@@ -923,27 +923,27 @@ function function_99c14949()
 		}
 		util::wait_network_frame();
 	}
-	var_a1ef7f29 = [];
+	s_spawn_locs = [];
 	if(isdefined(level.var_2a8acd42))
 	{
 		spawn_locs = [[level.var_2a8acd42]](1);
 		if(isarray(spawn_locs))
 		{
-			var_a1ef7f29 = spawn_locs;
+			s_spawn_locs = spawn_locs;
 		}
 		else
 		{
-			array::add(var_a1ef7f29, spawn_locs);
+			array::add(s_spawn_locs, spawn_locs);
 		}
 	}
 	else if(level.zm_loc_types[#"steiner_location"].size > 0)
 	{
-		var_a1ef7f29 = level.zm_loc_types[#"steiner_location"];
+		s_spawn_locs = level.zm_loc_types[#"steiner_location"];
 	}
 	var_69681a59 = [];
-	if(isdefined(level.active_zone_names) && isarray(var_a1ef7f29) && var_a1ef7f29.size > 0)
+	if(isdefined(level.active_zone_names) && isarray(s_spawn_locs) && s_spawn_locs.size > 0)
 	{
-		foreach(spawn_loc in var_a1ef7f29)
+		foreach(spawn_loc in s_spawn_locs)
 		{
 			if(isdefined(spawn_loc.zone_name) && array::contains(level.active_zone_names, spawn_loc.zone_name))
 			{
@@ -986,7 +986,7 @@ function function_99c14949()
 		function_ee21651d((("" + self.origin) + "") + var_b2aa54a9.origin);
 	#/
 	self function_bf898e7e(0);
-	self namespace_e0710ee6::function_a8dc3363(var_b2aa54a9);
+	self zm_ai_utility::function_a8dc3363(var_b2aa54a9);
 	self clientfield::increment("steiner_cleanup_teleport_clientfield");
 	self function_bf898e7e(1);
 	return true;
@@ -1099,7 +1099,7 @@ function function_3ced6468(n_round_number)
 	while(true)
 	{
 		level waittill(#"hash_5d3012139f083ccb");
-		if(namespace_c3287616::function_d0db51fc(#"hash_7c0d83ac1e845ac2"))
+		if(zm_round_spawning::function_d0db51fc(#"hash_7c0d83ac1e845ac2"))
 		{
 			level.var_b15745d6++;
 			n_player_count = zm_utility::function_a2541519(getplayers().size);
@@ -1452,7 +1452,7 @@ function private function_5ac86e25()
 	var_1e2b1cca = var_ef4f2892 * var_ef4f2892;
 	head_origin = self gettagorigin("j_head");
 	var_8b1f38b5 = head_origin[2] - self.origin[2];
-	params = function_4d1e7b48("dot_steiner_radiation_aura");
+	params = getstatuseffect("dot_steiner_radiation_aura");
 	while(isdefined(self) && isalive(self))
 	{
 		if(!is_true(self.var_216935f8))
@@ -2286,8 +2286,8 @@ function private function_bf8080c1(entity)
 			while(i <= time)
 			{
 				height = (launch_pos[2] + (var_813d38fa * i)) - (0.5 * getdvarfloat(#"bg_lowgravity", 400)) * sqr(i);
-				var_37f8a843 = (launch_pos[0] + (velocity[0] * i), launch_pos[1] + (velocity[1] * i), height);
-				recordsphere(var_37f8a843, 8, (0, 1, 0));
+				debug_pos = (launch_pos[0] + (velocity[0] * i), launch_pos[1] + (velocity[1] * i), height);
+				recordsphere(debug_pos, 8, (0, 1, 0));
 				i = i + 0.1;
 			}
 		}
@@ -2337,28 +2337,28 @@ function private function_a56050b0()
 	self setmodel("tag_origin");
 	waitframe(1);
 	self clientfield::set("radiation_bomb_trail_fx_clientfield", 1);
-	var_be17187b = undefined;
-	var_be17187b = self waittill(#"death", #"projectile_impact_explode", #"explode", #"hash_38b24dfa52842786");
-	if(var_be17187b._notify == "death")
+	s_waitresult = undefined;
+	s_waitresult = self waittill(#"death", #"projectile_impact_explode", #"explode", #"hash_38b24dfa52842786");
+	if(s_waitresult._notify == "death")
 	{
 		self deletedelay();
-		var_be17187b = undefined;
-		var_be17187b = self waittilltimeout(float(function_60d95f53()) / 1000, #"projectile_impact_explode", #"explode", #"hash_38b24dfa52842786");
-		if(var_be17187b._notify == "timeout")
+		s_waitresult = undefined;
+		s_waitresult = self waittilltimeout(float(function_60d95f53()) / 1000, #"projectile_impact_explode", #"explode", #"hash_38b24dfa52842786");
+		if(s_waitresult._notify == "timeout")
 		{
 			return;
 		}
 	}
-	if(isalive(owner) && var_be17187b._notify == "projectile_impact_explode")
+	if(isalive(owner) && s_waitresult._notify == "projectile_impact_explode")
 	{
 		/#
-			function_ee21651d((("" + self.origin) + "") + var_be17187b.position);
+			function_ee21651d((("" + self.origin) + "") + s_waitresult.position);
 			if(getdvarint(#"hash_65abc910bc611782", 0))
 			{
 				recordsphere(self.origin, 16, (0, 1, 0));
 			}
 		#/
-		var_b308e59c = util::spawn_model("tag_origin", var_be17187b.position, var_be17187b.normal);
+		var_b308e59c = util::spawn_model("tag_origin", s_waitresult.position, s_waitresult.normal);
 		var_b308e59c clientfield::set("radiation_bomb_play_landed_fx", 1);
 		var_b308e59c.owner = owner;
 		owner function_4d70c1d3(var_b308e59c);
@@ -2473,7 +2473,7 @@ function private function_fac064dc()
 	origin = self.origin;
 	owner = self.owner;
 	weapon = getweapon(#"tear_gas");
-	params = function_4d1e7b48("dot_steiner_radiation_bomb");
+	params = getstatuseffect("dot_steiner_radiation_bomb");
 	while(gettime() < var_6f13bbe0)
 	{
 		alive_players = function_a1ef346b(undefined, origin, 128);
@@ -3374,9 +3374,9 @@ function private function_5a481a84(player)
 	dist = distance(self.origin, player.origin);
 	targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
 	var_a6470558 = vectornormalize(targetorigin - self.origin);
-	var_d3cafde6 = self.meleeweapon.var_d3cafde6;
-	var_32708f81 = 100 + var_d3cafde6;
-	var_8cf8f805 = mapfloat(0, var_d3cafde6, 100, var_32708f81, dist);
+	aimeleerange = self.meleeweapon.aimeleerange;
+	var_32708f81 = 100 + aimeleerange;
+	var_8cf8f805 = mapfloat(0, aimeleerange, 100, var_32708f81, dist);
 	player playerknockback(1);
 	player applyknockback(int(var_8cf8f805), var_a6470558);
 	player playerknockback(0);
@@ -4236,12 +4236,12 @@ function private function_aed09e18(var_2fa3c4c9, location)
 	}
 	if(isdefined(location))
 	{
-		spawner = #"hash_1a09a8e1ac15a85";
+		spawner = #"spawner_zm_steiner_f";
 		if(var_2fa3c4c9[0] function_1e521615())
 		{
 			spawner = #"spawner_zm_steiner_hvt";
 		}
-		steiner = spawnactor(#"hash_1a09a8e1ac15a85", location.origin, location.angles);
+		steiner = spawnactor(#"spawner_zm_steiner_f", location.origin, location.angles);
 		if(isdefined(steiner))
 		{
 			steiner forceteleport(location.origin, location.angles);
@@ -4274,7 +4274,7 @@ function private function_aed09e18(var_2fa3c4c9, location)
 */
 function function_f045e7c(location, var_c406df14)
 {
-	steiner = spawnactor(#"hash_1a09a8e1ac15a85", location.origin, location.angles);
+	steiner = spawnactor(#"spawner_zm_steiner_f", location.origin, location.angles);
 	if(isdefined(steiner))
 	{
 		steiner forceteleport(location.origin, location.angles);

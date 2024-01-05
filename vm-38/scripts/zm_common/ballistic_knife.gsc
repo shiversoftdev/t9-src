@@ -1,14 +1,14 @@
-#using script_3469488e46c579c6;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_laststand.gsc;
 #using scripts\zm_common\zm_player.gsc;
+#using scripts\zm_common\zm_laststand.gsc;
+#using scripts\zm_common\zm.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\weapons\ballistic_knife.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace ballistic_knife;
 
@@ -23,11 +23,11 @@
 */
 function private autoexec function_5c4cf873()
 {
-	level notify(148163740);
+	level notify(-148163740);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: ballistic_knife
 	Checksum: 0x8D2DD6D3
 	Offset: 0xD8
@@ -35,7 +35,7 @@ function private autoexec function_5c4cf873()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ballistic_knife", &function_70a657d8, undefined, undefined, undefined);
 }

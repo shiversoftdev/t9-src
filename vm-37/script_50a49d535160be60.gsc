@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_cd621025 : class_6aaccc24
+class czm_hint_text : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_cd621025
+		Namespace: czm_hint_text
 		Checksum: 0x820DCA04
 		Offset: 0x360
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_cd621025 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_cd621025
+		Namespace: czm_hint_text
 		Checksum: 0x384A73C2
 		Offset: 0x5C0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_cd621025 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_cd621025
+		Namespace: czm_hint_text
 		Checksum: 0xB0C05FD4
 		Offset: 0x4A0
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_cd621025 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_cd621025
+		Name: register_clientside
+		Namespace: czm_hint_text
 		Checksum: 0x4AA88B32
 		Offset: 0x400
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_hint_text");
+		cluielem::register_clientside("zm_hint_text");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_cd621025
+		Namespace: czm_hint_text
 		Checksum: 0x4DD8FB4B
 		Offset: 0x380
 		Size: 0x74
@@ -68,28 +68,28 @@ class class_cd621025 : class_6aaccc24
 	*/
 	function setup_clientfields(var_f5852d69)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_hint_text");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 1, "int");
-		namespace_6aaccc24::function_dcb34c80("string", "text", 1);
+		cluielem::setup_clientfields("zm_hint_text");
+		cluielem::add_clientfield("_state", 1, 1, "int");
+		cluielem::function_dcb34c80("string", "text", 1);
 	}
 
 	/*
-		Name: function_d5ea17f0
-		Namespace: namespace_cd621025
+		Name: set_text
+		Namespace: czm_hint_text
 		Checksum: 0xC68E5A40
 		Offset: 0x588
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_d5ea17f0(localclientnum, value)
+	function set_text(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "text", value);
+		[[ self ]]->set_data(localclientnum, "text", value);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_cd621025
+		Namespace: czm_hint_text
 		Checksum: 0xAB7456F1
 		Offset: 0x4D0
 		Size: 0xAC
@@ -100,13 +100,13 @@ class class_cd621025 : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"visible" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
@@ -121,7 +121,7 @@ class class_cd621025 : class_6aaccc24
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_cd621025
+		Namespace: czm_hint_text
 		Checksum: 0x9B29E36D
 		Offset: 0x428
 		Size: 0x6C
@@ -130,9 +130,9 @@ class class_cd621025 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "text", #"");
+		[[ self ]]->set_data(localclientnum, "text", #"");
 	}
 
 }
@@ -150,7 +150,7 @@ class class_cd621025 : class_6aaccc24
 */
 function register(var_f5852d69)
 {
-	elem = new class_cd621025();
+	elem = new czm_hint_text();
 	[[ elem ]]->setup_clientfields(var_f5852d69);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -172,7 +172,7 @@ function register(var_f5852d69)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: zm_hint_text
 	Checksum: 0xDBCCC6F0
 	Offset: 0x248
@@ -180,10 +180,10 @@ function register(var_f5852d69)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_cd621025();
-	[[ elem ]]->function_5c1bb138();
+	elem = new czm_hint_text();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -244,7 +244,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_d5ea17f0
+	Name: set_text
 	Namespace: zm_hint_text
 	Checksum: 0xC1B100DA
 	Offset: 0x330
@@ -252,8 +252,8 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_d5ea17f0(localclientnum, value)
+function set_text(localclientnum, value)
 {
-	[[ self ]]->function_d5ea17f0(localclientnum, value);
+	[[ self ]]->set_text(localclientnum, value);
 }
 

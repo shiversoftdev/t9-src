@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_c24030b9 : class_6aaccc24
+class class_c24030b9 : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_c24030b9 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_54166b84
+		Name: set_objpoints
 		Namespace: namespace_c24030b9
 		Checksum: 0x25BE08F1
 		Offset: 0x530
@@ -52,13 +52,13 @@ class class_c24030b9 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_54166b84(localclientnum, value)
+	function set_objpoints(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "objpoints", value);
+		[[ self ]]->set_data(localclientnum, "objpoints", value);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_c24030b9
 		Checksum: 0xD706ED8B
 		Offset: 0x430
@@ -66,9 +66,9 @@ class class_c24030b9 : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_gamemode_onslaught_msg");
+		cluielem::register_clientside("mp_gamemode_onslaught_msg");
 	}
 
 	/*
@@ -82,13 +82,13 @@ class class_c24030b9 : class_6aaccc24
 	*/
 	function setup_clientfields(var_a584bc49, var_ea26adc8)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "objectiveText", 1);
-		namespace_6aaccc24::function_da693cbe("objpoints", 1, 11, "int", var_ea26adc8);
+		cluielem::setup_clientfields("mp_gamemode_onslaught_msg");
+		cluielem::function_dcb34c80("string", "objectiveText", 1);
+		cluielem::add_clientfield("objpoints", 1, 11, "int", var_ea26adc8);
 	}
 
 	/*
-		Name: function_eab3d36f
+		Name: set_objectivetext
 		Namespace: namespace_c24030b9
 		Checksum: 0x13515163
 		Offset: 0x4F8
@@ -96,9 +96,9 @@ class class_c24030b9 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_eab3d36f(localclientnum, value)
+	function set_objectivetext(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "objectiveText", value);
+		[[ self ]]->set_data(localclientnum, "objectiveText", value);
 	}
 
 	/*
@@ -112,9 +112,9 @@ class class_c24030b9 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "objectiveText", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "objpoints", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "objectiveText", #"");
+		[[ self ]]->set_data(localclientnum, "objpoints", 0);
 	}
 
 }
@@ -154,7 +154,7 @@ function register(var_a584bc49, var_ea26adc8)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_gamemode_onslaught_msg
 	Checksum: 0xBB1C0163
 	Offset: 0x270
@@ -162,10 +162,10 @@ function register(var_a584bc49, var_ea26adc8)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_c24030b9();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -212,7 +212,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_eab3d36f
+	Name: set_objectivetext
 	Namespace: mp_gamemode_onslaught_msg
 	Checksum: 0x43CFC641
 	Offset: 0x328
@@ -220,13 +220,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_eab3d36f(localclientnum, value)
+function set_objectivetext(localclientnum, value)
 {
-	[[ self ]]->function_eab3d36f(localclientnum, value);
+	[[ self ]]->set_objectivetext(localclientnum, value);
 }
 
 /*
-	Name: function_54166b84
+	Name: set_objpoints
 	Namespace: mp_gamemode_onslaught_msg
 	Checksum: 0xA68832F9
 	Offset: 0x358
@@ -234,8 +234,8 @@ function function_eab3d36f(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_54166b84(localclientnum, value)
+function set_objpoints(localclientnum, value)
 {
-	[[ self ]]->function_54166b84(localclientnum, value);
+	[[ self ]]->set_objpoints(localclientnum, value);
 }
 

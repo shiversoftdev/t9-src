@@ -1,6 +1,6 @@
 #using script_6167e26342be354b;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace hud_message_shared;
 
@@ -15,13 +15,13 @@
 */
 function private autoexec function_d3ba9c7f()
 {
-	level notify(1859269274);
+	level notify(-1859269274);
 }
 
 #namespace hud_message;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: hud_message
 	Checksum: 0xC1DFF94
 	Offset: 0xB0
@@ -29,7 +29,7 @@ function private autoexec function_d3ba9c7f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hud_message", &function_70a657d8, undefined, undefined, undefined);
 }

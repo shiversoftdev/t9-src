@@ -1,45 +1,45 @@
-#using script_1103c28492840e5f;
-#using script_11cc3a9267cf7ac7;
-#using script_1c5cce12dd83e08;
-#using script_202bf2aa3dbffa20;
-#using script_2ae7c487149cc862;
-#using script_2bdd098a8215ac9f;
-#using script_2c5f2d4e7aa698c4;
-#using script_2c8fd33ddb45e78b;
-#using script_311c446e3df6c3fa;
-#using script_35347d750c565866;
-#using script_37ec43096fb284a3;
+#using script_45ed9e2916a5d657;
+#using script_5ee86fb478309acf;
 #using script_38dc72b5220a1a67;
-#using script_391889b7ff93ef7e;
+#using script_a9c40f57b84dba8;
+#using script_2c5f2d4e7aa698c4;
 #using script_3a97cf7fe4b3bc97;
+#using script_7c1ce8053e1f767a;
+#using script_35347d750c565866;
+#using script_54b939ad79f46602;
+#using script_78c17b0050c5f017;
 #using script_3c0e0fe36a7ec024;
 #using script_3dc7e0c7f9c90bdb;
-#using script_3f6516099f1d5ff1;
-#using script_41e32418d719f2dd;
-#using script_44c87b4589ee1f93;
-#using script_45ed9e2916a5d657;
-#using script_461a5eb3081800a3;
-#using script_4ed01237ecbd380f;
-#using script_53d55f01b3a5be93;
-#using script_54b939ad79f46602;
-#using script_5665e7d917abc3fc;
-#using script_581877678e31274c;
-#using script_5ee86fb478309acf;
-#using script_60793766a26de8df;
-#using script_618d6f5ff5d18933;
-#using script_6243781aa5394e62;
-#using script_62c40d9a3acec9b1;
-#using script_71cdde87963901ec;
-#using script_78c17b0050c5f017;
-#using script_7c1ce8053e1f767a;
+#using script_311c446e3df6c3fa;
 #using script_7ccd314d69366639;
-#using script_a9c40f57b84dba8;
 #using script_d85a41a4c7247ce;
+#using script_1c5cce12dd83e08;
+#using script_2ae7c487149cc862;
+#using script_461a5eb3081800a3;
+#using script_202bf2aa3dbffa20;
+#using script_41e32418d719f2dd;
+#using script_4ed01237ecbd380f;
+#using script_5665e7d917abc3fc;
+#using script_2bdd098a8215ac9f;
+#using script_71cdde87963901ec;
+#using script_62c40d9a3acec9b1;
+#using script_1103c28492840e5f;
+#using script_37ec43096fb284a3;
+#using script_60793766a26de8df;
+#using script_11cc3a9267cf7ac7;
+#using script_44c87b4589ee1f93;
+#using script_581877678e31274c;
 #using script_eff00f787d80cdf;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using script_6243781aa5394e62;
+#using script_53d55f01b3a5be93;
+#using script_391889b7ff93ef7e;
+#using script_2c8fd33ddb45e78b;
 #using scripts\core_common\util_shared.csc;
+#using script_618d6f5ff5d18933;
+#using scripts\core_common\map.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace zsurvival;
 
@@ -74,20 +74,20 @@ event main(eventstruct)
 	setdvar(#"hash_11a23659adb39e95", 1);
 	callback::on_localclient_connect(&on_player_connect);
 	level.var_13339abf = array(#"hash_41f5516d2a39d700", #"hash_7f522bf9ee249485", #"hash_2d2ce8582fb2b98", #"hash_68767e76af3b02ad", #"hash_294b09b399adeaf6", #"hash_335dbdca3e36e2bd");
-	clientfield::function_a8bbc967("hudItems.streamerLoadFraction", #"hud_items", #"hash_7e7b0475689b500c", 1, 5, "float", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.wzLoadFinished", #"hud_items", #"hash_75d3a2a658cd9396", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.streamerLoadFraction", #"hud_items", #"hash_7e7b0475689b500c", 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.wzLoadFinished", #"hud_items", #"hash_75d3a2a658cd9396", 1, 1, "int", undefined, 0, 0);
 	clientfield::function_5b7d846d("hudItems.warzone.reinsertionPassengerCount", #"hash_593f03dd48d5bc1f", #"hash_4686fa61f7f123ba", 1, 7, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.alivePlayerCount", #"hud_items", #"hash_660e10919fc3cb96", 1, 7, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.alivePlayerCountEnemy", #"hud_items", #"hash_3200ae248348b38a", 1, 7, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.aliveTeammateCount", #"hud_items", #"hash_23a0fd1ff456959", 1, 7, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.spectatorsCount", #"hud_items", #"hash_2821db97459aaa4a", 1, 7, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.playerKills", #"hud_items", #"playerkills", 1, 9, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.playerCleanUps", #"hud_items", #"hash_cb62c942965b99d", 1, 7, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("presence.modeparam", #"hash_3645501c8ba141af", #"hash_7347f20e8c2800c3", 1, 7, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.showReinsertionPassengerCount", #"hud_items", #"hash_5f5475b776cfc0cd", 1, 1, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.playerLivesRemaining", #"hud_items", #"hash_6dddb9a20d49665d", 1, 3, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.playerCanRedeploy", #"hud_items", #"hash_116a728dee230334", 1, 1, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.zombiesSurvivalRespawn", #"hud_items", #"hash_130bf6c6767308c2", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.alivePlayerCount", #"hud_items", #"hash_660e10919fc3cb96", 1, 7, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.alivePlayerCountEnemy", #"hud_items", #"hash_3200ae248348b38a", 1, 7, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.aliveTeammateCount", #"hud_items", #"hash_23a0fd1ff456959", 1, 7, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.spectatorsCount", #"hud_items", #"hash_2821db97459aaa4a", 1, 7, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.playerKills", #"hud_items", #"playerkills", 1, 9, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.playerCleanUps", #"hud_items", #"hash_cb62c942965b99d", 1, 7, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("presence.modeparam", #"hash_3645501c8ba141af", #"hash_7347f20e8c2800c3", 1, 7, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.showReinsertionPassengerCount", #"hud_items", #"hash_5f5475b776cfc0cd", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.playerLivesRemaining", #"hud_items", #"hash_6dddb9a20d49665d", 1, 3, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.playerCanRedeploy", #"hud_items", #"hash_116a728dee230334", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.zombiesSurvivalRespawn", #"hud_items", #"hash_130bf6c6767308c2", 1, 1, "int", undefined, 0, 0);
 	clientfield::function_5b7d846d("hudItems.warzone.collapse", #"hash_593f03dd48d5bc1f", #"collapse", 1, 21, "int", undefined, 0, 0);
 	clientfield::function_5b7d846d("hudItems.warzone.waveRespawnTimer", #"hash_593f03dd48d5bc1f", #"hash_14384be8ccdfdba9", 1, 21, "int", undefined, 0, 0);
 	clientfield::function_5b7d846d("hudItems.warzone.collapseIndex", #"hash_593f03dd48d5bc1f", #"hash_7ac8dd213b1f8d42", 1, 3, "int", undefined, 0, 0);
@@ -204,7 +204,7 @@ function private function_33593a44(localclientnum, var_312d65d1, var_68f7ce2e, n
 }
 
 /*
-	Name: function_1877f414
+	Name: _on_localplayer_spawned
 	Namespace: zsurvival
 	Checksum: 0x377F5CDD
 	Offset: 0x1100
@@ -212,7 +212,7 @@ function private function_33593a44(localclientnum, var_312d65d1, var_68f7ce2e, n
 	Parameters: 1
 	Flags: Private
 */
-function private function_1877f414(localclientnum)
+function private _on_localplayer_spawned(localclientnum)
 {
 	if(self function_da43934d())
 	{
@@ -233,22 +233,22 @@ function private function_491c852e(item)
 {
 	switch(item)
 	{
-		case "hash_743b859c2367ff54":
+		case "trip_wire_wz_item":
 		{
 			return 1;
 			break;
 		}
-		case "hash_14b578e446580ad5":
+		case "concertina_wire_wz_item":
 		{
 			return 2;
 			break;
 		}
-		case "hash_5e5f2ed57ac4601f":
+		case "cymbal_monkey_wz_item":
 		{
 			return 3;
 			break;
 		}
-		case "hash_50b970644e43947b":
+		case "ultimate_turret_wz_item":
 		{
 			return 4;
 			break;
@@ -270,7 +270,7 @@ function private function_13a420b1(localclientnum)
 	self endon(#"shutdown", #"death");
 	self notify("df0a6a0cbfe7ce6");
 	self endon("df0a6a0cbfe7ce6");
-	var_8040e225 = item_world::function_a7e98a1a(localclientnum);
+	clientdata = item_world::function_a7e98a1a(localclientnum);
 	var_6e77adc6 = "inventory_craft" + localclientnum;
 	while(true)
 	{

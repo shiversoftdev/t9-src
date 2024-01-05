@@ -1,4 +1,4 @@
-#using script_788472602edbe3b9;
+#using scripts\mp_common\player\player_loadout.gsc;
 #using scripts\core_common\gameobjects_shared.gsc;
 
 #namespace os;

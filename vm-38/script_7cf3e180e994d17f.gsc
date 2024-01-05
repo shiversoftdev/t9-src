@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_db2381c4;
 
@@ -19,7 +19,7 @@ function private autoexec function_4d3dbfb7()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_db2381c4
 	Checksum: 0xFCBB8EE7
 	Offset: 0x268
@@ -27,7 +27,7 @@ function private autoexec function_4d3dbfb7()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4ddffaa090d81227", &function_c7f33cce, &function_fa076c68, undefined, undefined);
 }

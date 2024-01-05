@@ -1,8 +1,8 @@
-#namespace namespace_140b10cf;
+#namespace ostdm;
 
 /*
 	Name: function_54d69839
-	Namespace: namespace_140b10cf
+	Namespace: ostdm
 	Checksum: 0xD359A2F2
 	Offset: 0x60
 	Size: 0x14
@@ -11,12 +11,12 @@
 */
 function private autoexec function_54d69839()
 {
-	level notify(212914968);
+	level notify(-212914968);
 }
 
 /*
 	Name: main
-	Namespace: namespace_140b10cf
+	Namespace: ostdm
 	Checksum: 0x13AB88BB
 	Offset: 0x80
 	Size: 0xC

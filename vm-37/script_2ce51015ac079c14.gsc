@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_9e6034d2 : class_6aaccc24
+class cplayer_insertion_choice : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0xE1D37505
 		Offset: 0x328
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_9e6034d2 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x8B9C5F89
 		Offset: 0x568
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_9e6034d2 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0xB2526D28
 		Offset: 0x410
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_9e6034d2 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_9e6034d2
+		Name: register_clientside
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x6264800E
 		Offset: 0x398
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("player_insertion_choice");
+		cluielem::register_clientside("player_insertion_choice");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x5D75CF37
 		Offset: 0x348
 		Size: 0x44
@@ -68,13 +68,13 @@ class class_9e6034d2 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("player_insertion_choice");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
+		cluielem::setup_clientfields("player_insertion_choice");
+		cluielem::add_clientfield("_state", 1, 2, "int");
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x7D33277C
 		Offset: 0x440
 		Size: 0x11C
@@ -85,25 +85,25 @@ class class_9e6034d2 : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
-			if(#"hash_bcb68d30ea251e2" == state_name)
+			if(#"groundvehicle" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
-				if(#"hash_a9365fdb97f532b" == state_name)
+				if(#"halojump" == state_name)
 				{
-					[[ self ]]->function_d7d2fcce(localclientnum, "_state", 2);
+					[[ self ]]->set_data(localclientnum, "_state", 2);
 				}
 				else
 				{
 					if(#"heli" == state_name)
 					{
-						[[ self ]]->function_d7d2fcce(localclientnum, "_state", 3);
+						[[ self ]]->set_data(localclientnum, "_state", 3);
 					}
 					else
 					{
@@ -120,7 +120,7 @@ class class_9e6034d2 : class_6aaccc24
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_9e6034d2
+		Namespace: cplayer_insertion_choice
 		Checksum: 0x2C16E958
 		Offset: 0x3C0
 		Size: 0x44
@@ -129,7 +129,7 @@ class class_9e6034d2 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
 	}
 
@@ -148,7 +148,7 @@ class class_9e6034d2 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_9e6034d2();
+	elem = new cplayer_insertion_choice();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -170,7 +170,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: player_insertion_choice
 	Checksum: 0xE790F5D6
 	Offset: 0x240
@@ -178,10 +178,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_9e6034d2();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cplayer_insertion_choice();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

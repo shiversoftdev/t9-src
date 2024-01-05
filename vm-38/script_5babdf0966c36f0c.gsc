@@ -1,8 +1,8 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_13c9b452;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_809236b3()
 {
-	level notify(2122910088);
+	level notify(-2122910088);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_13c9b452
 	Checksum: 0x4D1BCA76
 	Offset: 0x100
@@ -29,7 +29,7 @@ function private autoexec function_809236b3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_24e8e2e7c9881782", &function_70a657d8, undefined, undefined, undefined);
 }

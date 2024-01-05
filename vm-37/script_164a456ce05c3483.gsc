@@ -1,37 +1,37 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
-#using script_2474a362752098d2;
-#using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
-#using script_3f27a7b2232674db;
-#using script_40f967ad5d18ea74;
 #using script_4611af4073d18808;
+#using script_2474a362752098d2;
+#using script_1a9763988299e68d;
+#using script_2a5bf5b4a00cee0d;
+#using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
-#using script_4c5c4a64a59247a2;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
 #using script_6b6510e124bad778;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_4c5c4a64a59247a2;
 #using scripts\core_common\hud_message_shared.gsc;
 #using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\oob.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_7f5aeb59;
 
@@ -198,7 +198,7 @@ function function_fcc90081(var_45b95f80)
 		self.doa.var_909a4dd5 = 0;
 		self.doa.var_484cc88b = 0;
 		self.doa.rof = undefined;
-		self.doa.var_a653de3f = undefined;
+		self.doa.roj = undefined;
 		self.doa.color = function_83fe843d(self);
 		self.doa.var_d6b75dff = 0;
 		self.doa.var_1106edda = 0;
@@ -1136,11 +1136,11 @@ function function_5ed5daa7()
 	#/
 	if(self doa_fate::function_d17f9bcb())
 	{
-		self.doa.score.var_7a3c00a0 = int(max(self.doa.score.var_7a3c00a0, 2));
+		self.doa.score.boosts = int(max(self.doa.score.boosts, 2));
 	}
 	else
 	{
-		self.doa.score.var_7a3c00a0 = int(max(self.doa.score.var_7a3c00a0, 1));
+		self.doa.score.boosts = int(max(self.doa.score.boosts, 1));
 	}
 	if(self doa_fate::function_8a19ece())
 	{
@@ -1148,17 +1148,17 @@ function function_5ed5daa7()
 		roll = randomint(30);
 		if(roll < 10)
 		{
-			level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_barrel"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+			level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_barrel"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		}
 		else
 		{
 			if(roll < 10)
 			{
-				level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boxing_glove"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boxing_glove"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 			}
 			else
 			{
-				level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_sawblade"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_sawblade"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 			}
 		}
 	}
@@ -1199,7 +1199,7 @@ function function_d0251f76(var_8987df35)
 		player.doa.var_d320bb5d = undefined;
 		player namespace_83eb6304::turnofffx("lantern_fade");
 		player namespace_83eb6304::turnofffx("lantern");
-		player notify(#"hash_432f04354a59ffb1");
+		player notify(#"lantern_terminated");
 		if(isdefined(player.doa.var_ad639ebd))
 		{
 			player.doa.var_ad639ebd delete();
@@ -1960,13 +1960,13 @@ function function_8fef418b()
 	{
 		self.last_valid_position = getclosestpointonnavmesh(self.origin, 2048, 0);
 	}
-	if(!isdefined(self.var_fab0ffd6))
+	if(!isdefined(self.playerradius))
 	{
-		self.var_fab0ffd6 = 24;
+		self.playerradius = 24;
 	}
 	if(!isdefined(self.var_f09063b2))
 	{
-		self.var_f09063b2 = sqr(self.var_fab0ffd6);
+		self.var_f09063b2 = sqr(self.playerradius);
 	}
 	if(!isdefined(self.last_valid_position))
 	{
@@ -2001,7 +2001,7 @@ function function_8fef418b()
 			origin = self.origin;
 		}
 	}
-	if(ispointonnavmesh(self.last_valid_position) && distance2dsquared(origin, self.last_valid_position) < sqr(self.var_fab0ffd6) && (sqr(origin[2] - self.last_valid_position[2])) < sqr(16))
+	if(ispointonnavmesh(self.last_valid_position) && distance2dsquared(origin, self.last_valid_position) < sqr(self.playerradius) && (sqr(origin[2] - self.last_valid_position[2])) < sqr(16))
 	{
 		return;
 	}
@@ -2009,7 +2009,7 @@ function function_8fef418b()
 	{
 		if(isdefined(self.var_5d991645))
 		{
-			if(distancesquared(origin, self.var_5d991645) < sqr(self.var_fab0ffd6))
+			if(distancesquared(origin, self.var_5d991645) < sqr(self.playerradius))
 			{
 				return;
 			}
@@ -2019,7 +2019,7 @@ function function_8fef418b()
 		{
 			return;
 		}
-		position = getclosestpointonnavmesh(ground_pos, 256, self.var_fab0ffd6);
+		position = getclosestpointonnavmesh(ground_pos, 256, self.playerradius);
 		if(isdefined(position))
 		{
 			self.last_valid_position = position;
@@ -2028,17 +2028,17 @@ function function_8fef418b()
 	}
 	else
 	{
-		if(ispointonnavmesh(origin, self.var_fab0ffd6))
+		if(ispointonnavmesh(origin, self.playerradius))
 		{
 			self.last_valid_position = origin;
 		}
 		else
 		{
-			if(ispointonnavmesh(self.last_valid_position, self.var_fab0ffd6) && distance2dsquared(origin, self.last_valid_position) < self.var_f09063b2 && (sqr(origin[2] - self.last_valid_position[2])) < self.var_f09063b2)
+			if(ispointonnavmesh(self.last_valid_position, self.playerradius) && distance2dsquared(origin, self.last_valid_position) < self.var_f09063b2 && (sqr(origin[2] - self.last_valid_position[2])) < self.var_f09063b2)
 			{
 				return;
 			}
-			position = getclosestpointonnavmesh(origin, 100, self.var_fab0ffd6);
+			position = getclosestpointonnavmesh(origin, 100, self.playerradius);
 			if(isdefined(position))
 			{
 				self.last_valid_position = position;

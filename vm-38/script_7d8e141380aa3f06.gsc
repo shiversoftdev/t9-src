@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_67dab37c;
 
@@ -21,7 +21,7 @@ function private autoexec function_c5a3de7b()
 #namespace namespace_fa39a5c3;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_fa39a5c3
 	Checksum: 0x797C6C83
 	Offset: 0xC0
@@ -29,7 +29,7 @@ function private autoexec function_c5a3de7b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5a3be2f74ac4fe03", &function_70a657d8, undefined, undefined, undefined);
 }

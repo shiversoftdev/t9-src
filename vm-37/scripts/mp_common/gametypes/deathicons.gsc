@@ -1,12 +1,12 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace deathicons;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: deathicons
 	Checksum: 0x3F9154ED
 	Offset: 0xA8
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"deathicons", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -120,7 +120,7 @@ function add(entity, dyingplayer, team)
 	{
 		return;
 	}
-	objectivename = (function_f99d2668() ? #"hash_2fc33ea98b703187" : #"headicon_dead");
+	objectivename = (sessionmodeiswarzonegame() ? #"headicon_dead_wz" : #"headicon_dead");
 	deathiconobjid = gameobjects::get_next_obj_id();
 	objective_add(deathiconobjid, "active", iconorg, objectivename, dyingplayer);
 	objective_setteam(deathiconobjid, team);

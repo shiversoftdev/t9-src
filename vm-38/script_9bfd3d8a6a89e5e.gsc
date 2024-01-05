@@ -1,17 +1,17 @@
-#using script_267e1d16ae28392b;
-#using script_3626f1b2cf51a99c;
-#using script_3d18e87594285298;
 #using script_3dc93ca9902a9cda;
+#using scripts\cp_common\bb.gsc;
+#using script_267e1d16ae28392b;
+#using script_7d0013bbc05623b9;
+#using script_3d18e87594285298;
 #using script_52da18c20f45c56a;
 #using script_5431e074c1428743;
-#using script_7d0013bbc05623b9;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_3626f1b2cf51a99c;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\bb.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_6cecf2d8;
 
@@ -26,11 +26,11 @@
 */
 function private autoexec function_d8c6a14()
 {
-	level notify(1766276180);
+	level notify(-1766276180);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6cecf2d8
 	Checksum: 0xBC2D04EA
 	Offset: 0x3D8
@@ -38,7 +38,7 @@ function private autoexec function_d8c6a14()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7ee44bf733d7a7ac", &function_70a657d8, undefined, undefined, #"hash_7e93e9089f28804f");
 }
@@ -268,7 +268,7 @@ function function_a8501d78(action)
 	var_df227d8a = actions::function_1028d928(action.name, "a");
 	if(var_df227d8a)
 	{
-		self thread namespace_e1cd3aae::function_d521a78f();
+		self childthread namespace_e1cd3aae::function_d521a78f();
 	}
 	self function_ead8fde7(action.name == "body_shield");
 	self val::set(#"action", "takedamage", 1);
@@ -280,10 +280,10 @@ function function_a8501d78(action)
 	self.takedown.body namespace_594b67e::function_b82cae8f(1);
 	self thread function_756e29bb(action, (isdefined(override.anim_name) ? override.anim_name : action.anim_name));
 	self.takedown.scene_root = undefined;
-	self thread function_c6059aa(action);
-	self thread function_c13ab5c7(action);
-	self thread function_7acc6ae7(action);
-	self thread function_e98922fb(action);
+	self childthread function_c6059aa(action);
+	self childthread function_c13ab5c7(action);
+	self childthread function_7acc6ae7(action);
+	self childthread function_e98922fb(action);
 	if(var_df227d8a)
 	{
 		self util::delay(0.2, undefined, &actions::function_3af7d065, 1);
@@ -335,12 +335,12 @@ function function_756e29bb(action, anim_name, var_c09e9b1c, var_d60fb210, var_2e
 	var_991552e7 = self namespace_594b67e::function_98f117ad(var_36a368e3, "ads");
 	firstframe = 1;
 	self thread namespace_594b67e::function_6e8e5902(action.ender);
-	self thread function_2513e926(action);
+	self childthread function_2513e926(action);
 	if(!is_true(var_2e7da7fb))
 	{
-		self thread function_80f856a8(action, anim_name, var_7369af2b);
+		self childthread function_80f856a8(action, anim_name, var_7369af2b);
 	}
-	self thread function_8ebed231(action);
+	self childthread function_8ebed231(action);
 	while(true)
 	{
 		adspressed = self namespace_594b67e::function_29fd0abd();
@@ -768,7 +768,7 @@ function function_c13ab5c7(action)
 			self notify(#"hash_244459f2eb8f0a38");
 			return;
 		}
-		self thread namespace_594b67e::function_aee5f6a6("body_shield");
+		self childthread namespace_594b67e::function_aee5f6a6("body_shield");
 	}
 }
 

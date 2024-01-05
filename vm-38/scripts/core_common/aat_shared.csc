@@ -1,7 +1,7 @@
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace aat_shared;
 
@@ -16,13 +16,13 @@
 */
 function private autoexec function_e1f62707()
 {
-	level notify(833952125);
+	level notify(-833952125);
 }
 
 #namespace aat;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: aat
 	Checksum: 0xE82F5C6
 	Offset: 0x188
@@ -30,7 +30,7 @@ function private autoexec function_e1f62707()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"aat", &function_70a657d8, &finalize_clientfields, undefined, undefined);
 }
@@ -47,7 +47,7 @@ function private autoexec function_89f2df9()
 function private function_70a657d8()
 {
 	clientfield::register("toplayer", "rob_ammo_mod_ready", 1, 1, "int", &function_4f950d48, 0, 0);
-	clientfield::function_a8bbc967("hud_items.gibDismembermentType", #"hud_items", #"hash_49b325aa4c9519d", 16000, 3, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hud_items.gibDismembermentType", #"hud_items", #"hash_49b325aa4c9519d", 16000, 3, "int", undefined, 0, 0);
 	level.aat_default_info_name = "none";
 	level.aat_default_info_icon = "blacktransparent";
 	register("none", level.aat_default_info_name, level.aat_default_info_icon);
@@ -87,11 +87,11 @@ function function_4f950d48(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwastimejump)
 	{
-		self function_bf9d3071("rob_ammo_mod_ready_light");
+		self playrenderoverridebundle("rob_ammo_mod_ready_light");
 	}
 	else
 	{
-		self function_5d482e78("rob_ammo_mod_ready_light");
+		self stoprenderoverridebundle("rob_ammo_mod_ready_light");
 	}
 }
 

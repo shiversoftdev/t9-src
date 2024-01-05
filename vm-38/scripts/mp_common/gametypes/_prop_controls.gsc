@@ -1,25 +1,25 @@
-#using script_1cc417743d7c262d;
-#using script_229f24b1662651c4;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\dogtags.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\tweakables_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\_prop_dev.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\core_common\tweakables_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\damagefeedback_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\killstreaks\mp\killstreaks.gsc;
 #using scripts\mp_common\gametypes\prop.gsc;
-#using scripts\mp_common\gametypes\spawning.gsc;
 #using scripts\mp_common\gametypes\spawnlogic.gsc;
+#using scripts\mp_common\gametypes\spawning.gsc;
+#using scripts\mp_common\gametypes\_prop_dev.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\core_common\dogtags.gsc;
 #using scripts\mp_common\util.gsc;
 
 #namespace _prop_controls;
@@ -35,14 +35,14 @@
 */
 function private autoexec function_c8c5c0b8()
 {
-	level notify(1102763481);
+	level notify(-1102763481);
 }
 
-#namespace namespace_314165c4;
+#namespace prop_controls;
 
 /*
 	Name: notifyonplayercommand
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xFBE498A0
 	Offset: 0x448
 	Size: 0x54
@@ -59,7 +59,7 @@ function notifyonplayercommand(command, key)
 
 /*
 	Name: notifyonplayercommandremove
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x7EB7D574
 	Offset: 0x4A8
 	Size: 0x2A
@@ -73,7 +73,7 @@ function notifyonplayercommandremove(command, key)
 
 /*
 	Name: function_255e9614
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x3ABA0521
 	Offset: 0x4E0
 	Size: 0x4AA
@@ -188,7 +188,7 @@ function function_255e9614(command, key)
 
 /*
 	Name: function_9024fce3
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x11B9CCB
 	Offset: 0x998
 	Size: 0x5C
@@ -213,7 +213,7 @@ function function_9024fce3(var_59b87232, command)
 
 /*
 	Name: function_21e5a72f
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x4907F947
 	Offset: 0xA00
 	Size: 0x5C
@@ -238,7 +238,7 @@ function function_21e5a72f(var_59b87232, command)
 
 /*
 	Name: function_903bba26
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x4B709630
 	Offset: 0xA68
 	Size: 0x3C
@@ -252,7 +252,7 @@ function function_903bba26()
 
 /*
 	Name: setupkeybindings
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x6F6D86BB
 	Offset: 0xAB0
 	Size: 0x15C
@@ -277,7 +277,7 @@ function setupkeybindings()
 
 /*
 	Name: function_1e25f968
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x7CCEF216
 	Offset: 0xC18
 	Size: 0x15C
@@ -302,7 +302,7 @@ function function_1e25f968()
 
 /*
 	Name: is_player_gamepad_enabled
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x37F630F0
 	Offset: 0xD80
 	Size: 0x1A
@@ -316,7 +316,7 @@ function is_player_gamepad_enabled()
 
 /*
 	Name: setvalue
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x83ECD65F
 	Offset: 0xDA8
 	Size: 0x1A
@@ -330,7 +330,7 @@ function setvalue(value)
 
 /*
 	Name: addupperrighthudelem
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x97F964A7
 	Offset: 0xDD0
 	Size: 0x1A6
@@ -386,7 +386,7 @@ function addupperrighthudelem(label, value, text, labelpc)
 
 /*
 	Name: propcontrolshud
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x36B8C2A3
 	Offset: 0xF80
 	Size: 0x1E4
@@ -421,7 +421,7 @@ function propcontrolshud()
 
 /*
 	Name: cleanuppropcontrolshudondeath
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x41D078DD
 	Offset: 0x1170
 	Size: 0x6C
@@ -439,7 +439,7 @@ function cleanuppropcontrolshudondeath()
 
 /*
 	Name: safedestroy
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xB1DD43EC
 	Offset: 0x11E8
 	Size: 0x2C
@@ -458,7 +458,7 @@ function safedestroy(hudelem)
 
 /*
 	Name: cleanuppropcontrolshud
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x6DA667E9
 	Offset: 0x1220
 	Size: 0x4E
@@ -480,7 +480,7 @@ function cleanuppropcontrolshud()
 
 /*
 	Name: updatetextongamepadchange
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x9DF332F9
 	Offset: 0x1278
 	Size: 0x19C
@@ -534,7 +534,7 @@ function updatetextongamepadchange()
 
 /*
 	Name: propinputwatch
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x28AA5912
 	Offset: 0x1420
 	Size: 0x280
@@ -613,7 +613,7 @@ function propinputwatch()
 
 /*
 	Name: proplockunlock
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xB4C0D1FC
 	Offset: 0x16A8
 	Size: 0x54
@@ -638,7 +638,7 @@ function proplockunlock()
 
 /*
 	Name: function_9bc7ac53
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x3CEEE851
 	Offset: 0x1708
 	Size: 0xD4
@@ -659,31 +659,31 @@ function function_9bc7ac53()
 
 /*
 	Name: registerpreviousprop
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x72BEE0DC
 	Offset: 0x17E8
 	Size: 0x82
 	Parameters: 1
 	Flags: None
 */
-function registerpreviousprop(var_d8316f60)
+function registerpreviousprop(inplayer)
 {
 	var_d8171b71 = 3;
-	if(!isdefined(var_d8316f60.usedpropsindex))
+	if(!isdefined(inplayer.usedpropsindex))
 	{
-		var_d8316f60.usedpropsindex = 0;
+		inplayer.usedpropsindex = 0;
 	}
-	var_d8316f60.usedprops[var_d8316f60.usedpropsindex] = var_d8316f60.prop.info;
-	var_d8316f60.usedpropsindex++;
-	if(var_d8316f60.usedpropsindex >= var_d8171b71)
+	inplayer.usedprops[inplayer.usedpropsindex] = inplayer.prop.info;
+	inplayer.usedpropsindex++;
+	if(inplayer.usedpropsindex >= var_d8171b71)
 	{
-		var_d8316f60.usedpropsindex = 0;
+		inplayer.usedpropsindex = 0;
 	}
 }
 
 /*
 	Name: propchange
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x5B8053A7
 	Offset: 0x1878
 	Size: 0x2CC
@@ -744,7 +744,7 @@ function propchange()
 
 /*
 	Name: prophaschangesleft
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x554E3F6B
 	Offset: 0x1B50
 	Size: 0x36
@@ -764,7 +764,7 @@ function prophaschangesleft()
 
 /*
 	Name: propdeductchange
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x4B9B2AB2
 	Offset: 0x1B90
 	Size: 0x4C
@@ -784,7 +784,7 @@ function propdeductchange()
 
 /*
 	Name: propsetchangesleft
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x867FB6AF
 	Offset: 0x1BE8
 	Size: 0x94
@@ -807,7 +807,7 @@ function propsetchangesleft(newvalue)
 
 /*
 	Name: propchangeto
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x24D1A820
 	Offset: 0x1C88
 	Size: 0x3E4
@@ -827,7 +827,7 @@ function propchangeto(info)
 	self.prop setmodel(info.modelname);
 	self.prop.xyzoffset = info.xyzoffset;
 	self.prop.anglesoffset = info.anglesoffset;
-	self.prop setscale(info.var_9846ca56);
+	self.prop setscale(info.propscale);
 	self.prop unlink();
 	self.propent unlink();
 	self.propent.origin = self.propanchor.origin;
@@ -863,7 +863,7 @@ function propchangeto(info)
 
 /*
 	Name: propmatchslope
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x7D94A5A2
 	Offset: 0x2078
 	Size: 0x24A
@@ -919,7 +919,7 @@ function propmatchslope()
 
 /*
 	Name: propability
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x84093862
 	Offset: 0x22D0
 	Size: 0x6C
@@ -941,7 +941,7 @@ function propability()
 
 /*
 	Name: propclonepower
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x17281F9B
 	Offset: 0x2348
 	Size: 0x44
@@ -959,7 +959,7 @@ function propclonepower()
 
 /*
 	Name: prophasclonesleft
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x2FCDBBFD
 	Offset: 0x2398
 	Size: 0x36
@@ -979,7 +979,7 @@ function prophasclonesleft()
 
 /*
 	Name: propdeductclonechange
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xC436E62A
 	Offset: 0x23D8
 	Size: 0x4C
@@ -999,7 +999,7 @@ function propdeductclonechange()
 
 /*
 	Name: propsetclonesleft
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xE9FDEF55
 	Offset: 0x2430
 	Size: 0xDC
@@ -1026,7 +1026,7 @@ function propsetclonesleft(newvalue)
 
 /*
 	Name: prophasflashesleft
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x76D47A44
 	Offset: 0x2518
 	Size: 0x36
@@ -1046,7 +1046,7 @@ function prophasflashesleft()
 
 /*
 	Name: propdeductflash
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x16D2547E
 	Offset: 0x2558
 	Size: 0x4C
@@ -1066,7 +1066,7 @@ function propdeductflash()
 
 /*
 	Name: propsetflashesleft
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xB1420407
 	Offset: 0x25B0
 	Size: 0x94
@@ -1089,7 +1089,7 @@ function propsetflashesleft(newvalue)
 
 /*
 	Name: set_pitch_roll_for_ground_normal
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x61AD1EC5
 	Offset: 0x2650
 	Size: 0x1BA
@@ -1126,7 +1126,7 @@ function set_pitch_roll_for_ground_normal(var_67b8306d)
 
 /*
 	Name: function_c0665212
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x111AE477
 	Offset: 0x2818
 	Size: 0xD0
@@ -1151,7 +1151,7 @@ function function_c0665212(var_ec9c756e)
 
 /*
 	Name: function_5b73beef
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x87882F1
 	Offset: 0x28F0
 	Size: 0x13C
@@ -1182,7 +1182,7 @@ function function_5b73beef(var_ec9c756e)
 
 /*
 	Name: get_ground_normal
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x2AFA846A
 	Offset: 0x2A38
 	Size: 0x3AE
@@ -1263,7 +1263,7 @@ function get_ground_normal(var_67b8306d, debug)
 
 /*
 	Name: propmoveunlock
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xDC882859
 	Offset: 0x2DF0
 	Size: 0x192
@@ -1309,7 +1309,7 @@ function propmoveunlock()
 
 /*
 	Name: unlockprop
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xBF91A7BE
 	Offset: 0x2F90
 	Size: 0x224
@@ -1356,7 +1356,7 @@ function unlockprop()
 
 /*
 	Name: lockprop
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xAAFDBF8F
 	Offset: 0x31C0
 	Size: 0x144
@@ -1390,7 +1390,7 @@ function lockprop()
 
 /*
 	Name: flashlockpropkey
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x9066A56A
 	Offset: 0x3310
 	Size: 0xF6
@@ -1418,7 +1418,7 @@ function flashlockpropkey()
 
 /*
 	Name: function_56cae8fa
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x4B332DEB
 	Offset: 0x3410
 	Size: 0x72
@@ -1437,7 +1437,7 @@ function function_56cae8fa()
 
 /*
 	Name: function_97f02d5c
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xDEC1E7C2
 	Offset: 0x3490
 	Size: 0x8A
@@ -1457,7 +1457,7 @@ function function_97f02d5c()
 
 /*
 	Name: function_6de7bc19
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x60B57754
 	Offset: 0x3528
 	Size: 0x192
@@ -1488,7 +1488,7 @@ function function_6de7bc19(success, type, player, origin1, text1, origin2, text2
 
 /*
 	Name: canlock
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x7ECFA624
 	Offset: 0x36C8
 	Size: 0x678
@@ -1596,7 +1596,7 @@ function canlock()
 
 /*
 	Name: propcamerazoom
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x1BC6617A
 	Offset: 0x3D50
 	Size: 0x1C0
@@ -1642,7 +1642,7 @@ function propcamerazoom()
 
 /*
 	Name: setnewabilityhud
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x3F30147E
 	Offset: 0x3F18
 	Size: 0x82
@@ -1670,7 +1670,7 @@ function setnewabilityhud()
 
 /*
 	Name: setnewabilitycount
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xB3985A28
 	Offset: 0x3FA8
 	Size: 0xEA
@@ -1711,7 +1711,7 @@ function setnewabilitycount(var_8c8fd413, count)
 
 /*
 	Name: endondeath
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xB30E4680
 	Offset: 0x40A0
 	Size: 0x2E
@@ -1727,7 +1727,7 @@ function endondeath()
 
 /*
 	Name: flashtheprops
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x4F1DE82E
 	Offset: 0x40D8
 	Size: 0xBC
@@ -1752,7 +1752,7 @@ function flashtheprops(var_c8c9bf0f)
 
 /*
 	Name: flashenemies
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x5B998399
 	Offset: 0x41A0
 	Size: 0x10E
@@ -1773,12 +1773,12 @@ function flashenemies(var_c8c9bf0f, position)
 	fwd = vectornormalize((fwd[0], fwd[1], 0));
 	var_ec24ae95 = fwd * 60;
 	spawn_pos = (position + vectorscale((0, 0, 1), 10)) + (fwd * 30);
-	var_f6beab23 = var_c8c9bf0f magicmissile(getweapon(#"eq_slow_grenade"), spawn_pos, var_ec24ae95);
+	concuss = var_c8c9bf0f magicmissile(getweapon(#"eq_slow_grenade"), spawn_pos, var_ec24ae95);
 }
 
 /*
 	Name: deletepropsifatmax
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x18ADBB80
 	Offset: 0x42B8
 	Size: 0x1BA
@@ -1834,7 +1834,7 @@ function deletepropsifatmax()
 
 /*
 	Name: cloneprop
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x6636BF91
 	Offset: 0x4480
 	Size: 0x228
@@ -1854,7 +1854,7 @@ function cloneprop()
 	var_6e55957c = spawn("script_model", self.prop.origin);
 	var_6e55957c.targetname = "propClone";
 	var_6e55957c setmodel(self.prop.model);
-	var_6e55957c setscale(self.prop.info.var_9846ca56);
+	var_6e55957c setscale(self.prop.info.propscale);
 	var_6e55957c.angles = self.prop.angles;
 	var_6e55957c setcandamage(1);
 	var_6e55957c.fakehealth = 50;
@@ -1879,7 +1879,7 @@ function cloneprop()
 
 /*
 	Name: damageclonewatch
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x420ABEA9
 	Offset: 0x46B0
 	Size: 0x176
@@ -1916,7 +1916,7 @@ function damageclonewatch(damage, attacker, direction_vec, point, meansofdeath, 
 
 /*
 	Name: function_d1a1cc8d
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x2BFD5BC1
 	Offset: 0x4830
 	Size: 0x10C
@@ -1948,7 +1948,7 @@ function function_d1a1cc8d()
 
 /*
 	Name: function_d8b858d4
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x9D8D1B89
 	Offset: 0x4948
 	Size: 0x202
@@ -1995,7 +1995,7 @@ function function_d8b858d4(var_2953b091, fade_in_time, fade_out_time)
 
 /*
 	Name: watchspecialgrenadethrow
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xC9ABE040
 	Offset: 0x4B58
 	Size: 0xEE
@@ -2021,7 +2021,7 @@ function watchspecialgrenadethrow()
 
 /*
 	Name: function_6eadaf78
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x10F210EE
 	Offset: 0x4C50
 	Size: 0x120
@@ -2053,7 +2053,7 @@ function function_6eadaf78(grenade, weapon)
 
 /*
 	Name: function_7278d508
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x4562805B
 	Offset: 0x4D78
 	Size: 0xFA
@@ -2075,7 +2075,7 @@ function function_7278d508(attacker, damageorigin, weapon, damage, meansofdeath)
 
 /*
 	Name: function_d04b961
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x479129F1
 	Offset: 0x4E80
 	Size: 0xE0
@@ -2102,7 +2102,7 @@ function function_d04b961(attacker, var_28a0d57c, meansofdeath, damage, damageor
 
 /*
 	Name: function_5d3e918a
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xFA106EFC
 	Offset: 0x4F68
 	Size: 0xA6
@@ -2126,7 +2126,7 @@ function function_5d3e918a(damageorigin)
 
 /*
 	Name: function_58699cee
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x7E09FD77
 	Offset: 0x5018
 	Size: 0x2E4
@@ -2171,7 +2171,7 @@ function function_58699cee(index)
 
 /*
 	Name: function_e896a36a
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x7F0CC10D
 	Offset: 0x5308
 	Size: 0x170
@@ -2208,7 +2208,7 @@ function function_e896a36a(var_319af7f5)
 
 /*
 	Name: function_45534e6c
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x45A2A5C1
 	Offset: 0x5480
 	Size: 0x1BC
@@ -2251,7 +2251,7 @@ function function_45534e6c(var_319af7f5)
 
 /*
 	Name: function_d08dcbaf
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x35570D82
 	Offset: 0x5648
 	Size: 0x130
@@ -2279,7 +2279,7 @@ function function_d08dcbaf(var_319af7f5)
 
 /*
 	Name: function_44a27dd6
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x5A99D47
 	Offset: 0x5780
 	Size: 0x130
@@ -2307,7 +2307,7 @@ function function_44a27dd6(var_319af7f5)
 
 /*
 	Name: function_d3b8a20e
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xC5F369D
 	Offset: 0x58B8
 	Size: 0x4E
@@ -2326,7 +2326,7 @@ function function_d3b8a20e(damageorigin)
 
 /*
 	Name: function_791579c9
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0x271CE044
 	Offset: 0x5910
 	Size: 0xA8
@@ -2347,7 +2347,7 @@ function function_791579c9(index)
 
 /*
 	Name: safesetalpha
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xE07B936D
 	Offset: 0x59C0
 	Size: 0x2A
@@ -2364,7 +2364,7 @@ function safesetalpha(hudelem, var_9c73f6bb)
 
 /*
 	Name: propabilitykeysvisible
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xAEF4568A
 	Offset: 0x59F8
 	Size: 0x174
@@ -2400,7 +2400,7 @@ function propabilitykeysvisible(visible, override)
 
 /*
 	Name: function_2b14e8b1
-	Namespace: namespace_314165c4
+	Namespace: prop_controls
 	Checksum: 0xD2BA5E34
 	Offset: 0x5B78
 	Size: 0xE2

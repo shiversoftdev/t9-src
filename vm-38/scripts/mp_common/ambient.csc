@@ -1,7 +1,7 @@
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\sound_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace ambient;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_c17c5041()
 {
-	level notify(1037851015);
+	level notify(-1037851015);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: ambient
 	Checksum: 0x3879036
 	Offset: 0x188
@@ -28,7 +28,7 @@ function private autoexec function_c17c5041()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ambient", &function_70a657d8, undefined, undefined, undefined);
 }

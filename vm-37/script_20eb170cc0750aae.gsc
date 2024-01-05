@@ -1,26 +1,26 @@
-#using script_256b8879317373de;
-#using script_32399001bdb550da;
-#using script_3706d21c449d0d14;
 #using script_3dc93ca9902a9cda;
-#using script_44b0b8420eabacad;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hud_message_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_spawn.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\gametypes\globallogic_utils.gsc;
-#using scripts\cp_common\skipto.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using script_32399001bdb550da;
+#using scripts\cp_common\gametypes\globallogic_utils.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\gametypes\globallogic_spawn.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
+#using script_3706d21c449d0d14;
+#using scripts\cp_common\bb.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\hud_message_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace coop;
 
@@ -38,7 +38,7 @@ event main(eventstruct)
 	clientfield::register("playercorpse", "hide_body", 1, 1, "int");
 	clientfield::register("toplayer", "killcam_menu", 1, 1, "int");
 	globallogic::init();
-	level.gametype = util::function_5df4294();
+	level.gametype = util::get_game_type();
 	level.var_837aa533 = hash(level.gametype);
 	if(isdefined(level.gametype))
 	{

@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_5813c56a : class_6aaccc24
+class class_5813c56a : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_5813c56a : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_39ee9107
+		Name: set_showphoto
 		Namespace: namespace_5813c56a
 		Checksum: 0xFB11C6D6
 		Offset: 0x530
@@ -52,13 +52,13 @@ class class_5813c56a : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_39ee9107(localclientnum, value)
+	function set_showphoto(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "showPhoto", value);
+		[[ self ]]->set_data(localclientnum, "showPhoto", value);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_5813c56a
 		Checksum: 0x16754AE2
 		Offset: 0x438
@@ -66,9 +66,9 @@ class class_5813c56a : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_silver_hud");
+		cluielem::register_clientside("zm_silver_hud");
 	}
 
 	/*
@@ -82,13 +82,13 @@ class class_5813c56a : class_6aaccc24
 	*/
 	function setup_clientfields(var_a7dcee14, var_5cdd6232)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_silver_hud");
-		namespace_6aaccc24::function_da693cbe("aetherscopeStatus", 1, 2, "int", var_a7dcee14);
-		namespace_6aaccc24::function_da693cbe("showPhoto", 1, 1, "int", var_5cdd6232);
+		cluielem::setup_clientfields("zm_silver_hud");
+		cluielem::add_clientfield("aetherscopeStatus", 1, 2, "int", var_a7dcee14);
+		cluielem::add_clientfield("showPhoto", 1, 1, "int", var_5cdd6232);
 	}
 
 	/*
-		Name: function_9efecfd1
+		Name: set_aetherscopestatus
 		Namespace: namespace_5813c56a
 		Checksum: 0x604F0B5F
 		Offset: 0x4F8
@@ -96,9 +96,9 @@ class class_5813c56a : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_9efecfd1(localclientnum, value)
+	function set_aetherscopestatus(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "aetherscopeStatus", value);
+		[[ self ]]->set_data(localclientnum, "aetherscopeStatus", value);
 	}
 
 	/*
@@ -112,9 +112,9 @@ class class_5813c56a : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "aetherscopeStatus", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "showPhoto", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "aetherscopeStatus", 0);
+		[[ self ]]->set_data(localclientnum, "showPhoto", 0);
 	}
 
 }
@@ -168,7 +168,7 @@ function register(var_a7dcee14, var_5cdd6232)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: zm_silver_hud
 	Checksum: 0x87A53E01
 	Offset: 0x278
@@ -176,10 +176,10 @@ function register(var_a7dcee14, var_5cdd6232)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_5813c56a();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -226,7 +226,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_9efecfd1
+	Name: set_aetherscopestatus
 	Namespace: zm_silver_hud
 	Checksum: 0x6D0E0B80
 	Offset: 0x330
@@ -234,13 +234,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_9efecfd1(localclientnum, value)
+function set_aetherscopestatus(localclientnum, value)
 {
-	[[ self ]]->function_9efecfd1(localclientnum, value);
+	[[ self ]]->set_aetherscopestatus(localclientnum, value);
 }
 
 /*
-	Name: function_39ee9107
+	Name: set_showphoto
 	Namespace: zm_silver_hud
 	Checksum: 0x3FE969F9
 	Offset: 0x360
@@ -248,8 +248,8 @@ function function_9efecfd1(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_39ee9107(localclientnum, value)
+function set_showphoto(localclientnum, value)
 {
-	[[ self ]]->function_39ee9107(localclientnum, value);
+	[[ self ]]->set_showphoto(localclientnum, value);
 }
 

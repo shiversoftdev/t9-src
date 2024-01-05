@@ -1,7 +1,7 @@
 #using script_49d63131b6de89a1;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_297ae820;
 
@@ -43,8 +43,8 @@ function init()
 	namespace_cf4aa5f0::function_6dbaba52("dark_aether_light_on", "zm_tungsten_dark_aether", undefined, undefined, undefined);
 	clientfield::register("world", "" + #"hash_658f225a02b95617", 28000, 1, "int", &function_c5a7e457, 1, 0);
 	clientfield::register("world", "" + #"hash_5e34e1c50fd13b32", 28000, 1, "int", &function_bdf1c128, 1, 0);
-	clientfield::register("world", "" + #"hash_15ba92106568d817", 28000, 1, "int", &function_4b73168b, 1, 0);
-	clientfield::register("world", "" + #"hash_4ed008087614d190", 28000, 1, "int", &function_ae88cc30, 1, 0);
+	clientfield::register("world", "" + #"pistol_light_on", 28000, 1, "int", &pistol_light_on, 1, 0);
+	clientfield::register("world", "" + #"dark_aether_light_on", 28000, 1, "int", &dark_aether_light_on, 1, 0);
 }
 
 /*
@@ -125,7 +125,7 @@ function function_bdf1c128(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 /*
-	Name: function_4b73168b
+	Name: pistol_light_on
 	Namespace: namespace_297ae820
 	Checksum: 0x4CE5FC78
 	Offset: 0x6E0
@@ -133,7 +133,7 @@ function function_bdf1c128(localclientnum, oldval, newval, bnewent, binitialsnap
 	Parameters: 7
 	Flags: Linked
 */
-function function_4b73168b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
+function pistol_light_on(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
 	if(bwastimejump)
 	{
@@ -146,7 +146,7 @@ function function_4b73168b(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 /*
-	Name: function_ae88cc30
+	Name: dark_aether_light_on
 	Namespace: namespace_297ae820
 	Checksum: 0x513F04D8
 	Offset: 0x768
@@ -154,7 +154,7 @@ function function_4b73168b(localclientnum, oldval, newval, bnewent, binitialsnap
 	Parameters: 7
 	Flags: Linked
 */
-function function_ae88cc30(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
+function dark_aether_light_on(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
 	if(bwastimejump)
 	{

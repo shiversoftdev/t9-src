@@ -1,27 +1,27 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
 #using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_9fc66ac;
 
@@ -36,7 +36,7 @@
 */
 function private autoexec function_cc5bbc97()
 {
-	level notify(1173626193);
+	level notify(-1173626193);
 }
 
 /*
@@ -143,7 +143,7 @@ function function_5beeba99()
 	var_8576a4b1 = level.doa.roundnumber;
 	if(name === "boss")
 	{
-		function_5e3127a5(#"hash_7de402b647d0af4a");
+		function_5e3127a5(#"bossfight");
 	}
 	else
 	{
@@ -236,9 +236,9 @@ function function_5e3127a5(var_75e87d7f, var_6ea1719d)
 	{
 		level.var_402c5b0e[#"hash_4599146c78031b2d"] = [];
 	}
-	if(!isdefined(level.var_402c5b0e[#"hash_7de402b647d0af4a"]))
+	if(!isdefined(level.var_402c5b0e[#"bossfight"]))
 	{
-		level.var_402c5b0e[#"hash_7de402b647d0af4a"] = [];
+		level.var_402c5b0e[#"bossfight"] = [];
 	}
 	if(!isdefined(level.var_402c5b0e[#"hash_516660c49395257f"]))
 	{
@@ -299,7 +299,7 @@ function function_914016fe(var_75e87d7f)
 			var_69836136 = "dungeon_0";
 			break;
 		}
-		case "hash_7de402b647d0af4a":
+		case "bossfight":
 		{
 			min = 0;
 			max = 0;

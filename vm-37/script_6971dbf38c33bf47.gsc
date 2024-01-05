@@ -1,7 +1,7 @@
-#using script_101d8280497ff416;
 #using script_680dddbda86931fa;
-#using scripts\core_common\callbacks_shared.csc;
+#using script_101d8280497ff416;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_f0884ae5;
 
@@ -16,7 +16,7 @@
 */
 function setup(localclientnum, var_582cb7bb)
 {
-	if(!namespace_ad5a0cd6::use_item_spawns())
+	if(!item_world_util::use_item_spawns())
 	{
 		return;
 	}

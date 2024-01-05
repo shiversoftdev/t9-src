@@ -1,15 +1,15 @@
-#using script_7bafaa95bb1b427e;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\serverfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\weapons\weapons.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 class class_9e71c1a2 
 {
@@ -1254,10 +1254,10 @@ class class_9e71c1a2
 		if(!e_player.var_ff7ce13b[m_s_bundle.type] && isdefined(var_b4563cfa))
 		{
 			show_tutorial_text(e_player);
-			var_be17187b = undefined;
-			var_be17187b = e_player waittill(#"minigame_tutorial_complete", #"hash_226f6717c97d10d6", #"death", #"entering_last_stand");
+			s_waitresult = undefined;
+			s_waitresult = e_player waittill(#"minigame_tutorial_complete", #"hash_226f6717c97d10d6", #"death", #"entering_last_stand");
 			function_673813fe(e_player);
-			if(var_be17187b._notify === "minigame_tutorial_complete")
+			if(s_waitresult._notify === "minigame_tutorial_complete")
 			{
 				e_player.var_ff7ce13b[m_s_bundle.type] = 1;
 			}
@@ -1465,7 +1465,7 @@ class class_9e71c1a2
 */
 function private autoexec function_45753f17()
 {
-	level notify(1080006987);
+	level notify(-1080006987);
 }
 
 #namespace minigame;
@@ -1510,7 +1510,7 @@ event private function_e0a8e4ba(struct)
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: minigame
 	Checksum: 0x15AAB6DB
 	Offset: 0x4C0
@@ -1518,7 +1518,7 @@ event private function_e0a8e4ba(struct)
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("minigames", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

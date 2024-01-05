@@ -1,11 +1,11 @@
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace hatchet;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: hatchet
 	Checksum: 0x6A632C29
 	Offset: 0xB0
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hatchet", &init_shared, undefined, undefined, undefined);
 }
@@ -86,7 +86,7 @@ function function_16a186f(s_watcher, player)
 {
 	self notify("6ccb7151796e717a");
 	self endon("6ccb7151796e717a");
-	self thread function_e95b2776();
+	self childthread function_e95b2776();
 	if(isdefined(level.playthrowhatchet))
 	{
 		player [[level.playthrowhatchet]](self);

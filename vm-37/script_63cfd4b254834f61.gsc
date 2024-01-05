@@ -1,10 +1,10 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_5d18774f;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_5d18774f
 	Checksum: 0x71DE7503
 	Offset: 0x88
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"blood", &preload, undefined, undefined, undefined);
 }

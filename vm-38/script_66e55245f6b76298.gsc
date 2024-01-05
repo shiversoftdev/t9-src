@@ -1,8 +1,8 @@
-#namespace namespace_e9082b55;
+#namespace item_world_cleanup;
 
 /*
 	Name: function_231ddb0d
-	Namespace: namespace_e9082b55
+	Namespace: item_world_cleanup
 	Checksum: 0x66ADEFDC
 	Offset: 0x60
 	Size: 0x14

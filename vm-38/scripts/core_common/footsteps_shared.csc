@@ -11,7 +11,7 @@
 */
 function private autoexec function_3f0f4a9b()
 {
-	level notify(1610177489);
+	level notify(-1610177489);
 }
 
 #namespace footsteps;

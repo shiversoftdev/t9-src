@@ -1,8 +1,8 @@
-#using script_1cc417743d7c262d;
-#using script_383a3b1bb18ba876;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
 
 #namespace killstreakrules;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_13a38829()
 {
-	level notify(2058413980);
+	level notify(-2058413980);
 }
 
 /*

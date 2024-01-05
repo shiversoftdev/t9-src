@@ -1,17 +1,17 @@
-#using script_51c30eeabe25bee6;
-#using script_5bb072c3abf4652c;
-#using script_7bacb32f8222fa3e;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using scripts\zm\perk\zm_perk_tombstone.gsc;
+#using scripts\zm_common\zm_vo.gsc;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using script_7bacb32f8222fa3e;
 #using scripts\zm_common\zm_equipment.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_e0966e1e;
 
@@ -26,11 +26,11 @@
 */
 function private autoexec function_1df06a19()
 {
-	level notify(2107623525);
+	level notify(-2107623525);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e0966e1e
 	Checksum: 0x68603EB6
 	Offset: 0x150
@@ -38,7 +38,7 @@ function private autoexec function_1df06a19()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6f7d2657f403b90d", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -66,20 +66,20 @@ function private function_70a657d8()
 		level.var_d385a742 = array(level.var_d385a742);
 	}
 	level.var_d385a742[level.var_d385a742.size] = entry;
-	namespace_9b007fc4::function_7c589e7("tactical", #"hash_703910d4007ce2b7");
+	zm_perk_tombstone::function_7c589e7("tactical", #"hash_703910d4007ce2b7");
 	weaponobjects::function_e6400478(#"hash_f223cacb02788e3", &function_36bda67f, 1);
 	clientfield::register("scriptmover", "" + #"hash_452045cf5cb8bc4c", 16000, 2, "int");
 	clientfield::register("scriptmover", "" + #"hash_7833487f87cacad1", 16000, 1, "int");
 	clientfield::register("scriptmover", "" + #"hash_1e3fecb02ce56163", 16000, 1, "int");
-	callback::function_10a4dd0a(&function_10a4dd0a);
-	callback::function_7897dfe6(&function_7897dfe6);
+	callback::on_item_pickup(&on_item_pickup);
+	callback::on_item_drop(&on_item_drop);
 	callback::on_bleedout(&function_b31c7f6);
 	callback::on_disconnect(&function_b31c7f6);
 	level.var_cdd63615 = &function_32e79e8;
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: namespace_e0966e1e
 	Checksum: 0xCFDCF127
 	Offset: 0x428
@@ -87,7 +87,7 @@ function private function_70a657d8()
 	Parameters: 1
 	Flags: None
 */
-function function_10a4dd0a(params)
+function on_item_pickup(params)
 {
 	if(!isdefined(params.item) || params.item.var_a6762160.name !== #"hash_703910d4007ce2b7")
 	{
@@ -164,7 +164,7 @@ function function_5c927d7(zombie)
 }
 
 /*
-	Name: function_7897dfe6
+	Name: on_item_drop
 	Namespace: namespace_e0966e1e
 	Checksum: 0x54664F28
 	Offset: 0x708
@@ -172,7 +172,7 @@ function function_5c927d7(zombie)
 	Parameters: 1
 	Flags: None
 */
-function function_7897dfe6(params)
+function on_item_drop(params)
 {
 	if(!isdefined(params.item) || params.item.var_a6762160.name !== #"hash_703910d4007ce2b7" || !isdefined(self.var_348162a4))
 	{
@@ -411,7 +411,7 @@ function function_2ba36cfa(watcher)
 	self.var_2a68975a.var_98d25e8e = 1;
 	self.var_2a68975a thread function_b6bf3f94(5);
 	self.var_2a68975a thread function_62d26159(self.var_2a68975a.target_zombie, self);
-	self function_bc82f900(#"hash_410bd55524ae7d");
+	self function_bc82f900(#"zm_interact_rumble");
 }
 
 /*
@@ -715,9 +715,9 @@ function function_3b028b4a(time_left, var_646dca28, var_7961a37e, var_b512a2d)
 			level.var_acb5d4ce[var_7961a37e].var_b722fee6 = level.var_acb5d4ce[var_7961a37e].var_b512a2d;
 			level.var_acb5d4ce[var_7961a37e].var_b512a2d = result.entity;
 		}
-		var_fc296337 = gettime();
-		time_left = time_left - ((float(var_fc296337 - start_time)) / 1000);
-		start_time = var_fc296337;
+		time_now = gettime();
+		time_left = time_left - ((float(time_now - start_time)) / 1000);
+		start_time = time_now;
 	}
 }
 
@@ -844,7 +844,7 @@ function function_f8ca0196()
 {
 	self endon(#"death");
 	wait(0.1);
-	self ai::function_62795e55();
+	self ai::clear_stun();
 	self show();
 	self solid();
 	self val::reset(#"hash_3859bdb609b02b2f", "allowdeath");

@@ -4,7 +4,7 @@
 #namespace mission_utils;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: mission_utils
 	Checksum: 0xBC95C06B
 	Offset: 0x98
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"mission", &function_70a657d8, undefined, undefined, undefined);
 }

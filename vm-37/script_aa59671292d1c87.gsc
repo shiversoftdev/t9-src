@@ -1,14 +1,14 @@
-#using script_18bc13f07baf161a;
-#using script_24879e3929b5b5e9;
 #using script_31b23f5316d1b26d;
-#using script_36f25afcb9441942;
-#using script_38635d174016f682;
+#using script_18bc13f07baf161a;
 #using script_64e5d3ad71ce8140;
+#using script_38635d174016f682;
 #using script_67049b48b589d81;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using script_36f25afcb9441942;
+#using script_24879e3929b5b5e9;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_1dc364c0;
 
@@ -41,10 +41,10 @@ function init()
 function function_45d79d27(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
 	color = undefined;
-	if(isdefined(self.var_eaa645fe))
+	if(isdefined(self.ffotdzodt8_ffot))
 	{
-		var_eaa645fe = "rg_room_" + self.var_eaa645fe;
-		room = level.var_c97eeeb4[var_eaa645fe];
+		ffotdzodt8_ffot = "rg_room_" + self.ffotdzodt8_ffot;
+		room = level.var_c97eeeb4[ffotdzodt8_ffot];
 	}
 	switch(bwastimejump)
 	{
@@ -84,7 +84,7 @@ function function_45d79d27(localclientnum, oldval, newval, bnewent, binitialsnap
 */
 function dungeon_set_roomid(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	self.var_eaa645fe = bwastimejump - 1;
+	self.ffotdzodt8_ffot = bwastimejump - 1;
 }
 
 /*

@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_d1b6325c : class_6aaccc24
+class czm_game_over : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x820DCA04
 		Offset: 0x358
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_d1b6325c : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x53C3500D
 		Offset: 0x5E0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_d1b6325c : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0xFE94CCA
 		Offset: 0x488
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_d1b6325c : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_d1b6325c
+		Name: register_clientside
+		Namespace: czm_game_over
 		Checksum: 0x34EF40D2
 		Offset: 0x3F8
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_game_over");
+		cluielem::register_clientside("zm_game_over");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x2406FD89
 		Offset: 0x378
 		Size: 0x74
@@ -68,14 +68,14 @@ class class_d1b6325c : class_6aaccc24
 	*/
 	function setup_clientfields(var_ddbc37b7)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_game_over");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("rounds", 1, 8, "int", var_ddbc37b7);
+		cluielem::setup_clientfields("zm_game_over");
+		cluielem::add_clientfield("_state", 1, 2, "int");
+		cluielem::add_clientfield("rounds", 1, 8, "int", var_ddbc37b7);
 	}
 
 	/*
 		Name: set_rounds
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0xB370A67F
 		Offset: 0x5A8
 		Size: 0x30
@@ -84,12 +84,12 @@ class class_d1b6325c : class_6aaccc24
 	*/
 	function set_rounds(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "rounds", value);
+		[[ self ]]->set_data(localclientnum, "rounds", value);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x36BAEF25
 		Offset: 0x4B8
 		Size: 0xE4
@@ -100,19 +100,19 @@ class class_d1b6325c : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"hash_4677c7e6d02d1a65" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
 				if(#"hash_5f1b73095bbb3a7a" == state_name)
 				{
-					[[ self ]]->function_d7d2fcce(localclientnum, "_state", 2);
+					[[ self ]]->set_data(localclientnum, "_state", 2);
 				}
 				else
 				{
@@ -128,7 +128,7 @@ class class_d1b6325c : class_6aaccc24
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x6AF44A2E
 		Offset: 0x420
 		Size: 0x60
@@ -137,9 +137,9 @@ class class_d1b6325c : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "rounds", 0);
+		[[ self ]]->set_data(localclientnum, "rounds", 0);
 	}
 
 }
@@ -157,7 +157,7 @@ class class_d1b6325c : class_6aaccc24
 */
 function register(var_ddbc37b7)
 {
-	elem = new class_d1b6325c();
+	elem = new czm_game_over();
 	[[ elem ]]->setup_clientfields(var_ddbc37b7);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -179,7 +179,7 @@ function register(var_ddbc37b7)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: zm_game_over
 	Checksum: 0x7FF17B8D
 	Offset: 0x240
@@ -187,10 +187,10 @@ function register(var_ddbc37b7)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_d1b6325c();
-	[[ elem ]]->function_5c1bb138();
+	elem = new czm_game_over();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

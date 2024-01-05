@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_8019ebdc : class_6aaccc24
+class cmobile_armory_loadout : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_8019ebdc
+		Namespace: cmobile_armory_loadout
 		Checksum: 0x7C638A2B
 		Offset: 0x2E0
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_8019ebdc : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_8019ebdc
+		Namespace: cmobile_armory_loadout
 		Checksum: 0xCE97CD0C
 		Offset: 0x3B0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_8019ebdc : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_8019ebdc
+		Namespace: cmobile_armory_loadout
 		Checksum: 0x6078E44F
 		Offset: 0x380
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_8019ebdc : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_8019ebdc
+		Name: register_clientside
+		Namespace: cmobile_armory_loadout
 		Checksum: 0xAD290318
 		Offset: 0x328
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mobile_armory_loadout");
+		cluielem::register_clientside("mobile_armory_loadout");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_8019ebdc
+		Namespace: cmobile_armory_loadout
 		Checksum: 0x2D544A0F
 		Offset: 0x300
 		Size: 0x1C
@@ -68,12 +68,12 @@ class class_8019ebdc : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("mobile_armory_loadout");
+		cluielem::setup_clientfields("mobile_armory_loadout");
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_8019ebdc
+		Namespace: cmobile_armory_loadout
 		Checksum: 0xA9F94B3B
 		Offset: 0x350
 		Size: 0x24
@@ -82,7 +82,7 @@ class class_8019ebdc : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -100,7 +100,7 @@ class class_8019ebdc : class_6aaccc24
 */
 function register()
 {
-	elem = new class_8019ebdc();
+	elem = new cmobile_armory_loadout();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mobile_armory_loadout
 	Checksum: 0xC504E1C9
 	Offset: 0x228
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_8019ebdc();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cmobile_armory_loadout();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

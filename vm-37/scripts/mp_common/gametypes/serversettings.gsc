@@ -1,11 +1,11 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace serversettings;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: serversettings
 	Checksum: 0xAAAA14D
 	Offset: 0xB0
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"serversettings", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -60,7 +60,7 @@ function init()
 	}
 	level.friendlyfire = getgametypesetting(#"friendlyfiretype");
 	level.var_a65e8e93 = level.friendlyfire;
-	level.var_78d89cdd = getgametypesetting(#"hash_66dce2e3aa29ab2e");
+	level.var_78d89cdd = getgametypesetting(#"roundstartfriendlyfiretype");
 	level.var_6aec2d48 = getgametypesetting(#"hash_5d5f4ee35c9977c7");
 	level.var_fe3ff9c1 = getgametypesetting(#"hash_68e3f54e05f57d85");
 	level.var_3297fce5 = getgametypesetting(#"hash_51e989796c38cd87");
@@ -104,7 +104,7 @@ function init()
 */
 function on_start_gametype()
 {
-	constrain_gametype(util::function_5df4294());
+	constrain_gametype(util::get_game_type());
 	constrain_map_size(level.mapsize);
 	for(;;)
 	{
@@ -139,7 +139,7 @@ function update()
 	scr_friendlyfire = getgametypesetting(#"friendlyfiretype");
 	if(level.var_40eaa459 === 1)
 	{
-		scr_friendlyfire = getgametypesetting(#"hash_66dce2e3aa29ab2e");
+		scr_friendlyfire = getgametypesetting(#"roundstartfriendlyfiretype");
 	}
 	if(level.friendlyfire != scr_friendlyfire)
 	{

@@ -1,8 +1,8 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\core_common\visionset_mgr_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\visionset_mgr_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_957938f0;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_533e723a()
 {
-	level notify(593579883);
+	level notify(-593579883);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_957938f0
 	Checksum: 0x49CB5A48
 	Offset: 0x208
@@ -29,7 +29,7 @@ function private autoexec function_533e723a()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3256c1e06451aec4", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -135,7 +135,7 @@ function function_6192b162()
 	{
 		if(!self function_d2503806(#"hash_5b08235c0b55a003"))
 		{
-			self function_bf9d3071(#"hash_5b08235c0b55a003");
+			self playrenderoverridebundle(#"hash_5b08235c0b55a003");
 		}
 		waitframe(1);
 	}

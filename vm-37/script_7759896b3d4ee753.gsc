@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_43514e12 : class_6aaccc24
+class class_43514e12 : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_43514e12 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_43514e12
 		Checksum: 0xA4561151
 		Offset: 0x430
@@ -52,9 +52,9 @@ class class_43514e12 : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_gamemode_onslaught_2nd_msg");
+		cluielem::register_clientside("mp_gamemode_onslaught_2nd_msg");
 	}
 
 	/*
@@ -68,13 +68,13 @@ class class_43514e12 : class_6aaccc24
 	*/
 	function setup_clientfields(var_61963aa5, var_242b1cea)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_2nd_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "objective2Text", 1);
-		namespace_6aaccc24::function_da693cbe("obj2points", 1, 11, "int", var_242b1cea);
+		cluielem::setup_clientfields("mp_gamemode_onslaught_2nd_msg");
+		cluielem::function_dcb34c80("string", "objective2Text", 1);
+		cluielem::add_clientfield("obj2points", 1, 11, "int", var_242b1cea);
 	}
 
 	/*
-		Name: function_9c1c0811
+		Name: set_objective2text
 		Namespace: namespace_43514e12
 		Checksum: 0x315DBB54
 		Offset: 0x4F8
@@ -82,9 +82,9 @@ class class_43514e12 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_9c1c0811(localclientnum, value)
+	function set_objective2text(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "objective2Text", value);
+		[[ self ]]->set_data(localclientnum, "objective2Text", value);
 	}
 
 	/*
@@ -98,7 +98,7 @@ class class_43514e12 : class_6aaccc24
 	*/
 	function function_d9092332(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "obj2points", value);
+		[[ self ]]->set_data(localclientnum, "obj2points", value);
 	}
 
 	/*
@@ -112,9 +112,9 @@ class class_43514e12 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "objective2Text", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "obj2points", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "objective2Text", #"");
+		[[ self ]]->set_data(localclientnum, "obj2points", 0);
 	}
 
 }
@@ -154,7 +154,7 @@ function register(var_61963aa5, var_242b1cea)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_gamemode_onslaught_2nd_msg
 	Checksum: 0xB5F803AF
 	Offset: 0x270
@@ -162,10 +162,10 @@ function register(var_61963aa5, var_242b1cea)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_43514e12();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -212,7 +212,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_9c1c0811
+	Name: set_objective2text
 	Namespace: mp_gamemode_onslaught_2nd_msg
 	Checksum: 0x899119BF
 	Offset: 0x328
@@ -220,9 +220,9 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_9c1c0811(localclientnum, value)
+function set_objective2text(localclientnum, value)
 {
-	[[ self ]]->function_9c1c0811(localclientnum, value);
+	[[ self ]]->set_objective2text(localclientnum, value);
 }
 
 /*

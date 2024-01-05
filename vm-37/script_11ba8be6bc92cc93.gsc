@@ -1,12 +1,12 @@
 #using script_31816d064a53f516;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\footsteps_shared.csc;
-#using scripts\core_common\math_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\footsteps_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_2a445563;
 
@@ -45,7 +45,7 @@ function function_d45ef8ea(localclientnum)
 	self.var_f87f8fa0 = "tag_eye";
 	self zombie_eye_glow::function_3a020b0f(localclientnum, "rob_zm_eyes_orange", #"hash_524decea28717b7c");
 	self callback::on_shutdown(&on_entity_shutdown);
-	self function_bf9d3071("rob_zm_man_werewolf_nonboss_weakpoint");
+	self playrenderoverridebundle("rob_zm_man_werewolf_nonboss_weakpoint");
 }
 
 /*
@@ -67,7 +67,7 @@ function on_entity_shutdown(localclientnum)
 		}
 		self zombie_eye_glow::good_barricade_damaged(localclientnum);
 	}
-	self function_5d482e78("rob_zm_man_werewolf_nonboss_weakpoint");
+	self stoprenderoverridebundle("rob_zm_man_werewolf_nonboss_weakpoint");
 }
 
 /*
@@ -99,8 +99,8 @@ function function_c65ce64a(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_815cc85c(localclientnum)
 {
 	self zombie_eye_glow::good_barricade_damaged(localclientnum);
-	self function_5d482e78("rob_zm_man_werewolf_nonboss_weakpoint");
-	self function_bf9d3071("rob_zm_werewolf_dust");
+	self stoprenderoverridebundle("rob_zm_man_werewolf_nonboss_weakpoint");
+	self playrenderoverridebundle("rob_zm_werewolf_dust");
 }
 
 /*

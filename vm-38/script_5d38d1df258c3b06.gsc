@@ -1,7 +1,7 @@
-#using script_240ef62ff60b2694;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\player\player_stats.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\system_shared.csc;
 
 #namespace namespace_7c1d0bac;
@@ -17,11 +17,11 @@
 */
 function private autoexec function_fbdc3394()
 {
-	level notify(39898346);
+	level notify(-39898346);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_7c1d0bac
 	Checksum: 0xCE0FBA31
 	Offset: 0x100
@@ -29,7 +29,7 @@ function private autoexec function_fbdc3394()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5fe7a854b630ef02", &function_70a657d8, undefined, undefined, undefined);
 }

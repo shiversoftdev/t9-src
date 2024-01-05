@@ -1,8 +1,8 @@
-#using script_27ba6748d83412fd;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\zm_common\zm_fasttravel.csc;
+#using scripts\zm_common\zm.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_ff7e490;
 
@@ -143,7 +143,7 @@ function function_e746b148(localclientnum, oldval, newval, bnewent, binitialsnap
 		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_anytown_usa_to_main_street", "targetname"), #"hash_5d6f46eb355ec1cb");
 		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_anytown_usa_to_bunker", "targetname"), #"hash_62e92c3479ce24e2", 1);
 		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_bunker_to_anytown_usa", "targetname"), #"hash_7689d161576092c2");
-		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_bunker_to_observation", "targetname"), #"hash_59fc8173747a78ca", 0, 1);
+		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_bunker_to_observation", "targetname"), #"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_under", 0, 1);
 		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_observation_to_bunker", "targetname"), #"hash_1d67a5d0f60e1ea");
 		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_observation_to_helipads", "targetname"), #"hash_697445b9607e9d53", 1);
 		function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_helipads_to_observation", "targetname"), #"hash_72d2ae42e9973cad");
@@ -157,7 +157,7 @@ function function_e746b148(localclientnum, oldval, newval, bnewent, binitialsnap
 		portal function_619a5c20();
 		portal thread zm_utility::function_a1290dca(localclientnum, #"hash_48c296f58e75bbc7");
 		portal = getent(localclientnum, "portal_fx_bunker_to_observation", "targetname");
-		portal.var_cc1c5020 = util::spawn_model(localclientnum, #"hash_45169d3166db3fb3", portal.origin - (-29, 0, 65.078), portal.angles);
+		portal.var_cc1c5020 = util::spawn_model(localclientnum, #"p9_zm_gold_teleporter_b", portal.origin - (-29, 0, 65.078), portal.angles);
 		portal.var_cc1c5020 hide();
 		portal.var_cc1c5020 function_619a5c20();
 		portal.var_cc1c5020 zm_utility::set_compass_icon(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump);

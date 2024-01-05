@@ -1,10 +1,10 @@
-#using script_3d35e2ff167b3a82;
-#using script_3d5887fc414a86fb;
-#using script_618d6f5ff5d18933;
 #using script_680dddbda86931fa;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
+#using script_618d6f5ff5d18933;
+#using script_3d35e2ff167b3a82;
+#using scripts\core_common\item_inventory.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace item_drop;
 
@@ -23,7 +23,7 @@ function private autoexec function_62c2acdb()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: item_drop
 	Checksum: 0x4E17D99B
 	Offset: 0x168
@@ -31,7 +31,7 @@ function private autoexec function_62c2acdb()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"item_drop", &function_70a657d8, undefined, undefined, #"item_world");
 }
@@ -47,12 +47,12 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!namespace_ad5a0cd6::use_item_spawns())
+	if(!item_world_util::use_item_spawns())
 	{
 		return;
 	}
 	register_client_fields();
-	level.var_a4a4012e = [];
+	level.item_spawn_drops = [];
 	level.var_624588d5 = [];
 	level.var_2b5a36e1 = [];
 }
@@ -95,14 +95,14 @@ function private function_67189b6b(localclientnum, newval)
 	{
 		return;
 	}
-	var_be90d3da = (newval & 4) != 0;
+	stashitem = (newval & 4) != 0;
 	newval = newval & -5;
 	self.falling = self clientfield::get("dynamic_item_drop_falling");
 	if(newval == 0)
 	{
-		if(isdefined(self) && isdefined(self.var_bd027dd9) && isdefined(level.var_a4a4012e[self.var_bd027dd9]))
+		if(isdefined(self) && isdefined(self.var_bd027dd9) && isdefined(level.item_spawn_drops[self.var_bd027dd9]))
 		{
-			arrayremoveindex(level.var_a4a4012e, self.var_bd027dd9, 1);
+			arrayremoveindex(level.item_spawn_drops, self.var_bd027dd9, 1);
 			arrayremoveindex(level.var_2b5a36e1, self.var_bd027dd9, 1);
 		}
 	}
@@ -117,56 +117,56 @@ function private function_67189b6b(localclientnum, newval)
 			{
 				return;
 			}
-			self.var_bd027dd9 = namespace_ad5a0cd6::function_1f0def85(self);
-			self.var_8e092725 = 0;
-			if(var_be90d3da)
+			self.var_bd027dd9 = item_world_util::function_1f0def85(self);
+			self.hidetime = 0;
+			if(stashitem)
 			{
-				self.var_8e092725 = -1;
+				self.hidetime = -1;
 			}
 			if(self.id != 32767 && self.id < function_8322cf16())
 			{
 				self.var_a6762160 = function_b1702735(self.id).var_a6762160;
 				self function_1fe1281(localclientnum, clientfield::get("dynamic_item_drop_count"));
 			}
-			arrayremovevalue(level.var_a4a4012e, undefined, 1);
-			level.var_a4a4012e[self.var_bd027dd9] = self;
+			arrayremovevalue(level.item_spawn_drops, undefined, 1);
+			level.item_spawn_drops[self.var_bd027dd9] = self;
 			item_world::function_b78a9820(localclientnum);
 			player = function_5c10bd79(localclientnum);
-			player item_world::show_item(localclientnum, self.var_bd027dd9, !var_be90d3da);
+			player item_world::show_item(localclientnum, self.var_bd027dd9, !stashitem);
 			if(isplayer(player) && distance2dsquared(self.origin, player.origin) <= sqr(1350))
 			{
 				player.var_506495f9 = 1;
-				var_8040e225 = item_world::function_a7e98a1a(localclientnum);
-				model = self item_world::function_7731d23c(var_8040e225);
+				clientdata = item_world::function_a7e98a1a(localclientnum);
+				model = self item_world::function_7731d23c(clientdata);
 				if(isdefined(model))
 				{
 					model show();
 					item_world::function_84964a9e(localclientnum, self.var_a6762160, model, self.var_bd027dd9);
 				}
 			}
-			namespace_b376ff3f::function_b1136fc8(localclientnum, self);
+			item_inventory::function_b1136fc8(localclientnum, self);
 		}
 		else if(newval == 2 || newval == 3)
 		{
-			self.var_8e092725 = gettime();
-			self.var_bd027dd9 = namespace_ad5a0cd6::function_1f0def85(self);
+			self.hidetime = gettime();
+			self.var_bd027dd9 = item_world_util::function_1f0def85(self);
 			if(newval == 2)
 			{
-				item_world::function_3de69770(localclientnum, self);
-				namespace_b376ff3f::function_31868137(localclientnum, self);
+				item_world::play_pickup_fx(localclientnum, self);
+				item_inventory::function_31868137(localclientnum, self);
 			}
 			else
 			{
-				namespace_b376ff3f::function_d1da833d(localclientnum, self);
+				item_inventory::function_d1da833d(localclientnum, self);
 			}
 			item_world::function_b78a9820(localclientnum);
 			item_world::function_2990e5f(localclientnum, self);
 			if(isdefined(self.var_bd027dd9) && getdvarint(#"hash_99bb0233e482c77", 0))
 			{
-				level.var_a4a4012e[self.var_bd027dd9] = undefined;
+				level.item_spawn_drops[self.var_bd027dd9] = undefined;
 			}
 			player = function_5c10bd79(localclientnum);
-			player item_world::function_222205a3(localclientnum, self.var_bd027dd9);
+			player item_world::hide_item(localclientnum, self.var_bd027dd9);
 		}
 	}
 }
@@ -240,7 +240,7 @@ function function_1fe1281(localclientnum, newval)
 	{
 		if(isdefined(self.amount) && newval !== self.amount)
 		{
-			namespace_b376ff3f::function_31868137(localclientnum, self);
+			item_inventory::function_31868137(localclientnum, self);
 		}
 		self.amount = newval;
 		self.count = 1;
@@ -249,7 +249,7 @@ function function_1fe1281(localclientnum, newval)
 	{
 		if(isdefined(self.count) && newval !== self.count)
 		{
-			namespace_b376ff3f::function_31868137(localclientnum, self);
+			item_inventory::function_31868137(localclientnum, self);
 		}
 		self.amount = 0;
 		self.count = newval;
@@ -322,17 +322,17 @@ function function_63226f88(localclientnum, oldval, newval, bnewent, binitialsnap
 	item_world::function_1b11e73c();
 	if(bwastimejump == 0)
 	{
-		self.var_ed175c5 = 0;
+		self.stash_type = 0;
 	}
 	else
 	{
 		if(bwastimejump == 1)
 		{
-			self.var_ed175c5 = 1;
+			self.stash_type = 1;
 		}
 		else if(bwastimejump == 2)
 		{
-			self.var_ed175c5 = 2;
+			self.stash_type = 2;
 		}
 	}
 }
@@ -352,7 +352,7 @@ function function_45f94325(localclientnum, oldval, newval, bnewent, binitialsnap
 	item_world::function_1b11e73c();
 	if(!isdefined(self.var_bd027dd9))
 	{
-		self.var_bd027dd9 = namespace_ad5a0cd6::function_1f0def85(self);
+		self.var_bd027dd9 = item_world_util::function_1f0def85(self);
 	}
 	level.var_2b5a36e1[self.var_bd027dd9] = self;
 	self.var_f4522f8c = getservertime(bwastimejump) + randomintrange(0, 500);

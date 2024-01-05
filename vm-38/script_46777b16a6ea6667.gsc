@@ -1,34 +1,34 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1b905a8474ed2a62;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_3aa0f32b70d4f7cb;
+#using script_164a456ce05c3483;
 #using script_3faf478d5b0850fe;
 #using script_47851dbeea22fe66;
-#using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_5701633066d199f2;
-#using script_59f07c660e6710a5;
+#using script_1ee011cd0961afd7;
 #using script_5f20d3b434d24884;
-#using script_7b7ed6e4bc963a51;
-#using scripts\core_common\ai_shared.gsc;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_4d85e8de54b02198;
 #using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\statemachine_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\ai\blackboard_vehicle.gsc;
 #using scripts\core_common\vehicle_ai_shared.gsc;
 #using scripts\core_common\vehicle_death_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\statemachine_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_59f07c660e6710a5;
+#using script_7b7ed6e4bc963a51;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_81522b3c;
 
@@ -43,7 +43,7 @@
 */
 function private autoexec function_36f14eb4()
 {
-	level notify(1214466281);
+	level notify(-1214466281);
 }
 
 /*
@@ -219,7 +219,7 @@ function function_f7d9bc34()
 }
 
 /*
-	Name: function_ea8fc463
+	Name: istargetvalid
 	Namespace: namespace_81522b3c
 	Checksum: 0x4AB89056
 	Offset: 0x9B8
@@ -227,7 +227,7 @@ function function_f7d9bc34()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_ea8fc463(target)
+function private istargetvalid(target)
 {
 	if(!isdefined(target) || !isalive(target))
 	{
@@ -256,25 +256,25 @@ function private function_ea8fc463(target)
 function private gettarget()
 {
 	targets = getplayers();
-	var_2d605ac5 = targets[0];
+	leasthunted = targets[0];
 	for(i = 0; i < targets.size; i++)
 	{
 		if(!isdefined(targets[i].hunted_by))
 		{
 			targets[i].hunted_by = 0;
 		}
-		if(!function_ea8fc463(targets[i]))
+		if(!istargetvalid(targets[i]))
 		{
 			continue;
 		}
-		if(!function_ea8fc463(var_2d605ac5) || targets[i].hunted_by < var_2d605ac5.hunted_by)
+		if(!istargetvalid(leasthunted) || targets[i].hunted_by < leasthunted.hunted_by)
 		{
-			var_2d605ac5 = targets[i];
+			leasthunted = targets[i];
 		}
 	}
-	if(function_ea8fc463(var_2d605ac5))
+	if(istargetvalid(leasthunted))
 	{
-		return var_2d605ac5;
+		return leasthunted;
 	}
 }
 
@@ -297,7 +297,7 @@ function private function_1076a2e0()
 			wait(0.5);
 			continue;
 		}
-		if(function_ea8fc463(self.var_c4e19d3))
+		if(istargetvalid(self.var_c4e19d3))
 		{
 			wait(0.5);
 			continue;
@@ -508,12 +508,12 @@ function function_1c4cd527(origin, owner, innerradius, outerradius, halfheight, 
 						{
 							point._scoredebug = [];
 						}
-						if(!isdefined(point._scoredebug[#"hash_3f8a9579ce4600de"]))
+						if(!isdefined(point._scoredebug[#"no visibility"]))
 						{
-							point._scoredebug[#"hash_3f8a9579ce4600de"] = spawnstruct();
+							point._scoredebug[#"no visibility"] = spawnstruct();
 						}
-						point._scoredebug[#"hash_3f8a9579ce4600de"].score = -1000;
-						point._scoredebug[#"hash_3f8a9579ce4600de"].scorename = "";
+						point._scoredebug[#"no visibility"].score = -1000;
+						point._scoredebug[#"no visibility"].scorename = "";
 					#/
 					point.score = point.score + -1000;
 				}
@@ -529,12 +529,12 @@ function function_1c4cd527(origin, owner, innerradius, outerradius, halfheight, 
 				{
 					point._scoredebug = [];
 				}
-				if(!isdefined(point._scoredebug[#"hash_3f8a9579ce4600de"]))
+				if(!isdefined(point._scoredebug[#"no visibility"]))
 				{
-					point._scoredebug[#"hash_3f8a9579ce4600de"] = spawnstruct();
+					point._scoredebug[#"no visibility"] = spawnstruct();
 				}
-				point._scoredebug[#"hash_3f8a9579ce4600de"].score = -5000;
-				point._scoredebug[#"hash_3f8a9579ce4600de"].scorename = "";
+				point._scoredebug[#"no visibility"].score = -5000;
+				point._scoredebug[#"no visibility"].scorename = "";
 			#/
 			point.score = point.score + -5000;
 		}

@@ -1,6 +1,6 @@
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\vehicle_shared.csc;
+#using scripts\core_common\util_shared.csc;
 
 #namespace vehicle;
 
@@ -18,25 +18,25 @@ function private autoexec function_e599db04()
 	level notify(66008352);
 }
 
-#namespace namespace_964fbfb5;
+#namespace wz_vehicle;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_964fbfb5
+	Name: __init__system__
+	Namespace: wz_vehicle
 	Checksum: 0x30E67605
 	Offset: 0xF8
 	Size: 0x3C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_efc308ec898ff43", &function_70a657d8, undefined, undefined, undefined);
+	system::register(#"wz_vehicle", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x2B70A770
 	Offset: 0x140
 	Size: 0xA4
@@ -53,7 +53,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_58e95b55
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x6C19AB7E
 	Offset: 0x1F0
 	Size: 0x66
@@ -75,7 +75,7 @@ function function_58e95b55(localclientnum, vehicle)
 
 /*
 	Name: function_84f28fd9
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x9630D11A
 	Offset: 0x260
 	Size: 0x4C
@@ -93,7 +93,7 @@ function function_84f28fd9(localclientnum, vehicle)
 
 /*
 	Name: function_7a5dc47e
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x44E13D3F
 	Offset: 0x2B8
 	Size: 0x98
@@ -117,7 +117,7 @@ function function_7a5dc47e(localclientnum, height, fx)
 
 /*
 	Name: function_b57d31e4
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x396CC6F8
 	Offset: 0x358
 	Size: 0xD8
@@ -145,7 +145,7 @@ function function_b57d31e4(localclientnum, height, fx)
 
 /*
 	Name: function_c6d5a97d
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0xF3492B9B
 	Offset: 0x438
 	Size: 0x4C
@@ -160,7 +160,7 @@ function function_c6d5a97d(localclientnum)
 
 /*
 	Name: function_bc80c148
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x44F350A3
 	Offset: 0x490
 	Size: 0x5C
@@ -178,7 +178,7 @@ function function_bc80c148(localclientnum, fx)
 
 /*
 	Name: function_c0119d33
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x28C58A9D
 	Offset: 0x4F8
 	Size: 0x5C

@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_140ed462 : class_6aaccc24
+class czm_game_timer : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_140ed462
+		Namespace: czm_game_timer
 		Checksum: 0x250A77E9
 		Offset: 0x258
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_140ed462 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_140ed462
+		Namespace: czm_game_timer
 		Checksum: 0xB85DD4ED
 		Offset: 0x480
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_140ed462 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_140ed462
+		Namespace: czm_game_timer
 		Checksum: 0x820B6CDE
 		Offset: 0x318
 		Size: 0x3C
@@ -47,26 +47,26 @@ class class_140ed462 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_21eb67aa
-		Namespace: namespace_140ed462
+		Name: set_minutes
+		Namespace: czm_game_timer
 		Checksum: 0xD177F5AA
 		Offset: 0x3E0
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_21eb67aa(player, value)
+	function set_minutes(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "minutes", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_140ed462
+		Namespace: czm_game_timer
 		Checksum: 0xF144FF53
 		Offset: 0x360
 		Size: 0x24
@@ -75,26 +75,26 @@ class class_140ed462 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_7954feaf
-		Namespace: namespace_140ed462
+		Name: set_showzero
+		Namespace: czm_game_timer
 		Checksum: 0x2E858FBF
 		Offset: 0x430
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_7954feaf(player, value)
+	function set_showzero(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showzero", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_140ed462
+		Namespace: czm_game_timer
 		Checksum: 0x954214A3
 		Offset: 0x278
 		Size: 0x94
@@ -103,22 +103,22 @@ class class_140ed462 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_game_timer");
-		namespace_6aaccc24::function_da693cbe("seconds", 1, 6, "int");
-		namespace_6aaccc24::function_da693cbe("minutes", 1, 9, "int");
-		namespace_6aaccc24::function_da693cbe("showzero", 1, 1, "int");
+		cluielem::setup_clientfields("zm_game_timer");
+		cluielem::add_clientfield("seconds", 1, 6, "int");
+		cluielem::add_clientfield("minutes", 1, 9, "int");
+		cluielem::add_clientfield("showzero", 1, 1, "int");
 	}
 
 	/*
-		Name: function_c48569e7
-		Namespace: namespace_140ed462
+		Name: set_seconds
+		Namespace: czm_game_timer
 		Checksum: 0x8867289A
 		Offset: 0x390
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_c48569e7(player, value)
+	function set_seconds(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "seconds", value);
 	}
@@ -152,7 +152,7 @@ function private autoexec function_2a68d84d()
 */
 function register()
 {
-	elem = new class_140ed462();
+	elem = new czm_game_timer();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -204,7 +204,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_c48569e7
+	Name: set_seconds
 	Namespace: zm_game_timer
 	Checksum: 0xB9272781
 	Offset: 0x1C8
@@ -212,13 +212,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_c48569e7(player, value)
+function set_seconds(player, value)
 {
-	[[ self ]]->function_c48569e7(player, value);
+	[[ self ]]->set_seconds(player, value);
 }
 
 /*
-	Name: function_21eb67aa
+	Name: set_minutes
 	Namespace: zm_game_timer
 	Checksum: 0xD9C0B78C
 	Offset: 0x1F8
@@ -226,13 +226,13 @@ function function_c48569e7(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_21eb67aa(player, value)
+function set_minutes(player, value)
 {
-	[[ self ]]->function_21eb67aa(player, value);
+	[[ self ]]->set_minutes(player, value);
 }
 
 /*
-	Name: function_7954feaf
+	Name: set_showzero
 	Namespace: zm_game_timer
 	Checksum: 0x7C666FC5
 	Offset: 0x228
@@ -240,8 +240,8 @@ function function_21eb67aa(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_7954feaf(player, value)
+function set_showzero(player, value)
 {
-	[[ self ]]->function_7954feaf(player, value);
+	[[ self ]]->set_showzero(player, value);
 }
 

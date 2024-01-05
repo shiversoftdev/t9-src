@@ -11,7 +11,7 @@
 */
 function function_bdda909b()
 {
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		return;
 	}

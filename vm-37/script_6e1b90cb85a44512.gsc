@@ -1,36 +1,36 @@
-#using script_18f0d22c75b141a7;
-#using script_1cc417743d7c262d;
-#using script_2c49ae69cd8ce30c;
-#using script_2f46c01b9eb62847;
-#using script_335d0650ed05d36d;
-#using script_3539cbff3042175f;
-#using script_3d703ef87a841fe4;
-#using script_3f27a7b2232674db;
-#using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
-#using script_5399f402045d7abd;
-#using scripts\core_common\armor.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\gestures.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
-#using scripts\core_common\hud_message_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\mp_common\challenges.gsc;
-#using scripts\mp_common\gametypes\gametype.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_defaults.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\killstreaks\recon_plane.gsc;
+#using scripts\killstreaks\mp\uav.gsc;
+#using scripts\weapons\weapon_utils.gsc;
+#using scripts\mp_common\util.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
 #using scripts\mp_common\gametypes\match.gsc;
 #using scripts\mp_common\gametypes\spawning.gsc;
-#using scripts\mp_common\util.gsc;
+#using scripts\mp_common\gametypes\globallogic_defaults.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\mp_common\gametypes\gametype.gsc;
+#using scripts\mp_common\challenges.gsc;
+#using scripts\core_common\armor.gsc;
+#using script_3d703ef87a841fe4;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using scripts\core_common\gestures.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\hud_message_shared.gsc;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\spawning_shared.gsc;
+#using script_335d0650ed05d36d;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
 
 #namespace dropkick;
 
@@ -121,11 +121,11 @@ function onscorelimit()
 */
 function end_round()
 {
-	level thread function_1a67afed();
-	level thread do_rumble();
-	level thread function_86ca9275();
-	level thread function_311e397d();
-	level thread function_68f13f40();
+	level childthread function_1a67afed();
+	level childthread do_rumble();
+	level childthread function_86ca9275();
+	level childthread function_311e397d();
+	level childthread function_68f13f40();
 	music::setmusicstate("dropkick_round_end");
 	playsoundatposition(#"hash_31f07589beb0a02e", (0, 0, 0));
 	wait(11);
@@ -403,7 +403,7 @@ function function_4e92a5e8()
 	var_e9f2629a[0] = spawn("script_model", var_791ffffd.origin);
 	var_e9f2629a[0] setmodel(#"wpn_t9_eqp_briefcase_world");
 	var_e9f2629a[0].angles = var_791ffffd.angles;
-	football = gameobjects::create_carry_object(#"neutral", trigger, var_e9f2629a, (0, 0, 0), #"hash_4c3deffad97a79da");
+	football = gameobjects::create_carry_object(#"neutral", trigger, var_e9f2629a, (0, 0, 0), #"dropkick_football");
 	football gameobjects::allow_carry(#"hash_5ccfd7bbbf07c770");
 	football gameobjects::set_visible(#"hash_5ccfd7bbbf07c770");
 	football gameobjects::set_use_time(level.var_8abcfbb8);
@@ -901,7 +901,7 @@ function function_3f367c2e()
 function function_1a67afed()
 {
 	clientfield::set("" + #"hash_69d32ac298f2aa22", 1);
-	level waittill(#"hash_2f4afe1cb9b6de05");
+	level waittill(#"pre_potm");
 	clientfield::set("" + #"hash_69d32ac298f2aa22", 2);
 	level waittill(#"potm_finished");
 	clientfield::set("" + #"hash_69d32ac298f2aa22", 3);
@@ -979,7 +979,7 @@ function private function_68f13f40()
 	wait(2.1);
 	foreach(player in getplayers())
 	{
-		player gestures::function_b204f6e3(#"hash_6c5354e57d5054f6", undefined, 1);
+		player gestures::play_gesture(#"hash_6c5354e57d5054f6", undefined, 1);
 	}
 	duration = 6.9;
 	wait(duration);

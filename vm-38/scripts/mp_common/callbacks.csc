@@ -1,11 +1,11 @@
-#using script_1b80a90bb1ce332e;
-#using script_7c21aca7f8a3572a;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\footsteps_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\vehicle_shared.csc;
-#using scripts\mp_common\callbacks.csc;
 #using scripts\mp_common\vehicle.csc;
+#using scripts\mp_common\callbacks.csc;
+#using scripts\core_common\vehicle_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\killstreaks\helicopter_shared.csc;
+#using scripts\killstreaks\airsupport.csc;
+#using scripts\core_common\footsteps_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace callbacks;
 
@@ -20,13 +20,13 @@
 */
 function private autoexec function_f375697()
 {
-	level notify(1776923280);
+	level notify(-1776923280);
 }
 
 #namespace callback;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: callback
 	Checksum: 0xD291A86C
 	Offset: 0x158
@@ -34,7 +34,7 @@ function private autoexec function_f375697()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"callback", &function_70a657d8, undefined, undefined, undefined);
 }

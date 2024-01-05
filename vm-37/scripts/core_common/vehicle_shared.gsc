@@ -1,28 +1,28 @@
-#using script_3728b3b9606c4299;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\turret_shared.gsc;
+#using scripts\core_common\weapons_shared.gsc;
+#using scripts\weapons\heatseekingmissile.gsc;
+#using scripts\core_common\vehicle_death_shared.gsc;
+#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\vehicleriders_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_ai_shared.gsc;
-#using scripts\core_common\vehicle_death_shared.gsc;
-#using scripts\core_common\vehicleriders_shared.gsc;
-#using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\turret_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace vehicle;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: vehicle
 	Checksum: 0x909C6DC3
 	Offset: 0xBB8
@@ -30,7 +30,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"vehicle_shared", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -83,26 +83,26 @@ function private function_70a657d8()
 	clientfield::register("vehicle", "rocket_damage_rumble", 1, 1, "counter");
 	if(!is_true(level.var_7b05c4b5))
 	{
-		clientfield::function_a8bbc967("vehicle.ammoCount", 1, 10, "int", 0);
-		clientfield::function_a8bbc967("vehicle.ammoReloading", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.ammoLow", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.rocketAmmo", 1, 2, "int", 0);
-		clientfield::function_a8bbc967("vehicle.ammo2Count", 1, 10, "int", 0);
-		clientfield::function_a8bbc967("vehicle.ammo2Reloading", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.ammo2Low", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.collisionWarning", 1, 2, "int", 0);
-		clientfield::function_a8bbc967("vehicle.enemyInReticle", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.missileRepulsed", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.incomingMissile", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.missileLock", 1, 2, "int", 0);
-		clientfield::function_a8bbc967("vehicle.malfunction", 1, 2, "int", 0);
-		clientfield::function_a8bbc967("vehicle.showHoldToExitPrompt", 1, 1, "int", 0);
-		clientfield::function_a8bbc967("vehicle.holdToExitProgress", 1, 5, "float", 0);
-		clientfield::function_a8bbc967("vehicle.vehicleAttackMode", 1, 3, "int", 0);
-		clientfield::function_a8bbc967("vehicle.invalidLanding", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.ammoCount", 1, 10, "int", 0);
+		clientfield::register_clientuimodel("vehicle.ammoReloading", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.ammoLow", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.rocketAmmo", 1, 2, "int", 0);
+		clientfield::register_clientuimodel("vehicle.ammo2Count", 1, 10, "int", 0);
+		clientfield::register_clientuimodel("vehicle.ammo2Reloading", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.ammo2Low", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.collisionWarning", 1, 2, "int", 0);
+		clientfield::register_clientuimodel("vehicle.enemyInReticle", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.missileRepulsed", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.incomingMissile", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.missileLock", 1, 2, "int", 0);
+		clientfield::register_clientuimodel("vehicle.malfunction", 1, 2, "int", 0);
+		clientfield::register_clientuimodel("vehicle.showHoldToExitPrompt", 1, 1, "int", 0);
+		clientfield::register_clientuimodel("vehicle.holdToExitProgress", 1, 5, "float", 0);
+		clientfield::register_clientuimodel("vehicle.vehicleAttackMode", 1, 3, "int", 0);
+		clientfield::register_clientuimodel("vehicle.invalidLanding", 1, 1, "int", 0);
 		for(i = 0; i < 3; i++)
 		{
-			clientfield::function_a8bbc967(("vehicle.bindingCooldown" + i) + ".cooldown", 1, 5, "float", 0);
+			clientfield::register_clientuimodel(("vehicle.bindingCooldown" + i) + ".cooldown", 1, 5, "float", 0);
 		}
 	}
 	clientfield::register("toplayer", "toggle_dnidamagefx", 1, 1, "int");
@@ -1173,7 +1173,7 @@ function get_on_and_go_path(path_start, distance)
 function go_path()
 {
 	level endon(#"game_ended");
-	self endon(#"death", #"hash_7c36ba955d05ca78");
+	self endon(#"death", #"stop path");
 	if(is_true(self.isphysicsvehicle))
 	{
 		self setbrake(0);
@@ -1259,7 +1259,7 @@ function function_bb9b43a9(path_start, var_1c847d0f, path_angles, location, var_
 function path_gate_open(node)
 {
 	node.gateopen = 1;
-	node notify(#"hash_4c7e71f20b5a7db7");
+	node notify(#"gate opened");
 }
 
 /*
@@ -1276,7 +1276,7 @@ function path_gate_wait_till_open(pathspot)
 	self endon(#"death");
 	self.waitingforgate = 1;
 	self set_speed(0, 15, "path gate closed");
-	pathspot waittill(#"hash_4c7e71f20b5a7db7");
+	pathspot waittill(#"gate opened");
 	self.waitingforgate = 0;
 	if(self.health > 0)
 	{
@@ -1502,7 +1502,7 @@ function init(vehicle)
 	}
 	else
 	{
-		if(vehicle.var_46439e18 && !function_f99d2668())
+		if(vehicle.var_46439e18 && !sessionmodeiswarzonegame())
 		{
 			vehicle.disconnectpathonstop = 1;
 			vehicle.disconnectpathdetail = 2;
@@ -1523,7 +1523,7 @@ function init(vehicle)
 	if(!isdefined(vehicle.script_nonmovingvehicle))
 	{
 		path_start = get_target(vehicle);
-		if(isdefined(path_start) && function_5f430582(path_start))
+		if(isdefined(path_start) && isvehiclenode(path_start))
 		{
 			vehicle thread get_on_path(path_start);
 		}
@@ -1813,8 +1813,8 @@ function set_speed(speed, rate, msg)
 function debug_set_speed(speed, rate, msg)
 {
 	/#
-		self notify(#"hash_7df59f670b5723ce");
-		self endon(#"hash_7df59f670b5723ce", #"hash_7542a4bb12b44682", #"death");
+		self notify(#"new debug_vehiclesetspeed");
+		self endon(#"new debug_vehiclesetspeed", #"resuming speed", #"death");
 		while(true)
 		{
 			while(getdvarstring(#"debug_vehiclesetspeed") != "")
@@ -1866,7 +1866,7 @@ function script_resume_speed(msg, rate)
 	{
 		self set_speed(fsetspeed, 15, "resume setspeed from attack");
 	}
-	self notify(#"hash_7542a4bb12b44682");
+	self notify(#"resuming speed");
 	/#
 		self thread debug_resume((msg + "") + type);
 	#/
@@ -4825,14 +4825,14 @@ function stop_monitor_damage_as_occupant()
 	Parameters: 2
 	Flags: Linked
 */
-function kill_vehicle(var_dbd1a594, weapon)
+function kill_vehicle(attackingplayer, weapon)
 {
 	if(!isdefined(weapon))
 	{
 		weapon = level.weaponnone;
 	}
 	damageorigin = self.origin + (0, 0, 1);
-	self finishvehicleradiusdamage(var_dbd1a594, var_dbd1a594, 32000, 32000, 10, 0, "MOD_EXPLOSIVE", weapon, damageorigin, 400, -1, (0, 0, 1), 0);
+	self finishvehicleradiusdamage(attackingplayer, attackingplayer, 32000, 32000, 10, 0, "MOD_EXPLOSIVE", weapon, damageorigin, 400, -1, (0, 0, 1), 0);
 }
 
 /*
@@ -4844,9 +4844,9 @@ function kill_vehicle(var_dbd1a594, weapon)
 	Parameters: 2
 	Flags: None
 */
-function function_eb183ffe(var_dbd1a594, weapon)
+function function_eb183ffe(attackingplayer, weapon)
 {
-	kill_vehicle(var_dbd1a594, weapon);
+	kill_vehicle(attackingplayer, weapon);
 }
 
 /*
@@ -5050,14 +5050,14 @@ function private function_40fc185b(params)
 	Parameters: 1
 	Flags: None
 */
-function function_1f05ebe8(var_b75d0d00)
+function function_1f05ebe8(vehicleassets)
 {
 	/#
-		foreach(asset in var_b75d0d00)
+		foreach(asset in vehicleassets)
 		{
 			if(asset.var_57f5cdd8 != #"")
 			{
-				foreach(var_58388e8c in var_b75d0d00)
+				foreach(var_58388e8c in vehicleassets)
 				{
 					if(var_58388e8c.name == asset.var_57f5cdd8)
 					{
@@ -5068,7 +5068,7 @@ function function_1f05ebe8(var_b75d0d00)
 			}
 			if(asset.var_5a25c2fb != #"")
 			{
-				foreach(var_3913f550 in var_b75d0d00)
+				foreach(var_3913f550 in vehicleassets)
 				{
 					if(var_3913f550.name == asset.var_5a25c2fb)
 					{
@@ -5077,7 +5077,7 @@ function function_1f05ebe8(var_b75d0d00)
 				}
 			}
 		}
-		return var_b75d0d00;
+		return vehicleassets;
 	#/
 }
 
@@ -5607,7 +5607,7 @@ function private function_831cd622(e_player)
 {
 	s_info = {};
 	v_movement = e_player getnormalizedmovement();
-	if(self.archetype === #"hash_5cb98c18fee01b3a")
+	if(self.archetype === #"fav")
 	{
 		var_d526c0e4 = self.origin + (anglestoright(self.angles) * 115);
 		var_c1af71a1 = self.origin + (anglestoright(self.angles) * -125);
@@ -6159,7 +6159,7 @@ function function_a29610b6(x, k)
 	Parameters: 5
 	Flags: None
 */
-function update_flare_ability(player, var_55716d54, active_time, cooldown_time, var_f69e2d1)
+function update_flare_ability(player, var_55716d54, active_time, cooldown_time, flare_tag)
 {
 	if(!isdefined(active_time))
 	{
@@ -6169,9 +6169,9 @@ function update_flare_ability(player, var_55716d54, active_time, cooldown_time, 
 	{
 		cooldown_time = 10;
 	}
-	if(!isdefined(var_f69e2d1))
+	if(!isdefined(flare_tag))
 	{
-		var_f69e2d1 = undefined;
+		flare_tag = undefined;
 	}
 	var_a86d6798 = "update_flare_ability";
 	self notify(var_a86d6798);
@@ -6202,7 +6202,7 @@ function update_flare_ability(player, var_55716d54, active_time, cooldown_time, 
 			self flag::clear("flares_available");
 			self.var_40d7d1f2 = 1;
 			player playsoundtoplayer(#"hash_35af2f72517d10ab", player);
-			self fire_flares(player, var_f69e2d1, active_time);
+			self fire_flares(player, flare_tag, active_time);
 			player clientfield::set_player_uimodel(("vehicle.bindingCooldown" + var_55716d54) + ".cooldown", 0);
 			wait(var_bca5c6c1);
 			self.var_40d7d1f2 = 0;
@@ -6300,11 +6300,11 @@ function private function_1eab63e3(flare_lifetime)
 	Parameters: 3
 	Flags: Linked
 */
-function fire_flares(player, var_f69e2d1, flare_lifetime)
+function fire_flares(player, flare_tag, flare_lifetime)
 {
-	if(!isdefined(var_f69e2d1))
+	if(!isdefined(flare_tag))
 	{
-		var_f69e2d1 = undefined;
+		flare_tag = undefined;
 	}
 	if(!isdefined(flare_lifetime))
 	{
@@ -6314,7 +6314,7 @@ function fire_flares(player, var_f69e2d1, flare_lifetime)
 	for(var_558d81a6 = 0; var_558d81a6 < 4; var_558d81a6++)
 	{
 		model = "tag_origin";
-		if(!isdefined(var_f69e2d1))
+		if(!isdefined(flare_tag))
 		{
 			self.var_70eddc3b = !is_true(self.var_70eddc3b);
 			start_tag = (self.var_70eddc3b ? "tag_fx_flare_left" : "tag_fx_flare_right");
@@ -6322,15 +6322,15 @@ function fire_flares(player, var_f69e2d1, flare_lifetime)
 		}
 		else
 		{
-			start_origin = self gettagorigin(var_f69e2d1);
+			start_origin = self gettagorigin(flare_tag);
 		}
 		if(!isdefined(start_origin))
 		{
 			start_origin = self gettagorigin("tag_origin") + vectorscale((0, 0, 1), 128);
 		}
-		if(isdefined(var_f69e2d1))
+		if(isdefined(flare_tag))
 		{
-			var_ac3aef54 = self gettagangles(var_f69e2d1);
+			var_ac3aef54 = self gettagangles(flare_tag);
 		}
 		if(!isdefined(var_ac3aef54))
 		{
@@ -6339,7 +6339,7 @@ function fire_flares(player, var_f69e2d1, flare_lifetime)
 		flare = util::spawn_model(model, start_origin, var_ac3aef54);
 		flare clientfield::set("play_flare_fx", 1);
 		flare_lifetime = max(var_f9a2afb9[var_558d81a6] - (var_558d81a6 * 0.15), 0.5);
-		flare thread move_flare(self, vectorscale((0, 0, -1), 200), 0.5, 0.25, flare_lifetime, var_f69e2d1);
+		flare thread move_flare(self, vectorscale((0, 0, -1), 200), 0.5, 0.25, flare_lifetime, flare_tag);
 		flare thread function_9ff1a886(self);
 		wait(0.15);
 	}
@@ -6404,19 +6404,19 @@ function function_7786cb5e(var_95d2171d, vector)
 	Parameters: 6
 	Flags: Linked
 */
-function move_flare(owner, gravity, var_2434a7ac, var_2d0d8b66, max_time, var_f69e2d1)
+function move_flare(owner, gravity, var_2434a7ac, var_2d0d8b66, max_time, flare_tag)
 {
-	if(!isdefined(var_f69e2d1))
+	if(!isdefined(flare_tag))
 	{
-		var_f69e2d1 = undefined;
+		flare_tag = undefined;
 	}
 	self endon(#"death");
 	start_time = gettime();
 	var_6de53efa = start_time + (var_2434a7ac * 1000);
 	end_time = start_time + (max_time * 1000);
-	if(isdefined(var_f69e2d1))
+	if(isdefined(flare_tag))
 	{
-		var_4626a28f = owner gettagangles(var_f69e2d1);
+		var_4626a28f = owner gettagangles(flare_tag);
 		var_abfdfad5 = 1;
 	}
 	else
@@ -6698,13 +6698,13 @@ function function_ff77beb1(otherplayer)
 		var_9db4bbbe.var_b6233805 = player.tag_stowed_hip;
 		var_9db4bbbe.stowed_weapon = player getstowedweapon();
 		var_9db4bbbe.bodytype = player getcharacterbodytype();
-		var_9db4bbbe.outfit = player function_50a9aad5();
+		var_9db4bbbe.outfit = player getcharacteroutfit();
 		var_d8d89950 = spawnstruct();
 		var_d8d89950.tag_stowed_back_weapon = otherplayer.tag_stowed_back;
 		var_d8d89950.var_b6233805 = otherplayer.tag_stowed_hip;
 		var_d8d89950.stowed_weapon = otherplayer getstowedweapon();
 		var_d8d89950.bodytype = otherplayer getcharacterbodytype();
-		var_d8d89950.outfit = otherplayer function_50a9aad5();
+		var_d8d89950.outfit = otherplayer getcharacteroutfit();
 		if(!isdefined(player.var_19bc935c))
 		{
 			player.var_19bc935c = var_9db4bbbe;
@@ -6733,7 +6733,7 @@ function function_d4a848de(var_19bc935c)
 {
 	player = self;
 	player setcharacterbodytype(var_19bc935c.bodytype);
-	player function_8fd843dd(var_19bc935c.outfit);
+	player setcharacteroutfit(var_19bc935c.outfit);
 }
 
 /*

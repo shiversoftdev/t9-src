@@ -1,11 +1,11 @@
-#using script_44c0e6a2f5660ef5;
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\beam_shared.csc;
+#using scripts\core_common\struct.csc;
+#using script_44c0e6a2f5660ef5;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_95c839d1;
 
@@ -20,7 +20,7 @@
 */
 function private autoexec function_2b1f2eb3()
 {
-	level notify(436290013);
+	level notify(-436290013);
 }
 
 /*
@@ -58,9 +58,9 @@ function init()
 	clientfield::register("world", "" + #"hash_6c47531bdf01d52c", 28000, 1, "int", &function_7ebf8c0a, 0, 0);
 	clientfield::register("world", "" + #"hash_78e149e0b7cb80e8", 28000, 1, "int", &function_381bdf6a, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_6cc7dece6cee40e1", 28000, 1, "int", &function_940af073, 0, 0);
-	level.var_87a3c4d1 = namespace_fb27ba0b::register();
+	level.var_87a3c4d1 = zm_roots_health_bar::register();
 	level.var_75a7d6 = struct::get(#"hash_5d6c93a20ed01a31");
-	if(!zm_utility::function_e51dc2d8())
+	if(!zm_utility::is_ee_enabled())
 	{
 		return;
 	}
@@ -306,22 +306,22 @@ function function_45782681(localclientnum, oldval, newval, bnewent, binitialsnap
 		soundstoploopemitter(#"hash_59bcffa6b4e44959", (8685, 1931, 193));
 		if(self.model === #"hash_b7cea188cbd2e02")
 		{
-			self function_bf9d3071(#"hash_715008a482133aa4");
+			self playrenderoverridebundle(#"hash_715008a482133aa4");
 		}
 		else
 		{
-			self function_bf9d3071(#"hash_ab879c54384fbcf");
+			self playrenderoverridebundle(#"hash_ab879c54384fbcf");
 		}
 	}
 	else
 	{
 		if(self.model === #"hash_b7cea188cbd2e02")
 		{
-			self function_5d482e78(#"hash_715008a482133aa4");
+			self stoprenderoverridebundle(#"hash_715008a482133aa4");
 		}
 		else
 		{
-			self function_5d482e78(#"hash_ab879c54384fbcf");
+			self stoprenderoverridebundle(#"hash_ab879c54384fbcf");
 		}
 	}
 }
@@ -374,7 +374,7 @@ function function_23cc7759(localclientnum, oldval, newval, bnewent, binitialsnap
 		{
 			if(self function_d2503806(var_ee6bcd51))
 			{
-				self function_5d482e78(var_ee6bcd51);
+				self stoprenderoverridebundle(var_ee6bcd51);
 			}
 		}
 		return;
@@ -383,7 +383,7 @@ function function_23cc7759(localclientnum, oldval, newval, bnewent, binitialsnap
 	var_9d075e06 = #"hash_1c7d3c44e1f3f425";
 	if(!var_d4015058 && !self function_d2503806(#"hash_74375380d1d53da2"))
 	{
-		self function_bf9d3071(#"hash_74375380d1d53da2");
+		self playrenderoverridebundle(#"hash_74375380d1d53da2");
 	}
 	if(bwastimejump >= 2)
 	{
@@ -391,7 +391,7 @@ function function_23cc7759(localclientnum, oldval, newval, bnewent, binitialsnap
 		var_9d075e06 = #"hash_1c7d3944e1f3ef0c";
 		if(!var_d4015058 && !self function_d2503806(#"hash_74375280d1d53bef"))
 		{
-			self function_bf9d3071(#"hash_74375280d1d53bef");
+			self playrenderoverridebundle(#"hash_74375280d1d53bef");
 		}
 		if(bwastimejump >= 3)
 		{
@@ -400,7 +400,7 @@ function function_23cc7759(localclientnum, oldval, newval, bnewent, binitialsnap
 			var_9d075e06 = #"hash_1c7d3a44e1f3f0bf";
 			if(!var_d4015058 && !self function_d2503806(#"hash_74375180d1d53a3c"))
 			{
-				self function_bf9d3071(#"hash_74375180d1d53a3c");
+				self playrenderoverridebundle(#"hash_74375180d1d53a3c");
 			}
 			if(bwastimejump >= 4)
 			{
@@ -408,14 +408,14 @@ function function_23cc7759(localclientnum, oldval, newval, bnewent, binitialsnap
 				var_9d075e06 = #"hash_1c7d3744e1f3eba6";
 				if(!var_d4015058 && !self function_d2503806(#"hash_74375080d1d53889"))
 				{
-					self function_bf9d3071(#"hash_74375080d1d53889");
+					self playrenderoverridebundle(#"hash_74375080d1d53889");
 				}
 				if(bwastimejump >= 5)
 				{
 					var_65a206d2 = #"hash_39ed119d7fa3dde9";
 					if(!var_d4015058 && !self function_d2503806(#"hash_74374f80d1d536d6"))
 					{
-						self function_bf9d3071(#"hash_74374f80d1d536d6");
+						self playrenderoverridebundle(#"hash_74374f80d1d536d6");
 					}
 				}
 			}
@@ -722,7 +722,7 @@ function function_cd3073f5(localclientnum, oldval, newval, bnewent, binitialsnap
 		}
 		if(!self function_d2503806(#"hash_4837670e6a8aaa2c"))
 		{
-			self function_bf9d3071(#"hash_4837670e6a8aaa2c");
+			self playrenderoverridebundle(#"hash_4837670e6a8aaa2c");
 		}
 	}
 	else
@@ -734,7 +734,7 @@ function function_cd3073f5(localclientnum, oldval, newval, bnewent, binitialsnap
 		}
 		if(self function_d2503806(#"hash_4837670e6a8aaa2c"))
 		{
-			self function_5d482e78(#"hash_4837670e6a8aaa2c");
+			self stoprenderoverridebundle(#"hash_4837670e6a8aaa2c");
 		}
 	}
 	if(bwastimejump == 2)
@@ -1206,7 +1206,7 @@ function function_20193edf(localclientnum, oldval, newval, bnewent, binitialsnap
 			stopfx(fieldname, self.var_292dd2b3);
 			self.var_292dd2b3 = undefined;
 		}
-		playfx(fieldname, #"hash_789bae8e3744f666", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+		playfx(fieldname, #"maps/zm_tungsten/fx9_zm_dark_aether_crystals_exp", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
 	}
 	else
 	{
@@ -1226,7 +1226,7 @@ function function_20193edf(localclientnum, oldval, newval, bnewent, binitialsnap
 			}
 			self stoprumble(fieldname, #"hash_6a557ef73676fea");
 			playfx(fieldname, #"hash_2452dd6eef500ad9", self.origin - vectorscale((0, 0, 1), 80), anglestoforward(vectorscale((1, 0, 0), 270)), anglestoup(vectorscale((1, 0, 0), 270)));
-			self.var_292dd2b3 = playfx(fieldname, #"hash_69bd2397ba4a3525", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+			self.var_292dd2b3 = playfx(fieldname, #"maps/zm_tungsten/fx9_zm_dark_crystals_ambient", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
 		}
 	}
 }
@@ -1422,7 +1422,7 @@ function function_381bdf6a(localclientnum, oldval, newval, bnewent, binitialsnap
 		{
 			if(!isdefined(var_48c75d3e.var_f356849d))
 			{
-				var_48c75d3e.var_f356849d = playfx(fieldname, #"hash_8478c81c667da1", var_48c75d3e.origin, anglestoforward(var_48c75d3e.angles), anglestoup(var_48c75d3e.angles));
+				var_48c75d3e.var_f356849d = playfx(fieldname, #"sr/fx9_obj_holdout_env_signifier", var_48c75d3e.origin, anglestoforward(var_48c75d3e.angles), anglestoup(var_48c75d3e.angles));
 			}
 		}
 		else if(isdefined(var_48c75d3e.var_f356849d))

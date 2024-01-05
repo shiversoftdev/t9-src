@@ -1,24 +1,24 @@
-#using script_101d8280497ff416;
 #using script_1e30f5109f6bf48c;
-#using script_20055f2f97341caa;
+#using script_7c727635e50af640;
 #using script_37560a24283a601;
-#using script_3d35e2ff167b3a82;
-#using script_3d5887fc414a86fb;
-#using script_618d6f5ff5d18933;
-#using script_680dddbda86931fa;
 #using script_68ae4d25b2c90f7d;
 #using script_7b5224fe73522c;
-#using script_7c727635e50af640;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using script_680dddbda86931fa;
+#using script_618d6f5ff5d18933;
+#using script_101d8280497ff416;
+#using script_3d35e2ff167b3a82;
+#using scripts\core_common\item_inventory.csc;
+#using script_20055f2f97341caa;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_1b527536;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1b527536
 	Checksum: 0x27033102
 	Offset: 0x190
@@ -26,7 +26,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_13a43d760497b54d", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -47,8 +47,8 @@ function private function_70a657d8()
 	{
 		return;
 	}
-	level.var_1b527536 = array(#"hash_85edf3a63bb488c", #"hash_2f148f3f9c3812a8", #"hash_2f14923f9c3817c1", #"hash_2f14913f9c38160e", #"hash_2f14943f9c381b27", #"frost_blast_5", #"heal_aoe", #"hash_379869d5b6da974b", #"hash_37986ad5b6da98fe", #"hash_37986bd5b6da9ab1", #"hash_37986cd5b6da9c64", #"hash_37986dd5b6da9e17", #"energy_mine", #"hash_4ac402a4add2a995", #"hash_4ac3ffa4add2a47c", #"hash_4ac400a4add2a62f", #"hash_4ac3fda4add2a116", #"hash_4ac3fea4add2a2c9", #"aether_shroud", #"hash_164c43cbd0ee958", #"hash_164c73cbd0eee71", #"hash_164c63cbd0eecbe", #"hash_164c93cbd0ef1d7", #"hash_164c83cbd0ef024", #"ring_of_fire", #"hash_631a223758cd92a", #"hash_631a123758cd777", #"hash_631a023758cd5c4", #"hash_6319f23758cd411", #"hash_6319e23758cd25e", #"hash_55569355da0f0f68", #"hash_43e326396554e18c", #"hash_43e329396554e6a5", #"hash_43e328396554e4f2", #"hash_43e323396554dc73", #"hash_43e322396554dac0");
-	clientfield::function_a8bbc967("hud_items.ammoCooldowns.fieldUpgrade", #"hud_items", [1:#"fieldupgrade", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
+	level.var_1b527536 = array(#"hash_85edf3a63bb488c", #"frost_blast_1", #"frost_blast_2", #"frost_blast_3", #"frost_blast_4", #"frost_blast_5", #"heal_aoe", #"hash_379869d5b6da974b", #"hash_37986ad5b6da98fe", #"hash_37986bd5b6da9ab1", #"hash_37986cd5b6da9c64", #"hash_37986dd5b6da9e17", #"energy_mine", #"energy_mine_1", #"energy_mine_2", #"energy_mine_3", #"energy_mine_4", #"hash_4ac3fea4add2a2c9", #"aether_shroud", #"hash_164c43cbd0ee958", #"hash_164c73cbd0eee71", #"hash_164c63cbd0eecbe", #"hash_164c93cbd0ef1d7", #"hash_164c83cbd0ef024", #"ring_of_fire", #"hash_631a223758cd92a", #"hash_631a123758cd777", #"hash_631a023758cd5c4", #"hash_6319f23758cd411", #"hash_6319e23758cd25e", #"hash_55569355da0f0f68", #"hash_43e326396554e18c", #"hash_43e329396554e6a5", #"hash_43e328396554e4f2", #"hash_43e323396554dc73", #"hash_43e322396554dac0");
+	clientfield::register_clientuimodel("hud_items.ammoCooldowns.fieldUpgrade", #"hud_items", [1:#"fieldupgrade", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
 	clientfield::register("toplayer", "field_upgrade_selected", 1, 5, "int", &function_473fedfd, 0, 0);
 	clientfield::register("allplayers", "field_upgrade_fired", 1, 4, "counter", &function_1079747f, 0, 0);
 }

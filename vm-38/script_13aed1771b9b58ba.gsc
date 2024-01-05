@@ -1,12 +1,12 @@
-#using script_3f9e0dc8454d98e1;
 #using script_72401f526ba71638;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using scripts\zm_common\zm_utility.gsc;
 #using scripts\core_common\laststand_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 
 #namespace namespace_ce9594c1;
 
@@ -25,7 +25,7 @@ function private autoexec function_4fda6e35()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_ce9594c1
 	Checksum: 0xDCA80CDE
 	Offset: 0x170
@@ -33,7 +33,7 @@ function private autoexec function_4fda6e35()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_49946b57ce6e712f", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }

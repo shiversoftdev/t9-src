@@ -1,10 +1,10 @@
-#using script_2a8820b4158c6689;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\ai\archetype_brutus.csc;
 #using scripts\core_common\footsteps_shared.csc;
-#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_df4fbf0;
 

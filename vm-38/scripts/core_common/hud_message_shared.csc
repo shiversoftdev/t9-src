@@ -19,7 +19,7 @@ function private autoexec function_990a93be()
 #namespace hud_message;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: hud_message
 	Checksum: 0xCA818DA3
 	Offset: 0x88
@@ -27,7 +27,7 @@ function private autoexec function_990a93be()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hud_message", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -64,7 +64,7 @@ function function_65299180(localclientnum, var_e69b15f0, var_ba0dbe09)
 	setuimodelvalue(getuimodel(var_683a6ce, #"numargs"), var_ba0dbe09.size);
 	if(!setuimodelvalue(var_683a6ce, var_e69b15f0))
 	{
-		function_9a227103(var_683a6ce);
+		forcenotifyuimodel(var_683a6ce);
 	}
 }
 

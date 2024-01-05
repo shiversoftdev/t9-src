@@ -1,31 +1,31 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_1caf36ff04a85ff6;
-#using script_3ddf84b7bb3bf47d;
 #using script_5a8a1aa32dea1a04;
-#using script_5bb072c3abf4652c;
-#using script_68d2ee1489345a1d;
-#using script_7d7ac1f663edcdc8;
-#using script_7fc996fe8678852;
-#using script_f11fc6f7a3ad5b9;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
+#using script_3ddf84b7bb3bf47d;
+#using scripts\zm_common\aats\zm_aat.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\popups_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_1caf36ff04a85ff6;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using script_7d7ac1f663edcdc8;
+#using scripts\zm_common\zm_utility.gsc;
 #using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_score.gsc;
 #using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace namespace_4b9fccd8;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4b9fccd8
 	Checksum: 0x6FEFDF88
 	Offset: 0x228
@@ -33,7 +33,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_794c3bb2e36b3278", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -73,7 +73,7 @@ function function_70a657d8()
 function function_8ac3bea9()
 {
 	var_f5ae494f = struct::get_array(#"hash_313be7fccc870cdd", "variantname");
-	if(is_true(getgametypesetting(#"hash_19d48a0d4490b0a2")) && isdefined(var_f5ae494f) && var_f5ae494f.size > 0)
+	if(is_true(getgametypesetting(#"zmpapenabled")) && isdefined(var_f5ae494f) && var_f5ae494f.size > 0)
 	{
 		level thread function_329ecd95(var_f5ae494f[0]);
 	}
@@ -296,10 +296,10 @@ function function_e3af0084()
 	weapon = self getcurrentweapon();
 	while(true)
 	{
-		var_bd027dd9 = namespace_b376ff3f::function_ec087745();
+		var_bd027dd9 = item_inventory::function_ec087745();
 		if(var_bd027dd9 != 32767)
 		{
-			var_d2648452 = namespace_b376ff3f::function_dfcacdc2(var_bd027dd9);
+			var_d2648452 = item_inventory::get_inventory_item(var_bd027dd9);
 			if(isdefined(var_d2648452.var_a8bccf69))
 			{
 				self clientfield::set_player_uimodel("pap_current", var_d2648452.var_a8bccf69);
@@ -327,7 +327,7 @@ function function_e3af0084()
 		{
 			self clientfield::set_player_uimodel("pap_current", 0);
 		}
-		self namespace_3e3637fc::function_ec7953fa();
+		self zm_aat::function_ec7953fa();
 		waitresult = undefined;
 		waitresult = self waittill(#"weapon_change", #"hash_4de2d5115dc310e2", #"hash_75ec9942d2d5fd0f", #"hash_5cd57762f792396b", #"hash_3713641b67661d30");
 		weapon = (isdefined(waitresult.weapon) ? waitresult.weapon : self getcurrentweapon());
@@ -539,14 +539,14 @@ function function_4609e67c(machine, trigger)
 		intpayload = waitresult.intpayload;
 		if(menu == #"sr_weapon_upgrade_menu")
 		{
-			item = namespace_b376ff3f::function_230ceec4(weapon);
+			item = item_inventory::function_230ceec4(weapon);
 			switch(waitresult.response)
 			{
 				case "hash_6235f4ca625f415":
 				{
 					var_82e23366 = getunlockableiteminfofromindex(intpayload, 3);
 					var_438da649 = function_b143666d(intpayload, 3);
-					var_461c9e9e = var_82e23366.var_3cf2d21;
+					var_461c9e9e = var_82e23366.namehash;
 					aat_name = function_d6739845(var_461c9e9e);
 					var_dfa2c41b = var_438da649.var_b5ec8024;
 					if(!isdefined(var_dfa2c41b))
@@ -559,7 +559,7 @@ function function_4609e67c(machine, trigger)
 					{
 						if(!is_true(item.var_a6762160.var_6e136726) && has_enough && !aat::is_exempt_weapon(weapon) && var_42a3b8a3 != aat_name && item.var_bd027dd9 != 32767)
 						{
-							var_4f0c684c = namespace_3e3637fc::function_296cde87(aat_name);
+							var_4f0c684c = zm_aat::function_296cde87(aat_name);
 							if(zm_weapons::function_89e5e7dd(var_4f0c684c))
 							{
 								switch(var_4f0c684c)
@@ -585,7 +585,7 @@ function function_4609e67c(machine, trigger)
 										break;
 									}
 								}
-								self playrumbleonentity(#"hash_410bd55524ae7d");
+								self playrumbleonentity(#"zm_interact_rumble");
 								self zm_weapons::function_37e9e0cb(item, weapon, aat_name);
 								self zm_score::minus_to_player_score(var_dfa2c41b);
 								self zm_stats::increment_client_stat(#"hash_1bcba3bbca05dee0");
@@ -619,8 +619,8 @@ function function_4609e67c(machine, trigger)
 						if(isdefined(item) && has_enough && var_a8bccf69 <= 3 && item.var_bd027dd9 != 32767 && !killstreaks::is_killstreak_weapon(weapon) && !function_ef9d58d0(item))
 						{
 							self playlocalsound(#"hash_1a8a0ca90d106338" + var_a8bccf69);
-							self namespace_b376ff3f::function_73ae3380(item, var_a8bccf69);
-							self playrumbleonentity(#"hash_410bd55524ae7d");
+							self item_inventory::function_73ae3380(item, var_a8bccf69);
+							self playrumbleonentity(#"zm_interact_rumble");
 							self zm_score::minus_to_player_score(var_340eb1b);
 							self zm_stats::increment_client_stat(#"hash_14f07bc6dbeaab78" + var_a8bccf69);
 							self zm_stats::increment_player_stat(#"hash_14f07bc6dbeaab78" + var_a8bccf69);

@@ -1,18 +1,18 @@
-#using script_267e1d16ae28392b;
 #using script_32399001bdb550da;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_267e1d16ae28392b;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace challenges;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: challenges
 	Checksum: 0xA440E7F0
 	Offset: 0x180
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"challenges", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -137,7 +137,7 @@ function challengeactorkills(data, time)
 	Parameters: 4
 	Flags: None
 */
-function function_fc664fc6(var_46e31744, var_2c59fe94, var_21bccb49, var_cab0fdf5)
+function function_fc664fc6(challengestat, var_2c59fe94, var_21bccb49, var_cab0fdf5)
 {
 	if(!isdefined(var_21bccb49))
 	{
@@ -157,20 +157,20 @@ function function_fc664fc6(var_46e31744, var_2c59fe94, var_21bccb49, var_cab0fdf
 	{
 		self.var_75b0a52c = [];
 	}
-	if(!isdefined(self.var_75b0a52c[var_46e31744]))
+	if(!isdefined(self.var_75b0a52c[challengestat]))
 	{
-		self.var_75b0a52c[var_46e31744] = 0;
+		self.var_75b0a52c[challengestat] = 0;
 	}
-	self.var_75b0a52c[var_46e31744] = self.var_75b0a52c[var_46e31744] + var_21bccb49;
+	self.var_75b0a52c[challengestat] = self.var_75b0a52c[challengestat] + var_21bccb49;
 	for(i = 0; i < var_2c59fe94; i++)
 	{
 		waitframe(2);
 	}
-	if((isdefined(self.var_75b0a52c[var_46e31744]) ? self.var_75b0a52c[var_46e31744] : 0) >= var_2c59fe94)
+	if((isdefined(self.var_75b0a52c[challengestat]) ? self.var_75b0a52c[challengestat] : 0) >= var_2c59fe94)
 	{
-		self stats::function_dad108fa(var_46e31744, var_cab0fdf5);
+		self stats::function_dad108fa(challengestat, var_cab0fdf5);
 	}
-	self.var_75b0a52c[var_46e31744] = undefined;
+	self.var_75b0a52c[challengestat] = undefined;
 	if(self.var_75b0a52c.size == 0)
 	{
 		self.var_75b0a52c = undefined;
@@ -506,7 +506,7 @@ function function_7b4387e1(rewardxp, maxval, row, tablenumber, challengetype, it
 		if(getdvarint(#"hash_4cc2d974d4e9d2d6", 0) != 0)
 		{
 			var_c4e9517b = tablenumber + 1;
-			tablename = (#"hash_929b58638c59880" + var_c4e9517b) + "";
+			tablename = ((#"gamedata/stats/cp/statsmilestones") + var_c4e9517b) + "";
 			var_eb67c133 = tablelookupcolumnforrow(tablename, row, 5);
 			if(var_eb67c133 === #"hash_4a80d584aac2e7d0")
 			{
@@ -534,12 +534,12 @@ function function_7b4387e1(rewardxp, maxval, row, tablenumber, challengetype, it
 			{
 				if(challengetype == 3)
 				{
-					challengestring = function_ea13f55(challengestring, "", "" + function_60394171(#"challenge", 3, itemindex));
+					challengestring = strreplace(challengestring, "", "" + function_60394171(#"challenge", 3, itemindex));
 				}
 			}
 			if(issubstr(challengestring, ""))
 			{
-				challengestring = function_ea13f55(challengestring, "", "" + tiertext);
+				challengestring = strreplace(challengestring, "", "" + tiertext);
 			}
 			msg = (((var_33b913f5 + "") + challengestring) + "") + maxval;
 			if(getdvarint(#"hash_4cc2d974d4e9d2d6", 0) == 1)

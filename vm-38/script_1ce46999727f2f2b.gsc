@@ -1,30 +1,30 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
 #using script_3bbf85ab4cb9f3c2;
 #using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
-#using script_47fb62300ac0bd60;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
 #using script_6b6510e124bad778;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_eccff4fb;
 
@@ -39,7 +39,7 @@
 */
 function private autoexec function_dd55f495()
 {
-	level notify(134765913);
+	level notify(-134765913);
 }
 
 /*
@@ -99,12 +99,12 @@ function function_4c9d8712(var_49838c63)
 function initplayer()
 {
 	self.doa.score = spawnstruct();
-	self function_c05eb7e6();
+	self resetplayer();
 	self.doa.score.var_4e33830e = 1;
 }
 
 /*
-	Name: function_c05eb7e6
+	Name: resetplayer
 	Namespace: namespace_eccff4fb
 	Checksum: 0x8A86212D
 	Offset: 0x4A0
@@ -112,7 +112,7 @@ function initplayer()
 	Parameters: 0
 	Flags: None
 */
-function function_c05eb7e6()
+function resetplayer()
 {
 	self.doa.score.points = 0;
 	self.doa.score.var_1397c196 = 0;
@@ -130,7 +130,7 @@ function function_c05eb7e6()
 	self.doa.score.var_267d0586 = 0;
 	self.doa.score.keys = 0;
 	self.doa.score.bombs = 1;
-	self.doa.score.var_7a3c00a0 = 2;
+	self.doa.score.boosts = 2;
 	self.doa.score.lives = 3;
 	self.doa.score.var_5eac81d0 = 200000;
 }
@@ -624,24 +624,24 @@ function function_7752515d()
 		{
 			if(self.doa.score.lives < self function_77cbfb85())
 			{
-				level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+				level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 			}
 			else
 			{
 				roll = randomint(100);
 				if(roll < 30)
 				{
-					level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_skeleton_fb"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+					level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_skeleton_fb"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 				}
 				else
 				{
 					if(roll < 60)
 					{
-						level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boxing_glove"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+						level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boxing_glove"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 					}
 					else
 					{
-						level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_coat_of_arms"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+						level doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_coat_of_arms"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 					}
 				}
 			}

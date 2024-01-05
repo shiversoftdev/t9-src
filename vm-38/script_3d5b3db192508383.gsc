@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace dynent_use;
 
@@ -14,11 +14,11 @@
 */
 function private autoexec function_a68f4922()
 {
-	level notify(1602405812);
+	level notify(-1602405812);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: dynent_use
 	Checksum: 0x8819E156
 	Offset: 0xC0
@@ -26,7 +26,7 @@ function private autoexec function_a68f4922()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"dynent_use", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -42,10 +42,10 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!(isdefined(getgametypesetting(#"hash_56ab3c042b783de6")) ? getgametypesetting(#"hash_56ab3c042b783de6") : 0))
+	if(!(isdefined(getgametypesetting(#"usabledynents")) ? getgametypesetting(#"usabledynents") : 0))
 	{
 		return;
 	}
-	clientfield::function_a8bbc967("hudItems.dynentUseHoldProgress", #"hud_items", #"hash_5ba72a5aa3320082", 13000, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.dynentUseHoldProgress", #"hud_items", #"hash_5ba72a5aa3320082", 13000, 5, "float", undefined, 0, 0);
 }
 

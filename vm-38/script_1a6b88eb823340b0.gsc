@@ -1,7 +1,7 @@
-#using script_1c65dbfc2f1c8d8f;
 #using script_3fbe90dd521a8e2d;
-#using scripts\core_common\aat_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace ammomod_electriccherry;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_e1608bce()
 {
-	level notify(445092242);
+	level notify(-445092242);
 }
 
 /*
@@ -75,7 +75,7 @@ event function_b4174270(eventstruct)
 		return;
 	}
 	weapon = self getcurrentweapon();
-	item = namespace_b376ff3f::function_230ceec4(weapon);
+	item = item_inventory::function_230ceec4(weapon);
 	if(item.var_a6762160.var_b079a6e6 === #"ammomod_electriccherry")
 	{
 		self function_aa4171b9();

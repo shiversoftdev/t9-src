@@ -1,5 +1,5 @@
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace art;
 
@@ -14,11 +14,11 @@
 */
 function private autoexec function_3137733e()
 {
-	level notify(107416560);
+	level notify(-107416560);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: art
 	Checksum: 0xE419824F
 	Offset: 0xA0
@@ -26,7 +26,7 @@ function private autoexec function_3137733e()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"art", &function_70a657d8, undefined, undefined, undefined);
 }

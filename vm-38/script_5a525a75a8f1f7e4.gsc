@@ -1,21 +1,21 @@
-#using script_14f4a3c583c77d4b;
-#using script_1c65dbfc2f1c8d8f;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_loadout.gsc;
+#using scripts\zm_common\zm_laststand.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\core_common\struct.gsc;
 #using script_1caf36ff04a85ff6;
-#using script_68d2ee1489345a1d;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
 #using script_7fc996fe8678852;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_laststand.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
 
 #namespace namespace_c09ae6c3;
 
@@ -30,11 +30,11 @@
 */
 function private autoexec function_575bffe0()
 {
-	level notify(1747619033);
+	level notify(-1747619033);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_c09ae6c3
 	Checksum: 0x5FCAD040
 	Offset: 0x1A0
@@ -42,7 +42,7 @@ function private autoexec function_575bffe0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_50d62958d724dac2", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -228,8 +228,8 @@ function function_5eeaa168()
 			}
 			var_1c7e95e9 = 0;
 			player.var_d30f56e4 = self;
-			weapon1 = player namespace_a0d533d1::function_2b83d3ff(player namespace_b376ff3f::function_2e711614(17 + 1));
-			weapon2 = player namespace_a0d533d1::function_2b83d3ff(player namespace_b376ff3f::function_2e711614(((17 + 1) + 8) + 1));
+			weapon1 = player namespace_a0d533d1::function_2b83d3ff(player item_inventory::function_2e711614(17 + 1));
+			weapon2 = player namespace_a0d533d1::function_2b83d3ff(player item_inventory::function_2e711614(((17 + 1) + 8) + 1));
 			if(!isdefined(weapon1))
 			{
 				weapon1 = var_f945fa92;
@@ -249,7 +249,7 @@ function function_5eeaa168()
 				{
 					if(weapon1 == var_f945fa92 || weapon1 == nullweapon || weapon1.weapclass == "melee" && (weapon2 != var_f945fa92 && weapon2 != nullweapon && weapon2.weapclass != "melee"))
 					{
-						item = player namespace_b376ff3f::function_230ceec4(weapon2);
+						item = player item_inventory::function_230ceec4(weapon2);
 						cost = function_adb75323(item);
 						if(player zm_score::can_player_purchase(cost) && !player function_f300168a(weapon2))
 						{
@@ -273,7 +273,7 @@ function function_5eeaa168()
 					}
 					else if(weapon2 == var_f945fa92 || weapon2 == nullweapon || weapon2.weapclass == "melee" && (weapon1 != var_f945fa92 && weapon1 != nullweapon && weapon1.weapclass != "melee"))
 					{
-						item = player namespace_b376ff3f::function_230ceec4(weapon1);
+						item = player item_inventory::function_230ceec4(weapon1);
 						cost = function_adb75323(item);
 						if(player zm_score::can_player_purchase(cost) && !player function_f300168a(weapon1))
 						{
@@ -308,7 +308,7 @@ function function_5eeaa168()
 					}
 					else
 					{
-						item = player namespace_b376ff3f::function_230ceec4(currentweapon);
+						item = player item_inventory::function_230ceec4(currentweapon);
 						cost = function_adb75323(item);
 						if(player zm_score::can_player_purchase(cost) && !player function_f300168a(currentweapon))
 						{
@@ -406,8 +406,8 @@ function function_e4ff673(eventstruct)
 		nullweapon = getweapon(#"none");
 		var_f945fa92 = getweapon(#"bare_hands");
 		currentweapon = player getcurrentweapon();
-		weapon1 = player namespace_a0d533d1::function_2b83d3ff(player namespace_b376ff3f::function_2e711614(17 + 1));
-		weapon2 = player namespace_a0d533d1::function_2b83d3ff(player namespace_b376ff3f::function_2e711614(((17 + 1) + 8) + 1));
+		weapon1 = player namespace_a0d533d1::function_2b83d3ff(player item_inventory::function_2e711614(17 + 1));
+		weapon2 = player namespace_a0d533d1::function_2b83d3ff(player item_inventory::function_2e711614(((17 + 1) + 8) + 1));
 		if(!isdefined(weapon1))
 		{
 			weapon1 = var_f945fa92;
@@ -472,13 +472,13 @@ function function_7c1cc13c(player, weapon, model)
 	{
 		return;
 	}
-	item = player namespace_b376ff3f::function_230ceec4(weapon);
+	item = player item_inventory::function_230ceec4(weapon);
 	cost = function_adb75323(item);
 	has_enough = player zm_score::can_player_purchase(cost);
 	currentclip = player getweaponammoclip(weapon);
 	maxammo = weapon.maxammo;
 	var_53b14ebf = weapon.clipsize;
-	player playrumbleonentity(#"hash_410bd55524ae7d");
+	player playrumbleonentity(#"zm_interact_rumble");
 	if(currentclip < weapon.clipsize && (maxammo == 0 || is_true(weapon.cliponly)) && has_enough)
 	{
 		if(player hasweapon(weapon))

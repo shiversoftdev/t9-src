@@ -1,7 +1,7 @@
 #using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 
 #namespace debug_shared;
 
@@ -22,7 +22,7 @@ function private autoexec function_ab16cc3c()
 #namespace debug;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: debug
 	Checksum: 0x1635EF25
 	Offset: 0xA0
@@ -30,7 +30,7 @@ function private autoexec function_ab16cc3c()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"debug", &function_70a657d8, undefined, undefined, undefined);

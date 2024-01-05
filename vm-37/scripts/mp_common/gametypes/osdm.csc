@@ -1,8 +1,8 @@
-#namespace namespace_82ae72f6;
+#namespace osdm;
 
 /*
 	Name: main
-	Namespace: namespace_82ae72f6
+	Namespace: osdm
 	Checksum: 0x4A83C599
 	Offset: 0x60
 	Size: 0xC

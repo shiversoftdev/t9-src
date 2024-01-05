@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_1b0cb7b1 : class_6aaccc24
+class cwz_revive_prompt : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0x8645E56
 		Offset: 0x440
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_1b0cb7b1 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0x215C2F00
 		Offset: 0x740
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_1b0cb7b1 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0x47FE5F82
 		Offset: 0x630
 		Size: 0x24
@@ -40,54 +40,54 @@ class class_1b0cb7b1 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_3b7b386a
-		Namespace: namespace_1b0cb7b1
+		Name: set_clientnum
+		Namespace: cwz_revive_prompt
 		Checksum: 0x2908B57C
 		Offset: 0x660
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3b7b386a(localclientnum, value)
+	function set_clientnum(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "clientnum", value);
+		[[ self ]]->set_data(localclientnum, "clientnum", value);
 	}
 
 	/*
-		Name: function_4b3fb8b8
-		Namespace: namespace_1b0cb7b1
+		Name: set_reviveprogress
+		Namespace: cwz_revive_prompt
 		Checksum: 0x305A4353
 		Offset: 0x6D0
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4b3fb8b8(localclientnum, value)
+	function set_reviveprogress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "reviveProgress", value);
+		[[ self ]]->set_data(localclientnum, "reviveProgress", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_1b0cb7b1
+		Name: register_clientside
+		Namespace: cwz_revive_prompt
 		Checksum: 0xBE69C0AD
 		Offset: 0x558
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("wz_revive_prompt");
+		cluielem::register_clientside("wz_revive_prompt");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0x9D6EFCD9
 		Offset: 0x460
 		Size: 0xEC
@@ -96,44 +96,44 @@ class class_1b0cb7b1 : class_6aaccc24
 	*/
 	function setup_clientfields(var_c05c67e2, var_afaddf7a, var_d65e5a18, var_f228b5fa, var_7cb8f98a, var_bda3bf84)
 	{
-		namespace_6aaccc24::setup_clientfields("wz_revive_prompt");
-		namespace_6aaccc24::function_da693cbe("clientnum", 1, 7, "int", var_d65e5a18);
-		namespace_6aaccc24::function_da693cbe("progress", 1, 5, "float", var_f228b5fa);
-		namespace_6aaccc24::function_da693cbe("reviveProgress", 1, 5, "float", var_7cb8f98a);
-		namespace_6aaccc24::function_da693cbe("cowardsWay", 1, 1, "int", var_bda3bf84);
+		cluielem::setup_clientfields("wz_revive_prompt");
+		cluielem::add_clientfield("clientnum", 1, 7, "int", var_d65e5a18);
+		cluielem::add_clientfield("progress", 1, 5, "float", var_f228b5fa);
+		cluielem::add_clientfield("reviveProgress", 1, 5, "float", var_7cb8f98a);
+		cluielem::add_clientfield("cowardsWay", 1, 1, "int", var_bda3bf84);
 	}
 
 	/*
-		Name: function_affe8f61
-		Namespace: namespace_1b0cb7b1
+		Name: set_progress
+		Namespace: cwz_revive_prompt
 		Checksum: 0xD4CDDF6F
 		Offset: 0x698
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_affe8f61(localclientnum, value)
+	function set_progress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "progress", value);
+		[[ self ]]->set_data(localclientnum, "progress", value);
 	}
 
 	/*
-		Name: function_f52e0186
-		Namespace: namespace_1b0cb7b1
+		Name: set_cowardsway
+		Namespace: cwz_revive_prompt
 		Checksum: 0xC89FA6B3
 		Offset: 0x708
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f52e0186(localclientnum, value)
+	function set_cowardsway(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "cowardsWay", value);
+		[[ self ]]->set_data(localclientnum, "cowardsWay", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_1b0cb7b1
+		Namespace: cwz_revive_prompt
 		Checksum: 0xD2B897AD
 		Offset: 0x580
 		Size: 0xA4
@@ -142,11 +142,11 @@ class class_1b0cb7b1 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "clientnum", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "progress", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "reviveProgress", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "cowardsWay", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "clientnum", 0);
+		[[ self ]]->set_data(localclientnum, "progress", 0);
+		[[ self ]]->set_data(localclientnum, "reviveProgress", 0);
+		[[ self ]]->set_data(localclientnum, "cowardsWay", 0);
 	}
 
 }
@@ -164,7 +164,7 @@ class class_1b0cb7b1 : class_6aaccc24
 */
 function private autoexec function_360c2a40()
 {
-	level notify(1329352256);
+	level notify(-1329352256);
 }
 
 /*
@@ -178,7 +178,7 @@ function private autoexec function_360c2a40()
 */
 function register(var_c05c67e2, var_afaddf7a, var_d65e5a18, var_f228b5fa, var_7cb8f98a, var_bda3bf84)
 {
-	elem = new class_1b0cb7b1();
+	elem = new cwz_revive_prompt();
 	[[ elem ]]->setup_clientfields(var_c05c67e2, var_afaddf7a, var_d65e5a18, var_f228b5fa, var_7cb8f98a, var_bda3bf84);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -200,7 +200,7 @@ function register(var_c05c67e2, var_afaddf7a, var_d65e5a18, var_f228b5fa, var_7c
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: wz_revive_prompt
 	Checksum: 0xE3989488
 	Offset: 0x2C8
@@ -208,10 +208,10 @@ function register(var_c05c67e2, var_afaddf7a, var_d65e5a18, var_f228b5fa, var_7c
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_1b0cb7b1();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cwz_revive_prompt();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -258,7 +258,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_3b7b386a
+	Name: set_clientnum
 	Namespace: wz_revive_prompt
 	Checksum: 0x5CA11903
 	Offset: 0x380
@@ -266,13 +266,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_3b7b386a(localclientnum, value)
+function set_clientnum(localclientnum, value)
 {
-	[[ self ]]->function_3b7b386a(localclientnum, value);
+	[[ self ]]->set_clientnum(localclientnum, value);
 }
 
 /*
-	Name: function_affe8f61
+	Name: set_progress
 	Namespace: wz_revive_prompt
 	Checksum: 0x44452A45
 	Offset: 0x3B0
@@ -280,13 +280,13 @@ function function_3b7b386a(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_affe8f61(localclientnum, value)
+function set_progress(localclientnum, value)
 {
-	[[ self ]]->function_affe8f61(localclientnum, value);
+	[[ self ]]->set_progress(localclientnum, value);
 }
 
 /*
-	Name: function_4b3fb8b8
+	Name: set_reviveprogress
 	Namespace: wz_revive_prompt
 	Checksum: 0x4BEA42C2
 	Offset: 0x3E0
@@ -294,13 +294,13 @@ function function_affe8f61(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4b3fb8b8(localclientnum, value)
+function set_reviveprogress(localclientnum, value)
 {
-	[[ self ]]->function_4b3fb8b8(localclientnum, value);
+	[[ self ]]->set_reviveprogress(localclientnum, value);
 }
 
 /*
-	Name: function_f52e0186
+	Name: set_cowardsway
 	Namespace: wz_revive_prompt
 	Checksum: 0x61A231F
 	Offset: 0x410
@@ -308,8 +308,8 @@ function function_4b3fb8b8(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_f52e0186(localclientnum, value)
+function set_cowardsway(localclientnum, value)
 {
-	[[ self ]]->function_f52e0186(localclientnum, value);
+	[[ self ]]->set_cowardsway(localclientnum, value);
 }
 

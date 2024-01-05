@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_ec90ce81 : class_6aaccc24
+class csr_weapon_upgrade_menu : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x4D8CCE20
 		Offset: 0x350
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x80A4509F
 		Offset: 0x4A0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xF3C11441
 		Offset: 0x438
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_ec90ce81
+		Name: register_clientside
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x52775501
 		Offset: 0x3C8
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_weapon_upgrade_menu");
+		cluielem::register_clientside("sr_weapon_upgrade_menu");
 	}
 
 	/*
-		Name: function_83d182e9
-		Namespace: namespace_ec90ce81
+		Name: set_cannotammomod
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xA6E1C4B4
 		Offset: 0x468
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_83d182e9(localclientnum, value)
+	function set_cannotammomod(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "cannotAmmoMod", value);
+		[[ self ]]->set_data(localclientnum, "cannotAmmoMod", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xD2CB957E
 		Offset: 0x370
 		Size: 0x4C
@@ -82,13 +82,13 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function setup_clientfields(var_52c93aa0)
 	{
-		namespace_6aaccc24::setup_clientfields("sr_weapon_upgrade_menu");
-		namespace_6aaccc24::function_da693cbe("cannotAmmoMod", 16000, 1, "int", var_52c93aa0);
+		cluielem::setup_clientfields("sr_weapon_upgrade_menu");
+		cluielem::add_clientfield("cannotAmmoMod", 16000, 1, "int", var_52c93aa0);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0xAEA28EB7
 		Offset: 0x3F0
 		Size: 0x40
@@ -97,8 +97,8 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "cannotAmmoMod", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "cannotAmmoMod", 0);
 	}
 
 }
@@ -116,7 +116,7 @@ class class_ec90ce81 : class_6aaccc24
 */
 function private autoexec function_873533ca()
 {
-	level notify(2116681697);
+	level notify(-2116681697);
 }
 
 /*
@@ -130,7 +130,7 @@ function private autoexec function_873533ca()
 */
 function register(var_52c93aa0)
 {
-	elem = new class_ec90ce81();
+	elem = new csr_weapon_upgrade_menu();
 	[[ elem ]]->setup_clientfields(var_52c93aa0);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -152,7 +152,7 @@ function register(var_52c93aa0)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: sr_weapon_upgrade_menu
 	Checksum: 0xD2D46173
 	Offset: 0x268
@@ -160,10 +160,10 @@ function register(var_52c93aa0)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_ec90ce81();
-	[[ elem ]]->function_5c1bb138();
+	elem = new csr_weapon_upgrade_menu();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -210,7 +210,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_83d182e9
+	Name: set_cannotammomod
 	Namespace: sr_weapon_upgrade_menu
 	Checksum: 0xA6BBA6A6
 	Offset: 0x320
@@ -218,8 +218,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_83d182e9(localclientnum, value)
+function set_cannotammomod(localclientnum, value)
 {
-	[[ self ]]->function_83d182e9(localclientnum, value);
+	[[ self ]]->set_cannotammomod(localclientnum, value);
 }
 

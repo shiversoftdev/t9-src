@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\oob.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_b77e8eb1;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_cfdeb8e4()
 {
-	level notify(115628911);
+	level notify(-115628911);
 }
 
 /*

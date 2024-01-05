@@ -1,23 +1,23 @@
-#using script_345bb77d6298356c;
-#using script_47fb62300ac0bd60;
-#using script_6021ce59143452c3;
-#using script_68d2ee1489345a1d;
-#using script_6ce38ab036223e6e;
-#using script_ab890501c40b73c;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\match_record.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\gametypes\globallogic_score.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_challenges.gsc;
-#using scripts\zm_common\zm_score.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_trial.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_round_logic.gsc;
+#using scripts\zm_common\zm_contracts.gsc;
+#using scripts\zm_common\zm_challenges.gsc;
+#using scripts\zm_common\zm.gsc;
+#using scripts\zm_common\gametypes\globallogic_score.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\zm_common\callings\zm_callings.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\match_record.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_stats;
 
@@ -36,7 +36,7 @@ function private autoexec function_213d6fff()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_stats
 	Checksum: 0x5C57CEFA
 	Offset: 0xA08
@@ -44,7 +44,7 @@ function private autoexec function_213d6fff()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_stats", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -108,12 +108,12 @@ function function_a8758411()
 {
 	if(getdvarint(#"hash_27ff853067d7c38c", 0))
 	{
-		var_821f7fa0 = getdvarint(#"hash_74323bf8006c003f", 0);
+		var_821f7fa0 = getdvarint(#"zm_active_event_calling", 0);
 		if(var_821f7fa0)
 		{
 			function_94335f4a(var_821f7fa0);
 		}
-		var_a4aebab9 = getdvarint(#"hash_4ef2b14c3bfef02a", 0);
+		var_a4aebab9 = getdvarint(#"zm_active_daily_calling", 0);
 		if(var_a4aebab9)
 		{
 			function_e8c496dd(var_a4aebab9);
@@ -132,9 +132,9 @@ function function_a8758411()
 */
 function player_stats_init()
 {
-	self callback::add_callback(#"hash_41c107b83320aba2", &function_1a222bee);
+	self callback::add_callback(#"on_item_use", &function_1a222bee);
 	self globallogic_score::initpersstat(#"kills", 0);
-	self globallogic_score::initpersstat(#"hash_7472529eae501802", 0, 1);
+	self globallogic_score::initpersstat(#"kills_critical", 0, 1);
 	self globallogic_score::initpersstat(#"hash_6013bccb7a4274b6", 0);
 	self globallogic_score::initpersstat(#"wonder_weapon_kills", 0);
 	self globallogic_score::initpersstat(#"damagedone", 0);
@@ -180,12 +180,12 @@ function player_stats_init()
 	self globallogic_score::initpersstat(#"hash_27399de28b76c5c6", 0);
 	self globallogic_score::initpersstat(#"minigun_pickedup", 0);
 	self globallogic_score::initpersstat(#"island_seed_pickedup", 0);
-	self globallogic_score::initpersstat(#"hash_cdafe5cd6299b0c", 0);
-	self globallogic_score::initpersstat(#"hash_3ec2a334a55d8215", 0);
-	self globallogic_score::initpersstat(#"hash_7d6f5e2da0f7af67", 0);
-	self globallogic_score::initpersstat(#"hash_636a6750788b3df0", 0);
-	self globallogic_score::initpersstat(#"hash_29b45601d5e0d53f", 0);
-	self globallogic_score::initpersstat(#"hash_79071dc310fc378f", 0);
+	self globallogic_score::initpersstat(#"hero_weapon_power_pickedup", 0);
+	self globallogic_score::initpersstat(#"pack_a_punch_pickedup", 0);
+	self globallogic_score::initpersstat(#"extra_lives_pickedup", 0);
+	self globallogic_score::initpersstat(#"zmarcade_key_pickedup", 0);
+	self globallogic_score::initpersstat(#"shield_charge_pickedup", 0);
+	self globallogic_score::initpersstat(#"dung_pickedup", 0);
 	self globallogic_score::initpersstat(#"hash_1b192689f4c8c402", 0);
 	self globallogic_score::initpersstat(#"bonus_points_team_pickedup", 0);
 	self globallogic_score::initpersstat(#"ww_grenade_pickedup", 0);
@@ -198,13 +198,13 @@ function player_stats_init()
 	self globallogic_score::initpersstat(#"hash_7f4d9be7afc10d0b", 0);
 	self globallogic_score::initpersstat(#"hash_7f4d9ce7afc10ebe", 0);
 	self globallogic_score::initpersstat(#"hash_7f4d9de7afc11071", 0);
-	self globallogic_score::initpersstat(#"hash_731ce11cd7aabf49", 0);
-	self globallogic_score::initpersstat(#"hash_28a20f25e5d2675b", 0);
-	self globallogic_score::initpersstat(#"hash_3000f7041705064b", 0);
-	self globallogic_score::initpersstat(#"hash_388f4347e28d7ab7", 0);
-	self globallogic_score::initpersstat(#"hash_4241552ec3f4078b", 0);
-	self globallogic_score::initpersstat(#"hash_52fec240a96cc85a", 0);
-	self globallogic_score::initpersstat(#"hash_63236a6a7db7369c", 0);
+	self globallogic_score::initpersstat(#"talent_juggernog_drank", 0);
+	self globallogic_score::initpersstat(#"talent_quickrevive_drank", 0);
+	self globallogic_score::initpersstat(#"talent_speedcola_drank", 0);
+	self globallogic_score::initpersstat(#"talent_doubletap_drank", 0);
+	self globallogic_score::initpersstat(#"talent_deadshot_drank", 0);
+	self globallogic_score::initpersstat(#"talent_staminup_drank", 0);
+	self globallogic_score::initpersstat(#"talent_elemental_pop_drank", 0);
 	self globallogic_score::initpersstat(#"specialty_armorvest_drank", 0);
 	self globallogic_score::initpersstat(#"specialty_quickrevive_drank", 0);
 	self globallogic_score::initpersstat(#"specialty_fastreload_drank", 0);
@@ -214,17 +214,17 @@ function player_stats_init()
 	self globallogic_score::initpersstat(#"specialty_widowswine_drank", 0);
 	self globallogic_score::initpersstat(#"specialty_deadshot_drank", 0);
 	self globallogic_score::initpersstat(#"specialty_electriccherry_drank", 0);
-	self globallogic_score::initpersstat(#"hash_6fd20bc72bf9e498", 0);
+	self globallogic_score::initpersstat(#"specialty_awareness_drank", 0);
 	self globallogic_score::initpersstat(#"hash_583ff5f66fd10104", 0);
 	self globallogic_score::initpersstat(#"hash_3cbaa7dc09e06bb7", 0);
-	self globallogic_score::initpersstat(#"hash_539966dfa171abec", 0);
-	self globallogic_score::initpersstat(#"hash_165df073a0d7a3c3", 0);
-	self globallogic_score::initpersstat(#"hash_5061c06e56f8d741", 0);
+	self globallogic_score::initpersstat(#"specialty_cooldown_drank", 0);
+	self globallogic_score::initpersstat(#"specialty_etherealrazor_drank", 0);
+	self globallogic_score::initpersstat(#"specialty_extraammo_drank", 0);
 	self globallogic_score::initpersstat(#"hash_3c548389d8524d38", 0);
 	self globallogic_score::initpersstat(#"specialty_phdflopper_drank", 0);
-	self globallogic_score::initpersstat(#"hash_6d567aa9deb5cb44", 0);
-	self globallogic_score::initpersstat(#"hash_13a7a122d86f219b", 0);
-	self globallogic_score::initpersstat(#"hash_1a58fe25d88d2b54", 0);
+	self globallogic_score::initpersstat(#"specialty_shield_drank", 0);
+	self globallogic_score::initpersstat(#"specialty_zombshell_drank", 0);
+	self globallogic_score::initpersstat(#"specialty_wolf_protector_drank", 0);
 	self globallogic_score::initpersstat(#"hash_3d9b732ca303132b", 0);
 	self globallogic_score::initpersstat(#"hash_48288866afddc0d4", 0);
 	self globallogic_score::initpersstat(#"hash_1dc1fbd3fd2fe493", 0);
@@ -328,7 +328,7 @@ function player_stats_init()
 	self incrementplayerstat("score", self.score);
 	self add_map_stat("score", self.score);
 	self.score_total = self.score;
-	self.var_f22ee5e = self.score_total;
+	self.objscore = self.score_total;
 	self globallogic_score::initpersstat(#"zteam", 0);
 	if(isdefined(level.level_specific_stats_init))
 	{
@@ -353,23 +353,23 @@ function player_stats_init()
 		var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b");
 		var_8962d9b1 = (isdefined(level.var_d479261a) ? level.var_d479261a : 0);
 		self stats::set_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b", var_8962d9b1);
-		var_327c034e = self stats::get_stat(#"hash_18e3320ccf4091e5", #"hash_6ad32b22445c4828");
+		var_327c034e = self stats::get_stat(#"hash_18e3320ccf4091e5", #"calling_timestamp");
 		var_d0ad64e3 = getutc();
 		var_222b02a1 = var_d0ad64e3 - var_327c034e;
 		var_ee21b34b = 86400;
 		if(var_87b499fb !== var_8962d9b1 || var_327c034e == 0 || var_222b02a1 > var_ee21b34b)
 		{
 			self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", 0);
-			self stats::set_stat(#"hash_18e3320ccf4091e5", #"hash_6ad32b22445c4828", var_d0ad64e3);
+			self stats::set_stat(#"hash_18e3320ccf4091e5", #"calling_timestamp", var_d0ad64e3);
 		}
 	}
 	if(getdvarint(#"hash_11da02ca40639de5", 0))
 	{
 		self zm_callings::function_f3393d6a();
 	}
-	if(function_eb50d9bf(#"hash_68a582f0fbd97eb2") > function_eb50d9bf(#"hash_7472529eae501802"))
+	if(get_client_stat(#"hash_68a582f0fbd97eb2") > get_client_stat(#"kills_critical"))
 	{
-		set_client_stat(#"hash_7472529eae501802", function_eb50d9bf(#"hash_68a582f0fbd97eb2"));
+		set_client_stat(#"kills_critical", get_client_stat(#"hash_68a582f0fbd97eb2"));
 	}
 }
 
@@ -403,7 +403,7 @@ function update_players_stats_at_match_end(players)
 	{
 		return;
 	}
-	game_mode = util::function_5df4294();
+	game_mode = util::get_game_type();
 	game_mode_group = level.scr_zm_ui_gametype_group;
 	map_location_name = level.scr_zm_map_start_location;
 	zm_score::function_bc9de425();
@@ -445,12 +445,12 @@ function update_players_stats_at_match_end(players)
 			player set_global_stat("total_points", player.score_total);
 		}
 		player function_1b763e4("HIGHEST_TEAM_SCORE", level.score_total);
-		function_42677837("TEAM_SCORE", level.score_total);
+		set_match_stat("TEAM_SCORE", level.score_total);
 		player function_9daadcaa("team_score", level.score_total);
 		player set_global_stat("rounds", var_600fbe9f);
 		player function_9daadcaa("rounds", var_600fbe9f);
 		total_rounds_survived = var_600fbe9f - 1;
-		if(zm_trial::function_b47f6aba() && is_true(level.var_7fe57c6b))
+		if(zm_trial::is_trial_mode() && is_true(level.var_7fe57c6b))
 		{
 			total_rounds_survived = level.round_number;
 			player zm_challenges::function_bf0be8f1();
@@ -494,12 +494,12 @@ function update_players_stats_at_match_end(players)
 			}
 			if(zm_utility::is_standard() && level.var_5caadd40 > 1)
 			{
-				player contracts::function_5b88297d(#"hash_64983d80a1a8a0bc");
+				player contracts::increment_zm_contract(#"hash_64983d80a1a8a0bc");
 				if(player.var_9fc3ee66 === 1)
 				{
 					player function_7bc347f6("RUSH_FIRST_PLACE_FINISHES");
 					player function_f1a1191d("RUSH_FIRST_PLACE_FINISHES");
-					player contracts::function_5b88297d(#"hash_2d05bf381b6a45be");
+					player contracts::increment_zm_contract(#"hash_2d05bf381b6a45be");
 				}
 			}
 		}
@@ -709,7 +709,7 @@ function highwater_global_stat(stat_name, value)
 }
 
 /*
-	Name: function_eb50d9bf
+	Name: get_client_stat
 	Namespace: zm_stats
 	Checksum: 0xCB18FF8E
 	Offset: 0x3C98
@@ -717,7 +717,7 @@ function highwater_global_stat(stat_name, value)
 	Parameters: 1
 	Flags: Linked
 */
-function function_eb50d9bf(stat_name)
+function get_client_stat(stat_name)
 {
 	return self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
 }
@@ -1487,7 +1487,7 @@ function increment_challenge_stat(stat_name, amount, var_b68b08b1)
 		var_b68b08b1 = 0;
 	}
 	/#
-		assert(function_7a600918(stat_name), "");
+		assert(ishash(stat_name), "");
 	#/
 	if(!level.onlinegame || is_true(level.zm_disable_recording_stats) || (var_b68b08b1 && zm_utility::is_standard()))
 	{
@@ -1499,7 +1499,7 @@ function increment_challenge_stat(stat_name, amount, var_b68b08b1)
 	}
 	self stats::function_dad108fa(stat_name, amount);
 	/#
-		var_ba1fb8c1 = self stats::function_441050ca(stat_name);
+		var_ba1fb8c1 = self stats::get_stat_global(stat_name);
 		if(isdefined(self.entity_num))
 		{
 			println(((("" + self.entity_num) + "") + function_9e72a96(stat_name) + "") + var_ba1fb8c1);
@@ -1584,7 +1584,7 @@ function function_165a4e7b(var_9177621d, b_value)
 }
 
 /*
-	Name: function_c9d32eb9
+	Name: get_match_stat
 	Namespace: zm_stats
 	Checksum: 0x17D5C1E0
 	Offset: 0x5640
@@ -1592,7 +1592,7 @@ function function_165a4e7b(var_9177621d, b_value)
 	Parameters: 1
 	Flags: Linked
 */
-function function_c9d32eb9(stat_name)
+function get_match_stat(stat_name)
 {
 	if(is_true(level.zm_disable_recording_stats))
 	{
@@ -1602,7 +1602,7 @@ function function_c9d32eb9(stat_name)
 }
 
 /*
-	Name: function_42677837
+	Name: set_match_stat
 	Namespace: zm_stats
 	Checksum: 0xAD0DEC7C
 	Offset: 0x5688
@@ -1610,7 +1610,7 @@ function function_c9d32eb9(stat_name)
 	Parameters: 2
 	Flags: Linked
 */
-function function_42677837(stat_name, value)
+function set_match_stat(stat_name, value)
 {
 	if(is_true(level.zm_disable_recording_stats))
 	{
@@ -1620,7 +1620,7 @@ function function_42677837(stat_name, value)
 }
 
 /*
-	Name: function_4be7186e
+	Name: add_match_stat
 	Namespace: zm_stats
 	Checksum: 0x44D29898
 	Offset: 0x56E0
@@ -1628,7 +1628,7 @@ function function_42677837(stat_name, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4be7186e(stat_name, value)
+function add_match_stat(stat_name, value)
 {
 	if(is_true(level.zm_disable_recording_stats))
 	{
@@ -1638,7 +1638,7 @@ function function_4be7186e(stat_name, value)
 }
 
 /*
-	Name: function_862d8623
+	Name: increment_match_stat
 	Namespace: zm_stats
 	Checksum: 0xFBE2E1FB
 	Offset: 0x5738
@@ -1646,7 +1646,7 @@ function function_4be7186e(stat_name, value)
 	Parameters: 1
 	Flags: None
 */
-function function_862d8623(stat_name)
+function increment_match_stat(stat_name)
 {
 	if(is_true(level.zm_disable_recording_stats))
 	{
@@ -1666,9 +1666,9 @@ function function_862d8623(stat_name)
 */
 function function_57febe39(stat_name, value)
 {
-	if(value > function_c9d32eb9(stat_name))
+	if(value > get_match_stat(stat_name))
 	{
-		function_42677837(stat_name, value);
+		set_match_stat(stat_name, value);
 	}
 }
 
@@ -1986,28 +1986,28 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath)
 				entity function_8f10788e("boas_killed_by_catalyst");
 				switch(weapon.var_9fde8624)
 				{
-					case "hash_266b62e342076a90":
+					case "catalyst_electric":
 					{
 						entity increment_client_stat("killed_by_catalyst_electric");
 						entity increment_player_stat("killed_by_catalyst_electric");
 						entity function_8f10788e("boas_killed_by_catalyst_electric");
 						break;
 					}
-					case "hash_5d6b55906fc82ff2":
+					case "catalyst_water":
 					{
 						entity increment_client_stat("killed_by_catalyst_water");
 						entity increment_player_stat("killed_by_catalyst_water");
 						entity function_8f10788e("boas_killed_by_catalyst_water");
 						break;
 					}
-					case "hash_5cfa99582cc66c59":
+					case "catalyst_plasma":
 					{
 						entity increment_client_stat("killed_by_catalyst_plasma");
 						entity increment_player_stat("killed_by_catalyst_plasma");
 						entity function_8f10788e("boas_killed_by_catalyst_plasma");
 						break;
 					}
-					case "hash_78ca8e8e6bdbc8ab":
+					case "catalyst_corrosive":
 					{
 						entity increment_client_stat("killed_by_catalyst_corrosive");
 						entity increment_player_stat("killed_by_catalyst_corrosive");
@@ -2104,28 +2104,28 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath)
 					weapon function_8f10788e("boas_catalysts_killed");
 					switch(entity.var_9fde8624)
 					{
-						case "hash_266b62e342076a90":
+						case "catalyst_electric":
 						{
 							weapon increment_client_stat("catalyst_electrics_killed");
 							weapon increment_player_stat("catalyst_electrics_killed");
 							weapon function_8f10788e("boas_catalyst_electrics_killed");
 							break;
 						}
-						case "hash_5d6b55906fc82ff2":
+						case "catalyst_water":
 						{
 							weapon increment_client_stat("catalyst_waters_killed");
 							weapon increment_player_stat("catalyst_waters_killed");
 							weapon function_8f10788e("boas_catalyst_waters_killed");
 							break;
 						}
-						case "hash_5cfa99582cc66c59":
+						case "catalyst_plasma":
 						{
 							weapon increment_client_stat("catalyst_plasmas_killed");
 							weapon increment_player_stat("catalyst_plasmas_killed");
 							weapon function_8f10788e("boas_catalyst_plasmas_killed");
 							break;
 						}
-						case "hash_78ca8e8e6bdbc8ab":
+						case "catalyst_corrosive":
 						{
 							weapon increment_client_stat("catalyst_corrosives_killed");
 							weapon increment_player_stat("catalyst_corrosives_killed");
@@ -2249,7 +2249,7 @@ function get_stat_distance_traveled()
 */
 function get_stat_round_number()
 {
-	return namespace_a28acff3::get_round_number();
+	return zm_round_logic::get_round_number();
 }
 
 /*
@@ -2316,12 +2316,12 @@ function update_global_counters_on_match_end()
 	var_d61f06ce = 0;
 	minigun_pickedup = 0;
 	island_seed_pickedup = 0;
-	var_3e74dc38 = 0;
-	var_d858ee80 = 0;
-	var_550709e6 = 0;
-	var_b4012da = 0;
-	var_47c42f82 = 0;
-	var_dcc9d810 = 0;
+	hero_weapon_power_pickedup = 0;
+	pack_a_punch_pickedup = 0;
+	extra_lives_pickedup = 0;
+	zmarcade_key_pickedup = 0;
+	shield_charge_pickedup = 0;
+	dung_pickedup = 0;
 	bonus_points_team_pickedup = 0;
 	ww_grenade_pickedup = 0;
 	zombie_blood_pickedup = 0;
@@ -2363,13 +2363,13 @@ function update_global_counters_on_match_end()
 	crimson_nosferatus_killed = 0;
 	killed_by_crimson_nosferatu = 0;
 	bats_killed = 0;
-	var_2407fa7f = 0;
-	var_a45c0ec = 0;
-	var_a1cab15d = 0;
-	var_8e14f822 = 0;
-	var_4b1715b8 = 0;
-	var_693f9ce6 = 0;
-	var_ac072054 = 0;
+	talent_juggernog_drank = 0;
+	talent_quickrevive_drank = 0;
+	talent_speedcola_drank = 0;
+	talent_doubletap_drank = 0;
+	talent_deadshot_drank = 0;
+	talent_staminup_drank = 0;
+	talent_elemental_pop_drank = 0;
 	specialty_armorvest_drank = 0;
 	specialty_quickrevive_drank = 0;
 	specialty_fastreload_drank = 0;
@@ -2378,15 +2378,15 @@ function update_global_counters_on_match_end()
 	specialty_doubletap2_drank = 0;
 	specialty_widowswine_drank = 0;
 	specialty_deadshot_drank = 0;
-	var_69a326a5 = 0;
+	specialty_awareness_drank = 0;
 	var_fe5dcda2 = 0;
 	var_48fd5671 = 0;
-	var_3b4ec51 = 0;
-	var_aa97f0a6 = 0;
+	specialty_cooldown_drank = 0;
+	specialty_extraammo_drank = 0;
 	var_a73cd9fe = 0;
 	specialty_phdflopper_drank = 0;
-	var_2da6115c = 0;
-	var_de6ec86b = 0;
+	specialty_shield_drank = 0;
+	specialty_etherealrazor_drank = 0;
 	var_b972d467 = 0;
 	var_16a0e615 = 0;
 	var_46c7e904 = 0;
@@ -2432,13 +2432,13 @@ function update_global_counters_on_match_end()
 		downs = downs + player.pers[#"downs"];
 		revives = revives + player.pers[#"revives"];
 		perks_drank = perks_drank + player.pers[#"perks_drank"];
-		var_2407fa7f = var_2407fa7f + player.pers[#"hash_731ce11cd7aabf49"];
-		var_a45c0ec = var_a45c0ec + player.pers[#"hash_28a20f25e5d2675b"];
-		var_a1cab15d = var_a1cab15d + player.pers[#"hash_3000f7041705064b"];
-		var_8e14f822 = var_8e14f822 + player.pers[#"hash_388f4347e28d7ab7"];
-		var_4b1715b8 = var_4b1715b8 + player.pers[#"hash_4241552ec3f4078b"];
-		var_693f9ce6 = var_693f9ce6 + player.pers[#"hash_52fec240a96cc85a"];
-		var_ac072054 = var_ac072054 + player.pers[#"hash_63236a6a7db7369c"];
+		talent_juggernog_drank = talent_juggernog_drank + player.pers[#"talent_juggernog_drank"];
+		talent_quickrevive_drank = talent_quickrevive_drank + player.pers[#"talent_quickrevive_drank"];
+		talent_speedcola_drank = talent_speedcola_drank + player.pers[#"talent_speedcola_drank"];
+		talent_doubletap_drank = talent_doubletap_drank + player.pers[#"talent_doubletap_drank"];
+		talent_deadshot_drank = talent_deadshot_drank + player.pers[#"talent_deadshot_drank"];
+		talent_staminup_drank = talent_staminup_drank + player.pers[#"talent_staminup_drank"];
+		talent_elemental_pop_drank = talent_elemental_pop_drank + player.pers[#"talent_elemental_pop_drank"];
 		specialty_armorvest_drank = specialty_armorvest_drank + player.pers[#"specialty_armorvest_drank"];
 		specialty_quickrevive_drank = specialty_quickrevive_drank + player.pers[#"specialty_quickrevive_drank"];
 		specialty_fastreload_drank = specialty_fastreload_drank + player.pers[#"specialty_fastreload_drank"];
@@ -2447,15 +2447,15 @@ function update_global_counters_on_match_end()
 		specialty_doubletap2_drank = specialty_doubletap2_drank + player.pers[#"specialty_doubletap2_drank"];
 		specialty_widowswine_drank = specialty_widowswine_drank + player.pers[#"specialty_widowswine_drank"];
 		specialty_deadshot_drank = specialty_deadshot_drank + player.pers[#"specialty_deadshot_drank"];
-		var_69a326a5 = var_69a326a5 + player.pers[#"hash_6fd20bc72bf9e498"];
+		specialty_awareness_drank = specialty_awareness_drank + player.pers[#"specialty_awareness_drank"];
 		var_fe5dcda2 = var_fe5dcda2 + player.pers[#"hash_583ff5f66fd10104"];
 		var_48fd5671 = var_48fd5671 + player.pers[#"hash_3cbaa7dc09e06bb7"];
-		var_3b4ec51 = var_3b4ec51 + player.pers[#"hash_539966dfa171abec"];
-		var_aa97f0a6 = var_aa97f0a6 + player.pers[#"hash_5061c06e56f8d741"];
+		specialty_cooldown_drank = specialty_cooldown_drank + player.pers[#"specialty_cooldown_drank"];
+		specialty_extraammo_drank = specialty_extraammo_drank + player.pers[#"specialty_extraammo_drank"];
 		var_a73cd9fe = var_a73cd9fe + player.pers[#"hash_3c548389d8524d38"];
 		specialty_phdflopper_drank = specialty_phdflopper_drank + player.pers[#"specialty_phdflopper_drank"];
-		var_2da6115c = var_2da6115c + player.pers[#"hash_6d567aa9deb5cb44"];
-		var_de6ec86b = var_de6ec86b + player.pers[#"hash_165df073a0d7a3c3"];
+		specialty_shield_drank = specialty_shield_drank + player.pers[#"specialty_shield_drank"];
+		specialty_etherealrazor_drank = specialty_etherealrazor_drank + player.pers[#"specialty_etherealrazor_drank"];
 		var_b972d467 = var_b972d467 + player.pers[#"hash_3d9b732ca303132b"];
 		var_16a0e615 = var_16a0e615 + player.pers[#"hash_48288866afddc0d4"];
 		var_46c7e904 = var_46c7e904 + player.pers[#"hash_1dc1fbd3fd2fe493"];
@@ -2490,12 +2490,12 @@ function update_global_counters_on_match_end()
 		var_d61f06ce = var_d61f06ce + player.pers[#"hash_27399de28b76c5c6"];
 		minigun_pickedup = minigun_pickedup + player.pers[#"minigun_pickedup"];
 		island_seed_pickedup = island_seed_pickedup + player.pers[#"island_seed_pickedup"];
-		var_3e74dc38 = var_3e74dc38 + player.pers[#"hash_cdafe5cd6299b0c"];
-		var_d858ee80 = var_d858ee80 + player.pers[#"hash_3ec2a334a55d8215"];
-		var_550709e6 = var_550709e6 + player.pers[#"hash_7d6f5e2da0f7af67"];
-		var_b4012da = var_b4012da + player.pers[#"hash_636a6750788b3df0"];
-		var_47c42f82 = var_47c42f82 + player.pers[#"hash_29b45601d5e0d53f"];
-		var_dcc9d810 = var_dcc9d810 + player.pers[#"hash_79071dc310fc378f"];
+		hero_weapon_power_pickedup = hero_weapon_power_pickedup + player.pers[#"hero_weapon_power_pickedup"];
+		pack_a_punch_pickedup = pack_a_punch_pickedup + player.pers[#"pack_a_punch_pickedup"];
+		extra_lives_pickedup = extra_lives_pickedup + player.pers[#"extra_lives_pickedup"];
+		zmarcade_key_pickedup = zmarcade_key_pickedup + player.pers[#"zmarcade_key_pickedup"];
+		shield_charge_pickedup = shield_charge_pickedup + player.pers[#"shield_charge_pickedup"];
+		dung_pickedup = dung_pickedup + player.pers[#"dung_pickedup"];
 		bonus_points_team_pickedup = bonus_points_team_pickedup + player.pers[#"bonus_points_team_pickedup"];
 		ww_grenade_pickedup = ww_grenade_pickedup + player.pers[#"ww_grenade_pickedup"];
 		use_magicbox = use_magicbox + player.pers[#"use_magicbox"];
@@ -2559,7 +2559,7 @@ function update_global_counters_on_match_end()
 		killed_by_crimson_nosferatu = killed_by_crimson_nosferatu + player.pers[#"killed_by_crimson_nosferatu"];
 		bats_killed = bats_killed + player.pers[#"bats_killed"];
 	}
-	game_mode = util::function_5df4294();
+	game_mode = util::get_game_type();
 }
 
 /*
@@ -2615,7 +2615,7 @@ function function_b14863c1()
 	{
 		if(zm_utility::is_survival())
 		{
-			level waittilltimeout(getdvarint(#"hash_40077e81a7bcd7c3", 300), #"hash_69090774fec4a17b", #"hash_3b28fcaa0b9b4489");
+			level waittilltimeout(getdvarint(#"hash_40077e81a7bcd7c3", 300), #"objective_ended", #"hash_3b28fcaa0b9b4489");
 		}
 		else
 		{
@@ -2846,7 +2846,7 @@ function function_c0c6ab19(var_ad971622, n_value, var_b68b08b1)
 		var_b68b08b1 = 0;
 	}
 	/#
-		assert(function_7a600918(var_ad971622), "");
+		assert(ishash(var_ad971622), "");
 	#/
 	if(!level.onlinegame || is_true(level.zm_disable_recording_stats) || (var_b68b08b1 && zm_utility::is_standard()))
 	{
@@ -2855,7 +2855,7 @@ function function_c0c6ab19(var_ad971622, n_value, var_b68b08b1)
 	/#
 		n_value = n_value * getdvarint(#"hash_56e2a9e5690e0373", 1);
 	#/
-	if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"hash_74323bf8006c003f", 0) && isdefined(level.var_ad5d54b))
+	if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"zm_active_event_calling", 0) && isdefined(level.var_ad5d54b))
 	{
 		s_event_calling_task = level.var_ad5d54b[self function_3e561f63()];
 		if(isdefined(s_event_calling_task) && s_event_calling_task.var_ad971622 == var_ad971622)
@@ -2863,12 +2863,12 @@ function function_c0c6ab19(var_ad971622, n_value, var_b68b08b1)
 			self function_7f377150(s_event_calling_task, n_value);
 		}
 	}
-	if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"hash_4ef2b14c3bfef02a", 0))
+	if(getdvarint(#"hash_27ff853067d7c38c", 0) && getdvarint(#"zm_active_daily_calling", 0))
 	{
 		/#
 			if(getdvar(#"hash_acdd08b365cb62f", 0))
 			{
-				var_a4aebab9 = getdvarint(#"hash_4ef2b14c3bfef02a", 0);
+				var_a4aebab9 = getdvarint(#"zm_active_daily_calling", 0);
 				if(var_a4aebab9)
 				{
 					function_e8c496dd(var_a4aebab9);
@@ -2936,7 +2936,7 @@ function function_7f377150(s_event_calling_task, n_value)
 	{
 		if((var_e4edaaf0 + n_value) >= s_event_calling_task.var_e226ec4f)
 		{
-			self luinotifyevent(#"hash_675b38b81564449", 4, 0, level.var_1aa5a6d6, self function_3e561f63(), self getentitynumber());
+			self luinotifyevent(#"zombie_callings_notification", 4, 0, level.var_1aa5a6d6, self function_3e561f63(), self getentitynumber());
 			self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress", 0);
 			self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"tiercompleted", 1);
 			self addrankxpvalue("event_calling_task", s_event_calling_task.n_xp, 5);
@@ -2975,12 +2975,12 @@ function function_e8c496dd(var_d479261a)
 	{
 		task = var_314051a1.var_4c2d4591[var_d479261a];
 		var_e199fb8a = getscriptbundle(task.task);
-		if(isdefined(var_e199fb8a.var_38fc223d))
+		if(isdefined(var_e199fb8a.callingtask))
 		{
 			var_341c004b = undefined;
-			for(i = 0; i < var_314051a1.var_df270379.size; i++)
+			for(i = 0; i < var_314051a1.tasklist.size; i++)
 			{
-				if(var_314051a1.var_df270379[i].task == task.task)
+				if(var_314051a1.tasklist[i].task == task.task)
 				{
 					var_341c004b = i;
 					break;
@@ -2988,7 +2988,7 @@ function function_e8c496dd(var_d479261a)
 			}
 			if(isdefined(var_341c004b))
 			{
-				level.s_daily_calling_task = {#hash_de86e878:var_341c004b, #n_xp:task.xp, #hash_ad971622:var_e199fb8a.var_38fc223d, #hash_e226ec4f:var_e199fb8a.var_61731cf1};
+				level.s_daily_calling_task = {#hash_de86e878:var_341c004b, #n_xp:task.xp, #hash_ad971622:var_e199fb8a.callingtask, #hash_e226ec4f:var_e199fb8a.dailytarget};
 			}
 		}
 	}
@@ -3015,7 +3015,7 @@ function function_55109709(s_daily_calling_task, n_value)
 		if((var_e4edaaf0 + n_value) >= s_daily_calling_task.var_e226ec4f)
 		{
 			self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", s_daily_calling_task.var_e226ec4f);
-			self luinotifyevent(#"hash_675b38b81564449", 3, 1, s_daily_calling_task.var_de86e878, self getentitynumber());
+			self luinotifyevent(#"zombie_callings_notification", 3, 1, s_daily_calling_task.var_de86e878, self getentitynumber());
 			self addrankxpvalue("daily_calling_task", s_daily_calling_task.n_xp, 5);
 			var_ae857992 = getdvarint(#"hash_60d812bef0f782fb", 2);
 			uploadstats(self);
@@ -3069,21 +3069,21 @@ function function_1a222bee(params)
 		switch(params.item.var_a6762160.weapon.statname)
 		{
 			case "energy_mine":
-			case "hash_4ac3fda4add2a116":
+			case "energy_mine_4":
 			case "hash_4ac3fea4add2a2c9":
-			case "hash_4ac3ffa4add2a47c":
-			case "hash_4ac400a4add2a62f":
-			case "hash_4ac402a4add2a995":
+			case "energy_mine_2":
+			case "energy_mine_3":
+			case "energy_mine_1":
 			{
 				self stats::function_622feb0d(#"energy_mine", #"uses", 1);
 				break;
 			}
 			case "hash_85edf3a63bb488c":
-			case "hash_2f148f3f9c3812a8":
-			case "hash_2f14913f9c38160e":
-			case "hash_2f14923f9c3817c1":
+			case "frost_blast_1":
+			case "frost_blast_3":
+			case "frost_blast_2":
 			case "frost_blast_5":
-			case "hash_2f14943f9c381b27":
+			case "frost_blast_4":
 			{
 				self stats::function_622feb0d(#"hash_85edf3a63bb488c", #"uses", 1);
 				break;
@@ -3120,7 +3120,7 @@ function function_1a222bee(params)
 			}
 			case "frag_grenade":
 			{
-				self stats::function_622feb0d(#"hash_34b7eb9fde56bd35", #"uses", 1);
+				self stats::function_622feb0d(#"eq_frag_grenade", #"uses", 1);
 				break;
 			}
 			case "hash_12f078ddc9b913c3":

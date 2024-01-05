@@ -1,5 +1,5 @@
+#using scripts\core_common\ai\archetype_utility.gsc;
 #using script_4c5c4a64a59247a2;
-#using script_6809bf766eba194a;
 
 #namespace init;
 

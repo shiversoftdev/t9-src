@@ -1,6 +1,6 @@
-#using script_27c22e1d8df4d852;
-#using script_6021ce59143452c3;
 #using script_698dd790cdc4965f;
+#using scripts\zm_common\zm_trial_util.gsc;
+#using scripts\zm_common\zm_trial.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_44e65ea3()
 {
-	level notify(2093998870);
+	level notify(-2093998870);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_fc5170d1
 	Checksum: 0xDC9F5FC1
 	Offset: 0xA8
@@ -29,7 +29,7 @@ function private autoexec function_44e65ea3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_388ce832b10c2f83", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -45,15 +45,15 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!zm_trial::function_b47f6aba())
+	if(!zm_trial::is_trial_mode())
 	{
 		return;
 	}
-	zm_trial::register_challenge(#"hash_c2ef6223096d3ca", &function_d1de6a85, &function_9e7b3f4d);
+	zm_trial::register_challenge(#"hash_c2ef6223096d3ca", &on_begin, &on_end);
 }
 
 /*
-	Name: function_d1de6a85
+	Name: on_begin
 	Namespace: namespace_fc5170d1
 	Checksum: 0xADE2660E
 	Offset: 0x158
@@ -61,9 +61,9 @@ function private function_70a657d8()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_d1de6a85()
+function private on_begin()
 {
-	weapon_names = array(#"hero_chakram_lv1", #"hero_chakram_lv2", #"hero_chakram_lv3", #"hash_68705e3b85992a56", #"hash_68705d3b859928a3", #"hash_68705c3b859926f0", #"hero_hammer_lv1", #"hero_hammer_lv2", #"hero_hammer_lv3", #"hash_6627879099b8a337", #"hash_6627889099b8a4ea", #"hash_6627899099b8a69d", #"hash_50f35e4cfb775e02", #"hash_50f35d4cfb775c4f", #"hash_50f35c4cfb775a9c", #"hero_sword_pistol_lv1", #"hero_sword_pistol_lv2", #"hero_sword_pistol_lv3", #"hash_65e48a2e69e81a5e", #"hash_65e4892e69e818ab", #"hash_65e4882e69e816f8");
+	weapon_names = array(#"hero_chakram_lv1", #"hero_chakram_lv2", #"hero_chakram_lv3", #"hero_chakram_lh_lv1", #"hero_chakram_lh_lv2", #"hero_chakram_lh_lv3", #"hero_hammer_lv1", #"hero_hammer_lv2", #"hero_hammer_lv3", #"hero_katana_t8_lv1", #"hero_katana_t8_lv2", #"hero_katana_t8_lv3", #"hero_scepter_lv1", #"hero_scepter_lv2", #"hero_scepter_lv3", #"hero_sword_pistol_lv1", #"hero_sword_pistol_lv2", #"hero_sword_pistol_lv3", #"hero_sword_pistol_lh_lv1", #"hero_sword_pistol_lh_lv2", #"hero_sword_pistol_lh_lv3");
 	level.var_3e2ac3b6 = [];
 	foreach(weapon_name in weapon_names)
 	{
@@ -77,13 +77,13 @@ function private function_d1de6a85()
 	{
 		player function_6a8979c9();
 		player callback::function_33f0ddd3(&function_33f0ddd3);
-		player namespace_b22c99a5::function_9bf8e274();
+		player zm_trial_util::function_9bf8e274();
 	}
 	level zm_trial::function_44200d07(1);
 }
 
 /*
-	Name: function_9e7b3f4d
+	Name: on_end
 	Namespace: namespace_fc5170d1
 	Checksum: 0x3BD279C
 	Offset: 0x480
@@ -91,7 +91,7 @@ function private function_d1de6a85()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_9e7b3f4d(round_reset)
+function private on_end(round_reset)
 {
 	foreach(player in getplayers())
 	{
@@ -104,7 +104,7 @@ function private function_9e7b3f4d(round_reset)
 				player unlockweapon(weapon.dualwieldweapon);
 			}
 		}
-		player namespace_b22c99a5::function_73ff0096();
+		player zm_trial_util::function_73ff0096();
 	}
 	level.var_3e2ac3b6 = undefined;
 	level zm_trial::function_44200d07(0);

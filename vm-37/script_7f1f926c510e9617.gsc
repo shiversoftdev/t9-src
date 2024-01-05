@@ -1,8 +1,8 @@
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\load_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\cp_common\util.csc;
+#using scripts\core_common\load_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_aff1f617;
 

@@ -1,19 +1,19 @@
-#using script_2c5daa95f8fec03c;
-#using script_58c342edd81589fb;
-#using script_799de24f8ad427f7;
 #using script_7d5c9b91cf8d272b;
-#using script_7e59d7bba853fe4b;
-#using script_db06eb511bd9b36;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_audio.gsc;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
 #using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_round_spawning.gsc;
+#using scripts\zm_common\zm_audio.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using script_799de24f8ad427f7;
+#using scripts\zm_common\zm_cleanup_mgr.gsc;
+#using scripts\zm_common\zm.gsc;
+#using script_2c5daa95f8fec03c;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_7cadb1cc;
 
@@ -32,7 +32,7 @@ function private autoexec function_346f872d()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_7cadb1cc
 	Checksum: 0x6C6FC83B
 	Offset: 0x170
@@ -40,7 +40,7 @@ function private autoexec function_346f872d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_65c0c481aff3fe43", &function_70a657d8, undefined, undefined, "zm_destination_manager");
 }
@@ -56,8 +56,8 @@ function private autoexec function_89f2df9()
 */
 function function_70a657d8()
 {
-	namespace_c3287616::register_archetype(#"hash_7c09b683edfb0e96", &function_48924a80, &round_spawn, undefined, 100);
-	namespace_c3287616::function_306ce518(#"hash_7c09b683edfb0e96", &function_9282dcac);
+	zm_round_spawning::register_archetype(#"hash_7c09b683edfb0e96", &function_48924a80, &round_spawn, undefined, 100);
+	zm_round_spawning::function_306ce518(#"hash_7c09b683edfb0e96", &function_9282dcac);
 	spawner::add_archetype_spawn_function(#"hash_7c09b683edfb0e96", &function_b82e0a5d);
 	spawner::function_89a2cd87(#"hash_7c09b683edfb0e96", &function_545f669b);
 	zm_cleanup::function_cdf5a512(#"hash_7c09b683edfb0e96", &function_1d787beb);
@@ -138,7 +138,7 @@ function function_1d787beb()
 	}
 	if(isentity(self))
 	{
-		self namespace_e0710ee6::function_a8dc3363(var_d7eff26a);
+		self zm_ai_utility::function_a8dc3363(var_d7eff26a);
 		self thread namespace_361e505d::function_940cd1d8();
 	}
 	return true;
@@ -184,7 +184,7 @@ function function_2995325f()
 						var_cfad5b23 = 0;
 						self clientfield::set("abomDissolveCF", 2);
 						wait(1);
-						self namespace_e0710ee6::function_a8dc3363({#origin:var_9f0bcfaa});
+						self zm_ai_utility::function_a8dc3363({#origin:var_9f0bcfaa});
 						self.completed_emerging_into_playable_area = 1;
 						self thread namespace_361e505d::function_940cd1d8();
 					}
@@ -395,7 +395,7 @@ function spawn_single(b_force_spawn, var_eb3a8721, var_bc66d64b)
 		#/
 		return undefined;
 	}
-	ai = spawnactor(#"hash_39b3550f618c72e8", s_spawn_loc.origin, s_spawn_loc.angles);
+	ai = spawnactor(#"spawner_bo5_abom", s_spawn_loc.origin, s_spawn_loc.angles);
 	if(isdefined(ai))
 	{
 		ai.script_string = s_spawn_loc.script_string;
@@ -508,7 +508,7 @@ function function_9282dcac(n_round_number)
 	while(true)
 	{
 		level waittill(#"hash_5d3012139f083ccb");
-		if(namespace_c3287616::function_d0db51fc(#"hash_7c09b683edfb0e96"))
+		if(zm_round_spawning::function_d0db51fc(#"hash_7c09b683edfb0e96"))
 		{
 			level.var_59adf71++;
 			n_player_count = zm_utility::function_a2541519(getplayers().size);

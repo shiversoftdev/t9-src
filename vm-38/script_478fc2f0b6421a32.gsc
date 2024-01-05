@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_60bf0cf2;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_e393f1c8()
 {
-	level notify(1677213572);
+	level notify(-1677213572);
 }
 
 /*

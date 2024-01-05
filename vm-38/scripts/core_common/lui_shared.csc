@@ -1,10 +1,10 @@
 #using script_1da833573eb80e61;
 #using script_2feaeed9ab01d6f7;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
-class class_6aaccc24 
+class cluielem 
 {
 	var var_47d8642e;
 	var var_bf9c8c95;
@@ -12,7 +12,7 @@ class class_6aaccc24
 
 	/*
 		Name: constructor
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0x515E03A5
 		Offset: 0x828
 		Size: 0x2A
@@ -28,7 +28,7 @@ class class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0x1F6AA34A
 		Offset: 0x860
 		Size: 0x96
@@ -45,7 +45,7 @@ class class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0x14963CFB
 		Offset: 0xF88
 		Size: 0x82
@@ -57,14 +57,14 @@ class class_6aaccc24
 		/#
 			assert(var_47d8642e, "");
 		#/
-		function_5686f5cd(local_client_num, hash(var_d5213cbb), var_bf9c8c95);
+		openluielem(local_client_num, hash(var_d5213cbb), var_bf9c8c95);
 		[[ self ]]->function_fa582112(local_client_num);
 		self.var_779239b4 = 1;
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xE77FB8DD
 		Offset: 0x1088
 		Size: 0x6E
@@ -76,20 +76,20 @@ class class_6aaccc24
 		/#
 			assert(var_47d8642e, "");
 		#/
-		function_43d5b973(local_client_num, hash(var_d5213cbb), var_bf9c8c95);
+		closeluielem(local_client_num, hash(var_d5213cbb), var_bf9c8c95);
 		self.var_779239b4 = 0;
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_6aaccc24
+		Name: register_clientside
+		Namespace: cluielem
 		Checksum: 0xD77661B
 		Offset: 0xDB0
 		Size: 0x18E
 		Parameters: 1
 		Flags: Linked
 	*/
-	function function_5c1bb138(menu_name)
+	function register_clientside(menu_name)
 	{
 		if(!isdefined(level.var_c6881a61))
 		{
@@ -119,7 +119,7 @@ class class_6aaccc24
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0x3C557C5B
 		Offset: 0x900
 		Size: 0xDA
@@ -143,15 +143,15 @@ class class_6aaccc24
 	}
 
 	/*
-		Name: function_92ba69fa
-		Namespace: namespace_6aaccc24
+		Name: get_data
+		Namespace: cluielem
 		Checksum: 0x2BBCAD35
 		Offset: 0x1330
 		Size: 0x6A
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_92ba69fa(local_client_num, field)
+	function get_data(local_client_num, field)
 	{
 		/#
 			assert(var_47d8642e, "");
@@ -161,7 +161,7 @@ class class_6aaccc24
 
 	/*
 		Name: function_cbca32d8
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xF00B036C
 		Offset: 0x13A8
 		Size: 0x26C
@@ -200,15 +200,15 @@ class class_6aaccc24
 	}
 
 	/*
-		Name: function_d7d2fcce
-		Namespace: namespace_6aaccc24
+		Name: set_data
+		Namespace: cluielem
 		Checksum: 0x70DE36E2
 		Offset: 0x1100
 		Size: 0x222
 		Parameters: 3
 		Flags: Linked
 	*/
-	function function_d7d2fcce(local_client_num, field, value)
+	function set_data(local_client_num, field, value)
 	{
 		/#
 			assert(var_47d8642e, "");
@@ -230,7 +230,7 @@ class class_6aaccc24
 
 	/*
 		Name: is_open
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xB5913E47
 		Offset: 0x1018
 		Size: 0x62
@@ -242,19 +242,19 @@ class class_6aaccc24
 		/#
 			assert(var_47d8642e, "");
 		#/
-		return function_e148e3b7(local_client_num, hash(var_d5213cbb), var_bf9c8c95);
+		return isluielemopen(local_client_num, hash(var_d5213cbb), var_bf9c8c95);
 	}
 
 	/*
-		Name: function_da693cbe
-		Namespace: namespace_6aaccc24
+		Name: add_clientfield
+		Namespace: cluielem
 		Checksum: 0xB30A2348
 		Offset: 0x9E8
 		Size: 0x1E4
 		Parameters: 5
 		Flags: Linked
 	*/
-	function function_da693cbe(field_name, version, bits, type, callback)
+	function add_clientfield(field_name, version, bits, type, callback)
 	{
 		/#
 			assert(!var_47d8642e, "");
@@ -273,12 +273,12 @@ class class_6aaccc24
 			}
 			var_2637b994[var_2637b994.size] = hash(field);
 		}
-		clientfield::function_346f95ba((("luielement." + var_d5213cbb) + ".") + (isdefined(var_bf9c8c95) ? "" + var_bf9c8c95 : "") + field_name, hash(var_d5213cbb), var_bf9c8c95, var_2637b994, version, bits, type, callback, 0, 0);
+		clientfield::register_luielem((("luielement." + var_d5213cbb) + ".") + (isdefined(var_bf9c8c95) ? "" + var_bf9c8c95 : "") + field_name, hash(var_d5213cbb), var_bf9c8c95, var_2637b994, version, bits, type, callback, 0, 0);
 	}
 
 	/*
 		Name: function_dcb34c80
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0x739C5D3E
 		Offset: 0xBD8
 		Size: 0x1CC
@@ -309,7 +309,7 @@ class class_6aaccc24
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_6aaccc24
+		Namespace: cluielem
 		Checksum: 0xF104CEE1
 		Offset: 0xF48
 		Size: 0x34
@@ -338,13 +338,13 @@ class class_6aaccc24
 */
 function private autoexec function_f77a9409()
 {
-	level notify(1067558688);
+	level notify(-1067558688);
 }
 
 #namespace lui;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: lui
 	Checksum: 0x46D567F4
 	Offset: 0x100
@@ -352,7 +352,7 @@ function private autoexec function_f77a9409()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"lui_shared", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -521,19 +521,19 @@ function private _screen_fade(localclientnum, n_time, n_target_alpha, n_start_al
 	else
 	{
 		level.localclients[localclientnum].full_screen_black = spawnstruct();
-		level.localclients[localclientnum].full_screen_black.lui_menu = full_screen_black::function_5c1bb138();
+		level.localclients[localclientnum].full_screen_black.lui_menu = full_screen_black::register_clientside();
 	}
 	level.localclients[localclientnum].full_screen_black.n_start_alpha = n_start_alpha;
 	level.localclients[localclientnum].full_screen_black.n_target_alpha = n_target_alpha;
 	level.localclients[localclientnum].full_screen_black.n_target_time = n_time_ms;
 	level.localclients[localclientnum].full_screen_black.n_start_time = gettime();
 	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->open(localclientnum);
-	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->function_eccc151d(localclientnum, v_color[0]);
-	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->function_2208b8db(localclientnum, v_color[1]);
-	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->function_7420df0a(localclientnum, v_color[2]);
-	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->function_9cd54463(localclientnum, n_start_alpha);
-	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->function_331f9dd(localclientnum, n_target_alpha);
-	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->function_237ff433(localclientnum, n_time_ms);
+	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->set_red(localclientnum, v_color[0]);
+	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->set_green(localclientnum, v_color[1]);
+	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->set_blue(localclientnum, v_color[2]);
+	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->set_startalpha(localclientnum, n_start_alpha);
+	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->set_endalpha(localclientnum, n_target_alpha);
+	[[ level.localclients[localclientnum].full_screen_black.lui_menu ]]->set_fadeovertime(localclientnum, n_time_ms);
 	wait(n_time);
 	if(b_force_close_menu || n_target_alpha == 0)
 	{

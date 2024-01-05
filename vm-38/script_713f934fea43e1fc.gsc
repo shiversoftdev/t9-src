@@ -1,9 +1,9 @@
 #using script_2d142c6d365a90a3;
-#using script_3d0f36632dad12df;
 #using script_7ebad89114ecedb1;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using script_3d0f36632dad12df;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace radiation;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_47861e64()
 {
-	level notify(1124953623);
+	level notify(-1124953623);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: radiation
 	Checksum: 0x286DC2CE
 	Offset: 0x110
@@ -30,7 +30,7 @@ function private autoexec function_47861e64()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"radiation", &function_70a657d8, undefined, undefined, undefined);
 }

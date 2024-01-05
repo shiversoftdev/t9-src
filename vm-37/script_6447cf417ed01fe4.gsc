@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_51a06b68 : class_6aaccc24
+class csr_objective_reward_menu : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x76817AC8
 		Offset: 0x490
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_51a06b68 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x33029790
 		Offset: 0x968
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_51a06b68 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x6D7FC952
 		Offset: 0x6F8
 		Size: 0x24
@@ -40,54 +40,54 @@ class class_51a06b68 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_2d7f3298
-		Namespace: namespace_51a06b68
+		Name: set_gunindex2
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x74358098
 		Offset: 0x8C0
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_2d7f3298(localclientnum, value)
+	function set_gunindex2(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "gunindex2", value);
+		[[ self ]]->set_data(localclientnum, "gunindex2", value);
 	}
 
 	/*
-		Name: function_43ba5f0e
-		Namespace: namespace_51a06b68
+		Name: set_gunindex1
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x9C04D273
 		Offset: 0x888
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_43ba5f0e(localclientnum, value)
+	function set_gunindex1(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "gunIndex1", value);
+		[[ self ]]->set_data(localclientnum, "gunIndex1", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_51a06b68
+		Name: register_clientside
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xAE3DE00E
 		Offset: 0x5F0
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_objective_reward_menu");
+		cluielem::register_clientside("sr_objective_reward_menu");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x64DF75DB
 		Offset: 0x4B0
 		Size: 0x134
@@ -96,18 +96,18 @@ class class_51a06b68 : class_6aaccc24
 	*/
 	function setup_clientfields(var_e4dedc0e, var_c8914fcf, var_2f1b82f5, var_bf555938, var_18d66c99)
 	{
-		namespace_6aaccc24::setup_clientfields("sr_objective_reward_menu");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("promptProgress", 1, 7, "float", var_e4dedc0e);
-		namespace_6aaccc24::function_da693cbe("gunIndex1", 1, 4, "int", var_c8914fcf);
-		namespace_6aaccc24::function_da693cbe("gunindex2", 1, 4, "int", var_2f1b82f5);
-		namespace_6aaccc24::function_da693cbe("gunindex3", 1, 4, "int", var_bf555938);
-		namespace_6aaccc24::function_da693cbe("color", 1, 2, "int", var_18d66c99);
+		cluielem::setup_clientfields("sr_objective_reward_menu");
+		cluielem::add_clientfield("_state", 1, 2, "int");
+		cluielem::add_clientfield("promptProgress", 1, 7, "float", var_e4dedc0e);
+		cluielem::add_clientfield("gunIndex1", 1, 4, "int", var_c8914fcf);
+		cluielem::add_clientfield("gunindex2", 1, 4, "int", var_2f1b82f5);
+		cluielem::add_clientfield("gunindex3", 1, 4, "int", var_bf555938);
+		cluielem::add_clientfield("color", 1, 2, "int", var_18d66c99);
 	}
 
 	/*
 		Name: set_color
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xC68C587E
 		Offset: 0x930
 		Size: 0x30
@@ -116,40 +116,40 @@ class class_51a06b68 : class_6aaccc24
 	*/
 	function set_color(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "color", value);
+		[[ self ]]->set_data(localclientnum, "color", value);
 	}
 
 	/*
-		Name: function_ada8b2f1
-		Namespace: namespace_51a06b68
+		Name: set_gunindex3
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xA8A0449F
 		Offset: 0x8F8
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_ada8b2f1(localclientnum, value)
+	function set_gunindex3(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "gunindex3", value);
+		[[ self ]]->set_data(localclientnum, "gunindex3", value);
 	}
 
 	/*
-		Name: function_b94196b8
-		Namespace: namespace_51a06b68
+		Name: set_promptprogress
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xCC6517C0
 		Offset: 0x850
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_b94196b8(localclientnum, value)
+	function set_promptprogress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "promptProgress", value);
+		[[ self ]]->set_data(localclientnum, "promptProgress", value);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0xCDB49CC5
 		Offset: 0x728
 		Size: 0x11C
@@ -160,25 +160,25 @@ class class_51a06b68 : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"hash_aae094fcdbbfdf5" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
 				if(#"hash_6e088fcf60bf0124" == state_name)
 				{
-					[[ self ]]->function_d7d2fcce(localclientnum, "_state", 2);
+					[[ self ]]->set_data(localclientnum, "_state", 2);
 				}
 				else
 				{
 					if(#"hash_7ca278cf4669f74b" == state_name)
 					{
-						[[ self ]]->function_d7d2fcce(localclientnum, "_state", 3);
+						[[ self ]]->set_data(localclientnum, "_state", 3);
 					}
 					else
 					{
@@ -195,7 +195,7 @@ class class_51a06b68 : class_6aaccc24
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_51a06b68
+		Namespace: csr_objective_reward_menu
 		Checksum: 0x7181119F
 		Offset: 0x618
 		Size: 0xD8
@@ -204,13 +204,13 @@ class class_51a06b68 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "promptProgress", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "gunIndex1", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "gunindex2", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "gunindex3", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "color", 0);
+		[[ self ]]->set_data(localclientnum, "promptProgress", 0);
+		[[ self ]]->set_data(localclientnum, "gunIndex1", 0);
+		[[ self ]]->set_data(localclientnum, "gunindex2", 0);
+		[[ self ]]->set_data(localclientnum, "gunindex3", 0);
+		[[ self ]]->set_data(localclientnum, "color", 0);
 	}
 
 }
@@ -228,7 +228,7 @@ class class_51a06b68 : class_6aaccc24
 */
 function register(var_e4dedc0e, var_c8914fcf, var_2f1b82f5, var_bf555938, var_18d66c99)
 {
-	elem = new class_51a06b68();
+	elem = new csr_objective_reward_menu();
 	[[ elem ]]->setup_clientfields(var_e4dedc0e, var_c8914fcf, var_2f1b82f5, var_bf555938, var_18d66c99);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -250,7 +250,7 @@ function register(var_e4dedc0e, var_c8914fcf, var_2f1b82f5, var_bf555938, var_18
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: sr_objective_reward_menu
 	Checksum: 0xAC6792F4
 	Offset: 0x2B8
@@ -258,10 +258,10 @@ function register(var_e4dedc0e, var_c8914fcf, var_2f1b82f5, var_bf555938, var_18
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_51a06b68();
-	[[ elem ]]->function_5c1bb138();
+	elem = new csr_objective_reward_menu();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -322,7 +322,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_b94196b8
+	Name: set_promptprogress
 	Namespace: sr_objective_reward_menu
 	Checksum: 0x43457B65
 	Offset: 0x3A0
@@ -330,13 +330,13 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_b94196b8(localclientnum, value)
+function set_promptprogress(localclientnum, value)
 {
-	[[ self ]]->function_b94196b8(localclientnum, value);
+	[[ self ]]->set_promptprogress(localclientnum, value);
 }
 
 /*
-	Name: function_43ba5f0e
+	Name: set_gunindex1
 	Namespace: sr_objective_reward_menu
 	Checksum: 0x8DB50734
 	Offset: 0x3D0
@@ -344,13 +344,13 @@ function function_b94196b8(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_43ba5f0e(localclientnum, value)
+function set_gunindex1(localclientnum, value)
 {
-	[[ self ]]->function_43ba5f0e(localclientnum, value);
+	[[ self ]]->set_gunindex1(localclientnum, value);
 }
 
 /*
-	Name: function_2d7f3298
+	Name: set_gunindex2
 	Namespace: sr_objective_reward_menu
 	Checksum: 0x8A3C4529
 	Offset: 0x400
@@ -358,13 +358,13 @@ function function_43ba5f0e(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_2d7f3298(localclientnum, value)
+function set_gunindex2(localclientnum, value)
 {
-	[[ self ]]->function_2d7f3298(localclientnum, value);
+	[[ self ]]->set_gunindex2(localclientnum, value);
 }
 
 /*
-	Name: function_ada8b2f1
+	Name: set_gunindex3
 	Namespace: sr_objective_reward_menu
 	Checksum: 0x9C4C4029
 	Offset: 0x430
@@ -372,9 +372,9 @@ function function_2d7f3298(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_ada8b2f1(localclientnum, value)
+function set_gunindex3(localclientnum, value)
 {
-	[[ self ]]->function_ada8b2f1(localclientnum, value);
+	[[ self ]]->set_gunindex3(localclientnum, value);
 }
 
 /*

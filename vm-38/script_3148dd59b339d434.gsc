@@ -1,6 +1,6 @@
+#using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 
 #namespace namespace_ac0c0ba8;
 
@@ -19,7 +19,7 @@ function private autoexec function_fbe23143()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_ac0c0ba8
 	Checksum: 0x5A8D9F84
 	Offset: 0x108
@@ -27,7 +27,7 @@ function private autoexec function_fbe23143()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_770956d673fdbba2", &function_70a657d8, undefined, undefined, undefined);
 }

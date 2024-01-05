@@ -1,30 +1,30 @@
-#using script_1292451e284848cc;
-#using script_1883fa4e60abbf9f;
-#using script_263b7f2982258785;
-#using script_31e9b35aaacbbd93;
-#using script_3dc93ca9902a9cda;
-#using script_4937c6974f43bb71;
-#using script_4ae261b2785dda9f;
+#using script_85cd2e9a28ea8a1;
 #using script_54412fb3a6fab34c;
 #using script_5552bd756afee443;
+#using script_3dc93ca9902a9cda;
+#using script_1292451e284848cc;
 #using script_61cfc2ab8e60625;
-#using script_85cd2e9a28ea8a1;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using script_31e9b35aaacbbd93;
+#using script_1883fa4e60abbf9f;
+#using script_4ae261b2785dda9f;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
 #using scripts\cp_common\skipto.gsc;
 #using scripts\cp_common\util.gsc;
+#using script_4937c6974f43bb71;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\cp_common\objectives.gsc;
+#using script_263b7f2982258785;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_d73f985a;
 
@@ -39,14 +39,14 @@
 */
 function private autoexec function_269e4b20()
 {
-	level notify(1298338835);
+	level notify(-1298338835);
 }
 
-#namespace namespace_47eaac63;
+#namespace tkdn_af_wreck;
 
 /*
 	Name: starting
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0x5F7B85F6
 	Offset: 0x468
 	Size: 0xC4
@@ -67,7 +67,7 @@ function starting(str_skipto)
 
 /*
 	Name: main
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0x73D0FD8A
 	Offset: 0x538
 	Size: 0x6FC
@@ -143,7 +143,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: function_fa3409bb
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0xE31221
 	Offset: 0xC40
 	Size: 0x6C
@@ -160,7 +160,7 @@ function function_fa3409bb()
 
 /*
 	Name: cleanup
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0xA0ED6EFA
 	Offset: 0xCB8
 	Size: 0x24
@@ -173,7 +173,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0xD02C3B69
 	Offset: 0xCE8
 	Size: 0x44
@@ -188,7 +188,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0x2ECD5C2B
 	Offset: 0xD38
 	Size: 0xC4
@@ -205,7 +205,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0x80F724D1
 	Offset: 0xE08
 	Size: 0x4
@@ -218,7 +218,7 @@ function init_scenes()
 
 /*
 	Name: function_cf191fff
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0x80F724D1
 	Offset: 0xE18
 	Size: 0x4
@@ -231,7 +231,7 @@ function function_cf191fff()
 
 /*
 	Name: function_91d49d23
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0x1EF6EFB3
 	Offset: 0xE28
 	Size: 0x44
@@ -249,7 +249,7 @@ function function_91d49d23(guy)
 
 /*
 	Name: function_70dd6f0e
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0xB7029FAF
 	Offset: 0xE78
 	Size: 0x1AC
@@ -281,7 +281,7 @@ function function_70dd6f0e()
 
 /*
 	Name: function_ea2f2e25
-	Namespace: namespace_47eaac63
+	Namespace: tkdn_af_wreck
 	Checksum: 0x813D7A59
 	Offset: 0x1030
 	Size: 0x184

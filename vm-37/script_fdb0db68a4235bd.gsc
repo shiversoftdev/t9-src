@@ -1,43 +1,43 @@
-#using script_164a456ce05c3483;
-#using script_16910aff9d97c520;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
+#using script_67c9a990c0db216c;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_5133d88c555e460;
 #using script_36fc02e86719d0f5;
+#using script_2a5bf5b4a00cee0d;
 #using script_3bbf85ab4cb9f3c2;
 #using script_3faf478d5b0850fe;
-#using script_413ab8fe25a61c50;
-#using script_4780230832eb22a9;
 #using script_47851dbeea22fe66;
-#using script_47fb62300ac0bd60;
-#using script_5133d88c555e460;
-#using script_5549681e1669c11a;
-#using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_634ae70c663d1cc9;
-#using script_67c9a990c0db216c;
-#using script_68cdf0ca5df5e;
-#using script_6b6510e124bad778;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
 #using script_717759a5d2a40e63;
+#using script_5f20d3b434d24884;
 #using script_774302f762d76254;
+#using script_6b6510e124bad778;
+#using script_16910aff9d97c520;
+#using script_634ae70c663d1cc9;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_17dcb1172e441bf6;
+#using script_5549681e1669c11a;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\load_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\serverfield_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
+#using script_68cdf0ca5df5e;
+#using script_413ab8fe25a61c50;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using script_4780230832eb22a9;
 
 #namespace namespace_8b9bbbb3;
 
@@ -52,7 +52,7 @@
 */
 event main(eventstruct)
 {
-	level thread lui::function_b95a3ba5("full_screen_movie", &full_screen_movie::register);
+	level thread lui::add_luimenu("full_screen_movie", &full_screen_movie::register);
 	level.var_fb6c6113 = 0;
 	serverfield::register("crab_behavior", 1, 1, "int", &function_bfd9c561);
 	/#
@@ -66,7 +66,7 @@ event main(eventstruct)
 	level.trackweaponstats = 0;
 	level.var_6e2d52c5 = 1;
 	level.var_20ad5db3 = sessionmodeiszombiesgame();
-	level.var_4f69a0e8 = function_f99d2668();
+	level.var_4f69a0e8 = sessionmodeiswarzonegame();
 	level.doa.var_16411829 = [];
 	setclearanceceiling(142);
 	setsaveddvar(#"hash_61cbea77be1b7b36", 1);
@@ -78,7 +78,7 @@ event main(eventstruct)
 	setsaveddvar(#"player_strafespeedscale", 1);
 	setsaveddvar(#"player_backspeedscale", 1);
 	setsaveddvar(#"hash_5784cae91fb32baa", 0);
-	setsaveddvar(#"hash_608e38c8a93de439", 0);
+	setsaveddvar(#"ai_threatsight", 0);
 	setsaveddvar(#"hash_272f8d946ae3e82f", 0);
 	setsaveddvar(#"ai_threatupdateinterval", 0);
 	setsaveddvar(#"hash_61eba98da1c9944a", 0);
@@ -1157,7 +1157,7 @@ function function_db874c99()
 	var_b282ad2f = struct::get_array("bloodlake_loot_spot", "targetname");
 	foreach(item in var_b282ad2f)
 	{
-		item = doa_pickups::function_d080f0db(doa_pickups::function_6265bde4(item.script_noteworthy), item.origin, item.angles, undefined, 1);
+		item = doa_pickups::itemspawn(doa_pickups::function_6265bde4(item.script_noteworthy), item.origin, item.angles, undefined, 1);
 		if(isdefined(item))
 		{
 			item notify(#"stopidle");
@@ -1605,7 +1605,7 @@ function function_e26b3847()
 		var_35b85488 delete();
 	}
 	var_2c7cecea = struct::get("fidolina_egg_hatch", "targetname");
-	var_ae0093c9 = doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_egg"), var_2c7cecea.origin, var_2c7cecea.angles, 1, 1);
+	var_ae0093c9 = doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_egg"), var_2c7cecea.origin, var_2c7cecea.angles, 1, 1);
 	if(isdefined(var_ae0093c9))
 	{
 		var_ae0093c9 setscale(4);
@@ -2351,7 +2351,7 @@ function function_13471cec(minlevel)
 		if(!function_520814d5(player, minlevel))
 		{
 		}
-		if(player.doa.score.var_7a3c00a0 == 0)
+		if(player.doa.score.boosts == 0)
 		{
 		}
 		if(level.doa.var_25f4de97 & 0)

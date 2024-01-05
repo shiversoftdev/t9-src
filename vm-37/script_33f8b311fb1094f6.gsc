@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_302a48fc : class_6aaccc24
+class class_302a48fc : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_302a48fc : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_302a48fc
 		Checksum: 0x8AB6182
 		Offset: 0x420
@@ -52,9 +52,9 @@ class class_302a48fc : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("vip_notify_text");
+		cluielem::register_clientside("vip_notify_text");
 	}
 
 	/*
@@ -66,15 +66,15 @@ class class_302a48fc : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function setup_clientfields(var_42fe6185, var_af074abc)
+	function setup_clientfields(var_42fe6185, alphacallback)
 	{
-		namespace_6aaccc24::setup_clientfields("vip_notify_text");
-		namespace_6aaccc24::function_dcb34c80("string", "vipmessage", 1);
-		namespace_6aaccc24::function_da693cbe("alpha", 1, 8, "float", var_af074abc);
+		cluielem::setup_clientfields("vip_notify_text");
+		cluielem::function_dcb34c80("string", "vipmessage", 1);
+		cluielem::add_clientfield("alpha", 1, 8, "float", alphacallback);
 	}
 
 	/*
-		Name: function_aa5c711d
+		Name: set_alpha
 		Namespace: namespace_302a48fc
 		Checksum: 0xF35A0FDA
 		Offset: 0x528
@@ -82,13 +82,13 @@ class class_302a48fc : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_aa5c711d(localclientnum, value)
+	function set_alpha(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "alpha", value);
+		[[ self ]]->set_data(localclientnum, "alpha", value);
 	}
 
 	/*
-		Name: function_d01a102c
+		Name: set_vipmessage
 		Namespace: namespace_302a48fc
 		Checksum: 0xCE75A235
 		Offset: 0x4F0
@@ -96,9 +96,9 @@ class class_302a48fc : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_d01a102c(localclientnum, value)
+	function set_vipmessage(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "vipmessage", value);
+		[[ self ]]->set_data(localclientnum, "vipmessage", value);
 	}
 
 	/*
@@ -112,9 +112,9 @@ class class_302a48fc : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "vipmessage", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "alpha", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "vipmessage", #"");
+		[[ self ]]->set_data(localclientnum, "alpha", 0);
 	}
 
 }
@@ -130,10 +130,10 @@ class class_302a48fc : class_6aaccc24
 	Parameters: 2
 	Flags: None
 */
-function register(var_42fe6185, var_af074abc)
+function register(var_42fe6185, alphacallback)
 {
 	elem = new class_302a48fc();
-	[[ elem ]]->setup_clientfields(var_42fe6185, var_af074abc);
+	[[ elem ]]->setup_clientfields(var_42fe6185, alphacallback);
 	if(!isdefined(level.var_ae746e8f))
 	{
 		level.var_ae746e8f = associativearray();
@@ -154,7 +154,7 @@ function register(var_42fe6185, var_af074abc)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: vip_notify_text
 	Checksum: 0xE281E6A1
 	Offset: 0x260
@@ -162,10 +162,10 @@ function register(var_42fe6185, var_af074abc)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_302a48fc();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -212,7 +212,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_d01a102c
+	Name: set_vipmessage
 	Namespace: vip_notify_text
 	Checksum: 0x9E7325AE
 	Offset: 0x318
@@ -220,13 +220,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_d01a102c(localclientnum, value)
+function set_vipmessage(localclientnum, value)
 {
-	[[ self ]]->function_d01a102c(localclientnum, value);
+	[[ self ]]->set_vipmessage(localclientnum, value);
 }
 
 /*
-	Name: function_aa5c711d
+	Name: set_alpha
 	Namespace: vip_notify_text
 	Checksum: 0x1242B7F9
 	Offset: 0x348
@@ -234,8 +234,8 @@ function function_d01a102c(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_aa5c711d(localclientnum, value)
+function set_alpha(localclientnum, value)
 {
-	[[ self ]]->function_aa5c711d(localclientnum, value);
+	[[ self ]]->set_alpha(localclientnum, value);
 }
 

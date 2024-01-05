@@ -1,14 +1,14 @@
-#using script_3f9e0dc8454d98e1;
-#using script_5bb072c3abf4652c;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace namespace_65320816;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_65320816
 	Checksum: 0xA62887B7
 	Offset: 0x118
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2209575d9ead0b63", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -32,13 +32,13 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	zombie_utility::set_zombie_var(#"hash_5926aba6d2b11cc", 0, 0, 1);
-	zombie_utility::set_zombie_var(#"hash_5eb5d53a58400df8", 10, 0, 1);
+	zombie_utility::set_zombie_var(#"zombie_powerup_cranked_pause_on", 0, 0, 1);
+	zombie_utility::set_zombie_var(#"zombie_powerup_cranked_pause_time", 10, 0, 1);
 	zm_powerups::register_powerup("cranked_pause", &function_1202eaf8);
 	if(zm_powerups::function_cc33adc8())
 	{
 		zm_powerups::add_zombie_powerup("cranked_pause", #"p9_zm_powerup_clock", #"hash_4beb7d0e9dfb41f4", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_cranked_pause", "zombie_powerup_cranked_pause_time", "zombie_powerup_cranked_pause_on");
-		zm_vo::function_2cf4b07f(#"hash_20c057e44a67cf98", #"hash_6f3de1197858ca4b");
+		zm_vo::function_2cf4b07f(#"cranked_pause", #"hash_6f3de1197858ca4b");
 		/#
 			adddebugcommand("");
 		#/

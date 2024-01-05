@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_fbe341f : class_6aaccc24
+class cdirtybomb_usebar : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x7E1E6212
 		Offset: 0x3D8
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_fbe341f : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x53253F22
 		Offset: 0x798
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_fbe341f : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x35CAFBAD
 		Offset: 0x560
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_4aa46834
-		Namespace: namespace_fbe341f
+		Name: set_activatorcount
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xF5429E2B
 		Offset: 0x760
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4aa46834(localclientnum, value)
+	function set_activatorcount(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "activatorCount", value);
+		[[ self ]]->set_data(localclientnum, "activatorCount", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_fbe341f
+		Name: register_clientside
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x3FE4322E
 		Offset: 0x4A8
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("DirtyBomb_UseBar");
+		cluielem::register_clientside("DirtyBomb_UseBar");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xEEF57C4C
 		Offset: 0x3F8
 		Size: 0xA4
@@ -82,15 +82,15 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function setup_clientfields(var_ec85b709, var_193163f7)
 	{
-		namespace_6aaccc24::setup_clientfields("DirtyBomb_UseBar");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 3, "int");
-		namespace_6aaccc24::function_da693cbe("progressFrac", 1, 10, "float", var_ec85b709);
-		namespace_6aaccc24::function_da693cbe("activatorCount", 1, 3, "int", var_193163f7);
+		cluielem::setup_clientfields("DirtyBomb_UseBar");
+		cluielem::add_clientfield("_state", 1, 3, "int");
+		cluielem::add_clientfield("progressFrac", 1, 10, "float", var_ec85b709);
+		cluielem::add_clientfield("activatorCount", 1, 3, "int", var_193163f7);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x742D79
 		Offset: 0x590
 		Size: 0x18C
@@ -101,37 +101,37 @@ class class_fbe341f : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"detonating" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
 				if(#"hash_1a2812055c330ee0" == state_name)
 				{
-					[[ self ]]->function_d7d2fcce(localclientnum, "_state", 2);
+					[[ self ]]->set_data(localclientnum, "_state", 2);
 				}
 				else
 				{
 					if(#"hash_59e0e869fbae7705" == state_name)
 					{
-						[[ self ]]->function_d7d2fcce(localclientnum, "_state", 3);
+						[[ self ]]->set_data(localclientnum, "_state", 3);
 					}
 					else
 					{
 						if(#"hash_b86ebfb5a93f57f" == state_name)
 						{
-							[[ self ]]->function_d7d2fcce(localclientnum, "_state", 4);
+							[[ self ]]->set_data(localclientnum, "_state", 4);
 						}
 						else
 						{
 							if(#"hash_4ff55a42344e567e" == state_name)
 							{
-								[[ self ]]->function_d7d2fcce(localclientnum, "_state", 5);
+								[[ self ]]->set_data(localclientnum, "_state", 5);
 							}
 							else
 							{
@@ -149,22 +149,22 @@ class class_fbe341f : class_6aaccc24
 	}
 
 	/*
-		Name: function_f0df5702
-		Namespace: namespace_fbe341f
+		Name: set_progressfrac
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x3DAD6888
 		Offset: 0x728
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f0df5702(localclientnum, value)
+	function set_progressfrac(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "progressFrac", value);
+		[[ self ]]->set_data(localclientnum, "progressFrac", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x7D29E272
 		Offset: 0x4D0
 		Size: 0x84
@@ -173,10 +173,10 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "progressFrac", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "activatorCount", 0);
+		[[ self ]]->set_data(localclientnum, "progressFrac", 0);
+		[[ self ]]->set_data(localclientnum, "activatorCount", 0);
 	}
 
 }
@@ -208,7 +208,7 @@ function private autoexec function_273cdf25()
 */
 function register(var_ec85b709, var_193163f7)
 {
-	elem = new class_fbe341f();
+	elem = new cdirtybomb_usebar();
 	[[ elem ]]->setup_clientfields(var_ec85b709, var_193163f7);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -230,7 +230,7 @@ function register(var_ec85b709, var_193163f7)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: dirtybomb_usebar
 	Checksum: 0x87435D75
 	Offset: 0x290
@@ -238,10 +238,10 @@ function register(var_ec85b709, var_193163f7)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_fbe341f();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cdirtybomb_usebar();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -302,7 +302,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_f0df5702
+	Name: set_progressfrac
 	Namespace: dirtybomb_usebar
 	Checksum: 0xF52CB605
 	Offset: 0x378
@@ -310,13 +310,13 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_f0df5702(localclientnum, value)
+function set_progressfrac(localclientnum, value)
 {
-	[[ self ]]->function_f0df5702(localclientnum, value);
+	[[ self ]]->set_progressfrac(localclientnum, value);
 }
 
 /*
-	Name: function_4aa46834
+	Name: set_activatorcount
 	Namespace: dirtybomb_usebar
 	Checksum: 0x84693EC7
 	Offset: 0x3A8
@@ -324,8 +324,8 @@ function function_f0df5702(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4aa46834(localclientnum, value)
+function set_activatorcount(localclientnum, value)
 {
-	[[ self ]]->function_4aa46834(localclientnum, value);
+	[[ self ]]->set_activatorcount(localclientnum, value);
 }
 

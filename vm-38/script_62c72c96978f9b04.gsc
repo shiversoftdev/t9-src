@@ -1,9 +1,9 @@
-#using script_19f3d8b7a687a3f1;
-#using script_27ba6748d83412fd;
 #using script_2d7a84fdf413563d;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
+#using script_19f3d8b7a687a3f1;
+#using scripts\zm_common\zm_fasttravel.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_dbb31ff3;
 
@@ -22,7 +22,7 @@ function private autoexec function_85a597ad()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_dbb31ff3
 	Checksum: 0x21E75237
 	Offset: 0xD0
@@ -30,7 +30,7 @@ function private autoexec function_85a597ad()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7bb41176a4b58056", &function_70a657d8, undefined, &finalize, undefined);
 }
@@ -46,7 +46,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	namespace_d84b2e13::register();
+	sr_beacon_menu::register();
 	clientfield::register("toplayer", "" + #"hash_5616eb8cc6b9c498", 1, 1, "counter", &function_595556d0, 0, 0);
 	clientfield::register("toplayer", "" + #"hash_5752601fd90562e1", 1, 1, "counter", &function_cc5db8e3, 0, 0);
 	namespace_52c8f34d::function_70a657d8();

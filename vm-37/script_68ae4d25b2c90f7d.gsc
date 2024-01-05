@@ -1,15 +1,15 @@
-#using script_4e53735256f112ac;
 #using script_d67878983e3d7c;
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using script_4e53735256f112ac;
 #using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\beam_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_32e85820;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_32e85820
 	Checksum: 0x3B402037
 	Offset: 0x298
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_36a2cb0be45d9374", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }

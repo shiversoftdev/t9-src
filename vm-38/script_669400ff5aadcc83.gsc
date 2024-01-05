@@ -1,8 +1,8 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\popups_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_af5c1c0c;
 
@@ -32,10 +32,10 @@ function private autoexec function_8bbac6a()
 function init()
 {
 	clientfield::function_91cd7763("string", "sr_vote_prompt.header", 1, 0);
-	clientfield::function_a8bbc967("sr_vote_prompt.numPlayersNeeded", 1, 2, "int", 0);
-	clientfield::function_a8bbc967("sr_vote_prompt.show", 1, 1, "int", 0);
-	clientfield::function_a8bbc967("sr_vote_prompt.starter", 1, 7, "int", 0);
-	clientfield::function_a8bbc967("sr_vote_prompt.status", 1, 2, "int", 0);
+	clientfield::register_clientuimodel("sr_vote_prompt.numPlayersNeeded", 1, 2, "int", 0);
+	clientfield::register_clientuimodel("sr_vote_prompt.show", 1, 1, "int", 0);
+	clientfield::register_clientuimodel("sr_vote_prompt.starter", 1, 7, "int", 0);
+	clientfield::register_clientuimodel("sr_vote_prompt.status", 1, 2, "int", 0);
 }
 
 /*

@@ -89,7 +89,7 @@ function function_1cb3c52d(name, radiationlevel, duration, var_4267b283)
 		return;
 	}
 	function_f45ee99d();
-	if(!isint(radiationlevel) || !isint(duration) || !function_7a600918(name))
+	if(!isint(radiationlevel) || !isint(duration) || !ishash(name))
 	{
 		/#
 			assert(0);
@@ -150,7 +150,7 @@ function function_6b384c0f(radiationlevel, sickness)
 */
 function function_ab99e60c()
 {
-	if(util::function_3f165ee8())
+	if(util::is_frontend_map())
 	{
 		return 0;
 	}

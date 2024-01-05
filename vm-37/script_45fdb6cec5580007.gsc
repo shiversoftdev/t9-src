@@ -1,11 +1,11 @@
-#using script_256b8879317373de;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace squads;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: squads
 	Checksum: 0x4817E54
 	Offset: 0x88
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"squads", &__init__, undefined, undefined, undefined);
 }
@@ -225,7 +225,7 @@ function function_a65e2082(squad)
 		}
 	}
 	var_fa810454 = function_46edfa55(var_74578e76);
-	party = self function_491311f4();
+	party = self getparty();
 	if(party.var_a15e4438 > var_fa810454)
 	{
 		return false;
@@ -406,7 +406,7 @@ function function_c70b26ea(squad)
 		else
 		{
 			squad = #"none";
-			party = self function_491311f4();
+			party = self getparty();
 			if(isdefined(party) && party.var_a15e4438 > 1)
 			{
 				squad = function_fc04a299(party);
@@ -452,8 +452,8 @@ function function_ff3321ee(var_bdb3f6a6)
 {
 	self.pers[#"squad"] = var_bdb3f6a6;
 	self.squad = var_bdb3f6a6;
-	self.pers[#"hash_76c42cef4e58a06f"] = 0;
-	self.var_edf90e4e = 0;
+	self.pers[#"teammateindex"] = 0;
+	self.teammateindex = 0;
 	self function_a4c9eb05();
 	/#
 		xuid = self getxuid();
@@ -490,7 +490,7 @@ function private function_e249c6ae(squadmates, index)
 {
 	foreach(player in squadmates)
 	{
-		if(player.var_edf90e4e == index)
+		if(player.teammateindex == index)
 		{
 			return true;
 		}
@@ -529,9 +529,9 @@ function private function_80d5f55(squadmates, party)
 	last_index = 1;
 	foreach(var_52ec371a in party.var_d77ed5eb)
 	{
-		if(var_52ec371a.var_edf90e4e > 0)
+		if(var_52ec371a.teammateindex > 0)
 		{
-			last_index = var_52ec371a.var_edf90e4e;
+			last_index = var_52ec371a.teammateindex;
 		}
 		else
 		{
@@ -564,7 +564,7 @@ function function_a4c9eb05()
 	{
 		squadmates = getplayers(self.team);
 	}
-	self.var_edf90e4e = self function_80d5f55(squadmates, self function_491311f4());
-	self.pers[#"hash_76c42cef4e58a06f"] = self.var_edf90e4e;
+	self.teammateindex = self function_80d5f55(squadmates, self getparty());
+	self.pers[#"teammateindex"] = self.teammateindex;
 }
 

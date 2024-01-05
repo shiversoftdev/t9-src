@@ -1,6 +1,6 @@
 #using script_7f6cd71c43c45c57;
-#using scripts\core_common\hud_message_shared.gsc;
 #using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\hud_message_shared.gsc;
 
 #namespace globallogic_utils;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_297bb455()
 {
-	level notify(1050139045);
+	level notify(-1050139045);
 }
 
 /*
@@ -534,7 +534,7 @@ function isheadshot(weapon, shitloc, smeansofdeath, einflictor)
 		case "mod_impact":
 		{
 			baseweapon = weapons::getbaseweapon(shitloc);
-			if(!shitloc.isballisticknife && baseweapon != level.weaponspecialcrossbow && baseweapon != level.var_9e188c0b)
+			if(!shitloc.isballisticknife && baseweapon != level.weaponspecialcrossbow && baseweapon != level.weaponflechette)
 			{
 				return false;
 			}

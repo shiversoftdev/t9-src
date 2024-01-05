@@ -1,6 +1,6 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_78f31cd9;
 
@@ -32,7 +32,7 @@ function private autoexec function_a5e60ba8()
 function init()
 {
 	registerclientfield("toplayer", "RGB_keyboard_manager", 1, 3, "int");
-	callback::function_98a0917d(&function_ca0a1ea4);
+	callback::on_game_playing(&function_ca0a1ea4);
 }
 
 /*

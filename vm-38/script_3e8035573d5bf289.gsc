@@ -1,16 +1,16 @@
-#using script_3f9e0dc8454d98e1;
-#using script_5660bae5b402a1eb;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm_bgb.gsc;
-#using scripts\zm_common\zm_laststand.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
-#using scripts\zm_common\zm_score.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
+#using scripts\zm_common\zm_laststand.gsc;
+#using scripts\zm_common\zm_bgb.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\core_common\ai\zombie_death.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_e7b06f1b;
 
@@ -25,11 +25,11 @@
 */
 function private autoexec function_ae1bdbd0()
 {
-	level notify(1773468851);
+	level notify(-1773468851);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e7b06f1b
 	Checksum: 0xF02D6AA
 	Offset: 0xE8
@@ -37,7 +37,7 @@ function private autoexec function_ae1bdbd0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6119ea2d427fdf8a", &function_70a657d8, undefined, undefined, undefined);
 }

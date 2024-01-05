@@ -1,31 +1,31 @@
-#using script_1cc417743d7c262d;
-#using script_2416cc31e71459ca;
-#using script_26187575f84f8d07;
-#using script_335d0650ed05d36d;
-#using script_3f9e54c7a9a7e1e2;
-#using script_4108035fe400ce67;
+#using scripts\mp_common\teams\teams.gsc;
+#using scripts\mp_common\player\player_loadout.gsc;
+#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\mp_common\gameadvertisement.gsc;
+#using scripts\wz_common\teams\teams.gsc;
+#using scripts\wz_common\spawn.gsc;
+#using script_b9a55edd207e4ca;
 #using script_46192c58ea066d7f;
 #using script_46a1e199a5662ca1;
-#using script_595f2d6a7b798a87;
-#using script_5ee699b0aaf564c4;
-#using script_65d4fc42e5e94766;
-#using script_69514c4c056c768;
-#using script_788472602edbe3b9;
-#using script_b9a55edd207e4ca;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\oob.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gameadvertisement.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using script_335d0650ed05d36d;
+#using script_5ee699b0aaf564c4;
+#using script_26187575f84f8d07;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using script_4108035fe400ce67;
+#using script_69514c4c056c768;
+#using script_1cc417743d7c262d;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using script_595f2d6a7b798a87;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 #namespace namespace_c6203f32;
 
@@ -40,11 +40,11 @@
 */
 function private autoexec function_d96cb85d()
 {
-	level notify(493627398);
+	level notify(-493627398);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_c6203f32
 	Checksum: 0xA90A9E8A
 	Offset: 0x410
@@ -52,7 +52,7 @@ function private autoexec function_d96cb85d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_112a74f076cda31", &function_62730899, undefined, undefined, #"territory");
 }
@@ -94,12 +94,12 @@ event main(eventstruct)
 			level.var_f3bbe6b4 = 1;
 		}
 		level.var_8166e83a = getdvarint(#"hash_4112aa7dda50b138", -1);
-		function_2085db3b();
+		init_devgui();
 	#/
 	callback::on_spawned(&onplayerspawned);
 	callback::on_player_killed(&on_player_killed);
 	callback::on_connect(&on_player_connect);
-	callback::function_98a0917d(&function_98a0917d);
+	callback::on_game_playing(&on_game_playing);
 	level.givecustomloadout = &givecustomloadout;
 	level.var_eada15e7 = &function_407d343f;
 	level.ondeadevent = &ondeadevent;
@@ -114,7 +114,7 @@ event main(eventstruct)
 	level.var_574cc797 = &namespace_234f0efc::function_588a586d;
 	clientfield::function_5b7d846d("hud_items_fireteam.exfil_state", 20000, 2, "int");
 	clientfield::register("scriptmover", "isExfilSite", 20000, 1, "int");
-	clientfield::function_a8bbc967("hud_items_fireteam_percontroller.teamRedeployableCount", 1, 3, "int", 1);
+	clientfield::register_clientuimodel("hud_items_fireteam_percontroller.teamRedeployableCount", 1, 3, "int", 1);
 	level.var_ce3bff50 = 1;
 	level.var_9b927bb4 = &function_9b927bb4;
 	level.var_a962eeb6 = undefined;
@@ -143,7 +143,7 @@ function private on_player_connect()
 }
 
 /*
-	Name: function_98a0917d
+	Name: on_game_playing
 	Namespace: namespace_c6203f32
 	Checksum: 0x65849C6F
 	Offset: 0xB30
@@ -151,7 +151,7 @@ function private on_player_connect()
 	Parameters: 0
 	Flags: Private
 */
-function private function_98a0917d()
+function private on_game_playing()
 {
 	gameadvertisement::setadvertisedstatus(0);
 	foreach(team in level.teams)
@@ -380,11 +380,11 @@ function private ondeadevent(team)
 		var_d72df62 = teams::function_c7eae573();
 		winning_team = teams::function_c2f2fb84(var_d72df62);
 		count = 2;
-		foreach(var_b524076f in var_d72df62)
+		foreach(final_team in var_d72df62)
 		{
-			if(!isdefined(winning_team) || util::function_fbce7263(winning_team, var_b524076f.team))
+			if(!isdefined(winning_team) || util::function_fbce7263(winning_team, final_team.team))
 			{
-				teams::team_eliminated(var_b524076f.team, count);
+				teams::team_eliminated(final_team.team, count);
 				count++;
 			}
 		}
@@ -431,16 +431,16 @@ function private function_1a22a165(team)
 */
 function private function_9b927bb4(var_698dbb78)
 {
-	var_cb15d41 = var_698dbb78 namespace_aaddef5a::function_70f1d702();
+	insertionplayer = var_698dbb78 namespace_aaddef5a::function_70f1d702();
 	var_98f6b428 = 1;
-	if(!isdefined(var_cb15d41))
+	if(!isdefined(insertionplayer))
 	{
 		teamplayers = getplayers(var_698dbb78.team);
 		foreach(player in teamplayers)
 		{
 			if(isalive(player))
 			{
-				var_cb15d41 = player;
+				insertionplayer = player;
 				if(!player namespace_b77e8eb1::function_8e4e3bb2())
 				{
 					var_98f6b428 = 0;
@@ -449,8 +449,8 @@ function private function_9b927bb4(var_698dbb78)
 			}
 		}
 	}
-	origin = var_cb15d41.origin;
-	angles = var_cb15d41.angles;
+	origin = insertionplayer.origin;
+	angles = insertionplayer.angles;
 	if(var_98f6b428)
 	{
 		var_4c3e77ea = (0, 0, 0);
@@ -460,20 +460,20 @@ function private function_9b927bb4(var_698dbb78)
 			{
 				continue;
 			}
-			var_9a8acd88 = distance2dsquared(var_cb15d41.origin, var_9bbce2cd.origin);
+			var_9a8acd88 = distance2dsquared(insertionplayer.origin, var_9bbce2cd.origin);
 			radius = var_9bbce2cd.var_8e392e0f;
 			radius = radius + 600;
 			if(radius * radius < var_9a8acd88)
 			{
 				continue;
 			}
-			var_8675da3 = var_cb15d41.origin - var_9bbce2cd.origin;
+			var_8675da3 = insertionplayer.origin - var_9bbce2cd.origin;
 			var_8675da3 = (var_8675da3[0], var_8675da3[1], 0);
 			var_bd581e61 = vectornormalize(var_8675da3) * radius;
 			target = level.exfilstruct.origin;
 			if(isdefined(target))
 			{
-				var_d43dd174 = target - var_cb15d41.origin;
+				var_d43dd174 = target - insertionplayer.origin;
 				var_d43dd174 = (var_d43dd174[0], var_d43dd174[1], 0);
 				a = vectordot(var_d43dd174, var_d43dd174);
 				b = 2 * vectordot(var_8675da3, var_d43dd174);
@@ -726,7 +726,7 @@ function function_93ef48b(vip, helicopter)
 	var_eb72be15 = helicopter gettagangles("tag_passenger3");
 	helicopter thread function_c05c19ed();
 	function_3d30adf7(vip.team);
-	round::function_d1e740f6(vip.team);
+	round::set_winner(vip.team);
 	thread globallogic::function_a3e3bd39(vip.team, 12);
 	vip startcameratween(lerptime, 0, 0);
 	vip animation::play(#"hash_56f45aa3dfb2cdf", var_a3476af7, var_eb72be15, 1, 0.15, 0, lerptime, undefined, undefined, 0);
@@ -1000,29 +1000,29 @@ function function_c05c19ed()
 	Parameters: 7
 	Flags: Private
 */
-function private function_18f58ab2(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot)
+function private function_18f58ab2(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot)
 {
 	pickup = 0;
 	switch(item.var_a6762160.name)
 	{
 		case "hash_6ebec4f42d4b01c":
 		{
-			pickup = function_dc3115e2(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot);
+			pickup = function_dc3115e2(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot);
 			break;
 		}
 		case "hash_2ec97717fa7f8ee":
 		{
-			pickup = function_a882bcee(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot);
+			pickup = function_a882bcee(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot);
 			break;
 		}
 		case "armor_pouch_item_t9":
 		{
-			pickup = namespace_234f0efc::function_dd8cb464(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot);
+			pickup = namespace_234f0efc::function_dd8cb464(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot);
 			break;
 		}
 		case "hash_583f1687cefbd3f3":
 		{
-			pickup = namespace_234f0efc::function_98942433(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot);
+			pickup = namespace_234f0efc::function_98942433(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot);
 			break;
 		}
 	}
@@ -1038,7 +1038,7 @@ function private function_18f58ab2(item, player, var_bd027dd9, var_d8138db2, ite
 	Parameters: 7
 	Flags: Private
 */
-function private function_dc3115e2(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot)
+function private function_dc3115e2(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot)
 {
 	if(slot.pers[#"lives"] > 5)
 	{
@@ -1061,7 +1061,7 @@ function private function_dc3115e2(item, player, var_bd027dd9, var_d8138db2, ite
 	Parameters: 7
 	Flags: Private
 */
-function private function_a882bcee(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot)
+function private function_a882bcee(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot)
 {
 	var_7a53de16 = function_c65231e2(slot.squad);
 	foreach(var_cc6fd54 in var_7a53de16)
@@ -1086,7 +1086,7 @@ function function_2d5cfefd()
 {
 	skipwait = 0;
 	/#
-		if(getdvarint(#"hash_36f30cd685f7126f", 0) || getdvarint(#"hash_6fd0fd3292f07618", 0))
+		if(getdvarint(#"hash_36f30cd685f7126f", 0) || getdvarint(#"scr_disable_infiltration", 0))
 		{
 			skipwait = 1;
 		}
@@ -1524,7 +1524,7 @@ function private function_b6420ef7()
 }
 
 /*
-	Name: function_2085db3b
+	Name: init_devgui
 	Namespace: namespace_c6203f32
 	Checksum: 0xF16AC29B
 	Offset: 0x4F90
@@ -1532,7 +1532,7 @@ function private function_b6420ef7()
 	Parameters: 0
 	Flags: None
 */
-function function_2085db3b()
+function init_devgui()
 {
 	/#
 		adddebugcommand("");

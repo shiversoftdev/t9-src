@@ -1,48 +1,48 @@
-#using script_178024232e91b0a1;
-#using script_1940fc077a028a81;
-#using script_2c5daa95f8fec03c;
-#using script_3357acf79ce92f4b;
-#using script_3411bb48d41bd3b;
-#using script_35598499769dbb3d;
-#using script_35b8a6927c851193;
 #using script_3751b21462a54a7d;
-#using script_37aecc8eb906ed91;
+#using script_2c5daa95f8fec03c;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
+#using scripts\zm_common\zm_zonemgr.gsc;
 #using script_3a88f428c6d8ef90;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
-#using script_41fe08c37d53a635;
-#using script_489b835a247c990e;
-#using script_4bf952f6ba31bb17;
-#using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_6809bf766eba194a;
-#using script_7e294a061be2fd9;
-#using script_7e59d7bba853fe4b;
-#using script_bd2b8aaa388dcce;
-#using script_caf007e2a98afa2;
-#using script_db06eb511bd9b36;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\weapons_shared.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_attackables.gsc;
-#using scripts\zm_common\zm_behavior_utility.gsc;
-#using scripts\zm_common\zm_blockers.gsc;
-#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_spawner.gsc;
 #using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_cleanup_mgr.gsc;
+#using scripts\zm_common\zm_blockers.gsc;
+#using scripts\zm_common\zm_behavior_utility.gsc;
+#using scripts\zm_common\zm_attackables.gsc;
+#using script_35b8a6927c851193;
+#using scripts\zm_common\zm.gsc;
+#using script_1940fc077a028a81;
+#using script_3411bb48d41bd3b;
+#using script_3357acf79ce92f4b;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\damagefeedback_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\ai\zombie.gsc;
+#using script_35598499769dbb3d;
+#using script_41fe08c37d53a635;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using script_178024232e91b0a1;
+#using script_489b835a247c990e;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_4bf952f6ba31bb17;
+#using script_4d85e8de54b02198;
+#using script_caf007e2a98afa2;
+#using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using script_37aecc8eb906ed91;
+#using scripts\abilities\gadgets\gadget_cymbal_monkey.gsc;
 
 #namespace zm_behavior;
 
@@ -80,7 +80,7 @@ function function_70a657d8()
 	}
 	zm_utility::function_d0f02e71(#"zombie");
 	spawner::add_archetype_spawn_function(#"zombie", &function_c15c6e44);
-	spawner::add_archetype_spawn_function(#"zombie", &function_a5188320);
+	spawner::add_archetype_spawn_function(#"zombie", &zombiespawninit);
 	spawner::function_89a2cd87(#"zombie", &function_823a8ebd);
 	level.do_randomized_zigzag_path = 1;
 	level.zombie_targets = [];
@@ -89,7 +89,7 @@ function function_70a657d8()
 }
 
 /*
-	Name: function_a5188320
+	Name: zombiespawninit
 	Namespace: zm_behavior
 	Checksum: 0x5A277AF1
 	Offset: 0x880
@@ -97,7 +97,7 @@ function function_70a657d8()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_a5188320()
+function private zombiespawninit()
 {
 	self pushplayer(0);
 	self collidewithactors(0);
@@ -186,13 +186,13 @@ function function_8b5bbd69(params)
 		var_96c5333a = !isdefined(traversalstartnode);
 		if(!var_96c5333a)
 		{
-			var_aa127355 = {#hash_23deb7ad:traversalstartnode.origin[2], #hash_3524da39:traversalstartnode.origin[1], #hash_b5b65b52:traversalstartnode.origin[0], #hash_340139b7:traversalendpos[2], #hash_40385225:traversalendpos[1], #hash_f774409e:traversalendpos[0], #hash_83cf29c8:traversalstartpos[2], #hash_753e8ca7:traversalstartpos[1], #hash_83e229fa:traversalstartpos[0], #spawner_name:hash(aitype)};
-			function_92d1707f(#"hash_6ec90ea3ba426491", var_aa127355);
+			eventparams = {#hash_23deb7ad:traversalstartnode.origin[2], #hash_3524da39:traversalstartnode.origin[1], #hash_b5b65b52:traversalstartnode.origin[0], #hash_340139b7:traversalendpos[2], #hash_40385225:traversalendpos[1], #hash_f774409e:traversalendpos[0], #hash_83cf29c8:traversalstartpos[2], #hash_753e8ca7:traversalstartpos[1], #hash_83e229fa:traversalstartpos[0], #spawner_name:hash(aitype)};
+			function_92d1707f(#"hash_6ec90ea3ba426491", eventparams);
 		}
 		else
 		{
-			var_aa127355 = {#hash_340139b7:traversalendpos[2], #hash_40385225:traversalendpos[1], #hash_f774409e:traversalendpos[0], #hash_83cf29c8:traversalstartpos[2], #hash_753e8ca7:traversalstartpos[1], #hash_83e229fa:traversalstartpos[0], #spawner_name:hash(aitype)};
-			function_92d1707f(#"hash_1bf75b08b5ca39a9", var_aa127355);
+			eventparams = {#hash_340139b7:traversalendpos[2], #hash_40385225:traversalendpos[1], #hash_f774409e:traversalendpos[0], #hash_83cf29c8:traversalstartpos[2], #hash_753e8ca7:traversalstartpos[1], #hash_83e229fa:traversalstartpos[0], #spawner_name:hash(aitype)};
+			function_92d1707f(#"hash_1bf75b08b5ca39a9", eventparams);
 		}
 	}
 	self finishtraversal();
@@ -648,11 +648,11 @@ function private initzmbehaviorsandasm()
 	/#
 		assert(!isdefined(&zombiestunactionend) || isscriptfunctionptr(&zombiestunactionend));
 	#/
-	behaviortreenetworkutility::registerbehaviortreeaction(#"hash_ef9eec310fdc751", &zombiestunactionstart, &function_4e52c07, &zombiestunactionend);
+	behaviortreenetworkutility::registerbehaviortreeaction(#"zombiestunaction", &zombiestunactionstart, &function_4e52c07, &zombiestunactionend);
 	/#
-		assert(isscriptfunctionptr(&function_bdedea72));
+		assert(isscriptfunctionptr(&zombiestunstart));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1ea36681b6c1071", &function_bdedea72);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"zombiestunstart", &zombiestunstart);
 	/#
 		assert(!isdefined(undefined) || isscriptfunctionptr(undefined));
 	#/
@@ -662,7 +662,7 @@ function private initzmbehaviorsandasm()
 	/#
 		assert(!isdefined(undefined) || isscriptfunctionptr(undefined));
 	#/
-	behaviortreenetworkutility::registerbehaviortreeaction(#"hash_18c4bd585d3772ff", undefined, &function_4e52c07, undefined);
+	behaviortreenetworkutility::registerbehaviortreeaction(#"zombiestunactionloop", undefined, &function_4e52c07, undefined);
 	/#
 		assert(isscriptfunctionptr(&function_c377438f));
 	#/
@@ -940,7 +940,7 @@ function function_754be649(entity)
 			entity.meleedistsq = entity.meleedistsq * entity.var_cbc65493;
 		}
 	}
-	if(is_true(self.var_37f16e2e) && !tracepassedonnavmesh(entity.origin, (isdefined(entity.enemy.last_valid_position) ? entity.enemy.last_valid_position : entity.enemy.origin), entity.enemy getpathfindingradius()))
+	if(is_true(self.isonnavmesh) && !tracepassedonnavmesh(entity.origin, (isdefined(entity.enemy.last_valid_position) ? entity.enemy.last_valid_position : entity.enemy.origin), entity.enemy getpathfindingradius()))
 	{
 		entity.var_d1bb0ad = 0;
 		return true;
@@ -1123,7 +1123,7 @@ function zombiefindflesh(behaviortreeentity)
 		return;
 	}
 	decoy = nightingale::function_29fbe24f(behaviortreeentity);
-	monkey = namespace_c5ba6e2a::function_4a5dff80(behaviortreeentity, 0);
+	monkey = gadget_cymbal_monkey::function_4a5dff80(behaviortreeentity, 0);
 	if(isdefined(monkey) && isdefined(decoy))
 	{
 		self.enemy_override = arraygetclosest(behaviortreeentity.origin, array(monkey, decoy));
@@ -1286,7 +1286,7 @@ function zombiefindflesh(behaviortreeentity)
 			else if(isdefined(behaviortreeentity.favoriteenemy))
 			{
 				behaviortreeentity.has_exit_point = undefined;
-				behaviortreeentity val::reset(#"hash_62fca810699077f3", "ignoreall");
+				behaviortreeentity val::reset(#"attack_properties", "ignoreall");
 				if(isarray(behaviortreeentity.enemy.var_f904e440) && isinarray(behaviortreeentity.enemy.var_f904e440, behaviortreeentity))
 				{
 					return;
@@ -1429,7 +1429,7 @@ function zombiefindfleshcode(behaviortreeentity)
 		aiprofile_endentry();
 		return;
 	}
-	monkey = namespace_c5ba6e2a::function_4a5dff80(behaviortreeentity, 0);
+	monkey = gadget_cymbal_monkey::function_4a5dff80(behaviortreeentity, 0);
 	if(isdefined(monkey))
 	{
 		behaviortreeentity.enemy_override = monkey;
@@ -1529,7 +1529,7 @@ function zombieupdategoal()
 	aiprofile_beginentry("zombieUpdateGoal");
 	if(isplayer(self.favoriteenemy))
 	{
-		targetent = namespace_e0710ee6::function_a2e8fd7b(self, self.favoriteenemy);
+		targetent = zm_ai_utility::function_a2e8fd7b(self, self.favoriteenemy);
 		if(isdefined(targetent.last_valid_position))
 		{
 			targetpos = getclosestpointonnavmesh(targetent.last_valid_position, 64, 0);
@@ -2198,7 +2198,7 @@ function zombieshouldstun(behaviortreeentity)
 }
 
 /*
-	Name: function_bdedea72
+	Name: zombiestunstart
 	Namespace: zm_behavior
 	Checksum: 0xD220EBAB
 	Offset: 0x7960
@@ -2206,7 +2206,7 @@ function zombieshouldstun(behaviortreeentity)
 	Parameters: 1
 	Flags: Linked
 */
-function function_bdedea72(behaviortreeentity)
+function zombiestunstart(behaviortreeentity)
 {
 	behaviortreeentity pathmode("dont move", 1);
 	callback::callback(#"hash_1eda827ff5e6895b");
@@ -2238,7 +2238,7 @@ function function_c377438f(behaviortreeentity)
 */
 function zombiestunactionstart(behaviortreeentity, asmstatename)
 {
-	function_bdedea72(behaviortreeentity);
+	zombiestunstart(behaviortreeentity);
 	behaviortreeentity.var_4034a31 = gibserverutils::isgibbed(behaviortreeentity, 256) || gibserverutils::isgibbed(behaviortreeentity, 128);
 	animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
 	return 5;
@@ -3755,7 +3755,7 @@ function function_b37b8c0d(entity)
 {
 	if(isdefined(entity.first_node))
 	{
-		zm_blockers::function_b193ea5c(entity.first_node, 1);
+		zm_blockers::open_zbarrier(entity.first_node, 1);
 	}
 }
 
@@ -4004,13 +4004,13 @@ function function_17cd1b17(behaviortreeentity)
 	meleedistsq = 4096;
 	if(isdefined(behaviortreeentity.meleeweapon) && behaviortreeentity.meleeweapon !== level.weaponnone)
 	{
-		meleedistsq = behaviortreeentity.meleeweapon.var_d3cafde6 * behaviortreeentity.meleeweapon.var_d3cafde6;
+		meleedistsq = behaviortreeentity.meleeweapon.aimeleerange * behaviortreeentity.meleeweapon.aimeleerange;
 	}
 	if(distancesquared(behaviortreeentity.origin, behaviortreeentity.enemy.origin) > meleedistsq)
 	{
 		return 0;
 	}
-	return isdefined(behaviortreeentity.var_88bd96a9) && gettime() < behaviortreeentity.var_88bd96a9;
+	return isdefined(behaviortreeentity.melee_cooldown) && gettime() < behaviortreeentity.melee_cooldown;
 }
 
 /*

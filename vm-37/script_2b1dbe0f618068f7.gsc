@@ -1,12 +1,12 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\serverfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\serverfield_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_2ed67032;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2ed67032
 	Checksum: 0x852DE83A
 	Offset: 0xE0
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7aac5c09cf9461e3", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -30,8 +30,8 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	clientfield::function_a8bbc967("hudItems.armorPlateCount", #"hud_items", #"hash_7c65108f5dcd93ef", 1, 4, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.armorPlateMaxCarry", #"hud_items", #"hash_6260c609342f556d", 1, 4, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.armorPlateCount", #"hud_items", #"hash_7c65108f5dcd93ef", 1, 4, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.armorPlateMaxCarry", #"hud_items", #"hash_6260c609342f556d", 1, 4, "int", undefined, 0, 0);
 	level.var_a05cd64e = &function_a05cd64e;
 	level.var_8ef8b9e8 = getweapon(#"hash_9825a3f1d038c6f");
 	callback::on_localclient_connect(&on_localclient_connect);

@@ -1,10 +1,10 @@
-#using script_3dc93ca9902a9cda;
-#using script_5552bd756afee443;
 #using script_85cd2e9a28ea8a1;
-#using scripts\core_common\array_shared.gsc;
+#using script_5552bd756afee443;
+#using script_3dc93ca9902a9cda;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_d16177a1;
 
@@ -19,7 +19,7 @@
 */
 function private autoexec function_89bfb1ac()
 {
-	level notify(1596626498);
+	level notify(-1596626498);
 }
 
 #namespace snd;
@@ -47,7 +47,7 @@ function private function_20b6bc92()
 			if(isfunctionptr(var_dfd5412c.callbackfunc))
 			{
 				target = var_dfd5412c.target;
-				value = [[var_dfd5412c.callbackfunc]](target, var_dfd5412c.var_8e530837, var_dfd5412c);
+				value = [[var_dfd5412c.callbackfunc]](target, var_dfd5412c.callbackdata, var_dfd5412c);
 				function_fee448d5(var_dfd5412c, value);
 			}
 		}
@@ -64,10 +64,10 @@ function private function_20b6bc92()
 	Parameters: 12
 	Flags: None
 */
-function function_b009fcc9(x, y, w, h, target, callbackfunc, var_8e530837, var_b1332cff, var_48a7a4bd, backgroundalpha, var_a2dbe44f, var_6a3d8755)
+function function_b009fcc9(x, y, w, h, target, callbackfunc, callbackdata, var_b1332cff, backgroundcolor, backgroundalpha, var_a2dbe44f, var_6a3d8755)
 {
 	var_b1332cff = function_ea2f17d1(var_b1332cff, 0);
-	var_48a7a4bd = function_ea2f17d1(var_48a7a4bd, 0.72974);
+	backgroundcolor = function_ea2f17d1(backgroundcolor, 0.72974);
 	backgroundalpha = function_ea2f17d1(backgroundalpha, 0.72974);
 	var_a2dbe44f = function_ea2f17d1(var_a2dbe44f, (0, 1, 0));
 	var_6a3d8755 = function_ea2f17d1(var_6a3d8755, 0.72974);
@@ -81,7 +81,7 @@ function function_b009fcc9(x, y, w, h, target, callbackfunc, var_8e530837, var_b
 	var_dfd5412c.var_e2c0fdcb = var_6a3d8755;
 	var_dfd5412c.target = target;
 	var_dfd5412c.callbackfunc = callbackfunc;
-	var_dfd5412c.var_8e530837 = var_8e530837;
+	var_dfd5412c.callbackdata = callbackdata;
 	var_dfd5412c.var_c53c088d = gettime();
 	var_dfd5412c.var_ca1ec566 = array(var_dfd5412c.var_ca1ec566[0], var_dfd5412c.var_ca1ec566[1] - var_dfd5412c.var_708cbe39[1]);
 	var_fc6c677b = "white";
@@ -90,7 +90,7 @@ function function_b009fcc9(x, y, w, h, target, callbackfunc, var_8e530837, var_b
 		hud.x = var_dfd5412c.var_ca1ec566[0];
 		hud.y = var_dfd5412c.var_ca1ec566[1];
 		hud.alignx = "";
-		hud.color = var_48a7a4bd;
+		hud.color = backgroundcolor;
 		hud.alpha = backgroundalpha;
 		hud.foreground = 0;
 		hud.sort = -1;

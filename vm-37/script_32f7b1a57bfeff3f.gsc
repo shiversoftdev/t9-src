@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_d0a96b4 : class_6aaccc24
+class class_d0a96b4 : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_d0a96b4 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_d0a96b4
 		Checksum: 0xAD290318
 		Offset: 0x328
@@ -52,9 +52,9 @@ class class_d0a96b4 : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("TerminalKeyboardFrame");
+		cluielem::register_clientside("TerminalKeyboardFrame");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_d0a96b4 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("TerminalKeyboardFrame");
+		cluielem::setup_clientfields("TerminalKeyboardFrame");
 	}
 
 	/*
@@ -82,7 +82,7 @@ class class_d0a96b4 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: namespace_20a120d7
 	Checksum: 0xA9EFADEA
 	Offset: 0x228
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_d0a96b4();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

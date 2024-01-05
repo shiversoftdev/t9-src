@@ -1,22 +1,22 @@
-#using script_256b8879317373de;
+#using scripts\weapons\weapon_utils.gsc;
+#using script_4ab78e327b76395f;
+#using scripts\cp_common\gametypes\globallogic_utils.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
+#using scripts\cp_common\friendlyfire.gsc;
+#using scripts\cp_common\challenges.gsc;
+#using scripts\cp_common\bb.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\globallogic\globallogic_player.gsc;
+#using scripts\core_common\battlechatter.gsc;
+#using scripts\core_common\damagefeedback_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\ammo_shared.gsc;
+#using script_4c5c4a64a59247a2;
 #using script_35598499769dbb3d;
 #using script_41fe08c37d53a635;
-#using script_4ab78e327b76395f;
-#using script_4c5c4a64a59247a2;
-#using script_5399f402045d7abd;
-#using script_70a43d6ba27cff6a;
-#using scripts\core_common\ammo_shared.gsc;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\challenges.gsc;
-#using scripts\cp_common\friendlyfire.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_utils.gsc;
 
 #namespace globallogic_actor;
 
@@ -31,7 +31,7 @@
 */
 function private autoexec function_7bc15179()
 {
-	level notify(1779712792);
+	level notify(-1779712792);
 }
 
 /*
@@ -104,7 +104,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
 		idamage = idamage * 3;
 	}
 	idamage = int(idamage);
-	var_a1f8d00b = idamage;
+	unmodified = idamage;
 	if(isdefined(self.overrideactordamage))
 	{
 		idamage = self [[self.overrideactordamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
@@ -125,9 +125,9 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
 			idamage = self [[damagecallback]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex);
 		}
 	}
-	if(idflags & 8192 && idamage < var_a1f8d00b)
+	if(idflags & 8192 && idamage < unmodified)
 	{
-		idamage = var_a1f8d00b;
+		idamage = unmodified;
 	}
 	/#
 		assert(isdefined(idamage), "");

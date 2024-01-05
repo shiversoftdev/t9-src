@@ -1,19 +1,19 @@
-#using script_139ae0bb0a87141c;
-#using script_3eb3df5aef50b41c;
-#using script_4f58b276cb938e94;
-#using script_5450c003e8a913b7;
 #using script_68d08b784c92da95;
-#using script_6c5ee33879e077f8;
 #using script_7e3221b6c80d8cc4;
 #using script_912160eeb6a2d51;
+#using script_6c5ee33879e077f8;
+#using script_139ae0bb0a87141c;
+#using script_4f58b276cb938e94;
+#using script_3eb3df5aef50b41c;
+#using script_5450c003e8a913b7;
+#using scripts\cp_common\util.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\util.gsc;
 
 #namespace utility;
 
@@ -402,12 +402,12 @@ function set_stealth_state(msg)
 			num = 3;
 			break;
 		}
-		case "hash_4ce137dcec0f527":
+		case "warning2":
 		{
 			num = 2;
 			break;
 		}
-		case "hash_4ce147dcec0f6da":
+		case "warning1":
 		{
 			num = 1;
 			break;
@@ -451,16 +451,16 @@ function alertlevel_init_map()
 	level.stealth.alert_levels_exe = [];
 	level.stealth.alert_levels_exe[#"normal"] = "noncombat";
 	level.stealth.alert_levels_exe[#"reset"] = "noncombat";
-	level.stealth.alert_levels_exe[#"hash_4ce147dcec0f6da"] = "low_alert";
-	level.stealth.alert_levels_exe[#"hash_4ce137dcec0f527"] = "high_alert";
-	level.stealth.alert_levels_exe[#"hash_4b55a59a56c4bdb3"] = "high_alert";
+	level.stealth.alert_levels_exe[#"warning1"] = "low_alert";
+	level.stealth.alert_levels_exe[#"warning2"] = "high_alert";
+	level.stealth.alert_levels_exe[#"combat_hunt"] = "high_alert";
 	level.stealth.alert_levels_exe[#"attack"] = "combat";
 	level.stealth.alert_levels_int = [];
 	level.stealth.alert_levels_int[#"normal"] = 0;
 	level.stealth.alert_levels_int[#"reset"] = 0;
-	level.stealth.alert_levels_int[#"hash_4ce147dcec0f6da"] = 2;
-	level.stealth.alert_levels_int[#"hash_4ce137dcec0f527"] = 3;
-	level.stealth.alert_levels_int[#"hash_4b55a59a56c4bdb3"] = 3;
+	level.stealth.alert_levels_int[#"warning1"] = 2;
+	level.stealth.alert_levels_int[#"warning2"] = 3;
+	level.stealth.alert_levels_int[#"combat_hunt"] = 3;
 	level.stealth.alert_levels_int[#"attack"] = 4;
 	level.stealth.alert_levels_exe[#"combat"] = 4;
 }
@@ -691,7 +691,7 @@ function get_patrol_react_magnitude_int(style)
 		{
 			return 0;
 		}
-		case "hash_6f2cd675c44382f2":
+		case "small_medium":
 		{
 			return 1;
 		}
@@ -958,11 +958,11 @@ function set_goal(goal, faceangles, goalradius)
 	Parameters: 1
 	Flags: Linked
 */
-function set_goal_radius(var_85ba7700)
+function set_goal_radius(newradius)
 {
-	if(isdefined(var_85ba7700))
+	if(isdefined(newradius))
 	{
-		self val::set(#"stealth", "goalradius", var_85ba7700);
+		self val::set(#"stealth", "goalradius", newradius);
 	}
 	else
 	{
@@ -1084,7 +1084,7 @@ function is_visible(other)
 			{
 				return 1;
 			}
-			if(util::function_30d3b9ff(self, other, 250))
+			if(util::can_see_ai(self, other, 250))
 			{
 				return 1;
 			}

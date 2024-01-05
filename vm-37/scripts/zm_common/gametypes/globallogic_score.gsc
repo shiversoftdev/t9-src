@@ -1,16 +1,16 @@
-#using script_3f9e0dc8454d98e1;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\bb_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\bb.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\gametypes\globallogic_audio.gsc;
-#using scripts\zm_common\gametypes\globallogic_utils.gsc;
 #using scripts\zm_common\util.gsc;
+#using scripts\zm_common\bb.gsc;
+#using scripts\zm_common\gametypes\globallogic_utils.gsc;
+#using scripts\zm_common\gametypes\globallogic_audio.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\bb_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace globallogic_score;
 
@@ -193,7 +193,7 @@ function function_144d0392(event, player, victim, descvalue, var_dbaa74e2)
 	newscore = victim.pers[#"score"];
 	pixendevent();
 	var_89b2d9e4 = newscore - var_b393387d;
-	var_10d67c1a = {#delta:var_89b2d9e4, #player:victim.name, #type:(function_7a600918(player) ? player : hash(player))};
+	var_10d67c1a = {#delta:var_89b2d9e4, #player:victim.name, #type:(ishash(player) ? player : hash(player))};
 	if(var_89b2d9e4 && !level.gameended && isdefined(label))
 	{
 		if(isactor(descvalue))
@@ -202,17 +202,17 @@ function function_144d0392(event, player, victim, descvalue, var_dbaa74e2)
 		}
 		else
 		{
-			if(function_7a600918(descvalue.var_c7e611ea))
+			if(ishash(descvalue.var_c7e611ea))
 			{
 				var_66c1748e = descvalue.var_c7e611ea;
 			}
-			else if(function_7a600918(descvalue.var_66c1748e))
+			else if(ishash(descvalue.var_66c1748e))
 			{
 				var_66c1748e = descvalue.var_66c1748e;
 			}
 		}
 		var_3fb48d9c = isdefined(var_dbaa74e2) && is_true(var_dbaa74e2.var_3fb48d9c);
-		if(function_7a600918(var_66c1748e))
+		if(ishash(var_66c1748e))
 		{
 			victim luinotifyevent(#"score_event", 5, label, var_89b2d9e4, var_66c1748e, -1, var_3fb48d9c);
 		}
@@ -222,7 +222,7 @@ function function_144d0392(event, player, victim, descvalue, var_dbaa74e2)
 		}
 	}
 	self function_3172cf59(victim, newscore, level.weaponnone, var_10d67c1a);
-	victim.var_f22ee5e = victim.score_total;
+	victim.objscore = victim.score_total;
 	return var_89b2d9e4;
 }
 
@@ -278,17 +278,17 @@ function function_3172cf59(player, newscore, weapon, var_10d67c1a)
 	newscore bb::add_to_stat("score", var_10d67c1a.delta);
 	if(!isbot(newscore))
 	{
-		if(!isdefined(newscore.pers[#"hash_f9d3527022e8383"]))
+		if(!isdefined(newscore.pers[#"scoreeventcache"]))
 		{
-			newscore.pers[#"hash_f9d3527022e8383"] = [];
+			newscore.pers[#"scoreeventcache"] = [];
 		}
-		if(!isdefined(newscore.pers[#"hash_f9d3527022e8383"][event]))
+		if(!isdefined(newscore.pers[#"scoreeventcache"][event]))
 		{
-			newscore.pers[#"hash_f9d3527022e8383"][event] = 1;
+			newscore.pers[#"scoreeventcache"][event] = 1;
 		}
 		else
 		{
-			newscore.pers[#"hash_f9d3527022e8383"][event] = newscore.pers[#"hash_f9d3527022e8383"][event] + 1;
+			newscore.pers[#"scoreeventcache"][event] = newscore.pers[#"scoreeventcache"][event] + 1;
 		}
 	}
 	if(scorediff <= 0)
@@ -298,7 +298,7 @@ function function_3172cf59(player, newscore, weapon, var_10d67c1a)
 	}
 	recordplayerstats(newscore, "score", weapon);
 	newscore stats::function_bb7eedf0(#"score", scorediff);
-	newscore stats::function_bb7eedf0(#"hash_2b53b624764a0a41", scorediff);
+	newscore stats::function_bb7eedf0(#"score_core", scorediff);
 	newscore.score_total = newscore.score_total + scorediff;
 	pixendevent();
 }
@@ -415,8 +415,8 @@ function giveteamscore(event, team, player, victim)
 	[[level.onteamscore]](player, victim);
 	pixendevent();
 	newscore = game.stat[#"teamscores"][victim];
-	var_c5fef2b3 = {#score:newscore, #diff:newscore - teamscore, #team:victim, #event:player, #gametime:function_f8d53445()};
-	function_92d1707f(#"hash_6823717ff11a304a", var_c5fef2b3);
+	zmteamscores = {#score:newscore, #diff:newscore - teamscore, #team:victim, #event:player, #gametime:function_f8d53445()};
+	function_92d1707f(#"hash_6823717ff11a304a", zmteamscores);
 	if(teamscore == newscore)
 	{
 		return;

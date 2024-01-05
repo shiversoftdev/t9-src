@@ -1,19 +1,19 @@
-#using script_17dcb1172e441bf6;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
 #using script_47851dbeea22fe66;
-#using script_634ae70c663d1cc9;
 #using script_774302f762d76254;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
+#using script_634ae70c663d1cc9;
+#using script_1ee011cd0961afd7;
+#using script_17dcb1172e441bf6;
+#using script_2a5bf5b4a00cee0d;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_53f73cda;
 
@@ -217,16 +217,16 @@ function function_a0fe5f28()
 				{
 					continue;
 				}
-				if(!isdefined(guy.doa.var_c72c2145))
+				if(!isdefined(guy.doa.hazard_hit))
 				{
-					guy.doa.var_c72c2145 = 0;
+					guy.doa.hazard_hit = 0;
 				}
 				curtime = gettime();
-				if(curtime < guy.doa.var_c72c2145)
+				if(curtime < guy.doa.hazard_hit)
 				{
 					continue;
 				}
-				guy.doa.var_c72c2145 = curtime + 1500;
+				guy.doa.hazard_hit = curtime + 1500;
 				guy namespace_e32bb68::function_3a59ec34("evt_doa_hazard_pole_impact");
 				guy namespace_83eb6304::function_3ecfde67("hazard_electric");
 				guy namespace_83eb6304::function_3ecfde67("tesla_shock");

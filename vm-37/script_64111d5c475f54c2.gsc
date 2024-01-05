@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_5813c56a : class_6aaccc24
+class class_5813c56a : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,11 +47,11 @@ class class_5813c56a : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_39ee9107
+		Name: set_showphoto
 		Namespace: namespace_5813c56a
 		Checksum: 0x79A31CF6
 		Offset: 0x368
@@ -59,7 +59,7 @@ class class_5813c56a : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_39ee9107(player, value)
+	function set_showphoto(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "showPhoto", value);
 	}
@@ -75,7 +75,7 @@ class class_5813c56a : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -89,13 +89,13 @@ class class_5813c56a : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_silver_hud");
-		namespace_6aaccc24::function_da693cbe("aetherscopeStatus", 1, 2, "int", 0);
-		namespace_6aaccc24::function_da693cbe("showPhoto", 1, 1, "int");
+		cluielem::setup_clientfields("zm_silver_hud");
+		cluielem::add_clientfield("aetherscopeStatus", 1, 2, "int", 0);
+		cluielem::add_clientfield("showPhoto", 1, 1, "int");
 	}
 
 	/*
-		Name: function_9efecfd1
+		Name: set_aetherscopestatus
 		Namespace: namespace_5813c56a
 		Checksum: 0x5D2D05D6
 		Offset: 0x318
@@ -103,7 +103,7 @@ class class_5813c56a : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_9efecfd1(player, value)
+	function set_aetherscopestatus(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "aetherscopeStatus", value);
 	}
@@ -175,7 +175,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_9efecfd1
+	Name: set_aetherscopestatus
 	Namespace: zm_silver_hud
 	Checksum: 0x930FB61F
 	Offset: 0x1A8
@@ -183,13 +183,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_9efecfd1(player, value)
+function set_aetherscopestatus(player, value)
 {
-	[[ self ]]->function_9efecfd1(player, value);
+	[[ self ]]->set_aetherscopestatus(player, value);
 }
 
 /*
-	Name: function_39ee9107
+	Name: set_showphoto
 	Namespace: zm_silver_hud
 	Checksum: 0x107FB542
 	Offset: 0x1D8
@@ -197,8 +197,8 @@ function function_9efecfd1(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_39ee9107(player, value)
+function set_showphoto(player, value)
 {
-	[[ self ]]->function_39ee9107(player, value);
+	[[ self ]]->set_showphoto(player, value);
 }
 

@@ -1,8 +1,8 @@
+#using scripts\core_common\struct.csc;
 #using script_2b1dbe0f618068f7;
+#using scripts\core_common\throttle_shared.csc;
 #using script_3d0f36632dad12df;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\throttle_shared.csc;
 
 #namespace namespace_b77e8eb1;
 
@@ -188,8 +188,8 @@ function private function_1ef0dbb2()
 			waitframe(1);
 			continue;
 		}
-		var_70aac56d = (level.circleradius * self.scale) * 3;
-		self function_5e00861(var_70aac56d, 1);
+		compassscale = (level.circleradius * self.scale) * 3;
+		self function_5e00861(compassscale, 1);
 		[[ level.var_99266dd4 ]]->waitinqueue(self);
 	}
 }
@@ -208,8 +208,8 @@ function private function_88008fc3()
 	self endon(#"death", #"hash_41a7922ed68f0877");
 	while(isdefined(self.scale))
 	{
-		var_70aac56d = (level.var_cd139dc0 * self.scale) * 3;
-		self function_5e00861(var_70aac56d, 1);
+		compassscale = (level.var_cd139dc0 * self.scale) * 3;
+		self function_5e00861(compassscale, 1);
 		[[ level.var_99266dd4 ]]->waitinqueue(self);
 	}
 }

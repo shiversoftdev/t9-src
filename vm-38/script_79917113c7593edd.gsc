@@ -1,10 +1,10 @@
-#using script_13da4e6b98ca81a1;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using script_13da4e6b98ca81a1;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_2d34cefc;
 
@@ -36,9 +36,9 @@ function private autoexec function_d0c5690e()
 function init_shared()
 {
 	callback::on_localclient_connect(&on_localclient_connect);
-	clientfield::function_a8bbc967("vehicle.selectedWeapon", #"vehicle_info", #"selectedweapon", 1, 2, "int", &function_db40057d, 0, 0);
-	clientfield::function_a8bbc967("vehicle.flareCount", #"vehicle_info", #"flarecount", 1, 2, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("vehicle.inAC130", #"vehicle_info", #"inac130", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("vehicle.selectedWeapon", #"vehicle_info", #"selectedweapon", 1, 2, "int", &function_db40057d, 0, 0);
+	clientfield::register_clientuimodel("vehicle.flareCount", #"vehicle_info", #"flarecount", 1, 2, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("vehicle.inAC130", #"vehicle_info", #"inac130", 1, 1, "int", undefined, 0, 0);
 	level.var_3e7d252b = getscriptbundle("killstreak_ac130");
 }
 
@@ -70,7 +70,7 @@ function on_localclient_connect(localclientnum)
 {
 	function_2c2bf9dc(localclientnum, "maincannonClipSize", #"hash_17df39d53492b0bf");
 	function_2c2bf9dc(localclientnum, "autocannonClipSize", #"hash_7b24d0d0d2823bca");
-	function_2c2bf9dc(localclientnum, "chaingunClipSize", #"hash_721bd01efec90239");
+	function_2c2bf9dc(localclientnum, "chaingunClipSize", #"ac130_chaingun");
 }
 
 /*

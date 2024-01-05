@@ -1,18 +1,18 @@
-#using script_14f4a3c583c77d4b;
-#using script_27c22e1d8df4d852;
-#using script_6021ce59143452c3;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\zm_common\zm_traps.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_trial_util.gsc;
+#using scripts\zm_common\zm_trial.gsc;
+#using scripts\zm_common\zm_loadout.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_b28d86fd;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_b28d86fd
 	Checksum: 0xF800FC1E
 	Offset: 0xE0
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_41cb195ec280085c", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -36,15 +36,15 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!zm_trial::function_b47f6aba())
+	if(!zm_trial::is_trial_mode())
 	{
 		return;
 	}
-	zm_trial::register_challenge(#"hash_149b9c514fee8fc3", &function_d1de6a85, &function_9e7b3f4d);
+	zm_trial::register_challenge(#"hash_149b9c514fee8fc3", &on_begin, &on_end);
 }
 
 /*
-	Name: function_d1de6a85
+	Name: on_begin
 	Namespace: namespace_b28d86fd
 	Checksum: 0xC41F2624
 	Offset: 0x190
@@ -52,21 +52,21 @@ function private function_70a657d8()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_d1de6a85()
+function private on_begin()
 {
 	callback::function_33f0ddd3(&function_33f0ddd3);
 	foreach(player in getplayers())
 	{
-		player thread namespace_b22c99a5::function_bf710271();
-		player namespace_b22c99a5::function_7dbb1712(1);
+		player thread zm_trial_util::function_bf710271();
+		player zm_trial_util::function_7dbb1712(1);
 	}
-	var_ec9e2b1d = getentarray("zombie_trap", "targetname");
+	a_t_traps = getentarray("zombie_trap", "targetname");
 	str_text = #"hash_24a438482954901";
-	foreach(var_9bda8088 in var_ec9e2b1d)
+	foreach(t_trap in a_t_traps)
 	{
-		if(!is_true(var_9bda8088._trap_in_use) && is_true(var_9bda8088.var_b3166dc1))
+		if(!is_true(t_trap._trap_in_use) && is_true(t_trap.var_b3166dc1))
 		{
-			var_9bda8088 zm_traps::trap_set_string(str_text, var_9bda8088.zombie_cost);
+			t_trap zm_traps::trap_set_string(str_text, t_trap.zombie_cost);
 		}
 	}
 	a_ai = getaiteamarray(level.zombie_team);
@@ -86,7 +86,7 @@ function private function_d1de6a85()
 }
 
 /*
-	Name: function_9e7b3f4d
+	Name: on_end
 	Namespace: namespace_b28d86fd
 	Checksum: 0x9F149849
 	Offset: 0x4E0
@@ -94,7 +94,7 @@ function private function_d1de6a85()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_9e7b3f4d(round_reset)
+function private on_end(round_reset)
 {
 	callback::function_824d206(&function_33f0ddd3);
 	level.var_b38bb71 = undefined;
@@ -102,16 +102,16 @@ function private function_9e7b3f4d(round_reset)
 	level zm_trial::function_25ee130(0);
 	foreach(player in getplayers())
 	{
-		player thread namespace_b22c99a5::function_dc0859e();
-		player namespace_b22c99a5::function_7dbb1712(1);
+		player thread zm_trial_util::function_dc0859e();
+		player zm_trial_util::function_7dbb1712(1);
 	}
-	var_ec9e2b1d = getentarray("zombie_trap", "targetname");
+	a_t_traps = getentarray("zombie_trap", "targetname");
 	str_text = #"hash_23c1c09e94181fdb";
-	foreach(var_9bda8088 in var_ec9e2b1d)
+	foreach(t_trap in a_t_traps)
 	{
-		if(!is_true(var_9bda8088._trap_in_use) && is_true(var_9bda8088.var_b3166dc1))
+		if(!is_true(t_trap._trap_in_use) && is_true(t_trap.var_b3166dc1))
 		{
-			var_9bda8088 zm_traps::trap_set_string(str_text, var_9bda8088.zombie_cost);
+			t_trap zm_traps::trap_set_string(str_text, t_trap.zombie_cost);
 		}
 	}
 }

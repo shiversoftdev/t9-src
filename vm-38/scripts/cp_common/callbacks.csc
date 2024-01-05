@@ -1,13 +1,13 @@
-#using script_46259d8dc4abfd9c;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\exploder_shared.csc;
-#using scripts\core_common\footsteps_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\core_common\vehicle_shared.csc;
+#using scripts\weapons\cp\explosive_bolt.csc;
 #using scripts\cp_common\callbacks.csc;
+#using scripts\core_common\vehicle_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\footsteps_shared.csc;
+#using scripts\core_common\exploder_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace callbacks;
 
@@ -22,13 +22,13 @@
 */
 function private autoexec function_ec5e196c()
 {
-	level notify(953193771);
+	level notify(-953193771);
 }
 
 #namespace callback;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: callback
 	Checksum: 0xEBAD4C22
 	Offset: 0x110
@@ -36,7 +36,7 @@ function private autoexec function_ec5e196c()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"callback", &function_70a657d8, undefined, undefined, undefined);
 }

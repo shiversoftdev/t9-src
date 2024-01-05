@@ -1,14 +1,14 @@
-#using script_3f9e0dc8454d98e1;
-#using script_545a0bac37bda541;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\statemachine_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\globallogic\globallogic_score.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\statemachine_shared.gsc;
 #using scripts\core_common\vehicle_ai_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_77b8863;
 
@@ -27,7 +27,7 @@ function private autoexec function_e7169d71()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_77b8863
 	Checksum: 0x266F03D0
 	Offset: 0x190
@@ -35,7 +35,7 @@ function private autoexec function_e7169d71()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_60e9e594b4389b03", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -51,7 +51,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	vehicle::add_main_callback(#"hash_3b41c3299f47fb7f", &function_c346ef73);
+	vehicle::add_main_callback(#"dust_ball", &function_c346ef73);
 	clientfield::register("scriptmover", "towers_boss_dust_ball_fx", 1, getminbitcountfornum(4), "int");
 	/#
 		level thread update_dvars();
@@ -110,7 +110,7 @@ function defaultrole()
 	statemachine statemachine::add_state("seek", &function_9ddc7275, &function_3e16dec3, &function_64f7393f);
 	statemachine statemachine::add_state("soul", &function_3f83eb6, &function_e452a40c, &function_22828012);
 	self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
-	self val::set(#"hash_3b41c3299f47fb7f", "takedamage", 0);
+	self val::set(#"dust_ball", "takedamage", 0);
 	self.takedamage = 0;
 	self vehicle_ai::call_custom_add_state_callbacks();
 	self.fxent = spawn("script_model", self.origin);
@@ -355,11 +355,11 @@ function function_ef0bfb9d()
 	while(true)
 	{
 		enemies = function_f6f34851(self.team);
-		var_61c9e8b6 = arraysort(enemies, self function_d3a9800e(), 1);
-		var_a5a1f99c = getaiarchetypearray(#"zombie");
-		var_a5a1f99c = arraycombine(var_a5a1f99c, getaiarchetypearray(#"catalyst"), 0, 0);
-		var_61c9e8b6 = arraycombine(var_a5a1f99c, var_61c9e8b6, 0, 0);
-		foreach(target in var_61c9e8b6)
+		alltargets = arraysort(enemies, self function_d3a9800e(), 1);
+		zombiesarray = getaiarchetypearray(#"zombie");
+		zombiesarray = arraycombine(zombiesarray, getaiarchetypearray(#"catalyst"), 0, 0);
+		alltargets = arraycombine(zombiesarray, alltargets, 0, 0);
+		foreach(target in alltargets)
 		{
 			var_87c0ec9c = distancesquared(target.origin, self function_d3a9800e());
 			if(var_87c0ec9c <= sqr(self.settings.damage_radius))
@@ -389,14 +389,14 @@ function function_ef0bfb9d()
 */
 function function_413aacb3(target)
 {
-	var_7588d977 = getaiarchetypearray(#"hash_3b41c3299f47fb7f");
-	foreach(var_3f1f1429 in var_7588d977)
+	var_7588d977 = getaiarchetypearray(#"dust_ball");
+	foreach(dustball in var_7588d977)
 	{
-		if(var_3f1f1429 == self)
+		if(dustball == self)
 		{
 			continue;
 		}
-		if(var_3f1f1429.favoriteenemy === target)
+		if(dustball.favoriteenemy === target)
 		{
 			return true;
 		}
@@ -430,8 +430,8 @@ function function_55be8453()
 		}
 	}
 	enemies = function_f6f34851(self.team);
-	var_61c9e8b6 = arraysort(enemies, self function_d3a9800e(), 1);
-	foreach(target in var_61c9e8b6)
+	alltargets = arraysort(enemies, self function_d3a9800e(), 1);
+	foreach(target in alltargets)
 	{
 		angles = self.angles;
 		if(self function_413aacb3(target))
@@ -444,7 +444,7 @@ function function_55be8453()
 			return;
 		}
 	}
-	foreach(target in var_61c9e8b6)
+	foreach(target in alltargets)
 	{
 		var_87c0ec9c = distancesquared(target.origin, self function_d3a9800e());
 		if(var_87c0ec9c <= 10000)
@@ -453,9 +453,9 @@ function function_55be8453()
 			return;
 		}
 	}
-	if(var_61c9e8b6.size && isdefined(var_61c9e8b6[0]))
+	if(alltargets.size && isdefined(alltargets[0]))
 	{
-		self.favoriteenemy = var_61c9e8b6[0];
+		self.favoriteenemy = alltargets[0];
 	}
 }
 

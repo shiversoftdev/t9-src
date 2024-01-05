@@ -1,11 +1,11 @@
+#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_hud.gsc;
 #using script_2f560596a9a134ab;
 #using script_4ce5d94e8c797350;
-#using script_5b4f7a8178990872;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
 
 #namespace namespace_51925ebc;
 
@@ -20,7 +20,7 @@
 */
 function private autoexec function_c38e39b8()
 {
-	level notify(125311928);
+	level notify(-125311928);
 }
 
 /*
@@ -119,22 +119,22 @@ function zone_init()
 	zm_zonemgr::add_zone_flags("connect_to_power_tunnel", "connect_center_room");
 	zm_zonemgr::add_zone_flags("connect_proto_exterior_rear_to_tunnel", "connect_tunnel_to_power_room");
 	zm_zonemgr::add_zone_flags("connect_plane_to_tunnel", "connect_tunnel_to_power_room");
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_60b2f29696c25fc4", 90, array("zone_proto_start", "zone_proto_start2"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_yard", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_57c709d0608e925f", 90, "zone_proto_interior_lower", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_west_ruins_1f", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_3e868812f1167436", 90, "zone_proto_upstairs", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_east_ruins_2f", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_403956d6660b774e", 90, array("zone_proto_roof_center", "zone_proto_roof_plane"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_ruins_roof", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_1417cb50f78e17e3", 90, "zone_power_tunnel", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_main_power", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_77344bcb8a308c09", 90, array("zone_power_room_outside", "zone_power_room"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_control_room", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_7bfe0d876e389ddc", 90, "zone_proto_plane_exterior", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_plane_wing", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_60b2f29696c25fc4", 90, array("zone_proto_start", "zone_proto_start2"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_yard", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_57c709d0608e925f", 90, "zone_proto_interior_lower", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_west_ruins_1f", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_3e868812f1167436", 90, "zone_proto_upstairs", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_east_ruins_2f", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_403956d6660b774e", 90, array("zone_proto_roof_center", "zone_proto_roof_plane"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_ruins_roof", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_1417cb50f78e17e3", 90, "zone_power_tunnel", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_main_power", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_77344bcb8a308c09", 90, array("zone_power_room_outside", "zone_power_room"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_control_room", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_7bfe0d876e389ddc", 90, "zone_proto_plane_exterior", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_plane_wing", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_529ed1bcbf7f6525";
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_7cb657a5f657cbbe", 90, array("zone_proto_start", "zone_proto_start2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_yard", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_756817dc68da56e9", 90, array("zone_proto_exterior_rear", "zone_proto_exterior_rear2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_pond", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_2272d4303498d425", 90, array("zone_proto_plane_exterior", "zone_proto_plane_exterior2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_crash_site", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_7e17eba37f893fb4", 90, "zone_tunnel_interior", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_tunnel", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_795ccb5ead8f853e", 90, "zone_trans_north", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_medical_bay", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_7f0be97960376eb0", 90, array("zone_center_upper", "zone_center_lower", "zone_center_upper_north", "zone_center_upper_west"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_particle_accelerator", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_aee5cb4bd88c4ee", 90, "zone_trans_south", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_weapons_lab", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_28a0e374fc2d128b", 90, undefined, undefined, #"hash_136efa9e9c0bcf06", undefined, &function_a0910b80, &function_f62d4e38);
+	namespace_f0b43eb5::create_challenge(#"hash_7cb657a5f657cbbe", 90, array("zone_proto_start", "zone_proto_start2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_yard", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_756817dc68da56e9", 90, array("zone_proto_exterior_rear", "zone_proto_exterior_rear2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_pond", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_2272d4303498d425", 90, array("zone_proto_plane_exterior", "zone_proto_plane_exterior2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_crash_site", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_7e17eba37f893fb4", 90, "zone_tunnel_interior", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_tunnel", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_795ccb5ead8f853e", 90, "zone_trans_north", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_medical_bay", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_7f0be97960376eb0", 90, array("zone_center_upper", "zone_center_lower", "zone_center_upper_north", "zone_center_upper_west"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_particle_accelerator", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_aee5cb4bd88c4ee", 90, "zone_trans_south", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_weapons_lab", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_28a0e374fc2d128b", 90, undefined, undefined, #"hash_136efa9e9c0bcf06", undefined, &function_a0910b80, &function_f62d4e38);
 }
 
 /*
@@ -213,11 +213,11 @@ function function_a74dcd0a(player)
 	Parameters: 1
 	Flags: Linked
 */
-function function_64c67df3(var_e2414b1b)
+function function_64c67df3(zone_path)
 {
-	if(isdefined(level.var_fdcaf3a6) && isdefined(var_e2414b1b))
+	if(isdefined(level.var_fdcaf3a6) && isdefined(zone_path))
 	{
-		if(var_e2414b1b.cost == 2)
+		if(zone_path.cost == 2)
 		{
 			if(self.cached_zone.name === #"zone_tunnel_interior")
 			{
@@ -268,8 +268,8 @@ function function_44b1279a()
 			self clientfield::set_to_player("" + #"hash_464e0cd19b3b8c12", 0);
 			self clientfield::set_to_player("" + #"hash_4be33f9c734f0cb9", 0);
 		}
-		var_be17187b = undefined;
-		var_be17187b = self waittill(#"hash_2d4daa9e80b86b60");
+		s_waitresult = undefined;
+		s_waitresult = self waittill(#"zone_change");
 	}
 }
 

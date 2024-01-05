@@ -1,10 +1,10 @@
-#using script_3b78d6d26bf3ec83;
-#using scripts\core_common\ai_shared.csc;
+#using scripts\abilities\gadgets\gadget_jammer_shared.csc;
 #using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_68a80213;
 
@@ -23,7 +23,7 @@ function private autoexec function_f91e2ca1()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_68a80213
 	Checksum: 0x88BD0608
 	Offset: 0xF8
@@ -31,7 +31,7 @@ function private autoexec function_f91e2ca1()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_512409f8a5de10e4", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

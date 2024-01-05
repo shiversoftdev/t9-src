@@ -1,23 +1,23 @@
-#using script_3626f1b2cf51a99c;
-#using script_4663ec59d864e437;
-#using script_5399f402045d7abd;
-#using script_6eea75edd4d830a;
-#using script_7d0013bbc05623b9;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\battlechatter.gsc;
 #using scripts\cp_common\util.gsc;
+#using script_7d0013bbc05623b9;
+#using script_3626f1b2cf51a99c;
+#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using scripts\abilities\gadgets\gadget_health_regen.gsc;
+#using scripts\weapons\weapon_utils.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_6eea75edd4d830a;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 #namespace namespace_594b67e;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_594b67e
 	Checksum: 0x84C64771
 	Offset: 0x4B8
@@ -25,7 +25,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_208cc96e397aed88", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -1356,7 +1356,7 @@ function function_44a46209(var_d8ba335a)
 	Parameters: 7
 	Flags: None
 */
-function function_3ceda691(gesture, target, var_584fcd3e, blendtime, starttime, var_8021ec1b, var_e67d2436)
+function function_3ceda691(gesture, target, var_584fcd3e, blendtime, starttime, var_8021ec1b, stopall)
 {
 	if(!isdefined(gesture))
 	{
@@ -1364,7 +1364,7 @@ function function_3ceda691(gesture, target, var_584fcd3e, blendtime, starttime, 
 	}
 	if(isgesture(gesture))
 	{
-		self thread function_6f3e9127(gesture, target, var_584fcd3e, blendtime, starttime, var_8021ec1b, var_e67d2436);
+		self thread function_6f3e9127(gesture, target, var_584fcd3e, blendtime, starttime, var_8021ec1b, stopall);
 	}
 	else
 	{
@@ -1397,7 +1397,7 @@ function function_b56ad054()
 	Parameters: 7
 	Flags: Private
 */
-function private function_6f3e9127(gesture, target, var_584fcd3e, blendtime, starttime, var_8021ec1b, var_e67d2436)
+function private function_6f3e9127(gesture, target, var_584fcd3e, blendtime, starttime, var_8021ec1b, stopall)
 {
 	self notify("23f2b4fc4d9d191d");
 	self endon("23f2b4fc4d9d191d");
@@ -1420,7 +1420,7 @@ function private function_6f3e9127(gesture, target, var_584fcd3e, blendtime, sta
 	{
 		waitframe(1);
 	}
-	self playgestureviewmodel(target, var_584fcd3e, blendtime, 0, starttime, var_8021ec1b, var_e67d2436);
+	self playgestureviewmodel(target, var_584fcd3e, blendtime, 0, starttime, var_8021ec1b, stopall);
 }
 
 /*
@@ -1722,7 +1722,7 @@ function function_396e2076(var_860605de, var_4170b151)
 	}
 	if(is_true(var_4170b151))
 	{
-		level notify(#"hash_746c5e6bced27651");
+		level notify(#"drop_corpse");
 	}
 }
 

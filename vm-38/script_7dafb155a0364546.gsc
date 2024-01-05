@@ -1,5 +1,5 @@
-#using script_13114d8a31c6152a;
 #using script_35ae72be7b4fec10;
+#using script_13114d8a31c6152a;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_e3815316;
@@ -19,7 +19,7 @@ function private autoexec function_699040d4()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e3815316
 	Checksum: 0xCE7F31F8
 	Offset: 0x98
@@ -27,7 +27,7 @@ function private autoexec function_699040d4()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5903f7e85045920f", &function_70a657d8, undefined, undefined, undefined);
 }

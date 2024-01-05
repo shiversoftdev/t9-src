@@ -1,9 +1,9 @@
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\music_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 
 #namespace audio_shared;
 
@@ -24,7 +24,7 @@ function private autoexec function_bda28fa4()
 #namespace audio;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: audio
 	Checksum: 0x72DA57E1
 	Offset: 0x318
@@ -32,7 +32,7 @@ function private autoexec function_bda28fa4()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"audio", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -162,7 +162,7 @@ function sndresetsoundsettings()
 */
 function on_player_connect()
 {
-	self callback::function_d8abfc3d(#"missile_lock", &function_9070d441);
+	self callback::function_d8abfc3d(#"missile_lock", &on_missile_lock);
 	self callback::function_d8abfc3d(#"hash_1a32e0fdeb70a76b", &function_c25f7d1);
 }
 
@@ -199,7 +199,7 @@ function on_player_killed(params)
 */
 function vehiclespawncontext()
 {
-	if(sessionmodeismultiplayergame() || function_f99d2668())
+	if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame())
 	{
 		self clientfield::set("sndSwitchVehicleContext", 1);
 	}
@@ -264,7 +264,7 @@ function playtargetmissilesound(alias, looping)
 }
 
 /*
-	Name: function_9070d441
+	Name: on_missile_lock
 	Namespace: audio
 	Checksum: 0xB4E547E3
 	Offset: 0xB68
@@ -272,7 +272,7 @@ function playtargetmissilesound(alias, looping)
 	Parameters: 1
 	Flags: Linked
 */
-function function_9070d441(params)
+function on_missile_lock(params)
 {
 	/#
 		assert(isplayer(self));

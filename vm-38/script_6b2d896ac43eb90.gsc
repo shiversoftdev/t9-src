@@ -1,36 +1,36 @@
-#using script_1029986e2bc8ca8e;
-#using script_1287f54612f9bfce;
+#using script_6155d71e1c9a57eb;
 #using script_215d7818c548cb51;
-#using script_348ce871561476c9;
-#using script_3cebb48c37fc271;
-#using script_3ddf84b7bb3bf47d;
+#using script_cf3d8fde2407bb1;
+#using script_1287f54612f9bfce;
+#using script_5fb26eef020f9958;
 #using script_55b68e9c3e3a915b;
 #using script_5a8a1aa32dea1a04;
-#using script_5bb072c3abf4652c;
-#using script_5fb26eef020f9958;
 #using script_613bf3e46dacdcfc;
-#using script_6155d71e1c9a57eb;
-#using script_669400ff5aadcc83;
-#using script_799de24f8ad427f7;
-#using script_7d7ac1f663edcdc8;
-#using script_7fc996fe8678852;
-#using script_cf3d8fde2407bb1;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_blockers.gsc;
 #using scripts\zm_common\zm_laststand.gsc;
 #using scripts\zm_common\zm_player.gsc;
+#using script_669400ff5aadcc83;
+#using scripts\zm_common\zm_vo.gsc;
 #using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_fasttravel.gsc;
+#using scripts\zm_common\zm_blockers.gsc;
+#using script_3ddf84b7bb3bf47d;
+#using script_7d7ac1f663edcdc8;
+#using script_799de24f8ad427f7;
+#using script_1029986e2bc8ca8e;
+#using scripts\core_common\player\player_free_fall.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\popups_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_dbb31ff3;
 
@@ -45,7 +45,7 @@
 */
 function private autoexec function_a0caff93()
 {
-	level notify(422243524);
+	level notify(-422243524);
 }
 
 /*
@@ -59,7 +59,7 @@ function private autoexec function_a0caff93()
 */
 event main(eventstruct)
 {
-	level.var_8bef1f53 = namespace_d84b2e13::register();
+	level.var_8bef1f53 = sr_beacon_menu::register();
 	clientfield::register("toplayer", "" + #"hash_5616eb8cc6b9c498", 1, 1, "counter");
 	clientfield::register("toplayer", "" + #"hash_5752601fd90562e1", 1, 1, "counter");
 	namespace_52c8f34d::function_70a657d8();
@@ -140,10 +140,10 @@ function function_1fab9ee0(eventstruct)
 	#/
 	if(isplayer(player) && !level flag::get(#"hash_23350b678001fece"))
 	{
-		if(!level.var_8bef1f53 namespace_d84b2e13::is_open(player) && !player clientfield::get_player_uimodel("hudItems.srOverlayOpen"))
+		if(!level.var_8bef1f53 sr_beacon_menu::is_open(player) && !player clientfield::get_player_uimodel("hudItems.srOverlayOpen"))
 		{
 			player notify(#"hash_5f178db4550eeae9");
-			level.var_8bef1f53 namespace_d84b2e13::open(player, 0);
+			level.var_8bef1f53 sr_beacon_menu::open(player, 0);
 			player thread function_21ba74a1(machine, self);
 			player namespace_553954de::function_14bada94();
 		}
@@ -182,9 +182,9 @@ function function_6c71e778(machine, trigger, var_4bbc024b)
 			}
 		}
 	}
-	if(level.var_8bef1f53 namespace_d84b2e13::is_open(self) && self clientfield::get_player_uimodel("hudItems.srOverlayOpen"))
+	if(level.var_8bef1f53 sr_beacon_menu::is_open(self) && self clientfield::get_player_uimodel("hudItems.srOverlayOpen"))
 	{
-		level.var_8bef1f53 namespace_d84b2e13::close(self);
+		level.var_8bef1f53 sr_beacon_menu::close(self);
 		self namespace_553954de::function_548f282();
 	}
 	self notify(#"hash_11ed79645f6768e1");
@@ -211,7 +211,7 @@ function function_755edc7e(machine, trigger)
 			break;
 		}
 	}
-	if(level.var_8bef1f53 namespace_d84b2e13::is_open(self) && self clientfield::get_player_uimodel("hudItems.srOverlayOpen"))
+	if(level.var_8bef1f53 sr_beacon_menu::is_open(self) && self clientfield::get_player_uimodel("hudItems.srOverlayOpen"))
 	{
 		self function_6c71e778(machine, trigger);
 	}
@@ -306,7 +306,7 @@ function warp(var_6afa034c)
 		player clientfield::increment_to_player("" + #"hash_5616eb8cc6b9c498", 1);
 	}
 	destination = level.var_7d45d0d4.var_d60029a6[level.var_7d45d0d4.destinationindex];
-	level thread namespace_b57ebf44::function_ab94c270(destination);
+	level thread zm_destination_manager::function_ab94c270(destination);
 	function_526a0df4(destination.targetname);
 	level.var_fe6ca5e8 = 1;
 	level notify(#"hash_29edd9425510b40d");
@@ -317,7 +317,7 @@ function warp(var_6afa034c)
 	}
 	objective_manager::start_timer(10);
 	objective_manager::function_a8ad6895(destination);
-	var_b2e24cfc = namespace_b57ebf44::function_f3be07d7(destination);
+	var_b2e24cfc = zm_destination_manager::function_f3be07d7(destination);
 	/#
 		assert(var_b2e24cfc.size >= 4, "" + destination.targetname);
 	#/
@@ -333,7 +333,7 @@ function warp(var_6afa034c)
 	{
 		if(isalive(player))
 		{
-			player namespace_4b76712::allow_player_basejumping(0);
+			player player_free_fall::allow_player_basejumping(0);
 			if(zm_utility::is_survival() && player laststand::player_is_in_laststand())
 			{
 				player thread zm_laststand::auto_revive(self);
@@ -367,7 +367,7 @@ function warp(var_6afa034c)
 	wait(1);
 	foreach(player in getplayers())
 	{
-		player namespace_4b76712::allow_player_basejumping(1);
+		player player_free_fall::allow_player_basejumping(1);
 		player clientfield::increment_to_player("" + #"hash_5752601fd90562e1", 1);
 	}
 }
@@ -405,7 +405,7 @@ function call_exfil(var_6afa034c)
 		self thread zm_vo::function_d342796e(#"hash_7e50fb36129dc24b", 1.5);
 	}
 	var_6afa034c showpart("screen_exfil_jnt");
-	self function_974881a5(var_6afa034c);
+	self destroy_beacon(var_6afa034c);
 	level flag::set(#"hash_3e765c26047c9f54");
 }
 
@@ -435,7 +435,7 @@ function function_21ba74a1(machine, trigger)
 		waitresult = self waittill(#"menuresponse");
 		menu = waitresult.menu;
 		response = waitresult.response;
-		if(menu == #"hash_26e4ec7e2fffff8d")
+		if(menu == #"sr_beacon_menu")
 		{
 			switch(waitresult.response)
 			{
@@ -465,7 +465,7 @@ function function_21ba74a1(machine, trigger)
 }
 
 /*
-	Name: function_974881a5
+	Name: destroy_beacon
 	Namespace: namespace_dbb31ff3
 	Checksum: 0x85DC49B3
 	Offset: 0x1750
@@ -473,7 +473,7 @@ function function_21ba74a1(machine, trigger)
 	Parameters: 1
 	Flags: Linked
 */
-function function_974881a5(var_6afa034c)
+function destroy_beacon(var_6afa034c)
 {
 	var_62157006 = "screen_exfil_jnt";
 	var_f6aedcc6 = var_6afa034c gettagorigin(var_62157006);

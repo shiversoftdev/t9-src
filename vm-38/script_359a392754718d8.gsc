@@ -1,4 +1,4 @@
-#using script_383a3b1bb18ba876;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_d8608565;
@@ -14,11 +14,11 @@
 */
 function private autoexec function_e8070124()
 {
-	level notify(436223825);
+	level notify(-436223825);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_d8608565
 	Checksum: 0x9B4C1B3D
 	Offset: 0xB0
@@ -26,7 +26,7 @@ function private autoexec function_e8070124()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_661f2553d5c4d2b4", &function_70a657d8, undefined, undefined, #"killstreaks");
 }

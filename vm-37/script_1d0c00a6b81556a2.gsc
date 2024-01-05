@@ -4,7 +4,7 @@
 #namespace namespace_543dc48f;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_543dc48f
 	Checksum: 0xACD7998E
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2e174447c1bc5bd6", &function_70a657d8, undefined, undefined, #"zm_weapons");
 }
@@ -58,7 +58,7 @@ function private on_connect()
 */
 function private function_c5b14b2f()
 {
-	callback::function_d8abfc3d(#"hash_25663702210244cc", &function_afade0d0);
+	callback::function_d8abfc3d(#"done_healing", &function_afade0d0);
 	self.var_f7500d42 = self.health;
 	self.ignore_health_regen_delay = 1;
 }
@@ -74,7 +74,7 @@ function private function_c5b14b2f()
 */
 function private function_afade0d0()
 {
-	callback::function_52ac9652(#"hash_25663702210244cc", &function_afade0d0);
+	callback::function_52ac9652(#"done_healing", &function_afade0d0);
 	if(isdefined(self.var_f7500d42))
 	{
 		self.var_c2b7641c = self.health - self.var_f7500d42;

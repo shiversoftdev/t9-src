@@ -1,10 +1,10 @@
-#using script_ac6a30f1991e105;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm.csc;
+#using scripts\core_common\math_shared.csc;
+#using script_ac6a30f1991e105;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_e3f7c013;
 
@@ -19,28 +19,28 @@
 */
 function private autoexec function_a550605b()
 {
-	level notify(789498594);
+	level notify(-789498594);
 }
 
-#namespace namespace_c402654;
+#namespace zombie_dog_util;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_c402654
+	Name: __init__system__
+	Namespace: zombie_dog_util
 	Checksum: 0xE669D923
 	Offset: 0x160
 	Size: 0x3C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_29467933d0da473b", &function_70a657d8, undefined, undefined, undefined);
+	system::register(#"zombie_dog_util", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_c402654
+	Namespace: zombie_dog_util
 	Checksum: 0x9DA40A51
 	Offset: 0x1A8
 	Size: 0xA4
@@ -56,7 +56,7 @@ function private function_70a657d8()
 
 /*
 	Name: init_dog_fx
-	Namespace: namespace_c402654
+	Namespace: zombie_dog_util
 	Checksum: 0xFFD8558A
 	Offset: 0x258
 	Size: 0x144
@@ -77,7 +77,7 @@ function init_dog_fx()
 
 /*
 	Name: dog_fx
-	Namespace: namespace_c402654
+	Namespace: zombie_dog_util
 	Checksum: 0xD5F15705
 	Offset: 0x3A8
 	Size: 0x4D4
@@ -142,7 +142,7 @@ function dog_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
 /*
 	Name: dog_round_fog_bank
-	Namespace: namespace_c402654
+	Namespace: zombie_dog_util
 	Checksum: 0x7CF76122
 	Offset: 0x888
 	Size: 0xC4
@@ -165,7 +165,7 @@ function dog_round_fog_bank(localclientnum, oldval, newval, bnewent, binitialsna
 
 /*
 	Name: function_33593a44
-	Namespace: namespace_c402654
+	Namespace: zombie_dog_util
 	Checksum: 0x8D23F30C
 	Offset: 0x958
 	Size: 0x2BC

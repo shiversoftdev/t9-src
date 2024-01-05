@@ -1,20 +1,20 @@
-#using script_1b905a8474ed2a62;
-#using script_3728b3b9606c4299;
-#using script_522aeb6ae906391e;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\throttle_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\ai\blackboard_vehicle.gsc;
+#using script_522aeb6ae906391e;
+#using scripts\weapons\heatseekingmissile.gsc;
 #using scripts\core_common\vehicle_ai_shared.gsc;
 #using scripts\core_common\vehicle_death_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace siegebot;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: siegebot
 	Checksum: 0x6D842A9
 	Offset: 0x360
@@ -22,13 +22,13 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"siegebot", &function_5de06a3f, undefined, undefined, undefined);
+	system::register(#"siegebot", &systeminit, undefined, undefined, undefined);
 }
 
 /*
-	Name: function_5de06a3f
+	Name: systeminit
 	Namespace: siegebot
 	Checksum: 0x429B0A1D
 	Offset: 0x3A8
@@ -36,7 +36,7 @@ function private autoexec function_89f2df9()
 	Parameters: 0
 	Flags: Linked
 */
-function function_5de06a3f()
+function systeminit()
 {
 	level.var_7fcdba66 = 1;
 	vehicle::add_main_callback("siegebot", &siegebot_initialize);

@@ -1,14 +1,14 @@
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\scene_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\scene_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace scene;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: scene
 	Checksum: 0x8EEBC8E6
 	Offset: 0x90
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"scene_debug", &function_c3c9d0e5, undefined, undefined, undefined);
@@ -498,7 +498,7 @@ function display_scene_menu(str_type, str_scene)
 function function_c0f30783(s_scenedef)
 {
 	/#
-		if(!is_true(s_scenedef.var_241c5f3c) || (is_true(s_scenedef.var_241c5f3c) && getdvarint(#"hash_11ad6a9695943217", 0)))
+		if(!is_true(s_scenedef.var_241c5f3c) || (is_true(s_scenedef.var_241c5f3c) && getdvarint(#"zm_debug_ee", 0)))
 		{
 			return true;
 		}
@@ -518,12 +518,12 @@ function function_c0f30783(s_scenedef)
 function scene_list_settext(strings, n_selected, str_title, var_444abf97)
 {
 	/#
-		level thread function_e67dabcc(strings, n_selected, str_title, var_444abf97);
+		level thread _scene_list_settext(strings, n_selected, str_title, var_444abf97);
 	#/
 }
 
 /*
-	Name: function_e67dabcc
+	Name: _scene_list_settext
 	Namespace: scene
 	Checksum: 0x18691839
 	Offset: 0x1890
@@ -531,7 +531,7 @@ function scene_list_settext(strings, n_selected, str_title, var_444abf97)
 	Parameters: 4
 	Flags: None
 */
-function function_e67dabcc(strings, n_selected, str_title, var_444abf97)
+function _scene_list_settext(strings, n_selected, str_title, var_444abf97)
 {
 	/#
 		if(!isdefined(var_444abf97))
@@ -676,7 +676,7 @@ function function_3bafd088(var_a572f325)
 {
 	/#
 		/#
-			if(getdvarint(#"hash_356851cac5b69fb7", 0) > 0 && getdvarint(#"hash_2aa16f268802da43", 0) > 0)
+			if(getdvarint(#"dvr_enable", 0) > 0 && getdvarint(#"scr_scene_dvr", 0) > 0)
 			{
 				if(!isdefined(var_a572f325))
 				{
@@ -709,7 +709,7 @@ function function_d2785094(var_a572f325)
 {
 	/#
 		/#
-			if(getdvarint(#"hash_356851cac5b69fb7", 0) > 0 && getdvarint(#"hash_2aa16f268802da43", 0) > 0)
+			if(getdvarint(#"dvr_enable", 0) > 0 && getdvarint(#"scr_scene_dvr", 0) > 0)
 			{
 				var_3ee40508 = 0;
 				var_2640d68e = 0;

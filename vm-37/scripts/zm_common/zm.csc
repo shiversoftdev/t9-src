@@ -1,58 +1,58 @@
-#using script_11cc3a9267cf7ac7;
-#using script_136606144df0f9f1;
-#using script_1611421ee9b880d3;
-#using script_17179876e0e27f8c;
-#using script_17a9d06bf819b2d3;
-#using script_2bdd098a8215ac9f;
-#using script_2c8fd33ddb45e78b;
+#using scripts\zm_common\zm_vo.csc;
 #using script_311c446e3df6c3fa;
-#using script_31816d064a53f516;
-#using script_3762ce8163e304e6;
-#using script_3d35e2ff167b3a82;
-#using script_3d5887fc414a86fb;
-#using script_460d54ff48daf1f7;
-#using script_4c3385b0ecce078c;
-#using script_4e53735256f112ac;
 #using script_4ed01237ecbd380f;
 #using script_538e87197f25d67;
-#using script_5569f8636cebd8f3;
+#using script_2bdd098a8215ac9f;
+#using script_136606144df0f9f1;
 #using script_5665e7d917abc3fc;
-#using script_57f0934f7e3e3b54;
-#using script_5ee86fb478309acf;
-#using script_618d6f5ff5d18933;
 #using script_62c40d9a3acec9b1;
-#using script_6d85b093d74cdfdd;
-#using script_6ffa998405e2f041;
 #using script_7520bf82a814057c;
-#using script_76b36ed1b7a51ed2;
-#using script_7f9d1ec3c0aa68b8;
+#using script_4e53735256f112ac;
+#using script_57f0934f7e3e3b54;
+#using scripts\zm\perk\zm_perk_juggernaut.csc;
+#using scripts\zm\perk\zm_perk_deadshot.csc;
+#using script_11cc3a9267cf7ac7;
+#using script_5ee86fb478309acf;
 #using script_eff00f787d80cdf;
-#using scripts\core_common\aat_shared.csc;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\fx_shared.csc;
+#using scripts\zm_common\zm_ui_inventory.csc;
+#using scripts\zm_common\gametypes\globallogic.csc;
+#using scripts\zm_common\zm_zdraw.csc;
+#using scripts\zm_common\zm_weapons.csc;
+#using scripts\zm_common\zm_wallbuy.csc;
+#using script_460d54ff48daf1f7;
+#using scripts\zm_common\zm_utility.csc;
+#using scripts\zm_common\zm_powerups.csc;
+#using script_17a9d06bf819b2d3;
+#using scripts\zm_common\zm_perks.csc;
+#using scripts\zm_common\zm_laststand.csc;
+#using script_2c8fd33ddb45e78b;
+#using scripts\zm_common\zm_hud.csc;
+#using scripts\zm_common\zm_ffotd.csc;
+#using scripts\zm_common\zm_equipment.csc;
+#using scripts\zm_common\zm_demo.csc;
+#using scripts\zm_common\zm_crafting.csc;
+#using scripts\zm_common\zm_blockers.csc;
+#using scripts\zm_common\zm_bgb.csc;
+#using scripts\zm_common\zm_audio.csc;
+#using scripts\zm_common\load.csc;
+#using script_31816d064a53f516;
+#using scripts\core_common\visionset_mgr_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\status_effects\status_effects.csc;
+#using scripts\core_common\scene_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
 #using scripts\core_common\renderoverridebundle.csc;
-#using scripts\core_common\scene_shared.csc;
+#using script_618d6f5ff5d18933;
+#using script_3d35e2ff167b3a82;
+#using scripts\core_common\item_inventory.csc;
+#using scripts\core_common\fx_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\aat_shared.csc;
 #using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\core_common\visionset_mgr_shared.csc;
-#using scripts\zm_common\gametypes\globallogic.csc;
-#using scripts\zm_common\load.csc;
-#using scripts\zm_common\zm_audio.csc;
-#using scripts\zm_common\zm_bgb.csc;
-#using scripts\zm_common\zm_blockers.csc;
-#using scripts\zm_common\zm_equipment.csc;
-#using scripts\zm_common\zm_ffotd.csc;
-#using scripts\zm_common\zm_laststand.csc;
-#using scripts\zm_common\zm_perks.csc;
-#using scripts\zm_common\zm_powerups.csc;
-#using scripts\zm_common\zm_utility.csc;
-#using scripts\zm_common\zm_weapons.csc;
-#using scripts\zm_common\zm_zdraw.csc;
 
 #namespace zm;
 
@@ -72,7 +72,7 @@ function autoexec ignore_systems()
 	system::ignore(#"gadget_cleanse");
 	system::ignore(#"gadget_heat_wave");
 	system::ignore(#"gadget_resurrect");
-	system::ignore(#"hash_52aca7c35be649b8");
+	system::ignore(#"gadget_health_boost");
 	system::ignore(#"gadget_shock_field");
 	system::ignore(#"gadget_other");
 	system::ignore(#"gadget_camo");
@@ -92,7 +92,7 @@ function autoexec ignore_systems()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm
 	Checksum: 0x2A7E2C1F
 	Offset: 0x850
@@ -100,7 +100,7 @@ function autoexec ignore_systems()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm", &function_70a657d8, undefined, undefined, "renderoverridebundle");
 }
@@ -121,7 +121,7 @@ function private function_70a657d8()
 		level.zombie_vars = [];
 	}
 	level.bgb_in_use = 0;
-	level.scr_zm_ui_gametype = util::function_5df4294();
+	level.scr_zm_ui_gametype = util::get_game_type();
 	level.scr_zm_ui_gametype_group = "";
 	level.scr_zm_map_start_location = "";
 	level.gamedifficulty = getgametypesetting(#"zmdifficulty");
@@ -133,7 +133,7 @@ function private function_70a657d8()
 	callback::on_laststand(&on_player_laststand);
 	renderoverridebundle::function_f72f089c(#"hash_60913f86a5a5a3f1", "rob_sonar_set_friendly_zm", &function_b9c917cc);
 	renderoverridebundle::function_f72f089c(#"hash_6844a09875672719", "rob_sonar_set_friendly_zm_ls", &function_a1ab192);
-	clientfield::function_a8bbc967("hudItems.srOverlayOpen", #"hud_items", #"hash_28c98765f5bcc9e8", 1, 1, "int", &function_dfbfa0f4, 0, 0);
+	clientfield::register_clientuimodel("hudItems.srOverlayOpen", #"hud_items", #"hash_28c98765f5bcc9e8", 1, 1, "int", &function_dfbfa0f4, 0, 0);
 	level.var_37076fe8 = &function_a2a8f79e;
 	level.var_38c7030b = &function_424dc557;
 	function_3385d776(#"hash_46067e7dfe6ba0dd");
@@ -341,15 +341,15 @@ function function_f21f0f11(localclientnum, var_a6762160)
 {
 	if(var_a6762160.itemtype === #"equipment" || var_a6762160.itemtype === #"tactical")
 	{
-		var_8040e225 = item_world::function_a7e98a1a(localclientnum);
+		clientdata = item_world::function_a7e98a1a(localclientnum);
 		var_935a2023 = self.var_9b882d22;
 		if(var_a6762160.itemtype === #"equipment")
 		{
-			var_7d722a81 = var_8040e225.inventory.items[7];
+			var_7d722a81 = clientdata.inventory.items[7];
 		}
 		else if(var_a6762160.itemtype === #"tactical")
 		{
-			var_7d722a81 = var_8040e225.inventory.items[13];
+			var_7d722a81 = clientdata.inventory.items[13];
 		}
 		if(isdefined(var_7d722a81) && var_7d722a81.id != 32767)
 		{
@@ -380,11 +380,11 @@ function function_218c0417(localclientnum, var_a6762160)
 	{
 		return 1;
 	}
-	if(namespace_b376ff3f::function_7d5553ac())
+	if(item_inventory::function_7d5553ac())
 	{
 		return 1;
 	}
-	return namespace_b376ff3f::function_ad4c6116(localclientnum, var_a6762160);
+	return item_inventory::function_ad4c6116(localclientnum, var_a6762160);
 }
 
 /*
@@ -441,7 +441,7 @@ function init()
 	level._zombie_gib_piece_index_head = 5;
 	level._zombie_gib_piece_index_guts = 6;
 	level._zombie_gib_piece_index_hat = 7;
-	setdvar(#"hash_442d42efc73d739a", 50);
+	setdvar(#"cg_healthperbar", 50);
 	callback::add_callback(#"on_localclient_connect", &basic_player_connect);
 	callback::on_spawned(&function_92f0c63);
 	scene::function_2e58158b(&function_bbea98ae);
@@ -636,7 +636,7 @@ function init_clientfields()
 	clientfield::register("world", "quest_complete_time", 1, 20, "int", &quest_complete_time, 0, 1);
 	clientfield::register("world", "game_start_time", 1, 20, "int", &game_start_time, 0, 1);
 	clientfield::register("scriptmover", "rob_zm_prop_fade", 1, 1, "int", &rob_zm_prop_fade, 0, 0);
-	clientfield::function_a8bbc967("hudItems.hasBackpack", #"hud_items", #"hash_3d621af88b5e463d", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.hasBackpack", #"hud_items", #"hasbackpack", 1, 1, "int", undefined, 0, 0);
 }
 
 /*
@@ -853,7 +853,7 @@ function rob_zm_prop_fade(localclientnum, oldval, newval, bnewent, binitialsnap,
 {
 	if(bwastimejump)
 	{
-		self function_bf9d3071(#"rob_zm_prop_fade");
+		self playrenderoverridebundle(#"rob_zm_prop_fade");
 		if(!isdefined(self.sndlooper))
 		{
 			self.sndlooper = self playloopsound(#"hash_66df9cab2c64f968");
@@ -861,7 +861,7 @@ function rob_zm_prop_fade(localclientnum, oldval, newval, bnewent, binitialsnap,
 	}
 	else
 	{
-		self function_5d482e78(#"rob_zm_prop_fade");
+		self stoprenderoverridebundle(#"rob_zm_prop_fade");
 		if(isdefined(self.sndlooper))
 		{
 			self stoploopsound(self.sndlooper);
@@ -1968,8 +1968,8 @@ function function_bbea98ae(localclientnum, b_igc_active)
 */
 function function_92f0c63(localclientnum)
 {
-	self renderoverridebundle::function_c8d97b8e(localclientnum, #"hash_5d0631b016d4fe26", #"hash_60913f86a5a5a3f1");
-	self renderoverridebundle::function_c8d97b8e(localclientnum, #"hash_7c0db17218fac872", #"hash_60913f86a5a5a3f1");
+	self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly", #"hash_60913f86a5a5a3f1");
+	self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly_ls", #"hash_60913f86a5a5a3f1");
 }
 
 /*
@@ -2097,8 +2097,8 @@ function function_dfbfa0f4(localclientnum, oldval, newval, bnewent, binitialsnap
 	{
 		var_cb481d18 = 0;
 	}
-	var_dcb56aa8 = function_1df4c3b0(fieldname, #"hash_159966ba825013a2");
-	setuimodelvalue(createuimodel(var_dcb56aa8, "canUseQuickInventory"), var_cb481d18);
+	inventoryuimodel = function_1df4c3b0(fieldname, #"hash_159966ba825013a2");
+	setuimodelvalue(createuimodel(inventoryuimodel, "canUseQuickInventory"), var_cb481d18);
 }
 
 /*

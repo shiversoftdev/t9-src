@@ -1,10 +1,10 @@
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\scene_actor_shared.gsc;
-#using scripts\core_common\scene_objects_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
 #using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scene_objects_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 class csceneactor : csceneobject
 {
@@ -75,8 +75,8 @@ class csceneactor : csceneobject
 		self notify(#"hash_74f6d3a1ddcff42");
 		self endon(#"hash_74f6d3a1ddcff42");
 		_o_scene endon(#"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_3168dab591a18b9b");
-		var_be17187b = undefined;
-		var_be17187b = _e waittill(#"death");
+		s_waitresult = undefined;
+		s_waitresult = _e waittill(#"death");
 		self.var_1f97724a = 1;
 		_e notify(#"hash_6e7fd8207fd988c6", {#str_scene:_o_scene._str_name});
 		if(!is_true(_e.skipscenedeath))
@@ -193,7 +193,7 @@ class csceneactor : csceneobject
 		{
 			csceneobject::set_ent_val("takedamage", 0, ent);
 		}
-		csceneobject::set_ent_val("ignoreme", !is_true(_s.var_c732c237), ent);
+		csceneobject::set_ent_val("ignoreme", !is_true(_s.attackme), ent);
 		csceneobject::set_ent_val("allowdeath", is_true(_s.allowdeath), ent);
 		csceneobject::set_ent_val("take_weapons", is_true(_s.removeweapon), ent);
 	}
@@ -452,7 +452,7 @@ class cscenecompanion : csceneobject, csceneactor
 	*/
 	function _cleanup()
 	{
-		if(!([[ _o_scene ]]->function_19015532(_str_shot)) || _o_scene._str_mode === "single")
+		if(!([[ _o_scene ]]->has_next_shot(_str_shot)) || _o_scene._str_mode === "single")
 		{
 			_e thread scene::function_37592f67(_o_scene._e_root, _o_scene._s);
 		}

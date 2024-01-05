@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_502f6ccb;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_e1e859d9()
 {
-	level notify(1439555559);
+	level notify(-1439555559);
 }
 
 #namespace microwave_turret;

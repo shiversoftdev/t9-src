@@ -1,9 +1,9 @@
 #using script_14d2d89964cae0b1;
-#using scripts\core_common\aat_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\renderoverridebundle.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\renderoverridebundle.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\aat_shared.csc;
 
 #namespace ammomod_brainrot;
 
@@ -60,7 +60,7 @@ function function_e437bd26(localclientnum, oldval, newval, bnewent, binitialsnap
 */
 function function_d500905a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	self renderoverridebundle::function_c8d97b8e(fieldname, #"hash_5d0631b016d4fe26", #"hash_4e9065fcc3da0f7f");
+	self renderoverridebundle::function_c8d97b8e(fieldname, #"zm_friendly", #"hash_4e9065fcc3da0f7f");
 	if(bwastimejump)
 	{
 		self setdrawname(#"hash_3bbbc2abb11e8ec1", 1);

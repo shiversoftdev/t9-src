@@ -1,13 +1,13 @@
-#using script_14d2d89964cae0b1;
-#using script_3d35e2ff167b3a82;
 #using script_618d6f5ff5d18933;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using script_3d35e2ff167b3a82;
+#using script_14d2d89964cae0b1;
 #using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\zm_common\zm_weapons.csc;
+#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_6fc19861;
 
@@ -26,7 +26,7 @@ function private autoexec function_ee0d27f8()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6fc19861
 	Checksum: 0x2B3C126D
 	Offset: 0x2F8
@@ -34,7 +34,7 @@ function private autoexec function_ee0d27f8()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4c62174ea005e84e", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -57,7 +57,7 @@ function private function_70a657d8()
 	clientfield::register("actor", "" + #"hash_5c2324e6d994b886", 28000, 1, "counter", &function_21f99cd2, 0, 0);
 	clientfield::register("allplayers", "" + #"hash_5d6139b1ce0e7c82", 28000, 2, "int", &function_f564024f, 0, 0);
 	clientfield::register("toplayer", "" + #"hash_13f32f06b0e858dd", 28000, 3, "int", &function_36ef6d02, 0, 0);
-	callback::function_f77ced93(&function_f77ced93);
+	callback::on_weapon_change(&on_weapon_change);
 	if(!isdefined(level.var_5bc34f35))
 	{
 		level.var_5bc34f35 = [];
@@ -120,7 +120,7 @@ function function_8ac3bea9()
 }
 
 /*
-	Name: function_f77ced93
+	Name: on_weapon_change
 	Namespace: namespace_6fc19861
 	Checksum: 0xF5F46037
 	Offset: 0x8F8
@@ -128,7 +128,7 @@ function function_8ac3bea9()
 	Parameters: 1
 	Flags: None
 */
-function function_f77ced93(params)
+function on_weapon_change(params)
 {
 	if(self == level || !isplayer(self))
 	{
@@ -425,15 +425,15 @@ function function_6247981b(localclientnum, var_a6762160)
 	var_cb5aea38 = [2:((((17 + 1) + 8) + 1) + 8) + 1, 1:((17 + 1) + 8) + 1, 0:17 + 1];
 	foreach(slot in var_cb5aea38)
 	{
-		var_9ccb901d = data.inventory.items[slot];
-		if(!isdefined(var_9ccb901d))
+		slot_item = data.inventory.items[slot];
+		if(!isdefined(slot_item))
 		{
 			continue;
 		}
-		var_291c422e = self namespace_a0d533d1::function_2b83d3ff(var_9ccb901d);
-		if(function_58d581b6(var_291c422e))
+		slot_weapon = self namespace_a0d533d1::function_2b83d3ff(slot_item);
+		if(function_58d581b6(slot_weapon))
 		{
-			var_b84949d0 = var_291c422e;
+			var_b84949d0 = slot_weapon;
 			break;
 		}
 	}
@@ -471,7 +471,7 @@ function function_72dbb6b0(localclientnum, oldval, newval, bnewent, binitialsnap
 	if(bwastimejump)
 	{
 		self thread function_a77b707(fieldname);
-		self function_bf9d3071(#"hash_20021a924b743e3e");
+		self playrenderoverridebundle(#"hash_20021a924b743e3e");
 		if(!isdefined(self.var_97928c44))
 		{
 			self playsound(fieldname, #"hash_3376f5f8d417f9f1");
@@ -488,7 +488,7 @@ function function_72dbb6b0(localclientnum, oldval, newval, bnewent, binitialsnap
 			self.var_97928c44 = undefined;
 		}
 		playsound(fieldname, #"hash_7c352e97b08234f4", self.origin + vectorscale((0, 0, 1), 40));
-		self function_5d482e78(#"hash_20021a924b743e3e");
+		self stoprenderoverridebundle(#"hash_20021a924b743e3e");
 		self thread function_82a54d90(fieldname);
 		self hide();
 	}
@@ -830,7 +830,7 @@ function function_60baf83(var_ee6bcd51)
 	{
 		self zm_utility::function_f933b697(var_ee6bcd51);
 	}
-	self function_5d482e78(var_ee6bcd51);
+	self stoprenderoverridebundle(var_ee6bcd51);
 }
 
 /*
@@ -848,13 +848,13 @@ function function_2f16cef6(var_ee6bcd51)
 	{
 		if(self zm_utility::function_10df0b9c(var_ee6bcd51))
 		{
-			self function_bf9d3071(var_ee6bcd51);
+			self playrenderoverridebundle(var_ee6bcd51);
 		}
 		self zm_utility::function_8065ace2(var_ee6bcd51);
 	}
 	else
 	{
-		self function_bf9d3071(var_ee6bcd51);
+		self playrenderoverridebundle(var_ee6bcd51);
 	}
 }
 

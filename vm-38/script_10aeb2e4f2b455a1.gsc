@@ -1,8 +1,8 @@
-#namespace namespace_e686e5d5;
+#namespace ai_interactables;
 
 /*
 	Name: function_af3322f6
-	Namespace: namespace_e686e5d5
+	Namespace: ai_interactables
 	Checksum: 0xE8AB40C2
 	Offset: 0x60
 	Size: 0x14
@@ -11,6 +11,6 @@
 */
 function private autoexec function_af3322f6()
 {
-	level notify(1202378783);
+	level notify(-1202378783);
 }
 

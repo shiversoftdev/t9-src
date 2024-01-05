@@ -1,28 +1,28 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
+#using script_2a5bf5b4a00cee0d;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
+#using script_774302f762d76254;
 #using script_1b0b07ff57d1dde3;
 #using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_3faf478d5b0850fe;
-#using script_40f967ad5d18ea74;
-#using script_47851dbeea22fe66;
-#using script_4d748e58ce25b60c;
 #using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using script_774302f762d76254;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 class class_3593c7e6 
 {
@@ -309,7 +309,7 @@ class class_3593c7e6
 */
 function private autoexec function_f30aa3d2()
 {
-	level notify(217612925);
+	level notify(-217612925);
 }
 
 /*
@@ -353,7 +353,7 @@ function init()
 		}
 		var_663588d = "Zombietron/AI/";
 		var_59ea00e = ("scr_spawn_enemy " + ([[ var_7a8f2a62 ]]->getname())) + "; zombie_devgui enemy";
-		util::function_e2e9d901(var_663588d + ([[ var_7a8f2a62 ]]->getname()), var_59ea00e);
+		util::add_devgui(var_663588d + ([[ var_7a8f2a62 ]]->getname()), var_59ea00e);
 	}
 }
 
@@ -812,9 +812,9 @@ function function_7292bc()
 					var_ba479a33[var_ba479a33.size] = var_3046d90a;
 				}
 			}
-			foreach(var_d3e74f81 in var_ba479a33)
+			foreach(removeitem in var_ba479a33)
 			{
-				arrayremovevalue(level.doa.var_dcbded2, var_d3e74f81);
+				arrayremovevalue(level.doa.var_dcbded2, removeitem);
 			}
 			var_ba479a33 = [];
 			var_1fb31dea = (gettime() + 1000) + randomint(1500);

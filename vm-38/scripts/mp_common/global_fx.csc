@@ -17,7 +17,7 @@ function private autoexec function_8f8fefbf()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: global_fx
 	Checksum: 0x2A6FA748
 	Offset: 0x88
@@ -25,7 +25,7 @@ function private autoexec function_8f8fefbf()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"global_fx", &function_70a657d8, &main, undefined, undefined);
 }

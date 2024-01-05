@@ -1,17 +1,17 @@
-#using script_335d0650ed05d36d;
-#using script_44b0b8420eabacad;
 #using script_75da5547b1822294;
 #using script_7d712f77ab8d0c16;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
+#using script_335d0650ed05d36d;
+#using script_44b0b8420eabacad;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\oob.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_c3ac4ef5;
 
@@ -150,14 +150,14 @@ function function_100e84f()
 	Parameters: 2
 	Flags: None
 */
-function function_d400d613(targetname, var_37c5ce49)
+function function_d400d613(targetname, typesarray)
 {
 	returnarray = [];
 	rawspawns = struct::get_array(targetname, "targetname");
 	rawspawns = function_b404fc61(rawspawns);
 	foreach(spawn in rawspawns)
 	{
-		foreach(supportedspawntype in var_37c5ce49)
+		foreach(supportedspawntype in typesarray)
 		{
 			if(!function_82ca1565(spawn, supportedspawntype))
 			{

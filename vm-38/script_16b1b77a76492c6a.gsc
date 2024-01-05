@@ -1,16 +1,16 @@
 #using script_19367cd29a4485db;
-#using script_1cc417743d7c262d;
-#using script_27347f09888ad15;
-#using script_3357acf79ce92f4b;
 #using script_3411bb48d41bd3b;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
+#using script_3357acf79ce92f4b;
+#using script_27347f09888ad15;
 #using scripts\core_common\math_shared.gsc;
+#using script_1cc417743d7c262d;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_2c949ef8;
 
@@ -25,7 +25,7 @@
 */
 function private autoexec function_77a2ce9e()
 {
-	level notify(1786615634);
+	level notify(-1786615634);
 }
 
 /*
@@ -54,7 +54,7 @@ function init()
 function main()
 {
 	/#
-		function_2085db3b();
+		init_devgui();
 	#/
 }
 
@@ -569,7 +569,7 @@ function function_c0966bb1(destination)
 		if(n_count < n_max)
 		{
 			a_spawns = array::randomize(struct::get_array(trigger.target));
-			trigger callback::function_35a12f19(&function_39ee3b21, undefined, a_spawns);
+			trigger callback::on_trigger(&function_39ee3b21, undefined, a_spawns);
 			n_count++;
 			waitframe(1);
 			continue;
@@ -592,7 +592,7 @@ function function_39ee3b21(eventstruct, a_spawns)
 	if(!is_true(self.var_83523415) && isplayer(eventstruct.activator) && level flag::get(#"hash_44074059e3987765"))
 	{
 		self.var_83523415 = 1;
-		self callback::function_b74bf3e(&function_39ee3b21);
+		self callback::remove_on_trigger(&function_39ee3b21);
 		str_bundle = "default_zombies_realm_" + level.var_15d17eb2;
 		if(!isdefined(a_spawns) || !a_spawns.size && isdefined(self.spawn_struct))
 		{
@@ -660,7 +660,7 @@ function function_5c3d1f()
 }
 
 /*
-	Name: function_2085db3b
+	Name: init_devgui
 	Namespace: namespace_2c949ef8
 	Checksum: 0xB450D235
 	Offset: 0x1A78
@@ -668,10 +668,10 @@ function function_5c3d1f()
 	Parameters: 0
 	Flags: None
 */
-function function_2085db3b()
+function init_devgui()
 {
 	/#
-		mapname = util::function_53bbf9d2();
+		mapname = util::get_map_name();
 		adddebugcommand(("" + mapname) + "");
 		adddebugcommand(("" + mapname) + "");
 		adddebugcommand(("" + mapname) + "");

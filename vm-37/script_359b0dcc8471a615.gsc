@@ -1,8 +1,8 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\music_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_7fe06af4;
 
@@ -39,7 +39,7 @@ event main(eventstruct)
 	{
 		return;
 	}
-	callback::function_98a0917d(&function_98a0917d);
+	callback::on_game_playing(&on_game_playing);
 	level.var_d38af2b = 0;
 	level.headless_mannequin_count = 0;
 	level.destructible_callbacks[#"headless"] = &mannequin_headless;
@@ -107,7 +107,7 @@ function function_5089875d()
 }
 
 /*
-	Name: function_98a0917d
+	Name: on_game_playing
 	Namespace: namespace_7fe06af4
 	Checksum: 0xD6E9B583
 	Offset: 0x4C8
@@ -115,7 +115,7 @@ function function_5089875d()
 	Parameters: 0
 	Flags: Linked
 */
-function function_98a0917d()
+function on_game_playing()
 {
 	level.mannequin_time = gettime();
 	/#
@@ -245,7 +245,7 @@ function function_bcce4bc0()
 {
 	/#
 		waitframe(1);
-		mapname = util::function_53bbf9d2();
+		mapname = util::get_map_name();
 		adddebugcommand("");
 		adddebugcommand(("" + mapname) + "");
 		adddebugcommand(("" + mapname) + "");

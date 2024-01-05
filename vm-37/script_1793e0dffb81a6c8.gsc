@@ -1,18 +1,18 @@
-#using script_3c362258ff800237;
-#using script_3d5821d793ed4c6;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using scripts\zm_common\util.csc;
+#using scripts\zm_common\zm_utility.csc;
+#using scripts\zm_common\zm_trial_util.csc;
+#using scripts\zm_common\zm_trial.csc;
+#using scripts\zm_common\zm_pack_a_punch.csc;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\util.csc;
-#using scripts\zm_common\zm_pack_a_punch.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_841de7df;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_841de7df
 	Checksum: 0xFA9617A9
 	Offset: 0x100
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4ef9c479ac8da304", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -36,18 +36,18 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!zm_trial::function_b47f6aba())
+	if(!zm_trial::is_trial_mode())
 	{
 		return;
 	}
 	clientfield::register("zbarrier", "" + #"hash_100f180bf5d2a517", 14000, 1, "int", &function_b245db69, 0, 0);
 	level._effect[#"hash_1d15a2dad558ac8c"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
 	level._effect[#"hash_1d15a5dad558b1a5"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
-	zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &function_d1de6a85, &function_9e7b3f4d);
+	zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);
 }
 
 /*
-	Name: function_d1de6a85
+	Name: on_begin
 	Namespace: namespace_841de7df
 	Checksum: 0x6C482A4C
 	Offset: 0x240
@@ -55,12 +55,12 @@ function private function_70a657d8()
 	Parameters: 2
 	Flags: Private
 */
-function private function_d1de6a85(localclientnum, a_params)
+function private on_begin(localclientnum, a_params)
 {
 }
 
 /*
-	Name: function_9e7b3f4d
+	Name: on_end
 	Namespace: namespace_841de7df
 	Checksum: 0xC53DA76
 	Offset: 0x260
@@ -68,7 +68,7 @@ function private function_d1de6a85(localclientnum, a_params)
 	Parameters: 1
 	Flags: Private
 */
-function private function_9e7b3f4d(localclientnum)
+function private on_end(localclientnum)
 {
 }
 
@@ -109,7 +109,7 @@ function private function_b245db69(localclientnum, oldval, newval, bnewent, bini
 			deletefx(fieldname, self.var_3b071bba);
 			self.var_3b071bba = undefined;
 		}
-		if(zm_utility::function_166646a6() == 1)
+		if(zm_utility::get_story() == 1)
 		{
 			self.var_18f8b30b = util::spawn_model(fieldname, "tag_origin", self.origin, self.angles);
 			self.var_3b071bba = util::playfxontag(fieldname, level._effect[#"hash_1d15a2dad558ac8c"], self.var_18f8b30b, "tag_origin");

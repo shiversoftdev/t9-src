@@ -1,11 +1,11 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\doors_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\doors_shared.gsc;
 
 class class_e500a966 : cdoor
 {
@@ -59,7 +59,7 @@ class class_e500a966 : cdoor
 #namespace windows;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: windows
 	Checksum: 0xBA03638B
 	Offset: 0x138
@@ -67,7 +67,7 @@ class class_e500a966 : cdoor
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"windows", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

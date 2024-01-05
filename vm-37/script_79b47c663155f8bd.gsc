@@ -1,6 +1,6 @@
-#using script_2255a7ad3edc838f;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\bots\bot.gsc;
 
 #namespace namespace_ffbf548b;
 
@@ -18,20 +18,20 @@ function function_70a657d8()
 	callback::on_start_gametype(&on_start_gametype);
 	level.var_f5c1fb9d = [];
 	level.var_8a530af5 = [];
-	if(!function_59116c33())
+	if(!isshipbuild())
 	{
-		var_c93ad421 = getdvarint(#"hash_688c3ba84e378e53", 0);
-		if(var_c93ad421 > 0)
+		botfill = getdvarint(#"botfill", 0);
+		if(botfill > 0)
 		{
-			level.var_fa9f5bab = var_c93ad421;
+			level.var_fa9f5bab = botfill;
 			return;
 		}
 	}
-	foreach(var_ad8edaa8 in level.teams)
+	foreach(teamstr in level.teams)
 	{
-		var_77e770bb = getgametypesetting(#"hash_43e6eb8f9fd14f92" + var_ad8edaa8, 0);
+		var_77e770bb = getgametypesetting(#"hash_43e6eb8f9fd14f92" + teamstr, 0);
 		level.var_8a530af5[team] = var_77e770bb;
-		count = getdvarint(#"bot_" + var_ad8edaa8, 0);
+		count = getdvarint(#"bot_" + teamstr, 0);
 		level.var_f5c1fb9d[team] = count;
 	}
 }
@@ -136,7 +136,7 @@ function private function_31a989f7(waitforplayers)
 		level flag::wait_till("all_players_connected");
 	}
 	waitframe(1);
-	if(!function_59116c33())
+	if(!isshipbuild())
 	{
 		if(isdefined(level.var_fa9f5bab) && level.var_fa9f5bab > 0)
 		{
@@ -342,7 +342,7 @@ function private function_f992463c(bots)
 	var_be6d09d1 = undefined;
 	foreach(bot in bots)
 	{
-		if(function_2dd2fa57(bot))
+		if(isautocontrolledplayer(bot))
 		{
 			continue;
 		}

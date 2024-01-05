@@ -1,8 +1,8 @@
-#using script_1883fa4e60abbf9f;
 #using script_7e3221b6c80d8cc4;
-#using scripts\core_common\array_shared.gsc;
+#using script_1883fa4e60abbf9f;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace player;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_251d4d1e()
 {
-	level notify(445635624);
+	level notify(-445635624);
 }
 
 /*
@@ -66,7 +66,7 @@ function main()
 		self thread stealthhints_thread();
 	}
 	/#
-		self thread stealth_debug::debug_player();
+		self childthread stealth_debug::debug_player();
 	#/
 }
 
@@ -185,8 +185,8 @@ function combatstate_thread(enabled)
 	self endon(#"hash_6de499574267aed9");
 	self endon(#"hash_4330b0368e7f1373");
 	self endon(#"disconnect");
-	self thread playerattackedmonitor();
-	self thread combatstate_updatethread();
+	self childthread playerattackedmonitor();
+	self childthread combatstate_updatethread();
 	self.stealth.combatstate = spawnstruct();
 	self.stealth.combatstate.name = "stealth";
 	self.stealth.combatstate.type = "idle";
@@ -429,13 +429,13 @@ function stealthhints_thread()
 	self.stealth.hints = spawnstruct();
 	self.stealth.hints.causeofdeath = undefined;
 	self.stealth.hints.investigators = [];
-	self.stealth.hints.deathhints[#"hash_1d42f8a3b0f3b508"] = 6;
+	self.stealth.hints.deathhints[#"footstep_sprint"] = 6;
 	self.stealth.hints.deathhints[#"gunshot"] = 8;
-	self.stealth.hints.deathhints[#"hash_1041a2916f3a6632"] = 16;
-	self.stealth.hints.deathhints[#"hash_5eaab7f613ca2883"] = 19;
-	self thread stealthhints_eventmonitor();
-	self thread stealthhints_deathmonitor();
-	self thread stealthhints_combatmonitor();
+	self.stealth.hints.deathhints[#"proximity_speed"] = 16;
+	self.stealth.hints.deathhints[#"sight_standing"] = 19;
+	self childthread stealthhints_eventmonitor();
+	self childthread stealthhints_deathmonitor();
+	self childthread stealthhints_combatmonitor();
 }
 
 /*
@@ -523,7 +523,7 @@ function stealthhints_eventmonitor()
 		{
 			continue;
 		}
-		self thread stealthhints_aimonitor(receiver, eventtype);
+		self childthread stealthhints_aimonitor(receiver, eventtype);
 	}
 }
 
@@ -538,7 +538,7 @@ function stealthhints_eventmonitor()
 */
 function stealthhints_aimonitor(ai, eventtype)
 {
-	self endon(#"hash_1623034e40340573");
+	self endon(#"combat_started");
 	self endon(#"stealth_enabled");
 	self.stealth.hints.investigators[self.stealth.hints.investigators.size] = ai;
 	if(ai [[ai.fnisinstealthhunt]]())
@@ -557,7 +557,7 @@ function stealthhints_aimonitor(ai, eventtype)
 	}
 	self.stealth.hints.causeofdeath = eventtype;
 	self.stealth.hints.investigators = [];
-	self notify(#"hash_1623034e40340573");
+	self notify(#"combat_started");
 }
 
 /*

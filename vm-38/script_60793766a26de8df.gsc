@@ -1,12 +1,12 @@
 #using script_5dc2afb89fe97cd0;
-#using script_ac6a30f1991e105;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\footsteps_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using script_ac6a30f1991e105;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_88795f45;
 
@@ -25,7 +25,7 @@ function private autoexec function_ed434ed0()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_88795f45
 	Checksum: 0x7CE67F29
 	Offset: 0x428
@@ -33,7 +33,7 @@ function private autoexec function_ed434ed0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_338a74f5c94ba66a", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -92,7 +92,7 @@ function private function_7ec99c76(localclientnum)
 			}
 			else
 			{
-				self.var_d62cdc72 = util::playfxontag(localclientnum, "zm_ai/fx9_steiner_eyes_glow", self, "J_EyeBall_LE");
+				self.eyefx = util::playfxontag(localclientnum, "zm_ai/fx9_steiner_eyes_glow", self, "J_EyeBall_LE");
 				self thread function_8d607c5a(localclientnum);
 			}
 		}
@@ -631,10 +631,10 @@ function function_5bde700f(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwasdemojump && isdefined(self))
 	{
-		if(isdefined(self.var_d62cdc72))
+		if(isdefined(self.eyefx))
 		{
-			killfx(fieldname, self.var_d62cdc72);
-			self.var_d62cdc72 = undefined;
+			killfx(fieldname, self.eyefx);
+			self.eyefx = undefined;
 		}
 	}
 }

@@ -1,5 +1,5 @@
-#using scripts\core_common\system_shared.csc;
 #using scripts\zm_common\zm_powerups.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_65320816;
 
@@ -18,7 +18,7 @@ function private autoexec function_f9e018b7()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_65320816
 	Checksum: 0x56E1C1AD
 	Offset: 0xC0
@@ -26,7 +26,7 @@ function private autoexec function_f9e018b7()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2209575d9ead0b63", &function_70a657d8, undefined, undefined, undefined);
 }

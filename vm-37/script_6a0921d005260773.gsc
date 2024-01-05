@@ -1,5 +1,5 @@
-#using script_35598499769dbb3d;
 #using scripts\cp_common\bb.gsc;
+#using script_35598499769dbb3d;
 
 #namespace abilities;
 

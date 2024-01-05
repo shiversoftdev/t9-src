@@ -1,12 +1,12 @@
-#using script_2255a7ad3edc838f;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\bots\bot.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_8eb9bc0a;
 
@@ -21,11 +21,11 @@
 */
 function private autoexec function_c57ce41d()
 {
-	level notify(1451106814);
+	level notify(-1451106814);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_8eb9bc0a
 	Checksum: 0xF5EB05E5
 	Offset: 0x238
@@ -33,7 +33,7 @@ function private autoexec function_c57ce41d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6d3c5317001d4fc6", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -155,7 +155,7 @@ function function_97346595()
 				{
 					level thread zombie_open_sesame();
 				}
-				var_b2efd61b = 4 - players.size;
+				remainingplayers = 4 - players.size;
 				callback::on_spawned(&function_c5342e8d);
 				players = getplayers();
 				foreach(player in players)
@@ -163,7 +163,7 @@ function function_97346595()
 					player val::set(#"hash_401e97eafd7ce04d", "takedamage", 0);
 				}
 				/#
-					adddebugcommand("" + var_b2efd61b);
+					adddebugcommand("" + remainingplayers);
 				#/
 				waitframe(1);
 				/#

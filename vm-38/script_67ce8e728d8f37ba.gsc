@@ -1,19 +1,19 @@
-#using script_256b8879317373de;
-#using script_2da073d4aa78c206;
-#using script_305d57cf0618009d;
-#using script_44b0b8420eabacad;
-#using script_6350c209b3d1b07d;
 #using script_67c9a990c0db216c;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using script_305d57cf0618009d;
+#using scripts\core_common\player\player_insertion.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\map.gsc;
 
 #namespace namespace_66d6aa44;
 
@@ -28,7 +28,7 @@
 */
 function private autoexec function_a8032dd6()
 {
-	level notify(1451619062);
+	level notify(-1451619062);
 }
 
 /*
@@ -42,10 +42,10 @@ function private autoexec function_a8032dd6()
 */
 event function_9347830c(eventstruct)
 {
-	lui::function_b95a3ba5("full_screen_movie", &full_screen_movie::register);
+	lui::add_luimenu("full_screen_movie", &full_screen_movie::register);
 	clientfield::register("world", "hide_intro_models", 1, 1, "int");
-	clientfield::function_a8bbc967("closeLoadingMovie", 1, 1, "int", 1);
-	callback::add_callback(#"hash_361e06db4b210e", &function_fcfa3b98);
+	clientfield::register_clientuimodel("closeLoadingMovie", 1, 1, "int", 1);
+	callback::add_callback(#"on_game_playing", &function_fcfa3b98);
 	level.var_2efdea7 = function_f6fd2b4a();
 	level.var_6e9fbf44 = [];
 	function_e526b83(level.var_2efdea7);
@@ -769,7 +769,7 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857)
 	var_5a990409 = 0;
 	level.var_ae517a5 = 1;
 	callback::remove_callback(#"joined_team", &function_d15f17fe);
-	callback::remove_callback(#"hash_4b55701ea20843ba", &function_b499bfc7);
+	callback::remove_callback(#"on_joined_spectator", &function_b499bfc7);
 	if(isdefined(level.var_2efdea7.var_c4ec5a3c))
 	{
 		if(!isdefined(scenes))
@@ -843,9 +843,9 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857)
 	}
 	if(spawning::function_daa5852f())
 	{
-		namespace_67838d10::function_63977a98(0);
-		namespace_67838d10::function_d28162a2((isdefined(level.var_2efdea7.var_3545b69a) ? level.var_2efdea7.var_3545b69a : 0));
-		namespace_67838d10::function_1a50e8a5((isdefined(level.var_2efdea7.var_73a4076) ? level.var_2efdea7.var_73a4076 : 0));
+		player_insertion::function_63977a98(0);
+		player_insertion::function_d28162a2((isdefined(level.var_2efdea7.var_3545b69a) ? level.var_2efdea7.var_3545b69a : 0));
+		player_insertion::function_1a50e8a5((isdefined(level.var_2efdea7.var_73a4076) ? level.var_2efdea7.var_73a4076 : 0));
 	}
 	level.var_fb99ff98 = 1;
 	scene::function_1e327c20(scenes, 0, 0, 1);
@@ -984,13 +984,13 @@ function function_2aaeab97(var_66cbfaf2)
 	{
 		return;
 	}
-	namespace_67838d10::function_63977a98(0);
+	player_insertion::function_63977a98(0);
 	if(!isdefined(level.var_2efdea7.var_d74b6b9c))
 	{
 		return;
 	}
-	namespace_67838d10::function_d28162a2((isdefined(level.var_2efdea7.var_3545b69a) ? level.var_2efdea7.var_3545b69a : 0));
-	namespace_67838d10::function_1a50e8a5((isdefined(level.var_2efdea7.var_73a4076) ? level.var_2efdea7.var_73a4076 : 0));
+	player_insertion::function_d28162a2((isdefined(level.var_2efdea7.var_3545b69a) ? level.var_2efdea7.var_3545b69a : 0));
+	player_insertion::function_1a50e8a5((isdefined(level.var_2efdea7.var_73a4076) ? level.var_2efdea7.var_73a4076 : 0));
 	players = getplayers();
 	util::function_21678f2c(players);
 	level util::delay((float(function_60d95f53()) / 1000) * 4, undefined, &function_c403d032, players);

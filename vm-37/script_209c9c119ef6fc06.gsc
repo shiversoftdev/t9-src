@@ -1,5 +1,5 @@
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 class class_d5e68311 
 {
@@ -190,11 +190,11 @@ class class_d5e68311
 		{
 			if(is_hidden)
 			{
-				var_884ed4f function_bf9d3071(#"hash_1d4878635b5ea5a3");
+				var_884ed4f playrenderoverridebundle(#"hash_1d4878635b5ea5a3");
 			}
 			else
 			{
-				var_884ed4f function_5d482e78(#"hash_1d4878635b5ea5a3");
+				var_884ed4f stoprenderoverridebundle(#"hash_1d4878635b5ea5a3");
 			}
 		}
 	}
@@ -324,7 +324,7 @@ class class_d5e68311
 	}
 
 	/*
-		Name: function_811485db
+		Name: set_client
 		Namespace: namespace_d5e68311
 		Checksum: 0x85399952
 		Offset: 0x748
@@ -332,7 +332,7 @@ class class_d5e68311
 		Parameters: 1
 		Flags: Linked
 	*/
-	function function_811485db(local_client_num)
+	function set_client(local_client_num)
 	{
 		if(!isdefined(local_client_num))
 		{
@@ -345,7 +345,7 @@ class class_d5e68311
 	}
 
 	/*
-		Name: function_99803944
+		Name: get_angle
 		Namespace: namespace_d5e68311
 		Checksum: 0xA5B55613
 		Offset: 0xA00
@@ -353,7 +353,7 @@ class class_d5e68311
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_99803944()
+	function get_angle()
 	{
 		return var_2d9de19e;
 	}
@@ -483,7 +483,7 @@ class class_d5e68311
 #namespace namespace_a9076ee3;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_a9076ee3
 	Checksum: 0x5E057872
 	Offset: 0x90
@@ -491,7 +491,7 @@ class class_d5e68311
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_19a39574bfda1b56", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -745,7 +745,7 @@ function private function_78e6ae5d()
 function private function_aab851cf()
 {
 	level endon(#"disconnect", #"hash_44d89707d01c9949", #"hash_553672f4d62ba043");
-	level.var_5d7dbefc thread function_78e6ae5d();
+	level.var_5d7dbefc childthread function_78e6ae5d();
 	while(isdefined(level.var_5d7dbefc))
 	{
 		var_4ce74bd9 = [[ level.var_5d7dbefc ]]->function_6e7ad37e();
@@ -764,7 +764,7 @@ function private function_aab851cf()
 		var_59ab9a62 = [[ level.var_5d7dbefc ]]->function_fbdfd5f9();
 		var_20eb713c = [[ level.var_5d7dbefc ]]->function_13f1dc62();
 		v_origin = [[ level.var_5d7dbefc ]]->get_origin();
-		v_angle = [[ level.var_5d7dbefc ]]->function_99803944();
+		v_angle = [[ level.var_5d7dbefc ]]->get_angle();
 		var_dbceb0e1 = 0;
 		if(is_true(var_59ab9a62.enabled) && !([[ level.var_5d7dbefc ]]->is_hidden()))
 		{

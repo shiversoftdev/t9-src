@@ -1,42 +1,42 @@
-#using script_164a456ce05c3483;
 #using script_179d92c110788f71;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
-#using script_2474a362752098d2;
-#using script_256b8879317373de;
-#using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
-#using script_40f967ad5d18ea74;
 #using script_4611af4073d18808;
+#using script_2474a362752098d2;
+#using script_1a9763988299e68d;
+#using script_2a5bf5b4a00cee0d;
+#using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
-#using script_68cdf0ca5df5e;
-#using script_6b6510e124bad778;
-#using script_74a56359b7d02ab6;
 #using script_774302f762d76254;
-#using script_7bafaa95bb1b427e;
+#using script_6b6510e124bad778;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_74a56359b7d02ab6;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using script_68cdf0ca5df5e;
+#using scripts\weapons\weapons.gsc;
 #using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\serverfield_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_b59ddbce;
 
@@ -72,8 +72,8 @@ function init()
 	callback::on_connect(&on_player_connect);
 	callback::on_spawned(&on_player_spawned);
 	callback::on_disconnect(&on_player_disconnect);
-	callback::add_callback(#"hash_4d2043b190b84792", &function_ef860973);
-	callback::add_callback(#"hash_137b937fd26992be", &function_6fa41b21);
+	callback::add_callback(#"on_host_migration_begin", &on_host_migration_begin);
+	callback::add_callback(#"on_host_migration_end", &on_host_migration_end);
 	if(isdefined(level.doa.var_cf250523))
 	{
 		level.callbackplayerkilled = level.doa.var_cf250523;
@@ -89,7 +89,7 @@ function init()
 }
 
 /*
-	Name: function_ef860973
+	Name: on_host_migration_begin
 	Namespace: namespace_b59ddbce
 	Checksum: 0xECC26496
 	Offset: 0xAE8
@@ -97,7 +97,7 @@ function init()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_ef860973(params)
+function private on_host_migration_begin(params)
 {
 	if(isplayer(self))
 	{
@@ -107,7 +107,7 @@ function private function_ef860973(params)
 }
 
 /*
-	Name: function_6fa41b21
+	Name: on_host_migration_end
 	Namespace: namespace_b59ddbce
 	Checksum: 0xE3126DA8
 	Offset: 0xB38
@@ -115,7 +115,7 @@ function private function_ef860973(params)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_6fa41b21(params)
+function private on_host_migration_end(params)
 {
 	if(isplayer(self))
 	{
@@ -324,7 +324,7 @@ function function_fc61ee02()
 	{
 		self.doa.score.lives = 0;
 		self.doa.score.bombs = 1;
-		self.doa.score.var_7a3c00a0 = 1;
+		self.doa.score.boosts = 1;
 	}
 	if(isbot(self))
 	{
@@ -409,7 +409,7 @@ function main()
 		player namespace_7f5aeb59::function_513831e1(1);
 		player clientfield::increment_to_player("controlBinding");
 		player clientfield::increment_to_player("hardResetCamera");
-		player namespace_eccff4fb::function_c05eb7e6();
+		player namespace_eccff4fb::resetplayer();
 	}
 	while(true)
 	{
@@ -768,53 +768,53 @@ function function_cdcf0e57(range)
 	roll = randomint(range);
 	if(roll == 99)
 	{
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_extra_life"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
 	}
 	if(roll > 92)
 	{
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_nuke"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
 	}
 	if(roll > 78)
 	{
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boost"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
 	}
 	if(roll > 58)
 	{
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_chicken"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
 	}
 	if(roll > 35)
 	{
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_sawblade"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_sawblade"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_sawblade"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_sawblade"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
 	}
 	if(roll > 15)
 	{
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_boxing_glove"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_boxing_glove"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_magnet"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_magnet"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 		wait(0.5);
 	}
-	level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_ammo"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+	level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_ammo"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 	wait(0.5);
-	level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_ammo"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+	level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_ammo"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 	wait(0.5);
-	level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_ammo"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+	level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_ammo"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 	wait(0.5);
 	if(roll == 0)
 	{
-		level thread doa_pickups::function_d080f0db(doa_pickups::function_6265bde4("zombietron_skeleton_key"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
+		level thread doa_pickups::itemspawn(doa_pickups::function_6265bde4("zombietron_skeleton_key"), self.origin, undefined, undefined, 1, undefined, undefined, undefined, self);
 	}
 }
 
@@ -977,10 +977,10 @@ function function_ba8327d7()
 	{
 		self.doa.var_d524abd8 = 0;
 		self.doa.var_48d0af86 = 1;
-		if(self.doa.score.var_7a3c00a0 > 0)
+		if(self.doa.score.boosts > 0)
 		{
 			self.doa.var_c026f7c9 = 1;
-			self.doa.score.var_7a3c00a0--;
+			self.doa.score.boosts--;
 			self thread namespace_7f5aeb59::turnplayershieldon();
 			forward = anglestoforward(self.angles);
 			self namespace_e32bb68::function_3a59ec34("evt_doa_powerup_boost_activate");
@@ -1190,7 +1190,7 @@ function private nukedeath(var_182c1d00, origin, player, var_2800ee5b)
 			{
 				self namespace_83eb6304::function_3ecfde67("burn_zombie");
 			}
-			self namespace_ed80aead::function_3ab2b4eb(self.health);
+			self namespace_ed80aead::gib_random_part(self.health);
 		}
 	}
 	if(self.archetype == "zombie")

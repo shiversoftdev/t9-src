@@ -13,7 +13,7 @@
 */
 function private autoexec function_6dc22e55()
 {
-	level notify(72360785);
+	level notify(-72360785);
 }
 
 #namespace beam;

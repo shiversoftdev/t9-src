@@ -1,20 +1,20 @@
-#using script_16b1b77a76492c6a;
-#using script_19367cd29a4485db;
-#using script_340a2e805e35f7a2;
-#using script_34ab99a4ca1a43d;
-#using script_7bacb32f8222fa3e;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_19367cd29a4485db;
+#using script_34ab99a4ca1a43d;
+#using script_16b1b77a76492c6a;
+#using script_7bacb32f8222fa3e;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_340a2e805e35f7a2;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_e7ab676d;
 
@@ -29,11 +29,11 @@
 */
 function private autoexec function_de4bf239()
 {
-	level notify(91723494);
+	level notify(-91723494);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e7ab676d
 	Checksum: 0x7F485A7D
 	Offset: 0x2D8
@@ -41,7 +41,7 @@ function private autoexec function_de4bf239()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7811e7ce71e374d0", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -70,7 +70,7 @@ function function_70a657d8()
 		return;
 	}
 	namespace_8b6a9d79::function_b3464a7c(#"hash_9c101fd93022c18", &function_602f1c7e);
-	callback::function_10a4dd0a(&function_97d03d85);
+	callback::on_item_pickup(&function_97d03d85);
 	util::registerclientsys("musicUnlock");
 }
 
@@ -156,7 +156,7 @@ function private function_1d6f6f32(eventstruct)
 		return;
 	}
 	self.b_activated = 1;
-	self callback::function_b74bf3e(&function_1d6f6f32);
+	self callback::remove_on_trigger(&function_1d6f6f32);
 	level thread function_ba971eed(self.instance);
 	level thread function_556eed55(self);
 	while(true)
@@ -283,7 +283,7 @@ function function_ba971eed(instance)
 function function_42d1d544(instance)
 {
 	instance endon(#"cleanup");
-	instance endon(#"hash_5d368f3e3a642450");
+	instance endon(#"radio_tuning_success");
 	self endon(#"death");
 	var_3875a0bb = instance.var_3875a0bb;
 	var_b61e50f0 = function_21a3a673(1, 8);
@@ -373,7 +373,7 @@ function function_35bafcde(instance, str_suffix, str_type)
 	self notify("515bb502b3a7f1c7");
 	self endon("515bb502b3a7f1c7");
 	instance endon(#"cleanup");
-	instance endon(#"hash_5d368f3e3a642450");
+	instance endon(#"radio_tuning_success");
 	self endon(#"death");
 	while(true)
 	{
@@ -394,7 +394,7 @@ function function_35bafcde(instance, str_suffix, str_type)
 function function_2c1d994f(instance)
 {
 	instance endon(#"cleanup");
-	instance endon(#"hash_5d368f3e3a642450");
+	instance endon(#"radio_tuning_success");
 	n_count = 0;
 	while(true)
 	{

@@ -1,10 +1,10 @@
-#using script_5399f402045d7abd;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\weapons\weapon_utils.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace battlechatter;
 
@@ -169,13 +169,13 @@ function function_e1983f22()
 	Parameters: 3
 	Flags: Linked
 */
-function function_d804d2f0(var_70b80ca6, player, allyradiussq)
+function function_d804d2f0(speakingplayer, player, allyradiussq)
 {
-	if(!isdefined(player) || !isdefined(player.origin) || !isdefined(var_70b80ca6) || !isdefined(var_70b80ca6.origin) || !isalive(player) || player.sessionstate != "playing" || player.playingdialog || player isplayerunderwater() || player isremotecontrolling() || player isinvehicle() || player isweaponviewonlylinked() || player == var_70b80ca6 || player.team != var_70b80ca6.team || player.playerrole == var_70b80ca6.playerrole || player hasperk(#"specialty_quieter"))
+	if(!isdefined(player) || !isdefined(player.origin) || !isdefined(speakingplayer) || !isdefined(speakingplayer.origin) || !isalive(player) || player.sessionstate != "playing" || player.playingdialog || player isplayerunderwater() || player isremotecontrolling() || player isinvehicle() || player isweaponviewonlylinked() || player == speakingplayer || player.team != speakingplayer.team || player.playerrole == speakingplayer.playerrole || player hasperk(#"specialty_quieter"))
 	{
 		return false;
 	}
-	distsq = distancesquared(var_70b80ca6.origin, player.origin);
+	distsq = distancesquared(speakingplayer.origin, player.origin);
 	if(distsq > allyradiussq)
 	{
 		return false;
@@ -479,7 +479,7 @@ function get_player_dialog_alias(dialogkey, meansofdeath)
 	{
 		return undefined;
 	}
-	if(function_7a600918(dialogkey))
+	if(ishash(dialogkey))
 	{
 		if(isdefined(level.var_4edd846))
 		{
@@ -500,7 +500,7 @@ function get_player_dialog_alias(dialogkey, meansofdeath)
 	{
 		return;
 	}
-	if(!function_7a600918(dialogalias))
+	if(!ishash(dialogalias))
 	{
 		voiceprefix = playerbundle.voiceprefix;
 		if(isdefined(voiceprefix))
@@ -520,18 +520,18 @@ function get_player_dialog_alias(dialogkey, meansofdeath)
 	Parameters: 2
 	Flags: None
 */
-function function_db89c38f(var_70b80ca6, allyradiussq)
+function function_db89c38f(speakingplayer, allyradiussq)
 {
 	allies = [];
 	foreach(player in level.players)
 	{
-		if(!function_d804d2f0(var_70b80ca6, player, allyradiussq))
+		if(!function_d804d2f0(speakingplayer, player, allyradiussq))
 		{
 			continue;
 		}
 		allies[allies.size] = player;
 	}
-	allies = arraysort(allies, var_70b80ca6.origin);
+	allies = arraysort(allies, speakingplayer.origin);
 	if(!isdefined(allies) || allies.size == 0)
 	{
 		return undefined;

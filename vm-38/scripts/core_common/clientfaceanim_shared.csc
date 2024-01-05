@@ -1,8 +1,8 @@
 #using scripts\core_common\animation_shared.csc;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace clientfaceanim_shared;
 
@@ -23,7 +23,7 @@ function private autoexec function_51c12c96()
 #namespace clientfaceanim;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: clientfaceanim
 	Checksum: 0xE93264B9
 	Offset: 0xB8
@@ -31,7 +31,7 @@ function private autoexec function_51c12c96()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"clientfaceanim_shared", undefined, &main, undefined, undefined);
 }
@@ -50,7 +50,7 @@ function main()
 	callback::on_spawned(&on_player_spawned);
 	callback::on_localclient_connect(&on_localclient_connect);
 	buildandvalidatefacialanimationlist(0);
-	animation::add_notetrack_func(#"clientfaceanim::deathanimshutdown", &function_d55dc6af);
+	animation::add_notetrack_func(#"clientfaceanim::deathanimshutdown", &deathanimshutdown);
 }
 
 /*
@@ -64,7 +64,7 @@ function main()
 */
 function private on_localclient_connect(localclientnum)
 {
-	thread function_cf386505(localclientnum);
+	thread update_players(localclientnum);
 }
 
 /*
@@ -253,7 +253,7 @@ function private function_26ff990a(local_client_num)
 }
 
 /*
-	Name: function_cf386505
+	Name: update_players
 	Namespace: clientfaceanim
 	Checksum: 0xBE636E15
 	Offset: 0xA48
@@ -261,7 +261,7 @@ function private function_26ff990a(local_client_num)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_cf386505(local_client_num)
+function private update_players(local_client_num)
 {
 	var_40425722 = 1;
 	while(true)
@@ -417,7 +417,7 @@ function private applydeathanim(localclientnum)
 }
 
 /*
-	Name: function_d55dc6af
+	Name: deathanimshutdown
 	Namespace: clientfaceanim
 	Checksum: 0x8EAD57C8
 	Offset: 0xF08
@@ -425,7 +425,7 @@ function private applydeathanim(localclientnum)
 	Parameters: 2
 	Flags: Linked, Private
 */
-function private function_d55dc6af(notifystring, param3)
+function private deathanimshutdown(notifystring, param3)
 {
 	self clearallfacialanims(self.localclientnum);
 }

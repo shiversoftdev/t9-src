@@ -1,14 +1,14 @@
-#using script_158d50d476435605;
-#using script_18b9d0e77614c97;
-#using scripts\core_common\delete.csc;
-#using scripts\core_common\dev_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using script_18b9d0e77614c97;
+#using scripts\core_common\dev_shared.csc;
+#using scripts\core_common\activecamo_shared.csc;
+#using scripts\core_common\delete.csc;
 
 #namespace load;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: load
 	Checksum: 0x85CB5130
 	Offset: 0xB8
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"load", &function_70a657d8, undefined, undefined, undefined);
 }

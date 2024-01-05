@@ -1,12 +1,12 @@
 #using script_35ae72be7b4fec10;
 #using script_3dc93ca9902a9cda;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_9fe28d6e;
 
@@ -21,11 +21,11 @@
 */
 function private autoexec function_d3f5d197()
 {
-	level notify(613409347);
+	level notify(-613409347);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9fe28d6e
 	Checksum: 0xAD3D5F5
 	Offset: 0x100
@@ -33,7 +33,7 @@ function private autoexec function_d3f5d197()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_38469cb55dd6355a", &function_c7f33cce, &function_fa076c68, undefined, undefined);
 }
@@ -126,11 +126,11 @@ function private function_7c9b0132()
 */
 function private function_90ceecf8()
 {
-	callback::on_spawned(&function_e4a4b07b);
+	callback::on_spawned(&_on_player_spawned);
 }
 
 /*
-	Name: function_e4a4b07b
+	Name: _on_player_spawned
 	Namespace: namespace_9fe28d6e
 	Checksum: 0x32F22BD2
 	Offset: 0x358
@@ -138,7 +138,7 @@ function private function_90ceecf8()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_e4a4b07b(localclientnum)
+function private _on_player_spawned(localclientnum)
 {
 	if(!isdefined(level._fx))
 	{
@@ -516,7 +516,7 @@ function private function_1913c46(location)
 	enemies = [];
 	if(isdefined(location.var_c9dbde14) && location.var_c9dbde14 > 0)
 	{
-		enemies = level._fx.player function_bdda420f(location.origin, location.var_c9dbde14);
+		enemies = level._fx.player getenemiesinradius(location.origin, location.var_c9dbde14);
 	}
 	return true;
 }
@@ -557,10 +557,10 @@ function private _update(var_dd94a1e3)
 		effect = undefined;
 		var_f16d4896 = randomintrange(0, locations.size);
 		var_5fd45f33 = locations[var_f16d4896];
-		var_bba7d11f = function_4c6d8fd3(var_5fd45f33, 0.5);
+		on_screen = function_4c6d8fd3(var_5fd45f33, 0.5);
 		in_range = function_20e12458(var_5fd45f33, distance.min, distance.max);
 		var_1bd0dc4d = function_1913c46(var_5fd45f33);
-		if(is_true(var_bba7d11f) && is_true(in_range) && is_false(var_1bd0dc4d))
+		if(is_true(on_screen) && is_true(in_range) && is_false(var_1bd0dc4d))
 		{
 			if(isdefined(var_5fd45f33.var_b17f3758) && var_5fd45f33.var_b17f3758 != "")
 			{

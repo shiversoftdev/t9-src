@@ -44,7 +44,7 @@ function function_fbb3b7ed(_notify, var_cc1545d8)
 	Parameters: 5
 	Flags: Linked
 */
-function function_9a82b890(localclientnum, duration, startsound, var_ed2d4562, var_7404e5a0)
+function function_9a82b890(localclientnum, duration, startsound, var_ed2d4562, endsound)
 {
 	if(level.var_2b64ba11 < 200)
 	{
@@ -69,9 +69,9 @@ function function_9a82b890(localclientnum, duration, startsound, var_ed2d4562, v
 			self stoploopsound(handle);
 			handle = undefined;
 		}
-		if(isdefined(var_7404e5a0))
+		if(isdefined(endsound))
 		{
-			self playsound(localclientnum, var_7404e5a0);
+			self playsound(localclientnum, endsound);
 		}
 		level.var_2b64ba11--;
 	}
@@ -115,9 +115,9 @@ event function_928600de(eventstruct)
 		viewangles = local_player getplayerangles();
 		dirtotarget = vectornormalize(eventstruct.position - local_player.origin);
 		playerforward = anglestoforward(viewangles);
-		var_a82b48d6 = anglestoright(viewangles);
+		playerright = anglestoright(viewangles);
 		var_1978c7fc = vectordot(dirtotarget, playerforward);
-		var_1006dafa = vectordot(dirtotarget, var_a82b48d6);
+		var_1006dafa = vectordot(dirtotarget, playerright);
 		var_5c9ee157 = dirtotarget * -1;
 		var_6059f1ff = local_player.origin + (randomfloat(10) - 5, randomfloat(10) - 5, randomfloat(10) - 5) + (2 * var_5c9ee157);
 		local_player function_3edb40f5(eventstruct.weapon, eventstruct.position, var_6059f1ff, dirtotarget * -1);

@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_536d73e : class_6aaccc24
+class class_536d73e : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_536d73e : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_536d73e
 		Checksum: 0x343720C7
 		Offset: 0x340
@@ -52,9 +52,9 @@ class class_536d73e : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("DOA_Overworld");
+		cluielem::register_clientside("DOA_Overworld");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_536d73e : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("DOA_Overworld");
+		cluielem::setup_clientfields("DOA_Overworld");
 	}
 
 	/*
@@ -82,7 +82,7 @@ class class_536d73e : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -136,7 +136,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: doa_overworld
 	Checksum: 0xBB3DA43E
 	Offset: 0x240
@@ -144,10 +144,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_536d73e();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

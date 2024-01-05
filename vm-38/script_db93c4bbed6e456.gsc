@@ -1,9 +1,9 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_88f6bc3c;
 
@@ -169,7 +169,7 @@ function function_6f822dd3()
 }
 
 /*
-	Name: function_56ae4d76
+	Name: get_trace
 	Namespace: namespace_5443b356
 	Checksum: 0xD1F16FBD
 	Offset: 0x708
@@ -177,7 +177,7 @@ function function_6f822dd3()
 	Parameters: 2
 	Flags: Linked
 */
-function function_56ae4d76(old_position, new_position)
+function get_trace(old_position, new_position)
 {
 	size = 10;
 	height = size * 2;
@@ -198,7 +198,7 @@ function function_56ae4d76(old_position, new_position)
 */
 function function_26d91402(old_position, new_position)
 {
-	trace = function_56ae4d76(old_position, new_position);
+	trace = get_trace(old_position, new_position);
 	return trace[#"position"];
 }
 
@@ -213,7 +213,7 @@ function function_26d91402(old_position, new_position)
 */
 function function_b7f367ed(old_position, new_position)
 {
-	trace = function_56ae4d76(old_position, new_position);
+	trace = get_trace(old_position, new_position);
 	if(trace[#"fraction"] < 1)
 	{
 		return false;

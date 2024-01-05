@@ -1,8 +1,8 @@
-#using script_42e02216167edefc;
 #using script_dc59353021baee1;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_42e02216167edefc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_95fdc800;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_c439d89a()
 {
-	level notify(978572420);
+	level notify(-978572420);
 }
 
 /*

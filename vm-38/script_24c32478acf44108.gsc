@@ -1,7 +1,7 @@
-#using script_35598499769dbb3d;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_35598499769dbb3d;
 
 #namespace namespace_9ff9f642;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_22fff61f()
 {
-	level notify(1737562821);
+	level notify(-1737562821);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9ff9f642
 	Checksum: 0x4F4696A7
 	Offset: 0xD0
@@ -28,7 +28,7 @@ function private autoexec function_22fff61f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_308dff40d53a7287", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -48,7 +48,7 @@ function private function_70a657d8()
 }
 
 /*
-	Name: function_9d45c058
+	Name: register_burn
 	Namespace: namespace_9ff9f642
 	Checksum: 0x1D83F91
 	Offset: 0x168
@@ -56,7 +56,7 @@ function private function_70a657d8()
 	Parameters: 5
 	Flags: Linked
 */
-function function_9d45c058(str_type, n_dps, n_duration, var_f472bfc, var_5713c703)
+function register_burn(str_type, n_dps, n_duration, var_f472bfc, var_5713c703)
 {
 	if(!isdefined(level.var_981dd9cf))
 	{
@@ -388,10 +388,10 @@ function function_865a83f8(zombie, target, predictedpos, var_95342913)
 		return false;
 	}
 	origin = target.origin;
-	var_f2fb414f = anglestoforward(target.angles);
-	var_9349139f = zombie.origin - origin;
-	var_3e3c8075 = (var_9349139f[0], var_9349139f[1], 0);
-	var_c2ee8451 = (var_f2fb414f[0], var_f2fb414f[1], 0);
+	facingvec = anglestoforward(target.angles);
+	enemyvec = zombie.origin - origin;
+	var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
+	var_c2ee8451 = (facingvec[0], facingvec[1], 0);
 	var_3e3c8075 = vectornormalize(var_3e3c8075);
 	var_c2ee8451 = vectornormalize(var_c2ee8451);
 	var_34e02165 = vectordot(var_c2ee8451, var_3e3c8075);
@@ -480,8 +480,8 @@ function slowdown(str_type, var_a47cf2b2, callback)
 	{
 		self.a_n_slowdown_timeouts[str_type] = {#callback:callback, #timeout:n_timeout};
 	}
-	var_1cd2ff30 = self.a_n_slowdown_timeouts.size;
-	while(var_1cd2ff30)
+	n_slowdowns = self.a_n_slowdown_timeouts.size;
+	while(n_slowdowns)
 	{
 		str_lowest_type = undefined;
 		n_lowest_rate = 10;
@@ -527,7 +527,7 @@ function slowdown(str_type, var_a47cf2b2, callback)
 			}
 		}
 		self function_e01e1ea1();
-		var_1cd2ff30 = self.a_n_slowdown_timeouts.size;
+		n_slowdowns = self.a_n_slowdown_timeouts.size;
 	}
 	self asmsetanimationrate(1);
 }

@@ -1,7 +1,7 @@
 #using script_612bbf55ca35e077;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_78f31cd9;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_d80b0b6d()
 {
-	level notify(437302941);
+	level notify(-437302941);
 }
 
 #namespace namespace_1e38a8f6;
@@ -36,7 +36,7 @@ function init()
 	if(function_8b1a219a() && getdvarint(#"hash_cca6902a7ce5273", 0) == 1)
 	{
 		callback::on_localclient_connect(&localclient_connect);
-		callback::function_d46d9315(&function_9b08184);
+		callback::on_gameplay_started(&function_9b08184);
 	}
 }
 
@@ -55,7 +55,7 @@ function function_9b08184(localclientnum)
 	player thread function_9ac87769(localclientnum);
 	level.var_4e740db2 = 1;
 	callback::on_spawned(&function_9ac87769);
-	callback::remove_callback(#"hash_53992479a389b987", &function_9b08184);
+	callback::remove_callback(#"on_gameplay_started", &function_9b08184);
 }
 
 /*
@@ -72,12 +72,12 @@ function localclient_connect(localclientnum)
 	function_13861db4(12);
 	function_4d990c6a();
 	function_d9a960f2(4, 12, 255, 2500, 750, 750, 0);
-	if(!util::function_3f165ee8())
+	if(!util::is_frontend_map())
 	{
 		thread function_ba24f324(localclientnum);
 		thread function_1d13e2db(localclientnum);
 	}
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		thread function_1d13e2db(localclientnum);
 	}
@@ -107,11 +107,11 @@ function function_9ac87769(localclientnum)
 	player thread function_161106e1(localclientnum);
 	player thread function_a78bbf22(localclientnum);
 	player thread function_1183b860(localclientnum);
-	if(!function_f99d2668() && !sessionmodeiszombiesgame())
+	if(!sessionmodeiswarzonegame() && !sessionmodeiszombiesgame())
 	{
 		player thread function_af712255(localclientnum);
 	}
-	if(is_true(level.var_d3909b95))
+	if(is_true(level.playerinsertion))
 	{
 		if(!isdefined(level.var_51e99b46) || level.var_51e99b46 != 2)
 		{
@@ -142,7 +142,7 @@ function function_43a84577()
 		function_b4c6383f(self function_c2a5ba97(key), 1, 15066083);
 	}
 	function_b4c6383f(self function_c2a5ba97("chatmodelast"), 1, 15327545);
-	if(is_true(level.var_d3909b95))
+	if(is_true(level.playerinsertion))
 	{
 		var_81fa6e00 = array("togglemap", "+map", "+inventory", "toggleinventory");
 		foreach(key in var_81fa6e00)
@@ -233,7 +233,7 @@ function function_1edfdbc1(localclientnum)
 			break;
 		}
 		current_health = renderhealthoverlayhealth(localclientnum);
-		basehealth = var_38d92d79 function_3b0f0852();
+		basehealth = var_38d92d79 getplayerspawnhealth();
 		n_health = current_health * basehealth;
 		if(n_health > 125)
 		{
@@ -297,12 +297,12 @@ function function_161106e1(localclientnum)
 	var_834a617c = array("key_f8", "key_f7", "key_f6", "key_f5");
 	while(!is_true(level.gameended))
 	{
-		var_4fa59c0d = getcurrentweapon(localclientnum);
-		var_4c47f204 = getweaponammoclip(localclientnum, var_4fa59c0d);
-		var_2276fbea = var_4fa59c0d.clipsize;
-		if(var_2276fbea > 0)
+		w_currentweapon = getcurrentweapon(localclientnum);
+		var_4c47f204 = getweaponammoclip(localclientnum, w_currentweapon);
+		n_clipsize = w_currentweapon.clipsize;
+		if(n_clipsize > 0)
 		{
-			var_102d6996 = var_4c47f204 / var_2276fbea;
+			var_102d6996 = var_4c47f204 / n_clipsize;
 		}
 		else
 		{
@@ -333,8 +333,8 @@ function function_161106e1(localclientnum)
 function function_a78bbf22(localclientnum)
 {
 	self endon(#"death");
-	level endon(#"hash_5f10014535621f84");
-	if(is_true(level.var_d3909b95))
+	level endon(#"keybind_change");
+	if(is_true(level.playerinsertion))
 	{
 		a_keys = array(self function_c2a5ba97("+frag"), self function_c2a5ba97("+smoke"));
 		self.var_9623f1d5 = array(0, 0);
@@ -401,7 +401,7 @@ function function_a78bbf22(localclientnum)
 function function_c6bcf243(var_35a126c, var_b742c891, localclientnum)
 {
 	self endon(#"death");
-	level endon(#"game_ended", #"hash_5f10014535621f84");
+	level endon(#"game_ended", #"keybind_change");
 	function_b4c6383f(var_35a126c, 3, 63487, 855309, 275, 0);
 	for(i = 0; i < 160; i++)
 	{
@@ -431,16 +431,16 @@ function function_ba24f324(localclientnum)
 	level endon(#"game_ended");
 	while(!is_true(level.gameended))
 	{
-		self waittill(#"hash_5f10014535621f84");
+		self waittill(#"keybind_change");
 		function_4d990c6a();
 		player = function_27673a7(localclientnum);
 		player function_43a84577();
 		player thread function_a78bbf22(localclientnum);
-		if(!function_f99d2668() && !sessionmodeiszombiesgame())
+		if(!sessionmodeiswarzonegame() && !sessionmodeiszombiesgame())
 		{
 			player thread function_af712255(localclientnum);
 		}
-		if(is_true(level.var_d3909b95))
+		if(is_true(level.playerinsertion))
 		{
 			if(!isdefined(level.var_51e99b46) || level.var_51e99b46 != 2)
 			{
@@ -520,14 +520,14 @@ function function_1d13e2db(localclientnum)
 		{
 			if(var_20ef87f3 > 0 && var_20ef87f3 != previoustime)
 			{
-				if(!function_f99d2668())
+				if(!sessionmodeiswarzonegame())
 				{
 					function_d9a960f2(1, 12, 255);
 					namespace_1b041925::function_815076cb(var_1953ea4a, 1711648);
 				}
 				if(var_20ef87f3 == 5)
 				{
-					if(function_f99d2668())
+					if(sessionmodeiswarzonegame())
 					{
 						function_d9a960f2(1, 12, 255);
 						namespace_1b041925::function_815076cb(var_1953ea4a, 1711648);
@@ -584,7 +584,7 @@ function function_1d13e2db(localclientnum)
 function function_af712255(localclientnum)
 {
 	self endon(#"death");
-	level endon(#"game_ended", #"hash_5f10014535621f84");
+	level endon(#"game_ended", #"keybind_change");
 	parentmodel = function_1df4c3b0(localclientnum, #"hash_38b7a28901866ae4");
 	var_f15e30b1 = getuimodel(parentmodel, "momentumPercentage");
 	var_2163222 = getuimodel(parentmodel, "killstreak0");
@@ -622,8 +622,8 @@ function function_af712255(localclientnum)
 */
 function function_9d6500b(localclientnum)
 {
-	self endon(#"death", #"hash_36dd69a696f827af");
-	level endon(#"hash_5f10014535621f84");
+	self endon(#"death", #"freefallend");
+	level endon(#"keybind_change");
 	if(isdefined(level.var_51e99b46) && level.var_51e99b46 == 2)
 	{
 		return;

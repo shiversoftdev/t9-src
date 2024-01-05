@@ -1,14 +1,14 @@
+#using scripts\zm_common\zm_utility.csc;
 #using script_2c8fd33ddb45e78b;
 #using script_d5fbb947291463c;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_f0b43eb5;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_f0b43eb5
 	Checksum: 0x37AFD1FC
 	Offset: 0x108
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1c32fc6c324d3e66", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -259,7 +259,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
 		}
 		case 7:
 		{
-			var_d5fa8477 = self namespace_4abf1500::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d", #"hash_38c50405421ca2a5");
+			var_d5fa8477 = self namespace_4abf1500::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d", #"audiolog");
 			str_model = namespace_4abf1500::function_12e3769(var_d5fa8477);
 			str_model = (isdefined(str_model) ? str_model : #"p9_sur_machine_computer_screen_no_play_prog");
 			/#

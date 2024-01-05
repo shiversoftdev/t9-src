@@ -2,8 +2,8 @@
 #using script_1883fa4e60abbf9f;
 #using script_7b68dad851540de;
 #using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace debug;
 
@@ -18,7 +18,7 @@
 */
 function private autoexec function_e35bafc1()
 {
-	level notify(543938470);
+	level notify(-543938470);
 }
 
 /*

@@ -1,30 +1,30 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c5daa95f8fec03c;
-#using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3faf478d5b0850fe;
-#using script_41fe08c37d53a635;
-#using script_47851dbeea22fe66;
-#using script_522aeb6ae906391e;
-#using script_556e19065f09f8a2;
-#using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
 #using script_60c9f7551ce6c823;
+#using script_2a5bf5b4a00cee0d;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_774302f762d76254;
+#using script_1b0b07ff57d1dde3;
 #using script_79315a6ccf4fce3d;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
+#using script_1ee011cd0961afd7;
+#using script_5f20d3b434d24884;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using scripts\core_common\util_shared.gsc;
+#using script_556e19065f09f8a2;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_2c5daa95f8fec03c;
+#using script_35598499769dbb3d;
+#using script_41fe08c37d53a635;
+#using script_522aeb6ae906391e;
+#using script_3819e7a1427df6d2;
+#using script_3aa0f32b70d4f7cb;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_b5ca279a;
 
@@ -126,7 +126,7 @@ function function_7f78da()
 	self.basic = 1;
 	self.var_c3ce559a = 0;
 	self.var_bb68380c = namespace_4dae815d::function_59a9cf1d() == 0 && !isdefined(level.doa.var_6f3d327);
-	self.var_42abd8e = !self.var_bb68380c;
+	self.shouldspawn = !self.var_bb68380c;
 	self thread zombie_eye_glow::function_b43f92cd();
 	if(self.var_bb68380c)
 	{
@@ -153,7 +153,7 @@ function function_c4faf752()
 {
 	self function_7f78da();
 	self.basic = undefined;
-	self.var_42abd8e = 0;
+	self.shouldspawn = 0;
 	self.zombie_move_speed = (isdefined(level.doa.var_13e8f9c9) ? level.doa.var_13e8f9c9 : (math::cointoss() ? "sprint" : "run"));
 	self.var_c3ce559a = 1;
 	animrate = randomfloatrange(1.2, 1.4);
@@ -216,7 +216,7 @@ function function_a4b27d0e()
 {
 	self function_7f78da();
 	self.basic = undefined;
-	self.var_42abd8e = 1;
+	self.shouldspawn = 1;
 	self asmsetanimationrate(1.1);
 	self.zombie_arms_position = (randomint(100) > 50 ? "up" : "down");
 	self.zombie_move_speed = (isdefined(level.doa.var_13e8f9c9) ? level.doa.var_13e8f9c9 : "run");
@@ -419,7 +419,7 @@ function function_83a2d68c()
 	self.var_1038c5e0 = "shadow_rez_in";
 	self.var_596fb6ed = "shadow_appear";
 	self.var_bb68380c = namespace_4dae815d::function_59a9cf1d() == 0;
-	self.var_42abd8e = 1;
+	self.shouldspawn = 1;
 	self.teleports = randomint(2) + 1;
 	self.zombie_move_speed = (isdefined(level.doa.var_13e8f9c9) ? level.doa.var_13e8f9c9 : "sprint");
 	if(isdefined(level.doa.var_a598a835))
@@ -751,7 +751,7 @@ function private function_55b7ea22(entity)
 		}
 		entity pathmode("dont move");
 		entity.var_1f2d0447 = 1;
-		entity.var_42abd8e = undefined;
+		entity.shouldspawn = undefined;
 		entity disableaimassist();
 	}
 }
@@ -770,7 +770,7 @@ function private function_98b102d8(entity)
 	entity.var_1f2d0447 = undefined;
 	entity pathmode("move allowed");
 	entity enableaimassist();
-	entity notify(#"hash_661885e7a60ccf04");
+	entity notify(#"not_underground");
 	entity.doa.original_origin = self.origin;
 }
 
@@ -785,7 +785,7 @@ function private function_98b102d8(entity)
 */
 function private function_63e044e7(entity)
 {
-	return is_true(entity.var_42abd8e);
+	return is_true(entity.shouldspawn);
 }
 
 /*

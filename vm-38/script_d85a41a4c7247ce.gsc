@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_fa1c4f0a;
 
@@ -32,7 +32,7 @@ event main(eventstruct)
 {
 	clientfield::register("scriptmover", "" + #"portal", 1, 1, "int", &portal_fx, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_2a7da9a87ecef87b", 1, 1, "int", &function_36ab0d37, 0, 0);
-	clientfield::register("scriptmover", "" + #"hash_7bfe2b6c24b46951", 1, 2, "int", &function_5884461e, 0, 0);
+	clientfield::register("scriptmover", "" + #"payload_teleport", 1, 2, "int", &function_5884461e, 0, 0);
 	clientfield::register("toplayer", "" + #"hash_19f93b2cb70ea2c5", 1, 1, "int", &function_fa7a206b, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_75190371f51baf5f", 1, 1, "counter", &function_96636479, 0, 0);
 	clientfield::register("vehicle", "" + #"hash_85dd1e407a282d9", 1, 1, "int", &function_691412b4, 0, 0);
@@ -59,7 +59,7 @@ function private on_vehicle_spawned(localclientnum)
 	if(self.vehicletype === #"hash_d069dee6a0076c8")
 	{
 		self function_3f24c5a(1);
-		self.var_ba36f5d = &function_ba36f5d;
+		self.stunnedcallback = &stunnedcallback;
 		self function_1f0c7136(0);
 		self setanim("p9_fxanim_sv_payload_atv_static_anim");
 	}
@@ -224,7 +224,7 @@ function function_612a9925(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 /*
-	Name: function_ba36f5d
+	Name: stunnedcallback
 	Namespace: namespace_fa1c4f0a
 	Checksum: 0x4C66E961
 	Offset: 0x1050
@@ -232,7 +232,7 @@ function function_612a9925(localclientnum, oldval, newval, bnewent, binitialsnap
 	Parameters: 2
 	Flags: Linked
 */
-function function_ba36f5d(localclientnum, val)
+function stunnedcallback(localclientnum, val)
 {
 	self setstunned(val);
 }

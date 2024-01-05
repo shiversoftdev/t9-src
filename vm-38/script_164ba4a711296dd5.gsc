@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_b6e5ba9d : class_6aaccc24
+class cinsertion_passenger_count : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x94C99E74
 		Offset: 0x1F0
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_b6e5ba9d : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0xC9C4E90C
 		Offset: 0x328
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_b6e5ba9d : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0xD1ACEF65
 		Offset: 0x260
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_b6e5ba9d : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x5770F9DD
 		Offset: 0x2A8
 		Size: 0x24
@@ -61,12 +61,12 @@ class class_b6e5ba9d : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0xB4EDED3C
 		Offset: 0x210
 		Size: 0x44
@@ -75,13 +75,13 @@ class class_b6e5ba9d : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("insertion_passenger_count");
-		namespace_6aaccc24::function_da693cbe("count", 1, 7, "int");
+		cluielem::setup_clientfields("insertion_passenger_count");
+		cluielem::add_clientfield("count", 1, 7, "int");
 	}
 
 	/*
 		Name: set_count
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x4B88EEC5
 		Offset: 0x2D8
 		Size: 0x44
@@ -122,7 +122,7 @@ function private autoexec function_9bf4a2e4()
 */
 function register()
 {
-	elem = new class_b6e5ba9d();
+	elem = new cinsertion_passenger_count();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

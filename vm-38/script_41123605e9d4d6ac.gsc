@@ -1,8 +1,8 @@
-#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_cc727a3b;
 
@@ -21,7 +21,7 @@ function private autoexec function_230a851e()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_cc727a3b
 	Checksum: 0x50A46FD
 	Offset: 0x2E0
@@ -29,7 +29,7 @@ function private autoexec function_230a851e()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_507ba1ac0432a7e6", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -225,7 +225,7 @@ function function_5565725d(localclientnum, dissolve, rob)
 		{
 			if(isdefined(zombie))
 			{
-				zombie function_bf9d3071(rob);
+				zombie playrenderoverridebundle(rob);
 			}
 		}
 	}
@@ -235,7 +235,7 @@ function function_5565725d(localclientnum, dissolve, rob)
 		{
 			if(isdefined(zombie))
 			{
-				zombie function_5d482e78(rob);
+				zombie stoprenderoverridebundle(rob);
 			}
 		}
 	}

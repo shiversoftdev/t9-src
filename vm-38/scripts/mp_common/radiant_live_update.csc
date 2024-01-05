@@ -13,11 +13,11 @@
 */
 function private autoexec function_2b2e2138()
 {
-	level notify(657986162);
+	level notify(-657986162);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: radiant_live_update
 	Checksum: 0x6FAF7AAF
 	Offset: 0x88
@@ -25,7 +25,7 @@ function private autoexec function_2b2e2138()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"radiant_live_update", &function_70a657d8, undefined, undefined, undefined);

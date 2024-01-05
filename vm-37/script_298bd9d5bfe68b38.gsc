@@ -1,18 +1,18 @@
-#using script_18f0d22c75b141a7;
+#using scripts\core_common\util_shared.gsc;
 #using script_75da5547b1822294;
 #using script_d9b5c8b1ad38ef5;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 
 #namespace weapon_cache;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: weapon_cache
 	Checksum: 0xFEA3BE58
 	Offset: 0x1B8
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"weapon_cache", &function_70a657d8, undefined, &finalize, undefined);
 }
@@ -140,7 +140,7 @@ function function_692bd0bc(player)
 	}
 	primaryoffhand = player function_826ed2dd();
 	player setweaponammoclip(primaryoffhand, player function_b7f1fd2c(primaryoffhand));
-	loadout = player loadout::function_e27dc453("secondarygrenade");
+	loadout = player loadout::get_loadout_slot("secondarygrenade");
 	secondaryoffhand = loadout.weapon;
 	if(isdefined(secondaryoffhand) && player hasweapon(secondaryoffhand))
 	{

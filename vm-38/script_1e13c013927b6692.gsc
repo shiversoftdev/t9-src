@@ -1,15 +1,15 @@
-#using script_3cebb48c37fc271;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_fasttravel.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\callbacks.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\callbacks.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_67dab37c;
 
@@ -24,13 +24,13 @@
 */
 function private autoexec function_ce7ae09()
 {
-	level notify(443767106);
+	level notify(-443767106);
 }
 
 #namespace namespace_fa39a5c3;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_fa39a5c3
 	Checksum: 0xCC3A549E
 	Offset: 0x168
@@ -38,7 +38,7 @@ function private autoexec function_ce7ae09()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5a3be2f74ac4fe03", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -125,7 +125,7 @@ function function_c52e8ba(player, var_8d5d092c)
 			switch(self.stub.script_string)
 			{
 				case "village":
-				case "hash_3f4ed3f61d98dd24":
+				case "firebase":
 				{
 					self.hint_string[n_player_index] = #"hash_222289639943b061";
 					break;
@@ -149,7 +149,7 @@ function function_c52e8ba(player, var_8d5d092c)
 						b_result = 1;
 						break;
 					}
-					case "hash_3f4ed3f61d98dd24":
+					case "firebase":
 					{
 						self.hint_string[n_player_index] = #"hash_6357eb67494da1b";
 						b_result = 1;
@@ -169,7 +169,7 @@ function function_c52e8ba(player, var_8d5d092c)
 							b_result = 1;
 							break;
 						}
-						case "hash_3f4ed3f61d98dd24":
+						case "firebase":
 						{
 							self.hint_string[n_player_index] = #"hash_6357eb67494da1b";
 							b_result = 1;
@@ -197,7 +197,7 @@ function function_c52e8ba(player, var_8d5d092c)
 							}
 							break;
 						}
-						case "hash_3f4ed3f61d98dd24":
+						case "firebase":
 						{
 							if(level flag::get(#"hash_7752d012501cd222") || level flag::get(#"hash_7735f4e5fdb1382b"))
 							{
@@ -252,7 +252,7 @@ function function_af65fe93(var_79bf62e6)
 	Parameters: 1
 	Flags: Linked
 */
-function function_54a36ee5(var_3ff283ce)
+function function_54a36ee5(e_unitrigger)
 {
 	if(level flag::get(#"hash_7752d012501cd222") || level flag::get(#"hash_7735f4e5fdb1382b"))
 	{
@@ -260,13 +260,13 @@ function function_54a36ee5(var_3ff283ce)
 	}
 	else
 	{
-		if(isdefined(var_3ff283ce.stub))
+		if(isdefined(e_unitrigger.stub))
 		{
-			n_cost = var_3ff283ce.stub.zombie_cost;
+			n_cost = e_unitrigger.stub.zombie_cost;
 		}
 		else
 		{
-			n_cost = var_3ff283ce.zombie_cost;
+			n_cost = e_unitrigger.zombie_cost;
 		}
 	}
 	return n_cost;
@@ -289,7 +289,7 @@ function function_bce9fcbe()
 	{
 		var_e8178f0 = self zm_zonemgr::is_player_in_zone([2:"zone_firebase3", 1:"zone_firebase2", 0:"zone_portal_transfer"]);
 		self clientfield::set_to_player("" + #"hash_69dc133e22a2769f", var_e8178f0);
-		self waittill(#"hash_2d4daa9e80b86b60");
+		self waittill(#"zone_change");
 	}
 }
 

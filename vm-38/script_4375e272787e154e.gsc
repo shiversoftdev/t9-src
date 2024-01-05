@@ -1,11 +1,11 @@
-#using script_3f6516099f1d5ff1;
 #using script_84f5590d2ac48f8;
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\music_shared.csc;
-#using scripts\core_common\scene_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\scene_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\map.csc;
 
 #namespace namespace_66d6aa44;
 
@@ -20,7 +20,7 @@
 */
 function private autoexec function_1b1bcd7e()
 {
-	level notify(1706699686);
+	level notify(-1706699686);
 }
 
 /*
@@ -35,7 +35,7 @@ function private autoexec function_1b1bcd7e()
 event codecallback_preinitialization(eventstruct)
 {
 	clientfield::register("world", "hide_intro_models", 1, 1, "int", &hide_intro_models, 0, 0);
-	clientfield::function_a8bbc967("closeLoadingMovie", #"hash_414f1dabe0f0c1a5", #"closeloadingmovie", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("closeLoadingMovie", #"hash_414f1dabe0f0c1a5", #"closeloadingmovie", 1, 1, "int", undefined, 0, 0);
 	var_43a36c6f = function_6681bbf6();
 	function_e526b83(var_43a36c6f);
 	level.var_5337a48a = [];

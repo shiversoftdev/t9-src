@@ -1,13 +1,13 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_42946372 : class_6aaccc24
+class cdoa_textbubble_playername : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x582453A7
 		Offset: 0x278
 		Size: 0x14
@@ -20,7 +20,7 @@ class class_42946372 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x97867C0E
 		Offset: 0x4F0
 		Size: 0x14
@@ -33,7 +33,7 @@ class class_42946372 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x40A1032C
 		Offset: 0x2C0
 		Size: 0x3C
@@ -46,40 +46,40 @@ class class_42946372 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_3b7b386a
-		Namespace: namespace_42946372
+		Name: set_clientnum
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0xFD52C439
 		Offset: 0x390
 		Size: 0x4C
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3b7b386a(player, value)
+	function set_clientnum(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 2, value, 0);
 	}
 
 	/*
-		Name: function_4f6e830d
-		Namespace: namespace_42946372
+		Name: set_offset_y
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x699770A1
 		Offset: 0x440
 		Size: 0x4C
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4f6e830d(player, value)
+	function set_offset_y(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 4, value, 0);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x86AE5CDD
 		Offset: 0x308
 		Size: 0x24
@@ -88,40 +88,40 @@ class class_42946372 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_61312692
-		Namespace: namespace_42946372
+		Name: set_offset_x
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0xDD7E27E5
 		Offset: 0x3E8
 		Size: 0x4C
 		Parameters: 2
 		Flags: None
 	*/
-	function function_61312692(player, value)
+	function set_offset_x(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 3, value, 0);
 	}
 
 	/*
-		Name: function_7ddfdfef
-		Namespace: namespace_42946372
+		Name: set_offset_z
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x3D46286B
 		Offset: 0x498
 		Size: 0x4C
 		Parameters: 2
 		Flags: None
 	*/
-	function function_7ddfdfef(player, value)
+	function set_offset_z(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 5, value, 0);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0xC3701D76
 		Offset: 0x298
 		Size: 0x1C
@@ -130,19 +130,19 @@ class class_42946372 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("DOA_TextBubble_PlayerName");
+		cluielem::setup_clientfields("DOA_TextBubble_PlayerName");
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_42946372
+		Name: set_entnum
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x5A6EF704
 		Offset: 0x338
 		Size: 0x4C
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c8350e33(player, value)
+	function set_entnum(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 1, value, 0);
 	}
@@ -162,7 +162,7 @@ class class_42946372 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_42946372();
+	elem = new cdoa_textbubble_playername();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -214,7 +214,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: doa_textbubble_playername
 	Checksum: 0x2EE7BEB4
 	Offset: 0x188
@@ -222,13 +222,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_c8350e33(player, value)
+function set_entnum(player, value)
 {
-	[[ self ]]->function_c8350e33(player, value);
+	[[ self ]]->set_entnum(player, value);
 }
 
 /*
-	Name: function_3b7b386a
+	Name: set_clientnum
 	Namespace: doa_textbubble_playername
 	Checksum: 0xAD092606
 	Offset: 0x1B8
@@ -236,13 +236,13 @@ function function_c8350e33(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_3b7b386a(player, value)
+function set_clientnum(player, value)
 {
-	[[ self ]]->function_3b7b386a(player, value);
+	[[ self ]]->set_clientnum(player, value);
 }
 
 /*
-	Name: function_61312692
+	Name: set_offset_x
 	Namespace: doa_textbubble_playername
 	Checksum: 0xED553875
 	Offset: 0x1E8
@@ -250,13 +250,13 @@ function function_3b7b386a(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_61312692(player, value)
+function set_offset_x(player, value)
 {
-	[[ self ]]->function_61312692(player, value);
+	[[ self ]]->set_offset_x(player, value);
 }
 
 /*
-	Name: function_4f6e830d
+	Name: set_offset_y
 	Namespace: doa_textbubble_playername
 	Checksum: 0xB4A14D2B
 	Offset: 0x218
@@ -264,13 +264,13 @@ function function_61312692(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4f6e830d(player, value)
+function set_offset_y(player, value)
 {
-	[[ self ]]->function_4f6e830d(player, value);
+	[[ self ]]->set_offset_y(player, value);
 }
 
 /*
-	Name: function_7ddfdfef
+	Name: set_offset_z
 	Namespace: doa_textbubble_playername
 	Checksum: 0x9492813
 	Offset: 0x248
@@ -278,8 +278,8 @@ function function_4f6e830d(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_7ddfdfef(player, value)
+function set_offset_z(player, value)
 {
-	[[ self ]]->function_7ddfdfef(player, value);
+	[[ self ]]->set_offset_z(player, value);
 }
 

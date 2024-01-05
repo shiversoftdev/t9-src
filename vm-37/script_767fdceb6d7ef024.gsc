@@ -1,9 +1,9 @@
 #using script_1f38e4dd404966a1;
 #using script_312c65d6c946308;
-#using script_3d5887fc414a86fb;
-#using scripts\core_common\aat_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\item_inventory.csc;
+#using scripts\core_common\aat_shared.csc;
 
 #namespace ammomod_electriccherry;
 

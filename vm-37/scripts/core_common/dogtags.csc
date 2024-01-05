@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace dogtags;
 
@@ -28,7 +28,7 @@ function init()
 */
 function function_319c73b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	self notify(#"hash_7117a0f5c62d8c3d");
+	self notify(#"stopbounce");
 	if(isdefined(self.var_47b256ef))
 	{
 		self.var_47b256ef unlink();
@@ -42,7 +42,7 @@ function function_319c73b1(localclientnum, oldval, newval, bnewent, binitialsnap
 	}
 	if(!isdefined(self.objectiveid))
 	{
-		objectivename = (isdefined(level.var_febab1ea) ? level.var_febab1ea : #"hash_bc7bcc75f63dc7b");
+		objectivename = (isdefined(level.var_febab1ea) ? level.var_febab1ea : #"conf_dogtags");
 		self.objectiveid = util::getnextobjid(fieldname);
 		objective_add(fieldname, self.objectiveid, "active", objectivename, self.origin, self.team);
 		objective_onentity(fieldname, self.objectiveid, self, 1, 1, 0);
@@ -141,7 +141,7 @@ function function_bcb88fb7(localclientnum)
 */
 function function_2eee13af()
 {
-	self endon(#"hash_7117a0f5c62d8c3d");
+	self endon(#"stopbounce");
 	self endon(#"death");
 	while(true)
 	{

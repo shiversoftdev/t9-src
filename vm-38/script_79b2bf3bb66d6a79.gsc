@@ -1,16 +1,16 @@
-#using script_1cd690a97dfca36e;
 #using script_31671175564a93b7;
+#using script_1cd690a97dfca36e;
 #using script_3318f11e3a1b2358;
-#using script_65fbfb5ecb1f899e;
-#using script_6fb84768f1f09fe;
 #using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
 #using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using script_65fbfb5ecb1f899e;
+#using scripts\core_common\callbacks_shared.csc;
+#using script_6fb84768f1f09fe;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace snipercam;
 
@@ -29,7 +29,7 @@ function private autoexec function_bd793480()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: snipercam
 	Checksum: 0xE5C1FC4
 	Offset: 0x2F0
@@ -37,7 +37,7 @@ function private autoexec function_bd793480()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("snipercam", &function_f64316de, undefined, undefined, undefined);
 }
@@ -168,18 +168,18 @@ function private function_51f065c3(parms)
 			var_1b6e3d9c = distance2d(var_188953e0.start.origin, parms.var_b21e26bd);
 			if(var_1b6e3d9c < 200)
 			{
-				var_d1e4d605 = var_188953e0.start;
+				side_cam_start = var_188953e0.start;
 				var_52c1d392 = var_188953e0.end;
 				var_61437df7 = var_188953e0.var_82267185;
 				break;
 			}
 		}
-		if(isdefined(var_d1e4d605))
+		if(isdefined(side_cam_start))
 		{
 			frame_count = 0;
 			while(frame_count < 6000)
 			{
-				sphere(var_d1e4d605.origin, 4, (0.2, 1, 0.2), 1, 0, 24, 1);
+				sphere(side_cam_start.origin, 4, (0.2, 1, 0.2), 1, 0, 24, 1);
 				sphere(var_52c1d392.origin, 4, (0.2, 1, 0.2), 1, 0, 24, 1);
 				var_c3df7dfc = parms.var_b21e26bd;
 				if(isdefined(var_61437df7))
@@ -243,7 +243,7 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5)
 		var_da5ce8d6 = sqr(100);
 		var_14ba017f = sqr(200);
 		var_53db73e1 = var_14ba017f + 1;
-		var_d1e4d605 = undefined;
+		side_cam_start = undefined;
 		var_61437df7 = undefined;
 		var_52c1d392 = undefined;
 		foreach(var_188953e0 in level.var_6356fe3b)
@@ -252,14 +252,14 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5)
 			if(var_8c36c881 > var_da5ce8d6 && var_8c36c881 < var_53db73e1)
 			{
 				var_53db73e1 = var_8c36c881;
-				var_d1e4d605 = var_188953e0.start;
+				side_cam_start = var_188953e0.start;
 				var_52c1d392 = var_188953e0.end;
 				var_61437df7 = var_188953e0.var_82267185;
 			}
 		}
-		if(isdefined(var_d1e4d605))
+		if(isdefined(side_cam_start))
 		{
-			var_fa3c8b18 = var_d1e4d605.origin;
+			var_fa3c8b18 = side_cam_start.origin;
 			var_c3df7dfc = parms.var_b21e26bd;
 			if(isdefined(var_61437df7))
 			{
@@ -313,7 +313,7 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5)
 			var_7333a53a = var_fa3c8b18 + (parms.forward * 25);
 			var_ac259dff moveto(var_7333a53a, 0.8);
 			var_26f59de4 = parms.var_e93a7f0f - var_fa3c8b18;
-			if(!isdefined(var_d1e4d605) && lengthsquared(var_26f59de4))
+			if(!isdefined(side_cam_start) && lengthsquared(var_26f59de4))
 			{
 				angles_to_ground = vectortoangles(vectornormalize(var_26f59de4));
 				final_angles = var_a4607150 + function_23f390cc((angles_to_ground[0], 0, 0));
@@ -321,14 +321,14 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5)
 			}
 		}
 		playmaincamxcam(localclientnum, #"hash_5c6d1cccae8395ba", 1, undefined, undefined, var_ac259dff);
-		setdvar(#"hash_5f4ab31dca8bb404", 1);
+		setdvar(#"runtime_time_scale", 1);
 		wait(0.3);
-		setdvar(#"hash_5f4ab31dca8bb404", 0.1);
+		setdvar(#"runtime_time_scale", 0.1);
 		/#
 			assert(parms.var_6051349d > 0.3);
 		#/
 		wait(parms.var_6051349d - 0.3);
-		setdvar(#"hash_5f4ab31dca8bb404", 1);
+		setdvar(#"runtime_time_scale", 1);
 		var_ac259dff delete();
 		if(isdefined(self))
 		{

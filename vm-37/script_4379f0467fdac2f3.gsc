@@ -1,12 +1,12 @@
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\dev_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_4d214d02;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4d214d02
 	Checksum: 0xFA14C332
 	Offset: 0x80
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_30f3aa1706b7cb3d", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -31,7 +31,7 @@ function private autoexec function_89f2df9()
 function private function_70a657d8()
 {
 	/#
-		level thread function_2085db3b();
+		level thread init_devgui();
 		callback::on_spawned(&function_7a47eaf);
 	#/
 }
@@ -50,7 +50,7 @@ function private function_8ac3bea9()
 }
 
 /*
-	Name: function_2085db3b
+	Name: init_devgui
 	Namespace: namespace_4d214d02
 	Checksum: 0x2736643D
 	Offset: 0x130
@@ -58,14 +58,14 @@ function private function_8ac3bea9()
 	Parameters: 0
 	Flags: None
 */
-function function_2085db3b()
+function init_devgui()
 {
 	/#
 		while(!canadddebugcommand())
 		{
 			waitframe(1);
 		}
-		mapname = util::function_53bbf9d2();
+		mapname = util::get_map_name();
 		level.var_66e8da6c = 0;
 		level.var_d1bab1c8 = 0;
 		level.var_3330d3fd = 0;
@@ -175,7 +175,7 @@ function reset_player()
 		player switchtoweapon(weapon, 1);
 		player setclientthirdperson(0);
 		player setcharacterbodytype(level.var_7a47eaf);
-		player function_8fd843dd(0);
+		player setcharacteroutfit(0);
 	#/
 }
 
@@ -242,7 +242,7 @@ function function_f178ffde()
 			player giveweapon(weapon);
 			player switchtoweapon(weapon, 1);
 			player setcharacterbodytype(bodytype);
-			player function_8fd843dd(0);
+			player setcharacteroutfit(0);
 		}
 		else
 		{
@@ -314,7 +314,7 @@ function function_35b5321c()
 			player giveweapon(weapon);
 			player switchtoweapon(weapon, 1);
 			player setcharacterbodytype(bodytype);
-			player function_8fd843dd(0);
+			player setcharacteroutfit(0);
 		}
 		else
 		{
@@ -387,7 +387,7 @@ function function_1e1d709d()
 			player giveweapon(weapon);
 			player switchtoweapon(weapon, 1);
 			player setcharacterbodytype(bodytype);
-			player function_8fd843dd(0);
+			player setcharacteroutfit(0);
 		}
 		else
 		{
@@ -460,7 +460,7 @@ function setup_zombie()
 			player giveweapon(weapon);
 			player switchtoweapon(weapon, 1);
 			player setcharacterbodytype(bodytype);
-			player function_8fd843dd(0);
+			player setcharacteroutfit(0);
 		}
 		else
 		{

@@ -1,45 +1,45 @@
-#using script_1292451e284848cc;
-#using script_1883fa4e60abbf9f;
-#using script_1aa56b3bc89b63e5;
-#using script_263b7f2982258785;
-#using script_2d443451ce681a;
-#using script_31e9b35aaacbbd93;
-#using script_32399001bdb550da;
-#using script_35ae72be7b4fec10;
-#using script_35e4637ff0faed7f;
-#using script_37f9ff47f340fbe8;
+#using script_85cd2e9a28ea8a1;
 #using script_3dc93ca9902a9cda;
+#using script_1292451e284848cc;
+#using script_7cf3e180e994d17f;
+#using script_1aa56b3bc89b63e5;
 #using script_3de86a21a0c8d47b;
+#using script_35e4637ff0faed7f;
+#using script_31e9b35aaacbbd93;
 #using script_61cfc2ab8e60625;
 #using script_73e0d5e10c6348fa;
-#using script_7cf3e180e994d17f;
-#using script_85cd2e9a28ea8a1;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\util.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using script_32399001bdb550da;
+#using script_35ae72be7b4fec10;
+#using scripts\core_common\lui_shared.gsc;
+#using script_1883fa4e60abbf9f;
+#using script_37f9ff47f340fbe8;
 #using scripts\core_common\colors_shared.gsc;
 #using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
 #using scripts\cp_common\objectives.gsc;
-#using scripts\cp_common\skipto.gsc;
-#using scripts\cp_common\util.gsc;
+#using script_263b7f2982258785;
+#using script_2d443451ce681a;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-#namespace namespace_7d4dd7f0;
+#namespace tkdn_af_hill;
 
 /*
 	Name: starting
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x7A05F7FC
 	Offset: 0xB00
 	Size: 0x164
@@ -65,7 +65,7 @@ function starting(str_skipto)
 
 /*
 	Name: main
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x1217101F
 	Offset: 0xC70
 	Size: 0xE94
@@ -121,11 +121,11 @@ function main(str_skipto, b_starting)
 	snd::function_7db65a93("snd_overlook_scene");
 	waitframe(1);
 	level.player val::reset(#"overlook", "ignoreme");
-	player waittill(#"hash_1f8a4c0f086d8116");
+	player waittill(#"camera_up");
 	level.var_2762a9c sethighdetail(1);
 	level.var_2713b408 sethighdetail(1);
-	var_e43b1540 = getaiarray("af_enemy4", "targetname")[0];
-	var_e43b1540 sethighdetail(1);
+	af_enemy4 = getaiarray("af_enemy4", "targetname")[0];
+	af_enemy4 sethighdetail(1);
 	level notify(#"hash_186d95ebb54fca9f");
 	level thread scene::play("scene_tkd_hit3_intro_overlook_arash", "overlook_shot", [0:level.var_2713b408]);
 	level thread scene::play("scene_tkd_hit3_intro_overlook_adler", "overlook_shot", [1:level.adler, 0:level.woods]);
@@ -133,14 +133,14 @@ function main(str_skipto, b_starting)
 	level thread util::delay("play_b3.0_iced_mus", undefined, &music::playstinger, "b3.0_iced");
 	level thread util::delay("play_b3.0_iced_mus", undefined, &music::setmusicstate, "b4.0_hold_fire");
 	level thread util::delay("play_b4.1_identify_mus", undefined, &music::playstinger, "b4.1_identify");
-	level waittill(#"hash_2c1c27cfc400de3c", #"hash_380fe6172e5e75ed");
+	level waittill(#"start_sniping", #"hash_380fe6172e5e75ed");
 	level flag::set("start_sniping");
 	snd::function_7db65a93("start_sniping");
 	thread function_4bc0b384(player);
 	thread function_7a77e3be(player);
 	thread function_84d4429e(player);
 	res = undefined;
-	res = player waittilltimeout(10, #"hash_2772b8eb57492997", #"weapon_change", #"weapon_fired");
+	res = player waittilltimeout(10, #"end_binocs", #"weapon_change", #"weapon_fired");
 	if(res._notify != #"timeout")
 	{
 		if(res._notify != #"weapon_fired")
@@ -150,7 +150,7 @@ function main(str_skipto, b_starting)
 		}
 	}
 	level flag::set("end_binocs");
-	player notify(#"hash_2772b8eb57492997");
+	player notify(#"end_binocs");
 	if(res._notify != #"timeout")
 	{
 		level music::setmusicstate("none");
@@ -184,7 +184,7 @@ function main(str_skipto, b_starting)
 		}
 		else
 		{
-			var_e43b1540 sethighdetail(0);
+			af_enemy4 sethighdetail(0);
 			level notify(#"hash_36f87644d590f542");
 			level thread scene::play("scene_tkd_hit3_intro_overlook_arash", "hit_impact", [0:level.var_2713b408]);
 			level thread scene::play("scene_tkd_hit3_intro_overlook_enemy4", "miss");
@@ -194,7 +194,7 @@ function main(str_skipto, b_starting)
 	level.var_2762a9c sethighdetail(0);
 	util::function_3e65fe0b(0);
 	thread function_254c9ae();
-	thread namespace_38c39f5::function_9d8f5cd3();
+	thread tkdn_af_chase::function_9d8f5cd3();
 	waitframe(1);
 	savegame::function_7790f03(1);
 	level flag::wait_till_any([1:"woods_to_truck", 0:"overlook_guys_done"]);
@@ -215,7 +215,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: function_84d4429e
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xD9C96337
 	Offset: 0x1B10
 	Size: 0x38
@@ -224,13 +224,13 @@ function main(str_skipto, b_starting)
 */
 function function_84d4429e(player)
 {
-	level waittill(#"hash_27b6062a24591f8b");
+	level waittill(#"player_break_stealth_tarmac");
 	player notify(#"weapon_fired");
 }
 
 /*
 	Name: function_4f024edb
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x4848DFD9
 	Offset: 0x1B50
 	Size: 0x11C
@@ -247,13 +247,13 @@ function function_4f024edb()
 		var_2d1826f9 thread scene::play("scene_tkd_hit3_intro_overlook_guy3", "react_shot", [0:var_2d1826f9]);
 	}
 	level scene::play("scene_tkd_hit3_intro_overlook", "hit", [0:level.var_fac9425c]);
-	var_e43b1540 = getaiarray("af_enemy4", "targetname")[0];
-	function_9967d19b(var_e43b1540);
+	af_enemy4 = getaiarray("af_enemy4", "targetname")[0];
+	function_9967d19b(af_enemy4);
 }
 
 /*
 	Name: function_ca9dd78b
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x77993507
 	Offset: 0x1C78
 	Size: 0xB0
@@ -274,7 +274,7 @@ function function_ca9dd78b()
 
 /*
 	Name: function_32398bfb
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x1BAE3000
 	Offset: 0x1D30
 	Size: 0x332
@@ -315,7 +315,7 @@ function function_32398bfb(player)
 
 /*
 	Name: function_c8a35cef
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x4E25D28D
 	Offset: 0x2070
 	Size: 0x74
@@ -331,7 +331,7 @@ function function_c8a35cef()
 
 /*
 	Name: function_b0d8b75
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x8A8234FC
 	Offset: 0x20F0
 	Size: 0x7C
@@ -347,7 +347,7 @@ function function_b0d8b75()
 
 /*
 	Name: function_5dd4ff85
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x17CC14E7
 	Offset: 0x2178
 	Size: 0x44
@@ -362,7 +362,7 @@ function function_5dd4ff85()
 
 /*
 	Name: function_31afa2db
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x39B585D3
 	Offset: 0x21C8
 	Size: 0xE4
@@ -386,7 +386,7 @@ function function_31afa2db()
 
 /*
 	Name: function_254c9ae
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xAC164829
 	Offset: 0x22B8
 	Size: 0x12C
@@ -407,7 +407,7 @@ function function_254c9ae()
 
 /*
 	Name: function_b432f86a
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xDDE280F9
 	Offset: 0x23F0
 	Size: 0x10C
@@ -418,7 +418,7 @@ function function_b432f86a(nodename)
 {
 	if(self == level.woods)
 	{
-		level endon(#"hash_550a742f9c1a9eb3");
+		level endon(#"woods_to_truck");
 	}
 	self flag::wait_till_clear(#"scriptedanim");
 	self stopanimscripted();
@@ -430,7 +430,7 @@ function function_b432f86a(nodename)
 
 /*
 	Name: function_7a77e3be
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xD3C4A4AA
 	Offset: 0x2508
 	Size: 0xBE
@@ -445,7 +445,7 @@ function function_7a77e3be(player)
 		if(player weaponswitchbuttonpressed() || player buttonbitstate("BUTTON_BIT_ANY_WEAP_CHANGE"))
 		{
 			level flag::set("end_binocs");
-			player notify(#"hash_2772b8eb57492997");
+			player notify(#"end_binocs");
 			break;
 		}
 		waitframe(1);
@@ -454,7 +454,7 @@ function function_7a77e3be(player)
 
 /*
 	Name: function_4bc0b384
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x1BF70AE5
 	Offset: 0x25D0
 	Size: 0xEC
@@ -463,7 +463,7 @@ function function_7a77e3be(player)
 */
 function function_4bc0b384(player)
 {
-	player waittill(#"hash_2772b8eb57492997");
+	player waittill(#"end_binocs");
 	player val::reset(#"overlook", "disable_weapon_cycling");
 	sniper = getweapon(#"sniper_quickscope_t9");
 	player seteverhadweaponall(1);
@@ -475,7 +475,7 @@ function function_4bc0b384(player)
 
 /*
 	Name: function_ef1d8a47
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xE3395701
 	Offset: 0x26C8
 	Size: 0x98
@@ -497,7 +497,7 @@ function function_ef1d8a47()
 
 /*
 	Name: cleanup
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x6EA5AE92
 	Offset: 0x2768
 	Size: 0xA4
@@ -513,7 +513,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x5F5D1141
 	Offset: 0x2818
 	Size: 0x44
@@ -528,7 +528,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x1A02887C
 	Offset: 0x2868
 	Size: 0x34
@@ -542,7 +542,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x34A2A10E
 	Offset: 0x28A8
 	Size: 0xC4
@@ -559,7 +559,7 @@ function init_scenes()
 
 /*
 	Name: function_2fc20b49
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xA099D2C0
 	Offset: 0x2978
 	Size: 0x4C
@@ -574,7 +574,7 @@ function function_2fc20b49(a_ents)
 
 /*
 	Name: function_309e4828
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x89E81E32
 	Offset: 0x29D0
 	Size: 0xBC
@@ -595,7 +595,7 @@ function function_309e4828(a_ents)
 
 /*
 	Name: function_f0cab8f5
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xB829E3B6
 	Offset: 0x2A98
 	Size: 0x5A
@@ -605,15 +605,15 @@ function function_309e4828(a_ents)
 function function_f0cab8f5(a_ents)
 {
 	level.var_2124e12b = a_ents[#"hash_f4e2bb35f1a6ff3"];
-	if(isdefined(a_ents[#"hash_4b83e6cb49ee3b37"]))
+	if(isdefined(a_ents[#"af_enemy4"]))
 	{
-		guy = a_ents[#"hash_4b83e6cb49ee3b37"];
+		guy = a_ents[#"af_enemy4"];
 	}
 }
 
 /*
 	Name: function_9b3565b1
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xB81AE44C
 	Offset: 0x2B00
 	Size: 0xA4
@@ -630,7 +630,7 @@ function function_9b3565b1(a_ents)
 
 /*
 	Name: function_94c3f34a
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x2CDEAC1D
 	Offset: 0x2BB0
 	Size: 0x74
@@ -649,7 +649,7 @@ function function_94c3f34a(name, ents)
 
 /*
 	Name: function_78bc26d5
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xDBEA83C4
 	Offset: 0x2C30
 	Size: 0x34
@@ -664,7 +664,7 @@ function function_78bc26d5()
 
 /*
 	Name: function_f7c7ce51
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x7B48711B
 	Offset: 0x2C70
 	Size: 0x44
@@ -679,7 +679,7 @@ function function_f7c7ce51()
 
 /*
 	Name: handle_camera
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x144B2049
 	Offset: 0x2CC0
 	Size: 0x2D4
@@ -696,7 +696,7 @@ function handle_camera()
 	player waittill(#"binoculars");
 	player notifyonplayercommandremove("binoculars", "+actionslot 4");
 	waitframe(1);
-	player notify(#"hash_1f8a4c0f086d8116");
+	player notify(#"camera_up");
 	waitframe(1);
 	player giveweapon(level.var_42db149f);
 	var_796f04ff = level.var_42db149f;
@@ -719,7 +719,7 @@ function handle_camera()
 
 /*
 	Name: function_8c38a6f0
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x61D3E023
 	Offset: 0x2FA0
 	Size: 0x44
@@ -733,7 +733,7 @@ function private function_8c38a6f0(parms)
 
 /*
 	Name: handle_intro_dialog
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x435F9102
 	Offset: 0x2FF0
 	Size: 0x54
@@ -749,7 +749,7 @@ function handle_intro_dialog()
 
 /*
 	Name: function_8c011eca
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x9B12AC38
 	Offset: 0x3050
 	Size: 0xD4
@@ -771,7 +771,7 @@ function function_8c011eca()
 
 /*
 	Name: function_9f929cf3
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x176412A5
 	Offset: 0x3130
 	Size: 0x7C
@@ -787,7 +787,7 @@ function function_9f929cf3()
 
 /*
 	Name: function_d75e55a1
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xEA52B94F
 	Offset: 0x31B8
 	Size: 0x342
@@ -804,8 +804,8 @@ function function_d75e55a1(targets, lines, fov, var_dc8ec980)
 	{
 		var_dc8ec980 = 5;
 	}
-	level endon(#"hash_200f785b59ddba03");
-	level endon(#"hash_27b6062a24591f8b");
+	level endon(#"player_break_stealth_fired");
+	level endon(#"player_break_stealth_tarmac");
 	level endon(#"hash_63e5acd07208c35d");
 	if(!isarray(targets))
 	{
@@ -817,7 +817,7 @@ function function_d75e55a1(targets, lines, fov, var_dc8ec980)
 	}
 	i = 0;
 	player = getplayers()[0];
-	while(!isdefined(player.var_3bb22a53))
+	while(!isdefined(player.spy_camera))
 	{
 		waitframe(1);
 	}
@@ -862,7 +862,7 @@ function function_d75e55a1(targets, lines, fov, var_dc8ec980)
 
 /*
 	Name: function_e779ff3c
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x3CACDDD4
 	Offset: 0x3508
 	Size: 0xEE
@@ -887,7 +887,7 @@ function function_e779ff3c(player, eye_pos, eye_angles, fov_cos, var_a74a4e75, f
 
 /*
 	Name: function_b12fabe5
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x9D122F3F
 	Offset: 0x3600
 	Size: 0xCC
@@ -916,7 +916,7 @@ function function_b12fabe5(player)
 
 /*
 	Name: function_9967d19b
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x10266C1E
 	Offset: 0x36D8
 	Size: 0x94
@@ -936,7 +936,7 @@ function function_9967d19b(excludes)
 
 /*
 	Name: function_f1f9011d
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x3E1F11C1
 	Offset: 0x3778
 	Size: 0x144
@@ -962,7 +962,7 @@ function function_f1f9011d()
 
 /*
 	Name: function_cc465a2
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xD796BA48
 	Offset: 0x38C8
 	Size: 0x204
@@ -971,7 +971,7 @@ function function_f1f9011d()
 */
 function function_cc465a2(player)
 {
-	level endon(#"hash_7b41adfed753464a");
+	level endon(#"af_hill_complete");
 	level endon(#"hash_1a8ccb31e7a09c0e");
 	thread function_b12fabe5(player);
 	ret = level flag::wait_till_any([2:"stealth_spotted", 1:"player_break_stealth_tarmac", 0:"player_break_stealth_fired"]);
@@ -980,7 +980,7 @@ function function_cc465a2(player)
 	{
 		return;
 	}
-	if(ret._notify == #"hash_27b6062a24591f8b" && level flag::get("start_sniping"))
+	if(ret._notify == #"player_break_stealth_tarmac" && level flag::get("start_sniping"))
 	{
 		return;
 	}
@@ -996,7 +996,7 @@ function function_cc465a2(player)
 
 /*
 	Name: function_a2015343
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0x8FDDB9F6
 	Offset: 0x3AD8
 	Size: 0x398
@@ -1044,7 +1044,7 @@ function function_a2015343(str_skipto)
 
 /*
 	Name: function_61f33d07
-	Namespace: namespace_7d4dd7f0
+	Namespace: tkdn_af_hill
 	Checksum: 0xDCE16BF6
 	Offset: 0x3E78
 	Size: 0x224

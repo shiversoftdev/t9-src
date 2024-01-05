@@ -1,13 +1,13 @@
-#using script_57f7003580bb15e0;
-#using script_6c8abe14025b47c4;
-#using script_7bafaa95bb1b427e;
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\weapons\weapons.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace sparrow;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: sparrow
 	Checksum: 0xF5556A1E
 	Offset: 0xD8
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"sparrow", &__init__, undefined, undefined, #"killstreaks");
 }
@@ -31,7 +31,7 @@ function private autoexec function_89f2df9()
 */
 function __init__()
 {
-	killstreaks::function_e4ef8390("killstreak_sparrow", &killstreaks::function_fc82c544);
+	killstreaks::register_killstreak("killstreak_sparrow", &killstreaks::function_fc82c544);
 }
 
 /*
@@ -128,8 +128,8 @@ function function_be16c377()
 */
 function function_f4e48434(position)
 {
-	var_c84f4998 = getwaterheight(position) - position[2];
-	return var_c84f4998 >= 24;
+	water_depth = getwaterheight(position) - position[2];
+	return water_depth >= 24;
 }
 
 /*

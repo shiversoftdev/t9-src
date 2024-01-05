@@ -1,4 +1,4 @@
-#using script_788472602edbe3b9;
+#using scripts\mp_common\player\player_loadout.gsc;
 #using scripts\core_common\gameobjects_shared.gsc;
 
 #namespace os;
@@ -14,7 +14,7 @@
 */
 function private autoexec function_9b088568()
 {
-	level notify(37175570);
+	level notify(-37175570);
 }
 
 /*

@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_fd95a9c : class_6aaccc24
+class class_fd95a9c : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_fd95a9c : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_3ae8b40f
+		Name: set_confirmbtn
 		Namespace: namespace_fd95a9c
 		Checksum: 0x46F58CCC
 		Offset: 0x548
@@ -52,13 +52,13 @@ class class_fd95a9c : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3ae8b40f(localclientnum, value)
+	function set_confirmbtn(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "confirmBtn", value);
+		[[ self ]]->set_data(localclientnum, "confirmBtn", value);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_fd95a9c
 		Checksum: 0x58EBB4CB
 		Offset: 0x438
@@ -66,13 +66,13 @@ class class_fd95a9c : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("DOA_KeyTrade");
+		cluielem::register_clientside("DOA_KeyTrade");
 	}
 
 	/*
-		Name: function_8a6595db
+		Name: set_textboxhint
 		Namespace: namespace_fd95a9c
 		Checksum: 0xF1937791
 		Offset: 0x510
@@ -80,9 +80,9 @@ class class_fd95a9c : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_8a6595db(localclientnum, value)
+	function set_textboxhint(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "textBoxHint", value);
+		[[ self ]]->set_data(localclientnum, "textBoxHint", value);
 	}
 
 	/*
@@ -96,9 +96,9 @@ class class_fd95a9c : class_6aaccc24
 	*/
 	function setup_clientfields(var_909954a3, var_66f4eb53)
 	{
-		namespace_6aaccc24::setup_clientfields("DOA_KeyTrade");
-		namespace_6aaccc24::function_dcb34c80("string", "textBoxHint", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "confirmBtn", 1);
+		cluielem::setup_clientfields("DOA_KeyTrade");
+		cluielem::function_dcb34c80("string", "textBoxHint", 1);
+		cluielem::function_dcb34c80("string", "confirmBtn", 1);
 	}
 
 	/*
@@ -112,9 +112,9 @@ class class_fd95a9c : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "textBoxHint", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "confirmBtn", #"");
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "textBoxHint", #"");
+		[[ self ]]->set_data(localclientnum, "confirmBtn", #"");
 	}
 
 }
@@ -132,7 +132,7 @@ class class_fd95a9c : class_6aaccc24
 */
 function private autoexec function_db33eec9()
 {
-	level notify(1804819692);
+	level notify(-1804819692);
 }
 
 /*
@@ -168,7 +168,7 @@ function register(var_909954a3, var_66f4eb53)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: doa_keytrade
 	Checksum: 0x31910F9C
 	Offset: 0x278
@@ -176,10 +176,10 @@ function register(var_909954a3, var_66f4eb53)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_fd95a9c();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -226,7 +226,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_8a6595db
+	Name: set_textboxhint
 	Namespace: doa_keytrade
 	Checksum: 0xBE3C601
 	Offset: 0x330
@@ -234,13 +234,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_8a6595db(localclientnum, value)
+function set_textboxhint(localclientnum, value)
 {
-	[[ self ]]->function_8a6595db(localclientnum, value);
+	[[ self ]]->set_textboxhint(localclientnum, value);
 }
 
 /*
-	Name: function_3ae8b40f
+	Name: set_confirmbtn
 	Namespace: doa_keytrade
 	Checksum: 0xDE0385CE
 	Offset: 0x360
@@ -248,8 +248,8 @@ function function_8a6595db(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_3ae8b40f(localclientnum, value)
+function set_confirmbtn(localclientnum, value)
 {
-	[[ self ]]->function_3ae8b40f(localclientnum, value);
+	[[ self ]]->set_confirmbtn(localclientnum, value);
 }
 

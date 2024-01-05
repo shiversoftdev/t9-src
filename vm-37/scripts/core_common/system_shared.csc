@@ -86,7 +86,7 @@ function function_5095b2c6(func)
 		else
 		{
 			/#
-				assert(isdefined(level.system_funcs[func.reqs]), ("" + (function_7a600918(func.reqs) ? function_9e72a96(func.reqs) : func.reqs)) + "");
+				assert(isdefined(level.system_funcs[func.reqs]), ("" + (ishash(func.reqs) ? function_9e72a96(func.reqs) : func.reqs)) + "");
 			#/
 			thread exec_post_system(level.system_funcs[func.reqs]);
 		}
@@ -164,7 +164,7 @@ function function_8dfa23e0(func)
 		else
 		{
 			/#
-				assert(isdefined(level.system_funcs[func.reqs]), ("" + (function_7a600918(func.reqs) ? function_9e72a96(func.reqs) : func.reqs)) + "");
+				assert(isdefined(level.system_funcs[func.reqs]), ("" + (ishash(func.reqs) ? function_9e72a96(func.reqs) : func.reqs)) + "");
 			#/
 			thread exec_pre_system(level.system_funcs[func.reqs]);
 		}
@@ -241,7 +241,7 @@ function function_3e3686fa(func)
 		else
 		{
 			/#
-				assert(isdefined(level.system_funcs[func.reqs]), ("" + (function_7a600918(func.reqs) ? function_9e72a96(func.reqs) : func.reqs)) + "");
+				assert(isdefined(level.system_funcs[func.reqs]), ("" + (ishash(func.reqs) ? function_9e72a96(func.reqs) : func.reqs)) + "");
 			#/
 			thread function_6cc01f0(level.system_funcs[func.reqs]);
 		}

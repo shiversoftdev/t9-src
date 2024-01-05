@@ -1,35 +1,35 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
+#using script_4611af4073d18808;
+#using script_36fc02e86719d0f5;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
+#using script_2a5bf5b4a00cee0d;
+#using script_40f967ad5d18ea74;
+#using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
+#using script_774302f762d76254;
 #using script_1b0b07ff57d1dde3;
 #using script_1ee011cd0961afd7;
-#using script_2255a7ad3edc838f;
-#using script_2a5bf5b4a00cee0d;
 #using script_350cffecd05ef6cf;
-#using script_36fc02e86719d0f5;
-#using script_40f967ad5d18ea74;
-#using script_4611af4073d18808;
-#using script_47851dbeea22fe66;
-#using script_4d748e58ce25b60c;
-#using script_50fca1a24ae351;
-#using script_5549681e1669c11a;
 #using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_68cdf0ca5df5e;
+#using script_1b01e95a6b5270fd;
+#using script_50fca1a24ae351;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using script_774302f762d76254;
+#using script_5549681e1669c11a;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
+#using script_68cdf0ca5df5e;
+#using scripts\core_common\bots\bot.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_e857b038;
 
@@ -794,7 +794,7 @@ function devguithink()
 			case "hash_609ef494db2ab837":
 			{
 				player = getplayers()[0];
-				level doa_pickups::function_d080f0db(doa_pickups::function_6265bde4(getdvar(#"hash_4e8b5bae739da5a", "zombietron_lmg")), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
+				level doa_pickups::itemspawn(doa_pickups::function_6265bde4(getdvar(#"hash_4e8b5bae739da5a", "zombietron_lmg")), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
 				break;
 			}
 		}
@@ -995,7 +995,7 @@ function function_8f024d05()
 		y = yoff;
 		namespace_1e25ad94::function_70e370a(x, y, ("ROUND " + level.doa.roundnumber) + " STATS", (1, 1, 1), 1, 2, 0.05);
 		y = y + 40;
-		if(is_true(level.doa.var_e230dc1d))
+		if(is_true(level.doa.challengeactive))
 		{
 			text = "CHALLENGE ROUND ACTIVE";
 			if(level flag::get("challenge_round_spawnOverride"))
@@ -1370,9 +1370,9 @@ function function_ddde8af6(delay)
 			{
 				self.doa.score.bombs = 9;
 			}
-			if(self.doa.score.var_7a3c00a0 <= 1)
+			if(self.doa.score.boosts <= 1)
 			{
-				self.doa.score.var_7a3c00a0 = 9;
+				self.doa.score.boosts = 9;
 			}
 		}
 		wait(1);
@@ -1468,7 +1468,7 @@ function function_1552e594()
 			{
 				guy setplayerangles((0, randomint(360), 0));
 				guy.doa.var_d524abd8 = 1;
-				namespace_1e25ad94::debugmsg("Bot is boosting.  Boosts Left:" + guy.doa.score.var_7a3c00a0);
+				namespace_1e25ad94::debugmsg("Bot is boosting.  Boosts Left:" + guy.doa.score.boosts);
 			}
 			if(roll == 0)
 			{
@@ -1683,15 +1683,15 @@ function function_a4037f83(pickup)
 			wait(1);
 			continue;
 		}
-		if(self.doa.score.var_7a3c00a0 == 0 && randomint(500) == 0)
+		if(self.doa.score.boosts == 0 && randomint(500) == 0)
 		{
-			self.doa.score.var_7a3c00a0 = 2;
+			self.doa.score.boosts = 2;
 		}
 		yaw = self namespace_ec06fe4a::getyaw2d(pickup.origin);
 		angles = (0, yaw, 0);
 		self setplayerangles(angles);
 		self.doa.var_d524abd8 = 1;
-		namespace_1e25ad94::debugmsg((("Bot is boosting at pickup:" + ([[ pickup.def ]]->getname())) + ".  Boosts Left:") + self.doa.score.var_7a3c00a0);
+		namespace_1e25ad94::debugmsg((("Bot is boosting at pickup:" + ([[ pickup.def ]]->getname())) + ".  Boosts Left:") + self.doa.score.boosts);
 		wait(0.5);
 	}
 }
@@ -1797,7 +1797,7 @@ function function_61b604bf()
 				label = label + toks[i];
 			}
 			var_59ea00e = ("" + name) + "";
-			util::function_e2e9d901(label, var_59ea00e);
+			util::add_devgui(label, var_59ea00e);
 		}
 		var_663588d = "";
 		foreach(def in level.doa.pickups.itemdefs)
@@ -1818,7 +1818,7 @@ function function_61b604bf()
 				label = label + toks[i];
 			}
 			var_59ea00e = ("" + name) + "";
-			util::function_e2e9d901(label, var_59ea00e);
+			util::add_devgui(label, var_59ea00e);
 		}
 		var_663588d = "";
 		foreach(def in level.doa.pickups.itemdefs)
@@ -1839,7 +1839,7 @@ function function_61b604bf()
 				label = label + toks[i];
 			}
 			var_59ea00e = ("" + name) + "";
-			util::function_e2e9d901(label, var_59ea00e);
+			util::add_devgui(label, var_59ea00e);
 		}
 	#/
 }

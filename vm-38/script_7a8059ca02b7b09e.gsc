@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_f4a96b08;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_b2dbcba5()
 {
-	level notify(2076279705);
+	level notify(-2076279705);
 }
 
 #namespace telemetry;

@@ -1,22 +1,22 @@
-#using script_14f4a3c583c77d4b;
-#using script_27d214e32f50853d;
-#using script_3f9e0dc8454d98e1;
-#using script_47fb62300ac0bd60;
-#using script_6e3c826b1814cab6;
-#using script_ab890501c40b73c;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_bgb.gsc;
-#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\trials\zm_trial_damage_drains_points.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_loadout.gsc;
+#using scripts\zm_common\zm_customgame.gsc;
+#using scripts\zm_common\zm_contracts.gsc;
+#using scripts\zm_common\zm_bgb.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_score;
 
@@ -31,11 +31,11 @@
 */
 function private autoexec function_53b607b5()
 {
-	level notify(1669004051);
+	level notify(-1669004051);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_score
 	Checksum: 0x494C25BA
 	Offset: 0x320
@@ -43,7 +43,7 @@ function private autoexec function_53b607b5()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_score", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -68,9 +68,9 @@ function private function_70a657d8()
 	score_cf_register_info("death_head", 1, 3);
 	score_cf_register_info("death_melee", 1, 3);
 	score_cf_register_info("transform_kill", 1, 3);
-	clientfield::function_a8bbc967("hudItems.doublePointsActive", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.doublePointsActive", 1, 1, "int");
 	callback::on_spawned(&player_on_spawned);
-	callback::function_10a4dd0a(&function_10a4dd0a);
+	callback::on_item_pickup(&on_item_pickup);
 	level callback::on_ai_killed(&function_a3d16ee5);
 	level.score_total = 0;
 	level.a_func_score_events = [];
@@ -569,9 +569,9 @@ function player_reduce_points(event, n_amount)
 		}
 		case "no_revive_penalty":
 		{
-			if(namespace_59ff1d6c::function_901b751c(#"hash_64291919b16c489a"))
+			if(zm_custom::function_901b751c(#"hash_64291919b16c489a"))
 			{
-				percent = namespace_59ff1d6c::function_901b751c(#"hash_64291919b16c489a") / 100;
+				percent = zm_custom::function_901b751c(#"hash_64291919b16c489a") / 100;
 				points = self.score * percent;
 			}
 			else if(level.round_number >= 50)
@@ -583,9 +583,9 @@ function player_reduce_points(event, n_amount)
 		}
 		case "died":
 		{
-			if(namespace_59ff1d6c::function_901b751c(#"hash_1158d006a3913ef6"))
+			if(zm_custom::function_901b751c(#"hash_1158d006a3913ef6"))
 			{
-				percent = namespace_59ff1d6c::function_901b751c(#"hash_1158d006a3913ef6") / 100;
+				percent = zm_custom::function_901b751c(#"hash_1158d006a3913ef6") / 100;
 				points = self.score * percent;
 			}
 			else if(level.round_number >= 50)
@@ -597,15 +597,15 @@ function player_reduce_points(event, n_amount)
 		}
 		case "downed":
 		{
-			if(level.round_number < 50 && !namespace_59ff1d6c::function_901b751c(#"hash_1fed0d9afc0b0040"))
+			if(level.round_number < 50 && !zm_custom::function_901b751c(#"hash_1fed0d9afc0b0040"))
 			{
 				percent = 0;
 			}
 			else
 			{
-				if(namespace_59ff1d6c::function_901b751c(#"hash_1fed0d9afc0b0040"))
+				if(zm_custom::function_901b751c(#"hash_1fed0d9afc0b0040"))
 				{
-					percent = namespace_59ff1d6c::function_901b751c(#"hash_1fed0d9afc0b0040") / 100;
+					percent = zm_custom::function_901b751c(#"hash_1fed0d9afc0b0040") / 100;
 				}
 				else
 				{
@@ -654,7 +654,7 @@ function player_reduce_points(event, n_amount)
 		points = 4000000;
 	}
 	self.score = points;
-	self notify(#"hash_733a824fa6229915", {#str_reason:event});
+	self notify(#"reduced_points", {#str_reason:event});
 }
 
 /*
@@ -704,10 +704,10 @@ function add_to_player_score(points, b_add_to_total, str_awarded_by, var_e6e6150
 		self zm_stats::function_301c4be2("boas_scoreEarned", n_points_to_add_to_currency);
 		self zm_stats::function_c0c6ab19(#"zearned", n_points_to_add_to_currency, 1);
 		level notify(#"earned_points", {#points:points, #player:self});
-		self contracts::function_5b88297d(#"hash_781e103e02826009", n_points_to_add_to_currency, #"zstandard");
+		self contracts::increment_zm_contract(#"hash_781e103e02826009", n_points_to_add_to_currency, #"zstandard");
 		if(zm_utility::is_standard())
 		{
-			self zm_stats::function_c0c6ab19(#"hash_61d61f092d2739eb", n_points_to_add_to_currency);
+			self zm_stats::function_c0c6ab19(#"rush_points", n_points_to_add_to_currency);
 		}
 		if(b_add_to_total)
 		{
@@ -750,7 +750,7 @@ function minus_to_player_score(points, b_forced)
 	}
 	if(!b_forced)
 	{
-		self contracts::function_5b88297d(#"hash_257283d6c7065a1e", points);
+		self contracts::increment_zm_contract(#"hash_257283d6c7065a1e", points);
 	}
 	self.score = self.score - points;
 	self stats::function_dad108fa(#"hash_59d8674357c2b6de", points);
@@ -865,7 +865,7 @@ function can_player_purchase(n_cost, var_1c65f833)
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: zm_score
 	Checksum: 0x5DAC7254
 	Offset: 0x21C0
@@ -873,7 +873,7 @@ function can_player_purchase(n_cost, var_1c65f833)
 	Parameters: 1
 	Flags: Linked
 */
-function function_10a4dd0a(s_params)
+function on_item_pickup(s_params)
 {
 	var_a6762160 = s_params.item.var_a6762160;
 	if(var_a6762160.itemtype === #"hash_910bf9605abbcea")
@@ -991,7 +991,7 @@ function function_89db94b3(e_attacker, n_damage, e_inflictor)
 	}
 	if(n_points)
 	{
-		if(isdefined(e_inflictor) && e_inflictor.var_9fde8624 === #"hash_44aa977896e18e7f")
+		if(isdefined(e_inflictor) && e_inflictor.var_9fde8624 === #"zombie_wolf_ally")
 		{
 			e_attacker player_add_points("damage_points", 10, undefined, undefined, undefined, undefined, undefined, self.var_12745932);
 			self.var_f256a4d9 = self.var_f256a4d9 - n_points;

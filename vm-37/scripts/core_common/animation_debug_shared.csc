@@ -1,11 +1,11 @@
-#using scripts\core_common\animation_shared.csc;
-#using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\animation_shared.csc;
 
 #namespace animation;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: animation
 	Checksum: 0xEC0C1CA8
 	Offset: 0x78
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_26dee29e21290041", &function_70a657d8, undefined, undefined, undefined);
 }

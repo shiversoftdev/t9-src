@@ -1,10 +1,10 @@
-#using scripts\core_common\animation_shared.csc;
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\beam_shared.csc;
+#using scripts\core_common\animation_shared.csc;
 
 #namespace namespace_af1ba366;
 
@@ -19,11 +19,11 @@
 */
 function private autoexec function_bd011d8f()
 {
-	level notify(1705312307);
+	level notify(-1705312307);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_af1ba366
 	Checksum: 0x97319921
 	Offset: 0x358
@@ -31,7 +31,7 @@ function private autoexec function_bd011d8f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_779f30bffb82a50e", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -51,11 +51,11 @@ function function_70a657d8()
 	{
 		return;
 	}
-	var_39539c05 = zm_utility::function_e51dc2d8();
+	var_39539c05 = zm_utility::is_ee_enabled();
 	var_95613111 = #"hash_50cc93a10c9d2175";
 	var_a0ab1f0d = getgametypesetting(var_95613111);
 	/#
-		var_39539c05 = getdvarint(#"hash_2992299f853b2039", 0);
+		var_39539c05 = getdvarint(#"zm_ee_enabled", 0);
 		var_a0ab1f0d = 1;
 	#/
 	if(!var_39539c05 || !var_a0ab1f0d)
@@ -74,8 +74,8 @@ function function_70a657d8()
 	clientfield::register("vehicle", "" + #"hash_1e59af4706036a79", 1, 1, "int", &function_858fe85a, 0, 0);
 	clientfield::register("vehicle", "" + #"hash_3178e1dcaee33fd3", 1, 1, "int", &laser_fx, 0, 0);
 	clientfield::register("world", "" + #"chopper_crash", 1, 1, "int", &function_3ec12c82, 0, 0);
-	clientfield::register("world", "" + #"hash_4c8a7e79b5a2c61d", 1, 1, "int", &function_1c47acdc, 0, 0);
-	clientfield::register("world", "" + #"hash_2c5407e7aece0a93", 1, 1, "int", &function_e4145df1, 0, 0);
+	clientfield::register("world", "" + #"end_of_level_corpses", 1, 1, "int", &function_1c47acdc, 0, 0);
+	clientfield::register("world", "" + #"end_of_level_exfil_outro_igc_props", 1, 1, "int", &function_e4145df1, 0, 0);
 	clientfield::register("world", "" + #"hash_46265c2ce587e427", 1, 1, "int", &function_62b0987f, 0, 0);
 	animation::add_notetrack_func("play_outro_music", &function_fdbfd57f);
 }
@@ -406,7 +406,7 @@ function private ambient_fx(localclientnum, oldval, newval, bnewent, binitialsna
 			}
 			else
 			{
-				self function_bf9d3071("rob_orda_dissolve_sr");
+				self playrenderoverridebundle("rob_orda_dissolve_sr");
 			}
 		}
 	}
@@ -419,8 +419,8 @@ function private ambient_fx(localclientnum, oldval, newval, bnewent, binitialsna
 		}
 		else if(self.model === #"hash_46cb6387fd2006a7")
 		{
-			self.var_51d78901 = playfx(fieldname, #"hash_38c212dea1c32d51", self.origin + vectorscale((0, 0, 1), 7000), anglestoforward(self.angles), anglestoup(self.angles + vectorscale((1, 0, 0), 90)));
-			self.var_d63b9eb9 = playfx(fieldname, #"hash_3a2680041b2dde0c", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
+			self.var_51d78901 = playfx(fieldname, #"zm_ai/fx9_orda_spawn_portal_c", self.origin + vectorscale((0, 0, 1), 7000), anglestoforward(self.angles), anglestoup(self.angles + vectorscale((1, 0, 0), 90)));
+			self.var_d63b9eb9 = playfx(fieldname, #"sr/fx9_orda_aether_portal_beam", self.origin, anglestoforward(self.angles), anglestoup(self.angles));
 			if(!isdefined(self.var_e1cd0eb7))
 			{
 				self.var_e1cd0eb7 = self.origin + vectorscale((0, 0, 1), 500);

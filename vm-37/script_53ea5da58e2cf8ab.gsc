@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_d0a96b4 : class_6aaccc24
+class class_d0a96b4 : cluielem
 {
 
 	/*
@@ -44,7 +44,7 @@ class class_d0a96b4 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -58,7 +58,7 @@ class class_d0a96b4 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -72,7 +72,7 @@ class class_d0a96b4 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("TerminalKeyboardFrame");
+		cluielem::setup_clientfields("TerminalKeyboardFrame");
 	}
 
 }

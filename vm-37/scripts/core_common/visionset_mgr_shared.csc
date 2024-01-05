@@ -1,12 +1,12 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace visionset_mgr;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: visionset_mgr
 	Checksum: 0x4C207AC5
 	Offset: 0x168
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"visionset_mgr", &function_70a657d8, &finalize_initialization, undefined, undefined);
 }

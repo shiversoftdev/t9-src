@@ -1,13 +1,13 @@
-#using script_47fb62300ac0bd60;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\math_shared.gsc;
 
 #namespace sprint_boost_grenade;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: sprint_boost_grenade
 	Checksum: 0xE924DEA
 	Offset: 0x88
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"sprint_boost_grenade", &function_70a657d8, undefined, undefined, undefined);
 }

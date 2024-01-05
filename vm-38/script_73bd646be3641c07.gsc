@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_5b1144e;
 
@@ -14,11 +14,11 @@
 */
 function private autoexec function_7353d272()
 {
-	level notify(1446905279);
+	level notify(-1446905279);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_5b1144e
 	Checksum: 0x31EF873D
 	Offset: 0xB8
@@ -26,7 +26,7 @@ function private autoexec function_7353d272()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1e8eafe505e52c51", &function_70a657d8, undefined, undefined, undefined);
 }

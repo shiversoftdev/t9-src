@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_4c6a0e72 : class_6aaccc24
+class ccp_chyron : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_4c6a0e72
+		Namespace: ccp_chyron
 		Checksum: 0x754B401B
 		Offset: 0x478
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_4c6a0e72 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_4c6a0e72
+		Namespace: ccp_chyron
 		Checksum: 0x1753957D
 		Offset: 0x898
 		Size: 0x14
@@ -30,22 +30,22 @@ class class_4c6a0e72 : class_6aaccc24
 	}
 
 	/*
-		Name: function_6b7b6e4
-		Namespace: namespace_4c6a0e72
+		Name: set_line3
+		Namespace: ccp_chyron
 		Checksum: 0xC4DFBD60
 		Offset: 0x7B8
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_6b7b6e4(localclientnum, value)
+	function set_line3(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "line3", value);
+		[[ self ]]->set_data(localclientnum, "line3", value);
 	}
 
 	/*
 		Name: open
-		Namespace: namespace_4c6a0e72
+		Namespace: ccp_chyron
 		Checksum: 0x9772144E
 		Offset: 0x718
 		Size: 0x24
@@ -54,68 +54,68 @@ class class_4c6a0e72 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_147e5271
-		Namespace: namespace_4c6a0e72
+		Name: set_line2
+		Namespace: ccp_chyron
 		Checksum: 0x28255A1D
 		Offset: 0x780
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_147e5271(localclientnum, value)
+	function set_line2(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "line2", value);
+		[[ self ]]->set_data(localclientnum, "line2", value);
 	}
 
 	/*
-		Name: function_2a377de3
-		Namespace: namespace_4c6a0e72
+		Name: set_line5
+		Namespace: ccp_chyron
 		Checksum: 0x9AE5215A
 		Offset: 0x828
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_2a377de3(localclientnum, value)
+	function set_line5(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "line5", value);
+		[[ self ]]->set_data(localclientnum, "line5", value);
 	}
 
 	/*
-		Name: function_4b584028
-		Namespace: namespace_4c6a0e72
+		Name: set_line1
+		Namespace: ccp_chyron
 		Checksum: 0x78584389
 		Offset: 0x748
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4b584028(localclientnum, value)
+	function set_line1(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "line1", value);
+		[[ self ]]->set_data(localclientnum, "line1", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_4c6a0e72
+		Name: register_clientside
+		Namespace: ccp_chyron
 		Checksum: 0x5ADD175F
 		Offset: 0x5E0
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("cp_chyron");
+		cluielem::register_clientside("cp_chyron");
 	}
 
 	/*
 		Name: set_index
-		Namespace: namespace_4c6a0e72
+		Namespace: ccp_chyron
 		Checksum: 0x69EC837
 		Offset: 0x860
 		Size: 0x30
@@ -124,12 +124,12 @@ class class_4c6a0e72 : class_6aaccc24
 	*/
 	function set_index(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "index", value);
+		[[ self ]]->set_data(localclientnum, "index", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_4c6a0e72
+		Namespace: ccp_chyron
 		Checksum: 0xBDF07D9E
 		Offset: 0x498
 		Size: 0x13C
@@ -138,32 +138,32 @@ class class_4c6a0e72 : class_6aaccc24
 	*/
 	function setup_clientfields(var_27185c26, var_9da4cb62, var_865fc474, var_1909e1e7, var_2ff7635c, var_eaf012fc)
 	{
-		namespace_6aaccc24::setup_clientfields("cp_chyron");
-		namespace_6aaccc24::function_dcb34c80("string", "line1", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "line2", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "line3", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "line4", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "line5", 1);
-		namespace_6aaccc24::function_da693cbe("index", 1, 4, "int", var_eaf012fc);
+		cluielem::setup_clientfields("cp_chyron");
+		cluielem::function_dcb34c80("string", "line1", 1);
+		cluielem::function_dcb34c80("string", "line2", 1);
+		cluielem::function_dcb34c80("string", "line3", 1);
+		cluielem::function_dcb34c80("string", "line4", 1);
+		cluielem::function_dcb34c80("string", "line5", 1);
+		cluielem::add_clientfield("index", 1, 4, "int", var_eaf012fc);
 	}
 
 	/*
-		Name: function_b7f01956
-		Namespace: namespace_4c6a0e72
+		Name: set_line4
+		Namespace: ccp_chyron
 		Checksum: 0x6D370ACF
 		Offset: 0x7F0
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_b7f01956(localclientnum, value)
+	function set_line4(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "line4", value);
+		[[ self ]]->set_data(localclientnum, "line4", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_4c6a0e72
+		Namespace: ccp_chyron
 		Checksum: 0xE8755B69
 		Offset: 0x608
 		Size: 0x108
@@ -172,13 +172,13 @@ class class_4c6a0e72 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "line1", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "line2", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "line3", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "line4", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "line5", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "index", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "line1", #"");
+		[[ self ]]->set_data(localclientnum, "line2", #"");
+		[[ self ]]->set_data(localclientnum, "line3", #"");
+		[[ self ]]->set_data(localclientnum, "line4", #"");
+		[[ self ]]->set_data(localclientnum, "line5", #"");
+		[[ self ]]->set_data(localclientnum, "index", 0);
 	}
 
 }
@@ -196,7 +196,7 @@ class class_4c6a0e72 : class_6aaccc24
 */
 function register(var_27185c26, var_9da4cb62, var_865fc474, var_1909e1e7, var_2ff7635c, var_eaf012fc)
 {
-	elem = new class_4c6a0e72();
+	elem = new ccp_chyron();
 	[[ elem ]]->setup_clientfields(var_27185c26, var_9da4cb62, var_865fc474, var_1909e1e7, var_2ff7635c, var_eaf012fc);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -218,7 +218,7 @@ function register(var_27185c26, var_9da4cb62, var_865fc474, var_1909e1e7, var_2f
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: cp_chyron
 	Checksum: 0x2C29577B
 	Offset: 0x2A0
@@ -226,10 +226,10 @@ function register(var_27185c26, var_9da4cb62, var_865fc474, var_1909e1e7, var_2f
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_4c6a0e72();
-	[[ elem ]]->function_5c1bb138();
+	elem = new ccp_chyron();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -276,7 +276,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_4b584028
+	Name: set_line1
 	Namespace: cp_chyron
 	Checksum: 0xDDEE3BB2
 	Offset: 0x358
@@ -284,13 +284,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_4b584028(localclientnum, value)
+function set_line1(localclientnum, value)
 {
-	[[ self ]]->function_4b584028(localclientnum, value);
+	[[ self ]]->set_line1(localclientnum, value);
 }
 
 /*
-	Name: function_147e5271
+	Name: set_line2
 	Namespace: cp_chyron
 	Checksum: 0x1BA5E1EA
 	Offset: 0x388
@@ -298,13 +298,13 @@ function function_4b584028(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_147e5271(localclientnum, value)
+function set_line2(localclientnum, value)
 {
-	[[ self ]]->function_147e5271(localclientnum, value);
+	[[ self ]]->set_line2(localclientnum, value);
 }
 
 /*
-	Name: function_6b7b6e4
+	Name: set_line3
 	Namespace: cp_chyron
 	Checksum: 0x71CB1DF5
 	Offset: 0x3B8
@@ -312,13 +312,13 @@ function function_147e5271(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_6b7b6e4(localclientnum, value)
+function set_line3(localclientnum, value)
 {
-	[[ self ]]->function_6b7b6e4(localclientnum, value);
+	[[ self ]]->set_line3(localclientnum, value);
 }
 
 /*
-	Name: function_b7f01956
+	Name: set_line4
 	Namespace: cp_chyron
 	Checksum: 0x791BAE81
 	Offset: 0x3E8
@@ -326,13 +326,13 @@ function function_6b7b6e4(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_b7f01956(localclientnum, value)
+function set_line4(localclientnum, value)
 {
-	[[ self ]]->function_b7f01956(localclientnum, value);
+	[[ self ]]->set_line4(localclientnum, value);
 }
 
 /*
-	Name: function_2a377de3
+	Name: set_line5
 	Namespace: cp_chyron
 	Checksum: 0x6AA4B6AC
 	Offset: 0x418
@@ -340,9 +340,9 @@ function function_b7f01956(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_2a377de3(localclientnum, value)
+function set_line5(localclientnum, value)
 {
-	[[ self ]]->function_2a377de3(localclientnum, value);
+	[[ self ]]->set_line5(localclientnum, value);
 }
 
 /*

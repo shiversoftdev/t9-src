@@ -1,13 +1,13 @@
-#using script_1304295570304027;
 #using script_5495f0bb06045dc7;
 #using script_b9a55edd207e4ca;
-#using scripts\core_common\struct.gsc;
+#using script_1304295570304027;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_cf48051e;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_cf48051e
 	Checksum: 0x58DD0E00
 	Offset: 0x90
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_112a74f076cda31", &function_62730899, undefined, undefined, #"territory");
 }
@@ -33,12 +33,12 @@ event main(eventstruct)
 {
 	namespace_2938acdc::init();
 	namespace_5c32f369::init();
-	level.onstartgametype = &function_d81f6eb7;
+	level.onstartgametype = &on_start_game_type;
 	level.var_61d4f517 = 0;
 }
 
 /*
-	Name: function_d81f6eb7
+	Name: on_start_game_type
 	Namespace: namespace_cf48051e
 	Checksum: 0xCB80822B
 	Offset: 0x138
@@ -46,9 +46,9 @@ event main(eventstruct)
 	Parameters: 0
 	Flags: None
 */
-function function_d81f6eb7()
+function on_start_game_type()
 {
-	namespace_17baa64d::function_d81f6eb7();
+	namespace_17baa64d::on_start_game_type();
 	namespace_5c32f369::onstartgametype();
 }
 

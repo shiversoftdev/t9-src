@@ -1,26 +1,26 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2474a362752098d2;
+#using script_1a9763988299e68d;
 #using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
 #using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5549681e1669c11a;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
+#using script_5549681e1669c11a;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_41f5b853;
 
@@ -35,7 +35,7 @@
 */
 function private autoexec function_af3c379b()
 {
-	level notify(82461213);
+	level notify(-82461213);
 }
 
 /*
@@ -725,15 +725,15 @@ function function_d2c582ec(origin, qty, radius, reward, flag)
 		case "weapon_cache":
 		{
 			var_d7d0ebdd = doa_pickups::function_57160cba(6);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
-			doa_pickups::function_d080f0db(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
+			doa_pickups::itemspawn(var_d7d0ebdd, qty + (randomintrange(-60, 60), randomintrange(-60, 60), 0), undefined, undefined, 1);
 			break;
 		}
 		default:
@@ -828,7 +828,7 @@ function function_e2b14b6(origin, angles)
 	}
 	else
 	{
-		doa_pickups::function_d080f0db(def, origin, angles, undefined, 1);
+		doa_pickups::itemspawn(def, origin, angles, undefined, 1);
 	}
 }
 

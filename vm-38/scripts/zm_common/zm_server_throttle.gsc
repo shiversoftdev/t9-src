@@ -1,5 +1,5 @@
-#using scripts\core_common\struct.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_server_throttle;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_3c49aceb()
 {
-	level notify(378547412);
+	level notify(-378547412);
 }
 
 /*

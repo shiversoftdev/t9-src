@@ -1,9 +1,9 @@
-#using scripts\core_common\bb_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\bb_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace bb;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_342a53e0()
 {
-	level notify(93329338);
+	level notify(-93329338);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: bb
 	Checksum: 0x11D14BB2
 	Offset: 0x1E0
@@ -30,7 +30,7 @@ function private autoexec function_342a53e0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"bb", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -230,7 +230,7 @@ function private function_bb412e85()
 	var_2084f739.level_name = level.script;
 	if(!isdefined(var_2084f739.level_name))
 	{
-		var_2084f739.level_name = util::function_53bbf9d2();
+		var_2084f739.level_name = util::get_map_name();
 	}
 	return var_2084f739;
 }

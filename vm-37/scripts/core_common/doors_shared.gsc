@@ -1,17 +1,17 @@
 #using script_6423505476898f6d;
 #using script_7cc5fb39b97494c4;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 class cdoor 
 {
@@ -254,7 +254,7 @@ class cdoor
 		level flag::wait_till("radiant_gameobjects_initialized");
 		m_e_door.func_custom_gameobject_position = &function_4fe7d9d5;
 		m_e_door.v_trigger_offset = m_s_bundle.v_trigger_offset;
-		m_e_door gameobjects::init_game_objects(m_s_bundle.var_d6de7a25);
+		m_e_door gameobjects::init_game_objects(m_s_bundle.door_interact);
 		m_e_door.mdl_gameobject.t_interact usetriggerrequirelookat();
 		m_e_door.mdl_gameobject.trigger.c_door = self;
 	}
@@ -1313,7 +1313,7 @@ class cdoor
 		}
 		else
 		{
-			m_e_door notify(#"hash_5acda8639d1cf121");
+			m_e_door notify(#"door_not_fully_closed");
 			if(isdefined(level.var_b4749b2e) && is_true(m_e_door.var_9e238e15) && m_e_door islinkedto(level.var_b4749b2e))
 			{
 				m_e_door unlink();
@@ -1598,7 +1598,7 @@ class cdoor
 	{
 		if(!sessionmodeiscampaigngame() || !isdefined(level.var_6a7fb742))
 		{
-			if(isdefined(m_s_bundle.var_d6de7a25))
+			if(isdefined(m_s_bundle.door_interact))
 			{
 				thread function_323b4378();
 			}
@@ -1643,7 +1643,7 @@ class cdoor
 					m_e_trigger setcursorhint("HINT_NOICON");
 					if(is_true(m_s_bundle.door_closes) && !is_true(m_e_trigger.var_2dbb0ac1))
 					{
-						local_offset = function_e2ee5807(m_e_trigger.origin, m_e_door.origin, m_e_door.angles);
+						local_offset = coordtransformtranspose(m_e_trigger.origin, m_e_door.origin, m_e_door.angles);
 						m_e_trigger enablelinkto();
 						m_e_trigger linkto(m_e_door, undefined, local_offset);
 					}
@@ -2093,7 +2093,7 @@ class cdoor
 #namespace doors;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: doors
 	Checksum: 0xE4056F36
 	Offset: 0x6120
@@ -2101,7 +2101,7 @@ class cdoor
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"doors", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -2120,7 +2120,7 @@ function private function_70a657d8()
 	level.var_1def7d37 = [];
 	util::init_dvar("scr_door_bash_requires_use", 0, &function_bae7ed2e);
 	util::init_dvar("scr_door_player_gestures", 1, &function_bae7ed2e);
-	util::init_dvar(#"hash_1da83e9a3dca0a70", 0, &function_bae7ed2e);
+	util::init_dvar(#"disabledoors", 0, &function_bae7ed2e);
 	/#
 		util::init_dvar("", 0, &function_bae7ed2e);
 	#/
@@ -2160,12 +2160,12 @@ function private function_8ac3bea9()
 {
 	level flag::wait_till("radiant_gameobjects_initialized");
 	var_1cde154f = getgametypesetting(#"use_doors");
-	if(isstring(var_1cde154f) || function_7a600918(var_1cde154f))
+	if(isstring(var_1cde154f) || ishash(var_1cde154f))
 	{
 		var_1cde154f = 1;
 	}
 	var_1cde154f = int(var_1cde154f);
-	var_5a23774b = int(level.var_1def7d37[#"hash_1da83e9a3dca0a70"]);
+	var_5a23774b = int(level.var_1def7d37[#"disabledoors"]);
 	if(!is_true(var_1cde154f) || is_true(var_5a23774b))
 	{
 		return;
@@ -2299,7 +2299,7 @@ function door_panel_interact(b_is_panel_reusable)
 						[[ door ]]->close();
 						if(!is_true(door.m_s_bundle.door_closes) && is_true(door.m_s_bundle.var_d37e8f3e))
 						{
-							door notify(#"hash_32171706aecfce6a", {#player:e_player});
+							door notify(#"set_destructible", {#player:e_player});
 						}
 						continue;
 					}
@@ -3176,12 +3176,12 @@ function door_update(c_door)
 		[[ c_door ]]->lock();
 		if(isdefined(c_door.var_a2f96f78.targetname) && isdefined(c_door.m_e_trigger))
 		{
-			self thread door_update_lock_scripted(c_door);
+			self childthread door_update_lock_scripted(c_door);
 		}
 	}
-	self thread door_open_update(c_door);
+	self childthread door_open_update(c_door);
 	[[ c_door ]]->update_use_message();
-	self thread function_463715ec(c_door);
+	self childthread function_463715ec(c_door);
 }
 
 /*
@@ -3263,7 +3263,7 @@ function function_426a2a1b(c_door)
 	{
 		if(is_true(c_door.m_s_bundle.var_d37e8f3e))
 		{
-			c_door notify(#"hash_32171706aecfce6a", {#player:c_door.var_9b9642be});
+			c_door notify(#"set_destructible", {#player:c_door.var_9b9642be});
 		}
 	}
 }
@@ -3301,13 +3301,13 @@ function door_update_lock_scripted(c_door)
 function function_dc98f943(c_door)
 {
 	e_door = c_door.m_e_door;
-	e_door endon(#"hash_d46ecc32678f28a", #"death");
+	e_door endon(#"door_cleared", #"death");
 	/#
 		assert(isdefined(e_door), "");
 	#/
 	e_door setcandamage(0);
 	waitresult = undefined;
-	waitresult = c_door waittill(#"hash_32171706aecfce6a");
+	waitresult = c_door waittill(#"set_destructible");
 	e_door waittill(#"door_closed");
 	e_door setcandamage(1);
 	e_door setteam(waitresult.player.team);
@@ -3364,7 +3364,7 @@ function function_dc98f943(c_door)
 	}
 	e_door notsolid();
 	[[ c_door ]]->function_f584b243(0);
-	e_door notify(#"hash_d46ecc32678f28a");
+	e_door notify(#"door_cleared");
 }
 
 /*
@@ -4988,7 +4988,7 @@ function private function_14c2fe40(player)
 	{
 		return true;
 	}
-	if(weapon.name == #"hash_5008d41b6731d548")
+	if(weapon.name == #"eq_spy_camera")
 	{
 		return true;
 	}
@@ -5262,9 +5262,9 @@ function function_191c5a63()
 	else
 	{
 		hint = #"hash_7b4d7f70e8bef419";
-		if(isdefined(self.m_s_bundle.var_d6de7a25))
+		if(isdefined(self.m_s_bundle.door_interact))
 		{
-			var_b4d98031 = getscriptbundle(self.m_s_bundle.var_d6de7a25);
+			var_b4d98031 = getscriptbundle(self.m_s_bundle.door_interact);
 			if(isdefined(var_b4d98031.str_hint))
 			{
 				hint = var_b4d98031.str_hint;
@@ -5363,9 +5363,9 @@ function function_19b91fc1()
 {
 	if(!sessionmodeiscampaigngame() || !isdefined(level.var_6a7fb742))
 	{
-		if(isdefined(self.m_s_bundle.var_d6de7a25))
+		if(isdefined(self.m_s_bundle.door_interact))
 		{
-			var_b4d98031 = getscriptbundle(self.m_s_bundle.var_d6de7a25);
+			var_b4d98031 = getscriptbundle(self.m_s_bundle.door_interact);
 			/#
 				assert(isdefined(var_b4d98031));
 			#/

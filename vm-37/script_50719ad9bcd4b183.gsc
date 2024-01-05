@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_14224618 : class_6aaccc24
+class cfull_screen_black : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_14224618
+		Namespace: cfull_screen_black
 		Checksum: 0xF7E2A852
 		Offset: 0x330
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_14224618 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_14224618
+		Namespace: cfull_screen_black
 		Checksum: 0x31B58032
 		Offset: 0x738
 		Size: 0x14
@@ -33,22 +33,22 @@ class class_14224618 : class_6aaccc24
 	}
 
 	/*
-		Name: function_331f9dd
-		Namespace: namespace_14224618
+		Name: set_endalpha
+		Namespace: cfull_screen_black
 		Checksum: 0x5A9210B1
 		Offset: 0x698
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_331f9dd(player, value)
+	function set_endalpha(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "endAlpha", value);
 	}
 
 	/*
 		Name: open
-		Namespace: namespace_14224618
+		Namespace: cfull_screen_black
 		Checksum: 0x73BFFEFD
 		Offset: 0x490
 		Size: 0x3C
@@ -61,40 +61,40 @@ class class_14224618 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_2208b8db
-		Namespace: namespace_14224618
+		Name: set_green
+		Namespace: cfull_screen_black
 		Checksum: 0xBC4056C9
 		Offset: 0x558
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_2208b8db(player, value)
+	function set_green(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "green", value);
 	}
 
 	/*
-		Name: function_237ff433
-		Namespace: namespace_14224618
+		Name: set_fadeovertime
+		Namespace: cfull_screen_black
 		Checksum: 0xA4C90688
 		Offset: 0x5F8
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_237ff433(player, value)
+	function set_fadeovertime(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "fadeOverTime", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_14224618
+		Namespace: cfull_screen_black
 		Checksum: 0x90D7CE74
 		Offset: 0x4D8
 		Size: 0x24
@@ -103,26 +103,26 @@ class class_14224618 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_7420df0a
-		Namespace: namespace_14224618
+		Name: set_blue
+		Namespace: cfull_screen_black
 		Checksum: 0xE619E965
 		Offset: 0x5A8
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_7420df0a(player, value)
+	function set_blue(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "blue", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_14224618
+		Namespace: cfull_screen_black
 		Checksum: 0x5C26FDFA
 		Offset: 0x350
 		Size: 0x134
@@ -131,54 +131,54 @@ class class_14224618 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("full_screen_black");
-		namespace_6aaccc24::function_da693cbe("red", 1, 3, "float");
-		namespace_6aaccc24::function_da693cbe("green", 1, 3, "float");
-		namespace_6aaccc24::function_da693cbe("blue", 1, 3, "float");
-		namespace_6aaccc24::function_da693cbe("fadeOverTime", 1, 12, "int");
-		namespace_6aaccc24::function_da693cbe("startAlpha", 1, 5, "float");
-		namespace_6aaccc24::function_da693cbe("endAlpha", 1, 5, "float");
-		namespace_6aaccc24::function_da693cbe("drawHUD", 1, 1, "int");
+		cluielem::setup_clientfields("full_screen_black");
+		cluielem::add_clientfield("red", 1, 3, "float");
+		cluielem::add_clientfield("green", 1, 3, "float");
+		cluielem::add_clientfield("blue", 1, 3, "float");
+		cluielem::add_clientfield("fadeOverTime", 1, 12, "int");
+		cluielem::add_clientfield("startAlpha", 1, 5, "float");
+		cluielem::add_clientfield("endAlpha", 1, 5, "float");
+		cluielem::add_clientfield("drawHUD", 1, 1, "int");
 	}
 
 	/*
-		Name: function_9cd54463
-		Namespace: namespace_14224618
+		Name: set_startalpha
+		Namespace: cfull_screen_black
 		Checksum: 0x41D28BED
 		Offset: 0x648
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_9cd54463(player, value)
+	function set_startalpha(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "startAlpha", value);
 	}
 
 	/*
-		Name: function_ae1277a0
-		Namespace: namespace_14224618
+		Name: set_drawhud
+		Namespace: cfull_screen_black
 		Checksum: 0x2FDF91E9
 		Offset: 0x6E8
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_ae1277a0(player, value)
+	function set_drawhud(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "drawHUD", value);
 	}
 
 	/*
-		Name: function_eccc151d
-		Namespace: namespace_14224618
+		Name: set_red
+		Namespace: cfull_screen_black
 		Checksum: 0x5ED99DA4
 		Offset: 0x508
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_eccc151d(player, value)
+	function set_red(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "red", value);
 	}
@@ -198,7 +198,7 @@ class class_14224618 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_14224618();
+	elem = new cfull_screen_black();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -250,7 +250,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_eccc151d
+	Name: set_red
 	Namespace: full_screen_black
 	Checksum: 0x7B15AD65
 	Offset: 0x1E0
@@ -258,13 +258,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_eccc151d(player, value)
+function set_red(player, value)
 {
-	[[ self ]]->function_eccc151d(player, value);
+	[[ self ]]->set_red(player, value);
 }
 
 /*
-	Name: function_2208b8db
+	Name: set_green
 	Namespace: full_screen_black
 	Checksum: 0xCCC5F452
 	Offset: 0x210
@@ -272,13 +272,13 @@ function function_eccc151d(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_2208b8db(player, value)
+function set_green(player, value)
 {
-	[[ self ]]->function_2208b8db(player, value);
+	[[ self ]]->set_green(player, value);
 }
 
 /*
-	Name: function_7420df0a
+	Name: set_blue
 	Namespace: full_screen_black
 	Checksum: 0x9D49DABB
 	Offset: 0x240
@@ -286,13 +286,13 @@ function function_2208b8db(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_7420df0a(player, value)
+function set_blue(player, value)
 {
-	[[ self ]]->function_7420df0a(player, value);
+	[[ self ]]->set_blue(player, value);
 }
 
 /*
-	Name: function_237ff433
+	Name: set_fadeovertime
 	Namespace: full_screen_black
 	Checksum: 0x32682548
 	Offset: 0x270
@@ -300,13 +300,13 @@ function function_7420df0a(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_237ff433(player, value)
+function set_fadeovertime(player, value)
 {
-	[[ self ]]->function_237ff433(player, value);
+	[[ self ]]->set_fadeovertime(player, value);
 }
 
 /*
-	Name: function_9cd54463
+	Name: set_startalpha
 	Namespace: full_screen_black
 	Checksum: 0x7666CA7C
 	Offset: 0x2A0
@@ -314,13 +314,13 @@ function function_237ff433(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_9cd54463(player, value)
+function set_startalpha(player, value)
 {
-	[[ self ]]->function_9cd54463(player, value);
+	[[ self ]]->set_startalpha(player, value);
 }
 
 /*
-	Name: function_331f9dd
+	Name: set_endalpha
 	Namespace: full_screen_black
 	Checksum: 0x8B020A94
 	Offset: 0x2D0
@@ -328,13 +328,13 @@ function function_9cd54463(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_331f9dd(player, value)
+function set_endalpha(player, value)
 {
-	[[ self ]]->function_331f9dd(player, value);
+	[[ self ]]->set_endalpha(player, value);
 }
 
 /*
-	Name: function_ae1277a0
+	Name: set_drawhud
 	Namespace: full_screen_black
 	Checksum: 0xD6D5653D
 	Offset: 0x300
@@ -342,8 +342,8 @@ function function_331f9dd(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_ae1277a0(player, value)
+function set_drawhud(player, value)
 {
-	[[ self ]]->function_ae1277a0(player, value);
+	[[ self ]]->set_drawhud(player, value);
 }
 

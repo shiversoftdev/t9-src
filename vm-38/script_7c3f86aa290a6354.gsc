@@ -1,13 +1,13 @@
-#using script_1c65dbfc2f1c8d8f;
 #using script_1cc417743d7c262d;
-#using script_3411bb48d41bd3b;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_3411bb48d41bd3b;
 #using scripts\zm_common\zm_score.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_dd8b9b1a;
 
@@ -28,7 +28,7 @@ function private autoexec function_b951494f()
 #namespace namespace_4faef43b;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4faef43b
 	Checksum: 0x569022D1
 	Offset: 0x330
@@ -36,7 +36,7 @@ function private autoexec function_b951494f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3793eb4a6c52c66f", &__init__, undefined, undefined, undefined);
 }
@@ -56,7 +56,7 @@ function __init__()
 	clientfield::register("scriptmover", "" + #"hash_6d9aa5215e695ca2", 1, 1, "counter");
 	clientfield::register("scriptmover", "" + #"hash_1f232116f775fa91", 1, 1, "counter");
 	clientfield::register("scriptmover", "" + #"hash_4719ef7fda616f3a", 1, 1, "counter");
-	clientfield::function_a8bbc967("hudItems.reinforcing", 1, 1, "int", 0);
+	clientfield::register_clientuimodel("hudItems.reinforcing", 1, 1, "int", 0);
 	level thread init_doors();
 	level thread function_e5d01ba1();
 	level.var_dd9a04c9 = 0;
@@ -141,7 +141,7 @@ function init_doors()
 		var_8b4e689b = spawn("trigger_radius", door_struct.origin, 0, 96, 96);
 		var_8b4e689b.parent_struct = door_struct;
 		var_8b4e689b thread function_6a3e8a89();
-		use_trigger callback::function_a04381e0(&door_think);
+		use_trigger callback::on_trigger_once(&door_think);
 		namespace_85745671::function_1ede0cd3(door_struct.target, door_struct.door, 3);
 		function_be2c24a3(door_struct.target, 0);
 	}
@@ -739,7 +739,7 @@ function private function_48a16d8d(activator, func)
 	{
 		waitframe(1);
 	}
-	self callback::function_a04381e0(func);
+	self callback::on_trigger_once(func);
 }
 
 /*
@@ -755,7 +755,7 @@ function private function_be463e75(delay, func)
 {
 	level endon(#"game_ended");
 	wait(delay);
-	self callback::function_a04381e0(func);
+	self callback::on_trigger_once(func);
 }
 
 /*

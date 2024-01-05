@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_5e02ffeb : class_6aaccc24
+class cluielembar_ct : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_5e02ffeb
+		Namespace: cluielembar_ct
 		Checksum: 0xA2B9B3A1
 		Offset: 0x588
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_5e02ffeb : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_5e02ffeb
+		Namespace: cluielembar_ct
 		Checksum: 0xDDABEB8B
 		Offset: 0xBA8
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_5e02ffeb : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_5e02ffeb
+		Namespace: cluielembar_ct
 		Checksum: 0xE1990972
 		Offset: 0x948
 		Size: 0x24
@@ -40,120 +40,120 @@ class class_5e02ffeb : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_2208b8db
-		Namespace: namespace_5e02ffeb
+		Name: set_green
+		Namespace: cluielembar_ct
 		Checksum: 0x90B2A911
 		Offset: 0xB00
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_2208b8db(localclientnum, value)
+	function set_green(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "green", value);
+		[[ self ]]->set_data(localclientnum, "green", value);
 	}
 
 	/*
-		Name: function_237ff433
-		Namespace: namespace_5e02ffeb
+		Name: set_fadeovertime
+		Namespace: cluielembar_ct
 		Checksum: 0x3FFD4E68
 		Offset: 0xA58
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_237ff433(localclientnum, value)
+	function set_fadeovertime(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "fadeOverTime", value);
+		[[ self ]]->set_data(localclientnum, "fadeOverTime", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_5e02ffeb
+		Name: register_clientside
+		Namespace: cluielembar_ct
 		Checksum: 0xE376E4BF
 		Offset: 0x7B0
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("LUIelemBar_ct");
+		cluielem::register_clientside("LUIelemBar_ct");
 	}
 
 	/*
-		Name: function_5dbd7024
-		Namespace: namespace_5e02ffeb
+		Name: set_height
+		Namespace: cluielembar_ct
 		Checksum: 0x2E335C0D
 		Offset: 0xA20
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_5dbd7024(localclientnum, value)
+	function set_height(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "height", value);
+		[[ self ]]->set_data(localclientnum, "height", value);
 	}
 
 	/*
-		Name: function_7420df0a
-		Namespace: namespace_5e02ffeb
+		Name: set_blue
+		Namespace: cluielembar_ct
 		Checksum: 0x1CE1756A
 		Offset: 0xB38
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_7420df0a(localclientnum, value)
+	function set_blue(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "blue", value);
+		[[ self ]]->set_data(localclientnum, "blue", value);
 	}
 
 	/*
-		Name: function_8b0b5811
-		Namespace: namespace_5e02ffeb
+		Name: set_width
+		Namespace: cluielembar_ct
 		Checksum: 0x8E3ADE38
 		Offset: 0x9E8
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_8b0b5811(localclientnum, value)
+	function set_width(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "width", value);
+		[[ self ]]->set_data(localclientnum, "width", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_5e02ffeb
+		Namespace: cluielembar_ct
 		Checksum: 0xBEB0952A
 		Offset: 0x5A8
 		Size: 0x1FC
 		Parameters: 10
 		Flags: None
 	*/
-	function setup_clientfields(var_218de242, var_f6cc2724, var_997793d7, var_fae6c0b5, var_a3e0a6ce, var_af074abc, var_9350f184, var_788c188f, var_3fb95ac9, var_661989d5)
+	function setup_clientfields(xcallback, ycallback, widthcallback, heightcallback, fadeovertimecallback, alphacallback, redcallback, greencallback, bluecallback, var_661989d5)
 	{
-		namespace_6aaccc24::setup_clientfields("LUIelemBar_ct");
-		namespace_6aaccc24::function_da693cbe("x", 1, 7, "int", var_218de242);
-		namespace_6aaccc24::function_da693cbe("y", 1, 6, "int", var_f6cc2724);
-		namespace_6aaccc24::function_da693cbe("width", 1, 6, "int", var_997793d7);
-		namespace_6aaccc24::function_da693cbe("height", 1, 6, "int", var_fae6c0b5);
-		namespace_6aaccc24::function_da693cbe("fadeOverTime", 1, 5, "int", var_a3e0a6ce);
-		namespace_6aaccc24::function_da693cbe("alpha", 1, 4, "float", var_af074abc);
-		namespace_6aaccc24::function_da693cbe("red", 1, 4, "float", var_9350f184);
-		namespace_6aaccc24::function_da693cbe("green", 1, 4, "float", var_788c188f);
-		namespace_6aaccc24::function_da693cbe("blue", 1, 4, "float", var_3fb95ac9);
-		namespace_6aaccc24::function_da693cbe("bar_percent", 1, 6, "float", var_661989d5);
+		cluielem::setup_clientfields("LUIelemBar_ct");
+		cluielem::add_clientfield("x", 1, 7, "int", xcallback);
+		cluielem::add_clientfield("y", 1, 6, "int", ycallback);
+		cluielem::add_clientfield("width", 1, 6, "int", widthcallback);
+		cluielem::add_clientfield("height", 1, 6, "int", heightcallback);
+		cluielem::add_clientfield("fadeOverTime", 1, 5, "int", fadeovertimecallback);
+		cluielem::add_clientfield("alpha", 1, 4, "float", alphacallback);
+		cluielem::add_clientfield("red", 1, 4, "float", redcallback);
+		cluielem::add_clientfield("green", 1, 4, "float", greencallback);
+		cluielem::add_clientfield("blue", 1, 4, "float", bluecallback);
+		cluielem::add_clientfield("bar_percent", 1, 6, "float", var_661989d5);
 	}
 
 	/*
 		Name: set_y
-		Namespace: namespace_5e02ffeb
+		Namespace: cluielembar_ct
 		Checksum: 0xE9BC68AD
 		Offset: 0x9B0
 		Size: 0x30
@@ -162,26 +162,26 @@ class class_5e02ffeb : class_6aaccc24
 	*/
 	function set_y(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "y", value);
+		[[ self ]]->set_data(localclientnum, "y", value);
 	}
 
 	/*
-		Name: function_aa5c711d
-		Namespace: namespace_5e02ffeb
+		Name: set_alpha
+		Namespace: cluielembar_ct
 		Checksum: 0xD177737D
 		Offset: 0xA90
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_aa5c711d(localclientnum, value)
+	function set_alpha(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "alpha", value);
+		[[ self ]]->set_data(localclientnum, "alpha", value);
 	}
 
 	/*
 		Name: set_x
-		Namespace: namespace_5e02ffeb
+		Namespace: cluielembar_ct
 		Checksum: 0xA61A28C5
 		Offset: 0x978
 		Size: 0x30
@@ -190,26 +190,26 @@ class class_5e02ffeb : class_6aaccc24
 	*/
 	function set_x(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "x", value);
+		[[ self ]]->set_data(localclientnum, "x", value);
 	}
 
 	/*
-		Name: function_eccc151d
-		Namespace: namespace_5e02ffeb
+		Name: set_red
+		Namespace: cluielembar_ct
 		Checksum: 0x7FD0B237
 		Offset: 0xAC8
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_eccc151d(localclientnum, value)
+	function set_red(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "red", value);
+		[[ self ]]->set_data(localclientnum, "red", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_5e02ffeb
+		Namespace: cluielembar_ct
 		Checksum: 0xCE95CBAA
 		Offset: 0x7D8
 		Size: 0x164
@@ -218,31 +218,31 @@ class class_5e02ffeb : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "x", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "y", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "width", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "height", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "fadeOverTime", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "alpha", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "red", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "green", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "blue", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "bar_percent", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "x", 0);
+		[[ self ]]->set_data(localclientnum, "y", 0);
+		[[ self ]]->set_data(localclientnum, "width", 0);
+		[[ self ]]->set_data(localclientnum, "height", 0);
+		[[ self ]]->set_data(localclientnum, "fadeOverTime", 0);
+		[[ self ]]->set_data(localclientnum, "alpha", 0);
+		[[ self ]]->set_data(localclientnum, "red", 0);
+		[[ self ]]->set_data(localclientnum, "green", 0);
+		[[ self ]]->set_data(localclientnum, "blue", 0);
+		[[ self ]]->set_data(localclientnum, "bar_percent", 0);
 	}
 
 	/*
-		Name: function_fd8c13fb
-		Namespace: namespace_5e02ffeb
+		Name: set_bar_percent
+		Namespace: cluielembar_ct
 		Checksum: 0xEA1AD274
 		Offset: 0xB70
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_fd8c13fb(localclientnum, value)
+	function set_bar_percent(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "bar_percent", value);
+		[[ self ]]->set_data(localclientnum, "bar_percent", value);
 	}
 
 }
@@ -258,10 +258,10 @@ class class_5e02ffeb : class_6aaccc24
 	Parameters: 10
 	Flags: None
 */
-function register(var_218de242, var_f6cc2724, var_997793d7, var_fae6c0b5, var_a3e0a6ce, var_af074abc, var_9350f184, var_788c188f, var_3fb95ac9, var_661989d5)
+function register(xcallback, ycallback, widthcallback, heightcallback, fadeovertimecallback, alphacallback, redcallback, greencallback, bluecallback, var_661989d5)
 {
-	elem = new class_5e02ffeb();
-	[[ elem ]]->setup_clientfields(var_218de242, var_f6cc2724, var_997793d7, var_fae6c0b5, var_a3e0a6ce, var_af074abc, var_9350f184, var_788c188f, var_3fb95ac9, var_661989d5);
+	elem = new cluielembar_ct();
+	[[ elem ]]->setup_clientfields(xcallback, ycallback, widthcallback, heightcallback, fadeovertimecallback, alphacallback, redcallback, greencallback, bluecallback, var_661989d5);
 	if(!isdefined(level.var_ae746e8f))
 	{
 		level.var_ae746e8f = associativearray();
@@ -282,7 +282,7 @@ function register(var_218de242, var_f6cc2724, var_997793d7, var_fae6c0b5, var_a3
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: luielembar_ct
 	Checksum: 0xCB4E440
 	Offset: 0x2F0
@@ -290,10 +290,10 @@ function register(var_218de242, var_f6cc2724, var_997793d7, var_fae6c0b5, var_a3
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_5e02ffeb();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cluielembar_ct();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -368,7 +368,7 @@ function set_y(localclientnum, value)
 }
 
 /*
-	Name: function_8b0b5811
+	Name: set_width
 	Namespace: luielembar_ct
 	Checksum: 0xFE67FA08
 	Offset: 0x408
@@ -376,13 +376,13 @@ function set_y(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_8b0b5811(localclientnum, value)
+function set_width(localclientnum, value)
 {
-	[[ self ]]->function_8b0b5811(localclientnum, value);
+	[[ self ]]->set_width(localclientnum, value);
 }
 
 /*
-	Name: function_5dbd7024
+	Name: set_height
 	Namespace: luielembar_ct
 	Checksum: 0x1D454E91
 	Offset: 0x438
@@ -390,13 +390,13 @@ function function_8b0b5811(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_5dbd7024(localclientnum, value)
+function set_height(localclientnum, value)
 {
-	[[ self ]]->function_5dbd7024(localclientnum, value);
+	[[ self ]]->set_height(localclientnum, value);
 }
 
 /*
-	Name: function_237ff433
+	Name: set_fadeovertime
 	Namespace: luielembar_ct
 	Checksum: 0xE86EFC89
 	Offset: 0x468
@@ -404,13 +404,13 @@ function function_5dbd7024(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_237ff433(localclientnum, value)
+function set_fadeovertime(localclientnum, value)
 {
-	[[ self ]]->function_237ff433(localclientnum, value);
+	[[ self ]]->set_fadeovertime(localclientnum, value);
 }
 
 /*
-	Name: function_aa5c711d
+	Name: set_alpha
 	Namespace: luielembar_ct
 	Checksum: 0xDEB4E37B
 	Offset: 0x498
@@ -418,13 +418,13 @@ function function_237ff433(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_aa5c711d(localclientnum, value)
+function set_alpha(localclientnum, value)
 {
-	[[ self ]]->function_aa5c711d(localclientnum, value);
+	[[ self ]]->set_alpha(localclientnum, value);
 }
 
 /*
-	Name: function_eccc151d
+	Name: set_red
 	Namespace: luielembar_ct
 	Checksum: 0xA022129
 	Offset: 0x4C8
@@ -432,13 +432,13 @@ function function_aa5c711d(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_eccc151d(localclientnum, value)
+function set_red(localclientnum, value)
 {
-	[[ self ]]->function_eccc151d(localclientnum, value);
+	[[ self ]]->set_red(localclientnum, value);
 }
 
 /*
-	Name: function_2208b8db
+	Name: set_green
 	Namespace: luielembar_ct
 	Checksum: 0x3E655BC7
 	Offset: 0x4F8
@@ -446,13 +446,13 @@ function function_eccc151d(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_2208b8db(localclientnum, value)
+function set_green(localclientnum, value)
 {
-	[[ self ]]->function_2208b8db(localclientnum, value);
+	[[ self ]]->set_green(localclientnum, value);
 }
 
 /*
-	Name: function_7420df0a
+	Name: set_blue
 	Namespace: luielembar_ct
 	Checksum: 0x421F6CFA
 	Offset: 0x528
@@ -460,13 +460,13 @@ function function_2208b8db(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_7420df0a(localclientnum, value)
+function set_blue(localclientnum, value)
 {
-	[[ self ]]->function_7420df0a(localclientnum, value);
+	[[ self ]]->set_blue(localclientnum, value);
 }
 
 /*
-	Name: function_fd8c13fb
+	Name: set_bar_percent
 	Namespace: luielembar_ct
 	Checksum: 0xEC53D4C8
 	Offset: 0x558
@@ -474,8 +474,8 @@ function function_7420df0a(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_fd8c13fb(localclientnum, value)
+function set_bar_percent(localclientnum, value)
 {
-	[[ self ]]->function_fd8c13fb(localclientnum, value);
+	[[ self ]]->set_bar_percent(localclientnum, value);
 }
 

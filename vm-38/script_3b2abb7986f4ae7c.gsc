@@ -1,32 +1,32 @@
 #using script_176597095ddfaa17;
-#using script_1c65dbfc2f1c8d8f;
 #using script_34ab99a4ca1a43d;
 #using script_3a88f428c6d8ef90;
-#using script_3fda550bc6e1089a;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_vo.gsc;
 #using script_437ce686d29bb81b;
-#using script_5bb072c3abf4652c;
-#using script_68d2ee1489345a1d;
-#using script_7fc996fe8678852;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\zm_common\gametypes\hostmigration.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\helicopter_shared.gsc;
+#using scripts\core_common\item_inventory.gsc;
 #using script_bf0c2c69ce5745e;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
-#using scripts\zm_common\gametypes\hostmigration.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_2291eec4;
 
@@ -47,7 +47,7 @@ function private autoexec function_3670eb05()
 #namespace namespace_dedc3cb9;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_dedc3cb9
 	Checksum: 0x17FEACC6
 	Offset: 0x3C0
@@ -55,7 +55,7 @@ function private autoexec function_3670eb05()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_146fecdc090c227e", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -229,7 +229,7 @@ function function_685a8288(instance)
 	vh_heli.var_99582f14 = 1;
 	vh_heli.var_1b9f096d = 1;
 	vh_heli.var_ac1388df = 1;
-	if(util::function_53bbf9d2() === #"hash_2ef022fa4966a6ae")
+	if(util::get_map_name() === #"wz_sanatorium")
 	{
 		vh_heli vehicle::toggle_lights_group(3, 1);
 		vh_heli turretsettargetangles(0, (0, 0, 0));
@@ -442,7 +442,7 @@ function function_be51796c(einflictor, eattacker, idamage, idflags, smeansofdeat
 					damage = damage * 0.1;
 				}
 			}
-			item = vpoint namespace_b376ff3f::function_230ceec4(psoffsettime);
+			item = vpoint item_inventory::function_230ceec4(psoffsettime);
 			if(isdefined(item))
 			{
 				var_528363fd = self namespace_b61a349a::function_b3496fde(var_fd90b0bb, vpoint, damage, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
@@ -632,9 +632,9 @@ function cratecontrolleddrop(instance, v_target_location, n_drop_time, var_72886
 		crate moveto(target, params.kstotaldroptime, acceltime, deceltime);
 		crate thread function_2defd397();
 		wait(acceltime);
-		if(!is_true(crate.var_7bea4af0))
+		if(!is_true(crate.pop_parachute))
 		{
-			crate waittill(#"movedone", #"hash_6ade3db3c3188274");
+			crate waittill(#"movedone", #"pop_parachute");
 		}
 		hostmigration::waittillhostmigrationdone();
 	}
@@ -797,7 +797,7 @@ function function_345ada65(attacker)
 	playsoundatposition(#"hash_2f1ae087d02ed33f", self.origin);
 	if(isplayer(attacker))
 	{
-		a_enemies = attacker function_bdda420f(self.origin, 256);
+		a_enemies = attacker getenemiesinradius(self.origin, 256);
 		foreach(ai in a_enemies)
 		{
 			if(isalive(ai))
@@ -1075,7 +1075,7 @@ function is_touching_crate()
 			stance_z_offset = (stance == "stand" ? 75 : (stance == "crouch" ? 55 : 15));
 			player_test_point = player.origin + (0, 0, stance_z_offset);
 			var_f6f95bb5 = distance2dsquared(player_test_point, self.origin);
-			var_dee7aebd = self.velocity[2];
+			zvel = self.velocity[2];
 			if(var_f6f95bb5 < 2500 && player_test_point[2] > crate_bottom_point[2])
 			{
 				attacker = (isdefined(self.owner) ? self.owner : self);

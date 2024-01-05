@@ -1,6 +1,6 @@
 #using script_35ae72be7b4fec10;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\core_common\util_shared.gsc;
 
 #namespace ent_name;
 
@@ -40,7 +40,7 @@ function add(name, team)
 		level.var_479cdca1 = [];
 	}
 	start_think = level.var_479cdca1.size == 0;
-	if(function_7a600918(team))
+	if(ishash(team))
 	{
 		if(team == #"axis" || team == #"enemy")
 		{
@@ -152,7 +152,7 @@ function private _think()
 	namespace_61e6d095::create(#"entname", #"hash_1624d8814bab0c71");
 	name = #"";
 	team = 0;
-	namespace_61e6d095::function_d5ea17f0(#"entname", name);
+	namespace_61e6d095::set_text(#"entname", name);
 	namespace_61e6d095::set_state(#"entname", team);
 	while(isdefined(level.var_479cdca1))
 	{
@@ -172,7 +172,7 @@ function private _think()
 		{
 			name = var_a1da1699;
 			team = var_5002c793;
-			namespace_61e6d095::function_d5ea17f0(#"entname", name);
+			namespace_61e6d095::set_text(#"entname", name);
 			namespace_61e6d095::set_state(#"entname", team);
 		}
 		waitframe(1);

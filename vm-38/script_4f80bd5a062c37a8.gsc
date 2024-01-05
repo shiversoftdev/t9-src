@@ -1,29 +1,29 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
 #using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_63948b76;
 
@@ -77,7 +77,7 @@ function function_86bd7962(player, spot, mg)
 	}
 	sentry endon(#"death");
 	team = player.team;
-	sentry.var_7799e14b = !mg;
+	sentry.ismissile = !mg;
 	sentry.faketarget = faketarget;
 	if(isdefined(sentry.faketarget))
 	{
@@ -129,7 +129,7 @@ function function_b44f2805()
 	{
 		if(isdefined(self.favoriteenemy))
 		{
-			if(is_true(self.var_7799e14b))
+			if(is_true(self.ismissile))
 			{
 				self.faketarget.origin = (self.origin + ((self.favoriteenemy.origin - self.origin) * 0.5)) + vectorscale((0, 0, 1), 1000);
 			}
@@ -228,7 +228,7 @@ function function_5945a362()
 			v_angles = self gettagangles("tag_flash");
 			forward = anglestoforward(v_angles);
 			enemyorigin = (self.favoriteenemy.origin[0], self.favoriteenemy.origin[1], v_origin[2]);
-			if(!is_true(self.var_7799e14b))
+			if(!is_true(self.ismissile))
 			{
 				distsq = distancesquared(enemyorigin, v_origin);
 				if(distsq > sqr(512))
@@ -304,7 +304,7 @@ function function_5945a362()
 				enemy = self.faketarget;
 				enemy.var_c80846be = self.favoriteenemy;
 			}
-			if(!is_true(self.var_7799e14b))
+			if(!is_true(self.ismissile))
 			{
 				while(gettime() < expiretime)
 				{

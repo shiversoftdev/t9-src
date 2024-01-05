@@ -1,27 +1,27 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
+#using script_164a456ce05c3483;
 #using script_3faf478d5b0850fe;
-#using script_41fe08c37d53a635;
 #using script_47851dbeea22fe66;
-#using script_4d85e8de54b02198;
-#using script_5701633066d199f2;
+#using script_1ee011cd0961afd7;
 #using script_5f20d3b434d24884;
-#using script_6809bf766eba194a;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using script_1b0b07ff57d1dde3;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_35598499769dbb3d;
+#using script_41fe08c37d53a635;
+#using script_3aa0f32b70d4f7cb;
+#using script_4d85e8de54b02198;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_3819e7a1427df6d2;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_f6712ec9;
 
@@ -169,7 +169,7 @@ function function_29c22852(entity)
 	}
 	if(isdefined(entity.meleeweapon) && entity.meleeweapon !== level.weaponnone)
 	{
-		meleedistsq = entity.meleeweapon.var_d3cafde6 * entity.meleeweapon.var_d3cafde6;
+		meleedistsq = entity.meleeweapon.aimeleerange * entity.meleeweapon.aimeleerange;
 	}
 	if(!isdefined(meleedistsq))
 	{
@@ -247,6 +247,6 @@ function private function_27a1a846(entity)
 function private function_99ac548f(entity)
 {
 	entity melee();
-	entity callback::callback(#"hash_11aa32ad6d527054");
+	entity callback::callback(#"on_ai_melee");
 }
 

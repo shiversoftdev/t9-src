@@ -1,6 +1,6 @@
-#using script_164ba4a711296dd5;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\wz_common\util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_164ba4a711296dd5;
 
 #namespace insertion;
 
@@ -15,7 +15,7 @@
 */
 function init()
 {
-	level.var_a2915a68 = insertion_passenger_count::register();
+	level.insertionpassenger = insertion_passenger_count::register();
 	level.var_a3c0d635 = &insertion_passenger_count::is_open;
 	level.var_f3320ad2 = &insertion_passenger_count::open;
 	level.var_81b39a59 = &insertion_passenger_count::close;
@@ -44,12 +44,12 @@ function function_dd98c073()
 			continue;
 		}
 		var_31a37076[player.team] = 1;
-		if(is_true(getgametypesetting(#"hash_2992e3d39d55b312")))
+		if(is_true(getgametypesetting(#"wzspectrerising")))
 		{
 			util::function_8076d591("warSpectreRisingInfiltration", {#team:player.team});
 			continue;
 		}
-		if(is_true(getgametypesetting(#"hash_53d529e82bcf1212")))
+		if(is_true(getgametypesetting(#"wzhardcore")))
 		{
 			util::function_8076d591("hcWarBoostInfiltration", {#team:player.team});
 			continue;

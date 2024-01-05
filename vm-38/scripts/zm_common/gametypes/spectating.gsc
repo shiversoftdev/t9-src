@@ -1,6 +1,6 @@
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 
 #namespace spectating;
 
@@ -19,7 +19,7 @@ function private autoexec function_339bd73e()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: spectating
 	Checksum: 0x790F4C11
 	Offset: 0xD0
@@ -27,7 +27,7 @@ function private autoexec function_339bd73e()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_spectating", &function_70a657d8, undefined, undefined, undefined);
 }

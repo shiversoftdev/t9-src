@@ -1,19 +1,19 @@
 #using script_215d7818c548cb51;
-#using script_348ce871561476c9;
 #using script_5b2a3c052bf17d0e;
-#using script_6b2d896ac43eb90;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
+#using script_6b2d896ac43eb90;
+#using scripts\core_common\player\player_free_fall.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_9c181b10;
 
@@ -34,7 +34,7 @@ function private autoexec function_698aee77()
 #namespace namespace_7ec6ae9f;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_7ec6ae9f
 	Checksum: 0xD53E963F
 	Offset: 0x1D8
@@ -42,7 +42,7 @@ function private autoexec function_698aee77()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2ff0859bce056c66", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -69,7 +69,7 @@ function private function_70a657d8()
 	namespace_8b6a9d79::function_b3464a7c(#"hash_2ff0859bce056c66", &function_ea2db6a9);
 	clientfield::register("allplayers", "phase_rift_player_fx", 1, 2, "int");
 	clientfield::register("toplayer", "" + #"hash_1b01e37683714902", 1, 1, "int");
-	callback::add_callback(#"hash_137b937fd26992be", &function_16ee428c);
+	callback::add_callback(#"on_host_migration_end", &function_16ee428c);
 }
 
 /*
@@ -90,16 +90,16 @@ function function_ea2db6a9(instance)
 	level.var_ff7bf48c = [];
 	foreach(var_2b357ce9 in var_d4f4d124)
 	{
-		var_94b03771 = namespace_8b6a9d79::spawn_script_model(var_2b357ce9, "tag_origin");
-		var_94b03771.fx_id = playfxontag(#"hash_7312068ea6037f71", var_94b03771, "tag_origin");
-		var_94b03771 playloopsound(#"hash_15ff560465c71665");
-		level.var_ff7bf48c[level.var_ff7bf48c.size] = var_94b03771;
+		mdl_portal = namespace_8b6a9d79::spawn_script_model(var_2b357ce9, "tag_origin");
+		mdl_portal.fx_id = playfxontag(#"hash_7312068ea6037f71", mdl_portal, "tag_origin");
+		mdl_portal playloopsound(#"hash_15ff560465c71665");
+		level.var_ff7bf48c[level.var_ff7bf48c.size] = mdl_portal;
 		trigger = spawn("trigger_radius", var_2b357ce9.origin + v_offset, 0, 128, 64);
 		trigger trigger::add_flags(16);
 		trigger.instance = instance;
 		trigger.var_2b357ce9 = var_2b357ce9;
-		trigger.var_94b03771 = var_94b03771;
-		trigger callback::function_35a12f19(&function_1c5803d9);
+		trigger.mdl_portal = mdl_portal;
+		trigger callback::on_trigger(&function_1c5803d9);
 		if(!isdefined(instance.a_triggers))
 		{
 			instance.a_triggers = [];
@@ -126,11 +126,11 @@ function function_16ee428c(params)
 {
 	if(isarray(level.var_ff7bf48c))
 	{
-		foreach(var_94b03771 in level.var_ff7bf48c)
+		foreach(mdl_portal in level.var_ff7bf48c)
 		{
-			if(isdefined(var_94b03771) && var_94b03771.instance.content_script_name !== #"hash_18be5193d8310f84")
+			if(isdefined(mdl_portal) && mdl_portal.instance.content_script_name !== #"hash_18be5193d8310f84")
 			{
-				var_94b03771.fx_id = playfxontag(#"hash_7312068ea6037f71", var_94b03771, "tag_origin");
+				mdl_portal.fx_id = playfxontag(#"hash_7312068ea6037f71", mdl_portal, "tag_origin");
 			}
 		}
 	}
@@ -149,7 +149,7 @@ function function_1c5803d9(eventstruct)
 {
 	var_2b357ce9 = self.var_2b357ce9;
 	instance = self.instance;
-	var_94b03771 = self.var_94b03771;
+	mdl_portal = self.mdl_portal;
 	var_85e930e6 = [];
 	if(!isdefined(var_2b357ce9.s_teleport) && isarray(instance.a_s_teleports))
 	{
@@ -220,7 +220,7 @@ function function_1c5803d9(eventstruct)
 	{
 		s_teleport.v_launch = (1250, 0, 300);
 	}
-	self thread function_a41c43bd(var_2b357ce9, var_94b03771, vehicle);
+	self thread function_a41c43bd(var_2b357ce9, mdl_portal, vehicle);
 	v_trigger_offset = vectorscale((0, 0, -1), 32);
 	if(isdefined(vehicle))
 	{
@@ -259,7 +259,7 @@ function private function_dda69211(player, vehicle, var_2b357ce9)
 		player val::set(#"hash_2ff0859bce056c66", "allow_prone", 0);
 		player val::set(#"hash_2ff0859bce056c66", "allow_stand", 1);
 		player val::set(#"hash_2ff0859bce056c66", "freezecontrols_allowlook", 1);
-		player namespace_4b76712::allow_player_basejumping(0);
+		player player_free_fall::allow_player_basejumping(0);
 		player clientfield::set("phase_rift_player_fx", 1);
 		if(isdefined(self.parent))
 		{
@@ -325,7 +325,7 @@ function private function_dda69211(player, vehicle, var_2b357ce9)
 			player.var_e1fd941b = undefined;
 			player val::reset_all(#"hash_2ff0859bce056c66");
 			player flag::clear(#"hash_9f062ac608bb7e4");
-			player namespace_4b76712::allow_player_basejumping(1);
+			player player_free_fall::allow_player_basejumping(1);
 		}
 		if(isdefined(vehicle))
 		{
@@ -350,14 +350,14 @@ function private function_dda69211(player, vehicle, var_2b357ce9)
 	Parameters: 3
 	Flags: None
 */
-function function_a41c43bd(var_2b357ce9, var_94b03771, vehicle)
+function function_a41c43bd(var_2b357ce9, mdl_portal, vehicle)
 {
 	if(self flag::get(#"hash_39816ba0141eb30c"))
 	{
 		return;
 	}
 	self flag::set(#"hash_39816ba0141eb30c");
-	var_94b03771 flag::set(#"hash_5c79c9319298891a");
+	mdl_portal flag::set(#"hash_5c79c9319298891a");
 	var_f49d0155 = (isdefined(self.instance.var_fe2612fe[#"hash_1381b446e6ab7a37"]) ? self.instance.var_fe2612fe[#"hash_1381b446e6ab7a37"] : []);
 	foreach(var_4db48fec in var_f49d0155)
 	{
@@ -372,7 +372,7 @@ function function_a41c43bd(var_2b357ce9, var_94b03771, vehicle)
 	{
 		return;
 	}
-	s_teleport = var_94b03771.s_teleport;
+	s_teleport = mdl_portal.s_teleport;
 	v_powerup = (namespace_77bd50da::function_81cad6d6(s_teleport.v_launch / 35, s_teleport.angles[1])) + s_teleport.origin;
 	powerup = util::spawn_model("tag_origin", v_powerup);
 	if(isdefined(powerup))
@@ -396,7 +396,7 @@ function function_a41c43bd(var_2b357ce9, var_94b03771, vehicle)
 	Parameters: 1
 	Flags: None
 */
-function function_d3d632c3(var_94b03771)
+function function_d3d632c3(mdl_portal)
 {
 	self endon(#"death");
 	/#
@@ -410,13 +410,13 @@ function function_d3d632c3(var_94b03771)
 		self.var_3b53f898 = 15;
 	}
 	wait(self.var_3b53f898);
-	if(isdefined(var_94b03771))
+	if(isdefined(mdl_portal))
 	{
-		arrayremovevalue(level.var_ff7bf48c, var_94b03771);
+		arrayremovevalue(level.var_ff7bf48c, mdl_portal);
 	}
-	if(isdefined(var_94b03771))
+	if(isdefined(mdl_portal))
 	{
-		var_94b03771 delete();
+		mdl_portal delete();
 	}
 	if(isdefined(self))
 	{
@@ -443,9 +443,9 @@ function function_8ebdf278(eventstruct)
 			{
 				trigger delete();
 			}
-			if(isdefined(trigger.var_94b03771))
+			if(isdefined(trigger.mdl_portal))
 			{
-				trigger.var_94b03771 delete();
+				trigger.mdl_portal delete();
 			}
 		}
 	}

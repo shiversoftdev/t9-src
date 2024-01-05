@@ -1,22 +1,22 @@
-#using script_3f9e0dc8454d98e1;
-#using script_6e3c826b1814cab6;
-#using script_ab890501c40b73c;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\demo_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_blockers.gsc;
-#using scripts\zm_common\zm_perks.gsc;
-#using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_perks.gsc;
+#using scripts\zm_common\zm_customgame.gsc;
+#using scripts\zm_common\zm_contracts.gsc;
+#using scripts\zm_common\zm_blockers.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\popups_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\demo_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace zm_power;
 
@@ -35,7 +35,7 @@ function private autoexec function_acefb7b9()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_power
 	Checksum: 0xB2C1A37D
 	Offset: 0x250
@@ -43,7 +43,7 @@ function private autoexec function_acefb7b9()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_power", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -248,8 +248,8 @@ function electric_switch()
 				}
 			}
 		}
-		user zm_stats::increment_challenge_stat(#"hash_7d4064a8d03e0606");
-		user contracts::function_5b88297d(#"hash_464acc5cd524989");
+		user zm_stats::increment_challenge_stat(#"power_activated");
+		user contracts::increment_zm_contract(#"hash_464acc5cd524989");
 		level turn_power_on_and_open_doors(power_zone);
 		user playrumbleonentity("damage_light");
 		switchentnum = self getentitynumber();
@@ -416,7 +416,7 @@ function standard_powered_items()
 			powered_perk thread zone_controlled_perk(trigger.script_int);
 		}
 	}
-	if(namespace_59ff1d6c::function_901b751c(#"hash_29004a67830922b6") != 0)
+	if(zm_custom::function_901b751c(#"zmpowerdoorstate") != 0)
 	{
 		zombie_doors = getentarray("zombie_door", "targetname");
 		foreach(door in zombie_doors)
@@ -1296,7 +1296,7 @@ function turn_power_on_and_open_doors(power_zone)
 	{
 		player zm_stats::function_8f10788e("boas_power_turnedon");
 	}
-	if(namespace_59ff1d6c::function_901b751c(#"hash_29004a67830922b6") != 0)
+	if(zm_custom::function_901b751c(#"zmpowerdoorstate") != 0)
 	{
 		zombie_doors = getentarray("zombie_door", "targetname");
 		foreach(door in zombie_doors)
@@ -1350,7 +1350,7 @@ function turn_power_off_and_close_doors(power_zone)
 		level flag::clear("power_on" + power_zone);
 		level clientfield::set("zombie_power_off", power_zone);
 	}
-	if(namespace_59ff1d6c::function_901b751c(#"hash_29004a67830922b6") != 0)
+	if(zm_custom::function_901b751c(#"zmpowerdoorstate") != 0)
 	{
 		zombie_doors = getentarray("zombie_door", "targetname");
 		foreach(door in zombie_doors)

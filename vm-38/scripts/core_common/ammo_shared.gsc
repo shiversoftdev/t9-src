@@ -1,10 +1,10 @@
-#using script_18f0d22c75b141a7;
-#using script_4c5c4a64a59247a2;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
 #using scripts\core_common\throttle_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using script_4c5c4a64a59247a2;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace ammo_shared;
 
@@ -19,7 +19,7 @@
 */
 function private autoexec function_c4804780()
 {
-	level notify(1205893502);
+	level notify(-1205893502);
 }
 
 #namespace ammo;
@@ -109,7 +109,7 @@ function ammo_pouch_think()
 			continue;
 		}
 		maxammo = 0;
-		loadout = player loadout::function_1ee886f7(weapon);
+		loadout = player loadout::find_loadout_slot(weapon);
 		if(isdefined(loadout))
 		{
 			if(loadout.count > 0)

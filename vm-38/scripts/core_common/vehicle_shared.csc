@@ -1,11 +1,11 @@
 #using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\vehicleriders_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace vehicle_shared;
 
@@ -26,7 +26,7 @@ function private autoexec function_3bcf98d7()
 #namespace vehicle;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: vehicle
 	Checksum: 0xF0EEEE99
 	Offset: 0xA90
@@ -34,7 +34,7 @@ function private autoexec function_3bcf98d7()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"vehicle_shared", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -91,26 +91,26 @@ function private function_70a657d8()
 	clientfield::register("vehicle", "rocket_damage_rumble", 1, 1, "counter", &function_f8e7ae58, 0, 0);
 	if(!is_true(level.var_7b05c4b5))
 	{
-		clientfield::function_a8bbc967("vehicle.ammoCount", #"vehicle_info", #"ammocount", 1, 10, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.ammoReloading", #"vehicle_info", #"hash_550a9fb315252f2a", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.ammoLow", #"vehicle_info", #"ammolow", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.rocketAmmo", #"vehicle_info", #"rocketammo", 1, 2, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.ammo2Count", #"vehicle_info", #"hash_5ebdb55c4339b03e", 1, 10, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.ammo2Reloading", #"vehicle_info", #"hash_55896773db99b2", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.ammo2Low", #"vehicle_info", #"hash_75b1c0663270e617", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.collisionWarning", #"vehicle_info", #"collisionwarning", 1, 2, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.enemyInReticle", #"vehicle_info", #"enemyinreticle", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.missileRepulsed", #"vehicle_info", #"missilerepulsed", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.incomingMissile", #"vehicle_info", #"incomingmissile", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.missileLock", #"vehicle_info", #"hash_1e2874e8dbd8154c", 1, 2, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.malfunction", #"vehicle_info", #"malfunction", 1, 2, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.showHoldToExitPrompt", #"vehicle_info", #"hash_3df500a422dcec86", 1, 1, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.holdToExitProgress", #"vehicle_info", #"hash_62917335327a89ba", 1, 5, "float", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.vehicleAttackMode", #"vehicle_info", #"vehicleattackmode", 1, 3, "int", undefined, 0, 0);
-		clientfield::function_a8bbc967("vehicle.invalidLanding", #"vehicle_info", #"hash_59d76961c5d59ccb", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.ammoCount", #"vehicle_info", #"ammocount", 1, 10, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.ammoReloading", #"vehicle_info", #"hash_550a9fb315252f2a", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.ammoLow", #"vehicle_info", #"ammolow", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.rocketAmmo", #"vehicle_info", #"rocketammo", 1, 2, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.ammo2Count", #"vehicle_info", #"hash_5ebdb55c4339b03e", 1, 10, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.ammo2Reloading", #"vehicle_info", #"hash_55896773db99b2", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.ammo2Low", #"vehicle_info", #"hash_75b1c0663270e617", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.collisionWarning", #"vehicle_info", #"collisionwarning", 1, 2, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.enemyInReticle", #"vehicle_info", #"enemyinreticle", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.missileRepulsed", #"vehicle_info", #"missilerepulsed", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.incomingMissile", #"vehicle_info", #"incomingmissile", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.missileLock", #"vehicle_info", #"hash_1e2874e8dbd8154c", 1, 2, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.malfunction", #"vehicle_info", #"malfunction", 1, 2, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.showHoldToExitPrompt", #"vehicle_info", #"hash_3df500a422dcec86", 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.holdToExitProgress", #"vehicle_info", #"hash_62917335327a89ba", 1, 5, "float", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.vehicleAttackMode", #"vehicle_info", #"vehicleattackmode", 1, 3, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("vehicle.invalidLanding", #"vehicle_info", #"hash_59d76961c5d59ccb", 1, 1, "int", undefined, 0, 0);
 		for(i = 0; i < 3; i++)
 		{
-			clientfield::function_a8bbc967(("vehicle.bindingCooldown" + i) + ".cooldown", #"vehicle_info", [1:#"cooldown", 0:#"hash_1260c321aeec38c3" + (isdefined(i) ? "" + i : "")], 1, 5, "float", undefined, 0, 0);
+			clientfield::register_clientuimodel(("vehicle.bindingCooldown" + i) + ".cooldown", #"vehicle_info", [1:#"cooldown", 0:#"hash_1260c321aeec38c3" + (isdefined(i) ? "" + i : "")], 1, 5, "float", undefined, 0, 0);
 		}
 	}
 	clientfield::register("toplayer", "toggle_dnidamagefx", 1, 1, "int", &field_toggle_dnidamagefx, 0, 0);
@@ -213,9 +213,9 @@ function spawned_callback(localclientnum)
 		self.settings = getscriptbundle(self.scriptbundlesettings);
 		var_a6de9f17 = self.settings.var_a6de9f17;
 	}
-	if(self function_5d43fd44() || isdefined(var_a6de9f17))
+	if(self usessubtargets() || isdefined(var_a6de9f17))
 	{
-		self thread function_529fa01(localclientnum, var_a6de9f17);
+		self thread watch_vehicle_damage(localclientnum, var_a6de9f17);
 	}
 	if(!is_true(self.settings.var_4221c285) && isdefined(self.settings.var_681129b2))
 	{
@@ -319,7 +319,7 @@ function on_shutdown(localclientnum)
 }
 
 /*
-	Name: function_529fa01
+	Name: watch_vehicle_damage
 	Namespace: vehicle
 	Checksum: 0xA4E75E19
 	Offset: 0x2268
@@ -327,7 +327,7 @@ function on_shutdown(localclientnum)
 	Parameters: 2
 	Flags: Linked
 */
-function function_529fa01(localclientnum, rumble)
+function watch_vehicle_damage(localclientnum, rumble)
 {
 	self endon(#"death");
 	self.notifyonbulletimpact = 1;
@@ -395,17 +395,17 @@ function function_a87e7c22(subtarget)
 		if(!isdefined(self.var_d2c05029[subtarget]) || self.var_d2c05029[subtarget] <= time)
 		{
 			self.var_d2c05029[subtarget] = time + 150;
-			bone = self function_d55293d0(subtarget);
-			self function_bf9d3071(#"hash_20bdbaa0db5eb57d", bone);
+			bone = self submodelboneforsubtarget(subtarget);
+			self playrenderoverridebundle(#"hash_20bdbaa0db5eb57d", bone);
 			wait(0.1);
-			self function_5d482e78(#"hash_20bdbaa0db5eb57d", bone);
+			self stoprenderoverridebundle(#"hash_20bdbaa0db5eb57d", bone);
 		}
 	}
 	else
 	{
-		self function_bf9d3071(#"hash_20bdbaa0db5eb57d");
+		self playrenderoverridebundle(#"hash_20bdbaa0db5eb57d");
 		wait(0.15);
-		self function_5d482e78(#"hash_20bdbaa0db5eb57d");
+		self stoprenderoverridebundle(#"hash_20bdbaa0db5eb57d");
 	}
 }
 
@@ -598,7 +598,7 @@ function play_boost(localclientnum, var_a7ba3864, duration)
 function kill_boost(localclientnum, var_1ca9b241, var_dc0238cc, player, duration)
 {
 	self endon(#"death");
-	wait((isdefined(duration) ? duration : self.var_686515e3 + 0.5));
+	wait((isdefined(duration) ? duration : self.boostduration + 0.5));
 	self notify(#"end_boost");
 	if(isdefined(var_1ca9b241))
 	{
@@ -986,12 +986,12 @@ function function_34105b89(localclientnum, groupid, ison)
 	}
 	self endon(#"death");
 	util::waittill_dobj(localclientnum);
-	var_babd059c = function_7927d9b1(settings, groupid);
-	if(!isarray(var_babd059c))
+	bone_group = function_7927d9b1(settings, groupid);
+	if(!isarray(bone_group))
 	{
 		return;
 	}
-	foreach(var_b969bea7 in var_babd059c)
+	foreach(var_b969bea7 in bone_group)
 	{
 		if(isdefined(var_b969bea7) && isdefined(var_b969bea7.var_f08513a))
 		{
@@ -1387,7 +1387,7 @@ function lights_off(localclientnum)
 }
 
 /*
-	Name: function_44729756
+	Name: lights_flicker
 	Namespace: vehicle
 	Checksum: 0xE356E2A0
 	Offset: 0x4820
@@ -1395,7 +1395,7 @@ function lights_off(localclientnum)
 	Parameters: 3
 	Flags: Linked
 */
-function function_44729756(localclientnum, duration, var_5db078ba)
+function lights_flicker(localclientnum, duration, var_5db078ba)
 {
 	if(!isdefined(duration))
 	{
@@ -1407,7 +1407,7 @@ function function_44729756(localclientnum, duration, var_5db078ba)
 	}
 	self notify("5ba8e4885a493d86");
 	self endon("5ba8e4885a493d86");
-	self endon(#"hash_45365ddf9df27830");
+	self endon(#"cancel_flicker");
 	self endon(#"death");
 	if(!isdefined(self.scriptbundlesettings))
 	{
@@ -1516,24 +1516,24 @@ function flicker_lights(localclientnum, oldval, newval, bnewent, binitialsnap, f
 {
 	if(bwastimejump == 0)
 	{
-		self notify(#"hash_45365ddf9df27830");
+		self notify(#"cancel_flicker");
 		self lights_off(fieldname);
 	}
 	else
 	{
 		if(bwastimejump == 1)
 		{
-			self thread function_44729756(fieldname);
+			self thread lights_flicker(fieldname);
 		}
 		else
 		{
 			if(bwastimejump == 2)
 			{
-				self thread function_44729756(fieldname, 20);
+				self thread lights_flicker(fieldname, 20);
 			}
 			else if(bwastimejump == 3)
 			{
-				self notify(#"hash_45365ddf9df27830");
+				self notify(#"cancel_flicker");
 			}
 		}
 	}
@@ -2031,11 +2031,11 @@ function private function_cc6f861b(localclientnum)
 	self function_3aa94f97();
 	if(is_true(self.var_6aedef46))
 	{
-		self.var_5a428a07 = self playsound(localclientnum, self.var_f0885951);
+		self.var_5a428a07 = self playsound(localclientnum, self.hornsound);
 	}
 	else
 	{
-		self.var_76660b3a = self playloopsound(self.var_f0885951);
+		self.var_76660b3a = self playloopsound(self.hornsound);
 	}
 }
 
@@ -2120,7 +2120,7 @@ function private function_2d24296(localclientnum, oldval, newval, bnewent, binit
 	{
 		return;
 	}
-	if(!isdefined(self.var_f0885951))
+	if(!isdefined(self.hornsound))
 	{
 		return;
 	}
@@ -2184,9 +2184,9 @@ function function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap
 				}
 				case 1:
 				{
-					if(isdefined(var_b5ddf091.warning) && isdefined(var_b5ddf091.var_b82c68ed))
+					if(isdefined(var_b5ddf091.warning) && isdefined(var_b5ddf091.tag_warning))
 					{
-						handle = util::playfxontag(binitialsnap, var_b5ddf091.warning, self, var_b5ddf091.var_b82c68ed);
+						handle = util::playfxontag(binitialsnap, var_b5ddf091.warning, self, var_b5ddf091.tag_warning);
 						if(!isdefined(self.fx_handles[#"malfunction"]))
 						{
 							self.fx_handles[#"malfunction"] = [];

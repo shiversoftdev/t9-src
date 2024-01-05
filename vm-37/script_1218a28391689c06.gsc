@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_2d986308;
 
@@ -14,12 +14,12 @@
 */
 event main(eventstruct)
 {
-	callback::function_d46d9315(&function_d46d9315);
+	callback::on_gameplay_started(&on_gameplay_started);
 	util::waitforclient(0);
 }
 
 /*
-	Name: function_d46d9315
+	Name: on_gameplay_started
 	Namespace: namespace_2d986308
 	Checksum: 0x1C1D584E
 	Offset: 0x118
@@ -27,7 +27,7 @@ event main(eventstruct)
 	Parameters: 1
 	Flags: Linked
 */
-function function_d46d9315(localclientnum)
+function on_gameplay_started(localclientnum)
 {
 	level thread nuked_population_sign_think(localclientnum);
 }

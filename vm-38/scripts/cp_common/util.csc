@@ -1,16 +1,16 @@
-#using script_140d5347de8af85c;
-#using script_251549d469e816bf;
 #using script_2764f2b7c40521c8;
 #using script_38dc72b5220a1a67;
+#using script_251549d469e816bf;
 #using script_40e017336a087343;
-#using script_65fbfb5ecb1f899e;
 #using script_7276bc654659288;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\math_shared.csc;
-#using scripts\core_common\serverfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using script_140d5347de8af85c;
+#using script_65fbfb5ecb1f899e;
+#using scripts\core_common\serverfield_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace util;
 
@@ -29,7 +29,7 @@ function private autoexec function_967a438e()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: util
 	Checksum: 0x2F9745DA
 	Offset: 0x1B0
@@ -37,7 +37,7 @@ function private autoexec function_967a438e()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3b7610eda5a02b79", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -97,16 +97,16 @@ function private function_2e48b28e(localclientnum, oldval, newval, bnewent, bini
 		self.var_86c3a9a2 = 1;
 	}
 	target = float(!bwastimejump);
-	var_d89ba925 = ((abs(target - self.var_86c3a9a2)) / var_a6f59e30) * 1000;
+	time_total = ((abs(target - self.var_86c3a9a2)) / var_a6f59e30) * 1000;
 	time_start = self getclienttime();
 	start = self.var_86c3a9a2;
 	while(self.var_86c3a9a2 != target)
 	{
 		waitframe(1);
-		var_fc296337 = self getclienttime();
-		time_delta = var_fc296337 - time_start;
-		var_3d454e88 = math::clamp(time_delta / var_d89ba925, 0, 1);
-		self.var_86c3a9a2 = start + ((target - start) * var_3d454e88);
+		time_now = self getclienttime();
+		time_delta = time_now - time_start;
+		coef = math::clamp(time_delta / time_total, 0, 1);
+		self.var_86c3a9a2 = start + ((target - start) * coef);
 		self function_97c2dab8(self.var_86c3a9a2);
 	}
 	self function_1402addd();

@@ -1,32 +1,32 @@
-#using script_1940fc077a028a81;
-#using script_2c5daa95f8fec03c;
-#using script_3357acf79ce92f4b;
-#using script_3411bb48d41bd3b;
-#using script_35598499769dbb3d;
-#using script_35b5ff21c2a0960f;
-#using script_3751b21462a54a7d;
-#using script_3819e7a1427df6d2;
-#using script_3a88f428c6d8ef90;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
-#using script_41fe08c37d53a635;
-#using script_4d85e8de54b02198;
-#using script_57f7003580bb15e0;
-#using script_6809bf766eba194a;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_behavior.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
 #using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using script_3a88f428c6d8ef90;
+#using scripts\zm_common\zm_powerups.gsc;
+#using scripts\zm_common\zm_behavior.gsc;
+#using script_1940fc077a028a81;
+#using script_3411bb48d41bd3b;
+#using script_3357acf79ce92f4b;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_3751b21462a54a7d;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\globallogic\globallogic_vehicle.gsc;
+#using script_35598499769dbb3d;
+#using script_41fe08c37d53a635;
+#using script_2c5daa95f8fec03c;
+#using script_3aa0f32b70d4f7cb;
+#using script_4d85e8de54b02198;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_3819e7a1427df6d2;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\damagefeedback_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_98decc78;
 
@@ -41,11 +41,11 @@
 */
 function private autoexec function_8232c56d()
 {
-	level notify(1786356668);
+	level notify(-1786356668);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_98decc78
 	Checksum: 0x91D1FCCD
 	Offset: 0x340
@@ -53,7 +53,7 @@ function private autoexec function_8232c56d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5cb28995c23c44a", &function_70a657d8, &main, undefined, undefined);
 }
@@ -69,7 +69,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	gametype = util::function_5df4294();
+	gametype = util::get_game_type();
 	if(gametype == #"zsurvival")
 	{
 		level.var_9ee73630 = [];
@@ -92,7 +92,7 @@ function private function_70a657d8()
 		spawner::function_89a2cd87(#"zombie", &function_95d1bec9);
 	}
 	clientfield::register("toplayer", "" + #"hash_3a86c740229275b7", 1, 3, "counter");
-	function_74e6d564();
+	initzombiebehaviors();
 }
 
 /*
@@ -106,12 +106,12 @@ function private function_70a657d8()
 */
 function private main()
 {
-	level.var_847ab632 = &namespace_85745671::function_847ab632;
+	level.custom_melee_fire = &namespace_85745671::custom_melee_fire;
 	if((isdefined(getgametypesetting(#"hash_4ac1f31d592e3f3d")) ? getgametypesetting(#"hash_4ac1f31d592e3f3d") : 0))
 	{
 		callback::add_callback(#"hash_70eeb7d813f149b2", &namespace_85745671::function_cf065988);
 		callback::add_callback(#"hash_15858698313c5f32", &namespace_85745671::function_b0503d98);
-		turretweapon = getweapon(#"hash_36a6454f13b54f18");
+		turretweapon = getweapon(#"gun_ultimate_turret");
 		if(isdefined(turretweapon))
 		{
 			turretweapon = turretweapon.rootweapon;
@@ -128,7 +128,7 @@ function private main()
 }
 
 /*
-	Name: function_74e6d564
+	Name: initzombiebehaviors
 	Namespace: namespace_98decc78
 	Checksum: 0x979D6836
 	Offset: 0x8B8
@@ -136,7 +136,7 @@ function private main()
 	Parameters: 0
 	Flags: Linked
 */
-function function_74e6d564()
+function initzombiebehaviors()
 {
 	/#
 		assert(isscriptfunctionptr(&function_197fdaee));
@@ -167,7 +167,7 @@ function private function_42151b1b()
 {
 	self.ai.var_870d0893 = 1;
 	self callback::function_d8abfc3d(#"on_ai_damage", &zombie_gib_on_damage);
-	self callback::function_d8abfc3d(#"hash_11aa32ad6d527054", &namespace_85745671::function_b8eb5dea);
+	self callback::function_d8abfc3d(#"on_ai_melee", &namespace_85745671::function_b8eb5dea);
 	self callback::function_d8abfc3d(#"hash_3bb51ce51020d0eb", &namespace_85745671::function_16e2f075);
 	self callback::function_d8abfc3d(#"on_ai_killed", &function_bf21203e);
 	aiutility::addaioverridedamagecallback(self, &function_853cd0f0);
@@ -222,7 +222,7 @@ function function_1bc8ecf1()
 function private function_95d1bec9()
 {
 	self.var_48915943 = 1;
-	function_fb4a1aa3(self);
+	setup_awareness(self);
 	self thread awareness::function_fa6e010d();
 }
 
@@ -269,10 +269,10 @@ function private function_853cd0f0(einflictor, eattacker, idamage, idflags, smea
 	}
 	if(isdefined(damagefromunderneath) && psoffsettime !== "MOD_DOT")
 	{
-		var_9a429025 = function_f74d2943(damagefromunderneath, 7);
-		if(isdefined(var_9a429025))
+		dot_params = function_f74d2943(damagefromunderneath, 7);
+		if(isdefined(dot_params))
 		{
-			status_effect::status_effect_apply(var_9a429025, damagefromunderneath, var_fd90b0bb);
+			status_effect::status_effect_apply(dot_params, damagefromunderneath, var_fd90b0bb);
 		}
 	}
 	var_3b037158 = isdefined(damagefromunderneath) && isarray(level.var_7fc48a1a) && isinarray(level.var_7fc48a1a, damagefromunderneath);
@@ -576,7 +576,7 @@ function private function_6f78caa9()
 }
 
 /*
-	Name: function_fb4a1aa3
+	Name: setup_awareness
 	Namespace: namespace_98decc78
 	Checksum: 0x6F16D909
 	Offset: 0x1EB0
@@ -584,21 +584,21 @@ function private function_6f78caa9()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_fb4a1aa3(entity)
+function private setup_awareness(entity)
 {
 	if(is_true(entity.ai.var_870d0893))
 	{
-		entity.var_f9a12c59 = 1;
-		entity.var_ed35eeb2 = 1;
+		entity.has_awareness = 1;
+		entity.ignorelaststandplayers = 1;
 		entity callback::function_d8abfc3d(#"on_ai_damage", &awareness::function_5f511313);
-		awareness::function_dad6ba0e(entity, #"wander", &function_962ec972, &awareness::function_4ebe4a6d, &awareness::function_b264a0bc, undefined, &awareness::function_555d960b);
-		awareness::function_dad6ba0e(entity, #"investigate", &function_18cf0569, &awareness::function_9eefc327, &function_60856c6d, undefined, &awareness::function_a360dd00);
-		awareness::function_dad6ba0e(entity, #"chase", &function_88586098, &function_e85f22b3, &function_5b3d00f3, &awareness::function_5c40e824, &function_1ae9512e);
+		awareness::register_state(entity, #"wander", &function_962ec972, &awareness::function_4ebe4a6d, &awareness::function_b264a0bc, undefined, &awareness::function_555d960b);
+		awareness::register_state(entity, #"investigate", &function_18cf0569, &awareness::function_9eefc327, &function_60856c6d, undefined, &awareness::function_a360dd00);
+		awareness::register_state(entity, #"chase", &function_88586098, &function_e85f22b3, &function_5b3d00f3, &awareness::function_5c40e824, &function_1ae9512e);
 		awareness::set_state(entity, #"wander");
 	}
 	else
 	{
-		entity.var_f9a12c59 = 0;
+		entity.has_awareness = 0;
 	}
 }
 

@@ -14,8 +14,8 @@
 function function_d92cb558(result, vararg)
 {
 	/#
-		var_2f3fa528 = "";
-		return var_2f3fa528;
+		pathstr = "";
+		return pathstr;
 	#/
 }
 
@@ -37,7 +37,7 @@ function get_stat(...)
 	{
 		return undefined;
 	}
-	result = function_644a3b03(vararg);
+	result = readmatchstat(vararg);
 	/#
 		function_d92cb558(result, vararg);
 	#/
@@ -64,7 +64,7 @@ function set_stat(...)
 	}
 	value = vararg[vararg.size - 1];
 	arrayremoveindex(vararg, vararg.size - 1);
-	result = function_484b4b09(vararg, value);
+	result = writematchstat(vararg, value);
 	/#
 		function_d92cb558(result, vararg);
 	#/
@@ -84,10 +84,10 @@ function function_7a93acec(...)
 {
 	vec = vararg[vararg.size - 1];
 	arrayremoveindex(vararg, vararg.size - 1);
-	var_22f1ed01 = set_stat(vararg, 0, int(vec[0]));
-	var_531b181 = set_stat(vararg, 1, int(vec[1]));
-	var_bea5a46a = set_stat(vararg, 2, int(vec[2]));
-	return is_true(var_22f1ed01) && is_true(var_531b181) && is_true(var_bea5a46a);
+	vec_0 = set_stat(vararg, 0, int(vec[0]));
+	vec_1 = set_stat(vararg, 1, int(vec[1]));
+	vec_2 = set_stat(vararg, 2, int(vec[2]));
+	return is_true(vec_0) && is_true(vec_1) && is_true(vec_2);
 }
 
 /*
@@ -110,7 +110,7 @@ function inc_stat(...)
 	}
 	value = vararg[vararg.size - 1];
 	arrayremoveindex(vararg, vararg.size - 1);
-	result = function_976e9113(vararg, value);
+	result = incrementmatchstat(vararg, value);
 	/#
 		function_d92cb558(result, vararg);
 	#/
@@ -201,10 +201,10 @@ function function_ded5f5b6(...)
 	{
 		vec = vararg[vararg.size - 1];
 		arrayremoveindex(vararg, vararg.size - 1);
-		var_22f1ed01 = set_player_stat(vararg, 0, int(vec[0]));
-		var_531b181 = set_player_stat(vararg, 1, int(vec[1]));
-		var_bea5a46a = set_player_stat(vararg, 2, int(vec[2]));
-		return is_true(var_22f1ed01) && is_true(var_531b181) && is_true(var_bea5a46a);
+		vec_0 = set_player_stat(vararg, 0, int(vec[0]));
+		vec_1 = set_player_stat(vararg, 1, int(vec[1]));
+		vec_2 = set_player_stat(vararg, 2, int(vec[2]));
+		return is_true(vec_0) && is_true(vec_1) && is_true(vec_2);
 	}
 }
 

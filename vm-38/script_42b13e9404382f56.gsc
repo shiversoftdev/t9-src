@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_c982469d : class_6aaccc24
+class class_c982469d : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,7 +47,7 @@ class class_c982469d : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -61,11 +61,11 @@ class class_c982469d : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_74adcd8a
+		Name: set_armor_vis
 		Namespace: namespace_c982469d
 		Checksum: 0x5C8A1C32
 		Offset: 0x440
@@ -73,7 +73,7 @@ class class_c982469d : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_74adcd8a(player, value)
+	function set_armor_vis(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "armor_vis", value);
 	}
@@ -89,10 +89,10 @@ class class_c982469d : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_corrupted_health_bar");
-		namespace_6aaccc24::function_da693cbe("health", 4000, 7, "float");
-		namespace_6aaccc24::function_da693cbe("armor", 4000, 7, "float");
-		namespace_6aaccc24::function_da693cbe("armor_vis", 4000, 1, "int");
+		cluielem::setup_clientfields("zm_corrupted_health_bar");
+		cluielem::add_clientfield("health", 4000, 7, "float");
+		cluielem::add_clientfield("armor", 4000, 7, "float");
+		cluielem::add_clientfield("armor_vis", 4000, 1, "int");
 	}
 
 	/*
@@ -125,11 +125,11 @@ class class_c982469d : class_6aaccc24
 
 }
 
-#namespace namespace_d0cd3b4a;
+#namespace zm_corrupted_health_bar;
 
 /*
 	Name: function_5cfe9464
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0xFC7921B5
 	Offset: 0xE8
 	Size: 0x14
@@ -143,7 +143,7 @@ function private autoexec function_5cfe9464()
 
 /*
 	Name: register
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x7FD4BDF9
 	Offset: 0x108
 	Size: 0x34
@@ -159,7 +159,7 @@ function register()
 
 /*
 	Name: open
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x584B4B43
 	Offset: 0x148
 	Size: 0x38
@@ -177,7 +177,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x5189623B
 	Offset: 0x188
 	Size: 0x1C
@@ -191,7 +191,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0xC3D6EA8D
 	Offset: 0x1B0
 	Size: 0x1A
@@ -205,7 +205,7 @@ function is_open(player)
 
 /*
 	Name: set_health
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x4538EA91
 	Offset: 0x1D8
 	Size: 0x28
@@ -219,7 +219,7 @@ function set_health(player, value)
 
 /*
 	Name: set_armor
-	Namespace: namespace_d0cd3b4a
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x2F5A58B5
 	Offset: 0x208
 	Size: 0x28
@@ -232,16 +232,16 @@ function set_armor(player, value)
 }
 
 /*
-	Name: function_74adcd8a
-	Namespace: namespace_d0cd3b4a
+	Name: set_armor_vis
+	Namespace: zm_corrupted_health_bar
 	Checksum: 0x58AD17FA
 	Offset: 0x238
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_74adcd8a(player, value)
+function set_armor_vis(player, value)
 {
-	[[ self ]]->function_74adcd8a(player, value);
+	[[ self ]]->set_armor_vis(player, value);
 }
 

@@ -1,10 +1,10 @@
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace scriptmodels;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: scriptmodels
 	Checksum: 0x7AAEE42A
 	Offset: 0xA0
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"scriptmodels", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -61,7 +61,7 @@ function private function_9abee270(model)
 	}
 	if(is_true(model.var_3ee8e0e2))
 	{
-		model util::function_c596f193();
+		model util::make_sentient();
 	}
 	if(is_true(model.var_5d16ec51))
 	{

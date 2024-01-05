@@ -1,15 +1,15 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\lui_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\core_common\visionset_mgr_shared.csc;
-#using scripts\zm_common\util.csc;
-#using scripts\zm_common\zm_equipment.csc;
-#using scripts\zm_common\zm_perks.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\zm_common\zm_perks.csc;
+#using scripts\zm_common\zm_equipment.csc;
+#using scripts\zm_common\util.csc;
+#using scripts\core_common\visionset_mgr_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\lui_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace zm_altbody;
 
@@ -28,7 +28,7 @@ function private autoexec function_e15cd206()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_altbody
 	Checksum: 0x43E0E1F6
 	Offset: 0x158
@@ -36,7 +36,7 @@ function private autoexec function_e15cd206()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_altbody", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -52,7 +52,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	clientfield::function_a8bbc967("player_lives", #"zm_hud", #"player_lives", 1, 2, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("player_lives", #"zm_hud", #"player_lives", 1, 2, "int", undefined, 0, 0);
 	clientfield::register("toplayer", "player_mana", 1, 8, "float", &set_player_mana, 0, 1);
 	clientfield::register("toplayer", "player_in_afterlife", 1, 1, "int", &toggle_player_altbody, 0, 1);
 	clientfield::register("allplayers", "player_altbody", 1, 1, "int", &toggle_player_altbody_3p, 0, 1);
@@ -137,7 +137,7 @@ function toggle_player_altbody(localclientnum, oldval, newval, bnewent, binitial
 		self.altbody = fieldname;
 		if(bwastimejump)
 		{
-			self thread function_f2e3981e(binitialsnap, fieldname);
+			self thread clear_transition(binitialsnap, fieldname);
 		}
 		else
 		{
@@ -221,7 +221,7 @@ function cover_transition(localclientnum, onoff)
 }
 
 /*
-	Name: function_f2e3981e
+	Name: clear_transition
 	Namespace: zm_altbody
 	Checksum: 0x207B4FD3
 	Offset: 0x7D0
@@ -229,7 +229,7 @@ function cover_transition(localclientnum, onoff)
 	Parameters: 2
 	Flags: None
 */
-function function_f2e3981e(localclientnum, onoff)
+function clear_transition(localclientnum, onoff)
 {
 	level lui::screen_fade_in(onoff, 0);
 }

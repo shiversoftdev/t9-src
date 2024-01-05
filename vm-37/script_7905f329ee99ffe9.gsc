@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_c3742963 : class_6aaccc24
+class cconsequences_notification : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0xC0A6ABC9
 		Offset: 0x378
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_c3742963 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0x2EC21205
 		Offset: 0x550
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_c3742963 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0x77EE885D
 		Offset: 0x4B0
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_c3742963 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_c3742963
+		Name: register_clientside
+		Namespace: cconsequences_notification
 		Checksum: 0x3DF2C520
 		Offset: 0x420
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("consequences_notification");
+		cluielem::register_clientside("consequences_notification");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0x1EC39CF0
 		Offset: 0x398
 		Size: 0x7C
@@ -68,28 +68,28 @@ class class_c3742963 : class_6aaccc24
 	*/
 	function setup_clientfields(var_6ad1a3bb, var_b8233aa2)
 	{
-		namespace_6aaccc24::setup_clientfields("consequences_notification");
-		namespace_6aaccc24::function_da693cbe("visible", 1, 1, "int", var_6ad1a3bb);
-		namespace_6aaccc24::function_da693cbe("content_index", 1, 4, "int", var_b8233aa2);
+		cluielem::setup_clientfields("consequences_notification");
+		cluielem::add_clientfield("visible", 1, 1, "int", var_6ad1a3bb);
+		cluielem::add_clientfield("content_index", 1, 4, "int", var_b8233aa2);
 	}
 
 	/*
-		Name: function_afdd9f65
-		Namespace: namespace_c3742963
+		Name: set_content_index
+		Namespace: cconsequences_notification
 		Checksum: 0x90B6CA86
 		Offset: 0x518
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_afdd9f65(localclientnum, value)
+	function set_content_index(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "content_index", value);
+		[[ self ]]->set_data(localclientnum, "content_index", value);
 	}
 
 	/*
 		Name: set_visible
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0xDDCE1E85
 		Offset: 0x4E0
 		Size: 0x30
@@ -98,12 +98,12 @@ class class_c3742963 : class_6aaccc24
 	*/
 	function set_visible(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "visible", value);
+		[[ self ]]->set_data(localclientnum, "visible", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_c3742963
+		Namespace: cconsequences_notification
 		Checksum: 0xAE031439
 		Offset: 0x448
 		Size: 0x5C
@@ -112,9 +112,9 @@ class class_c3742963 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "visible", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "content_index", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "visible", 0);
+		[[ self ]]->set_data(localclientnum, "content_index", 0);
 	}
 
 }
@@ -132,7 +132,7 @@ class class_c3742963 : class_6aaccc24
 */
 function register(var_6ad1a3bb, var_b8233aa2)
 {
-	elem = new class_c3742963();
+	elem = new cconsequences_notification();
 	[[ elem ]]->setup_clientfields(var_6ad1a3bb, var_b8233aa2);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -154,7 +154,7 @@ function register(var_6ad1a3bb, var_b8233aa2)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: consequences_notification
 	Checksum: 0xFFBDCAED
 	Offset: 0x260
@@ -162,10 +162,10 @@ function register(var_6ad1a3bb, var_b8233aa2)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_c3742963();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cconsequences_notification();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -226,7 +226,7 @@ function set_visible(localclientnum, value)
 }
 
 /*
-	Name: function_afdd9f65
+	Name: set_content_index
 	Namespace: consequences_notification
 	Checksum: 0xA40D54B6
 	Offset: 0x348
@@ -234,8 +234,8 @@ function set_visible(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_afdd9f65(localclientnum, value)
+function set_content_index(localclientnum, value)
 {
-	[[ self ]]->function_afdd9f65(localclientnum, value);
+	[[ self ]]->set_content_index(localclientnum, value);
 }
 

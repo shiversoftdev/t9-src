@@ -1,22 +1,22 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1b01e95a6b5270fd;
-#using script_1ee011cd0961afd7;
+#using scripts\core_common\ai\archetype_brutus.gsc;
 #using script_2a5bf5b4a00cee0d;
-#using script_3aa0f32b70d4f7cb;
-#using script_47851dbeea22fe66;
-#using script_4d85e8de54b02198;
-#using script_4ee0ccb42a9d88f5;
-#using script_522aeb6ae906391e;
-#using script_5701633066d199f2;
-#using script_57f7003580bb15e0;
+#using script_164a456ce05c3483;
 #using script_5f20d3b434d24884;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
+#using script_47851dbeea22fe66;
+#using script_1ee011cd0961afd7;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using script_4d85e8de54b02198;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_df4fbf0;
 
@@ -31,7 +31,7 @@
 */
 function private autoexec function_32039f2e()
 {
-	level notify(1935609788);
+	level notify(-1935609788);
 }
 
 /*
@@ -126,7 +126,7 @@ function function_8b038048()
 	self.no_gib = 1;
 	self.zombie_move_speed = "walk";
 	self.maxhealth = self.health;
-	self.var_5b857980 = function_4d1e7b48(#"hash_19533caf858a9f3b");
+	self.shock_status_effect = getstatuseffect(#"hash_19533caf858a9f3b");
 	self thread damagewatch();
 	self thread function_79445831();
 	if(level.doa.world_state == 0)
@@ -300,7 +300,7 @@ function private function_85e8940a(entity)
 		damage = mapfloat(entity getpathfindingradius() + 15, entity ai::function_9139c839().var_1709a39, 90, 20, distance(entity.origin, player.origin));
 		damage = int(max(20, damage));
 		player dodamage(damage, entity.origin, entity, entity, "none", "MOD_PROJECTILE_SPLASH");
-		player thread status_effect::status_effect_apply(self.var_5b857980, undefined, self, 0);
+		player thread status_effect::status_effect_apply(self.shock_status_effect, undefined, self, 0);
 		player clientfield::increment_to_player("brutus_shock_attack_player", 1);
 	}
 }

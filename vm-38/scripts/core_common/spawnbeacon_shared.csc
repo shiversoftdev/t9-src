@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_f2029649;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_6dfbd99a()
 {
-	level notify(494411775);
+	level notify(-494411775);
 }
 
 #namespace spawn_beacon;
@@ -45,7 +45,7 @@ function init_shared()
 function setupclientfields()
 {
 	clientfield::register("scriptmover", "spawnbeacon_placed", 1, 1, "int", &spawnbeacon_placed, 0, 0);
-	clientfield::function_a8bbc967("hudItems.spawnbeacon.active", #"hud_items", [1:#"active", 0:#"spawnbeacon"], 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.spawnbeacon.active", #"hud_items", [1:#"active", 0:#"spawnbeacon"], 1, 1, "int", undefined, 0, 0);
 }
 
 /*

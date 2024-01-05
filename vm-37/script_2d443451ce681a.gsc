@@ -1,18 +1,18 @@
-#using script_4ab78e327b76395f;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\colors_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\load.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\cp_common\load.gsc;
+#using script_4ab78e327b76395f;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\colors_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace ai;
 
@@ -441,11 +441,11 @@ function function_c3314131(var_2795777d, var_82706add, var_69747751, var_7b2eb76
 	e_goal = spawnstruct();
 	if(isdefined(var_2795777d))
 	{
-		var_a2e909e9 = getaiarray(var_2795777d, var_82706add);
+		a_e_ai = getaiarray(var_2795777d, var_82706add);
 	}
 	else
 	{
-		var_a2e909e9 = getaiarray();
+		a_e_ai = getaiarray();
 	}
 	if(!isdefined(var_69747751))
 	{
@@ -453,15 +453,15 @@ function function_c3314131(var_2795777d, var_82706add, var_69747751, var_7b2eb76
 			assertmsg("");
 		#/
 	}
-	function_1eaaceab(var_a2e909e9);
-	e_goal thread function_53f3fb5(var_a2e909e9, var_89c6f2db, n_timeout);
+	function_1eaaceab(a_e_ai);
+	e_goal thread function_53f3fb5(a_e_ai, var_89c6f2db, n_timeout);
 	e_goal thread function_b7bb4bb5(var_371cea52);
 	if(isdefined(var_89c6f2db) || isdefined(var_371cea52))
 	{
 		e_goal waittill(array("aGuys_kill_count", "aGuys_flag_hit"));
 	}
-	function_1eaaceab(var_a2e909e9);
-	level thread function_6706a21c(var_a2e909e9, var_69747751, var_7b2eb76f, b_shoot);
+	function_1eaaceab(a_e_ai);
+	level thread function_6706a21c(a_e_ai, var_69747751, var_7b2eb76f, b_shoot);
 	e_goal struct::delete();
 }
 
@@ -824,12 +824,12 @@ function private function_66d43d96()
 		{
 			if(self.var_11149e48.moving)
 			{
-				self thread function_f3a8861e(self.var_11149e48.move, 1);
+				self childthread function_f3a8861e(self.var_11149e48.move, 1);
 				var_bee8f197 = float(function_60d95f53()) / 1000;
 			}
 			else
 			{
-				self thread function_f3a8861e(self.var_11149e48.idle, 1);
+				self childthread function_f3a8861e(self.var_11149e48.idle, 1);
 				self notify(#"hash_14c8785c81be82ac");
 				var_bee8f197 = 1;
 			}

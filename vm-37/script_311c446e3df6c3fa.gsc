@@ -1,14 +1,14 @@
-#using script_359683f0ff3b3fbb;
 #using script_74e3c3cd261ec799;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using script_359683f0ff3b3fbb;
 
 #namespace objective_manager;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: objective_manager
 	Checksum: 0xF599A347
 	Offset: 0x180
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"objective_manager", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -102,13 +102,13 @@ function private function_dd2493cc(var_c5dfdae0, ...)
 {
 	if(isdefined(var_c5dfdae0) && !self function_d2503806(var_c5dfdae0))
 	{
-		self function_bf9d3071(var_c5dfdae0);
+		self playrenderoverridebundle(var_c5dfdae0);
 	}
 	foreach(rob in vararg)
 	{
 		if(self function_d2503806(rob))
 		{
-			self function_5d482e78(rob);
+			self stoprenderoverridebundle(rob);
 		}
 	}
 }

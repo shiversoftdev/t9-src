@@ -1,6 +1,6 @@
 #using script_746267f0669c40ae;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_21dd166c;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_e581c6f8()
 {
-	level notify(1322753441);
+	level notify(-1322753441);
 }
 
 /*

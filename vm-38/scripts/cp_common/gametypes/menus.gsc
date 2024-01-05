@@ -1,18 +1,18 @@
+#using scripts\cp_common\util.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using scripts\cp_common\load.gsc;
 #using script_32399001bdb550da;
 #using script_35ae72be7b4fec10;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
 #using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\load.gsc;
-#using scripts\cp_common\skipto.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace menus;
 
@@ -31,7 +31,7 @@ function private autoexec function_d277d47e()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: menus
 	Checksum: 0x4F50937A
 	Offset: 0x440
@@ -39,7 +39,7 @@ function private autoexec function_d277d47e()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"menus", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -76,7 +76,7 @@ function init()
 	game.menu[#"menu_class"] = "class";
 	game.menu[#"menu_changeclass"] = "mobile_armory_loadout";
 	game.menu[#"menu_changeclass_offline"] = "mobile_armory_loadout";
-	game.menu[#"hash_644a9c94f3d35a8a"] = "PositionDraft";
+	game.menu[#"menu_draft"] = "PositionDraft";
 	foreach(str_team in level.teams)
 	{
 		game.menu["menu_changeclass_" + str_team] = "mobile_armory_loadout";
@@ -281,7 +281,7 @@ function on_menu_response()
 			}
 			continue;
 		}
-		if(menu == game.menu[#"hash_644a9c94f3d35a8a"])
+		if(menu == game.menu[#"menu_draft"])
 		{
 			self [[level.draftmenu]](response, intpayload);
 			continue;

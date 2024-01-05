@@ -1,21 +1,21 @@
-#using script_18f0d22c75b141a7;
-#using script_47fb62300ac0bd60;
-#using script_545a0bac37bda541;
-#using scripts\core_common\armor.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using scripts\core_common\globallogic\globallogic_score.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\armor.gsc;
 
 #namespace contracts;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: contracts
 	Checksum: 0x9F2C980C
 	Offset: 0x120
@@ -23,7 +23,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"contracts", &function_70a657d8, undefined, &finalize_init, undefined);
 }
@@ -61,14 +61,14 @@ function private finalize_init()
 	if(can_process_contracts())
 	{
 		register_player_contract_event(#"headshot", &on_headshot_kill, 1);
-		register_player_contract_event(#"hash_4b92edc69ea525fc", &function_a0045e6a);
+		register_player_contract_event(#"air_assault_total_kills", &function_a0045e6a);
 		register_player_contract_event(#"hash_10b0c56ae630070d", &function_8af6a5a);
 		challenges::registerchallengescallback("playerKilled", &contract_kills);
 		challenges::registerchallengescallback("gameEnd", &function_a4c8ce2a);
 		globallogic_score::registercontractwinevent(&contract_win);
 		register_player_contract_event(#"double_kill", &function_a7a24a36, 1);
-		register_player_contract_event(#"ekia", &function_71eb8a5a, 2);
-		register_player_contract_event(#"objective_ekia", &function_660b0026);
+		register_player_contract_event(#"ekia", &on_ekia, 2);
+		register_player_contract_event(#"objective_ekia", &on_objective_ekia);
 		register_player_contract_event(#"hash_31940a13f77a7a79", &function_23ddb75);
 		register_player_contract_event(#"hash_2f3b5cfd90466f60", &function_fb608f0a, 1);
 		register_player_contract_event(#"hash_32ed5d2b274397c1", &function_4b024d04);
@@ -93,19 +93,19 @@ function private finalize_init()
 */
 function function_2065738f(killstreaktype)
 {
-	self function_a54e2068(#"hash_bf49eb59a524a2c");
+	self increment_contract(#"hash_bf49eb59a524a2c");
 	switch(killstreaktype)
 	{
 		case "counteruav":
-		case "hash_65f8a13931095b50":
+		case "inventory_counteruav":
 		{
-			self function_a54e2068(#"hash_55d5fc464b179a45");
+			self increment_contract(#"hash_55d5fc464b179a45");
 			break;
 		}
 		case "uav":
-		case "hash_73f41ae07ef2ba54":
+		case "inventory_uav":
 		{
-			self function_a54e2068(#"hash_5faef94f35522583");
+			self increment_contract(#"hash_5faef94f35522583");
 			break;
 		}
 	}
@@ -127,46 +127,46 @@ function function_a7a24a36(weaponname)
 	{
 		case "frag_grenade":
 		{
-			attacker function_a54e2068(#"hash_2414160d464f90ae");
-			attacker function_a54e2068(#"hash_255d9fb4f18be3d4");
+			attacker increment_contract(#"hash_2414160d464f90ae");
+			attacker increment_contract(#"hash_255d9fb4f18be3d4");
 			break;
 		}
 		case "eq_molotov":
 		{
-			attacker function_a54e2068(#"hash_28eee88b752d363a");
-			attacker function_a54e2068(#"hash_255d9fb4f18be3d4");
+			attacker increment_contract(#"hash_28eee88b752d363a");
+			attacker increment_contract(#"hash_255d9fb4f18be3d4");
 			break;
 		}
 		case "satchel_charge":
 		{
-			attacker function_a54e2068(#"hash_296479e90e353da1");
-			attacker function_a54e2068(#"hash_255d9fb4f18be3d4");
+			attacker increment_contract(#"hash_296479e90e353da1");
+			attacker increment_contract(#"hash_255d9fb4f18be3d4");
 			break;
 		}
 		case "eq_sticky_grenade":
 		{
-			attacker function_a54e2068(#"hash_46ab1787f07dba5a");
-			attacker function_a54e2068(#"hash_255d9fb4f18be3d4");
+			attacker increment_contract(#"hash_46ab1787f07dba5a");
+			attacker increment_contract(#"hash_255d9fb4f18be3d4");
 			break;
 		}
 		case "remote_missile":
 		{
-			attacker function_a54e2068(#"hash_772e19fad283c8cf");
+			attacker increment_contract(#"hash_772e19fad283c8cf");
 			break;
 		}
 		case "sig_bow_flame":
 		{
-			attacker function_a54e2068(#"hash_6e992792aaf0dc10");
+			attacker increment_contract(#"hash_6e992792aaf0dc10");
 			break;
 		}
 		case "hero_pineapplegun":
 		{
-			attacker function_a54e2068(#"hash_2977fecb56dd9b59");
+			attacker increment_contract(#"hash_2977fecb56dd9b59");
 			break;
 		}
 		case "recon_car":
 		{
-			attacker function_a54e2068(#"hash_3d11e20647031a01");
+			attacker increment_contract(#"hash_3d11e20647031a01");
 			break;
 		}
 	}
@@ -200,7 +200,7 @@ function on_player_connect()
 */
 function can_process_contracts()
 {
-	if(getdvarint(#"hash_5f85c5979e163766", 0) == 0)
+	if(getdvarint(#"contracts_enabled", 0) == 0)
 	{
 		return 0;
 	}
@@ -208,7 +208,7 @@ function can_process_contracts()
 	{
 		return 0;
 	}
-	if(!(sessionmodeismultiplayergame() || function_f99d2668()))
+	if(!(sessionmodeismultiplayergame() || sessionmodeiswarzonegame()))
 	{
 		return 0;
 	}
@@ -388,7 +388,7 @@ function contract_kills(data)
 }
 
 /*
-	Name: function_71eb8a5a
+	Name: on_ekia
 	Namespace: contracts
 	Checksum: 0xECF44338
 	Offset: 0x10E0
@@ -396,7 +396,7 @@ function contract_kills(data)
 	Parameters: 2
 	Flags: Linked
 */
-function function_71eb8a5a(weapon, victim)
+function on_ekia(weapon, victim)
 {
 	attacker = self;
 	attacker function_fd9fb79b(#"hash_224789279d37fc30");
@@ -473,11 +473,11 @@ function function_71eb8a5a(weapon, victim)
 	}
 	if(var_8a4cfbd)
 	{
-		attacker function_a54e2068(#"hash_6b52fb637a3c29cb");
+		attacker increment_contract(#"hash_6b52fb637a3c29cb");
 	}
-	else if(victim.var_b76e0a09)
+	else if(victim.issignatureweapon)
 	{
-		attacker function_a54e2068(#"hash_31a6484e36a0a20f");
+		attacker increment_contract(#"hash_31a6484e36a0a20f");
 	}
 	total_unlocked = attacker gettotalunlockedweaponattachments(victim);
 	loadout_primary_weapon = attacker loadout::function_18a77b37("primary");
@@ -504,14 +504,14 @@ function function_71eb8a5a(weapon, victim)
 			attacker function_fd9fb79b(#"hash_469703d9a67cf0dd");
 		}
 	}
-	if(armor::function_4f977182() > 0 && isdefined(self.var_c79fb13d))
+	if(armor::get_armor() > 0 && isdefined(self.var_c79fb13d))
 	{
 		attacker function_fd9fb79b(#"hash_7d90475d2d43eefd");
 	}
 }
 
 /*
-	Name: function_660b0026
+	Name: on_objective_ekia
 	Namespace: contracts
 	Checksum: 0x6BB1D42F
 	Offset: 0x15F0
@@ -519,9 +519,9 @@ function function_71eb8a5a(weapon, victim)
 	Parameters: 0
 	Flags: Linked
 */
-function function_660b0026()
+function on_objective_ekia()
 {
-	self function_a54e2068(#"hash_674ddfad917fa524");
+	self increment_contract(#"hash_674ddfad917fa524");
 }
 
 /*
@@ -535,7 +535,7 @@ function function_660b0026()
 */
 function function_23ddb75()
 {
-	self function_a54e2068(#"hash_210a710134dbdaaa");
+	self increment_contract(#"hash_210a710134dbdaaa");
 }
 
 /*
@@ -570,23 +570,23 @@ function function_fd9fb79b(var_38280f2f, delta)
 */
 function function_fb608f0a(weapon)
 {
-	self function_a54e2068(#"hash_186da11489a29d82");
+	self increment_contract(#"hash_186da11489a29d82");
 	if(weapon.statname == #"hash_2de6f2fb4eb1529")
 	{
-		function_a54e2068(#"hash_189a19dfebc71184");
+		increment_contract(#"hash_189a19dfebc71184");
 	}
 	else
 	{
 		if(weapon.statname == #"land_mine")
 		{
-			function_a54e2068(#"hash_4ef18c4603d407ad");
+			increment_contract(#"hash_4ef18c4603d407ad");
 		}
 		else if(util::getweaponclass(weapon) === #"weapon_grenade")
 		{
-			function_a54e2068(#"hash_58b984c08b43c46a");
+			increment_contract(#"hash_58b984c08b43c46a");
 			if(weapon.statname == #"satchel_charge")
 			{
-				function_a54e2068(#"hash_16feef44241889e5");
+				increment_contract(#"hash_16feef44241889e5");
 			}
 		}
 	}
@@ -617,7 +617,7 @@ function function_4b024d04()
 			break;
 		}
 	}
-	self function_a54e2068(var_c421e6b);
+	self increment_contract(var_c421e6b);
 }
 
 /*
@@ -655,18 +655,18 @@ function private function_902ef0de(var_38280f2f, delta)
 	if(new_progress != old_progress)
 	{
 		self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
-		if(isdefined(level.var_90031a39[var_38280f2f]))
+		if(isdefined(level.contract_ids[var_38280f2f]))
 		{
-			self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.var_90031a39[var_38280f2f], new_progress);
+			self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
 		}
 	}
 	if(old_progress < target_value && target_value <= new_progress)
 	{
 		var_9d12108c = (isdefined(self.timeplayed[self.team]) ? self.timeplayed[self.team] : 0);
-		self.pers[#"contracts"][var_38280f2f].var_be5bf249 = (self stats::function_441050ca(#"time_played_total") - self.pers[#"hash_5651f00c6c1790a4"]) + var_9d12108c;
-		if(isdefined(level.var_90031a39[var_38280f2f]))
+		self.pers[#"contracts"][var_38280f2f].var_be5bf249 = (self stats::get_stat_global(#"time_played_total") - self.pers[#"hash_5651f00c6c1790a4"]) + var_9d12108c;
+		if(isdefined(level.contract_ids[var_38280f2f]))
 		{
-			self luinotifyevent(#"hash_1739c4bd5baf83bc", 1, level.var_90031a39[var_38280f2f]);
+			self luinotifyevent(#"hash_1739c4bd5baf83bc", 1, level.contract_ids[var_38280f2f]);
 		}
 	}
 	/#
@@ -762,19 +762,19 @@ function contract_win(winner)
 	{
 		case "conf":
 		case "hash_1e1515dc71a38bb9":
-		case "hash_40e7fa1f82c9a9a9":
+		case "conf_hc":
 		{
 			var_831b642b = #"hash_62eeb56528fb2dd2";
 			break;
 		}
 		case "control":
-		case "hash_1acc245ba0adf546":
+		case "control_hc":
 		{
 			var_831b642b = #"hash_42a587fd027c16d7";
 			break;
 		}
 		case "hash_1f03b546a8317f1d":
-		case "hash_2b1e0466676a9e7d":
+		case "dom_hc":
 		case "dom":
 		{
 			var_831b642b = #"hash_1286a20fba67f00f";
@@ -787,7 +787,7 @@ function contract_win(winner)
 			break;
 		}
 		case "koth":
-		case "hash_4d813729d9a4bebd":
+		case "koth_hc":
 		case "hash_5ad222bb812ce35d":
 		{
 			var_831b642b = #"hash_1fa6cd6ec6b44413";
@@ -799,13 +799,13 @@ function contract_win(winner)
 			var_831b642b = #"hash_491aa3b35ce36b7f";
 			break;
 		}
-		case "hash_2ad10ed6e94a349c":
+		case "tdm_hc":
 		{
 			var_831b642b = #"hash_91095804fbbf4ae";
 			break;
 		}
 		case "sd":
-		case "hash_7a9ce625ed68488a":
+		case "sd_hc":
 		{
 			var_831b642b = #"hash_7065ab34c90b39b4";
 			break;
@@ -839,12 +839,12 @@ function function_c5958b54()
 	switch(level.gametype)
 	{
 		case "ball":
-		case "hash_7e279a00003eea98":
+		case "ball_hc":
 		{
 			var_c421e6b = #"hash_34477f0475c38164";
 			break;
 		}
-		case "hash_2f6e1c35e35e3cfe":
+		case "bounty_hc":
 		case "bounty":
 		{
 			var_c421e6b = #"hash_4985d4f734fdbfce";
@@ -852,25 +852,25 @@ function function_c5958b54()
 		}
 		case "conf":
 		case "hash_1e1515dc71a38bb9":
-		case "hash_40e7fa1f82c9a9a9":
+		case "conf_hc":
 		{
 			var_c421e6b = #"hash_5de2883b8961e46f";
 			break;
 		}
 		case "control":
-		case "hash_1acc245ba0adf546":
+		case "control_hc":
 		{
 			var_c421e6b = #"hash_62d0b4c184c48912";
 			break;
 		}
 		case "ctf":
-		case "hash_7eee54ba2b077140":
+		case "ctf_hc":
 		{
 			var_c421e6b = #"hash_42b7ebc5926b0008";
 			break;
 		}
 		case "dem":
-		case "hash_69f97b66f80cb88b":
+		case "dem_hc":
 		{
 			var_c421e6b = #"hash_36472e9b2de73d63";
 			break;
@@ -882,7 +882,7 @@ function function_c5958b54()
 			break;
 		}
 		case "hash_1f03b546a8317f1d":
-		case "hash_2b1e0466676a9e7d":
+		case "dom_hc":
 		case "dom":
 		{
 			var_c421e6b = #"hash_4289a3f53c536915";
@@ -895,44 +895,44 @@ function function_c5958b54()
 			break;
 		}
 		case "escort":
-		case "hash_6999ad920e0c2033":
+		case "escort_hc":
 		{
 			var_c421e6b = #"hash_38fb96360f792879";
 			break;
 		}
-		case "hash_2c9bf6486c8d5123":
+		case "gun_hc":
 		case "gun":
 		{
 			var_c421e6b = #"hash_f916a0b9718fb8";
 			break;
 		}
-		case "hash_36ec512a45b61e1c":
+		case "infect_hc":
 		case "infect":
 		{
 			var_c421e6b = #"hash_53542c30ea90ca02";
 			break;
 		}
 		case "koth":
-		case "hash_4d813729d9a4bebd":
+		case "koth_hc":
 		case "hash_5ad222bb812ce35d":
 		{
 			var_c421e6b = #"hash_50f232749a3c2486";
 			break;
 		}
 		case "prop":
-		case "hash_5fa2c7e9d9b8185c":
+		case "prop_hc":
 		{
 			var_c421e6b = #"hash_6b23bf478e392be0";
 			break;
 		}
 		case "sas":
-		case "hash_2f2a3faa406faca6":
+		case "sas_hc":
 		{
 			var_c421e6b = #"hash_4bba29532de87a59";
 			break;
 		}
 		case "sd":
-		case "hash_7a9ce625ed68488a":
+		case "sd_hc":
 		{
 			var_c421e6b = #"hash_5039727046c10015";
 			break;
@@ -943,7 +943,7 @@ function function_c5958b54()
 			var_c421e6b = #"hash_697ce077df5b3b5a";
 			break;
 		}
-		case "hash_2ad10ed6e94a349c":
+		case "tdm_hc":
 		{
 			var_c421e6b = #"hash_30ac3098e945e653";
 			break;
@@ -1107,19 +1107,19 @@ function function_d9ae19f0(player)
 function devgui_setup()
 {
 	/#
-		var_74757534 = "";
+		devgui_base = "";
 		wait(3);
-		function_e07e542b(var_74757534, undefined);
-		function_17a92a99(var_74757534);
-		function_b308be00(var_74757534);
-		function_aae10509(var_74757534);
-		function_7402288f(var_74757534);
-		function_ef925b75(var_74757534);
-		function_5ab1c2d4(var_74757534);
-		function_1379e87e(var_74757534);
-		function_6339ba69(var_74757534);
-		function_b8984e1a(var_74757534);
-		function_6961cd46(var_74757534);
+		function_e07e542b(devgui_base, undefined);
+		function_17a92a99(devgui_base);
+		function_b308be00(devgui_base);
+		function_aae10509(devgui_base);
+		function_7402288f(devgui_base);
+		function_ef925b75(devgui_base);
+		function_5ab1c2d4(devgui_base);
+		function_1379e87e(devgui_base);
+		function_6339ba69(devgui_base);
+		function_b8984e1a(devgui_base);
+		function_6961cd46(devgui_base);
 	#/
 }
 

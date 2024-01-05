@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_617a54f4;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_fafcf43d()
 {
-	level notify(990041076);
+	level notify(-990041076);
 }
 
 /*
@@ -38,15 +38,15 @@ function function_d8383812(id, version, script_noteworthy, speed, soul_fx, var_2
 		level.var_e4336230 = [];
 	}
 	level.var_e4336230["sc_" + id] = {#hash_b8d19839:var_b8d19839, #hash_6a1c7649:var_6a1c7649, #hash_925337f4:var_925337f4, #hash_2e845a89:var_2e845a89, #soul_fx:soul_fx, #speed:speed, #script_noteworthy:script_noteworthy};
-	clientfield::register("actor", "sc_" + id, version, 1, "int", &function_305e672f, 0, 0);
+	clientfield::register("actor", "sc_" + id, version, 1, "int", &soul_capture, 0, 0);
 	if(var_b8d19839)
 	{
-		clientfield::register("vehicle", "sc_" + id, version, 1, "int", &function_305e672f, 0, 0);
+		clientfield::register("vehicle", "sc_" + id, version, 1, "int", &soul_capture, 0, 0);
 	}
 }
 
 /*
-	Name: function_305e672f
+	Name: soul_capture
 	Namespace: namespace_617a54f4
 	Checksum: 0xB281AF22
 	Offset: 0x2D0
@@ -54,7 +54,7 @@ function function_d8383812(id, version, script_noteworthy, speed, soul_fx, var_2
 	Parameters: 7
 	Flags: Private
 */
-function private function_305e672f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump)
+function private soul_capture(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump)
 {
 	def = level.var_e4336230[bwasdemojump];
 	if(!isdefined(def))

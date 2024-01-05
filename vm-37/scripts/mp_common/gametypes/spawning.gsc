@@ -1,5 +1,5 @@
-#using scripts\core_common\util_shared.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\core_common\util_shared.gsc;
 
 #namespace spawning;
 

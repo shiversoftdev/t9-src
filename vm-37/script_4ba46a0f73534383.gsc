@@ -1,16 +1,16 @@
-#using script_4108035fe400ce67;
-#using script_68d2ee1489345a1d;
-#using script_7bafaa95bb1b427e;
-#using scripts\core_common\armor.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\weapons\weapons.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using script_4108035fe400ce67;
+#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\armor.gsc;
 
 #namespace namespace_2ed67032;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2ed67032
 	Checksum: 0xFBFFF225
 	Offset: 0x100
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7aac5c09cf9461e3", &function_70a657d8, undefined, &finalize, undefined);
 }
@@ -35,8 +35,8 @@ function private autoexec function_89f2df9()
 function private function_70a657d8()
 {
 	level.var_8ef8b9e8 = getweapon(#"hash_9825a3f1d038c6f");
-	clientfield::function_a8bbc967("hudItems.armorPlateCount", 1, 4, "int");
-	clientfield::function_a8bbc967("hudItems.armorPlateMaxCarry", 1, 4, "int");
+	clientfield::register_clientuimodel("hudItems.armorPlateCount", 1, 4, "int");
+	clientfield::register_clientuimodel("hudItems.armorPlateMaxCarry", 1, 4, "int");
 	callback::on_spawned(&on_player_spawned);
 	callback::on_connect(&on_player_connect);
 	callback::add_callback(#"on_loadout", &on_player_loadout);
@@ -138,9 +138,9 @@ function private on_player_loadout()
 	Parameters: 7
 	Flags: Private
 */
-function private function_e74225a7(item, player, var_bd027dd9, var_d8138db2, itemcount, var_aec6fa7f, slot)
+function private function_e74225a7(item, player, var_bd027dd9, itemid, itemcount, var_aec6fa7f, slot)
 {
-	if(itemcount.var_a6762160.itemtype == #"hash_56d6621e6c4caf07")
+	if(itemcount.var_a6762160.itemtype == #"armor_shard")
 	{
 		var_82da4e0 = int(min(slot, self.var_c52363ab - var_aec6fa7f.var_7d7d976a));
 		var_aec6fa7f.var_7d7d976a = var_aec6fa7f.var_7d7d976a + var_82da4e0;
@@ -165,7 +165,7 @@ function private function_86b9a404()
 	{
 		return 0;
 	}
-	return self.var_7d7d976a > 0 && armor::function_4f977182() < 225;
+	return self.var_7d7d976a > 0 && armor::get_armor() < 225;
 }
 
 /*
@@ -205,7 +205,7 @@ function private function_d66636df()
 	{
 		self.var_7d7d976a = self.var_7d7d976a - 1;
 		self clientfield::set_player_uimodel("hudItems.armorPlateCount", self.var_7d7d976a);
-		var_8b8faf32 = armor::function_4f977182();
+		var_8b8faf32 = armor::get_armor();
 		var_3d557ef9 = var_8b8faf32 + 75;
 		var_3d557ef9 = int(min(var_3d557ef9, 225));
 		self armor::set_armor(var_3d557ef9, 225, 3, 0.4, 1, 0.5, 0, 1, 1, 1);

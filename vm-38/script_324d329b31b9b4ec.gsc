@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_f0840611;
 
@@ -96,7 +96,7 @@ function marker_state_changed(localclientnum, oldval, newval, bnewent, binitials
 	}
 	else
 	{
-		player notify(#"hash_72e5eda620e4157");
+		player notify(#"stop_previs");
 	}
 	if(isdefined(player.markerobj) && !player.markerobj hasdobj(fieldname))
 	{
@@ -115,7 +115,7 @@ function marker_state_changed(localclientnum, oldval, newval, bnewent, binitials
 */
 function function_2b804e42(localclientnum)
 {
-	self waittill(#"death", #"weapon_change", #"hash_72e5eda620e4157");
+	self waittill(#"death", #"weapon_change", #"stop_previs");
 	if(isdefined(level.var_9c4cdb79[localclientnum]))
 	{
 		level.var_9c4cdb79[localclientnum] hide();
@@ -133,14 +133,14 @@ function function_2b804e42(localclientnum)
 */
 function previs(localclientnum, invalid)
 {
-	self notify(#"hash_72e5eda620e4157");
-	self endon(#"death", #"weapon_change", #"hash_72e5eda620e4157");
+	self notify(#"stop_previs");
+	self endon(#"death", #"weapon_change", #"stop_previs");
 	level.var_9c4cdb79[localclientnum] show();
 	self thread function_2b804e42(localclientnum);
 	function_3e8d9b27(!invalid, localclientnum);
 	while(true)
 	{
-		function_82a8db78(localclientnum, invalid);
+		update_previs(localclientnum, invalid);
 		waitframe(1);
 	}
 }
@@ -161,7 +161,7 @@ function spawn_previs(localclientnum)
 }
 
 /*
-	Name: function_82a8db78
+	Name: update_previs
 	Namespace: ir_strobe
 	Checksum: 0xE81BF104
 	Offset: 0x670
@@ -169,7 +169,7 @@ function spawn_previs(localclientnum)
 	Parameters: 2
 	Flags: Linked
 */
-function function_82a8db78(localclientnum, invalid)
+function update_previs(localclientnum, invalid)
 {
 	player = self;
 	facing_angles = getlocalclientangles(localclientnum);
@@ -213,9 +213,9 @@ function function_82a8db78(localclientnum, invalid)
 	Parameters: 2
 	Flags: Linked
 */
-function function_3e8d9b27(var_120d5014, localclientnum)
+function function_3e8d9b27(validlocation, localclientnum)
 {
-	if(var_120d5014)
+	if(validlocation)
 	{
 		level.var_9c4cdb79[localclientnum] setmodel(#"wpn_t9_eqp_smoke_grenade_world_yellow");
 		if(isdefined(level.previs_fx))

@@ -1,6 +1,6 @@
 #using script_2c5daa95f8fec03c;
 #using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
+#using scripts\core_common\ai\zombie_utility.gsc;
 #using script_522aeb6ae906391e;
 #using script_59f07c660e6710a5;
 #using scripts\core_common\callbacks_shared.gsc;
@@ -36,9 +36,9 @@ function private autoexec function_aa1f7568()
 function autoexec init()
 {
 	registerbehaviorscriptfunctions();
-	spawner::add_archetype_spawn_function(#"hash_1bc8194446d4722f", &function_d0439ae2);
-	spawner::add_archetype_spawn_function(#"hash_1bc8194446d4722f", &zombie_utility::zombiespawnsetup);
-	spawner::function_89a2cd87(#"hash_1bc8194446d4722f", &function_bac4724a);
+	spawner::add_archetype_spawn_function(#"tormentor", &function_d0439ae2);
+	spawner::add_archetype_spawn_function(#"tormentor", &zombie_utility::zombiespawnsetup);
+	spawner::function_89a2cd87(#"tormentor", &function_bac4724a);
 }
 
 /*

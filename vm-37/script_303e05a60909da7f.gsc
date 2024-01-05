@@ -1,13 +1,13 @@
-#using script_2c49ae69cd8ce30c;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
 #using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace high_value_target;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: high_value_target
 	Checksum: 0x36E526C2
 	Offset: 0xA0
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"high_value_target", &function_70a657d8, undefined, undefined, undefined);
 }

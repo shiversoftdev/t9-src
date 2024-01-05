@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_28a7d65d : class_6aaccc24
+class cself_respawn : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x16266B8D
 		Offset: 0x1C8
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_28a7d65d : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0xC42AC60D
 		Offset: 0x300
 		Size: 0x14
@@ -33,22 +33,22 @@ class class_28a7d65d : class_6aaccc24
 	}
 
 	/*
-		Name: function_459465a
-		Namespace: namespace_28a7d65d
+		Name: set_percent
+		Namespace: cself_respawn
 		Checksum: 0x7FAB19E9
 		Offset: 0x2B0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_459465a(player, value)
+	function set_percent(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "percent", value);
 	}
 
 	/*
 		Name: open
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x899CE1FB
 		Offset: 0x238
 		Size: 0x3C
@@ -61,12 +61,12 @@ class class_28a7d65d : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0xA11CA29D
 		Offset: 0x280
 		Size: 0x24
@@ -75,12 +75,12 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x3A51758C
 		Offset: 0x1E8
 		Size: 0x44
@@ -89,8 +89,8 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("self_respawn");
-		namespace_6aaccc24::function_da693cbe("percent", 1, 6, "float");
+		cluielem::setup_clientfields("self_respawn");
+		cluielem::add_clientfield("percent", 1, 6, "float");
 	}
 
 }
@@ -108,7 +108,7 @@ class class_28a7d65d : class_6aaccc24
 */
 function register()
 {
-	elem = new class_28a7d65d();
+	elem = new cself_respawn();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -160,7 +160,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_459465a
+	Name: set_percent
 	Namespace: self_respawn
 	Checksum: 0xA36A41BF
 	Offset: 0x198
@@ -168,8 +168,8 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_459465a(player, value)
+function set_percent(player, value)
 {
-	[[ self ]]->function_459465a(player, value);
+	[[ self ]]->set_percent(player, value);
 }
 

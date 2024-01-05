@@ -13,13 +13,13 @@
 */
 function private autoexec function_e7022dc0()
 {
-	level notify(540721458);
+	level notify(-540721458);
 }
 
 #namespace activities;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: activities
 	Checksum: 0xE1D2329F
 	Offset: 0xA8
@@ -27,7 +27,7 @@ function private autoexec function_e7022dc0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"activities", &function_70a657d8, undefined, undefined, undefined);
 }

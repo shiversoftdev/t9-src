@@ -1,14 +1,14 @@
-#using script_14d2d89964cae0b1;
-#using script_4e53735256f112ac;
 #using script_d67878983e3d7c;
+#using script_4e53735256f112ac;
+#using script_14d2d89964cae0b1;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 
 #namespace namespace_cf2b4f27;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_cf2b4f27
 	Checksum: 0x9DF81467
 	Offset: 0x3E0
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_62a392bb15b68ccd", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }
@@ -185,9 +185,9 @@ function function_78f4a9dc(localclientnum, oldval, newval, bnewent, binitialsnap
 */
 function function_46e16bf3(localclientnum, b_freeze)
 {
-	self notify(#"hash_224e66d46cc29cd6");
-	self endoncallback(&function_ed5b4054, #"death", #"hash_224e66d46cc29cd6");
-	self function_bf9d3071("rob_test_character_ice");
+	self notify(#"end_frosty");
+	self endoncallback(&function_ed5b4054, #"death", #"end_frosty");
+	self playrenderoverridebundle("rob_test_character_ice");
 	if(!isdefined(self.var_82fb67e7))
 	{
 		self.var_82fb67e7 = 0;
@@ -217,7 +217,7 @@ function function_46e16bf3(localclientnum, b_freeze)
 			if(self.var_82fb67e7 <= 0)
 			{
 				self.var_958cf9c5 = undefined;
-				self function_5d482e78("rob_test_character_ice");
+				self stoprenderoverridebundle("rob_test_character_ice");
 				if(isdefined(self.var_565ef52d))
 				{
 					stopfx(localclientnum, self.var_565ef52d);
@@ -263,11 +263,11 @@ function function_46e16bf3(localclientnum, b_freeze)
 					{
 						if(isdynentvalid(gib))
 						{
-							gib function_bf9d3071("rob_test_character_ice");
+							gib playrenderoverridebundle("rob_test_character_ice");
 						}
 					}
 				}
-				self function_5d482e78("rob_test_character_ice");
+				self stoprenderoverridebundle("rob_test_character_ice");
 				if(isdefined(self.var_565ef52d))
 				{
 					killfx(localclientnum, self.var_565ef52d);

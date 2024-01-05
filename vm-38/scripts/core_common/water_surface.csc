@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\system_shared.csc;
 
 #namespace water_surface;
@@ -15,11 +15,11 @@
 */
 function private autoexec function_c10e032d()
 {
-	level notify(344884952);
+	level notify(-344884952);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: water_surface
 	Checksum: 0x2815A55D
 	Offset: 0xC8
@@ -27,7 +27,7 @@ function private autoexec function_c10e032d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"water_surface", &function_70a657d8, undefined, undefined, undefined);
 }

@@ -1,31 +1,31 @@
-#using script_164a456ce05c3483;
-#using script_1a9763988299e68d;
-#using script_1c65dbfc2f1c8d8f;
-#using script_1ce46999727f2f2b;
 #using script_1ee011cd0961afd7;
-#using script_2c49ae69cd8ce30c;
-#using script_335d0650ed05d36d;
-#using script_3dafaf0497ea14b8;
-#using script_3f27a7b2232674db;
-#using script_5f20d3b434d24884;
-#using script_65d4fc42e5e94766;
+#using script_1ce46999727f2f2b;
+#using script_1a9763988299e68d;
 #using script_774302f762d76254;
+#using script_164a456ce05c3483;
+#using script_5f20d3b434d24884;
 #using script_791c11dd176d5dfa;
+#using script_3dafaf0497ea14b8;
+#using scripts\wz_common\spawn.gsc;
+#using scripts\wz_common\hud.gsc;
+#using scripts\mp_common\util.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
 #using scripts\core_common\armor.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\mp_common\callbacks.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\player\player_role.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\mp_common\callbacks.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
-#using scripts\mp_common\util.gsc;
-#using scripts\wz_common\hud.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_335d0650ed05d36d;
 
 #namespace brawl;
 
@@ -293,8 +293,8 @@ function on_spawn_player(predictedspawn)
 	self armor::set_armor(150, 150, 0, 1, 1, 1, 1, 1, 1, 1);
 	self thread function_6337e931();
 	self.var_2eb578bd = 1;
-	self function_8fd843dd(0);
-	self function_9b48a8e5(0);
+	self setcharacteroutfit(0);
+	self setcharacterwarpaintoutfit(0);
 	self function_ab96a9b5("head", 0);
 	self function_ab96a9b5("headgear", 0);
 	self function_ab96a9b5("arms", 0);
@@ -316,10 +316,10 @@ function on_spawn_player(predictedspawn)
 */
 function function_8cef1872()
 {
-	if(isdefined(self.var_283bf712))
+	if(isdefined(self.spawn_anchor))
 	{
-		self.var_283bf712 delete();
-		self.var_283bf712 = undefined;
+		self.spawn_anchor delete();
+		self.spawn_anchor = undefined;
 	}
 	self clientfield::set_player_uimodel("hudItems.wzLoadFinished", 1);
 	self clientfield::set_player_uimodel("hudItems.streamerLoadFraction", 1);

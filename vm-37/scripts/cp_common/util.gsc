@@ -1,39 +1,39 @@
+#using scripts\cp_common\collectibles.gsc;
 #using script_1478fbd17fe393cf;
-#using script_1cf46b33555422b7;
-#using script_263b7f2982258785;
-#using script_32399001bdb550da;
-#using script_35ae72be7b4fec10;
-#using script_4607f5d47c16102b;
-#using script_4ae261b2785dda9f;
 #using script_5513c8efed5ff300;
+#using script_35ae72be7b4fec10;
+#using script_4ae261b2785dda9f;
+#using script_32399001bdb550da;
+#using script_7d0013bbc05623b9;
+#using script_6df46b7b233fa3c;
+#using script_263b7f2982258785;
+#using scripts\cp_common\oed.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\string_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\serverfield_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using script_1cf46b33555422b7;
+#using script_4607f5d47c16102b;
 #using script_5961deb533dad533;
 #using script_633abfc63faf8efc;
-#using script_6df46b7b233fa3c;
-#using script_7d0013bbc05623b9;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\serverfield_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\string_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
-#using scripts\cp_common\collectibles.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\oed.gsc;
 
 #namespace util;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: util
 	Checksum: 0x66EA6EA4
 	Offset: 0x5F0
@@ -41,7 +41,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3b7610eda5a02b79", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -62,7 +62,7 @@ function private function_70a657d8()
 		level.var_54ce800f = [];
 	}
 	function_3969639b(&cp_hint_text::register, "cp_hint_text");
-	lui::function_b95a3ba5("pip_menu", &pip_menu::register);
+	lui::add_luimenu("pip_menu", &pip_menu::register);
 	clientfield::register("toplayer", "cinematicmotion_blend", 1, 1, "int");
 	serverfield::register("cinematicmotion_blend", 1, 1, "int", &function_e6d37e3b);
 	animation::add_notetrack_func("dialog_gender_vo", &function_b7367cc0);
@@ -1770,7 +1770,7 @@ function set_low_ready(b_lowready, gesture)
 	}
 	if(b_lowready)
 	{
-		if(isstring(gesture) || function_7a600918(gesture) && isgesture(gesture))
+		if(isstring(gesture) || ishash(gesture) && isgesture(gesture))
 		{
 			self val::set(#"low_ready", "disable_weapon_fire", 1);
 			self playgestureviewmodel(gesture);
@@ -2012,7 +2012,7 @@ function show_hint_text(str_text_to_show, b_should_blink, str_turn_off_notify, n
 	}
 	if(!level flag::get(#"mission_failed"))
 	{
-		self thread namespace_fe8e9929::function_4c2d4fc4(b_should_blink, #"", 0, #"", 2, n_display_time, str_turn_off_notify, 0);
+		self thread hint_tutorial::function_4c2d4fc4(b_should_blink, #"", 0, #"", 2, n_display_time, str_turn_off_notify, 0);
 	}
 }
 
@@ -2033,7 +2033,7 @@ function function_84f75222(str_text_to_show, b_should_blink, str_turn_off_notify
 		self hide_hint_text(0);
 	}
 	var_9620799e cp_hint_text::open(self);
-	var_9620799e cp_hint_text::function_a16f86c1(self, str_text_to_show);
+	var_9620799e cp_hint_text::set_hint_text(self, str_text_to_show);
 	wait_network_frame();
 	if(b_should_blink)
 	{
@@ -2061,7 +2061,7 @@ function hide_hint_text(b_fade_before_hiding)
 	{
 		b_fade_before_hiding = 1;
 	}
-	self namespace_fe8e9929::function_9f427d88((b_fade_before_hiding ? 2 : 0));
+	self hint_tutorial::function_9f427d88((b_fade_before_hiding ? 2 : 0));
 }
 
 /*
@@ -2076,18 +2076,18 @@ function hide_hint_text(b_fade_before_hiding)
 function function_7b7dfab3(n_display_time, str_turn_off_notify)
 {
 	self endon(#"disconnect");
-	var_be17187b = undefined;
+	s_waitresult = undefined;
 	if(n_display_time > 0.75)
 	{
-		var_be17187b = undefined;
-		var_be17187b = self waittilltimeout(n_display_time - 0.75, str_turn_off_notify, #"kill_hint_text", #"death");
+		s_waitresult = undefined;
+		s_waitresult = self waittilltimeout(n_display_time - 0.75, str_turn_off_notify, #"kill_hint_text", #"death");
 	}
 	else
 	{
-		var_be17187b = undefined;
-		var_be17187b = self waittill(str_turn_off_notify, #"kill_hint_text", #"death");
+		s_waitresult = undefined;
+		s_waitresult = self waittill(str_turn_off_notify, #"kill_hint_text", #"death");
 	}
-	if(var_be17187b._notify == "timeout")
+	if(s_waitresult._notify == "timeout")
 	{
 		hide_hint_text(1);
 	}
@@ -2319,7 +2319,7 @@ function function_2020ca4e()
 	while(isdefined(self))
 	{
 		str_result = undefined;
-		str_result = self waittill(#"hash_5a63f58af5d098b5", #"enter_vehicle", #"exit_vehicle", #"death");
+		str_result = self waittill(#"vehicle_used", #"enter_vehicle", #"exit_vehicle", #"death");
 		if(str_result._notify == "death")
 		{
 			if(isdefined(self))
@@ -2360,7 +2360,7 @@ function function_2020ca4e()
 }
 
 /*
-	Name: function_30d3b9ff
+	Name: can_see_ai
 	Namespace: util
 	Checksum: 0x1921A1F1
 	Offset: 0x4F68
@@ -2368,7 +2368,7 @@ function function_2020ca4e()
 	Parameters: 5
 	Flags: None
 */
-function function_30d3b9ff(var_428cf68a, ai, latency, var_593afcc1, var_8230ceac)
+function can_see_ai(var_428cf68a, ai, latency, var_593afcc1, var_8230ceac)
 {
 	currenttime = gettime();
 	if(!isdefined(latency))
@@ -2598,7 +2598,7 @@ function function_49cff8b0(slot, do_show)
 }
 
 /*
-	Name: function_830b7ecd
+	Name: give_offhand_weapon
 	Namespace: util
 	Checksum: 0xA235B485
 	Offset: 0x5778
@@ -2606,7 +2606,7 @@ function function_49cff8b0(slot, do_show)
 	Parameters: 1
 	Flags: None
 */
-function function_830b7ecd(weapon)
+function give_offhand_weapon(weapon)
 {
 	offhandslot = 0;
 	if(isdefined(self._gadgets_player[offhandslot]))
@@ -2634,7 +2634,7 @@ function are_enemies_nearby(origin, radius)
 	{
 		radius = 2000;
 	}
-	var_d3a6fe2b = self function_bdda420f(origin, radius);
+	var_d3a6fe2b = self getenemiesinradius(origin, radius);
 	foreach(enemy in var_d3a6fe2b)
 	{
 		if(isalive(enemy) && !is_true(enemy.in_melee_death))
@@ -3138,7 +3138,7 @@ function function_a5318821(var_79a934ad, var_6fa12df4, var_64b54706, var_20900fd
 	{
 		self.var_4fc36735 = 0;
 	}
-	var_f82db92c = function_53bbf9d2();
+	var_f82db92c = get_map_name();
 	var_a9413c09 = !var_f82db92c == #"cp_ger_stakeout";
 	if(var_20900fd && !var_a9413c09)
 	{
@@ -3167,7 +3167,7 @@ function function_a5318821(var_79a934ad, var_6fa12df4, var_64b54706, var_20900fd
 	var_55f32da2 = ((lookup * 2) + var_918f15a4) + 3;
 	self setcharacterbodytype(var_55f32da2);
 	var_cc362ad9 = (self namespace_70eba6e6::function_e86cb765() - 1) + (8 * var_6fa12df4);
-	self function_8fd843dd(var_cc362ad9);
+	self setcharacteroutfit(var_cc362ad9);
 	var_50faf85d = self namespace_70eba6e6::function_33bf99f8(1);
 	setsaveddvar(#"hash_270ca5acff742bb9", var_50faf85d);
 }
@@ -3183,7 +3183,7 @@ function function_a5318821(var_79a934ad, var_6fa12df4, var_64b54706, var_20900fd
 */
 function function_de500b59()
 {
-	mapname = function_53bbf9d2();
+	mapname = get_map_name();
 	if(getplayers()[0].var_4fc36735 === 1 || mapname === #"cp_ger_hub" || mapname === #"cp_ger_hub8")
 	{
 		return #"hash_40c037a247e8b24f";

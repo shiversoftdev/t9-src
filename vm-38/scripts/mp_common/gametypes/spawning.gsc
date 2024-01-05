@@ -1,5 +1,5 @@
-#using scripts\core_common\util_shared.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\core_common\util_shared.gsc;
 
 #namespace spawning;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_a64f5621()
 {
-	level notify(1178971011);
+	level notify(-1178971011);
 }
 
 /*

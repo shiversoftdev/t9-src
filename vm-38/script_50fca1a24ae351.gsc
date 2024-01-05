@@ -1,37 +1,37 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
-#using script_2474a362752098d2;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c9915120c137848;
-#using script_2e9202713de2b353;
-#using script_3bbf85ab4cb9f3c2;
-#using script_3faf478d5b0850fe;
-#using script_40f967ad5d18ea74;
-#using script_41fbdfb1149a433e;
-#using script_47851dbeea22fe66;
-#using script_48e04a393ec6d855;
-#using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_6ad6653eed415ffc;
-#using script_6b6510e124bad778;
-#using script_73ad7687b437e468;
-#using script_746267f0669c40ae;
-#using script_74a56359b7d02ab6;
-#using script_774302f762d76254;
 #using script_dc59353021baee1;
+#using script_746267f0669c40ae;
+#using script_2c9915120c137848;
+#using script_2474a362752098d2;
+#using script_1a9763988299e68d;
+#using script_2a5bf5b4a00cee0d;
+#using script_3bbf85ab4cb9f3c2;
+#using script_40f967ad5d18ea74;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
+#using script_774302f762d76254;
+#using script_6b6510e124bad778;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_74a56359b7d02ab6;
 #using script_f38dc50f0e82277;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using script_2e9202713de2b353;
+#using script_6ad6653eed415ffc;
+#using script_41fbdfb1149a433e;
+#using script_73ad7687b437e468;
+#using script_48e04a393ec6d855;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_981c1f3c;
 
@@ -46,7 +46,7 @@
 */
 function private autoexec function_fd1e2d10()
 {
-	level notify(978581300);
+	level notify(-978581300);
 }
 
 /*
@@ -444,7 +444,7 @@ function function_4be92bcc(idx, seconds)
 	var_80d530a9.buildtime = seconds;
 	var_80d530a9.tiles = level.var_c97eeeb4.size;
 	var_80d530a9.rooms = level.var_d5561d56;
-	var_80d530a9.var_b1cbdbfb = level.var_5d40e975;
+	var_80d530a9.halls = level.var_5d40e975;
 	var_80d530a9.players = namespace_7f5aeb59::function_f08b75c1();
 	var_80d530a9.var_a98f4fd2 = [];
 	foreach(var_a557de6c in level.doa.var_830f8412)
@@ -461,7 +461,7 @@ function function_4be92bcc(idx, seconds)
 		var_80d530a9.var_a98f4fd2[var_80d530a9.var_a98f4fd2.size] = tile;
 	}
 	level.doa.var_fa21a3aa = level.doa.var_fa21a3aa + var_80d530a9.tiles;
-	level.doa.var_f23e2931 = level.doa.var_f23e2931 + var_80d530a9.var_b1cbdbfb;
+	level.doa.var_f23e2931 = level.doa.var_f23e2931 + var_80d530a9.halls;
 	level.doa.var_f5f2b4e8 = level.doa.var_f5f2b4e8 + var_80d530a9.rooms;
 }
 
@@ -660,7 +660,7 @@ function function_600ea4f()
 		}
 		furthest = level.doa.var_c2648383[level.doa.var_c2648383.size - 1];
 		level.doa.var_c2648383 = [];
-		level.doa.var_9f48249a = doa_pickups::function_d080f0db(doa_pickups::function_2c9923d7(39), furthest.origin, undefined, undefined, 1);
+		level.doa.var_9f48249a = doa_pickups::itemspawn(doa_pickups::function_2c9923d7(39), furthest.origin, undefined, undefined, 1);
 		level.doa.var_9f48249a namespace_83eb6304::function_3ecfde67("teleporter_dungeon_light");
 		level.doa.var_9f48249a clientfield::set("set_icon", 9);
 		level.doa.var_9f48249a notify(#"hash_2a866f50cc161ca8");
@@ -674,7 +674,7 @@ function function_600ea4f()
 		{
 			continue;
 		}
-		item = doa_pickups::function_d080f0db(doa_pickups::function_6265bde4(pickup.script_noteworthy), pickup.origin, undefined, undefined, 1);
+		item = doa_pickups::itemspawn(doa_pickups::function_6265bde4(pickup.script_noteworthy), pickup.origin, undefined, undefined, 1);
 		if(isdefined(pickup.modelscale))
 		{
 			item setscale(pickup.modelscale);
@@ -748,10 +748,10 @@ function function_10d89d49()
 	self endon("6f61d15234e42e9c");
 	self endon(#"disconnect");
 	level endon(#"game_over", #"dungeon_cleanup", #"dungeon_destroyed");
-	var_4a46d3c0 = level.doa.var_187ed224.origin[2] - 256;
+	basez = level.doa.var_187ed224.origin[2] - 256;
 	while(isdefined(level.doa.var_182fb75a))
 	{
-		if(self.origin[2] <= var_4a46d3c0)
+		if(self.origin[2] <= basez)
 		{
 			namespace_1e25ad94::debugmsg((((("Player " + self.name) + " FELL out of the active dungeon at location: ") + self.origin) + "  Failsafe warp to start point: ") + level.doa.var_187ed224.origin, 1);
 			self setorigin(level.doa.var_187ed224.origin);

@@ -1,8 +1,8 @@
-#using script_4eecbd20dc9a462c;
 #using script_57f0934f7e3e3b54;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\scene_shared.csc;
+#using script_4eecbd20dc9a462c;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\scene_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace chopper_gunner;
 
@@ -21,7 +21,7 @@ function private autoexec function_7a36c55f()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: chopper_gunner
 	Checksum: 0xA108665F
 	Offset: 0xD0
@@ -29,7 +29,7 @@ function private autoexec function_7a36c55f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"chopper_gunner", &function_70a657d8, undefined, undefined, #"killstreaks");
 }

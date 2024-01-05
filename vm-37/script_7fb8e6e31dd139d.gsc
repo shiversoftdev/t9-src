@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_73eecff9 : class_6aaccc24
+class cmp_prop_controls : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0x81539047
 		Offset: 0x180
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_73eecff9 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0xF3AA983C
 		Offset: 0x240
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_73eecff9 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0x465DF9E1
 		Offset: 0x1C8
 		Size: 0x3C
@@ -44,12 +44,12 @@ class class_73eecff9 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0x6C5969CF
 		Offset: 0x210
 		Size: 0x24
@@ -58,12 +58,12 @@ class class_73eecff9 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_73eecff9
+		Namespace: cmp_prop_controls
 		Checksum: 0x7202E5B7
 		Offset: 0x1A0
 		Size: 0x1C
@@ -72,7 +72,7 @@ class class_73eecff9 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("mp_prop_controls");
+		cluielem::setup_clientfields("mp_prop_controls");
 	}
 
 }
@@ -90,7 +90,7 @@ class class_73eecff9 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_73eecff9();
+	elem = new cmp_prop_controls();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

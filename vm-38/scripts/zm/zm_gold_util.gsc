@@ -1,12 +1,12 @@
-#using script_531a6d61ee606513;
-#using script_58087978e7d5a0fd;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\zm_devgui.gsc;
 #using scripts\core_common\struct.gsc;
 #using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_531a6d61ee606513;
+#using script_58087978e7d5a0fd;
 
 #namespace namespace_5c4c9a39;
 
@@ -21,7 +21,7 @@
 */
 function private autoexec function_99e973a1()
 {
-	level notify(1417020361);
+	level notify(-1417020361);
 }
 
 /*
@@ -35,8 +35,8 @@ function private autoexec function_99e973a1()
 */
 function init()
 {
-	level.var_82d7691b = namespace_82d7691b::register();
-	level.var_2d060063 = namespace_2d060063::register();
+	level.zm_gold_hud = zm_gold_hud::register();
+	level.zm_gold_align_satellite_hud = zm_gold_align_satellite_hud::register();
 	/#
 		level thread function_37597f29();
 	#/
@@ -53,9 +53,9 @@ function init()
 */
 function function_1aeb4889()
 {
-	if(!level.var_82d7691b namespace_82d7691b::is_open(self))
+	if(!level.zm_gold_hud zm_gold_hud::is_open(self))
 	{
-		level.var_82d7691b namespace_82d7691b::open(self);
+		level.zm_gold_hud zm_gold_hud::open(self);
 	}
 }
 
@@ -70,9 +70,9 @@ function function_1aeb4889()
 */
 function close_hud()
 {
-	if(level.var_82d7691b namespace_82d7691b::is_open(self))
+	if(level.zm_gold_hud zm_gold_hud::is_open(self))
 	{
-		level.var_82d7691b namespace_82d7691b::close(self);
+		level.zm_gold_hud zm_gold_hud::close(self);
 	}
 }
 
@@ -89,14 +89,14 @@ function function_b488623(b_show)
 {
 	if(is_true(b_show))
 	{
-		if(!level.var_2d060063 namespace_2d060063::is_open(self))
+		if(!level.zm_gold_align_satellite_hud zm_gold_align_satellite_hud::is_open(self))
 		{
-			level.var_2d060063 namespace_2d060063::open(self);
+			level.zm_gold_align_satellite_hud zm_gold_align_satellite_hud::open(self);
 		}
 	}
-	else if(level.var_2d060063 namespace_2d060063::is_open(self))
+	else if(level.zm_gold_align_satellite_hud zm_gold_align_satellite_hud::is_open(self))
 	{
-		level.var_2d060063 namespace_2d060063::close(self);
+		level.zm_gold_align_satellite_hud zm_gold_align_satellite_hud::close(self);
 	}
 }
 

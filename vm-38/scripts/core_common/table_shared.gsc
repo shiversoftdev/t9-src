@@ -11,7 +11,7 @@
 */
 function private autoexec function_f081e5d5()
 {
-	level notify(354673376);
+	level notify(-354673376);
 }
 
 #namespace table;

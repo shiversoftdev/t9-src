@@ -1,16 +1,16 @@
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
+#using scripts\cp_common\debug.gsc;
 #using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\debug.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace poi;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: poi
 	Checksum: 0xD9BB09F5
 	Offset: 0x110
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"poi", &function_f64316de, undefined, undefined, undefined);
 }
@@ -548,7 +548,7 @@ function private function_c6ff2ee5()
 		self function_4d1af993();
 	}
 	/#
-		self thread function_4c4e4ab0();
+		self childthread function_4c4e4ab0();
 	#/
 	while(true)
 	{

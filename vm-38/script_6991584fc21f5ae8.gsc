@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_fd95a9c : class_6aaccc24
+class class_fd95a9c : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,11 +47,11 @@ class class_fd95a9c : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_3ae8b40f
+		Name: set_confirmbtn
 		Namespace: namespace_fd95a9c
 		Checksum: 0xB4524F31
 		Offset: 0x388
@@ -59,7 +59,7 @@ class class_fd95a9c : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3ae8b40f(player, value)
+	function set_confirmbtn(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "confirmBtn", value);
 	}
@@ -75,11 +75,11 @@ class class_fd95a9c : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_8a6595db
+		Name: set_textboxhint
 		Namespace: namespace_fd95a9c
 		Checksum: 0x4AD3123B
 		Offset: 0x338
@@ -87,7 +87,7 @@ class class_fd95a9c : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_8a6595db(player, value)
+	function set_textboxhint(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "textBoxHint", value);
 	}
@@ -103,9 +103,9 @@ class class_fd95a9c : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("DOA_KeyTrade");
-		namespace_6aaccc24::function_dcb34c80("string", "textBoxHint", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "confirmBtn", 1);
+		cluielem::setup_clientfields("DOA_KeyTrade");
+		cluielem::function_dcb34c80("string", "textBoxHint", 1);
+		cluielem::function_dcb34c80("string", "confirmBtn", 1);
 	}
 
 }
@@ -123,7 +123,7 @@ class class_fd95a9c : class_6aaccc24
 */
 function private autoexec function_4d2dc93()
 {
-	level notify(2128830538);
+	level notify(-2128830538);
 }
 
 /*
@@ -189,7 +189,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_8a6595db
+	Name: set_textboxhint
 	Namespace: doa_keytrade
 	Checksum: 0xE506C977
 	Offset: 0x1C8
@@ -197,13 +197,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_8a6595db(player, value)
+function set_textboxhint(player, value)
 {
-	[[ self ]]->function_8a6595db(player, value);
+	[[ self ]]->set_textboxhint(player, value);
 }
 
 /*
-	Name: function_3ae8b40f
+	Name: set_confirmbtn
 	Namespace: doa_keytrade
 	Checksum: 0x5A6AF285
 	Offset: 0x1F8
@@ -211,8 +211,8 @@ function function_8a6595db(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_3ae8b40f(player, value)
+function set_confirmbtn(player, value)
 {
-	[[ self ]]->function_3ae8b40f(player, value);
+	[[ self ]]->set_confirmbtn(player, value);
 }
 

@@ -1,6 +1,6 @@
-#using script_2b1dbe0f618068f7;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using script_2b1dbe0f618068f7;
 
 #namespace namespace_234f0efc;
 
@@ -19,7 +19,7 @@ function private autoexec function_8e8f839d()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_234f0efc
 	Checksum: 0xE95D20CE
 	Offset: 0xC8
@@ -27,7 +27,7 @@ function private autoexec function_8e8f839d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_296b16535a22f50f", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -43,7 +43,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	clientfield::function_a8bbc967("hudItems.radiationVestHealth", #"hud_items", #"hash_347090a9ef988900", 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.radiationVestHealth", #"hud_items", #"hash_347090a9ef988900", 1, 5, "float", undefined, 0, 0);
 }
 
 /*

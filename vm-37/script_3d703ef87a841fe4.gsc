@@ -1,5 +1,5 @@
-#using script_256b8879317373de;
-#using script_6350c209b3d1b07d;
+#using scripts\core_common\map.gsc;
+#using scripts\core_common\player\player_shared.gsc;
 
 #namespace teams;
 
@@ -55,7 +55,7 @@ function function_dc7eaabd(assignment)
 }
 
 /*
-	Name: function_6d86768e
+	Name: is_team_empty
 	Namespace: teams
 	Checksum: 0x557E6A10
 	Offset: 0x1E0
@@ -63,7 +63,7 @@ function function_dc7eaabd(assignment)
 	Parameters: 1
 	Flags: Linked
 */
-function function_6d86768e(team)
+function is_team_empty(team)
 {
 	team_players = getplayers(team);
 	if(team_players.size > 0)
@@ -86,7 +86,7 @@ function function_959bac94()
 {
 	foreach(team in level.teams)
 	{
-		if(self function_6d86768e(team))
+		if(self is_team_empty(team))
 		{
 			/#
 				println(((("" + "") + self.name) + "") + team);
@@ -285,10 +285,10 @@ function private function_ba459d03(team)
 	/#
 		if(is_true(level.var_ba13fb7a))
 		{
-			var_54e8d52e = string(team);
+			team_str = string(team);
 			if(isdefined(level.teams[team]))
 			{
-				var_54e8d52e = level.teams[team];
+				team_str = level.teams[team];
 			}
 			voip = "";
 			if(isdefined(level.var_75dffa9f[team]))
@@ -299,7 +299,7 @@ function private function_ba459d03(team)
 			{
 				voip = voip + "";
 			}
-			println(((((("" + "") + self.name) + "") + var_54e8d52e) + "") + voip);
+			println(((((("" + "") + self.name) + "") + team_str) + "") + voip);
 		}
 	#/
 }
@@ -318,7 +318,7 @@ function function_a9d594a0(party)
 	/#
 		foreach(var_52ec371a in party.var_d77ed5eb)
 		{
-			var_2798314b = var_52ec371a function_491311f4();
+			var_2798314b = var_52ec371a getparty();
 			if(var_2798314b.var_a15e4438 != party.var_a15e4438)
 			{
 				/#
@@ -344,7 +344,7 @@ function function_d28f6fa0(team)
 		players = getplayers(team);
 		foreach(player in players)
 		{
-			function_a9d594a0(player function_491311f4());
+			function_a9d594a0(player getparty());
 		}
 	#/
 }

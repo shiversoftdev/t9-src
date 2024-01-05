@@ -1,5 +1,5 @@
-#using scripts\core_common\animation_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\animation_shared.csc;
 
 #namespace namespace_80c07c34;
 
@@ -18,7 +18,7 @@ function private autoexec function_4417957a()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_80c07c34
 	Checksum: 0x53AD9A02
 	Offset: 0x118
@@ -26,7 +26,7 @@ function private autoexec function_4417957a()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_75bfc88140adb680", &function_c7f33cce, &function_fa076c68, undefined, undefined);
 }

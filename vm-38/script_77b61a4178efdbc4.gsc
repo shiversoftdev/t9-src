@@ -1,28 +1,28 @@
-#using script_299f56e6d0b16416;
-#using script_2c5daa95f8fec03c;
 #using script_3411bb48d41bd3b;
-#using script_3819e7a1427df6d2;
-#using script_3a704cbcf4081bfb;
-#using script_610ee556015777f3;
-#using script_799de24f8ad427f7;
-#using script_7e59d7bba853fe4b;
-#using script_7fc996fe8678852;
-#using script_db06eb511bd9b36;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm.gsc;
+#using scripts\core_common\ai\archetype_mimic.gsc;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
 #using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
-#using scripts\zm_common\zm_unitrigger.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_quick_spawning.gsc;
+#using script_799de24f8ad427f7;
+#using scripts\zm_common\zm_cleanup_mgr.gsc;
+#using scripts\zm_common\zm.gsc;
+#using script_2c5daa95f8fec03c;
+#using script_3a704cbcf4081bfb;
+#using script_3819e7a1427df6d2;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_14c07d4f;
 
@@ -37,11 +37,11 @@
 */
 function private autoexec function_b7cbb23d()
 {
-	level notify(270671099);
+	level notify(-270671099);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_14c07d4f
 	Checksum: 0x286B65F
 	Offset: 0x2D0
@@ -49,7 +49,7 @@ function private autoexec function_b7cbb23d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7442f9a5295824fd", &function_70a657d8, &function_8ac3bea9, undefined, "zm_destination_manager");
 }
@@ -225,7 +225,7 @@ function function_c0b09ab0()
 	self clientfield::set("mimic_emerge_fx", 1);
 	self.var_a516906f = {#angles:self.angles, #origin:self.origin};
 	self.var_a516906f.anim = #"ai_t9_zm_mimic_com_emerge_prop_quick_f_01";
-	self animcustom(&namespace_6c0f4217::function_f3b371f1);
+	self animcustom(&archetype_mimic::function_f3b371f1);
 }
 
 /*
@@ -315,7 +315,7 @@ function function_9832759c(origin, num_points)
 */
 function function_7a3d3a78(zone_name, spawn_points)
 {
-	if(!isdefined(zone_name) || (!isstring(zone_name) && !function_7a600918(zone_name)))
+	if(!isdefined(zone_name) || (!isstring(zone_name) && !ishash(zone_name)))
 	{
 		return spawn_points;
 	}
@@ -461,10 +461,10 @@ function function_5394f283()
 function function_dca29f5c()
 {
 	self endon(#"death");
-	if(level.zm_loc_types[#"hash_5c68e66197c189b4"].size > 0)
+	if(level.zm_loc_types[#"mimic_location"].size > 0)
 	{
-		s_spawn_loc = array::random(level.zm_loc_types[#"hash_5c68e66197c189b4"]);
-		self namespace_e0710ee6::function_a8dc3363(s_spawn_loc);
+		s_spawn_loc = array::random(level.zm_loc_types[#"mimic_location"]);
+		self zm_ai_utility::function_a8dc3363(s_spawn_loc);
 		self function_c0b09ab0();
 	}
 	else
@@ -496,7 +496,7 @@ function function_ce42b67b()
 		return true;
 	}
 	var_b2aa54a9 = spawn_points[randomint(spawn_points.size)];
-	self namespace_e0710ee6::function_a8dc3363(var_b2aa54a9);
+	self zm_ai_utility::function_a8dc3363(var_b2aa54a9);
 	if(isdefined(self.var_a6fe91fd))
 	{
 		foreach(prop in self.var_a6fe91fd)
@@ -592,9 +592,9 @@ function spawn_single(var_eb3a8721)
 		{
 			s_spawn_loc = [[level.var_7ad32862]]();
 		}
-		else if(level.zm_loc_types[#"hash_5c68e66197c189b4"].size > 0)
+		else if(level.zm_loc_types[#"mimic_location"].size > 0)
 		{
-			s_spawn_loc = array::random(level.zm_loc_types[#"hash_5c68e66197c189b4"]);
+			s_spawn_loc = array::random(level.zm_loc_types[#"mimic_location"]);
 		}
 	}
 	if(!isdefined(s_spawn_loc))
@@ -607,7 +607,7 @@ function spawn_single(var_eb3a8721)
 		#/
 		return undefined;
 	}
-	ai = spawnactor(#"hash_785d6a6acd470388", s_spawn_loc.origin, s_spawn_loc.angles);
+	ai = spawnactor(#"spawner_bo5_mimic", s_spawn_loc.origin, s_spawn_loc.angles);
 	if(isdefined(ai))
 	{
 		ai.var_7a5e475 = 0;
@@ -663,7 +663,7 @@ function function_62b67aab()
 */
 function function_a7a45f60(target_player)
 {
-	var_7bc72d27 = namespace_df043b58::function_f1ec5df(target_player, target_player getvelocity(), 1);
+	var_7bc72d27 = zm_quick_spawning::function_f1ec5df(target_player, target_player getvelocity(), 1);
 	if(var_7bc72d27.size)
 	{
 		player_zone = var_7bc72d27[randomint(var_7bc72d27.size)];
@@ -802,7 +802,7 @@ function function_218c4ce8()
 					{
 						continue;
 					}
-					struct.var_da70348d = info.type;
+					struct.lure_prop_type = info.type;
 					level.var_6e175eb[level.var_6e175eb.size] = struct;
 				}
 			}
@@ -813,7 +813,7 @@ function function_218c4ce8()
 	{
 		foreach(trigger_stub in level.var_976841f)
 		{
-			trigger_stub.var_da70348d = 1;
+			trigger_stub.lure_prop_type = 1;
 			level.var_6e175eb[level.var_6e175eb.size] = trigger_stub;
 		}
 		namespace_be0f9d50::function_da3be96b(1, &function_c4a57e80, &function_9542c864);
@@ -828,7 +828,7 @@ function function_218c4ce8()
 			{
 				foreach(e_pod in instance.a_models)
 				{
-					var_926eb7ac = {#origin:e_pod.origin, #angles:e_pod.angles, #prop:e_pod, #hash_da70348d:2};
+					var_926eb7ac = {#origin:e_pod.origin, #angles:e_pod.angles, #prop:e_pod, #lure_prop_type:2};
 					level.var_6e175eb[level.var_6e175eb.size] = var_926eb7ac;
 				}
 			}
@@ -840,7 +840,7 @@ function function_218c4ce8()
 	{
 		foreach(vehicle in vehicles)
 		{
-			spawn_struct = {#origin:vehicle.origin, #angles:vehicle.angles, #prop:vehicle, #hash_da70348d:3};
+			spawn_struct = {#origin:vehicle.origin, #angles:vehicle.angles, #prop:vehicle, #lure_prop_type:3};
 			level.var_6e175eb[level.var_6e175eb.size] = spawn_struct;
 		}
 	}

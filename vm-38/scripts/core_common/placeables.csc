@@ -11,6 +11,6 @@
 */
 function private autoexec function_7ac0f3e()
 {
-	level notify(1031172262);
+	level notify(-1031172262);
 }
 

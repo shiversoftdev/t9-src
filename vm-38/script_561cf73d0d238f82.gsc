@@ -1,8 +1,8 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_c498bb05;
 
@@ -21,7 +21,7 @@ function private autoexec function_4f90823b()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_c498bb05
 	Checksum: 0xBBFAF91
 	Offset: 0xD0
@@ -29,7 +29,7 @@ function private autoexec function_4f90823b()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_34176c075d085060", undefined, &function_8ac3bea9, undefined, undefined);
 }
@@ -46,7 +46,7 @@ function private autoexec function_89f2df9()
 function autoexec function_8ac3bea9()
 {
 	var_4c520d72 = getentarray("window_trigger", "targetname");
-	array::thread_all(var_4c520d72, &callback::function_35a12f19, &function_82c985d1);
+	array::thread_all(var_4c520d72, &callback::on_trigger, &function_82c985d1);
 }
 
 /*

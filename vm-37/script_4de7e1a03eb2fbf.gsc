@@ -1,17 +1,17 @@
-#using script_24c32478acf44108;
-#using script_57f7003580bb15e0;
-#using script_6c8abe14025b47c4;
+#using scripts\zm_common\zm_player.gsc;
 #using script_746c9396ccd2c32d;
-#using script_7bafaa95bb1b427e;
-#using scripts\core_common\callbacks_shared.gsc;
+#using script_24c32478acf44108;
+#using scripts\weapons\weapons.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_player.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_b6556af;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_b6556af
 	Checksum: 0x93ED0EE3
 	Offset: 0xE0
@@ -19,7 +19,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3a796bfe275f52a3", &__init__, undefined, undefined, #"killstreaks");
 }
@@ -63,7 +63,7 @@ function private onactordamage(params)
 	{
 		return;
 	}
-	statuseffect = function_4d1e7b48("dot_sig_bow_flame");
+	statuseffect = getstatuseffect("dot_sig_bow_flame");
 	self status_effect::status_effect_apply(statuseffect, weapon, params.eattacker, 0, undefined, undefined, params.vpoint);
 	self ammomod_napalmburst::function_74816787();
 	duration = float(statuseffect.var_77449e9) / 1000;

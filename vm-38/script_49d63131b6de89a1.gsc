@@ -13,7 +13,7 @@
 */
 function private autoexec function_84c8cf4()
 {
-	level notify(344141909);
+	level notify(-344141909);
 }
 
 #namespace namespace_cf4aa5f0;
@@ -71,7 +71,7 @@ function private function_6e561a85(&var_c4d527a6, exploders)
 	{
 		foreach(exploder in exploders)
 		{
-			if(isstring(exploder) || function_7a600918(exploder))
+			if(isstring(exploder) || ishash(exploder))
 			{
 				if(!isdefined(var_c4d527a6))
 				{
@@ -88,7 +88,7 @@ function private function_6e561a85(&var_c4d527a6, exploders)
 			}
 		}
 	}
-	else if(isstring(exploders) || function_7a600918(exploders))
+	else if(isstring(exploders) || ishash(exploders))
 	{
 		if(!isdefined(var_c4d527a6))
 		{

@@ -1,30 +1,30 @@
-#using script_263b7f2982258785;
-#using script_2d443451ce681a;
-#using script_31786c2dc684e9b;
-#using script_31e9b35aaacbbd93;
-#using script_32399001bdb550da;
-#using script_3dc93ca9902a9cda;
-#using script_474bf596f5ecdb01;
 #using script_4937c6974f43bb71;
-#using script_4a73380997c0854e;
-#using script_4ccd0c3512b52a10;
-#using script_61cfc2ab8e60625;
-#using script_7d0013bbc05623b9;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_32399001bdb550da;
 #using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using script_31e9b35aaacbbd93;
+#using script_3dc93ca9902a9cda;
 #using scripts\cp_common\objectives.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
 #using scripts\cp_common\skipto.gsc;
+#using script_7d0013bbc05623b9;
 #using scripts\cp_common\util.gsc;
+#using script_4ccd0c3512b52a10;
+#using scripts\cp\cp_takedown.gsc;
+#using script_474bf596f5ecdb01;
+#using script_31786c2dc684e9b;
+#using script_263b7f2982258785;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using script_61cfc2ab8e60625;
+#using script_2d443451ce681a;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_c9f7b6af;
 
@@ -53,11 +53,11 @@ function starting(str_skipto)
 	level.adler forceteleport(var_fcbd93e0.origin, var_fcbd93e0.angles);
 	level.woods forceteleport(var_1100faeb.origin, var_1100faeb.angles);
 	player clientfield::set_to_player("force_stream_weapons", 1);
-	level thread namespace_5df9d277::function_68461db2();
+	level thread tkdn_raid_bar::function_68461db2();
 	level util::function_3e65fe0b(1);
 	level notify(#"hash_4aade1e09ed49814");
 	level notify(#"hash_41a9df66948f9e8a");
-	scene::add_scene_func("scene_tkd_hit2_intro_bar_v2", &namespace_5df9d277::function_e2d2754d, "civilians");
+	scene::add_scene_func("scene_tkd_hit2_intro_bar_v2", &tkdn_raid_bar::function_e2d2754d, "civilians");
 	level thread scene::play("scene_tkd_hit2_intro_bar_v2", "civilians");
 	var_b7ec8c4b = getent("bar_door_clip", "targetname");
 	var_b7ec8c4b delete();
@@ -105,8 +105,8 @@ function main(str_skipto, b_starting)
 	level flag::wait_till("flag_move_on_to_alley");
 	level thread function_3df72127();
 	level notify(#"hash_5c41a54cd623966e");
-	var_d582d701 = getent("alley_clip", "targetname");
-	var_d582d701 delete();
+	alley_clip = getent("alley_clip", "targetname");
+	alley_clip delete();
 	player val::reset(#"bar", "allow_sprint");
 	player val::reset(#"bar", "allow_mantle");
 	player val::reset(#"bar", "allow_jump");
@@ -116,7 +116,7 @@ function main(str_skipto, b_starting)
 	player util::blend_movespeedscale(0.45, 2);
 	level thread function_c05edfd0();
 	namespace_a052577e::function_b26ed576();
-	level thread scene::init_streamer(#"hash_511c915b0909fb99", getplayers());
+	level thread scene::init_streamer(#"scene_tkd_hit2_bar_alley", getplayers());
 	level thread scene::init("scene_tkd_hit2_bar_alley");
 	level thread scene::init("scene_tkd_hit2_adler_alley");
 	level thread scene::play("scene_tkd_hit2_bar_alley", "Alley");
@@ -199,7 +199,7 @@ function function_c05edfd0()
 	var_d7e0979c = getspawnerarray("kitchen_guys", "script_aigroup");
 	foreach(spawner in var_d7e0979c)
 	{
-		spawner spawner::add_spawn_function(&namespace_b331012d::function_306807e5);
+		spawner spawner::add_spawn_function(&tkdn_raid_apt::function_306807e5);
 	}
 	level thread function_d5cc022();
 	level flag::wait_till("flag_setup_kitchen_guys");
@@ -271,7 +271,7 @@ function function_4bc3dba()
 	level flag::wait_till("flag_close_bar_door");
 	level thread scene::play("scene_tkd_hit2_intro_bar_v2", "Bar_Door_Close");
 	wait(3);
-	level thread namespace_5df9d277::function_a5d7de3c();
+	level thread tkdn_raid_bar::function_a5d7de3c();
 	setsaveddvar(#"hash_6b57212fd4fcdd3a", 300);
 }
 

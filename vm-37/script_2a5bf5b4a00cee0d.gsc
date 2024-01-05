@@ -1,27 +1,27 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
 #using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_ec06fe4a;
 
@@ -94,7 +94,7 @@ function getclosestenemy(myteam)
 }
 
 /*
-	Name: function_fe0a86bb
+	Name: addpoi
 	Namespace: namespace_ec06fe4a
 	Checksum: 0x92A19
 	Offset: 0x490
@@ -102,7 +102,7 @@ function getclosestenemy(myteam)
 	Parameters: 1
 	Flags: Linked
 */
-function function_fe0a86bb(ent)
+function addpoi(ent)
 {
 	arrayremovevalue(level.doa.var_af6d47dd, undefined);
 	level.doa.var_af6d47dd[level.doa.var_af6d47dd.size] = ent;
@@ -284,11 +284,11 @@ function function_3b3bb5c(var_687ec70b, dmg)
 	Parameters: 1
 	Flags: Linked
 */
-function function_de70888a(var_c91f42eb)
+function function_de70888a(bosskills)
 {
-	if(!isdefined(var_c91f42eb))
+	if(!isdefined(bosskills))
 	{
-		var_c91f42eb = 1;
+		bosskills = 1;
 	}
 	level.doa.var_1b8c7044 = 1;
 	while(function_9788bacc() > 0)
@@ -297,7 +297,7 @@ function function_de70888a(var_c91f42eb)
 		enemies = function_8ff7f92c();
 		foreach(badguy in enemies)
 		{
-			if(is_true(badguy.boss) && var_c91f42eb == 0)
+			if(is_true(badguy.boss) && bosskills == 0)
 			{
 				continue;
 			}

@@ -1,12 +1,12 @@
-#using scripts\core_common\array_shared.csc;
+#using scripts\zm_common\zm_bgb.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\zm_common\zm_bgb.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace zm_bgb_newtonian_negation;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_bgb_newtonian_negation
 	Checksum: 0xB12857CB
 	Offset: 0xB0
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_bgb_newtonian_negation", &function_70a657d8, undefined, undefined, #"bgb");
 }

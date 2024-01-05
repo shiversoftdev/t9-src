@@ -1,31 +1,31 @@
-#using script_1435f3c9fc699e04;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\globallogic\globallogic_score.gsc;
 #using script_1cc417743d7c262d;
-#using script_2c49ae69cd8ce30c;
+#using scripts\mp_common\player\player_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\overtime.gsc;
+#using scripts\mp_common\gametypes\match.gsc;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\mp_common\challenges.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using script_7d712f77ab8d0c16;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\demo_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
 #using script_335d0650ed05d36d;
 #using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
-#using script_545a0bac37bda541;
-#using script_7a8059ca02b7b09e;
-#using script_7d712f77ab8d0c16;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
-#using scripts\core_common\demo_shared.gsc;
+#using script_1435f3c9fc699e04;
 #using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\challenges.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
-#using scripts\mp_common\gametypes\match.gsc;
-#using scripts\mp_common\gametypes\overtime.gsc;
-#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\battlechatter.gsc;
 
 #namespace namespace_d03f485e;
 
@@ -288,14 +288,14 @@ function function_610d3790(einflictor, victim, idamage, weapon)
 	{
 		if([[level.iskillstreakweapon]](weapon) || (isdefined(weapon.statname) && [[level.iskillstreakweapon]](getweapon(weapon.statname))))
 		{
-			var_629fbd5c = 1;
+			weaponiskillstreak = 1;
 		}
 	}
 	if(isplayer(attacker) && attacker.team !== idamage.team)
 	{
 		if(zone.var_cddc87d1 === 1 && (attacker istouching(zone.trigger) || idamage istouching(zone.trigger)))
 		{
-			if(!is_true(var_629fbd5c))
+			if(!is_true(weaponiskillstreak))
 			{
 				scoreevents::function_2a2e1723(#"war_killed_attacker_in_zone", attacker, idamage, weapon);
 			}
@@ -312,7 +312,7 @@ function function_610d3790(einflictor, victim, idamage, weapon)
 				{
 					idamage thread globallogic_score::function_7d830bc(victim, attacker, weapon, zone, zone.team);
 				}
-				if(idamage istouching(zone.trigger) && !is_true(var_629fbd5c))
+				if(idamage istouching(zone.trigger) && !is_true(weaponiskillstreak))
 				{
 					scoreevents::processscoreevent(#"hash_339b0e87303dbd56", attacker, idamage, weapon);
 				}
@@ -493,7 +493,7 @@ function onzonecapture(sentient)
 	level.activezone setteam(sentient.team);
 	if(nextzone >= level.var_1b3b480b.size || nextzone < 0)
 	{
-		match::function_d1e740f6(sentient.team);
+		match::set_winner(sentient.team);
 		thread globallogic::function_a3e3bd39(sentient.team, 1);
 		return;
 	}
@@ -536,7 +536,7 @@ function onzonecapture(sentient)
 	deactivatezone(level.activezone.index);
 	thread function_a8049ffd(nextzone, 15);
 	user = self gameobjects::function_4e3386a8(sentient.team);
-	self thread function_ef09febd(self.users[user].var_5b307a20, self.users[user].touching.players, "Capture", 0, 0, 0);
+	self thread function_ef09febd(self.users[user].contributors, self.users[user].touching.players, "Capture", 0, 0, 0);
 	self function_3e4f6efb();
 	resume_time();
 	function_8b52c845(sentient.team, 50);
@@ -1147,7 +1147,7 @@ function ontimelimit()
 {
 	if(overtime::is_overtime_round())
 	{
-		round::function_d1e740f6(level.activezone gameobjects::function_14fccbd9());
+		round::set_winner(level.activezone gameobjects::function_14fccbd9());
 	}
 	else
 	{
@@ -1176,19 +1176,19 @@ function function_ef09febd(var_1dbb2b2b, var_6d7ae157, string, var_24672ed6, var
 	{
 		if(isdefined(contribution))
 		{
-			var_9b38d2c0 = contribution.player;
-			if(isdefined(var_9b38d2c0) && isdefined(contribution.contribution))
+			contributor = contribution.player;
+			if(isdefined(contributor) && isdefined(contribution.contribution))
 			{
 				percentage = (100 * contribution.contribution) / self.usetime;
-				var_9b38d2c0.var_759a143b = int(0.5 + percentage);
-				var_9b38d2c0.var_1aea8209 = contribution.starttime;
-				if(percentage < getgametypesetting(#"hash_1c94fa23e276efe9"))
+				contributor.var_759a143b = int(0.5 + percentage);
+				contributor.var_1aea8209 = contribution.starttime;
+				if(percentage < getgametypesetting(#"contributionmin"))
 				{
 					continue;
 				}
-				if(contribution.var_e22ea52b && (!isdefined(earliestplayer) || var_9b38d2c0.var_1aea8209 < earliestplayer.var_1aea8209))
+				if(contribution.var_e22ea52b && (!isdefined(earliestplayer) || contributor.var_1aea8209 < earliestplayer.var_1aea8209))
 				{
-					earliestplayer = var_9b38d2c0;
+					earliestplayer = contributor;
 				}
 				if(!isdefined(var_b4613aa2))
 				{
@@ -1198,7 +1198,7 @@ function function_ef09febd(var_1dbb2b2b, var_6d7ae157, string, var_24672ed6, var
 				{
 					var_b4613aa2 = array(var_b4613aa2);
 				}
-				var_b4613aa2[var_b4613aa2.size] = var_9b38d2c0;
+				var_b4613aa2[var_b4613aa2.size] = contributor;
 			}
 		}
 	}
@@ -1253,7 +1253,7 @@ function credit_player(player, string, var_24672ed6, var_81b74b24, neutralizing,
 	if(var_af8f6146)
 	{
 		time stats::function_dad108fa(#"hash_2f1df496791a2f5f", 1);
-		time contracts::function_a54e2068(#"hash_4fa0008b60deaab4");
+		time contracts::increment_contract(#"hash_4fa0008b60deaab4");
 	}
 	if(time.var_759a143b >= 100)
 	{

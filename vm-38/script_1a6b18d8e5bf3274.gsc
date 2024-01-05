@@ -1,10 +1,10 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\zm_common\zm_weapons.csc;
+#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_a5ef5769;
 
@@ -19,11 +19,11 @@
 */
 function private autoexec function_2d2b0cb7()
 {
-	level notify(1065213596);
+	level notify(-1065213596);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_a5ef5769
 	Checksum: 0x622A29E5
 	Offset: 0x260
@@ -31,7 +31,7 @@ function private autoexec function_2d2b0cb7()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_52556758a0c8acfe", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -212,7 +212,7 @@ function function_219213be(localclientnum, oldval, newval, bnewent, binitialsnap
 	if(bwastimejump && bwastimejump < (var_2ddbe94.size + 1))
 	{
 		self.var_b159952f = var_2ddbe94[bwastimejump - 1];
-		self function_bf9d3071(self.var_b159952f);
+		self playrenderoverridebundle(self.var_b159952f);
 	}
 }
 

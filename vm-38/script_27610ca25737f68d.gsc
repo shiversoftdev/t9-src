@@ -1,15 +1,15 @@
 #using script_2c5daa95f8fec03c;
-#using script_35598499769dbb3d;
-#using script_3f9e0dc8454d98e1;
-#using script_4dc6a9b234b838e1;
 #using script_72401f526ba71638;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_4dc6a9b234b838e1;
 #using scripts\zm_common\zm_weapons.gsc;
+#using script_35598499769dbb3d;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_797fe2e7;
 
@@ -28,7 +28,7 @@ function private autoexec function_3b602d11()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_797fe2e7
 	Checksum: 0x7EF18940
 	Offset: 0x1F8
@@ -36,7 +36,7 @@ function private autoexec function_3b602d11()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_607f0336b64df630", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }
@@ -57,22 +57,22 @@ function private function_70a657d8()
 	level.var_887c77a4 = "destroyed_armor_zm";
 	callback::on_ai_killed(&function_9b6145a);
 	namespace_1b527536::function_36e0540e(#"energy_mine", 1, 30, "field_upgrade_energy_mine_item_sr");
-	namespace_1b527536::function_36e0540e(#"hash_4ac402a4add2a995", 2, 30, "field_upgrade_energy_mine_1_item_sr");
-	namespace_1b527536::function_36e0540e(#"hash_4ac3ffa4add2a47c", 2, 30, "field_upgrade_energy_mine_2_item_sr");
-	namespace_1b527536::function_36e0540e(#"hash_4ac400a4add2a62f", 2, 30, "field_upgrade_energy_mine_3_item_sr");
-	namespace_1b527536::function_36e0540e(#"hash_4ac3fda4add2a116", 2, 30, "field_upgrade_energy_mine_4_item_sr");
+	namespace_1b527536::function_36e0540e(#"energy_mine_1", 2, 30, "field_upgrade_energy_mine_1_item_sr");
+	namespace_1b527536::function_36e0540e(#"energy_mine_2", 2, 30, "field_upgrade_energy_mine_2_item_sr");
+	namespace_1b527536::function_36e0540e(#"energy_mine_3", 2, 30, "field_upgrade_energy_mine_3_item_sr");
+	namespace_1b527536::function_36e0540e(#"energy_mine_4", 2, 30, "field_upgrade_energy_mine_4_item_sr");
 	namespace_1b527536::function_36e0540e(#"hash_4ac3fea4add2a2c9", 2, 30, "field_upgrade_energy_mine_5_item_sr");
 	namespace_1b527536::function_dbd391bf(#"energy_mine", &function_a6da15be);
-	namespace_1b527536::function_dbd391bf(#"hash_4ac402a4add2a995", &function_a6da15be);
-	namespace_1b527536::function_dbd391bf(#"hash_4ac3ffa4add2a47c", &function_a6da15be);
-	namespace_1b527536::function_dbd391bf(#"hash_4ac400a4add2a62f", &function_a6da15be);
-	namespace_1b527536::function_dbd391bf(#"hash_4ac3fda4add2a116", &function_a6da15be);
+	namespace_1b527536::function_dbd391bf(#"energy_mine_1", &function_a6da15be);
+	namespace_1b527536::function_dbd391bf(#"energy_mine_2", &function_a6da15be);
+	namespace_1b527536::function_dbd391bf(#"energy_mine_3", &function_a6da15be);
+	namespace_1b527536::function_dbd391bf(#"energy_mine_4", &function_a6da15be);
 	namespace_1b527536::function_dbd391bf(#"hash_4ac3fea4add2a2c9", &function_a6da15be);
 	zm_weapons::function_404c3ad5(getweapon(#"energy_mine"), &function_1ac47afc);
-	zm_weapons::function_404c3ad5(getweapon(#"hash_4ac402a4add2a995"), &function_1ac47afc);
-	zm_weapons::function_404c3ad5(getweapon(#"hash_4ac3ffa4add2a47c"), &function_1ac47afc);
-	zm_weapons::function_404c3ad5(getweapon(#"hash_4ac400a4add2a62f"), &function_1ac47afc);
-	zm_weapons::function_404c3ad5(getweapon(#"hash_4ac3fda4add2a116"), &function_a68304b6);
+	zm_weapons::function_404c3ad5(getweapon(#"energy_mine_1"), &function_1ac47afc);
+	zm_weapons::function_404c3ad5(getweapon(#"energy_mine_2"), &function_1ac47afc);
+	zm_weapons::function_404c3ad5(getweapon(#"energy_mine_3"), &function_1ac47afc);
+	zm_weapons::function_404c3ad5(getweapon(#"energy_mine_4"), &function_a68304b6);
 	zm_weapons::function_404c3ad5(getweapon(#"hash_4ac3fea4add2a2c9"), &function_a68304b6);
 }
 
@@ -98,17 +98,17 @@ function function_a6da15be(params)
 	switch(weapon.name)
 	{
 		case "energy_mine":
-		case "hash_4ac402a4add2a995":
+		case "energy_mine_1":
 		{
 			break;
 		}
-		case "hash_4ac3ffa4add2a47c":
+		case "energy_mine_2":
 		{
 			var_29030410 = 2;
 			var_79e920ac = 2;
 			break;
 		}
-		case "hash_4ac400a4add2a62f":
+		case "energy_mine_3":
 		{
 			var_f61738a0 = 1;
 			var_f224b687 = 2;
@@ -116,7 +116,7 @@ function function_a6da15be(params)
 			var_79e920ac = 3;
 			break;
 		}
-		case "hash_4ac3fda4add2a116":
+		case "energy_mine_4":
 		{
 			var_f61738a0 = 1;
 			var_f224b687 = 2;
@@ -210,7 +210,7 @@ function private function_71efd0e6(a_ai_targets, v_origin, var_f61738a0, b_stun)
 		}
 		if(b_stun && ai.var_6f84b820 === #"special")
 		{
-			ai ai::function_62795e55();
+			ai ai::clear_stun();
 			ai ai::stun();
 		}
 		waitframe(1);
@@ -272,7 +272,7 @@ function private function_3655d156(e_player, n_radius, v_origin)
 {
 	if(isdefined(e_player))
 	{
-		a_ai_targets = e_player function_bdda420f(v_origin, n_radius);
+		a_ai_targets = e_player getenemiesinradius(v_origin, n_radius);
 	}
 	else
 	{
@@ -300,11 +300,11 @@ function function_39aea6b8(name)
 	switch(name)
 	{
 		case "energy_mine":
-		case "hash_4ac3fda4add2a116":
+		case "energy_mine_4":
 		case "hash_4ac3fea4add2a2c9":
-		case "hash_4ac3ffa4add2a47c":
-		case "hash_4ac400a4add2a62f":
-		case "hash_4ac402a4add2a995":
+		case "energy_mine_2":
+		case "energy_mine_3":
+		case "energy_mine_1":
 		{
 			return true;
 			break;

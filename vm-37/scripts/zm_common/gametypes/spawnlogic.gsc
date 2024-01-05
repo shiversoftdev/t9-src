@@ -1,12 +1,12 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace spawnlogic;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: spawnlogic
 	Checksum: 0x959B338B
 	Offset: 0xD0
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"spawnlogic", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -530,7 +530,7 @@ function finalizespawnpointchoice(spawnpoint)
 function getbestweightedspawnpoint(spawnpoints)
 {
 	maxsighttracedspawnpoints = 3;
-	for(var_65ce2e33 = 0; var_65ce2e33 <= maxsighttracedspawnpoints; var_65ce2e33++)
+	for(trycount = 0; trycount <= maxsighttracedspawnpoints; trycount++)
 	{
 		bestspawnpoints = [];
 		bestweight = undefined;
@@ -562,7 +562,7 @@ function getbestweightedspawnpoint(spawnpoints)
 			return undefined;
 		}
 		bestspawnpoint = bestspawnpoints[randomint(bestspawnpoints.size)];
-		if(var_65ce2e33 == maxsighttracedspawnpoints)
+		if(trycount == maxsighttracedspawnpoints)
 		{
 			return bestspawnpoint;
 		}
@@ -2012,7 +2012,7 @@ function spawnweightdebug(spawnpoints)
 			textoffset = vectorscale((0, 0, -1), 12);
 			for(i = 0; i < spawnpoints.size; i++)
 			{
-				amnt = 1 * (1 - (spawnpoints[i].weight / 100000));
+				amnt = 1 * (1 - (spawnpoints[i].weight / -100000));
 				if(amnt < 0)
 				{
 					amnt = 0;

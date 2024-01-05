@@ -1,20 +1,20 @@
-#using script_1287f54612f9bfce;
-#using script_1c65dbfc2f1c8d8f;
-#using script_256b8879317373de;
-#using script_3751b21462a54a7d;
 #using script_3ddf84b7bb3bf47d;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
+#using script_3751b21462a54a7d;
+#using scripts\zm_common\zm_utility.gsc;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using script_1287f54612f9bfce;
+#using script_7fc996fe8678852;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_c71c7ca5;
 
@@ -29,11 +29,11 @@
 */
 function private autoexec function_7c264d43()
 {
-	level notify(1983689422);
+	level notify(-1983689422);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_c71c7ca5
 	Checksum: 0x35821C27
 	Offset: 0x1B8
@@ -41,7 +41,7 @@ function private autoexec function_7c264d43()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_59fd15f8f403c8b", &function_70a657d8, &function_8ac3bea9, undefined, #"hash_f81b9dea74f0ee");
 }

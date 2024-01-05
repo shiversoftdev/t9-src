@@ -1,37 +1,37 @@
-#using script_1ab12e599f5989a;
-#using script_1e72c148eb0b32d2;
-#using script_335d0650ed05d36d;
-#using script_34e9dd62fc371077;
-#using script_3819e7a1427df6d2;
-#using script_3e196d275a6fb180;
-#using script_3f9e0dc8454d98e1;
-#using script_41b18a77720c5395;
-#using script_556e19065f09f8a2;
-#using script_5bb072c3abf4652c;
-#using script_68d2ee1489345a1d;
-#using script_6c5b51f98cd04fa3;
-#using script_6ce38ab036223e6e;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\death_circle.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\gametypes\globallogic_score.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_behavior.gsc;
-#using scripts\zm_common\zm_powerups.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
-#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm\powerup\zm_powerup_nuke.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\gametypes\zonslaught.gsc;
+#using scripts\zm_common\zm_round_logic.gsc;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_sq.gsc;
+#using scripts\zm_common\zm_powerups.gsc;
+#using scripts\zm_common\zm_behavior.gsc;
+#using scripts\zm_common\zm.gsc;
+#using scripts\zm_common\gametypes\globallogic_score.gsc;
+#using script_41b18a77720c5395;
+#using script_3819e7a1427df6d2;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using script_34e9dd62fc371077;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_556e19065f09f8a2;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using script_335d0650ed05d36d;
+#using script_3e196d275a6fb180;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\death_circle.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_51f64aa9;
 
@@ -69,7 +69,7 @@ function function_2ce126c4()
 	callback::on_spawned(&function_e8535657);
 	callback::on_connect(&function_8b930ad1);
 	callback::on_start_gametype(&function_6071bedf);
-	callback::function_98a0917d(&function_bfd2a58b);
+	callback::on_game_playing(&function_bfd2a58b);
 	callback::on_ai_killed(&on_ai_killed);
 	callback::add_callback(#"hash_5118a91e667446ee", &function_13f485ad);
 	level.var_4ea2c79a = 1;
@@ -107,16 +107,16 @@ function function_2ce126c4()
 	{
 		level.var_7e2af8d5 = array(level.var_7e2af8d5);
 	}
-	if(!isinarray(level.var_7e2af8d5, #"hash_785d6a6acd470388"))
+	if(!isinarray(level.var_7e2af8d5, #"spawner_bo5_mimic"))
 	{
-		level.var_7e2af8d5[level.var_7e2af8d5.size] = #"hash_785d6a6acd470388";
+		level.var_7e2af8d5[level.var_7e2af8d5.size] = #"spawner_bo5_mimic";
 	}
 	level.custom_end_screen = &custom_end_screen;
 	spawner::add_archetype_spawn_function(#"zombie", &zombiespawnsetup);
 	spawner::function_89a2cd87(#"zombie", &function_a9b7dc57);
 	spawner::add_archetype_spawn_function(#"zombie_dog", &function_6a89f900);
 	level callback::add_callback(#"hash_4ad847c8f6c6405f", &spawn_dog);
-	level.var_6abbc37c = namespace_6abbc37c::register();
+	level.onslaught_hud = onslaught_hud::register();
 	level.var_e2f95698 = #"hash_34e052fa44442bbb";
 	if(is_true(getgametypesetting(#"hash_40dfc52deb067c7c")))
 	{
@@ -196,7 +196,7 @@ function function_c1d511f6()
 		waitresult = undefined;
 		waitresult = level waittill(#"hash_5731a6df491c37c7");
 		var_c2f7b1a3 = waitresult.location;
-		namespace_ee206246::objective_set(#"hash_641e9c4d20df5950", var_c2f7b1a3);
+		zm_sq::objective_set(#"hash_641e9c4d20df5950", var_c2f7b1a3);
 		level waittill(#"hash_1b8264e950c01344");
 	}
 }
@@ -251,7 +251,7 @@ function private function_d3379a31()
 }
 
 /*
-	Name: function_1d8a7744
+	Name: debug_spawns
 	Namespace: namespace_51f64aa9
 	Checksum: 0x59026F7C
 	Offset: 0x11F0
@@ -259,7 +259,7 @@ function private function_d3379a31()
 	Parameters: 0
 	Flags: None
 */
-function function_1d8a7744()
+function debug_spawns()
 {
 	/#
 		var_da0b6672 = 50;
@@ -379,7 +379,7 @@ function function_2f6706d2()
 */
 function function_d09d6958(value)
 {
-	level.var_6abbc37c namespace_6abbc37c::function_eab3d36f(self, value);
+	level.onslaught_hud onslaught_hud::set_objectivetext(self, value);
 }
 
 /*
@@ -396,10 +396,10 @@ function function_61c3d59c(str_text, var_a920f1d6)
 	self notify("17be3305ad154343");
 	self endon("17be3305ad154343");
 	self endon(#"disconnect", #"death");
-	level.var_6abbc37c namespace_6abbc37c::function_d0a02472(self, 1);
+	level.onslaught_hud onslaught_hud::set_showobjective(self, 1);
 	self function_d09d6958(str_text);
 	wait(var_a920f1d6);
-	level.var_6abbc37c namespace_6abbc37c::function_d0a02472(self, 0);
+	level.onslaught_hud onslaught_hud::set_showobjective(self, 0);
 }
 
 /*
@@ -413,7 +413,7 @@ function function_61c3d59c(str_text, var_a920f1d6)
 */
 function function_22d0bd07(value)
 {
-	level.var_6abbc37c namespace_6abbc37c::function_b73d2d7c(self, value);
+	level.onslaught_hud onslaught_hud::set_bossalerttext(self, value);
 }
 
 /*
@@ -430,10 +430,10 @@ function function_f9b8bf44(str_text, var_a920f1d6)
 	self notify("6840aefd1548ae70");
 	self endon("6840aefd1548ae70");
 	self endon(#"disconnect", #"death");
-	level.var_6abbc37c namespace_6abbc37c::function_1c28d7c2(self, 1);
+	level.onslaught_hud onslaught_hud::set_showbossalert(self, 1);
 	self function_22d0bd07(str_text);
 	wait(var_a920f1d6);
-	level.var_6abbc37c namespace_6abbc37c::function_1c28d7c2(self, 0);
+	level.onslaught_hud onslaught_hud::set_showbossalert(self, 0);
 }
 
 /*
@@ -447,7 +447,7 @@ function function_f9b8bf44(str_text, var_a920f1d6)
 */
 function function_f0e74135(value)
 {
-	level.var_6abbc37c namespace_6abbc37c::function_9c1c0811(self, value);
+	level.onslaught_hud onslaught_hud::set_objective2text(self, value);
 }
 
 /*
@@ -464,10 +464,10 @@ function function_4b12e9e4(str_text, var_a920f1d6)
 	self notify("7a8d649af6d5428c");
 	self endon("7a8d649af6d5428c");
 	self endon(#"disconnect", #"death");
-	level.var_6abbc37c namespace_6abbc37c::function_d6b5fdc4(self, 1);
+	level.onslaught_hud onslaught_hud::set_showobjective2(self, 1);
 	self function_f0e74135(str_text);
 	wait(var_a920f1d6);
-	level.var_6abbc37c namespace_6abbc37c::function_d6b5fdc4(self, 0);
+	level.onslaught_hud onslaught_hud::set_showobjective2(self, 0);
 }
 
 /*
@@ -481,7 +481,7 @@ function function_4b12e9e4(str_text, var_a920f1d6)
 */
 function function_2617d862()
 {
-	level.var_6abbc37c namespace_6abbc37c::function_da96c24e(self, 0);
+	level.onslaught_hud onslaught_hud::set_showscore(self, 0);
 }
 
 /*
@@ -495,7 +495,7 @@ function function_2617d862()
 */
 function function_813aaa72(value)
 {
-	level.var_6abbc37c namespace_6abbc37c::function_2a0b1f84(self, value);
+	level.onslaught_hud onslaught_hud::set_score3points(self, value);
 }
 
 /*
@@ -509,7 +509,7 @@ function function_813aaa72(value)
 */
 function function_da556d60()
 {
-	level.var_6abbc37c namespace_6abbc37c::function_da96c24e(self, 1);
+	level.onslaught_hud onslaught_hud::set_showscore(self, 1);
 }
 
 /*
@@ -523,7 +523,7 @@ function function_da556d60()
 */
 function function_251073e9()
 {
-	level.var_6abbc37c namespace_6abbc37c::function_9b5f8a75(self, 0);
+	level.onslaught_hud onslaught_hud::set_showendscore(self, 0);
 }
 
 /*
@@ -537,7 +537,7 @@ function function_251073e9()
 */
 function function_cf4e42ea()
 {
-	level.var_6abbc37c namespace_6abbc37c::function_9b5f8a75(self, 1);
+	level.onslaught_hud onslaught_hud::set_showendscore(self, 1);
 }
 
 /*
@@ -592,7 +592,7 @@ function function_bfd2a58b()
 	/#
 		if(is_true(level.var_bc0b4b46))
 		{
-			level thread function_1d8a7744();
+			level thread debug_spawns();
 		}
 	#/
 	level thread function_81c192d();
@@ -627,9 +627,9 @@ function function_8b930ad1()
 function function_e8535657()
 {
 	self endon(#"disconnect");
-	if(!level.var_6abbc37c namespace_6abbc37c::is_open(self))
+	if(!level.onslaught_hud onslaught_hud::is_open(self))
 	{
-		level.var_6abbc37c namespace_6abbc37c::open(self);
+		level.onslaught_hud onslaught_hud::open(self);
 	}
 }
 
@@ -766,7 +766,7 @@ function function_5954bef8()
 */
 function zombiespawnsetup()
 {
-	self.overrideactordamage = &function_51bc140b;
+	self.overrideactordamage = &aidamage;
 	self.custom_location = &function_b5c27e32;
 	self zm_behavior::function_d63f6426();
 	self.script_string = "find_flesh";
@@ -791,7 +791,7 @@ function zombiespawnsetup()
 */
 function function_6c40ff50()
 {
-	aiutility::addaioverridedamagecallback(self, &function_51bc140b);
+	aiutility::addaioverridedamagecallback(self, &aidamage);
 	self.zombie_think_done = 1;
 	self.completed_emerging_into_playable_area = 1;
 	self.b_ignore_cleanup = 1;
@@ -817,7 +817,7 @@ function function_6c40ff50()
 }
 
 /*
-	Name: function_51bc140b
+	Name: aidamage
 	Namespace: namespace_51f64aa9
 	Checksum: 0xCA94E307
 	Offset: 0x22A8
@@ -825,7 +825,7 @@ function function_6c40ff50()
 	Parameters: 13
 	Flags: None
 */
-function function_51bc140b(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex)
+function aidamage(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex)
 {
 	if(isdefined(boneindex) && isactor(boneindex) && boneindex.archetype == #"zombie")
 	{
@@ -998,10 +998,10 @@ function function_6fcd98c5()
 */
 function function_73297fa()
 {
-	var_a5a1f99c = getaiarchetypearray(#"zombie");
-	var_a5a1f99c = arraycombine(var_a5a1f99c, getaiarchetypearray(#"zombie_dog"), 0, 0);
-	var_a5a1f99c = arraycombine(var_a5a1f99c, getaiarchetypearray(#"hash_7c0d83ac1e845ac2"), 0, 0);
-	foreach(ai in var_a5a1f99c)
+	zombiesarray = getaiarchetypearray(#"zombie");
+	zombiesarray = arraycombine(zombiesarray, getaiarchetypearray(#"zombie_dog"), 0, 0);
+	zombiesarray = arraycombine(zombiesarray, getaiarchetypearray(#"hash_7c0d83ac1e845ac2"), 0, 0);
+	foreach(ai in zombiesarray)
 	{
 		if(isai(ai) && isalive(ai) && ai.team !== #"allies" && !zm_utility::is_magic_bullet_shield_enabled(ai))
 		{
@@ -1657,7 +1657,7 @@ function give_match_bonus(data)
 		var_c602cc83 = player.var_1096b5c0;
 		var_370ac26d = int(((((var_22ba849f * var_81b61a08) * var_191f8e5e) * var_f65fd621) - var_c602cc83) * var_7c032359);
 		player zm::function_78e7b549(var_370ac26d);
-		player namespace_81c567a8::function_d7b5082e();
+		player display_transition::function_d7b5082e();
 		/#
 			println((((("" + player getentnum()) + "") + player.name) + "") + var_370ac26d);
 			println("" + var_22ba849f);
@@ -1823,7 +1823,7 @@ function spawn_zombie(outer_radius, inner_radius, duration, boss_zombie, var_8c4
 	#/
 	player_angles = player_angles + (0, var_c4c03968, 0);
 	player_dir = anglestoforward(player_angles);
-	var_78da6163 = function_ad6356f5(var_c5eed04e.origin);
+	var_78da6163 = getclosesttacpoint(var_c5eed04e.origin);
 	if(!isdefined(var_78da6163) && isdefined(var_c5eed04e.last_valid_position))
 	{
 		/#
@@ -1832,7 +1832,7 @@ function spawn_zombie(outer_radius, inner_radius, duration, boss_zombie, var_8c4
 				circle(var_c5eed04e.last_valid_position, 150, (1, 0, 0), 1, 1, duration);
 			}
 		#/
-		var_78da6163 = function_ad6356f5(var_c5eed04e.last_valid_position);
+		var_78da6163 = getclosesttacpoint(var_c5eed04e.last_valid_position);
 	}
 	/#
 		if(is_true(level.var_bc79322a))
@@ -1991,7 +1991,7 @@ function spawn_zombie(outer_radius, inner_radius, duration, boss_zombie, var_8c4
 		var_d23463ac.used_time = gettime();
 		var_83959d6f = vectornormalize(var_c5eed04e.origin - var_d23463ac.origin);
 		spawn_angle = vectortoangles(var_83959d6f);
-		var_78da6163 = function_ad6356f5(var_c5eed04e.origin);
+		var_78da6163 = getclosesttacpoint(var_c5eed04e.origin);
 		if(isdefined(var_8c4dd20c))
 		{
 			var_b434916b = var_8c4dd20c;
@@ -3119,7 +3119,7 @@ function function_f19e31a2()
 		/#
 			debug2dtext((1000, 700, 0), "", (1, 1, 1), 1, (0, 0, 0), 0.5, 2.8, 200);
 		#/
-		namespace_ee206246::objective_complete(#"hash_641e9c4d20df5950");
+		zm_sq::objective_complete(#"hash_641e9c4d20df5950");
 		/#
 			println("" + level.var_9cf0f18d.origin);
 		#/
@@ -3440,7 +3440,7 @@ function function_69e5b9b()
 		level callback::callback(#"hash_5118a91e667446ee");
 		if(!is_true(level.boss_round))
 		{
-			namespace_a28acff3::set_round_number(level.round_number + 1);
+			zm_round_logic::set_round_number(level.round_number + 1);
 		}
 		else
 		{
@@ -4093,38 +4093,38 @@ function get_number_variants(aliasprefix)
 */
 function get_valid_lines(aliasprefix)
 {
-	var_a5e8d5c7 = [];
+	a_variants = [];
 	for(i = 0; i < 20; i++)
 	{
 		str_alias = (aliasprefix + "_") + i;
 		if(soundexists(str_alias))
 		{
-			if(!isdefined(var_a5e8d5c7))
+			if(!isdefined(a_variants))
 			{
-				var_a5e8d5c7 = [];
+				a_variants = [];
 			}
-			else if(!isarray(var_a5e8d5c7))
+			else if(!isarray(a_variants))
 			{
-				var_a5e8d5c7 = array(var_a5e8d5c7);
+				a_variants = array(a_variants);
 			}
-			var_a5e8d5c7[var_a5e8d5c7.size] = str_alias;
+			a_variants[a_variants.size] = str_alias;
 			continue;
 		}
 		if(soundexists(aliasprefix))
 		{
-			if(!isdefined(var_a5e8d5c7))
+			if(!isdefined(a_variants))
 			{
-				var_a5e8d5c7 = [];
+				a_variants = [];
 			}
-			else if(!isarray(var_a5e8d5c7))
+			else if(!isarray(a_variants))
 			{
-				var_a5e8d5c7 = array(var_a5e8d5c7);
+				a_variants = array(a_variants);
 			}
-			var_a5e8d5c7[var_a5e8d5c7.size] = aliasprefix;
+			a_variants[a_variants.size] = aliasprefix;
 			break;
 		}
 	}
-	return var_a5e8d5c7;
+	return a_variants;
 }
 
 /*

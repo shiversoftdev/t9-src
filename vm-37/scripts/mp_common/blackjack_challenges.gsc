@@ -1,14 +1,14 @@
-#using script_3f27a7b2232674db;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace blackjack_challenges;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: blackjack_challenges
 	Checksum: 0x72D48134
 	Offset: 0xF8
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"blackjack_challenges", &function_70a657d8, undefined, undefined, undefined);
 }

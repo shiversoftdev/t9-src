@@ -1,20 +1,20 @@
-#using script_178024232e91b0a1;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
+#using scripts\zm_common\zm_utility.gsc;
 #using script_3357acf79ce92f4b;
 #using script_3411bb48d41bd3b;
 #using script_3aa0f32b70d4f7cb;
-#using script_4bf952f6ba31bb17;
-#using script_4d85e8de54b02198;
-#using script_7e59d7bba853fe4b;
-#using script_bd2b8aaa388dcce;
+#using script_178024232e91b0a1;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_4d85e8de54b02198;
+#using script_4bf952f6ba31bb17;
+#using scripts\core_common\ai\zombie.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_e292b080;
 
@@ -33,7 +33,7 @@ function private autoexec function_9fedd279()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_e292b080
 	Checksum: 0xB0219877
 	Offset: 0x350
@@ -41,7 +41,7 @@ function private autoexec function_9fedd279()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1f8830cd01b39f8f", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -78,14 +78,14 @@ function private function_7ff2a0fc()
 		/#
 			assert(isscriptfunctionptr(&function_e91d8371));
 		#/
-		behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1d72a84d1a755d7f", &function_e91d8371, 1);
+		behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieupdatethrottle", &function_e91d8371, 1);
 	}
 	else
 	{
 		/#
 			assert(isscriptfunctionptr(&function_e91d8371));
 		#/
-		behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1d72a84d1a755d7f", &function_e91d8371, 2);
+		behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieupdatethrottle", &function_e91d8371, 2);
 	}
 	/#
 		assert(isscriptfunctionptr(&function_5aeeecac));
@@ -106,15 +106,15 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombieshouldmelee));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_3481eea9a9726377", &zombieshouldmelee);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieshouldmelee", &zombieshouldmelee);
 	/#
 		assert(isscriptfunctionptr(&function_d8b225ae));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_61ab63365479456b", &function_d8b225ae);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieshouldmeleeattackable", &function_d8b225ae);
 	/#
 		assert(isscriptfunctionptr(&zombieshouldmove));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_61a4f87f1c6225d0", &zombieshouldmove);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombieshouldmove", &zombieshouldmove);
 	/#
 		assert(isscriptfunctionptr(&function_bfc25c77));
 	#/
@@ -126,7 +126,7 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombieshouldknockdown));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_2cfb23ecd91e559f", &zombieshouldknockdown);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieshouldknockdown", &zombieshouldknockdown);
 	/#
 		assert(isscriptfunctionptr(&function_2a7b4aab));
 	#/
@@ -180,21 +180,21 @@ function private function_7ff2a0fc()
 	#/
 	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_9d432cd960b099a", &function_5ac985fe);
 	/#
-		assert(isscriptfunctionptr(&function_c6787767));
+		assert(isscriptfunctionptr(&zombiemoveactionstart));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_a8a1cfa346aa6fb", &function_c6787767);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombiemoveactionstart", &zombiemoveactionstart);
 	/#
 		assert(isscriptfunctionptr(&zombiemoveactionupdate));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_7963765b515bfe18", &zombiemoveactionupdate);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombiemoveactionupdate", &zombiemoveactionupdate);
 	/#
-		assert(isscriptfunctionptr(&function_c6787767));
+		assert(isscriptfunctionptr(&zombiemoveactionstart));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_a8a1cfa346aa6fb", &function_c6787767);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiemoveactionstart", &zombiemoveactionstart);
 	/#
 		assert(isscriptfunctionptr(&zombiemoveactionupdate));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_7963765b515bfe18", &zombiemoveactionupdate);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiemoveactionupdate", &zombiemoveactionupdate);
 	/#
 		assert(isscriptfunctionptr(&function_7c8e35e8));
 	#/
@@ -212,7 +212,7 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombieknockdownactionstart));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_70e2c6f9bb18c5cc", &zombieknockdownactionstart);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieknockdownactionstart", &zombieknockdownactionstart);
 	/#
 		assert(isscriptfunctionptr(&function_c8939973));
 	#/
@@ -220,7 +220,7 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&zombiegetupactionterminate));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_6c72993cdaed86ac", &zombiegetupactionterminate);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombiegetupactionterminate", &zombiegetupactionterminate);
 	/#
 		assert(!isdefined(undefined) || isscriptfunctionptr(undefined));
 	#/
@@ -234,19 +234,19 @@ function private function_7ff2a0fc()
 	/#
 		assert(isscriptfunctionptr(&function_f8250d5e));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_636c8e136e07da5a", &function_f8250d5e);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombieidleactionstart", &function_f8250d5e);
 	/#
 		assert(isscriptfunctionptr(&function_860d5d8));
 	#/
-	behaviorstatemachine::registerbsmscriptapiinternal(#"hash_42e3f983d696091b", &function_860d5d8);
+	behaviorstatemachine::registerbsmscriptapiinternal(#"wzzombieidleactionupdate", &function_860d5d8);
 	/#
 		assert(isscriptfunctionptr(&function_f8250d5e));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_636c8e136e07da5a", &function_f8250d5e);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieidleactionstart", &function_f8250d5e);
 	/#
 		assert(isscriptfunctionptr(&function_860d5d8));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_42e3f983d696091b", &function_860d5d8);
+	behaviortreenetworkutility::registerbehaviortreescriptapi(#"wzzombieidleactionupdate", &function_860d5d8);
 	/#
 		assert(isscriptfunctionptr(&function_f37b0fbd));
 	#/
@@ -310,7 +310,7 @@ function private function_e91d8371(entity)
 	}
 	level.var_8de0b84e[level.var_a2fbb776] = entity getentitynumber();
 	level.var_a2fbb776 = (level.var_a2fbb776 + 1) % 2;
-	if(is_true(level.is_survival) && is_true(entity.var_f9a12c59))
+	if(is_true(level.is_survival) && is_true(entity.has_awareness))
 	{
 		function_eea7a68a(entity);
 	}
@@ -361,7 +361,7 @@ function function_eea7a68a(entity)
 {
 	entity.enemy_override = namespace_85745671::function_b67c088d();
 	namespace_85745671::function_744beb04(entity);
-	awareness::function_c8f102d5(entity);
+	awareness::target_update(entity);
 }
 
 /*
@@ -373,9 +373,9 @@ function function_eea7a68a(entity)
 	Parameters: 6
 	Flags: Linked
 */
-function function_5ba8b9d4(entity, var_21bdf069, dynent, var_f3fec032, var_9680a0e4, var_144ce0a0)
+function function_5ba8b9d4(entity, var_21bdf069, dynent, var_f3fec032, dynentstate, var_144ce0a0)
 {
-	if(var_144ce0a0 && var_9680a0e4 != 0 || is_true(var_f3fec032.var_c14aa186[var_9680a0e4].ignoredamage))
+	if(var_144ce0a0 && dynentstate != 0 || is_true(var_f3fec032.dynentstates[dynentstate].ignoredamage))
 	{
 		return false;
 	}
@@ -499,16 +499,16 @@ function zombieshouldmelee(entity)
 		return false;
 	}
 	meleedistsq = zombiebehavior::function_997f1224(entity);
-	var_c6bad08 = undefined;
-	enemy = namespace_e0710ee6::function_825317c(entity);
+	enemy_vehicle = undefined;
+	enemy = zm_ai_utility::function_825317c(entity);
 	enemy = (isdefined(enemy) ? enemy : entity.enemy);
 	test_origin = enemy.origin;
 	if(isplayer(enemy))
 	{
 		if(namespace_85745671::function_142c3c86(enemy))
 		{
-			var_c6bad08 = enemy getvehicleoccupied();
-			test_origin = namespace_85745671::function_401070dd(var_c6bad08, enemy);
+			enemy_vehicle = enemy getvehicleoccupied();
+			test_origin = namespace_85745671::function_401070dd(enemy_vehicle, enemy);
 			if(!isdefined(test_origin))
 			{
 				test_origin = enemy.origin;
@@ -523,20 +523,20 @@ function zombieshouldmelee(entity)
 		{
 			if(isvehicle(enemy getgroundent()))
 			{
-				var_c6bad08 = enemy getgroundent();
+				enemy_vehicle = enemy getgroundent();
 				test_origin = (isdefined(enemy.last_valid_position) ? enemy.last_valid_position : entity.enemy.origin);
 			}
 			else if(isvehicle(enemy getmoverent()))
 			{
-				var_c6bad08 = enemy getmoverent();
+				enemy_vehicle = enemy getmoverent();
 				test_origin = (isdefined(enemy.last_valid_position) ? enemy.last_valid_position : enemy.origin);
 			}
 		}
-		if(isdefined(var_c6bad08) && isdefined(entity.var_cbc65493))
+		if(isdefined(enemy_vehicle) && isdefined(entity.var_cbc65493))
 		{
 			meleedistsq = meleedistsq * entity.var_cbc65493;
 		}
-		if(isdefined(var_c6bad08) && isdefined(entity.var_a9db7324) && abs(var_c6bad08 getspeed()) > 0)
+		if(isdefined(enemy_vehicle) && isdefined(entity.var_a9db7324) && abs(enemy_vehicle getspeed()) > 0)
 		{
 			meleedistsq = meleedistsq * entity.var_a9db7324;
 		}
@@ -562,7 +562,7 @@ function zombieshouldmelee(entity)
 	{
 		return false;
 	}
-	if(!entity cansee((isdefined(var_c6bad08) ? var_c6bad08 : enemy)))
+	if(!entity cansee((isdefined(enemy_vehicle) ? enemy_vehicle : enemy)))
 	{
 		return false;
 	}
@@ -572,13 +572,13 @@ function zombieshouldmelee(entity)
 		entity.var_1b250399 = entity.origin;
 		return true;
 	}
-	if(isdefined(var_c6bad08))
+	if(isdefined(enemy_vehicle))
 	{
 		entity.idletime = gettime();
 		entity.var_1b250399 = entity.origin;
 		return true;
 	}
-	if(is_true(self.var_37f16e2e) && !tracepassedonnavmesh(entity.origin, (isdefined(enemy.last_valid_position) ? enemy.last_valid_position : enemy.origin), enemy getpathfindingradius()))
+	if(is_true(self.isonnavmesh) && !tracepassedonnavmesh(entity.origin, (isdefined(enemy.last_valid_position) ? enemy.last_valid_position : enemy.origin), enemy getpathfindingradius()))
 	{
 		return false;
 	}
@@ -917,8 +917,8 @@ function function_da99776f(entity)
 		newangles = (entity.angles[0], targetyaw, entity.angles[2]);
 		entity teleport(entity.origin, newangles);
 		/#
-			var_dec635d = anglestoforward(newangles);
-			recordline(entity.origin, entity.origin + (var_dec635d * 50), (0, 1, 0));
+			forwardangles = anglestoforward(newangles);
+			recordline(entity.origin, entity.origin + (forwardangles * 50), (0, 1, 0));
 		#/
 	}
 	return true;
@@ -969,7 +969,7 @@ function function_c8caa34b(entity)
 }
 
 /*
-	Name: function_c6787767
+	Name: zombiemoveactionstart
 	Namespace: namespace_e292b080
 	Checksum: 0x350783A0
 	Offset: 0x3278
@@ -977,7 +977,7 @@ function function_c8caa34b(entity)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_c6787767(entity)
+function private zombiemoveactionstart(entity)
 {
 	entity.movetime = gettime();
 	entity.moveorigin = entity.origin;
@@ -1048,7 +1048,7 @@ function private function_7c8e35e8(entity, asmstate)
 		node.owner = entity;
 		if(entity.archetype !== #"zombie" && !isentity(entity.traversal_blocker))
 		{
-			entity callback::function_d8abfc3d(#"hash_11aa32ad6d527054", &damagedoor);
+			entity callback::function_d8abfc3d(#"on_ai_melee", &damagedoor);
 		}
 		if(isdefined(asmstate))
 		{
@@ -1132,7 +1132,7 @@ function private function_3f71b9c2(entity, asmstate)
 	}
 	asmstate.traversal_blocker = undefined;
 	asmstate.var_a476b329 = undefined;
-	asmstate callback::function_52ac9652(#"hash_11aa32ad6d527054", &damagedoor);
+	asmstate callback::function_52ac9652(#"on_ai_melee", &damagedoor);
 	if(asmstate asmgetstatus() == "asm_status_running")
 	{
 		asmstate.var_fc781a6f = 1;
@@ -1608,10 +1608,10 @@ function zombieupdategoal(goalpos)
 				path = undefined;
 				if(is_true(self.var_ceed8829))
 				{
-					var_f67d1ba2 = generatenavmeshpath(self.origin, goalpos, self);
-					if(isdefined(var_f67d1ba2) && var_f67d1ba2.status === "succeeded" && isdefined(var_f67d1ba2.pathpoints))
+					pathdata = generatenavmeshpath(self.origin, goalpos, self);
+					if(isdefined(pathdata) && pathdata.status === "succeeded" && isdefined(pathdata.pathpoints))
 					{
-						path = var_f67d1ba2.pathpoints;
+						path = pathdata.pathpoints;
 					}
 				}
 				else

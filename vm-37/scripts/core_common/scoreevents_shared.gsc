@@ -1,11 +1,11 @@
-#using script_47fb62300ac0bd60;
-#using script_68d2ee1489345a1d;
 #using script_7a8059ca02b7b09e;
-#using script_bc839bb0e693558;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
 #using scripts\core_common\rank_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\abilities\ability_power.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace scoreevents;
 
@@ -129,11 +129,11 @@ function processscoreevent(event, player, victim, weapon, var_36f23f1f, var_dbaa
 	{
 		return scoregiven;
 	}
-	if(isdefined(level.scoreinfo[event]) && is_true(level.scoreinfo[event][#"hash_7b64eabf26f777c7"]))
+	if(isdefined(level.scoreinfo[event]) && is_true(level.scoreinfo[event][#"is_deprecated"]))
 	{
 		return scoregiven;
 	}
-	if(is_true(level.var_64ce2685))
+	if(is_true(level.disablescoreevents))
 	{
 		return scoregiven;
 	}
@@ -144,13 +144,13 @@ function processscoreevent(event, player, victim, weapon, var_36f23f1f, var_dbaa
 	pixbeginevent();
 	isscoreevent = 0;
 	/#
-		if(getdvarint(#"hash_39060c853726e6c0", 0) > 0)
+		if(getdvarint(#"logscoreevents", 0) > 0)
 		{
 			if(!isdefined(level.var_10cd7193))
 			{
 				level.var_10cd7193 = [];
 			}
-			eventstr = (function_7a600918(event) ? function_9e72a96(event) : event);
+			eventstr = (ishash(event) ? function_9e72a96(event) : event);
 			if(!isdefined(level.var_10cd7193))
 			{
 				level.var_10cd7193 = [];
@@ -223,7 +223,7 @@ function processscoreevent(event, player, victim, weapon, var_36f23f1f, var_dbaa
 		}
 		if(isdefined(weapon) && isdefined(level.scoreinfo[event]))
 		{
-			var_6d1793bb = level.scoreinfo[event][#"hash_17ffe407dca54dd7"];
+			var_6d1793bb = level.scoreinfo[event][#"medalnamehash"];
 			if(isdefined(var_6d1793bb))
 			{
 				specialistindex = player getspecialistindex();
@@ -380,7 +380,7 @@ function uninterruptedobitfeedkills(attacker, weapon)
 	if(isdefined(attacker))
 	{
 		processscoreevent(#"uninterrupted_obit_feed_kills", attacker, self, weapon);
-		attacker contracts::function_a54e2068(#"hash_2e97dac7aef215da");
+		attacker contracts::increment_contract(#"hash_2e97dac7aef215da");
 		attacker stats::function_dad108fa(#"hash_3b7d759c8864b5d8", 1);
 	}
 }
@@ -505,14 +505,14 @@ function getscoreeventtablename(gametype)
 		{
 			prefix = #"hash_5f114025234e912f";
 		}
-		else if(function_f99d2668())
+		else if(sessionmodeiswarzonegame())
 		{
 			prefix = #"hash_2bedaa060f1bcc0f";
 		}
 	}
-	gametype = function_ea13f55(gametype, "_hc", "");
-	gametype = function_ea13f55(gametype, "_cdl", "");
-	gametype = function_ea13f55(gametype, "_bb", "");
+	gametype = strreplace(gametype, "_hc", "");
+	gametype = strreplace(gametype, "_cdl", "");
+	gametype = strreplace(gametype, "_bb", "");
 	tablename = ((prefix + "_") + gametype) + ".csv";
 	if(!is_true(isassetloaded("stringtable", tablename)))
 	{

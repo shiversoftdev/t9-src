@@ -1,10 +1,10 @@
-#using script_3706d21c449d0d14;
 #using scripts\core_common\system_shared.gsc;
+#using script_3706d21c449d0d14;
 
 #namespace gadget_health_regen;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: gadget_health_regen
 	Checksum: 0x334085A
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_282f48d36d893e20", &function_70a657d8, undefined, undefined, undefined);
 }

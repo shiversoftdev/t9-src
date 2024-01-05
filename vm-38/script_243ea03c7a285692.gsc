@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_135e8f9a : class_6aaccc24
+class crevive_hud : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_135e8f9a
+		Namespace: crevive_hud
 		Checksum: 0x85A85551
 		Offset: 0x260
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_135e8f9a : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_135e8f9a
+		Namespace: crevive_hud
 		Checksum: 0x49F8F1E5
 		Offset: 0x488
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_135e8f9a : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_135e8f9a
+		Namespace: crevive_hud
 		Checksum: 0xA3BBE23E
 		Offset: 0x320
 		Size: 0x3C
@@ -47,40 +47,40 @@ class class_135e8f9a : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_28ebf0f1
-		Namespace: namespace_135e8f9a
+		Name: set_fadetime
+		Namespace: crevive_hud
 		Checksum: 0x99BCAF8A
 		Offset: 0x438
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_28ebf0f1(player, value)
+	function set_fadetime(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "fadeTime", value);
 	}
 
 	/*
-		Name: function_3b7b386a
-		Namespace: namespace_135e8f9a
+		Name: set_clientnum
+		Namespace: crevive_hud
 		Checksum: 0x20EB5534
 		Offset: 0x3E8
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_3b7b386a(player, value)
+	function set_clientnum(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "clientNum", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_135e8f9a
+		Namespace: crevive_hud
 		Checksum: 0x9B0C8B67
 		Offset: 0x368
 		Size: 0x24
@@ -89,12 +89,12 @@ class class_135e8f9a : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_135e8f9a
+		Namespace: crevive_hud
 		Checksum: 0xBFFB4A2F
 		Offset: 0x280
 		Size: 0x94
@@ -103,22 +103,22 @@ class class_135e8f9a : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("revive_hud");
-		namespace_6aaccc24::function_dcb34c80("string", "text", 1);
-		namespace_6aaccc24::function_da693cbe("clientNum", 1, 7, "int");
-		namespace_6aaccc24::function_da693cbe("fadeTime", 1, 5, "int");
+		cluielem::setup_clientfields("revive_hud");
+		cluielem::function_dcb34c80("string", "text", 1);
+		cluielem::add_clientfield("clientNum", 1, 7, "int");
+		cluielem::add_clientfield("fadeTime", 1, 5, "int");
 	}
 
 	/*
-		Name: function_d5ea17f0
-		Namespace: namespace_135e8f9a
+		Name: set_text
+		Namespace: crevive_hud
 		Checksum: 0xC1D154ED
 		Offset: 0x398
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_d5ea17f0(player, value)
+	function set_text(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "text", value);
 	}
@@ -138,7 +138,7 @@ class class_135e8f9a : class_6aaccc24
 */
 function private autoexec function_d7560939()
 {
-	level notify(885510103);
+	level notify(-885510103);
 }
 
 /*
@@ -152,7 +152,7 @@ function private autoexec function_d7560939()
 */
 function register()
 {
-	elem = new class_135e8f9a();
+	elem = new crevive_hud();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -204,7 +204,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_d5ea17f0
+	Name: set_text
 	Namespace: revive_hud
 	Checksum: 0xCC6C0C8B
 	Offset: 0x1D0
@@ -212,13 +212,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: Linked
 */
-function function_d5ea17f0(player, value)
+function set_text(player, value)
 {
-	[[ self ]]->function_d5ea17f0(player, value);
+	[[ self ]]->set_text(player, value);
 }
 
 /*
-	Name: function_3b7b386a
+	Name: set_clientnum
 	Namespace: revive_hud
 	Checksum: 0x1A3EDE94
 	Offset: 0x200
@@ -226,13 +226,13 @@ function function_d5ea17f0(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_3b7b386a(player, value)
+function set_clientnum(player, value)
 {
-	[[ self ]]->function_3b7b386a(player, value);
+	[[ self ]]->set_clientnum(player, value);
 }
 
 /*
-	Name: function_28ebf0f1
+	Name: set_fadetime
 	Namespace: revive_hud
 	Checksum: 0x637205F8
 	Offset: 0x230
@@ -240,8 +240,8 @@ function function_3b7b386a(player, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_28ebf0f1(player, value)
+function set_fadetime(player, value)
 {
-	[[ self ]]->function_28ebf0f1(player, value);
+	[[ self ]]->set_fadetime(player, value);
 }
 

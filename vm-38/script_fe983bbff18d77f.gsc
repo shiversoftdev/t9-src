@@ -14,7 +14,7 @@
 */
 function private autoexec function_13942b3d()
 {
-	level notify(768015983);
+	level notify(-768015983);
 }
 
 #namespace namespace_206491b4;

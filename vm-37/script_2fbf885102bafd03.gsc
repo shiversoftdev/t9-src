@@ -1,34 +1,34 @@
-#using script_18910f59cc847b42;
-#using script_1b2f6ef7778cf920;
-#using script_245f38df21b701ca;
-#using script_30c7fb449869910;
-#using script_30efbc1e0156ebae;
-#using script_3314b730521b9666;
-#using script_38635d174016f682;
-#using script_41540e991952b0c1;
-#using script_42cbbdcd1e160063;
-#using script_4adf64e112e9afec;
-#using script_60a2f38d6d37fd6a;
-#using script_64e5d3ad71ce8140;
-#using script_67049b48b589d81;
-#using script_6b71c9befed901f2;
-#using script_71603a58e2da0698;
-#using script_75c3996cce8959f7;
 #using script_75e0a2c8a5c12652;
+#using script_41540e991952b0c1;
 #using script_76abb7986de59601;
-#using script_77163d5a569e2071;
-#using script_771f5bff431d8d57;
+#using script_67049b48b589d81;
+#using script_64e5d3ad71ce8140;
+#using script_60a2f38d6d37fd6a;
+#using script_6b71c9befed901f2;
 #using script_7bf1bd99605135bf;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\spawner_shared.csc;
-#using scripts\core_common\spawning_shared.csc;
+#using script_75c3996cce8959f7;
+#using script_71603a58e2da0698;
+#using script_30c7fb449869910;
+#using script_1b2f6ef7778cf920;
+#using script_4adf64e112e9afec;
+#using script_771f5bff431d8d57;
+#using script_42cbbdcd1e160063;
+#using script_3314b730521b9666;
+#using script_77163d5a569e2071;
+#using script_38635d174016f682;
+#using script_18910f59cc847b42;
+#using script_30efbc1e0156ebae;
+#using script_245f38df21b701ca;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\spawning_shared.csc;
+#using scripts\core_common\spawner_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_a6ddb172;
 
@@ -45,16 +45,16 @@ function init()
 {
 	clientfield::register("world", "banner_event", 1, 6, "int", &function_778aa85f, 0, 0);
 	clientfield::register("world", "banner_eventplayer", 1, 6, "int", &function_41109d42, 0, 0);
-	level.doa.banner[0] = doa_bannerelement::function_5c1bb138();
-	level.doa.var_5f94c071[0] = doa_textelement::function_5c1bb138();
-	level.doa.var_75e2ed0d[0] = doa_textelement::function_5c1bb138();
-	level.doa.var_4f001f48[0] = doa_textelement::function_5c1bb138();
-	level.doa.var_51c724d6[0] = doa_textelement::function_5c1bb138();
-	level.doa.banner[1] = doa_bannerelement::function_5c1bb138();
-	level.doa.var_5f94c071[1] = doa_textelement::function_5c1bb138();
-	level.doa.var_75e2ed0d[1] = doa_textelement::function_5c1bb138();
-	level.doa.var_4f001f48[1] = doa_textelement::function_5c1bb138();
-	level.doa.var_51c724d6[1] = doa_textelement::function_5c1bb138();
+	level.doa.banner[0] = doa_bannerelement::register_clientside();
+	level.doa.var_5f94c071[0] = doa_textelement::register_clientside();
+	level.doa.var_75e2ed0d[0] = doa_textelement::register_clientside();
+	level.doa.var_4f001f48[0] = doa_textelement::register_clientside();
+	level.doa.var_51c724d6[0] = doa_textelement::register_clientside();
+	level.doa.banner[1] = doa_bannerelement::register_clientside();
+	level.doa.var_5f94c071[1] = doa_textelement::register_clientside();
+	level.doa.var_75e2ed0d[1] = doa_textelement::register_clientside();
+	level.doa.var_4f001f48[1] = doa_textelement::register_clientside();
+	level.doa.var_51c724d6[1] = doa_textelement::register_clientside();
 }
 
 /*
@@ -1052,27 +1052,27 @@ function function_56821d13(localclientnum)
 	#/
 	if(level.doa.banner[localclientnum] doa_bannerelement::is_open(localclientnum))
 	{
-		level.doa.banner[localclientnum] doa_bannerelement::function_aa5c711d(localclientnum, 0);
+		level.doa.banner[localclientnum] doa_bannerelement::set_alpha(localclientnum, 0);
 		level.doa.banner[localclientnum] doa_bannerelement::close(localclientnum);
 	}
 	if(level.doa.var_5f94c071[localclientnum] doa_bannerelement::is_open(localclientnum))
 	{
-		level.doa.var_5f94c071[localclientnum] doa_bannerelement::function_aa5c711d(localclientnum, 0);
+		level.doa.var_5f94c071[localclientnum] doa_bannerelement::set_alpha(localclientnum, 0);
 		level.doa.var_5f94c071[localclientnum] doa_bannerelement::close(localclientnum);
 	}
 	if(level.doa.var_75e2ed0d[localclientnum] doa_bannerelement::is_open(localclientnum))
 	{
-		level.doa.var_75e2ed0d[localclientnum] doa_bannerelement::function_aa5c711d(localclientnum, 0);
+		level.doa.var_75e2ed0d[localclientnum] doa_bannerelement::set_alpha(localclientnum, 0);
 		level.doa.var_75e2ed0d[localclientnum] doa_bannerelement::close(localclientnum);
 	}
 	if(level.doa.var_4f001f48[localclientnum] doa_bannerelement::is_open(localclientnum))
 	{
-		level.doa.var_4f001f48[localclientnum] doa_bannerelement::function_aa5c711d(localclientnum, 0);
+		level.doa.var_4f001f48[localclientnum] doa_bannerelement::set_alpha(localclientnum, 0);
 		level.doa.var_4f001f48[localclientnum] doa_bannerelement::close(localclientnum);
 	}
 	if(level.doa.var_51c724d6[localclientnum] doa_bannerelement::is_open(localclientnum))
 	{
-		level.doa.var_51c724d6[localclientnum] doa_bannerelement::function_aa5c711d(localclientnum, 0);
+		level.doa.var_51c724d6[localclientnum] doa_bannerelement::set_alpha(localclientnum, 0);
 		level.doa.var_51c724d6[localclientnum] doa_bannerelement::close(localclientnum);
 	}
 	level notify(#"hash_75b2813809fa8394");
@@ -1136,13 +1136,13 @@ function function_9a92c603(localclientnum, var_150143d0)
 		self doa_textelement::open(localclientnum);
 		if(isdefined(payload))
 		{
-			self doa_textelement::function_9e089af4(localclientnum, payload);
+			self doa_textelement::set_intpayload(localclientnum, payload);
 		}
 		self doa_textelement::function_f50d5765(localclientnum, text);
 		self doa_textelement::function_f97e9049(localclientnum, x, y);
-		self doa_textelement::function_aa5c711d(localclientnum, 0);
+		self doa_textelement::set_alpha(localclientnum, 0);
 		self doa_textelement::set_color(localclientnum, color[0], color[1], color[2]);
-		self doa_textelement::function_bede6f52(localclientnum, scale);
+		self doa_textelement::set_scale(localclientnum, scale);
 		if(isdefined(var_6dcbe6ee))
 		{
 			self thread function_c11d702b(localclientnum, var_6dcbe6ee, var_42f603e1, var_a5866ebf);
@@ -1173,7 +1173,7 @@ function function_9a92c603(localclientnum, var_150143d0)
 	}
 	if(self doa_bannerelement::is_open(localclientnum))
 	{
-		self doa_bannerelement::function_aa5c711d(localclientnum, 0);
+		self doa_bannerelement::set_alpha(localclientnum, 0);
 		self doa_bannerelement::close(localclientnum);
 	}
 }
@@ -1200,11 +1200,11 @@ function function_3ce17e62(localclientnum, var_ab7c878c, var_393b2936, durations
 		n_timer = gettime();
 		if(n_timer >= n_time_end)
 		{
-			[[ self ]]->function_aa5c711d(localclientnum, var_393b2936);
+			[[ self ]]->set_alpha(localclientnum, var_393b2936);
 			return;
 		}
 		var_5db054c7 = mapfloat(n_time_start, n_time_end, var_ab7c878c, var_393b2936, n_timer);
-		[[ self ]]->function_aa5c711d(localclientnum, var_5db054c7);
+		[[ self ]]->set_alpha(localclientnum, var_5db054c7);
 		waitframe(1);
 	}
 }
@@ -1233,7 +1233,7 @@ function function_c11d702b(localclientnum, durationseconds, lowalpha, highalpha)
 		n_timer = gettime();
 		if(n_timer >= n_time_end)
 		{
-			[[ self ]]->function_aa5c711d(localclientnum, var_fc4d0311);
+			[[ self ]]->set_alpha(localclientnum, var_fc4d0311);
 			n_time_start = gettime();
 			n_time_end = gettime() + (int(durationseconds * 1000));
 			n_timer = n_time_start;
@@ -1244,7 +1244,7 @@ function function_c11d702b(localclientnum, durationseconds, lowalpha, highalpha)
 		else
 		{
 			var_5db054c7 = mapfloat(n_time_start, n_time_end, startalpha, var_fc4d0311, n_timer);
-			[[ self ]]->function_aa5c711d(localclientnum, var_5db054c7);
+			[[ self ]]->set_alpha(localclientnum, var_5db054c7);
 		}
 		waitframe(1);
 	}

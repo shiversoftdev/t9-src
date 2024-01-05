@@ -13,7 +13,7 @@
 */
 function private autoexec function_7fd2023()
 {
-	level notify(1323806999);
+	level notify(-1323806999);
 }
 
 #namespace territory;
@@ -139,12 +139,12 @@ function is_inside(point, var_73362d27, territory)
 	}
 	foreach(boundary in territory.bounds)
 	{
-		var_fa52306b = point;
+		testpoint = point;
 		if(var_73362d27)
 		{
-			var_fa52306b = (var_fa52306b[0], var_fa52306b[1], boundary.origin[2]);
+			testpoint = (testpoint[0], testpoint[1], boundary.origin[2]);
 		}
-		if(boundary istouching(var_fa52306b))
+		if(boundary istouching(testpoint))
 		{
 			return true;
 		}

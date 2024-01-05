@@ -1,15 +1,15 @@
+#using script_4ccd0c3512b52a10;
+#using scripts\cp_common\objectives.gsc;
+#using script_7d0013bbc05623b9;
 #using script_35ae72be7b4fec10;
 #using script_3626f1b2cf51a99c;
-#using script_4ccd0c3512b52a10;
-#using script_7d0013bbc05623b9;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\objectives.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_2943ccdc;
 
@@ -28,7 +28,7 @@ function private autoexec function_f31b00f5()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2943ccdc
 	Checksum: 0x5CB2A6B3
 	Offset: 0x310
@@ -36,7 +36,7 @@ function private autoexec function_f31b00f5()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_ee64d6a280a2e42", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -81,7 +81,7 @@ function open(var_738a6265, top_left, bottom_right, var_879505e1, var_ff0f9714, 
 		player thread namespace_61e6d095::function_4bfa9617("close_interactive_map");
 		player val::set(#"hash_46ef83540c23a2f7", "freezecontrols", 1);
 		namespace_61e6d095::create(#"hash_ee64d6a280a2e42", var_738a6265);
-		namespace_61e6d095::function_28027c42(#"hash_ee64d6a280a2e42", [2:#"hash_72cc4740fa4d3da3", 1:#"hash_66c6997fe4c5ccf", 0:#"hash_ee64d6a280a2e42"]);
+		namespace_61e6d095::function_28027c42(#"hash_ee64d6a280a2e42", [2:#"hash_72cc4740fa4d3da3", 1:#"hint_tutorial", 0:#"hash_ee64d6a280a2e42"]);
 		namespace_61e6d095::function_24e5fa63(#"hash_ee64d6a280a2e42", [1:#"hash_3c27402259e4c18e", 0:#"ui_confirm"], 1);
 		if(!isdefined(top_left))
 		{
@@ -109,11 +109,11 @@ function open(var_738a6265, top_left, bottom_right, var_879505e1, var_ff0f9714, 
 		}
 		if(isdefined(map_width))
 		{
-			namespace_61e6d095::function_8b0b5811(#"hash_ee64d6a280a2e42", map_width);
+			namespace_61e6d095::set_width(#"hash_ee64d6a280a2e42", map_width);
 		}
 		if(isdefined(map_height))
 		{
-			namespace_61e6d095::function_5dbd7024(#"hash_ee64d6a280a2e42", map_height);
+			namespace_61e6d095::set_height(#"hash_ee64d6a280a2e42", map_height);
 		}
 		if(is_true(var_7ec0800f) && isentity(top_left) && isentity(bottom_right))
 		{
@@ -588,7 +588,7 @@ function function_87f0056b()
 */
 function function_d0243e5b(uid, name, value)
 {
-	namespace_61e6d095::function_d7d2fcce(#"hash_ee64d6a280a2e42", ((("mapObjects" + ".") + uid) + ".") + name, value);
+	namespace_61e6d095::set_data(#"hash_ee64d6a280a2e42", ((("mapObjects" + ".") + uid) + ".") + name, value);
 }
 
 /*
@@ -602,7 +602,7 @@ function function_d0243e5b(uid, name, value)
 */
 function function_dbf83dc4(uid, name)
 {
-	namespace_61e6d095::function_92ba69fa(#"hash_ee64d6a280a2e42", ((("mapObjects" + ".") + uid) + ".") + name);
+	namespace_61e6d095::get_data(#"hash_ee64d6a280a2e42", ((("mapObjects" + ".") + uid) + ".") + name);
 }
 
 /*
@@ -730,7 +730,7 @@ function function_9af7280f(objects)
 {
 	foreach(object in objects)
 	{
-		if(function_7a600918(uid))
+		if(ishash(uid))
 		{
 			object add_object(uid);
 			continue;
@@ -963,15 +963,15 @@ function function_4b1a5235(prompt)
 */
 function close(cleanup)
 {
-	level notify(#"hash_7d0c549b3fac0991");
+	level notify(#"close_interactive_map");
 	player = getplayers()[0];
-	player notify(#"hash_7d0c549b3fac0991");
+	player notify(#"close_interactive_map");
 	player clientfield::set_to_player("toggle_interactive_map", 0);
 	util::wait_network_frame(2);
 	player prompts::function_ee7adae5(#"cursor");
 	prompts::function_398ab9eb();
 	namespace_61e6d095::function_9ade1d9b(#"hash_ee64d6a280a2e42", "cursor.update", 0, 1);
-	namespace_61e6d095::function_d7d2fcce(#"hash_ee64d6a280a2e42", "update", 0, 1);
+	namespace_61e6d095::set_data(#"hash_ee64d6a280a2e42", "update", 0, 1);
 	namespace_61e6d095::remove(#"hash_ee64d6a280a2e42");
 	namespace_61e6d095::function_4279fd02(#"hash_ee64d6a280a2e42");
 	if(is_true(cleanup))
@@ -1056,7 +1056,7 @@ function function_fabe437a(var_248cbbcf)
 function private function_5cab7397()
 {
 	level notify("f61ea4c2cf8a773");
-	level endon(#"hash_7d0c549b3fac0991", "6c5260e220bebf4", #"hash_64a3b02565bdf75f");
+	level endon(#"close_interactive_map", "6c5260e220bebf4", #"hash_64a3b02565bdf75f");
 	level waittill(#"hash_5644658da7c85062");
 	objectives::remove(#"hash_748279bcfd49d4cd");
 	remove_object(#"hash_748279bcfd49d4cd");
@@ -1119,7 +1119,7 @@ function private function_9dfe141f(uid, var_6d62c29c, angle_offset)
 	{
 		angle_offset = 0;
 	}
-	level endon(#"hash_7d0c549b3fac0991", #"hash_64a3b02565bdf75f");
+	level endon(#"close_interactive_map", #"hash_64a3b02565bdf75f");
 	self endon(#"death", #"hash_7c1f9e1214f47b4e");
 	self thread function_8e91c74c(uid);
 	while(true)
@@ -1153,7 +1153,7 @@ function private function_9dfe141f(uid, var_6d62c29c, angle_offset)
 */
 function private function_8e91c74c(uid)
 {
-	level endon(#"hash_7d0c549b3fac0991", #"hash_64a3b02565bdf75f");
+	level endon(#"close_interactive_map", #"hash_64a3b02565bdf75f");
 	self endon(#"hash_7c1f9e1214f47b4e");
 	self waittill(#"death");
 	thread remove_object(uid);
@@ -1170,7 +1170,7 @@ function private function_8e91c74c(uid)
 */
 function private function_75cb287(var_ff0f9714)
 {
-	level endon(#"hash_546b1fe54ba63887", #"hash_7d0c549b3fac0991", #"hash_64a3b02565bdf75f");
+	level endon(#"hash_546b1fe54ba63887", #"close_interactive_map", #"hash_64a3b02565bdf75f");
 	player = getplayers()[0];
 	player endon(#"death");
 	level.var_2943ccdc.var_eb166cf5 = undefined;
@@ -1399,6 +1399,6 @@ function private function_a246a802(object)
 */
 function private function_fa8087e3()
 {
-	namespace_61e6d095::function_d7d2fcce(#"hash_ee64d6a280a2e42", "update", 1, 1, 0, 0, 1);
+	namespace_61e6d095::set_data(#"hash_ee64d6a280a2e42", "update", 1, 1, 0, 0, 1);
 }
 

@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_6b831806 : class_6aaccc24
+class cblackseajetskideployprompt : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_6b831806
+		Namespace: cblackseajetskideployprompt
 		Checksum: 0xD524E6C9
 		Offset: 0x338
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_6b831806 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_6b831806
+		Namespace: cblackseajetskideployprompt
 		Checksum: 0x297A5532
 		Offset: 0x490
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_6b831806 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_6b831806
+		Namespace: cblackseajetskideployprompt
 		Checksum: 0xF7BE7806
 		Offset: 0x428
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_6b831806 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_26d9350e
-		Namespace: namespace_6b831806
+		Name: set_deployprogress
+		Namespace: cblackseajetskideployprompt
 		Checksum: 0x9A41AF48
 		Offset: 0x458
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_26d9350e(localclientnum, value)
+	function set_deployprogress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "deployProgress", value);
+		[[ self ]]->set_data(localclientnum, "deployProgress", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_6b831806
+		Name: register_clientside
+		Namespace: cblackseajetskideployprompt
 		Checksum: 0xA07BE86A
 		Offset: 0x3B0
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("BlackSeaJetskiDeployPrompt");
+		cluielem::register_clientside("BlackSeaJetskiDeployPrompt");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_6b831806
+		Namespace: cblackseajetskideployprompt
 		Checksum: 0xB80E6C2E
 		Offset: 0x358
 		Size: 0x4C
@@ -82,13 +82,13 @@ class class_6b831806 : class_6aaccc24
 	*/
 	function setup_clientfields(var_8c9ddf96)
 	{
-		namespace_6aaccc24::setup_clientfields("BlackSeaJetskiDeployPrompt");
-		namespace_6aaccc24::function_da693cbe("deployProgress", 1, 5, "float", var_8c9ddf96);
+		cluielem::setup_clientfields("BlackSeaJetskiDeployPrompt");
+		cluielem::add_clientfield("deployProgress", 1, 5, "float", var_8c9ddf96);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_6b831806
+		Namespace: cblackseajetskideployprompt
 		Checksum: 0x9C18D245
 		Offset: 0x3D8
 		Size: 0x48
@@ -97,8 +97,8 @@ class class_6b831806 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "deployProgress", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "deployProgress", 0);
 	}
 
 }
@@ -116,7 +116,7 @@ class class_6b831806 : class_6aaccc24
 */
 function register(var_8c9ddf96)
 {
-	elem = new class_6b831806();
+	elem = new cblackseajetskideployprompt();
 	[[ elem ]]->setup_clientfields(var_8c9ddf96);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -138,7 +138,7 @@ function register(var_8c9ddf96)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: blackseajetskideployprompt
 	Checksum: 0xF4329E61
 	Offset: 0x250
@@ -146,10 +146,10 @@ function register(var_8c9ddf96)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_6b831806();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cblackseajetskideployprompt();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -196,7 +196,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_26d9350e
+	Name: set_deployprogress
 	Namespace: blackseajetskideployprompt
 	Checksum: 0x8B9D3D38
 	Offset: 0x308
@@ -204,8 +204,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_26d9350e(localclientnum, value)
+function set_deployprogress(localclientnum, value)
 {
-	[[ self ]]->function_26d9350e(localclientnum, value);
+	[[ self ]]->set_deployprogress(localclientnum, value);
 }
 

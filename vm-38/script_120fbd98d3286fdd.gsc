@@ -1,5 +1,5 @@
-#using script_4e261fd4bc49e992;
 #using script_78825cbb1ab9f493;
+#using scripts\core_common\player\player_insertion.csc;
 
 #namespace namespace_bc2b656d;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_fd52c48d()
 {
-	level notify(219809791);
+	level notify(-219809791);
 }
 
 /*

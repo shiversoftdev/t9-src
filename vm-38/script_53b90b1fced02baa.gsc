@@ -1,5 +1,5 @@
-#using script_16d00590b7ac9e6;
 #using scripts\core_common\animation_shared.gsc;
+#using script_16d00590b7ac9e6;
 
 #namespace animation_selector_table_evaluators;
 

@@ -1,15 +1,15 @@
-#using script_2bdd098a8215ac9f;
+#using script_62c72c96978f9b04;
 #using script_311c446e3df6c3fa;
 #using script_4ed01237ecbd380f;
+#using script_2bdd098a8215ac9f;
 #using script_538e87197f25d67;
 #using script_5665e7d917abc3fc;
-#using script_62c72c96978f9b04;
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_73df937d;
 
@@ -24,11 +24,11 @@
 */
 function private autoexec function_d3bd8e0()
 {
-	level notify(100820852);
+	level notify(-100820852);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_73df937d
 	Checksum: 0xC43E2D53
 	Offset: 0x158
@@ -36,7 +36,7 @@ function private autoexec function_d3bd8e0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5ff56dba9074b0b4", &function_70a657d8, undefined, undefined, undefined);
 }

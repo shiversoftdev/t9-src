@@ -1,12 +1,12 @@
 #using script_13da4e6b98ca81a1;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace killcam;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: killcam
 	Checksum: 0x9A6F157D
 	Offset: 0x98
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"killcam", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -35,8 +35,8 @@ function private function_70a657d8()
 		return;
 	}
 	callback::on_localclient_connect(&on_localclient_connect);
-	callback::function_e9e16e2f(&function_e9e16e2f);
-	callback::function_4f6cafea(&function_4f6cafea);
+	callback::on_killcam_begin(&on_killcam_begin);
+	callback::on_killcam_end(&on_killcam_end);
 	callback::function_9fcd5f60(&function_9fcd5f60);
 	callback::add_callback(#"hash_1184c2c2ed4c24b3", &function_c8bff20a);
 }
@@ -122,7 +122,7 @@ function function_bb763df8(localclientnum)
 }
 
 /*
-	Name: function_e9e16e2f
+	Name: on_killcam_begin
 	Namespace: killcam
 	Checksum: 0x42CFAE5B
 	Offset: 0x430
@@ -130,7 +130,7 @@ function function_bb763df8(localclientnum)
 	Parameters: 1
 	Flags: Linked
 */
-function function_e9e16e2f(params)
+function on_killcam_begin(params)
 {
 	player = function_27673a7(params.localclientnum);
 	if(!isdefined(player))
@@ -149,7 +149,7 @@ function function_e9e16e2f(params)
 }
 
 /*
-	Name: function_4f6cafea
+	Name: on_killcam_end
 	Namespace: killcam
 	Checksum: 0x4ECADC49
 	Offset: 0x528
@@ -157,7 +157,7 @@ function function_e9e16e2f(params)
 	Parameters: 1
 	Flags: Linked
 */
-function function_4f6cafea(params)
+function on_killcam_end(params)
 {
 	function_bb763df8(params.localclientnum);
 	player = function_27673a7(params.localclientnum);

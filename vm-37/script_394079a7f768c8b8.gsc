@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_98cc868d : class_6aaccc24
+class class_98cc868d : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_98cc868d : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_98cc868d
 		Checksum: 0x617C8470
 		Offset: 0x328
@@ -52,9 +52,9 @@ class class_98cc868d : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("pitch_and_yaw_meters");
+		cluielem::register_clientside("pitch_and_yaw_meters");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_98cc868d : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("pitch_and_yaw_meters");
+		cluielem::setup_clientfields("pitch_and_yaw_meters");
 	}
 
 	/*
@@ -82,7 +82,7 @@ class class_98cc868d : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: pitch_and_yaw_meters
 	Checksum: 0x217BEB73
 	Offset: 0x228
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_98cc868d();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

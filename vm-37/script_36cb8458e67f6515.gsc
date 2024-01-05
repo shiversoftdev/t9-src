@@ -1,14 +1,14 @@
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\compass.gsc;
-#using scripts\core_common\load_shared.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\compass.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-#namespace namespace_ad433090;
+#namespace mp_tank;
 
 /*
 	Name: main
-	Namespace: namespace_ad433090
+	Namespace: mp_tank
 	Checksum: 0x30158836
 	Offset: 0x148
 	Size: 0x1A4
@@ -30,7 +30,7 @@ event main(eventstruct)
 
 /*
 	Name: function_8d9c0c2d
-	Namespace: namespace_ad433090
+	Namespace: mp_tank
 	Checksum: 0xBEDC0D57
 	Offset: 0x2F8
 	Size: 0x44
@@ -44,7 +44,7 @@ function function_8d9c0c2d(a_ents)
 
 /*
 	Name: function_a4fed09f
-	Namespace: namespace_ad433090
+	Namespace: mp_tank
 	Checksum: 0xC1BD6AF6
 	Offset: 0x348
 	Size: 0x3C

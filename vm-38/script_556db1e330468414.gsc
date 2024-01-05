@@ -1,22 +1,22 @@
-#using script_1471eea5d2e60f83;
+#using script_6155d71e1c9a57eb;
 #using script_16b1b77a76492c6a;
 #using script_34ab99a4ca1a43d;
-#using script_35598499769dbb3d;
-#using script_6155d71e1c9a57eb;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using script_35598499769dbb3d;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using script_1471eea5d2e60f83;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_21a03d2d;
 
@@ -31,13 +31,13 @@
 */
 function private autoexec function_152143a0()
 {
-	level notify(139056002);
+	level notify(-139056002);
 }
 
 #namespace namespace_181e92ae;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_181e92ae
 	Checksum: 0xECE1D005
 	Offset: 0x2C0
@@ -45,7 +45,7 @@ function private autoexec function_152143a0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6eb528f341abf64a", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -367,7 +367,7 @@ function private function_4b312787(struct)
 {
 	if(math::cointoss(50))
 	{
-		model = #"hash_63c3c466ed134b31";
+		model = #"p9_sur_crystal_medium_01_orange";
 		str_scene = "p9_zm_gold_sur_crystal_medium_01_bundle";
 	}
 	else

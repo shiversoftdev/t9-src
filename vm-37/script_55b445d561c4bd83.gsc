@@ -91,12 +91,12 @@ function private function_c0e2f147(team)
 	{
 		team = #"allies";
 	}
-	var_ad8edaa8 = level.teams[team];
-	if(!isdefined(var_ad8edaa8))
+	teamstr = level.teams[team];
+	if(!isdefined(teamstr))
 	{
 		return undefined;
 	}
-	return getgametypesetting(#"hash_7a5a6325a6e843b7" + var_ad8edaa8);
+	return getgametypesetting(#"hash_7a5a6325a6e843b7" + teamstr);
 }
 
 /*

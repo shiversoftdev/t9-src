@@ -1,8 +1,8 @@
-#using script_3dc93ca9902a9cda;
 #using script_5552bd756afee443;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
+#using script_3dc93ca9902a9cda;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_ce2d072f;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_80763da()
 {
-	level notify(1217246153);
+	level notify(-1217246153);
 }
 
 #namespace snd;
@@ -124,7 +124,7 @@ function private function_ac3c5285(posx, posy, text, color, scale, var_24ea4e17,
 		var_1c57e012 = int(var_45b08b81 / frametime);
 		var_9a0d8dab = 1;
 		var_206c3ebf = 0;
-		if(is_true(level.var_17e6189d.var_8c37ff34))
+		if(is_true(level._snd.var_8c37ff34))
 		{
 			var_9a0d8dab = 2;
 		}
@@ -533,7 +533,7 @@ function function_31d6fc52(var_9632a625, color, depthtest, duration, offset)
 		{
 			return;
 		}
-		if(is_true(level.var_17e6189d.var_8c37ff34))
+		if(is_true(level._snd.var_8c37ff34))
 		{
 			duration = int(60 * duration);
 		}
@@ -648,10 +648,10 @@ function function_81183b3(origin, size, angles, color, alpha, depthtest, duratio
 		var_ec1abeec = (var_d805968e, var_d805968e, var_d805968e);
 		var_b278259c = (color * var_ec1abeec) + (1, 0, 0);
 		var_7a8ab5a2 = (color * var_ec1abeec) + (0, 1, 0);
-		var_b2d5a637 = (color * var_ec1abeec) + (0, 0, 1);
+		colb = (color * var_ec1abeec) + (0, 0, 1);
 		line(origin - forward, origin + forward, var_b278259c, alpha, depthtest, duration);
 		line(origin - right, origin + right, var_7a8ab5a2, alpha, depthtest, duration);
-		line(origin - up, origin + up, var_b2d5a637, alpha, depthtest, duration);
+		line(origin - up, origin + up, colb, alpha, depthtest, duration);
 	#/
 }
 

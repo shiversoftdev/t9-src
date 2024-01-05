@@ -1,14 +1,14 @@
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\vehicle_ai_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\sound_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace vehicle_death;
 
@@ -52,7 +52,7 @@ event private function_e0a8e4ba(struct)
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: vehicle_death
 	Checksum: 0x46FDB271
 	Offset: 0x4E0
@@ -60,7 +60,7 @@ event private function_e0a8e4ba(struct)
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"vehicle_death", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -394,7 +394,7 @@ function play_death_audio()
 */
 function play_spinning_plane_sound()
 {
-	if(self.vehicletype == #"hash_4043fb66689f91c8")
+	if(self.vehicletype == #"veh_dart_wz")
 	{
 		return;
 	}
@@ -2551,12 +2551,12 @@ function function_933d48a2()
 		waitresult = self waittill(#"veh_predictedcollision");
 		if(isdefined(waitresult.target))
 		{
-			var_e2031bd1 = waitresult.target;
-			if(!vehicle::is_corpse(var_e2031bd1) || is_true(var_e2031bd1.var_3acf1c07))
+			vehiclecorpse = waitresult.target;
+			if(!vehicle::is_corpse(vehiclecorpse) || is_true(vehiclecorpse.var_3acf1c07))
 			{
 				continue;
 			}
-			if(!isdefined(var_e2031bd1.settings) || !is_true(var_e2031bd1.settings.var_3a42a4d9))
+			if(!isdefined(vehiclecorpse.settings) || !is_true(vehiclecorpse.settings.var_3a42a4d9))
 			{
 				continue;
 			}
@@ -2566,10 +2566,10 @@ function function_933d48a2()
 			{
 				continue;
 			}
-			var_e2031bd1.var_3acf1c07 = 1;
-			var_e2031bd1 corpse_explode_fx();
-			var_e2031bd1 vehicle::do_death_dynents();
-			var_e2031bd1 deletewhensafe();
+			vehiclecorpse.var_3acf1c07 = 1;
+			vehiclecorpse corpse_explode_fx();
+			vehiclecorpse vehicle::do_death_dynents();
+			vehiclecorpse deletewhensafe();
 		}
 	}
 }

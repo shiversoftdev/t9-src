@@ -342,7 +342,7 @@ class cscriptbundlebase
 */
 function private autoexec function_43d00a91()
 {
-	level notify(1000517497);
+	level notify(-1000517497);
 }
 
 #namespace scriptbundle;

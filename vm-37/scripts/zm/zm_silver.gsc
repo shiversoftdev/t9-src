@@ -1,48 +1,48 @@
-#using script_14f4a3c583c77d4b;
-#using script_3411bb48d41bd3b;
-#using script_3b5e488c4d278da3;
-#using script_3cebb48c37fc271;
-#using script_3cf7932e9702e270;
-#using script_3e57cc1a9084fdd6;
-#using script_432a18be09b697bd;
-#using script_4ce5d94e8c797350;
-#using script_4cf51a28ef39b750;
-#using script_4d1e366b77f0b4b;
-#using script_5882f53c3e1f693f;
-#using script_58c342edd81589fb;
-#using script_72596c919cdba3f7;
-#using script_7b1cd3908a825fdd;
-#using script_ab862743b3070a;
-#using script_ab890501c40b73c;
-#using script_b9d273dc917ee1f;
 #using script_c08f3519167b630;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\compass.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\load_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scriptmodels_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
+#using scripts\zm\zm_silver_sound.gsc;
+#using script_3cf7932e9702e270;
+#using scripts\zm\zm_silver_util.gsc;
+#using scripts\zm\zm_silver_zones.gsc;
+#using scripts\zm\zm_silver_ww_quest.gsc;
+#using scripts\zm\zm_silver_pap_quest.gsc;
+#using script_432a18be09b697bd;
+#using scripts\zm\zm_silver_main_quest.gsc;
+#using script_5882f53c3e1f693f;
+#using script_4cf51a28ef39b750;
+#using script_3e57cc1a9084fdd6;
+#using script_3b5e488c4d278da3;
+#using scripts\zm_common\zm_magicbox.gsc;
+#using script_7b1cd3908a825fdd;
+#using script_3411bb48d41bd3b;
+#using scripts\zm_common\zm_devgui.gsc;
+#using script_4ce5d94e8c797350;
+#using script_4d1e366b77f0b4b;
+#using script_ab862743b3070a;
+#using scripts\zm_common\callbacks.gsc;
+#using script_b9d273dc917ee1f;
+#using script_72596c919cdba3f7;
+#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_round_spawning.gsc;
+#using scripts\zm_common\zm_perks.gsc;
+#using scripts\zm_common\zm_loadout.gsc;
+#using scripts\zm_common\zm_fasttravel.gsc;
+#using scripts\zm_common\zm_contracts.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using scripts\zm_common\zm.gsc;
 #using scripts\core_common\struct.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\zm\zm_silver_main_quest.gsc;
-#using scripts\zm\zm_silver_pap_quest.gsc;
-#using scripts\zm\zm_silver_sound.gsc;
-#using scripts\zm\zm_silver_util.gsc;
-#using scripts\zm\zm_silver_ww_quest.gsc;
-#using scripts\zm\zm_silver_zones.gsc;
-#using scripts\zm_common\callbacks.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_magicbox.gsc;
-#using scripts\zm_common\zm_perks.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scriptmodels_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\compass.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_ee0fc845;
 
@@ -69,7 +69,7 @@ function autoexec opt_in()
 	namespace_4abf1500::function_88645994(#"hash_1650c04a5db4ba64", #"hash_69f1546764fcc948", #"hash_44becc3958fa81a2", #"hash_549a6693186d47cc", #"hash_3c7bf14c75b291f9", #"hash_4eadf87f04308190", #"hash_7676acc36353a1ae", #"hash_14226a503acda919", #"hash_54455979b64faab");
 	setdvar(#"player_shallowwaterwadescale", 1);
 	setdvar(#"player_waistwaterwadescale", 1);
-	setdvar(#"hash_70d60913dea5aadd", 1);
+	setdvar(#"player_deepwaterwadescale", 1);
 }
 
 /*
@@ -98,7 +98,7 @@ event main(eventstruct)
 	level.var_aaf7505f = 90;
 	level.var_baed3b8e = 1750;
 	level.var_ac94c2b8 = 2;
-	clientfield::function_a8bbc967("player_lives", 1, 2, "int");
+	clientfield::register_clientuimodel("player_lives", 1, 2, "int");
 	clientfield::register("world", "" + #"hash_5e38b0496d9664bb", 1, 3, "int");
 	clientfield::register("world", "" + #"hash_2690e69916d071d9", 1, 1, "int");
 	clientfield::register("toplayer", "" + #"hash_464e0cd19b3b8c12", 1, 1, "int");
@@ -150,7 +150,7 @@ event main(eventstruct)
 	level thread function_7a15a086();
 	level thread function_85bd89cb();
 	level callback::function_74872db6(&function_74872db6);
-	level callback::function_189f87c1(&function_189f87c1);
+	level callback::on_round_end(&on_round_end);
 	level thread function_26ecdeeb();
 	level.var_bb6bf2e0 = 1;
 	namespace_591b4396::function_fa5bd408(array("zone_proto_exterior_rear2", "zone_proto_exterior_rear"));
@@ -257,7 +257,7 @@ function function_4b29f610()
 */
 function function_77dff008()
 {
-	self contracts::function_5b88297d(#"hash_52d7aad059ba306a");
+	self contracts::increment_zm_contract(#"hash_52d7aad059ba306a");
 }
 
 /*
@@ -346,7 +346,7 @@ function function_ddc13fd6()
 	#/
 	s_spot = array::random(a_s_spots);
 	var_bf65599c = (isdefined(s_spot.script_int) ? s_spot.script_int : 1);
-	var_3a615dd8 = [];
+	a_sp_zombies = [];
 	var_7f5d141a = [];
 	foreach(sp_zombie in level.zombie_spawners)
 	{
@@ -365,22 +365,22 @@ function function_ddc13fd6()
 		}
 		if(isdefined(sp_zombie.script_int) && sp_zombie.script_int == var_bf65599c)
 		{
-			if(!isdefined(var_3a615dd8))
+			if(!isdefined(a_sp_zombies))
 			{
-				var_3a615dd8 = [];
+				a_sp_zombies = [];
 			}
-			else if(!isarray(var_3a615dd8))
+			else if(!isarray(a_sp_zombies))
 			{
-				var_3a615dd8 = array(var_3a615dd8);
+				a_sp_zombies = array(a_sp_zombies);
 			}
-			var_3a615dd8[var_3a615dd8.size] = sp_zombie;
+			a_sp_zombies[a_sp_zombies.size] = sp_zombie;
 		}
 	}
 	if(level.round_number >= 20 && var_7f5d141a.size > 0)
 	{
-		return (randomintrange(0, 100) < 5 ? array::random(var_7f5d141a) : (var_3a615dd8.size > 0 ? array::random(var_3a615dd8) : level.zombie_spawners[0]));
+		return (randomintrange(0, 100) < 5 ? array::random(var_7f5d141a) : (a_sp_zombies.size > 0 ? array::random(a_sp_zombies) : level.zombie_spawners[0]));
 	}
-	return (var_3a615dd8.size > 0 ? array::random(var_3a615dd8) : level.zombie_spawners[0]);
+	return (a_sp_zombies.size > 0 ? array::random(a_sp_zombies) : level.zombie_spawners[0]);
 }
 
 /*
@@ -575,10 +575,10 @@ function private function_360fb84d()
 	var_d1ae80e1 = undefined;
 	while(true)
 	{
-		var_be17187b = undefined;
-		var_be17187b = level waittill(#"start_of_round", #"pap_quest_completed");
+		s_waitresult = undefined;
+		s_waitresult = level waittill(#"start_of_round", #"pap_quest_completed");
 		n_players = zm_utility::function_a2541519(getplayers().size);
-		if(!namespace_c3287616::function_fab464c4(level.round_number) && (n_players == 1 && level.round_number >= 15 || (n_players > 1 && level.round_number >= 13) || (isdefined(var_d1ae80e1) && level.round_number >= var_d1ae80e1)))
+		if(!zm_round_spawning::function_fab464c4(level.round_number) && (n_players == 1 && level.round_number >= 15 || (n_players > 1 && level.round_number >= 13) || (isdefined(var_d1ae80e1) && level.round_number >= var_d1ae80e1)))
 		{
 			function_a95110c(level.round_number);
 			return;
@@ -602,7 +602,7 @@ function private function_360fb84d()
 function private function_a95110c(n_round)
 {
 	level.var_ad49daf9 = n_round;
-	namespace_c3287616::function_cc103b38(#"hash_7c0d83ac1e845ac2", level.var_ad49daf9);
+	zm_round_spawning::function_cc103b38(#"hash_7c0d83ac1e845ac2", level.var_ad49daf9);
 	level.var_2a8acd42 = &function_55b0a71e;
 	level flag::set(#"hash_6d4b62fdfe880888");
 }
@@ -668,7 +668,7 @@ function function_74872db6()
 }
 
 /*
-	Name: function_189f87c1
+	Name: on_round_end
 	Namespace: namespace_ee0fc845
 	Checksum: 0x80F724D1
 	Offset: 0x2B38
@@ -676,7 +676,7 @@ function function_74872db6()
 	Parameters: 0
 	Flags: Linked
 */
-function function_189f87c1()
+function on_round_end()
 {
 }
 
@@ -839,9 +839,9 @@ function function_3ada378c()
 	level.var_3161430e = level.round_number;
 	level.var_539f36cd = &function_cd3a65e0;
 	level.dog_round_track_override = &dog_round_tracker;
-	namespace_c402654::function_aec3446d(0);
+	zombie_dog_util::dog_enable_rounds(0);
 	level flag::wait_till(#"hash_3b2ee17e5ce02f9e");
-	namespace_c3287616::function_d36196b1(level.next_dog_round);
+	zm_round_spawning::function_d36196b1(level.next_dog_round);
 }
 
 /*
@@ -857,12 +857,12 @@ function dog_round_tracker(var_634c65f0)
 {
 	level.dog_round_count = 1;
 	level.next_dog_round = (level.round_number <= 5 ? 6 : level.round_number + 1);
-	namespace_c3287616::function_376e51ef(#"zombie_dog", int(max(12, level.next_dog_round + 1)));
-	namespace_c3287616::function_b4a8f95a(#"zombie_dog", level.next_dog_round, &namespace_c402654::dog_round_start, &namespace_c402654::dog_round_stop, &namespace_c402654::function_dd162858, &waiting_for_next_dog_spawn, level.var_dc50acfa);
+	zm_round_spawning::function_376e51ef(#"zombie_dog", int(max(12, level.next_dog_round + 1)));
+	zm_round_spawning::function_b4a8f95a(#"zombie_dog", level.next_dog_round, &zombie_dog_util::dog_round_start, &zombie_dog_util::dog_round_stop, &zombie_dog_util::function_dd162858, &waiting_for_next_dog_spawn, level.var_dc50acfa);
 	spawner::function_89a2cd87(#"zombie_dog", &namespace_85745671::function_2089690e);
-	namespace_c3287616::function_df803678(&namespace_c402654::function_ed67c5e7);
+	zm_round_spawning::function_df803678(&zombie_dog_util::function_ed67c5e7);
 	/#
-		level thread namespace_c402654::function_de0a6ae4();
+		level thread zombie_dog_util::function_de0a6ae4();
 	#/
 }
 
@@ -1184,7 +1184,7 @@ function waiting_for_next_dog_spawn(count, max)
 */
 function function_a6101b7()
 {
-	if(util::function_5df4294() == #"zclassic" || (!is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) && getdvarint(#"hash_40bd34b35079cf2e", 0) === 0))
+	if(util::get_game_type() == #"zclassic" || (!is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) && getdvarint(#"hash_40bd34b35079cf2e", 0) === 0))
 	{
 		hidemiscmodels("xmas_decorations");
 		array::delete_all(getentarray("xmas_decorations", "targetname"));

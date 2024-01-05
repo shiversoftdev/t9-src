@@ -1,11 +1,11 @@
+#using scripts\core_common\ai\archetype_utility.gsc;
 #using script_42e8ee8721f5e6ef;
-#using script_6809bf766eba194a;
-#using script_68d2ee1489345a1d;
 #using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace battlechatter;
 
@@ -20,11 +20,11 @@
 */
 function private autoexec function_9a26b072()
 {
-	level notify(1421587594);
+	level notify(-1421587594);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: battlechatter
 	Checksum: 0xC75CA4E
 	Offset: 0x350
@@ -32,7 +32,7 @@ function private autoexec function_9a26b072()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2c8719a97b3c90fa", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -512,7 +512,7 @@ function function_4e7b6f6d(category, type, modifier)
 	{
 		delay = namespace_bec1e8ca::function_2d2570e3(category, type, modifier);
 		key = modifier;
-		if(!function_7a600918(modifier))
+		if(!ishash(modifier))
 		{
 			key = (((("" + category) + "_") + type) + "_") + modifier;
 		}
@@ -555,7 +555,7 @@ event function_edd0c161(eventstruct)
 	}
 	grenade = eventstruct.projectile;
 	weapon = eventstruct.weapon;
-	if(weapon.name == #"hash_34b7eb9fde56bd35" || weapon.name == #"frag_grenade" || weapon.name == #"hash_15ed0347f1459a04")
+	if(weapon.name == #"eq_frag_grenade" || weapon.name == #"frag_grenade" || weapon.name == #"hash_15ed0347f1459a04")
 	{
 		self thread bc_ainotifyconvert("grenadetoss");
 		level thread bc_incominggrenadewatcher(self, grenade, "grenadeincoming");

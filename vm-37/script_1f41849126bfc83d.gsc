@@ -1,13 +1,13 @@
-#using script_152c3f4ffef9e588;
-#using script_c8d806d2487b617;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using script_c8d806d2487b617;
+#using script_152c3f4ffef9e588;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_6615ea91;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6615ea91
 	Checksum: 0x2AF7D4E2
 	Offset: 0x128
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_53f69893eea352cb", &function_70a657d8, undefined, undefined, #"radiation");
 }
@@ -35,15 +35,15 @@ function private function_70a657d8()
 	{
 		return;
 	}
-	callback::on_spawned(&function_e4a4b07b);
-	clientfield::function_a8bbc967("hudItems.incursion.radiationDamage", 1, 5, "float");
-	clientfield::function_a8bbc967("hudItems.incursion.radiationProtection", 1, 5, "float");
-	clientfield::function_a8bbc967("hudItems.incursion.radiationHealth", 1, 5, "float");
+	callback::on_spawned(&_on_player_spawned);
+	clientfield::register_clientuimodel("hudItems.incursion.radiationDamage", 1, 5, "float");
+	clientfield::register_clientuimodel("hudItems.incursion.radiationProtection", 1, 5, "float");
+	clientfield::register_clientuimodel("hudItems.incursion.radiationHealth", 1, 5, "float");
 	clientfield::register("toplayer", "radiation", 1, 10, "int");
 }
 
 /*
-	Name: function_e4a4b07b
+	Name: _on_player_spawned
 	Namespace: namespace_6615ea91
 	Checksum: 0xDC151D09
 	Offset: 0x268
@@ -51,7 +51,7 @@ function private function_70a657d8()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_e4a4b07b()
+function private _on_player_spawned()
 {
 	if(!namespace_956bd4dd::function_ab99e60c())
 	{

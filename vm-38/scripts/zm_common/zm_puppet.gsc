@@ -1,5 +1,5 @@
-#using scripts\zm_common\zm_spawner.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
 
 #namespace zm_puppet;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_2946765e()
 {
-	level notify(107431548);
+	level notify(-107431548);
 }
 
 /*

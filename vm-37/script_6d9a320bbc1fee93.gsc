@@ -1,7 +1,7 @@
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\footsteps_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\footsteps_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_2e61cc4b;
 
@@ -39,7 +39,7 @@ function init()
 */
 function private function_4c731a08(localclientnum)
 {
-	self function_bf9d3071("rob_zm_eyes_red");
+	self playrenderoverridebundle("rob_zm_eyes_red");
 }
 
 /*
@@ -55,17 +55,17 @@ function function_624041b1(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwastimejump == 1)
 	{
-		self.var_d62cdc72 = util::playfxontag(fieldname, "maps/zm_towers/fx8_boss_eye_glow", self, "tag_eye");
+		self.eyefx = util::playfxontag(fieldname, "maps/zm_towers/fx8_boss_eye_glow", self, "tag_eye");
 	}
 	else
 	{
 		if(bwastimejump == 2)
 		{
-			self.var_d62cdc72 = util::playfxontag(fieldname, "maps/zm_towers/fx8_boss_eye_glow_alt", self, "tag_eye");
+			self.eyefx = util::playfxontag(fieldname, "maps/zm_towers/fx8_boss_eye_glow_alt", self, "tag_eye");
 		}
-		else if(isdefined(self.var_d62cdc72))
+		else if(isdefined(self.eyefx))
 		{
-			stopfx(fieldname, self.var_d62cdc72);
+			stopfx(fieldname, self.eyefx);
 		}
 	}
 }
@@ -83,12 +83,12 @@ function function_e1fb79d0(var_99c2529a, oldval, newval, bnewent, binitialsnap, 
 {
 	if(bwastimejump == 1)
 	{
-		self function_5d482e78("rob_zm_eyes_red");
-		self function_bf9d3071(#"hash_782edffb9e72130");
+		self stoprenderoverridebundle("rob_zm_eyes_red");
+		self playrenderoverridebundle(#"hash_782edffb9e72130");
 	}
 	else
 	{
-		self function_5d482e78(#"hash_782edffb9e72130");
+		self stoprenderoverridebundle(#"hash_782edffb9e72130");
 	}
 }
 

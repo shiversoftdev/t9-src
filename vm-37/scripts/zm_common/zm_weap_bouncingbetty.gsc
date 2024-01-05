@@ -1,16 +1,16 @@
-#using script_4c50b35ef5f6d7ae;
-#using script_8988fdbc78d6c53;
+#using scripts\zm_common\zm_placeable_mine.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\weapons\bouncingbetty.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm_placeable_mine.gsc;
 
 #namespace bouncingbetty;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: bouncingbetty
 	Checksum: 0x4F8F9EA8
 	Offset: 0xB8
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"bouncingbetty", &function_70a657d8, undefined, undefined, undefined);
 }

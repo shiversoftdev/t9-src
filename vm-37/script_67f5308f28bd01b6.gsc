@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_4868ccea : class_6aaccc24
+class class_4868ccea : cluielem
 {
 
 	/*
@@ -40,7 +40,7 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
@@ -54,7 +54,7 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function function_1ae2ab1b(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "wavesText", value);
+		[[ self ]]->set_data(localclientnum, "wavesText", value);
 	}
 
 	/*
@@ -68,11 +68,11 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function function_32a88912(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "zkillsText", value);
+		[[ self ]]->set_data(localclientnum, "zkillsText", value);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_4868ccea
 		Checksum: 0xAD2A5848
 		Offset: 0x4B0
@@ -80,9 +80,9 @@ class class_4868ccea : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_gamemode_onslaught_endscore_msg");
+		cluielem::register_clientside("mp_gamemode_onslaught_endscore_msg");
 	}
 
 	/*
@@ -96,7 +96,7 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function function_5ef55261(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "eliteKillsText", value);
+		[[ self ]]->set_data(localclientnum, "eliteKillsText", value);
 	}
 
 	/*
@@ -110,10 +110,10 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function setup_clientfields(var_17be0970, var_5e297271, var_96a56852)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_endscore_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "wavesText", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "eliteKillsText", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "zkillsText", 1);
+		cluielem::setup_clientfields("mp_gamemode_onslaught_endscore_msg");
+		cluielem::function_dcb34c80("string", "wavesText", 1);
+		cluielem::function_dcb34c80("string", "eliteKillsText", 1);
+		cluielem::function_dcb34c80("string", "zkillsText", 1);
 	}
 
 	/*
@@ -127,10 +127,10 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "wavesText", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "eliteKillsText", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "zkillsText", #"");
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "wavesText", #"");
+		[[ self ]]->set_data(localclientnum, "eliteKillsText", #"");
+		[[ self ]]->set_data(localclientnum, "zkillsText", #"");
 	}
 
 }
@@ -170,7 +170,7 @@ function register(var_17be0970, var_5e297271, var_96a56852)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_gamemode_onslaught_endscore_msg
 	Checksum: 0x6957223A
 	Offset: 0x290
@@ -178,10 +178,10 @@ function register(var_17be0970, var_5e297271, var_96a56852)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_4868ccea();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

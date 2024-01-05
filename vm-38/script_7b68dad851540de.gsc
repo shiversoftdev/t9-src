@@ -1,14 +1,14 @@
-#using script_6809bf766eba194a;
-#using script_68d08b784c92da95;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_68d08b784c92da95;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace smart_object;
 
@@ -27,7 +27,7 @@ function private autoexec function_fe850bdd()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: smart_object
 	Checksum: 0xAE139212
 	Offset: 0x208
@@ -35,7 +35,7 @@ function private autoexec function_fe850bdd()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"smart_object", &function_70a657d8, undefined, undefined, #"scene");
 }
@@ -452,7 +452,7 @@ function private function_8b855873(&shots, ai, var_ee9cbc26)
 	{
 		result = undefined;
 		result = ai waittill(#"alert", #"death", #"damage");
-		self thread function_ca2d3925(shots, ai, var_ee9cbc26, result);
+		self childthread function_ca2d3925(shots, ai, var_ee9cbc26, result);
 	}
 }
 
@@ -846,7 +846,7 @@ function function_b69b2de4(obj)
 	{
 		return false;
 	}
-	if(!isstring(obj.scriptbundlename) && !function_7a600918(obj.scriptbundlename))
+	if(!isstring(obj.scriptbundlename) && !ishash(obj.scriptbundlename))
 	{
 		return false;
 	}
@@ -1395,7 +1395,7 @@ function private function_23eef632()
 			foreach(obj in level.smartobjectpoints)
 			{
 				scriptbundlename = obj.scriptbundlename;
-				if(function_7a600918(scriptbundlename))
+				if(ishash(scriptbundlename))
 				{
 					scriptbundlename = function_9e72a96(scriptbundlename);
 				}
@@ -1451,7 +1451,7 @@ function private function_ed7733c7()
 			foreach(obj in level.var_49430738)
 			{
 				scriptbundlename = obj.scriptbundlename;
-				if(function_7a600918(scriptbundlename))
+				if(ishash(scriptbundlename))
 				{
 					scriptbundlename = function_9e72a96(scriptbundlename);
 				}

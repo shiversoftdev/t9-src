@@ -1,8 +1,8 @@
 #using script_43ca6411ae7bac76;
-#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\scene_shared.gsc;
 #using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace dialogue;
 
@@ -77,7 +77,7 @@ function function_47b06180()
 		return;
 	}
 	self util::function_f78e220a();
-	self notify(#"hash_5d02e24cebf138cb");
+	self notify(#"cancel speaking");
 }
 
 /*

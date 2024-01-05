@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace globallogic_tickets;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_98e6ab48()
 {
-	level notify(519540818);
+	level notify(-519540818);
 }
 
 #namespace tickets;

@@ -1,7 +1,7 @@
-#using script_340a2e805e35f7a2;
 #using script_471b31bd963b388e;
-#using scripts\core_common\callbacks_shared.gsc;
+#using script_340a2e805e35f7a2;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_1d9375fc;
 
@@ -32,7 +32,7 @@ function private autoexec function_811574eb()
 */
 function setup(var_582cb7bb)
 {
-	if(!namespace_ad5a0cd6::use_item_spawns())
+	if(!item_world_util::use_item_spawns())
 	{
 		return;
 	}

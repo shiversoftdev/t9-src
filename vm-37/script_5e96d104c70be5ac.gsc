@@ -1,19 +1,19 @@
-#using script_18f0d22c75b141a7;
-#using script_1c65dbfc2f1c8d8f;
-#using script_1caf36ff04a85ff6;
-#using script_3f27a7b2232674db;
-#using script_7a8059ca02b7b09e;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using script_1caf36ff04a85ff6;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_8d0ae0b4;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_8d0ae0b4
 	Checksum: 0xDBC8B021
 	Offset: 0xE0
@@ -21,7 +21,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3c80acaf1d791b8c", &function_70a657d8, undefined, undefined, #"hash_53528dbbf6cd15c4");
 }
@@ -40,15 +40,15 @@ function private function_70a657d8()
 	telemetry::function_98df8818(#"hash_44873692d238cf3b", &function_3f08a12b);
 	telemetry::function_98df8818(#"hash_4481df211c9d18aa", &function_3b4b8944);
 	telemetry::function_98df8818(#"hash_27cccc0731de1722", &function_1f5722ec);
-	callback::function_7897dfe6(&function_7897dfe6);
-	callback::function_10a4dd0a(&function_10a4dd0a);
+	callback::on_item_drop(&on_item_drop);
+	callback::on_item_pickup(&on_item_pickup);
 	callback::on_spawned(&on_player_spawned);
-	telemetry::add_callback(#"hash_361e06db4b210e", &function_72c32279);
+	telemetry::add_callback(#"on_game_playing", &function_72c32279);
 	telemetry::add_callback(#"hash_3ca80e35288a78d0", &function_d519e318);
 	telemetry::add_callback(#"on_player_connect", &on_player_connect);
 	telemetry::add_callback(#"on_player_disconnect", &on_player_disconnect);
-	telemetry::add_callback(#"hash_193ded5c8932fe29", &function_189f87c1);
-	telemetry::add_callback(#"hash_5118a91e667446ee", &function_189f87c1);
+	telemetry::add_callback(#"on_round_end", &on_round_end);
+	telemetry::add_callback(#"hash_5118a91e667446ee", &on_round_end);
 }
 
 /*
@@ -69,7 +69,7 @@ function function_72c32279()
 	}
 	/#
 		println("" + getutc());
-		println("" + util::function_53bbf9d2());
+		println("" + util::get_map_name());
 		println("" + level.gametype);
 		println("" + sessionmodeisprivateonlinegame());
 		println("" + sessionmodeissystemlink());
@@ -83,7 +83,7 @@ function function_72c32279()
 	}
 	matchstart = {};
 	matchstart.utc_start_time_s = utc;
-	matchstart.map = hash(util::function_53bbf9d2());
+	matchstart.map = hash(util::get_map_name());
 	matchstart.game_type = hash(level.gametype);
 	matchstart.var_c8019fa4 = sessionmodeisprivateonlinegame();
 	matchstart.is_offline = sessionmodeissystemlink();
@@ -119,7 +119,7 @@ function function_d519e318()
 	/#
 		println("" + function_f8d53445());
 		println("" + gettime());
-		println("" + util::function_53bbf9d2());
+		println("" + util::get_map_name());
 		println("" + level.gametype);
 		println("" + getutc());
 	#/
@@ -127,7 +127,7 @@ function function_d519e318()
 	matchend = {};
 	matchend.utc_start_time_s = 0;
 	matchend.utc_end_time_s = utc;
-	matchend.map = hash(util::function_53bbf9d2());
+	matchend.map = hash(util::get_map_name());
 	matchend.game_type = hash(level.gametype);
 	matchend.var_c8019fa4 = sessionmodeisprivateonlinegame();
 	matchend.is_offline = sessionmodeissystemlink();
@@ -175,7 +175,7 @@ function function_d519e318()
 }
 
 /*
-	Name: function_189f87c1
+	Name: on_round_end
 	Namespace: namespace_8d0ae0b4
 	Checksum: 0xED33FC4
 	Offset: 0xC10
@@ -183,7 +183,7 @@ function function_d519e318()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_189f87c1(data)
+function private on_round_end(data)
 {
 	var_a5722144 = {};
 	var_a5722144.var_29d0de09 = (isdefined(game.telemetry.var_29d0de09) ? game.telemetry.var_29d0de09 : 0);
@@ -504,7 +504,7 @@ function private function_3f08a12b(data)
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: namespace_8d0ae0b4
 	Checksum: 0xB840EBF4
 	Offset: 0x2A98
@@ -512,7 +512,7 @@ function private function_3f08a12b(data)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_10a4dd0a(params)
+function private on_item_pickup(params)
 {
 	item = params.item;
 	weapon = namespace_a0d533d1::function_2b83d3ff(item);
@@ -551,7 +551,7 @@ function private function_10a4dd0a(params)
 }
 
 /*
-	Name: function_7897dfe6
+	Name: on_item_drop
 	Namespace: namespace_8d0ae0b4
 	Checksum: 0xB43461EB
 	Offset: 0x2CE0
@@ -559,7 +559,7 @@ function private function_10a4dd0a(params)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_7897dfe6(params)
+function private on_item_drop(params)
 {
 	item = params.item;
 	weapon = namespace_a0d533d1::function_2b83d3ff(item);

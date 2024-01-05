@@ -1,17 +1,17 @@
-#using script_1417f739c5b20576;
 #using script_774302f762d76254;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
 #using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
 #using scripts\zm_common\gametypes\zm_gametype.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\globallogic\globallogic_shared.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
 
 #namespace doa;
 
@@ -26,7 +26,7 @@
 */
 function private autoexec function_ce3d9dcb()
 {
-	level notify(1635679548);
+	level notify(-1635679548);
 }
 
 /*

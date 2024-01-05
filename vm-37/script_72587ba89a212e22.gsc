@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_fbe341f : class_6aaccc24
+class cdirtybomb_usebar : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x227173FB
 		Offset: 0x3B8
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_fbe341f : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xD935AE5B
 		Offset: 0x698
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_fbe341f : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xAC1E801D
 		Offset: 0x540
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_4aa46834
-		Namespace: namespace_fbe341f
+		Name: set_activatorcount
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x4DC9E671
 		Offset: 0x660
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4aa46834(localclientnum, value)
+	function set_activatorcount(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "activatorCount", value);
+		[[ self ]]->set_data(localclientnum, "activatorCount", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_fbe341f
+		Name: register_clientside
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x7986894C
 		Offset: 0x488
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("DirtyBomb_UseBar");
+		cluielem::register_clientside("DirtyBomb_UseBar");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xEF210A9
 		Offset: 0x3D8
 		Size: 0xA4
@@ -82,15 +82,15 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function setup_clientfields(var_ec85b709, var_193163f7)
 	{
-		namespace_6aaccc24::setup_clientfields("DirtyBomb_UseBar");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("progressFrac", 1, 10, "float", var_ec85b709);
-		namespace_6aaccc24::function_da693cbe("activatorCount", 1, 3, "int", var_193163f7);
+		cluielem::setup_clientfields("DirtyBomb_UseBar");
+		cluielem::add_clientfield("_state", 1, 1, "int");
+		cluielem::add_clientfield("progressFrac", 1, 10, "float", var_ec85b709);
+		cluielem::add_clientfield("activatorCount", 1, 3, "int", var_193163f7);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xEA8A85FB
 		Offset: 0x570
 		Size: 0xAC
@@ -101,13 +101,13 @@ class class_fbe341f : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"detonating" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
@@ -121,22 +121,22 @@ class class_fbe341f : class_6aaccc24
 	}
 
 	/*
-		Name: function_f0df5702
-		Namespace: namespace_fbe341f
+		Name: set_progressfrac
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x55F00AD5
 		Offset: 0x628
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f0df5702(localclientnum, value)
+	function set_progressfrac(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "progressFrac", value);
+		[[ self ]]->set_data(localclientnum, "progressFrac", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xCC75FBC7
 		Offset: 0x4B0
 		Size: 0x84
@@ -145,10 +145,10 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "progressFrac", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "activatorCount", 0);
+		[[ self ]]->set_data(localclientnum, "progressFrac", 0);
+		[[ self ]]->set_data(localclientnum, "activatorCount", 0);
 	}
 
 }
@@ -166,7 +166,7 @@ class class_fbe341f : class_6aaccc24
 */
 function register(var_ec85b709, var_193163f7)
 {
-	elem = new class_fbe341f();
+	elem = new cdirtybomb_usebar();
 	[[ elem ]]->setup_clientfields(var_ec85b709, var_193163f7);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -188,7 +188,7 @@ function register(var_ec85b709, var_193163f7)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: dirtybomb_usebar
 	Checksum: 0x5434FCF0
 	Offset: 0x270
@@ -196,10 +196,10 @@ function register(var_ec85b709, var_193163f7)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_fbe341f();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cdirtybomb_usebar();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -260,7 +260,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_f0df5702
+	Name: set_progressfrac
 	Namespace: dirtybomb_usebar
 	Checksum: 0x765AD5E9
 	Offset: 0x358
@@ -268,13 +268,13 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_f0df5702(localclientnum, value)
+function set_progressfrac(localclientnum, value)
 {
-	[[ self ]]->function_f0df5702(localclientnum, value);
+	[[ self ]]->set_progressfrac(localclientnum, value);
 }
 
 /*
-	Name: function_4aa46834
+	Name: set_activatorcount
 	Namespace: dirtybomb_usebar
 	Checksum: 0xC777A7A2
 	Offset: 0x388
@@ -282,8 +282,8 @@ function function_f0df5702(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4aa46834(localclientnum, value)
+function set_activatorcount(localclientnum, value)
 {
-	[[ self ]]->function_4aa46834(localclientnum, value);
+	[[ self ]]->set_activatorcount(localclientnum, value);
 }
 

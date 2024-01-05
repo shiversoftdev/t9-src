@@ -1,9 +1,9 @@
 #using script_113dd7f0ea2a1d4f;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_score.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_7eea54d0;
 
@@ -19,7 +19,7 @@
 function init()
 {
 	callback::on_connect(&on_player_connect);
-	callback::function_10a4dd0a(&function_10a4dd0a);
+	callback::on_item_pickup(&on_item_pickup);
 	callback::on_ai_damage(&on_ai_damage);
 	callback::on_ai_killed(&on_ai_killed);
 }
@@ -39,7 +39,7 @@ function on_player_connect()
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: namespace_7eea54d0
 	Checksum: 0x81B4B28A
 	Offset: 0x138
@@ -47,7 +47,7 @@ function on_player_connect()
 	Parameters: 1
 	Flags: None
 */
-function function_10a4dd0a(s_params)
+function on_item_pickup(s_params)
 {
 	var_a6762160 = s_params.item.var_a6762160;
 	if(var_a6762160.itemtype === #"hash_910bf9605abbcea")

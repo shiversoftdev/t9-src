@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_bc79c0e8 : class_6aaccc24
+class cprototype_self_revive : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_bc79c0e8
+		Namespace: cprototype_self_revive
 		Checksum: 0x7C638A2B
 		Offset: 0x2E0
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_bc79c0e8 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_bc79c0e8
+		Namespace: cprototype_self_revive
 		Checksum: 0xCE97CD0C
 		Offset: 0x3B0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_bc79c0e8 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_bc79c0e8
+		Namespace: cprototype_self_revive
 		Checksum: 0x6078E44F
 		Offset: 0x380
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_bc79c0e8 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_bc79c0e8
+		Name: register_clientside
+		Namespace: cprototype_self_revive
 		Checksum: 0xAD290318
 		Offset: 0x328
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("prototype_self_revive");
+		cluielem::register_clientside("prototype_self_revive");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_bc79c0e8
+		Namespace: cprototype_self_revive
 		Checksum: 0x2D544A0F
 		Offset: 0x300
 		Size: 0x1C
@@ -68,12 +68,12 @@ class class_bc79c0e8 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("prototype_self_revive");
+		cluielem::setup_clientfields("prototype_self_revive");
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_bc79c0e8
+		Namespace: cprototype_self_revive
 		Checksum: 0xA9F94B3B
 		Offset: 0x350
 		Size: 0x24
@@ -82,7 +82,7 @@ class class_bc79c0e8 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -100,7 +100,7 @@ class class_bc79c0e8 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_bc79c0e8();
+	elem = new cprototype_self_revive();
 	[[ elem ]]->setup_clientfields();
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -122,7 +122,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: prototype_self_revive
 	Checksum: 0x610D8CE3
 	Offset: 0x228
@@ -130,10 +130,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_bc79c0e8();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cprototype_self_revive();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

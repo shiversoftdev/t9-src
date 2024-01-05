@@ -1,10 +1,10 @@
 #using script_65fbfb5ecb1f899e;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\load_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 #using scripts\cp_common\util.csc;
+#using scripts\core_common\load_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace dialog_tree;
 
@@ -19,11 +19,11 @@
 */
 function private autoexec function_5e86a59c()
 {
-	level notify(1473202208);
+	level notify(-1473202208);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: dialog_tree
 	Checksum: 0x62FFB14B
 	Offset: 0x128
@@ -31,7 +31,7 @@ function private autoexec function_5e86a59c()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("dialog_tree", &function_70a657d8, undefined, undefined, undefined);
 }

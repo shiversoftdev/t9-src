@@ -1,21 +1,21 @@
-#using script_3728b3b9606c4299;
-#using script_383a3b1bb18ba876;
+#using scripts\weapons\heatseekingmissile.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
 #using script_4721de209091b1a6;
-#using script_47fb62300ac0bd60;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\killcam_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\killcam_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace jetfighter;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: jetfighter
 	Checksum: 0x8AC7BAD
 	Offset: 0x2A0
@@ -23,7 +23,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"jetfighter", &function_70a657d8, undefined, undefined, #"killstreaks");
 }
@@ -39,7 +39,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	killstreaks::function_e4ef8390("killstreak_jetfighter", &usekillstreak);
+	killstreaks::register_killstreak("killstreak_jetfighter", &usekillstreak);
 	killstreakrules::function_feb4595f("jetfighter", &function_a0624137);
 	clientfield::register("scriptmover", "jetfighter_contrail", 1, 1, "int");
 	scene::add_scene_func(#"p9_fxanim_mp_jetfighter_bundle", &function_c3c5d5e1, "play");
@@ -223,7 +223,7 @@ function private function_4b3b25af(killstreak_id)
 function private function_6ff76fc6()
 {
 	height = (killstreaks::function_43f4782d() + 4000) + (randomfloatrange(-200, 200));
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		height = height + self.origin[2];
 	}
@@ -260,7 +260,7 @@ function private function_8f304847(var_d44b8c3e, startangles)
 {
 	startforward = anglestoforward(startangles);
 	startforward = (startforward[0], startforward[1], 0);
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		var_51cabd75 = 180 / 30;
 		var_ddd8ddab = (20000 * 2.5) / (3 - 1);
@@ -349,7 +349,7 @@ function private function_ce402c10(bundle, team, var_d44b8c3e)
 			{
 				if(util::function_fbce7263(streak.team, team))
 				{
-					if(function_f99d2668() && distance2dsquared(var_d44b8c3e, streak.origin) > var_85014cc6)
+					if(sessionmodeiswarzonegame() && distance2dsquared(var_d44b8c3e, streak.origin) > var_85014cc6)
 					{
 						continue;
 					}
@@ -399,7 +399,7 @@ function private function_a0624137(var_be96ce4e)
 			{
 				if(util::function_fbce7263(streak.team, self.team))
 				{
-					if(function_f99d2668() && distance2dsquared(self.origin, streak.origin) > var_85014cc6)
+					if(sessionmodeiswarzonegame() && distance2dsquared(self.origin, streak.origin) > var_85014cc6)
 					{
 						continue;
 					}

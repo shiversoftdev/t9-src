@@ -1,11 +1,11 @@
-#using script_4e53735256f112ac;
-#using script_d67878983e3d7c;
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using script_d67878983e3d7c;
+#using script_4e53735256f112ac;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\beam_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_9111e6ab;
 
@@ -20,11 +20,11 @@
 */
 function private autoexec function_19fa9c12()
 {
-	level notify(1317792240);
+	level notify(-1317792240);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9111e6ab
 	Checksum: 0x8EC15BF2
 	Offset: 0x170
@@ -32,7 +32,7 @@ function private autoexec function_19fa9c12()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6c156e681484d01a", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }
@@ -115,13 +115,13 @@ function function_1e0fa475(localclientnum, oldval, newval, bnewent, binitialsnap
 		if(is_true(self.var_23fa23a9))
 		{
 			a_players = getplayers(fieldname, self.team, self.origin, 400);
-			foreach(var_12a907ec in a_players)
+			foreach(player_source in a_players)
 			{
-				if(var_12a907ec === self)
+				if(player_source === self)
 				{
 					continue;
 				}
-				if(is_true(var_12a907ec.var_60b31640))
+				if(is_true(player_source.var_60b31640))
 				{
 					if(zm_utility::function_f8796df3(fieldname))
 					{
@@ -135,7 +135,7 @@ function function_1e0fa475(localclientnum, oldval, newval, bnewent, binitialsnap
 						var_606b3e1 = self gettagorigin("j_spineupper");
 						var_a31b967a = self gettagangles("j_spineupper");
 					}
-					if(var_12a907ec haspart(fieldname, "j_spineupper"))
+					if(player_source haspart(fieldname, "j_spineupper"))
 					{
 						var_9d127d90 = "j_spineupper";
 					}
@@ -158,11 +158,11 @@ function function_1e0fa475(localclientnum, oldval, newval, bnewent, binitialsnap
 						if(!isdefined(self.var_ae02f041[fieldname][n_entity]))
 						{
 							self playsound(fieldname, #"hash_2924768fc653f982", self.origin + vectorscale((0, 0, 1), 75));
-							self.var_ae02f041[fieldname][n_entity] = beam::function_cfb2f62a(fieldname, self.var_a2820ebf, "tag_origin", var_12a907ec, var_9d127d90, "beam9_zm_tesla_storm");
+							self.var_ae02f041[fieldname][n_entity] = beam::function_cfb2f62a(fieldname, self.var_a2820ebf, "tag_origin", player_source, var_9d127d90, "beam9_zm_tesla_storm");
 						}
 						if(!isdefined(self.var_512656d8[fieldname][n_entity]))
 						{
-							self.var_512656d8[fieldname][n_entity] = beam::function_cfb2f62a(fieldname, self.var_a2820ebf, "tag_origin", var_12a907ec, var_9d127d90, "beam9_zm_tesla_storm_elec");
+							self.var_512656d8[fieldname][n_entity] = beam::function_cfb2f62a(fieldname, self.var_a2820ebf, "tag_origin", player_source, var_9d127d90, "beam9_zm_tesla_storm_elec");
 						}
 					}
 				}

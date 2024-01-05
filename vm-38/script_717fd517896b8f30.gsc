@@ -1,5 +1,5 @@
-#using script_27c22e1d8df4d852;
-#using script_6021ce59143452c3;
+#using scripts\zm_common\zm_trial_util.gsc;
+#using scripts\zm_common\zm_trial.gsc;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_3c6f8637;
@@ -15,28 +15,28 @@
 */
 function private autoexec function_3d77c310()
 {
-	level notify(1928583849);
+	level notify(-1928583849);
 }
 
-#namespace namespace_7b1a5a90;
+#namespace zm_trial_randomize_perks;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_7b1a5a90
+	Name: __init__system__
+	Namespace: zm_trial_randomize_perks
 	Checksum: 0xC3D448CE
 	Offset: 0x98
 	Size: 0x3C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_24dadafee669bfbe", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_7b1a5a90
+	Namespace: zm_trial_randomize_perks
 	Checksum: 0x4A993D69
 	Offset: 0xE0
 	Size: 0x5C
@@ -45,23 +45,23 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!zm_trial::function_b47f6aba())
+	if(!zm_trial::is_trial_mode())
 	{
 		return;
 	}
-	zm_trial::register_challenge(#"hash_45ef12aaa7c1d585", &function_d1de6a85, &function_9e7b3f4d);
+	zm_trial::register_challenge(#"hash_45ef12aaa7c1d585", &on_begin, &on_end);
 }
 
 /*
-	Name: function_d1de6a85
-	Namespace: namespace_7b1a5a90
+	Name: on_begin
+	Namespace: zm_trial_randomize_perks
 	Checksum: 0x4C4788AE
 	Offset: 0x148
 	Size: 0xD0
 	Parameters: 2
 	Flags: Private
 */
-function private function_d1de6a85(var_e38c7612, var_2d4ba9d4)
+function private on_begin(var_e38c7612, var_2d4ba9d4)
 {
 	self.var_e38c7612 = zm_trial::function_5769f26a(var_e38c7612);
 	self.var_2d4ba9d4 = isdefined(var_2d4ba9d4);
@@ -72,15 +72,15 @@ function private function_d1de6a85(var_e38c7612, var_2d4ba9d4)
 }
 
 /*
-	Name: function_9e7b3f4d
-	Namespace: namespace_7b1a5a90
+	Name: on_end
+	Namespace: zm_trial_randomize_perks
 	Checksum: 0x9EBF5CCE
 	Offset: 0x220
 	Size: 0x194
 	Parameters: 1
 	Flags: Private
 */
-function private function_9e7b3f4d(round_reset)
+function private on_end(round_reset)
 {
 	if(!round_reset)
 	{
@@ -100,7 +100,7 @@ function private function_9e7b3f4d(round_reset)
 				var_696c3b4[var_696c3b4.size] = player;
 			}
 			player.var_167bc422 = undefined;
-			player namespace_b22c99a5::function_f3aacffb();
+			player zm_trial_util::function_f3aacffb();
 		}
 		if(var_696c3b4.size)
 		{
@@ -119,7 +119,7 @@ function private function_9e7b3f4d(round_reset)
 
 /*
 	Name: is_active
-	Namespace: namespace_7b1a5a90
+	Namespace: zm_trial_randomize_perks
 	Checksum: 0xD4278AD9
 	Offset: 0x3C0
 	Size: 0x3A
@@ -134,7 +134,7 @@ function is_active(var_34f09024)
 
 /*
 	Name: function_e4c3443c
-	Namespace: namespace_7b1a5a90
+	Namespace: zm_trial_randomize_perks
 	Checksum: 0x55E18ABD
 	Offset: 0x408
 	Size: 0x1EE
@@ -151,12 +151,12 @@ function private function_e4c3443c(s_challenge)
 		{
 			if(!is_true(self.var_167bc422) && self.score < s_challenge.var_e38c7612)
 			{
-				self namespace_b22c99a5::function_63060af4(1);
+				self zm_trial_util::function_63060af4(1);
 				self.var_167bc422 = 1;
 			}
 			else if(is_true(self.var_167bc422) && self.score >= s_challenge.var_e38c7612)
 			{
-				self namespace_b22c99a5::function_63060af4(0);
+				self zm_trial_util::function_63060af4(0);
 				self.var_167bc422 = undefined;
 			}
 		}
@@ -164,16 +164,16 @@ function private function_e4c3443c(s_challenge)
 		{
 			if(!is_true(self.var_167bc422) && self.score >= s_challenge.var_e38c7612)
 			{
-				self namespace_b22c99a5::function_63060af4(1);
+				self zm_trial_util::function_63060af4(1);
 				self.var_167bc422 = 1;
 			}
 			else if(is_true(self.var_167bc422) && self.score < s_challenge.var_e38c7612)
 			{
-				self namespace_b22c99a5::function_63060af4(0);
+				self zm_trial_util::function_63060af4(0);
 				self.var_167bc422 = undefined;
 			}
 		}
-		self waittill(#"earned_points", #"spent_points", #"hash_733a824fa6229915");
+		self waittill(#"earned_points", #"spent_points", #"reduced_points");
 	}
 }
 

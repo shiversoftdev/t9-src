@@ -1,11 +1,11 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace zombie_eye_glow;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zombie_eye_glow
 	Checksum: 0xF58B6C4A
 	Offset: 0x198
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zombie_eye_glow", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -146,7 +146,7 @@ function good_barricade_damaged(localclientnum)
 {
 	if(isdefined(self.var_12b59dee))
 	{
-		self function_5d482e78(self.var_12b59dee, "j_head");
+		self stoprenderoverridebundle(self.var_12b59dee, "j_head");
 		self.var_12b59dee = undefined;
 	}
 	if(isdefined(self.var_3231a850))
@@ -169,7 +169,7 @@ function private function_fe127aaf(localclientnum, var_ee6bcd51, str_fx)
 {
 	if(isdefined(var_ee6bcd51))
 	{
-		self function_bf9d3071(var_ee6bcd51, "j_head");
+		self playrenderoverridebundle(var_ee6bcd51, "j_head");
 		self.var_12b59dee = var_ee6bcd51;
 	}
 	if(isdefined(str_fx))

@@ -1,35 +1,35 @@
-#using script_12282e6b2cc91b42;
-#using script_20055f2f97341caa;
-#using script_235cad39dd72e0ac;
+#using scripts\zm_common\zm_aoe.csc;
+#using scripts\weapons\zm\weaponobjects.csc;
+#using scripts\zm_common\zm_traps.csc;
+#using scripts\zm_common\zm_score.csc;
+#using scripts\zm_common\zm_magicbox.csc;
+#using scripts\zm_common\zm_customgame.csc;
+#using scripts\zm_common\zm_audio.csc;
+#using scripts\zm_common\zm.csc;
+#using scripts\zm_common\global_fx.csc;
+#using scripts\zm_common\ambient.csc;
+#using scripts\core_common\vehicles\driving_fx.csc;
 #using script_26e61ae2e1d842a9;
-#using script_30496ec6b1f696ca;
-#using script_309ce7f5a9a023de;
-#using script_3d5887fc414a86fb;
-#using script_446b64250de153ef;
-#using script_45e0fb7326469ccf;
-#using script_618d6f5ff5d18933;
-#using script_644007a8c3885fc;
-#using script_66e55245f6b76298;
-#using script_6971dbf38c33bf47;
 #using script_727042a075af51b7;
-#using script_730b372fb9c41b81;
-#using scripts\core_common\clientfaceanim_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
+#using script_30496ec6b1f696ca;
+#using script_6971dbf38c33bf47;
+#using script_309ce7f5a9a023de;
+#using script_66e55245f6b76298;
+#using script_618d6f5ff5d18933;
+#using scripts\core_common\item_inventory.csc;
+#using script_20055f2f97341caa;
+#using script_644007a8c3885fc;
+#using script_446b64250de153ef;
+#using scripts\core_common\vehicle_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\turret_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\load_shared.csc;
 #using scripts\core_common\footsteps_shared.csc;
 #using scripts\core_common\fx_shared.csc;
-#using scripts\core_common\load_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\turret_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\core_common\vehicle_shared.csc;
-#using scripts\zm_common\ambient.csc;
-#using scripts\zm_common\global_fx.csc;
-#using scripts\zm_common\zm.csc;
-#using scripts\zm_common\zm_audio.csc;
-#using scripts\zm_common\zm_magicbox.csc;
-#using scripts\zm_common\zm_score.csc;
-#using scripts\zm_common\zm_traps.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\clientfaceanim_shared.csc;
 
 #namespace load;
 
@@ -48,7 +48,7 @@ function private autoexec function_bfb937af()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: load
 	Checksum: 0x105E2130
 	Offset: 0x1B0
@@ -56,7 +56,7 @@ function private autoexec function_bfb937af()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_load", &function_aeb1baea, undefined, undefined, undefined);
 }

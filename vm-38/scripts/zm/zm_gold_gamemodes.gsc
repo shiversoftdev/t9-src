@@ -11,7 +11,7 @@
 */
 function private autoexec function_35db5705()
 {
-	level notify(788525523);
+	level notify(-788525523);
 }
 
 /*

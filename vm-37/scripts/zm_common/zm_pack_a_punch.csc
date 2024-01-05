@@ -1,21 +1,21 @@
-#using script_14d2d89964cae0b1;
-#using script_158d50d476435605;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using scripts\zm_common\zm_utility.csc;
 #using scripts\core_common\exploder_shared.csc;
+#using script_14d2d89964cae0b1;
 #using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\scene_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\activecamo_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace zm_pack_a_punch;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_pack_a_punch
 	Checksum: 0x3D8E79A6
 	Offset: 0x148
@@ -23,7 +23,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_pack_a_punch", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -75,7 +75,7 @@ function function_5c574877(params)
 */
 function on_localplayer_spawned(localclientnum)
 {
-	n_story = zm_utility::function_166646a6();
+	n_story = zm_utility::get_story();
 	if(isdefined(level.var_59d3631c))
 	{
 		forcestreamxmodel(level.var_59d3631c, 1, 0);
@@ -104,7 +104,7 @@ function on_localplayer_spawned(localclientnum)
 */
 function pap_force_stream(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	n_story = zm_utility::function_166646a6();
+	n_story = zm_utility::get_story();
 	if(bwastimejump)
 	{
 		if(isdefined(level.var_59d3631c))

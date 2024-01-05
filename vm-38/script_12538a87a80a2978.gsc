@@ -1,22 +1,22 @@
-#using script_165beea08a63a243;
-#using script_18077945bb84ede7;
-#using script_1c65dbfc2f1c8d8f;
-#using script_4108035fe400ce67;
 #using script_4ce7b4190a2fa70;
-#using script_7bacb32f8222fa3e;
 #using script_7d7ac1f663edcdc8;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using script_18077945bb84ede7;
+#using script_165beea08a63a243;
+#using script_7bacb32f8222fa3e;
+#using script_4108035fe400ce67;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
 #using script_7fc996fe8678852;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 
 #namespace namespace_cda50904;
 
@@ -35,7 +35,7 @@ function private autoexec function_805e28b2()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_cda50904
 	Checksum: 0xD0008EC3
 	Offset: 0x350
@@ -43,7 +43,7 @@ function private autoexec function_805e28b2()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_57d1b71f57332413", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
 }
@@ -73,7 +73,7 @@ function function_70a657d8()
 function finalize()
 {
 	/#
-		level thread function_2085db3b();
+		level thread init_devgui();
 	#/
 }
 
@@ -325,9 +325,9 @@ function function_39340834(struct, trigger)
 			gunindex1 = function_219cb8bb(index1);
 			gunindex2 = function_219cb8bb(index2);
 			gunindex3 = function_219cb8bb(var_d6a6fb08);
-			level.var_30197c60 sr_objective_reward_menu::function_43ba5f0e(self, gunindex1);
-			level.var_30197c60 sr_objective_reward_menu::function_2d7f3298(self, gunindex2);
-			level.var_30197c60 sr_objective_reward_menu::function_ada8b2f1(self, gunindex3);
+			level.var_30197c60 sr_objective_reward_menu::set_gunindex1(self, gunindex1);
+			level.var_30197c60 sr_objective_reward_menu::set_gunindex2(self, gunindex2);
+			level.var_30197c60 sr_objective_reward_menu::set_gunindex3(self, gunindex3);
 			level.var_30197c60 sr_objective_reward_menu::set_color(self, var_9c9943cf);
 		}
 		self thread function_80bbb50b(struct, trigger);
@@ -772,7 +772,7 @@ function function_80bbb50b(chest, trigger)
 					var_25b6fcfc = chest.var_f0f92268[playerindex][self.var_ba0ccdab];
 				}
 				gun = function_4ba8fde(var_25b6fcfc);
-				var_fa3df96 = self namespace_b376ff3f::function_e66dcff5(gun);
+				var_fa3df96 = self item_inventory::function_e66dcff5(gun);
 				self item_world::function_de2018e3(gun, self, var_fa3df96);
 				if(isdefined(self.var_524f43cb) && (isdefined(trigger.var_7fadf788) && isdefined(self.var_524f43cb[trigger.var_7fadf788])))
 				{
@@ -785,12 +785,12 @@ function function_80bbb50b(chest, trigger)
 				self function_6c71e778();
 				return;
 			}
-			level.var_30197c60 sr_objective_reward_menu::function_b94196b8(self, var_38c5c771 / 750);
+			level.var_30197c60 sr_objective_reward_menu::set_promptprogress(self, var_38c5c771 / 750);
 		}
 		else
 		{
 			var_38c5c771 = 0;
-			level.var_30197c60 sr_objective_reward_menu::function_b94196b8(self, var_38c5c771 / 750);
+			level.var_30197c60 sr_objective_reward_menu::set_promptprogress(self, var_38c5c771 / 750);
 		}
 		if(self stancebuttonpressed() || distance2d(self.origin, chest.origin) > 128 || self laststand::player_is_in_laststand() || self isinvehicle())
 		{
@@ -808,7 +808,7 @@ function function_80bbb50b(chest, trigger)
 }
 
 /*
-	Name: function_2085db3b
+	Name: init_devgui
 	Namespace: namespace_cda50904
 	Checksum: 0x866C200B
 	Offset: 0x2758
@@ -816,11 +816,11 @@ function function_80bbb50b(chest, trigger)
 	Parameters: 0
 	Flags: None
 */
-function function_2085db3b()
+function init_devgui()
 {
 	/#
 		util::waittill_can_add_debug_command();
-		util::function_e2e9d901("", "");
+		util::add_devgui("", "");
 		level thread function_578918d1();
 	#/
 }

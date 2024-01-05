@@ -13,7 +13,7 @@
 */
 function private autoexec function_31a349f4()
 {
-	level notify(1798110841);
+	level notify(-1798110841);
 }
 
 /*
@@ -48,7 +48,7 @@ function function_c30c297c(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(isdefined(self))
 	{
-		self function_bf9d3071(#"hash_1528dae63f55fcde");
+		self playrenderoverridebundle(#"hash_1528dae63f55fcde");
 		playsound(bwastimejump, #"hash_20c4f0485930af2a", self.origin + vectorscale((0, 0, 1), 35));
 	}
 }

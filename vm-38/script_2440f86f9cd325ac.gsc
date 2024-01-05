@@ -1,28 +1,28 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
 #using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ee011cd0961afd7;
 #using script_2a5bf5b4a00cee0d;
-#using script_350cffecd05ef6cf;
 #using script_40f967ad5d18ea74;
 #using script_47851dbeea22fe66;
+#using script_164a456ce05c3483;
 #using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
 #using script_5f20d3b434d24884;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 #using script_74a56359b7d02ab6;
 #using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_3ddea5d0;
 
@@ -37,7 +37,7 @@
 */
 function private autoexec function_d60a1bab()
 {
-	level notify(622341467);
+	level notify(-622341467);
 }
 
 #namespace namespace_3a8e4a3;
@@ -66,7 +66,7 @@ function function_98acc465()
 	wait(1);
 	self makesentient();
 	self.threatbias = 0;
-	namespace_ec06fe4a::function_fe0a86bb(self);
+	namespace_ec06fe4a::addpoi(self);
 	self.var_ef88bfeb = 1;
 	self waittill(#"pickup_timeout");
 	wait(1);
@@ -83,7 +83,7 @@ function function_98acc465()
 	origin = namespace_ec06fe4a::function_65ee50ba(self.origin, 10) + vectorscale((0, 0, 1), 12);
 	if(([[ prize ]]->function_5ce4fb28()) != 13)
 	{
-		prize = doa_pickups::function_d080f0db(prize, origin, undefined, 1, 1);
+		prize = doa_pickups::itemspawn(prize, origin, undefined, 1, 1);
 	}
 	else
 	{

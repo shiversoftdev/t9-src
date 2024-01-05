@@ -11,7 +11,7 @@
 */
 function private autoexec function_8bf5d945()
 {
-	level notify(1746686958);
+	level notify(-1746686958);
 }
 
 #namespace gamestate;

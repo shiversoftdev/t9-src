@@ -1,21 +1,21 @@
-#using script_1f17c601c8e8824c;
-#using script_396f7d71538c9677;
-#using script_5399f402045d7abd;
-#using script_68d2ee1489345a1d;
-#using script_6d9bde564029bdf6;
 #using script_725554a59d6a75b9;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_6d9bde564029bdf6;
+#using script_396f7d71538c9677;
+#using script_1f17c601c8e8824c;
+#using scripts\weapons\weapon_utils.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
 
 #namespace battlechatter;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: battlechatter
 	Checksum: 0x6EB74D9B
 	Offset: 0x458
@@ -23,7 +23,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"battlechatter", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -44,7 +44,7 @@ function private function_70a657d8()
 	#/
 	callback::on_spawned(&on_player_spawned);
 	callback::function_33f0ddd3(&function_33f0ddd3);
-	callback::function_98a0917d(&function_9cc82a74);
+	callback::on_game_playing(&function_9cc82a74);
 	if(is_true(level.teambased) && !isdefined(game.boostplayerspicked))
 	{
 		game.boostplayerspicked = [];
@@ -217,7 +217,7 @@ function function_5896274(waittime, dialogalias, dialogflags, dialogbuffer, enem
 function function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy)
 {
 	self endon(#"death");
-	var_c84adc7e = !function_f99d2668() || !isdefined(dialogflags) || dialogflags & 128;
+	var_c84adc7e = !sessionmodeiswarzonegame() || !isdefined(dialogflags) || dialogflags & 128;
 	if(!var_c84adc7e)
 	{
 		level endon(#"game_ended");
@@ -360,27 +360,27 @@ function stop_dialog(var_cdaf7797)
 	Parameters: 6
 	Flags: Linked
 */
-function function_9d4a3d68(var_11317dc8, var_70b80ca6, var_df336ed3, weapon, startdelay, var_44e63719)
+function function_9d4a3d68(var_11317dc8, speakingplayer, var_df336ed3, weapon, startdelay, var_44e63719)
 {
 	level endon(#"game_ended");
-	var_70b80ca6 endon(#"disconnect");
+	speakingplayer endon(#"disconnect");
 	/#
 		assert(isdefined(var_11317dc8));
 	#/
 	/#
-		assert(isplayer(var_70b80ca6));
+		assert(isplayer(speakingplayer));
 	#/
 	startdelay = (isdefined(startdelay) ? startdelay : 0);
 	var_44e63719 = (isdefined(var_44e63719) ? var_44e63719 : 4);
 	if(startdelay > 0)
 	{
 		wait(startdelay);
-		if(!isdefined(var_70b80ca6))
+		if(!isdefined(speakingplayer))
 		{
 			return;
 		}
 	}
-	var_70b80ca6 function_18aba49d(var_11317dc8, weapon, var_df336ed3);
+	speakingplayer function_18aba49d(var_11317dc8, weapon, var_df336ed3);
 	thread wait_dialog_buffer(var_44e63719);
 }
 
@@ -494,13 +494,13 @@ function function_46ac5cbb(victim)
 	Parameters: 2
 	Flags: None
 */
-function function_551980b7(var_70b80ca6, var_76787d10)
+function function_551980b7(speakingplayer, var_76787d10)
 {
 	if(!is_true(level.allowspecialistdialog) || !isdefined(var_76787d10))
 	{
 		return;
 	}
-	if(!isdefined(var_70b80ca6) || !isplayer(var_70b80ca6))
+	if(!isdefined(speakingplayer) || !isplayer(speakingplayer))
 	{
 		return;
 	}
@@ -508,7 +508,7 @@ function function_551980b7(var_70b80ca6, var_76787d10)
 	{
 		return;
 	}
-	var_daeb4f94 = function_58c93260(var_70b80ca6);
+	var_daeb4f94 = function_58c93260(speakingplayer);
 	var_2708cdb2 = function_58c93260(var_76787d10);
 	if(!isdefined(var_daeb4f94) || !isdefined(var_2708cdb2))
 	{
@@ -518,7 +518,7 @@ function function_551980b7(var_70b80ca6, var_76787d10)
 	{
 		return;
 	}
-	thread function_9d4a3d68(6, var_70b80ca6, var_76787d10, level.weaponnone, 0, 4);
+	thread function_9d4a3d68(6, speakingplayer, var_76787d10, level.weaponnone, 0, 4);
 }
 
 /*
@@ -1098,7 +1098,7 @@ function function_576ff6fe(killstreaktype)
 }
 
 /*
-	Name: function_cef454e8
+	Name: playkillstreakthreat
 	Namespace: battlechatter
 	Checksum: 0xD767CD3
 	Offset: 0x36B8
@@ -1106,7 +1106,7 @@ function function_576ff6fe(killstreaktype)
 	Parameters: 1
 	Flags: Linked
 */
-function function_cef454e8(killstreaktype)
+function playkillstreakthreat(killstreaktype)
 {
 	if(!is_true(level.allowspecialistdialog) || !isdefined(self) || !isplayer(self) || self hasperk(#"specialty_quieter"))
 	{
@@ -1346,7 +1346,7 @@ function function_e3ebbf87(var_aa988d26, var_c1132df6)
 	self notify("466f2691e55c760b");
 	self endon("466f2691e55c760b");
 	self endon(#"death", #"disconnect");
-	if(!function_f99d2668())
+	if(!sessionmodeiswarzonegame())
 	{
 		level endon(#"game_ended");
 	}

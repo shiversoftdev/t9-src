@@ -1,11 +1,11 @@
-#using script_4e53735256f112ac;
-#using script_d67878983e3d7c;
-#using scripts\core_common\beam_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using script_d67878983e3d7c;
+#using script_4e53735256f112ac;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\beam_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_bf2d4e77;
 
@@ -20,11 +20,11 @@
 */
 function private autoexec function_aab2e9d7()
 {
-	level notify(1218435308);
+	level notify(-1218435308);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_bf2d4e77
 	Checksum: 0xD931B2DD
 	Offset: 0x100
@@ -32,7 +32,7 @@ function private autoexec function_aab2e9d7()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6be63b3e08b5ceb9", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }
@@ -180,7 +180,7 @@ function function_7431f6cc(localclientnum, oldval, newval, bnewent, binitialsnap
 					var_37cec89a = #"hash_704b1e9eda987ea3";
 					break;
 				}
-				case "hash_24f9e195cf2de42":
+				case "soa":
 				case "zombie":
 				case "avogadro":
 				{

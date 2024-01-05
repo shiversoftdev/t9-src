@@ -15,11 +15,11 @@
 */
 function private autoexec function_c6a4ddc8()
 {
-	level notify(1085864138);
+	level notify(-1085864138);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_5665d8db
 	Checksum: 0x5198F53E
 	Offset: 0x98
@@ -27,7 +27,7 @@ function private autoexec function_c6a4ddc8()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2bb3180ae90516b3", &function_70a657d8, undefined, undefined, undefined);
 }

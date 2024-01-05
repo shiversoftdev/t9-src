@@ -1,12 +1,12 @@
 #using script_113dd7f0ea2a1d4f;
-#using script_1c65dbfc2f1c8d8f;
-#using script_3751b21462a54a7d;
 #using script_7963da8c5cf62922;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using script_3751b21462a54a7d;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace namespace_77bd50da;
 
@@ -25,7 +25,7 @@ function private autoexec function_78b2c532()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_77bd50da
 	Checksum: 0xA36D6535
 	Offset: 0xC8
@@ -33,7 +33,7 @@ function private autoexec function_78b2c532()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7b30b3878fc15536", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -141,7 +141,7 @@ function function_cc8342e0(string, opentime)
 	if(!level.var_90456892 sr_message_box::is_open(self))
 	{
 		level.var_90456892 sr_message_box::open(self);
-		level.var_90456892 sr_message_box::function_7a690474(self, string);
+		level.var_90456892 sr_message_box::set_messagebox(self, string);
 	}
 	else
 	{

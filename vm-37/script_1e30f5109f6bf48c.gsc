@@ -1,14 +1,14 @@
 #using script_4e53735256f112ac;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\system_shared.csc;
 
 #namespace namespace_2ab93693;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2ab93693
 	Checksum: 0x393103
 	Offset: 0x168
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_662c938bd03bd1ad", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }

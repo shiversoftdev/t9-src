@@ -1,9 +1,9 @@
-#using script_1883fa4e60abbf9f;
-#using script_21cbc79d1d70402;
 #using script_3dc93ca9902a9cda;
+#using script_21cbc79d1d70402;
+#using script_1883fa4e60abbf9f;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
 
 #namespace namespace_214c1803;
@@ -38,7 +38,7 @@ function scalevolume(ent, vol)
 #namespace namespace_6c0cd084;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6c0cd084
 	Checksum: 0xAC5E67F4
 	Offset: 0x2A8
@@ -46,7 +46,7 @@ function scalevolume(ent, vol)
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_299575137124db03", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -158,7 +158,7 @@ function threat_sight_set_dvar(enabled)
 	{
 		return;
 	}
-	setsaveddvar(#"hash_608e38c8a93de439", enabled);
+	setsaveddvar(#"ai_threatsight", enabled);
 	level thread threat_sight_set_dvar_display(enabled);
 }
 
@@ -197,7 +197,7 @@ function threat_sight_set_dvar_display(enabled)
 */
 function threat_sight_enabled()
 {
-	if(!level.var_53ad6e22[#"hash_608e38c8a93de439"])
+	if(!level.var_53ad6e22[#"ai_threatsight"])
 	{
 		return 0;
 	}
@@ -252,7 +252,7 @@ function threat_sight_set_state(statename)
 			break;
 		}
 		case "hash_5689f41e8c0ad00":
-		case "hash_4b55a59a56c4bdb3":
+		case "combat_hunt":
 		{
 			self.threatsight = 1;
 			break;
@@ -512,7 +512,7 @@ function threat_sight_player_entity_state_set(ai, statename)
 			self.stealth.threat_sighted[entid] = undefined;
 			break;
 		}
-		case "hash_4b55a59a56c4bdb3":
+		case "combat_hunt":
 		{
 			ai setthreatsight(self, 0);
 			break;
@@ -845,7 +845,7 @@ function threat_sight_player_entity_state_thread()
 			}
 			entid = entity getentitynumber();
 			self.stealth.maxalertlevel = max(self.stealth.maxalertlevel, entity.alertlevelint);
-			if(level.var_53ad6e22[#"hash_608e38c8a93de439"])
+			if(level.var_53ad6e22[#"ai_threatsight"])
 			{
 				if(!isdefined(entity.fnisinstealthcombat) || entity [[entity.fnisinstealthcombat]]())
 				{

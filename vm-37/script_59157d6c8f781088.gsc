@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_32689523 : class_6aaccc24
+class cmp_laststand_client : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xDFE8B952
 		Offset: 0x218
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_32689523 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xDA6BD3DB
 		Offset: 0x3C8
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_32689523 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0x2EBE4882
 		Offset: 0x2B0
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_32689523 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xFD4D17AF
 		Offset: 0x2F8
 		Size: 0x24
@@ -61,26 +61,26 @@ class class_32689523 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_67bdfe40
-		Namespace: namespace_32689523
+		Name: set_bleedout_progress
+		Namespace: cmp_laststand_client
 		Checksum: 0x342C555E
 		Offset: 0x328
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_67bdfe40(player, value)
+	function set_bleedout_progress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "bleedout_progress", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_32689523
+		Namespace: cmp_laststand_client
 		Checksum: 0xEB4C4440
 		Offset: 0x238
 		Size: 0x6C
@@ -89,21 +89,21 @@ class class_32689523 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("mp_laststand_client");
-		namespace_6aaccc24::function_da693cbe("bleedout_progress", 1, 6, "float");
-		namespace_6aaccc24::function_da693cbe("revive_progress", 1, 5, "float");
+		cluielem::setup_clientfields("mp_laststand_client");
+		cluielem::add_clientfield("bleedout_progress", 1, 6, "float");
+		cluielem::add_clientfield("revive_progress", 1, 5, "float");
 	}
 
 	/*
-		Name: function_d50fdde9
-		Namespace: namespace_32689523
+		Name: set_revive_progress
+		Namespace: cmp_laststand_client
 		Checksum: 0xD509DB19
 		Offset: 0x378
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_d50fdde9(player, value)
+	function set_revive_progress(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "revive_progress", value);
 	}
@@ -123,7 +123,7 @@ class class_32689523 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_32689523();
+	elem = new cmp_laststand_client();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -175,7 +175,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_67bdfe40
+	Name: set_bleedout_progress
 	Namespace: mp_laststand_client
 	Checksum: 0xCBDFB61D
 	Offset: 0x1B8
@@ -183,13 +183,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_67bdfe40(player, value)
+function set_bleedout_progress(player, value)
 {
-	[[ self ]]->function_67bdfe40(player, value);
+	[[ self ]]->set_bleedout_progress(player, value);
 }
 
 /*
-	Name: function_d50fdde9
+	Name: set_revive_progress
 	Namespace: mp_laststand_client
 	Checksum: 0xAAD60BF9
 	Offset: 0x1E8
@@ -197,8 +197,8 @@ function function_67bdfe40(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_d50fdde9(player, value)
+function set_revive_progress(player, value)
 {
-	[[ self ]]->function_d50fdde9(player, value);
+	[[ self ]]->set_revive_progress(player, value);
 }
 

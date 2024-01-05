@@ -1,12 +1,12 @@
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_3c79982f;
 
@@ -21,13 +21,13 @@
 */
 function private autoexec function_7520e91c()
 {
-	level notify(1372532603);
+	level notify(-1372532603);
 }
 
 #namespace namespace_d9b7a459;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_d9b7a459
 	Checksum: 0xFC240EC8
 	Offset: 0xC8
@@ -35,7 +35,7 @@ function private autoexec function_7520e91c()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"hash_5f4a915350d11e3b", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
@@ -1170,17 +1170,17 @@ function function_ff217e96(var_5a86a1c2, v_pos, v_ang, s_instance, var_2ceba174)
 			for(var_6e0e2531 = 0; var_6e0e2531 < var_b744a7ed; var_6e0e2531++)
 			{
 				var_322595c6 = function_d7c3cf6c(var_2074c3ff, var_6e0e2531, var_be7bc546);
-				if(var_322595c6.var_3cf2d21 === var_5a86a1c2)
+				if(var_322595c6.namehash === var_5a86a1c2)
 				{
 					var_c22fcaad = player getcharacterbodytype();
-					var_81cd46bd = player function_50a9aad5();
+					var_81cd46bd = player getcharacteroutfit();
 					player setcharacterbodytype(var_2074c3ff);
-					player function_8fd843dd(var_6e0e2531);
+					player setcharacteroutfit(var_6e0e2531);
 					if(isdefined(var_2ceba174) && isarray(var_322595c6.presets))
 					{
-						foreach(var_47fc7c6f in var_322595c6.presets)
+						foreach(s_preset in var_322595c6.presets)
 						{
-							if(!is_true(var_47fc7c6f.isvalid))
+							if(!is_true(s_preset.isvalid))
 							{
 								continue;
 							}
@@ -1199,7 +1199,7 @@ function function_ff217e96(var_5a86a1c2, v_pos, v_ang, s_instance, var_2ceba174)
 						var_412d5310 useanimtree("");
 					}
 					player setcharacterbodytype(var_c22fcaad);
-					player function_8fd843dd(var_81cd46bd);
+					player setcharacteroutfit(var_81cd46bd);
 					return var_412d5310;
 				}
 			}

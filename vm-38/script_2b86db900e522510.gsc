@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_ba33e0c1 : class_6aaccc24
+class class_ba33e0c1 : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,11 +47,11 @@ class class_ba33e0c1 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_4aa46834
+		Name: set_activatorcount
 		Namespace: namespace_ba33e0c1
 		Checksum: 0x2C7B2EE3
 		Offset: 0x4D0
@@ -59,7 +59,7 @@ class class_ba33e0c1 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4aa46834(player, value)
+	function set_activatorcount(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "activatorCount", value);
 	}
@@ -75,7 +75,7 @@ class class_ba33e0c1 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -89,10 +89,10 @@ class class_ba33e0c1 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("EncodedRadio_UseBar");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("progressFrac", 1, 10, "float");
-		namespace_6aaccc24::function_da693cbe("activatorCount", 1, 3, "int", 0);
+		cluielem::setup_clientfields("EncodedRadio_UseBar");
+		cluielem::add_clientfield("_state", 1, 1, "int");
+		cluielem::add_clientfield("progressFrac", 1, 10, "float");
+		cluielem::add_clientfield("activatorCount", 1, 3, "int", 0);
 	}
 
 	/*
@@ -128,7 +128,7 @@ class class_ba33e0c1 : class_6aaccc24
 	}
 
 	/*
-		Name: function_f0df5702
+		Name: set_progressfrac
 		Namespace: namespace_ba33e0c1
 		Checksum: 0xAEBF3322
 		Offset: 0x480
@@ -136,7 +136,7 @@ class class_ba33e0c1 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f0df5702(player, value)
+	function set_progressfrac(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "progressFrac", value);
 	}
@@ -236,7 +236,7 @@ function set_state(player, state_name)
 }
 
 /*
-	Name: function_f0df5702
+	Name: set_progressfrac
 	Namespace: namespace_4d6a580c
 	Checksum: 0xFB3969DB
 	Offset: 0x210
@@ -244,13 +244,13 @@ function set_state(player, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_f0df5702(player, value)
+function set_progressfrac(player, value)
 {
-	[[ self ]]->function_f0df5702(player, value);
+	[[ self ]]->set_progressfrac(player, value);
 }
 
 /*
-	Name: function_4aa46834
+	Name: set_activatorcount
 	Namespace: namespace_4d6a580c
 	Checksum: 0xB75C7889
 	Offset: 0x240
@@ -258,8 +258,8 @@ function function_f0df5702(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4aa46834(player, value)
+function set_activatorcount(player, value)
 {
-	[[ self ]]->function_4aa46834(player, value);
+	[[ self ]]->set_activatorcount(player, value);
 }
 

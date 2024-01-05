@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_2d7ccca3;
 
@@ -20,7 +20,7 @@ function private autoexec function_459517c2()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_2d7ccca3
 	Checksum: 0x35A22214
 	Offset: 0x120
@@ -28,7 +28,7 @@ function private autoexec function_459517c2()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3dcfc06bf6bfc5f5", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -44,7 +44,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	clientfield::function_a8bbc967("hudItems.ammoCooldowns.fieldUpgrade", 1, 5, "float", 0);
+	clientfield::register_clientuimodel("hudItems.ammoCooldowns.fieldUpgrade", 1, 5, "float", 0);
 	callback::on_connect(&function_39a250e3);
 	clientfield::register("missile", "fieldUpgradeActive", 1, 1, "int");
 }
@@ -129,7 +129,7 @@ event private function_688d2014(eventstruct)
 		weaponindex = getitemindexfromref(weapon.name);
 		self notify(#"hash_5e15609b9205fae8");
 		self function_18afabb5(weaponindex);
-		clipsize = self function_f09c133d(weapon);
+		clipsize = self getweaponammoclipsize(weapon);
 		self function_e7f8957a(clipsize);
 		self function_42ee343f(#"hash_14ebcb39234f4126", weaponindex);
 		self thread function_63ac35a3(weapon);
@@ -149,7 +149,7 @@ function private function_63ac35a3(weapon)
 {
 	self notify(#"hash_36a1ce93b922198d");
 	self endon(#"death", #"hash_36a1ce93b922198d");
-	clipsize = self function_f09c133d(weapon);
+	clipsize = self getweaponammoclipsize(weapon);
 	self function_e7f8957a(clipsize);
 	if(self function_e3774219(weapon))
 	{
@@ -238,10 +238,10 @@ function private function_e7085388(weapon, var_e3774219)
 	{
 		self.pers[#"fieldupgrades"][#"hash_1f9e227d7c859634"] = undefined;
 	}
-	var_1d838ee9 = self.pers[#"fieldupgrades"][#"hash_3e6d442adf0713fc"];
+	previousweapon = self.pers[#"fieldupgrades"][#"hash_3e6d442adf0713fc"];
 	weaponindex = getitemindexfromref(weapon.name);
 	self.pers[#"fieldupgrades"][#"hash_3e6d442adf0713fc"] = weapon;
-	clipsize = self function_f09c133d(weapon);
+	clipsize = self getweaponammoclipsize(weapon);
 	self function_e7f8957a(clipsize);
 	cooldown = function_e7967fc8(weapon, var_cdd95e58);
 	self function_f6621fe5(int(cooldown));
@@ -249,7 +249,7 @@ function private function_e7085388(weapon, var_e3774219)
 	{
 		if(var_e3774219)
 		{
-			var_d3239b6b = function_e7967fc8(var_1d838ee9, var_4dcb7b2e);
+			var_d3239b6b = function_e7967fc8(previousweapon, var_4dcb7b2e);
 			var_1b634dac = self.pers[#"fieldupgrades"][#"ammo"] * var_d3239b6b;
 			if(isdefined(self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"]))
 			{
@@ -382,8 +382,8 @@ function private function_62c1bfaa(weapon)
 */
 function private function_e3774219(weapon)
 {
-	var_1d838ee9 = self.pers[#"fieldupgrades"][#"hash_3e6d442adf0713fc"];
-	return isdefined(var_1d838ee9) && var_1d838ee9 != weapon;
+	previousweapon = self.pers[#"fieldupgrades"][#"hash_3e6d442adf0713fc"];
+	return isdefined(previousweapon) && previousweapon != weapon;
 }
 
 /*

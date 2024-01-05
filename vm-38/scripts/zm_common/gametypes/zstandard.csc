@@ -1,11 +1,11 @@
-#using script_13ba67412d79c7f;
-#using script_151cd5772fe546db;
-#using script_2f226180773b89b9;
 #using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
+#using script_2f226180773b89b9;
+#using script_13ba67412d79c7f;
+#using script_151cd5772fe546db;
 #using scripts\zm_common\zm_powerups.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace zstandard;
 
@@ -20,7 +20,7 @@
 */
 function private autoexec function_7812f()
 {
-	level notify(938195218);
+	level notify(-938195218);
 }
 
 /*
@@ -60,7 +60,7 @@ event main(eventstruct)
 function private finalize_clientfields(localclientnum)
 {
 	clientfield::register("toplayer", "zm_trials_timer", 1, getminbitcountfornum(540), "int", &function_bb753058, 0, 1);
-	clientfield::function_5b7d846d("ZMHudGlobal.trials.gameStartTime", #"hash_21ac7bf03dae9888", #"gamestarttime", 1, 31, "int", undefined, 0, 0);
+	clientfield::function_5b7d846d("ZMHudGlobal.trials.gameStartTime", #"zm_trials", #"gamestarttime", 1, 31, "int", undefined, 0, 0);
 }
 
 /*

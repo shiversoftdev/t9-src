@@ -1,5 +1,5 @@
-#using script_40114edfb27a2dd9;
 #using scripts\core_common\system_shared.csc;
+#using script_40114edfb27a2dd9;
 
 #namespace hud_shared;
 
@@ -20,7 +20,7 @@ function private autoexec function_1aff2cd0()
 #namespace hud;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: hud
 	Checksum: 0x670AA1C8
 	Offset: 0x90
@@ -28,7 +28,7 @@ function private autoexec function_1aff2cd0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hud", &function_70a657d8, undefined, undefined, undefined);
 }

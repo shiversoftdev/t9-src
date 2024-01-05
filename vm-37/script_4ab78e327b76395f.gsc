@@ -1,22 +1,22 @@
+#using scripts\cp_common\bb.gsc;
 #using script_2d443451ce681a;
-#using script_3626f1b2cf51a99c;
-#using script_52da18c20f45c56a;
-#using script_5431e074c1428743;
 #using script_7d0013bbc05623b9;
 #using script_9bfd3d8a6a89e5e;
-#using scripts\core_common\animation_shared.gsc;
+#using script_5431e074c1428743;
+#using script_52da18c20f45c56a;
+#using script_3626f1b2cf51a99c;
+#using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\scene_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\bb.gsc;
 
 #namespace namespace_5f6e61d9;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_5f6e61d9
 	Checksum: 0xE566B0E7
 	Offset: 0x318
@@ -24,7 +24,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_32009cf32baa31d1", &function_70a657d8, undefined, undefined, #"hash_7e93e9089f28804f");
 }
@@ -474,7 +474,7 @@ function private function_e3789852(victim)
 		assert(isplayer(self));
 	#/
 	self endon(#"death", #"hash_7c3b085512be9978");
-	level waittill(#"no_corpse_pickup", #"hash_746c5e6bced27651");
+	level waittill(#"no_corpse_pickup", #"drop_corpse");
 	self notify(#"hash_4dff86580406a1af");
 }
 

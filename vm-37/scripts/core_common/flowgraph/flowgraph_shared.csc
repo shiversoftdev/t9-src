@@ -1,0 +1,1091 @@
+#using scripts\core_common\flowgraph\flowgraph_core.csc;
+
+#namespace flowgraph_logic;
+
+/*
+	Name: iffunc
+	Namespace: flowgraph_logic
+	Checksum: 0xDE43D61C
+	Offset: 0x68
+	Size: 0x2A
+	Parameters: 2
+	Flags: None
+*/
+function iffunc(x, b)
+{
+	return array(b, !b);
+}
+
+/*
+	Name: orfunc
+	Namespace: flowgraph_logic
+	Checksum: 0x6DFA7D18
+	Offset: 0xA0
+	Size: 0x4A
+	Parameters: 3
+	Flags: None
+*/
+function orfunc(x, b_a, b_b)
+{
+	return array(b_a || b_b, !(b_a || b_b));
+}
+
+/*
+	Name: andfunc
+	Namespace: flowgraph_logic
+	Checksum: 0xA9AB675B
+	Offset: 0xF8
+	Size: 0x4A
+	Parameters: 3
+	Flags: None
+*/
+function andfunc(x, b_a, b_b)
+{
+	return array(b_a && b_b, !(b_a && b_b));
+}
+
+/*
+	Name: notfunc
+	Namespace: flowgraph_logic
+	Checksum: 0xA3BE184C
+	Offset: 0x150
+	Size: 0x12
+	Parameters: 1
+	Flags: None
+*/
+function notfunc(b_value)
+{
+	return !b_value;
+}
+
+/*
+	Name: lessthan
+	Namespace: flowgraph_logic
+	Checksum: 0xEA7F7F3A
+	Offset: 0x170
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function lessthan(var_8b1a2ec6, var_d2073c9f)
+{
+	return var_8b1a2ec6 < var_d2073c9f;
+}
+
+/*
+	Name: function_b457969e
+	Namespace: flowgraph_logic
+	Checksum: 0x19F4A547
+	Offset: 0x198
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function function_b457969e(var_8b1a2ec6, var_d2073c9f)
+{
+	return var_8b1a2ec6 <= var_d2073c9f;
+}
+
+/*
+	Name: greaterthan
+	Namespace: flowgraph_logic
+	Checksum: 0x1D7C27FC
+	Offset: 0x1C0
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function greaterthan(var_8b1a2ec6, var_d2073c9f)
+{
+	return var_8b1a2ec6 > var_d2073c9f;
+}
+
+/*
+	Name: function_3743e19e
+	Namespace: flowgraph_logic
+	Checksum: 0x82358CD7
+	Offset: 0x1E8
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function function_3743e19e(var_8b1a2ec6, var_d2073c9f)
+{
+	return var_8b1a2ec6 >= var_d2073c9f;
+}
+
+/*
+	Name: equal
+	Namespace: flowgraph_logic
+	Checksum: 0x4DC018F2
+	Offset: 0x210
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function equal(var_8b1a2ec6, var_d2073c9f)
+{
+	return var_8b1a2ec6 == var_d2073c9f;
+}
+
+/*
+	Name: function_5cb6d7c8
+	Namespace: flowgraph_logic
+	Checksum: 0x8A59A7CC
+	Offset: 0x238
+	Size: 0xAC
+	Parameters: 3
+	Flags: None
+*/
+function function_5cb6d7c8(x, b_1, b_2)
+{
+	if(is_true(b_1))
+	{
+		self flowgraph::kick(array(undefined, 1, 0), 1);
+	}
+	else if(is_true(b_2))
+	{
+		self flowgraph::kick(array(undefined, 0, 1), 1);
+	}
+}
+
+/*
+	Name: function_4902305f
+	Namespace: flowgraph_logic
+	Checksum: 0x5A66CF2B
+	Offset: 0x2F0
+	Size: 0x114
+	Parameters: 4
+	Flags: None
+*/
+function function_4902305f(x, b_1, b_2, b_3)
+{
+	if(is_true(b_1))
+	{
+		self flowgraph::kick(array(undefined, 1, 0, 0), 1);
+	}
+	else
+	{
+		if(is_true(b_2))
+		{
+			self flowgraph::kick(array(undefined, 0, 1, 0), 1);
+		}
+		else if(is_true(b_3))
+		{
+			self flowgraph::kick(array(undefined, 0, 0, 1), 1);
+		}
+	}
+}
+
+/*
+	Name: function_3b225c4
+	Namespace: flowgraph_logic
+	Checksum: 0xD87CAB78
+	Offset: 0x410
+	Size: 0x16C
+	Parameters: 5
+	Flags: None
+*/
+function function_3b225c4(x, b_1, b_2, b_3, b_4)
+{
+	if(is_true(b_1))
+	{
+		self flowgraph::kick(array(undefined, 1, 0, 0, 0), 1);
+	}
+	else
+	{
+		if(is_true(b_2))
+		{
+			self flowgraph::kick(array(undefined, 0, 1, 0, 0), 1);
+		}
+		else
+		{
+			if(is_true(b_3))
+			{
+				self flowgraph::kick(array(undefined, 0, 0, 1, 0), 1);
+			}
+			else if(is_true(b_4))
+			{
+				self flowgraph::kick(array(undefined, 0, 0, 0, 1), 1);
+			}
+		}
+	}
+}
+
+/*
+	Name: function_f82f0ebe
+	Namespace: flowgraph_logic
+	Checksum: 0xE36BD33A
+	Offset: 0x588
+	Size: 0x1C4
+	Parameters: 6
+	Flags: None
+*/
+function function_f82f0ebe(x, b_1, b_2, b_3, b_4, b_5)
+{
+	if(is_true(b_1))
+	{
+		self flowgraph::kick(array(undefined, 1, 0, 0, 0, 0), 1);
+	}
+	else
+	{
+		if(is_true(b_2))
+		{
+			self flowgraph::kick(array(undefined, 0, 1, 0, 0, 0), 1);
+		}
+		else
+		{
+			if(is_true(b_3))
+			{
+				self flowgraph::kick(array(undefined, 0, 0, 1, 0, 0), 1);
+			}
+			else
+			{
+				if(is_true(b_4))
+				{
+					self flowgraph::kick(array(undefined, 0, 0, 0, 1, 0), 1);
+				}
+				else if(is_true(b_5))
+				{
+					self flowgraph::kick(array(undefined, 0, 0, 0, 0, 1), 1);
+				}
+			}
+		}
+	}
+}
+
+/*
+	Name: function_3f431ce5
+	Namespace: flowgraph_logic
+	Checksum: 0xAE7CC732
+	Offset: 0x758
+	Size: 0x21C
+	Parameters: 7
+	Flags: None
+*/
+function function_3f431ce5(x, b_1, b_2, b_3, b_4, b_5, b_6)
+{
+	if(is_true(b_1))
+	{
+		self flowgraph::kick(array(undefined, 1, 0, 0, 0, 0, 0), 1);
+	}
+	else
+	{
+		if(is_true(b_2))
+		{
+			self flowgraph::kick(array(undefined, 0, 1, 0, 0, 0, 0), 1);
+		}
+		else
+		{
+			if(is_true(b_3))
+			{
+				self flowgraph::kick(array(undefined, 0, 0, 1, 0, 0, 0), 1);
+			}
+			else
+			{
+				if(is_true(b_4))
+				{
+					self flowgraph::kick(array(undefined, 0, 0, 0, 1, 0, 0), 1);
+				}
+				else
+				{
+					if(is_true(b_5))
+					{
+						self flowgraph::kick(array(undefined, 0, 0, 0, 0, 1, 0), 1);
+					}
+					else if(is_true(b_6))
+					{
+						self flowgraph::kick(array(undefined, 0, 0, 0, 0, 0, 1), 1);
+					}
+				}
+			}
+		}
+	}
+}
+
+/*
+	Name: function_2d817962
+	Namespace: flowgraph_logic
+	Checksum: 0xE151DC96
+	Offset: 0x980
+	Size: 0x2AC
+	Parameters: 8
+	Flags: None
+*/
+function function_2d817962(x, b_1, b_2, b_3, b_4, b_5, b_6, b_7)
+{
+	if(is_true(b_1))
+	{
+		self flowgraph::kick(array(undefined, 1, 0, 0, 0, 0, 0, 0), 1);
+	}
+	else
+	{
+		if(is_true(b_2))
+		{
+			self flowgraph::kick(array(undefined, 0, 1, 0, 0, 0, 0, 0), 1);
+		}
+		else
+		{
+			if(is_true(b_3))
+			{
+				self flowgraph::kick(array(undefined, 0, 0, 1, 0, 0, 0, 0), 1);
+			}
+			else
+			{
+				if(is_true(b_4))
+				{
+					self flowgraph::kick(array(undefined, 0, 0, 0, 1, 0, 0, 0), 1);
+				}
+				else
+				{
+					if(is_true(b_5))
+					{
+						self flowgraph::kick(array(undefined, 0, 0, 0, 0, 1, 0, 0), 1);
+					}
+					else
+					{
+						if(is_true(b_6))
+						{
+							self flowgraph::kick(array(undefined, 0, 0, 0, 0, 0, 1, 0), 1);
+						}
+						else if(is_true(b_7))
+						{
+							self flowgraph::kick(array(undefined, 0, 0, 0, 0, 0, 0, 1), 1);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*
+	Name: function_c8fcb052
+	Namespace: flowgraph_logic
+	Checksum: 0x75FB874F
+	Offset: 0xC38
+	Size: 0x30C
+	Parameters: 9
+	Flags: None
+*/
+function function_c8fcb052(x, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8)
+{
+	if(is_true(b_1))
+	{
+		self flowgraph::kick(array(undefined, 1, 0, 0, 0, 0, 0, 0, 0), 1);
+	}
+	else
+	{
+		if(is_true(b_2))
+		{
+			self flowgraph::kick(array(undefined, 0, 1, 0, 0, 0, 0, 0, 0), 1);
+		}
+		else
+		{
+			if(is_true(b_3))
+			{
+				self flowgraph::kick(array(undefined, 0, 0, 1, 0, 0, 0, 0, 0), 1);
+			}
+			else
+			{
+				if(is_true(b_4))
+				{
+					self flowgraph::kick(array(undefined, 0, 0, 0, 1, 0, 0, 0, 0), 1);
+				}
+				else
+				{
+					if(is_true(b_5))
+					{
+						self flowgraph::kick(array(undefined, 0, 0, 0, 0, 1, 0, 0, 0), 1);
+					}
+					else
+					{
+						if(is_true(b_6))
+						{
+							self flowgraph::kick(array(undefined, 0, 0, 0, 0, 0, 1, 0, 0), 1);
+						}
+						else
+						{
+							if(is_true(b_7))
+							{
+								self flowgraph::kick(array(undefined, 0, 0, 0, 0, 0, 0, 1, 0), 1);
+							}
+							else if(is_true(b_8))
+							{
+								self flowgraph::kick(array(undefined, 0, 0, 0, 0, 0, 0, 0, 1), 1);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#namespace flowgraph_loops;
+
+/*
+	Name: forloop
+	Namespace: flowgraph_loops
+	Checksum: 0x70429B24
+	Offset: 0xF50
+	Size: 0x92
+	Parameters: 3
+	Flags: None
+*/
+function forloop(x, i_begin, i_end)
+{
+	i_step = 1;
+	if(i_end < i_begin)
+	{
+		i_step = -1;
+	}
+	i = i_begin;
+	while(i != i_end)
+	{
+		self flowgraph::kick(array(1, i), 1);
+		i = i + i_step;
+	}
+}
+
+/*
+	Name: foreachloop
+	Namespace: flowgraph_loops
+	Checksum: 0xBDA6178
+	Offset: 0xFF0
+	Size: 0xB0
+	Parameters: 2
+	Flags: None
+*/
+function foreachloop(x, a_items)
+{
+	foreach(item in a_items)
+	{
+		self flowgraph::kick(array(1, item), 1);
+	}
+}
+
+/*
+	Name: whileloop
+	Namespace: flowgraph_loops
+	Checksum: 0xC006C29D
+	Offset: 0x10A8
+	Size: 0x6E
+	Parameters: 2
+	Flags: None
+*/
+function whileloop(x, b_condition)
+{
+	while(b_condition)
+	{
+		self flowgraph::kick(1, 1);
+		inputs = self flowgraph::collect_inputs();
+		b_condition = inputs[1];
+	}
+}
+
+#namespace flowgraph_sequence;
+
+/*
+	Name: sequence2
+	Namespace: flowgraph_sequence
+	Checksum: 0x719B651
+	Offset: 0x1120
+	Size: 0x6C
+	Parameters: 1
+	Flags: None
+*/
+function sequence2(x)
+{
+	self flowgraph::kick(array(1, 0), 1);
+	self flowgraph::kick(array(0, 1), 1);
+}
+
+/*
+	Name: sequence3
+	Namespace: flowgraph_sequence
+	Checksum: 0x28BA2EC4
+	Offset: 0x1198
+	Size: 0x9C
+	Parameters: 1
+	Flags: None
+*/
+function sequence3(x)
+{
+	self flowgraph::kick(array(1, 0, 0), 1);
+	self flowgraph::kick(array(0, 1, 0), 1);
+	self flowgraph::kick(array(0, 0, 1), 1);
+}
+
+/*
+	Name: sequence4
+	Namespace: flowgraph_sequence
+	Checksum: 0xCDB44931
+	Offset: 0x1240
+	Size: 0xCC
+	Parameters: 1
+	Flags: None
+*/
+function sequence4(x)
+{
+	self flowgraph::kick(array(1, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 1, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 1, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 1), 1);
+}
+
+/*
+	Name: sequence5
+	Namespace: flowgraph_sequence
+	Checksum: 0xA67E3187
+	Offset: 0x1318
+	Size: 0x124
+	Parameters: 1
+	Flags: None
+*/
+function sequence5(x)
+{
+	self flowgraph::kick(array(1, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 1, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 1, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 1, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 1), 1);
+}
+
+/*
+	Name: sequence6
+	Namespace: flowgraph_sequence
+	Checksum: 0x6FC63220
+	Offset: 0x1448
+	Size: 0x15C
+	Parameters: 1
+	Flags: None
+*/
+function sequence6(x)
+{
+	self flowgraph::kick(array(1, 0, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 1, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 1, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 1, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 1, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 0, 1), 1);
+}
+
+/*
+	Name: sequence7
+	Namespace: flowgraph_sequence
+	Checksum: 0xDD6BA1E2
+	Offset: 0x15B0
+	Size: 0x194
+	Parameters: 1
+	Flags: None
+*/
+function sequence7(x)
+{
+	self flowgraph::kick(array(1, 0, 0, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 1, 0, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 1, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 1, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 1, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 0, 1, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 0, 0, 1), 1);
+}
+
+/*
+	Name: sequence8
+	Namespace: flowgraph_sequence
+	Checksum: 0xA85DE057
+	Offset: 0x1750
+	Size: 0x1CC
+	Parameters: 1
+	Flags: None
+*/
+function sequence8(x)
+{
+	self flowgraph::kick(array(1, 0, 0, 0, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 1, 0, 0, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 1, 0, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 1, 0, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 1, 0, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 0, 1, 0, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 0, 0, 1, 0), 1);
+	self flowgraph::kick(array(0, 0, 0, 0, 0, 0, 0, 1), 1);
+}
+
+#namespace flowgraph_util;
+
+/*
+	Name: onflowgraphrun
+	Namespace: flowgraph_util
+	Checksum: 0x863B8A7D
+	Offset: 0x1928
+	Size: 0x24
+	Parameters: 0
+	Flags: None
+*/
+function onflowgraphrun()
+{
+	self.owner waittill(#"flowgraph_run");
+	return true;
+}
+
+/*
+	Name: waitfunc
+	Namespace: flowgraph_util
+	Checksum: 0xA52D97D4
+	Offset: 0x1958
+	Size: 0x1E
+	Parameters: 2
+	Flags: None
+*/
+function waitfunc(x, f_seconds)
+{
+	wait(f_seconds);
+	return true;
+}
+
+/*
+	Name: createthread
+	Namespace: flowgraph_util
+	Checksum: 0x8D85327E
+	Offset: 0x1980
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function createthread(x)
+{
+	return true;
+}
+
+#namespace flowgraph_random;
+
+/*
+	Name: randomfloatinrangefunc
+	Namespace: flowgraph_random
+	Checksum: 0x4D22D27B
+	Offset: 0x1998
+	Size: 0x2A
+	Parameters: 2
+	Flags: None
+*/
+function randomfloatinrangefunc(f_min, f_max)
+{
+	return randomfloatrange(f_min, f_max);
+}
+
+/*
+	Name: randomunitvector
+	Namespace: flowgraph_random
+	Checksum: 0x86B891B9
+	Offset: 0x19D0
+	Size: 0x5A
+	Parameters: 0
+	Flags: None
+*/
+function randomunitvector()
+{
+	return vectornormalize((randomfloat(1), randomfloat(1), randomfloat(1)));
+}
+
+#namespace flowgraph_math;
+
+/*
+	Name: multiply
+	Namespace: flowgraph_math
+	Checksum: 0x727F0A2C
+	Offset: 0x1A38
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function multiply(var_d895ca40, var_3029f96f)
+{
+	return var_3029f96f * var_3029f96f;
+}
+
+/*
+	Name: divide
+	Namespace: flowgraph_math
+	Checksum: 0x67DAB5E9
+	Offset: 0x1A60
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function divide(var_d895ca40, var_3029f96f)
+{
+	return var_d895ca40 / var_3029f96f;
+}
+
+/*
+	Name: add
+	Namespace: flowgraph_math
+	Checksum: 0xD6131013
+	Offset: 0x1A88
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function add(var_d895ca40, var_3029f96f)
+{
+	return var_d895ca40 + var_3029f96f;
+}
+
+/*
+	Name: subtract
+	Namespace: flowgraph_math
+	Checksum: 0x5ED28556
+	Offset: 0x1AB0
+	Size: 0x1A
+	Parameters: 2
+	Flags: None
+*/
+function subtract(var_d895ca40, var_3029f96f)
+{
+	return var_d895ca40 - var_3029f96f;
+}
+
+/*
+	Name: negate
+	Namespace: flowgraph_math
+	Checksum: 0x4A447C6E
+	Offset: 0x1AD8
+	Size: 0x16
+	Parameters: 1
+	Flags: None
+*/
+function negate(v)
+{
+	return v * -1;
+}
+
+/*
+	Name: vectordotfunc
+	Namespace: flowgraph_math
+	Checksum: 0x318953B7
+	Offset: 0x1AF8
+	Size: 0x2A
+	Parameters: 2
+	Flags: None
+*/
+function vectordotfunc(v_1, v_2)
+{
+	return vectordot(v_1, v_2);
+}
+
+#namespace flowgraph_lighting;
+
+/*
+	Name: getlightingstatefunc
+	Namespace: flowgraph_lighting
+	Checksum: 0x7E79C477
+	Offset: 0x1B30
+	Size: 0x12
+	Parameters: 0
+	Flags: None
+*/
+function getlightingstatefunc()
+{
+	return getlightingstate();
+}
+
+#namespace flowgraph_level;
+
+/*
+	Name: function_35dc468d
+	Namespace: flowgraph_level
+	Checksum: 0xBA017376
+	Offset: 0x1B50
+	Size: 0x18
+	Parameters: 1
+	Flags: None
+*/
+function function_35dc468d(str_field)
+{
+	return level.(str_field);
+}
+
+/*
+	Name: function_f9d5c4b0
+	Namespace: flowgraph_level
+	Checksum: 0x27297489
+	Offset: 0x1B70
+	Size: 0x32
+	Parameters: 3
+	Flags: None
+*/
+function function_f9d5c4b0(x, str_field, var_b8003601)
+{
+	level.(str_field) = var_b8003601;
+	return true;
+}
+
+#namespace namespace_22752a75;
+
+/*
+	Name: function_8892c7a6
+	Namespace: namespace_22752a75
+	Checksum: 0x9462B12A
+	Offset: 0x1BB0
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_8892c7a6(i_value)
+{
+	return i_value;
+}
+
+/*
+	Name: function_28c4ae67
+	Namespace: namespace_22752a75
+	Checksum: 0xE4A22AED
+	Offset: 0x1BC8
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_28c4ae67(var_2eb63fd3)
+{
+	return var_2eb63fd3;
+}
+
+/*
+	Name: function_36bf9c6c
+	Namespace: namespace_22752a75
+	Checksum: 0xD6F8FBF4
+	Offset: 0x1BE0
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_36bf9c6c(b_value)
+{
+	return b_value;
+}
+
+/*
+	Name: function_fe4cf085
+	Namespace: namespace_22752a75
+	Checksum: 0x1F85A5E0
+	Offset: 0x1BF8
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_fe4cf085(str_value)
+{
+	return str_value;
+}
+
+/*
+	Name: function_3ece9d7e
+	Namespace: namespace_22752a75
+	Checksum: 0x4D175601
+	Offset: 0x1C10
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_3ece9d7e(var_4cb0cd3c)
+{
+	return var_4cb0cd3c;
+}
+
+/*
+	Name: function_68a5d644
+	Namespace: namespace_22752a75
+	Checksum: 0x1F431C94
+	Offset: 0x1C28
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_68a5d644(var_30e9e231)
+{
+	return var_30e9e231;
+}
+
+/*
+	Name: function_4e718879
+	Namespace: namespace_22752a75
+	Checksum: 0xDBAD051F
+	Offset: 0x1C40
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_4e718879(v_value)
+{
+	return v_value;
+}
+
+/*
+	Name: pathnodeconstant
+	Namespace: namespace_22752a75
+	Checksum: 0x1FACFBAD
+	Offset: 0x1C58
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function pathnodeconstant(var_f4af12cc)
+{
+	return var_f4af12cc;
+}
+
+/*
+	Name: function_9ef80b8b
+	Namespace: namespace_22752a75
+	Checksum: 0x1A6613FF
+	Offset: 0x1C70
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_9ef80b8b(e_value)
+{
+	return e_value;
+}
+
+/*
+	Name: introduction_minigun
+	Namespace: namespace_22752a75
+	Checksum: 0x5E6EF4B9
+	Offset: 0x1C88
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function introduction_minigun(ai_value)
+{
+	return ai_value;
+}
+
+/*
+	Name: function_513da14e
+	Namespace: namespace_22752a75
+	Checksum: 0xEE0617DE
+	Offset: 0x1CA0
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_513da14e(var_162b6305)
+{
+	return var_162b6305;
+}
+
+/*
+	Name: function_7cbb60c3
+	Namespace: namespace_22752a75
+	Checksum: 0xD3E060AD
+	Offset: 0x1CB8
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_7cbb60c3(var_e7355b57)
+{
+	return var_e7355b57;
+}
+
+/*
+	Name: function_f2357a4d
+	Namespace: namespace_22752a75
+	Checksum: 0x73B01401
+	Offset: 0x1CD0
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_f2357a4d(var_52d6c2bd)
+{
+	return var_52d6c2bd;
+}
+
+/*
+	Name: function_79f7d941
+	Namespace: namespace_22752a75
+	Checksum: 0xFF8B155F
+	Offset: 0x1CE8
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_79f7d941(var_b8003601)
+{
+	return var_b8003601;
+}
+
+/*
+	Name: function_fdafe394
+	Namespace: namespace_22752a75
+	Checksum: 0x5F28A7FC
+	Offset: 0x1D00
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_fdafe394(var_e477c3b)
+{
+	return var_e477c3b;
+}
+
+/*
+	Name: function_28848a6a
+	Namespace: namespace_22752a75
+	Checksum: 0x4CA3593F
+	Offset: 0x1D18
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_28848a6a(var_6b11d5a)
+{
+	return var_6b11d5a;
+}
+
+/*
+	Name: function_8f5a9b3e
+	Namespace: namespace_22752a75
+	Checksum: 0x13BBE9BF
+	Offset: 0x1D30
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_8f5a9b3e(fx_value)
+{
+	return fx_value;
+}
+
+/*
+	Name: function_a5f771ce
+	Namespace: namespace_22752a75
+	Checksum: 0x3FDFC5A8
+	Offset: 0x1D48
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_a5f771ce(var_e0bddaf5)
+{
+	return var_e0bddaf5;
+}
+
+/*
+	Name: function_527fa489
+	Namespace: namespace_22752a75
+	Checksum: 0xF764DAA5
+	Offset: 0x1D60
+	Size: 0x10
+	Parameters: 1
+	Flags: None
+*/
+function function_527fa489(var_5ab747e5)
+{
+	return var_5ab747e5;
+}
+

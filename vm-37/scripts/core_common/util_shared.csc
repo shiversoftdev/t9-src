@@ -1,13 +1,13 @@
 #using script_72d4466ce2e2cc7b;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\math_shared.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace util;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: util
 	Checksum: 0x72262E9F
 	Offset: 0x158
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"util_shared", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -1061,7 +1061,7 @@ function _delay(time_or_notify, str_endon, func, arg1, arg2, arg3, arg4, arg5, a
 	{
 		self endon(str_endon);
 	}
-	if(function_7a600918(time_or_notify) || isstring(time_or_notify))
+	if(ishash(time_or_notify) || isstring(time_or_notify))
 	{
 		self waittill(time_or_notify);
 	}
@@ -1102,7 +1102,7 @@ function _delay_notify(time_or_notify, str_notify, str_endon)
 	{
 		self endon(str_endon);
 	}
-	if(function_7a600918(time_or_notify) || isstring(time_or_notify))
+	if(ishash(time_or_notify) || isstring(time_or_notify))
 	{
 		self waittill(time_or_notify);
 	}
@@ -2446,7 +2446,7 @@ function is_safehouse(str_next_map)
 {
 	if(!isdefined(str_next_map))
 	{
-		str_next_map = function_53bbf9d2();
+		str_next_map = get_map_name();
 	}
 	return false;
 }
@@ -2647,7 +2647,7 @@ function waittill_down_button_pressed()
 */
 function function_4c1656d5()
 {
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		return getdvarfloat(#"hash_4e7a02edee964bf9", 250);
 	}
@@ -2665,7 +2665,7 @@ function function_4c1656d5()
 */
 function function_16fb0a3b()
 {
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		if(getdvarint(#"hash_23a1d3a9139af42b", 0) > 0)
 		{
@@ -2746,8 +2746,8 @@ function function_c16f65a3(enemy_a, enemy_b)
 	/#
 		assert(enemy_a != enemy_b, "");
 	#/
-	level.var_766875b1[enemy_a] = enemy_b;
-	level.var_766875b1[enemy_b] = enemy_a;
+	level.team_enemy_mapping[enemy_a] = enemy_b;
+	level.team_enemy_mapping[enemy_b] = enemy_a;
 }
 
 /*
@@ -2815,7 +2815,7 @@ function preload_frontend(localclientnum, oldval, newval, bnewent, binitialsnap,
 {
 	if(bwastimejump == 1)
 	{
-		function_223e25d3();
+		preloadfrontend();
 	}
 }
 
@@ -2887,9 +2887,9 @@ function get_enemy_team(team)
 	{
 		return undefined;
 	}
-	if(isdefined(level.var_766875b1) && isdefined(level.var_766875b1[team]))
+	if(isdefined(level.team_enemy_mapping) && isdefined(level.team_enemy_mapping[team]))
 	{
-		return level.var_766875b1[team];
+		return level.team_enemy_mapping[team];
 	}
 	return #"none";
 }
@@ -2915,26 +2915,26 @@ function function_35aed314(teama, teamb)
 	{
 		return false;
 	}
-	if(isdefined(level.var_766875b1))
+	if(isdefined(level.team_enemy_mapping))
 	{
-		if(isdefined(level.var_766875b1[teama]))
+		if(isdefined(level.team_enemy_mapping[teama]))
 		{
-			if(#"any" == level.var_766875b1[teama])
+			if(#"any" == level.team_enemy_mapping[teama])
 			{
 				return true;
 			}
-			if(teamb == level.var_766875b1[teama])
+			if(teamb == level.team_enemy_mapping[teama])
 			{
 				return true;
 			}
 		}
-		if(isdefined(level.var_766875b1[teamb]))
+		if(isdefined(level.team_enemy_mapping[teamb]))
 		{
-			if(#"any" == level.var_766875b1[teamb])
+			if(#"any" == level.team_enemy_mapping[teamb])
 			{
 				return true;
 			}
-			if(teama == level.var_766875b1[teamb])
+			if(teama == level.team_enemy_mapping[teamb])
 			{
 				return true;
 			}
@@ -2958,7 +2958,7 @@ function is_on_side(str_team)
 }
 
 /*
-	Name: function_5df4294
+	Name: get_game_type
 	Namespace: util
 	Checksum: 0x9C66B41D
 	Offset: 0x5358
@@ -2966,13 +2966,13 @@ function is_on_side(str_team)
 	Parameters: 0
 	Flags: Linked
 */
-function function_5df4294()
+function get_game_type()
 {
 	return tolower(getdvarstring(#"g_gametype"));
 }
 
 /*
-	Name: function_53bbf9d2
+	Name: get_map_name
 	Namespace: util
 	Checksum: 0x3E916B60
 	Offset: 0x5398
@@ -2980,13 +2980,13 @@ function function_5df4294()
 	Parameters: 0
 	Flags: Linked
 */
-function function_53bbf9d2()
+function get_map_name()
 {
-	return tolower(getdvarstring(#"hash_3b7b241b78207c96"));
+	return tolower(getdvarstring(#"sv_mapname"));
 }
 
 /*
-	Name: function_3f165ee8
+	Name: is_frontend_map
 	Namespace: util
 	Checksum: 0x464C1227
 	Offset: 0x53D8
@@ -2994,9 +2994,9 @@ function function_53bbf9d2()
 	Parameters: 0
 	Flags: Linked
 */
-function function_3f165ee8()
+function is_frontend_map()
 {
-	return function_53bbf9d2() === "core_frontend";
+	return get_map_name() === "core_frontend";
 }
 
 /*
@@ -3011,10 +3011,10 @@ function function_3f165ee8()
 function function_26489405()
 {
 	isnightmap = 0;
-	mapname = function_53bbf9d2();
+	mapname = get_map_name();
 	switch(mapname)
 	{
-		case "hash_623073ec102c587a":
+		case "mp_casino":
 		{
 			isnightmap = 1;
 			break;
@@ -3028,7 +3028,7 @@ function function_26489405()
 }
 
 /*
-	Name: function_bca268b3
+	Name: is_arena_lobby
 	Namespace: util
 	Checksum: 0x52CB04A1
 	Offset: 0x5480
@@ -3036,7 +3036,7 @@ function function_26489405()
 	Parameters: 0
 	Flags: Linked
 */
-function function_bca268b3()
+function is_arena_lobby()
 {
 	mode = function_bea73b01();
 	if(mode == 3)
@@ -3269,7 +3269,7 @@ function function_48e57e36(var_1f1d12d8)
 }
 
 /*
-	Name: function_e2e9d901
+	Name: add_devgui
 	Namespace: util
 	Checksum: 0xA7071862
 	Offset: 0x5A70
@@ -3277,7 +3277,7 @@ function function_48e57e36(var_1f1d12d8)
 	Parameters: 3
 	Flags: None
 */
-function function_e2e9d901(localclientnum, menu_path, commands)
+function add_devgui(localclientnum, menu_path, commands)
 {
 	/#
 		adddebugcommand(localclientnum, ((("" + menu_path) + "") + commands) + "");
@@ -3285,7 +3285,7 @@ function function_e2e9d901(localclientnum, menu_path, commands)
 }
 
 /*
-	Name: function_d84da933
+	Name: remove_devgui
 	Namespace: util
 	Checksum: 0x7F3D554A
 	Offset: 0x5AD8
@@ -3293,7 +3293,7 @@ function function_e2e9d901(localclientnum, menu_path, commands)
 	Parameters: 2
 	Flags: None
 */
-function function_d84da933(localclientnum, menu_path)
+function remove_devgui(localclientnum, menu_path)
 {
 	/#
 		adddebugcommand(localclientnum, ("" + menu_path) + "");

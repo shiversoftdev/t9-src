@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_8c34ca59 : class_6aaccc24
+class cseeker_mine_prompt : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xB776CD1A
 		Offset: 0x398
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_8c34ca59 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xD88C065
 		Offset: 0x578
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_8c34ca59 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0x937D5049
 		Offset: 0x4D8
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_8c34ca59 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_8c34ca59
+		Name: register_clientside
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xA76C33
 		Offset: 0x440
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("seeker_mine_prompt");
+		cluielem::register_clientside("seeker_mine_prompt");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xFA2128E8
 		Offset: 0x3B8
 		Size: 0x7C
@@ -68,42 +68,42 @@ class class_8c34ca59 : class_6aaccc24
 	*/
 	function setup_clientfields(var_afaddf7a, var_ca3086f0)
 	{
-		namespace_6aaccc24::setup_clientfields("seeker_mine_prompt");
-		namespace_6aaccc24::function_da693cbe("progress", 1, 5, "float", var_afaddf7a);
-		namespace_6aaccc24::function_da693cbe("promptState", 1, 2, "int", var_ca3086f0);
+		cluielem::setup_clientfields("seeker_mine_prompt");
+		cluielem::add_clientfield("progress", 1, 5, "float", var_afaddf7a);
+		cluielem::add_clientfield("promptState", 1, 2, "int", var_ca3086f0);
 	}
 
 	/*
-		Name: function_affe8f61
-		Namespace: namespace_8c34ca59
+		Name: set_progress
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xECA01C31
 		Offset: 0x508
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_affe8f61(localclientnum, value)
+	function set_progress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "progress", value);
+		[[ self ]]->set_data(localclientnum, "progress", value);
 	}
 
 	/*
-		Name: function_c719cfea
-		Namespace: namespace_8c34ca59
+		Name: set_promptstate
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xF58C3904
 		Offset: 0x540
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c719cfea(localclientnum, value)
+	function set_promptstate(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "promptState", value);
+		[[ self ]]->set_data(localclientnum, "promptState", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_8c34ca59
+		Namespace: cseeker_mine_prompt
 		Checksum: 0xCEE6291E
 		Offset: 0x468
 		Size: 0x64
@@ -112,9 +112,9 @@ class class_8c34ca59 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "progress", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "promptState", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "progress", 0);
+		[[ self ]]->set_data(localclientnum, "promptState", 0);
 	}
 
 }
@@ -132,7 +132,7 @@ class class_8c34ca59 : class_6aaccc24
 */
 function private autoexec function_a5e5e1c9()
 {
-	level notify(490628782);
+	level notify(-490628782);
 }
 
 /*
@@ -146,7 +146,7 @@ function private autoexec function_a5e5e1c9()
 */
 function register(var_afaddf7a, var_ca3086f0)
 {
-	elem = new class_8c34ca59();
+	elem = new cseeker_mine_prompt();
 	[[ elem ]]->setup_clientfields(var_afaddf7a, var_ca3086f0);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -168,7 +168,7 @@ function register(var_afaddf7a, var_ca3086f0)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: seeker_mine_prompt
 	Checksum: 0x93199B89
 	Offset: 0x280
@@ -176,10 +176,10 @@ function register(var_afaddf7a, var_ca3086f0)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_8c34ca59();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cseeker_mine_prompt();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -226,7 +226,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_affe8f61
+	Name: set_progress
 	Namespace: seeker_mine_prompt
 	Checksum: 0x2412093C
 	Offset: 0x338
@@ -234,13 +234,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_affe8f61(localclientnum, value)
+function set_progress(localclientnum, value)
 {
-	[[ self ]]->function_affe8f61(localclientnum, value);
+	[[ self ]]->set_progress(localclientnum, value);
 }
 
 /*
-	Name: function_c719cfea
+	Name: set_promptstate
 	Namespace: seeker_mine_prompt
 	Checksum: 0xC5C169A3
 	Offset: 0x368
@@ -248,8 +248,8 @@ function function_affe8f61(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c719cfea(localclientnum, value)
+function set_promptstate(localclientnum, value)
 {
-	[[ self ]]->function_c719cfea(localclientnum, value);
+	[[ self ]]->set_promptstate(localclientnum, value);
 }
 

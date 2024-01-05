@@ -1,12 +1,12 @@
-#using script_35b5ff21c2a0960f;
+#using scripts\weapons\deployable.gsc;
 #using script_4266a5d281c65453;
-#using script_79a7e1c31a3e8cc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\cp_common\challenges.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_actor.gsc;
 #using scripts\cp_common\gametypes\globallogic_player.gsc;
+#using scripts\cp_common\gametypes\globallogic_actor.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
+#using scripts\cp_common\challenges.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\globallogic\globallogic_vehicle.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace callbacks;
 
@@ -27,7 +27,7 @@ function private autoexec function_d6f6ac23()
 #namespace callback;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: callback
 	Checksum: 0x2F5016A8
 	Offset: 0xD0
@@ -35,7 +35,7 @@ function private autoexec function_d6f6ac23()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"callback", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -112,14 +112,14 @@ function set_default_callbacks()
 	level.callbackplayerdisconnect = &globallogic_player::callback_playerdisconnect;
 	level.callbackplayerdamage = &globallogic_player::callback_playerdamage;
 	level.callbackplayerkilled = &globallogic_player::callback_playerkilled;
-	level.var_7509c7d8 = &globallogic_player::function_452827de;
+	level.callbackplayershielddamageblocked = &globallogic_player::callback_playershielddamageblocked;
 	level.var_3a9881cb = &globallogic_player::function_74b6d714;
 	level.callbackplayermelee = &globallogic_player::callback_playermelee;
 	level.callbackactorspawned = &globallogic_actor::callback_actorspawned;
 	level.callbackactordamage = &globallogic_actor::callback_actordamage;
 	level.callbackactorkilled = &globallogic_actor::callback_actorkilled;
 	level.callbackactorcloned = &globallogic_actor::callback_actorcloned;
-	level.var_6788bf11 = &namespace_e42b3e24::function_8c7ec52f;
+	level.var_6788bf11 = &globallogic_scriptmover::function_8c7ec52f;
 	level.callbackvehiclespawned = &globallogic_vehicle::callback_vehiclespawned;
 	level.callbackvehicledamage = &globallogic_vehicle::callback_vehicledamage;
 	level.callbackvehiclekilled = &globallogic_vehicle::callback_vehiclekilled;

@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_3df1eeda : class_6aaccc24
+class czm_trial_timer : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0x7D6CC707
 		Offset: 0x380
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_3df1eeda : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0x138AA621
 		Offset: 0x560
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_3df1eeda : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0xBD2F54B0
 		Offset: 0x4C0
 		Size: 0x24
@@ -40,54 +40,54 @@ class class_3df1eeda : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_3df1eeda
+		Name: register_clientside
+		Namespace: czm_trial_timer
 		Checksum: 0xE3193775
 		Offset: 0x428
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_trial_timer");
+		cluielem::register_clientside("zm_trial_timer");
 	}
 
 	/*
-		Name: function_6ad54036
-		Namespace: namespace_3df1eeda
+		Name: set_under_round_rules
+		Namespace: czm_trial_timer
 		Checksum: 0x2E968043
 		Offset: 0x528
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_6ad54036(localclientnum, value)
+	function set_under_round_rules(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "under_round_rules", value);
+		[[ self ]]->set_data(localclientnum, "under_round_rules", value);
 	}
 
 	/*
-		Name: function_8ede8e82
-		Namespace: namespace_3df1eeda
+		Name: set_timer_text
+		Namespace: czm_trial_timer
 		Checksum: 0xFF74B72D
 		Offset: 0x4F0
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_8ede8e82(localclientnum, value)
+	function set_timer_text(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "timer_text", value);
+		[[ self ]]->set_data(localclientnum, "timer_text", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0x7FDF8825
 		Offset: 0x3A0
 		Size: 0x7C
@@ -96,14 +96,14 @@ class class_3df1eeda : class_6aaccc24
 	*/
 	function setup_clientfields(var_96b8e5ea, var_33be6591)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_trial_timer");
-		namespace_6aaccc24::function_dcb34c80("string", "timer_text", 1);
-		namespace_6aaccc24::function_da693cbe("under_round_rules", 1, 1, "int", var_33be6591);
+		cluielem::setup_clientfields("zm_trial_timer");
+		cluielem::function_dcb34c80("string", "timer_text", 1);
+		cluielem::add_clientfield("under_round_rules", 1, 1, "int", var_33be6591);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_3df1eeda
+		Namespace: czm_trial_timer
 		Checksum: 0xDF6CD8AB
 		Offset: 0x450
 		Size: 0x68
@@ -112,9 +112,9 @@ class class_3df1eeda : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "timer_text", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "under_round_rules", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "timer_text", #"");
+		[[ self ]]->set_data(localclientnum, "under_round_rules", 0);
 	}
 
 }
@@ -132,7 +132,7 @@ class class_3df1eeda : class_6aaccc24
 */
 function register(var_96b8e5ea, var_33be6591)
 {
-	elem = new class_3df1eeda();
+	elem = new czm_trial_timer();
 	[[ elem ]]->setup_clientfields(var_96b8e5ea, var_33be6591);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -154,7 +154,7 @@ function register(var_96b8e5ea, var_33be6591)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: zm_trial_timer
 	Checksum: 0xDC2268C2
 	Offset: 0x268
@@ -162,10 +162,10 @@ function register(var_96b8e5ea, var_33be6591)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_3df1eeda();
-	[[ elem ]]->function_5c1bb138();
+	elem = new czm_trial_timer();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -212,7 +212,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_8ede8e82
+	Name: set_timer_text
 	Namespace: zm_trial_timer
 	Checksum: 0x2C1E43D5
 	Offset: 0x320
@@ -220,13 +220,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_8ede8e82(localclientnum, value)
+function set_timer_text(localclientnum, value)
 {
-	[[ self ]]->function_8ede8e82(localclientnum, value);
+	[[ self ]]->set_timer_text(localclientnum, value);
 }
 
 /*
-	Name: function_6ad54036
+	Name: set_under_round_rules
 	Namespace: zm_trial_timer
 	Checksum: 0x4FB12491
 	Offset: 0x350
@@ -234,8 +234,8 @@ function function_8ede8e82(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_6ad54036(localclientnum, value)
+function set_under_round_rules(localclientnum, value)
 {
-	[[ self ]]->function_6ad54036(localclientnum, value);
+	[[ self ]]->set_under_round_rules(localclientnum, value);
 }
 

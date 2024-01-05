@@ -1,12 +1,12 @@
+#using scripts\core_common\system_shared.gsc;
 #using script_35ae72be7b4fec10;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_4ea0b0e1;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4ea0b0e1
 	Checksum: 0x67C69103
 	Offset: 0xD8
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3092c343f49326ae", &function_c7f33cce, undefined, undefined, undefined);
 }

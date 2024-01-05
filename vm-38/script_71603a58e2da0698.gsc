@@ -1,33 +1,33 @@
-#using script_18910f59cc847b42;
-#using script_1b2f6ef7778cf920;
+#using script_3b893ec1252cdffd;
+#using scripts\core_common\ai\zombie_vortex.csc;
+#using script_76abb7986de59601;
+#using script_67049b48b589d81;
+#using script_64e5d3ad71ce8140;
+#using script_6b71c9befed901f2;
+#using script_75c3996cce8959f7;
+#using script_71603a58e2da0698;
 #using script_30c7fb449869910;
 #using script_33128b01aae27d52;
-#using script_3314b730521b9666;
-#using script_38635d174016f682;
-#using script_3b893ec1252cdffd;
-#using script_42cbbdcd1e160063;
-#using script_4adf64e112e9afec;
-#using script_4b8e80d5d6c93ae1;
-#using script_64e5d3ad71ce8140;
-#using script_67049b48b589d81;
-#using script_6b71c9befed901f2;
-#using script_71603a58e2da0698;
-#using script_75c3996cce8959f7;
-#using script_76abb7986de59601;
-#using script_77163d5a569e2071;
+#using script_1b2f6ef7778cf920;
 #using script_771f5bff431d8d57;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
+#using script_4adf64e112e9afec;
+#using script_42cbbdcd1e160063;
+#using script_3314b730521b9666;
+#using script_77163d5a569e2071;
+#using script_38635d174016f682;
+#using script_18910f59cc847b42;
 #using scripts\core_common\hud_message_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\serverfield_shared.csc;
-#using scripts\core_common\spawner_shared.csc;
-#using scripts\core_common\spawning_shared.csc;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\spawning_shared.csc;
+#using scripts\core_common\spawner_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\serverfield_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_b59ddbce;
 
@@ -42,7 +42,7 @@
 */
 function private autoexec function_501b3599()
 {
-	level notify(550079208);
+	level notify(-550079208);
 }
 
 /*
@@ -56,7 +56,7 @@ function private autoexec function_501b3599()
 */
 function init()
 {
-	level.var_46a66896 = doa_overworld::function_5c1bb138();
+	level.var_46a66896 = doa_overworld::register_clientside();
 	clientfield::register("allplayers", "bombDrop", 1, 1, "int", &function_c75159ad, 0, 0);
 	clientfield::register("toplayer", "cutscene", 1, 2, "int", &function_769d489, 0, 0);
 	clientfield::register("toplayer", "controlBinding", 1, 4, "counter", &function_e7a44fda, 0, 0);

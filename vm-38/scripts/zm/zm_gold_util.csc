@@ -1,8 +1,8 @@
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using script_2f2e0161d9aace47;
 #using script_341ccd78d3215071;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\util_shared.csc;
 
 #namespace namespace_5c4c9a39;
 
@@ -31,7 +31,7 @@ function private autoexec function_7b6ea63c()
 */
 function init()
 {
-	namespace_82d7691b::register();
-	namespace_2d060063::register();
+	zm_gold_hud::register();
+	zm_gold_align_satellite_hud::register();
 }
 

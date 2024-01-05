@@ -1,12 +1,12 @@
 #using script_618d6f5ff5d18933;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_7da6f8ca;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_7da6f8ca
 	Checksum: 0x52DA64B5
 	Offset: 0xD8
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_40a4f03bb2983ee3", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -135,12 +135,12 @@ function item_updateworldfx(localclientnum, oldval, newval, bnewent, binitialsna
 		self.falling = 0;
 		if(isdefined(level.var_d342a3fd) && isdefined(level.var_d342a3fd[fieldname]))
 		{
-			var_8040e225 = level.var_d342a3fd[fieldname];
-			model = var_8040e225.var_ab111430[self.var_bd027dd9];
+			clientdata = level.var_d342a3fd[fieldname];
+			model = clientdata.modellist[self.var_bd027dd9];
 			if(isdefined(model))
 			{
 				item_world::function_2990e5f(fieldname, model);
-				model.var_f7fa2943 = undefined;
+				model.modelfx = undefined;
 				wait(0.5);
 				if(isdefined(self) && (isdefined(self.var_bd027dd9) && isdefined(model)))
 				{

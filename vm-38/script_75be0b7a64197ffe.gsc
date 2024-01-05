@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_2c949ef8;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_afbca2dd()
 {
-	level notify(869636470);
+	level notify(-869636470);
 }
 
 /*

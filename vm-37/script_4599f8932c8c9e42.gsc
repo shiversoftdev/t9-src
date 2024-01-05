@@ -1,10 +1,10 @@
-#using script_6c8abe14025b47c4;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace ray_gun;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: ray_gun
 	Checksum: 0xD9F34356
 	Offset: 0x88
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"ray_gun", &__init__, undefined, undefined, #"killstreaks");
 }
@@ -30,7 +30,7 @@ function __init__()
 {
 	if(!sessionmodeiscampaigngame() && !sessionmodeiszombiesgame())
 	{
-		killstreaks::function_e4ef8390("killstreak_ray_gun", &killstreaks::function_fc82c544);
+		killstreaks::register_killstreak("killstreak_ray_gun", &killstreaks::function_fc82c544);
 	}
 }
 

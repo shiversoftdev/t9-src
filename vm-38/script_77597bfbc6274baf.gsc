@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_cc6c4729;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_da410efd()
 {
-	level notify(541595440);
+	level notify(-541595440);
 }
 
 #namespace namespace_8a08914c;
@@ -37,7 +37,7 @@ function init()
 	clientfield::register("world", "" + #"hash_22d24ba0bcf94c3f", 28000, getminbitcountfornum(2), "int", &function_c8ff2bab, 0, 0);
 	clientfield::register("world", "" + #"hash_2d4fdf69e826bcc4", 28000, getminbitcountfornum(2), "int", &function_761411a9, 0, 0);
 	clientfield::register("actor", "" + #"zombie_soul", 28000, 1, "int", &function_bb5d646a, 0, 0);
-	clientfield::register("world", "" + #"hash_404bf39ceee49c7e", 28000, 1, "int", &function_18ee8bed, 0, 0);
+	clientfield::register("world", "" + #"ww_crystalaxe_glow", 28000, 1, "int", &ww_crystalaxe_glow, 0, 0);
 }
 
 /*
@@ -268,7 +268,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 /*
-	Name: function_18ee8bed
+	Name: ww_crystalaxe_glow
 	Namespace: namespace_8a08914c
 	Checksum: 0x5A279271
 	Offset: 0x1288
@@ -276,7 +276,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
 	Parameters: 7
 	Flags: Linked
 */
-function function_18ee8bed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump)
+function ww_crystalaxe_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump)
 {
 	a_s_fx = struct::get_array("ww_crystalaxe_glow");
 	if(bwasdemojump)

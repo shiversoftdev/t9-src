@@ -1,7 +1,7 @@
 #using script_75da5547b1822294;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\oob.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
 
 #namespace oob;
 
@@ -103,7 +103,7 @@ function private function_c1471c7c(point)
 */
 function private _teleport_player(origin, angles, var_9914886a)
 {
-	self endon(#"disconnect", #"hash_6b2be5fc7a5ce34f");
+	self endon(#"disconnect", #"insertion_starting");
 	self.oobdisabled = 1;
 	fadetime = 0.5;
 	self thread hud::fade_to_black_for_x_sec(0, 1, fadetime, fadetime);
@@ -155,15 +155,15 @@ function function_b777ff94(entity)
 	{
 		player = players[index];
 		startpoint = player.origin + (playeroffset * index);
-		var_8390ff37 = function_2a3d483d(startpoint);
-		var_8390ff37 = function_c1471c7c(var_8390ff37);
-		var_ee243d11 = vectortoangles(mapcenter - player.origin);
+		validpoint = function_2a3d483d(startpoint);
+		validpoint = function_c1471c7c(validpoint);
+		toangles = vectortoangles(mapcenter - player.origin);
 		if(!isplayer(player))
 		{
 			player dodamage(player.health, player.origin);
 			continue;
 		}
-		player thread _teleport_player(var_8390ff37, var_ee243d11, var_9914886a);
+		player thread _teleport_player(validpoint, toangles, var_9914886a);
 	}
 }
 
@@ -178,8 +178,8 @@ function function_b777ff94(entity)
 */
 function function_cabed683(startpoint)
 {
-	var_8390ff37 = function_2a3d483d(startpoint);
-	var_8390ff37 = function_c1471c7c(var_8390ff37);
-	return var_8390ff37;
+	validpoint = function_2a3d483d(startpoint);
+	validpoint = function_c1471c7c(validpoint);
+	return validpoint;
 }
 

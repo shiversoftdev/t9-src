@@ -1,9 +1,9 @@
-#using script_13da4e6b98ca81a1;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\lui_shared.csc;
 #using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using script_13da4e6b98ca81a1;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace dom;
 
@@ -18,7 +18,7 @@
 */
 function private autoexec function_522fa780()
 {
-	level notify(1999961813);
+	level notify(-1999961813);
 }
 
 /*
@@ -225,7 +225,7 @@ function function_e116df6c(localclientnum, oldval, newval, bnewent, binitialsnap
 		}
 		if(!self function_d2503806(level.var_117b4a3a[0]))
 		{
-			self function_bf9d3071(level.var_117b4a3a[0]);
+			self playrenderoverridebundle(level.var_117b4a3a[0]);
 		}
 	}
 }
@@ -606,20 +606,20 @@ function function_dd2493cc(local_client_num, objid)
 			{
 				continue;
 			}
-			for(var_e8c72d8f = 0; var_e8c72d8f < level.var_117b4a3a.size; var_e8c72d8f++)
+			for(si = 0; si < level.var_117b4a3a.size; si++)
 			{
-				rob = level.var_117b4a3a[var_e8c72d8f] + suffix;
+				rob = level.var_117b4a3a[si] + suffix;
 				if(entity function_d2503806(rob))
 				{
-					if(state != var_e8c72d8f)
+					if(state != si)
 					{
-						entity function_5d482e78(rob);
+						entity stoprenderoverridebundle(rob);
 					}
 					continue;
 				}
-				if(state == var_e8c72d8f)
+				if(state == si)
 				{
-					entity function_bf9d3071(rob);
+					entity playrenderoverridebundle(rob);
 					if(iscodcaster)
 					{
 						codcaster::function_773f6e31(local_client_num, entity, rob, state);

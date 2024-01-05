@@ -1,35 +1,35 @@
-#using script_1254ac024174d9c0;
-#using script_14f4a3c583c77d4b;
-#using script_340a2e805e35f7a2;
-#using script_471b31bd963b388e;
+#using scripts\zm_common\gametypes\globallogic.gsc;
 #using script_5e96d104c70be5ac;
-#using script_6e3c826b1814cab6;
-#using script_7a8059ca02b7b09e;
-#using script_7bacb32f8222fa3e;
-#using script_7fc996fe8678852;
-#using script_ab890501c40b73c;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\zm_common\trials\zm_trial_disable_buys.gsc;
+#using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\zm_common\zm_melee_weapon.gsc;
+#using scripts\zm_common\zm_magicbox.gsc;
+#using scripts\zm_common\zm_loadout.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\zm_common\zm_customgame.gsc;
+#using scripts\zm_common\zm_contracts.gsc;
+#using scripts\zm_common\zm_bgb.gsc;
+#using scripts\zm_common\zm_audio.gsc;
 #using scripts\zm_common\bb.gsc;
 #using scripts\zm_common\callbacks.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_bgb.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_magicbox.gsc;
-#using scripts\zm_common\zm_melee_weapon.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_unitrigger.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
-#using scripts\zm_common\zm_zonemgr.gsc;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\math_shared.gsc;
+#using script_340a2e805e35f7a2;
+#using script_471b31bd963b388e;
+#using script_7bacb32f8222fa3e;
+#using script_7fc996fe8678852;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_207ea311;
 
@@ -44,11 +44,11 @@
 */
 function private autoexec function_8c17fa74()
 {
-	level notify(183829673);
+	level notify(-183829673);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_207ea311
 	Checksum: 0xFD92F2F
 	Offset: 0x1C0
@@ -56,7 +56,7 @@ function private autoexec function_8c17fa74()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_684573a459d68beb", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -169,7 +169,7 @@ function function_23c31b4e()
 			}
 			else
 			{
-				self thread function_3ba2978d();
+				self childthread function_3ba2978d();
 			}
 		}
 		waitresult = undefined;
@@ -207,7 +207,7 @@ function function_3ba2978d()
 		{
 			self clientfield::set("" + #"hash_63af42145e260fb5", 0);
 		}
-		self waittill(#"hash_2d4daa9e80b86b60");
+		self waittill(#"zone_change");
 	}
 }
 

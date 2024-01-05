@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_ec90ce81 : class_6aaccc24
+class csr_weapon_upgrade_menu : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x928FF90A
 		Offset: 0x180
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x1463279F
 		Offset: 0x240
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_ec90ce81 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x2CCA2BF4
 		Offset: 0x1C8
 		Size: 0x3C
@@ -44,12 +44,12 @@ class class_ec90ce81 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x4FDBFC39
 		Offset: 0x210
 		Size: 0x24
@@ -58,12 +58,12 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_ec90ce81
+		Namespace: csr_weapon_upgrade_menu
 		Checksum: 0x18BACB35
 		Offset: 0x1A0
 		Size: 0x1C
@@ -72,7 +72,7 @@ class class_ec90ce81 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_weapon_upgrade_menu");
+		cluielem::setup_clientfields("sr_weapon_upgrade_menu");
 	}
 
 }
@@ -90,7 +90,7 @@ class class_ec90ce81 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_ec90ce81();
+	elem = new csr_weapon_upgrade_menu();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

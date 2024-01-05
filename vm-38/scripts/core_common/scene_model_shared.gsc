@@ -44,6 +44,6 @@ class cscenemodel : csceneobject
 */
 function private autoexec function_e80dcecf()
 {
-	level notify(1399206413);
+	level notify(-1399206413);
 }
 

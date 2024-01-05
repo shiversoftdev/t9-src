@@ -1,8 +1,8 @@
 #using script_13114d8a31c6152a;
-#using script_35ae72be7b4fec10;
+#using scripts\core_common\values_shared.gsc;
 #using script_4937c6974f43bb71;
 #using script_7d0013bbc05623b9;
-#using scripts\core_common\values_shared.gsc;
+#using script_35ae72be7b4fec10;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
 
 #namespace namespace_a9a79253;

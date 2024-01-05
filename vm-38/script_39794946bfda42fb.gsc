@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_c33e75d1 : class_6aaccc24
+class class_c33e75d1 : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,11 +47,11 @@ class class_c33e75d1 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_1870151b
+		Name: set_racetotallap
 		Namespace: namespace_c33e75d1
 		Checksum: 0xEFE7233D
 		Offset: 0x4B0
@@ -59,13 +59,13 @@ class class_c33e75d1 : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_1870151b(player, value)
+	function set_racetotallap(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "raceTotalLap", value);
 	}
 
 	/*
-		Name: function_2b44c64e
+		Name: set_raceranking
 		Namespace: namespace_c33e75d1
 		Checksum: 0x4DABA36B
 		Offset: 0x410
@@ -73,13 +73,13 @@ class class_c33e75d1 : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_2b44c64e(player, value)
+	function set_raceranking(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "raceRanking", value);
 	}
 
 	/*
-		Name: function_2b80b614
+		Name: set_racerewardtier
 		Namespace: namespace_c33e75d1
 		Checksum: 0x7CDBA257
 		Offset: 0x500
@@ -87,13 +87,13 @@ class class_c33e75d1 : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_2b80b614(player, value)
+	function set_racerewardtier(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "raceRewardTier", value);
 	}
 
 	/*
-		Name: function_307daa91
+		Name: set_racecurrentlap
 		Namespace: namespace_c33e75d1
 		Checksum: 0xEB6E0B96
 		Offset: 0x460
@@ -101,7 +101,7 @@ class class_c33e75d1 : class_6aaccc24
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_307daa91(player, value)
+	function set_racecurrentlap(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "raceCurrentLap", value);
 	}
@@ -117,7 +117,7 @@ class class_c33e75d1 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -131,20 +131,20 @@ class class_c33e75d1 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_tungsten_grandprix");
-		namespace_6aaccc24::function_da693cbe("raceRanking", 28000, 2, "int");
-		namespace_6aaccc24::function_da693cbe("raceCurrentLap", 28000, 2, "int");
-		namespace_6aaccc24::function_da693cbe("raceTotalLap", 28000, 2, "int");
-		namespace_6aaccc24::function_da693cbe("raceRewardTier", 28000, 2, "int", 0);
+		cluielem::setup_clientfields("zm_tungsten_grandprix");
+		cluielem::add_clientfield("raceRanking", 28000, 2, "int");
+		cluielem::add_clientfield("raceCurrentLap", 28000, 2, "int");
+		cluielem::add_clientfield("raceTotalLap", 28000, 2, "int");
+		cluielem::add_clientfield("raceRewardTier", 28000, 2, "int", 0);
 	}
 
 }
 
-#namespace namespace_5ac3cdbb;
+#namespace zm_tungsten_grandprix;
 
 /*
 	Name: function_7412301b
-	Namespace: namespace_5ac3cdbb
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0x6AA776DF
 	Offset: 0x100
 	Size: 0x14
@@ -158,7 +158,7 @@ function private autoexec function_7412301b()
 
 /*
 	Name: register
-	Namespace: namespace_5ac3cdbb
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0x759888E7
 	Offset: 0x120
 	Size: 0x34
@@ -174,7 +174,7 @@ function register()
 
 /*
 	Name: open
-	Namespace: namespace_5ac3cdbb
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0x584B4B43
 	Offset: 0x160
 	Size: 0x38
@@ -192,7 +192,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_5ac3cdbb
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0x5189623B
 	Offset: 0x1A0
 	Size: 0x1C
@@ -206,7 +206,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_5ac3cdbb
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0xC3D6EA8D
 	Offset: 0x1C8
 	Size: 0x1A
@@ -219,58 +219,58 @@ function is_open(player)
 }
 
 /*
-	Name: function_2b44c64e
-	Namespace: namespace_5ac3cdbb
+	Name: set_raceranking
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0x88DFDB3D
 	Offset: 0x1F0
 	Size: 0x28
 	Parameters: 2
 	Flags: Linked
 */
-function function_2b44c64e(player, value)
+function set_raceranking(player, value)
 {
-	[[ self ]]->function_2b44c64e(player, value);
+	[[ self ]]->set_raceranking(player, value);
 }
 
 /*
-	Name: function_307daa91
-	Namespace: namespace_5ac3cdbb
+	Name: set_racecurrentlap
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0xE25ED9EE
 	Offset: 0x220
 	Size: 0x28
 	Parameters: 2
 	Flags: Linked
 */
-function function_307daa91(player, value)
+function set_racecurrentlap(player, value)
 {
-	[[ self ]]->function_307daa91(player, value);
+	[[ self ]]->set_racecurrentlap(player, value);
 }
 
 /*
-	Name: function_1870151b
-	Namespace: namespace_5ac3cdbb
+	Name: set_racetotallap
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0xD1C97B0A
 	Offset: 0x250
 	Size: 0x28
 	Parameters: 2
 	Flags: Linked
 */
-function function_1870151b(player, value)
+function set_racetotallap(player, value)
 {
-	[[ self ]]->function_1870151b(player, value);
+	[[ self ]]->set_racetotallap(player, value);
 }
 
 /*
-	Name: function_2b80b614
-	Namespace: namespace_5ac3cdbb
+	Name: set_racerewardtier
+	Namespace: zm_tungsten_grandprix
 	Checksum: 0x1AC53E22
 	Offset: 0x280
 	Size: 0x28
 	Parameters: 2
 	Flags: Linked
 */
-function function_2b80b614(player, value)
+function set_racerewardtier(player, value)
 {
-	[[ self ]]->function_2b80b614(player, value);
+	[[ self ]]->set_racerewardtier(player, value);
 }
 

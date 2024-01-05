@@ -1,16 +1,16 @@
-#using script_7f1f926c510e9617;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\load_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using script_7f1f926c510e9617;
 #using scripts\cp_common\util.csc;
+#using scripts\core_common\load_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace districts;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: districts
 	Checksum: 0xA3223549
 	Offset: 0xE0
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("cp_districts_system", &function_70a657d8, undefined, undefined, undefined);
 }

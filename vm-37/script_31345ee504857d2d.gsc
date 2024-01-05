@@ -1,28 +1,28 @@
-#using script_178024232e91b0a1;
-#using script_3aa0f32b70d4f7cb;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using script_3aa0f32b70d4f7cb;
+#using script_178024232e91b0a1;
 
-#namespace namespace_9ce42227;
+#namespace aiinteractables;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_9ce42227
+	Name: __init__system__
+	Namespace: aiinteractables
 	Checksum: 0x69ADAE6F
 	Offset: 0x98
 	Size: 0x3C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_7e51b62fb1d59a7b", &function_70a657d8, undefined, undefined, undefined);
+	system::register(#"ai_interactables", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_9ce42227
+	Namespace: aiinteractables
 	Checksum: 0xD73C203
 	Offset: 0xE0
 	Size: 0x14C
@@ -48,7 +48,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_2f0f1b62
-	Namespace: namespace_9ce42227
+	Namespace: aiinteractables
 	Checksum: 0x179EA19A
 	Offset: 0x238
 	Size: 0x120
@@ -77,7 +77,7 @@ function private function_2f0f1b62()
 
 /*
 	Name: function_64d25a18
-	Namespace: namespace_9ce42227
+	Namespace: aiinteractables
 	Checksum: 0x7EDCD6CC
 	Offset: 0x360
 	Size: 0xC0
@@ -115,7 +115,7 @@ function function_64d25a18(entity)
 
 /*
 	Name: function_b4bc7751
-	Namespace: namespace_9ce42227
+	Namespace: aiinteractables
 	Checksum: 0x1D620CC9
 	Offset: 0x428
 	Size: 0x158

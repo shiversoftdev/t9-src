@@ -1,14 +1,14 @@
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\tracker_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\tracker_shared.gsc;
 
 #namespace tracker;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: tracker
 	Checksum: 0x3BB5C8C6
 	Offset: 0x90
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"tracker", &function_70a657d8, undefined, undefined, undefined);
 }

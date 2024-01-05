@@ -1,30 +1,30 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_1a9763988299e68d;
-#using script_1b01e95a6b5270fd;
-#using script_1b0b07ff57d1dde3;
-#using script_1ce46999727f2f2b;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_2e9202713de2b353;
-#using script_350cffecd05ef6cf;
-#using script_40f967ad5d18ea74;
-#using script_41fbdfb1149a433e;
-#using script_47851dbeea22fe66;
-#using script_47fb62300ac0bd60;
-#using script_48e04a393ec6d855;
-#using script_4d748e58ce25b60c;
-#using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_73ad7687b437e468;
-#using script_74a56359b7d02ab6;
 #using script_77357b2d180aa2b8;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
+#using script_1a9763988299e68d;
+#using script_2a5bf5b4a00cee0d;
+#using script_40f967ad5d18ea74;
+#using script_47851dbeea22fe66;
+#using script_1ce46999727f2f2b;
+#using script_164a456ce05c3483;
+#using script_4d748e58ce25b60c;
+#using script_5f20d3b434d24884;
+#using script_1b0b07ff57d1dde3;
+#using script_1ee011cd0961afd7;
+#using script_350cffecd05ef6cf;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
+#using script_74a56359b7d02ab6;
+#using script_2e9202713de2b353;
+#using script_41fbdfb1149a433e;
+#using script_73ad7687b437e468;
+#using script_48e04a393ec6d855;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_a6056a45;
 
@@ -249,11 +249,11 @@ function function_9592df27()
 					/#
 						assert(isdefined(def), "");
 					#/
-					var_4981a43f = doa_pickups::function_d080f0db(def, item.origin, item.angles, undefined, 1);
-					if(isdefined(var_4981a43f))
+					pickupitem = doa_pickups::itemspawn(def, item.origin, item.angles, undefined, 1);
+					if(isdefined(pickupitem))
 					{
-						var_4981a43f thread namespace_ec06fe4a::function_73d79e7d(self.script_model, 1, vectorscale((0, 0, 1), 20));
-						var_4981a43f notify(#"hash_2a866f50cc161ca8");
+						pickupitem thread namespace_ec06fe4a::function_73d79e7d(self.script_model, 1, vectorscale((0, 0, 1), 20));
+						pickupitem notify(#"hash_2a866f50cc161ca8");
 						if(!isdefined(self.var_152b081b))
 						{
 							self.var_152b081b = [];
@@ -262,7 +262,7 @@ function function_9592df27()
 						{
 							self.var_152b081b = array(self.var_152b081b);
 						}
-						self.var_152b081b[self.var_152b081b.size] = var_4981a43f;
+						self.var_152b081b[self.var_152b081b.size] = pickupitem;
 					}
 					break;
 				}

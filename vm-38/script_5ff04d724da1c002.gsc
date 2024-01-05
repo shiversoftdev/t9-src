@@ -1,7 +1,7 @@
 #using script_355c6e84a79530cb;
-#using script_7fc996fe8678852;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_7fc996fe8678852;
 
 #namespace namespace_7a9f67c8;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_9de556b8()
 {
-	level notify(793881006);
+	level notify(-793881006);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_7a9f67c8
 	Checksum: 0x977BDC54
 	Offset: 0xA0
@@ -28,7 +28,7 @@ function private autoexec function_9de556b8()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3617acb8b856566f", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }

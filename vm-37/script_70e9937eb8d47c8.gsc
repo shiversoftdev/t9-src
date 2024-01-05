@@ -1,19 +1,19 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_1cc417743d7c262d;
-#using script_3411bb48d41bd3b;
-#using script_3f9e0dc8454d98e1;
-#using script_73bd646be3641c07;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_blockers.gsc;
-#using scripts\zm_common\zm_score.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_73bd646be3641c07;
+#using scripts\zm_common\zm_blockers.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_3411bb48d41bd3b;
+#using scripts\zm_common\zm_score.gsc;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace zm_barricade;
 
@@ -75,8 +75,8 @@ function function_14354831()
 	if(self.content_key === "barricade_window")
 	{
 		str_target = self.target2;
-		var_575ce9bb = struct::get_array(str_target);
-		foreach(s_part in var_575ce9bb)
+		a_s_parts = struct::get_array(str_target);
+		foreach(s_part in a_s_parts)
 		{
 			if(s_part.script_noteworthy === "barrier_align")
 			{
@@ -84,8 +84,8 @@ function function_14354831()
 				v_old_angles = self.angles;
 				self.origin = s_part.origin;
 				self.angles = s_part.angles;
-				self.var_c592952e = namespace_8b6a9d79::function_94974eef(self, "zbarrier_" + self.zbarrier);
-				self.var_c592952e.targetname = str_target;
+				self.e_barricade = namespace_8b6a9d79::function_94974eef(self, "zbarrier_" + self.zbarrier);
+				self.e_barricade.targetname = str_target;
 				self.origin = var_721fe4cf;
 				self.angles = v_old_angles;
 				break;
@@ -149,8 +149,8 @@ function function_14354831()
 	setenablenode(self.neg_start, 1);
 	setenablenode(self.neg_end, 0);
 	self zm_blockers::blocker_attack_spots();
-	var_575ce9bb = struct::get_array(str_target);
-	foreach(s_part in var_575ce9bb)
+	a_s_parts = struct::get_array(str_target);
+	foreach(s_part in a_s_parts)
 	{
 		if(s_part.script_noteworthy === "trigger_location")
 		{

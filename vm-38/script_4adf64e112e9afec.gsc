@@ -1,32 +1,32 @@
-#using script_15672f35157ae7ca;
-#using script_18910f59cc847b42;
-#using script_30c7fb449869910;
-#using script_3314b730521b9666;
-#using script_38635d174016f682;
 #using script_3b893ec1252cdffd;
-#using script_42cbbdcd1e160063;
-#using script_5d76b3609d3af702;
-#using script_60a2f38d6d37fd6a;
-#using script_64e5d3ad71ce8140;
-#using script_67049b48b589d81;
 #using script_6ac5ce345bf4213b;
-#using script_6b71c9befed901f2;
-#using script_71603a58e2da0698;
-#using script_75c3996cce8959f7;
+#using script_5d76b3609d3af702;
+#using script_15672f35157ae7ca;
 #using script_76abb7986de59601;
-#using script_77163d5a569e2071;
+#using script_67049b48b589d81;
+#using script_64e5d3ad71ce8140;
+#using script_60a2f38d6d37fd6a;
+#using script_6b71c9befed901f2;
+#using script_75c3996cce8959f7;
+#using script_71603a58e2da0698;
+#using script_30c7fb449869910;
 #using script_771f5bff431d8d57;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
+#using script_42cbbdcd1e160063;
+#using script_3314b730521b9666;
+#using script_77163d5a569e2071;
+#using script_38635d174016f682;
+#using script_18910f59cc847b42;
 #using scripts\core_common\hud_message_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\spawner_shared.csc;
-#using scripts\core_common\spawning_shared.csc;
 #using scripts\core_common\struct.csc;
+#using scripts\core_common\spawning_shared.csc;
+#using scripts\core_common\spawner_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_6e90e490;
 
@@ -67,7 +67,7 @@ function init()
 		clientfield::function_5b7d846d(clientfieldname, #"hash_365a974a1df27ef4", [1:#"bombs", 0:#"player" + (isdefined(i) ? "" + i : "")], 1, 4, "int", undefined, 0, 0);
 		toks = strtok("doaGlobal.player$.boosts", "$");
 		clientfieldname = (toks[0] + i) + toks[1];
-		clientfield::function_5b7d846d(clientfieldname, #"hash_365a974a1df27ef4", [1:#"hash_5d1b6f8121c0fc8d", 0:#"player" + (isdefined(i) ? "" + i : "")], 1, 4, "int", undefined, 0, 0);
+		clientfield::function_5b7d846d(clientfieldname, #"hash_365a974a1df27ef4", [1:#"boosts", 0:#"player" + (isdefined(i) ? "" + i : "")], 1, 4, "int", undefined, 0, 0);
 		toks = strtok("doaGlobal.player$.keys", "$");
 		clientfieldname = (toks[0] + i) + toks[1];
 		clientfield::function_5b7d846d(clientfieldname, #"hash_365a974a1df27ef4", [1:#"keys", 0:#"player" + (isdefined(i) ? "" + i : "")], 1, 4, "int", undefined, 0, 0);
@@ -154,7 +154,7 @@ function function_381c8192()
 	for(i = 0; i < 8; i++)
 	{
 		obj = spawnstruct();
-		obj.var_e429ef89 = luielem_entity_bar::function_5c1bb138();
+		obj.var_e429ef89 = luielem_entity_bar::register_clientside();
 		obj.localclientnum = -1;
 		obj.entitynum = -1;
 		level.doa.healthbars[i] = obj;
@@ -239,7 +239,7 @@ function function_deb84496(localclientnum, entitynum)
 		{
 			var_6c978e26.var_e429ef89 luielem_entity_bar::open(localclientnum);
 		}
-		var_6c978e26.var_e429ef89 luielem_entity_bar::function_c8350e33(localclientnum, entitynum);
+		var_6c978e26.var_e429ef89 luielem_entity_bar::set_entnum(localclientnum, entitynum);
 		namespace_1e25ad94::debugmsg((("Allocated a healthBar to localClientNum:" + localclientnum) + " Entity:") + entitynum);
 		return var_6c978e26.var_e429ef89;
 	}
@@ -314,7 +314,7 @@ function function_f5b1f2e0(localclientnum, oldval, newval, bnewent, binitialsnap
 			if(self.var_e4f0114d luielem_entity_bar::is_open(fieldname))
 			{
 				self.var_e4f0114d luielem_entity_bar::function_b4023f5a(fieldname, 0, 0, 90);
-				self.var_e4f0114d luielem_entity_bar::function_a9793a65(fieldname, 0.5);
+				self.var_e4f0114d luielem_entity_bar::set_entityscale(fieldname, 0.5);
 				self function_c53f825c(fieldname);
 			}
 		}
@@ -355,7 +355,7 @@ function function_c53f825c(localclientnum)
 		state = "Red";
 	}
 	namespace_1e25ad94::debugmsg((("Setting healthBar to progress: " + self.health_percent) + " State is: ") + state);
-	self.var_e4f0114d luielem_entity_bar::function_ecacbaa5(localclientnum, self.health_percent);
+	self.var_e4f0114d luielem_entity_bar::set_progress_percent(localclientnum, self.health_percent);
 	self.var_e4f0114d luielem_entity_bar::set_state(localclientnum, hash(state));
 }
 
@@ -401,7 +401,7 @@ function function_9d1ddcae()
 	for(i = 0; i < 8; i++)
 	{
 		obj = spawnstruct();
-		obj.var_e429ef89 = doa_textbubble::function_5c1bb138();
+		obj.var_e429ef89 = doa_textbubble::register_clientside();
 		obj.localclientnum = -1;
 		obj.entitynum = -1;
 		level.doa.var_b1d82287[i] = obj;
@@ -410,7 +410,7 @@ function function_9d1ddcae()
 	for(i = 0; i < 4; i++)
 	{
 		obj = spawnstruct();
-		obj.var_e429ef89 = doa_textbubble_playername::function_5c1bb138();
+		obj.var_e429ef89 = doa_textbubble_playername::register_clientside();
 		obj.localclientnum = -1;
 		obj.entitynum = -1;
 		level.doa.var_96dc6b3b[i] = obj;
@@ -631,7 +631,7 @@ function function_15158f84(localclientnum)
 	}
 	offset = self function_80317cee();
 	self.var_de98eb73 doa_textbubble::function_919052d(localclientnum, self.entnum, self function_a789b576());
-	self.var_de98eb73 doa_textbubble::function_d5ea17f0(localclientnum, #"hash_7ee185f0146bd791");
+	self.var_de98eb73 doa_textbubble::set_text(localclientnum, #"hash_7ee185f0146bd791");
 	self.var_de98eb73 doa_textbubble::function_b4023f5a(localclientnum, offset[0], offset[1], offset[2]);
 	self thread function_b935ba2b(localclientnum, self.entnum);
 	return true;
@@ -703,7 +703,7 @@ function function_fd71fef3(localclientnum, oldval, newval, bnewent, binitialsnap
 		val = self function_d47b1ac(bwastimejump, var_a793c1e1, var_a6e8b35b);
 		if(isdefined(val.msg))
 		{
-			self.var_de98eb73 doa_textbubble::function_d5ea17f0(fieldname, val.msg);
+			self.var_de98eb73 doa_textbubble::set_text(fieldname, val.msg);
 		}
 		else
 		{
@@ -891,8 +891,8 @@ function function_8394bc71(localclientnum)
 		self playsound(localclientnum, #"hash_1af6f1a195265272");
 	}
 	offset = (-16, 0, 58);
-	self.var_7488bfe4 doa_textbubble_playername::function_c8350e33(localclientnum, self.entnum);
-	self.var_7488bfe4 doa_textbubble_playername::function_3b7b386a(localclientnum, clientnum);
+	self.var_7488bfe4 doa_textbubble_playername::set_entnum(localclientnum, self.entnum);
+	self.var_7488bfe4 doa_textbubble_playername::set_clientnum(localclientnum, clientnum);
 	self.var_7488bfe4 doa_textbubble_playername::function_b4023f5a(localclientnum, offset[0], offset[1], offset[2]);
 	self thread function_b935ba2b(localclientnum, self.entnum);
 	return true;

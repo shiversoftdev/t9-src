@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_1a456b75 : class_6aaccc24
+class class_1a456b75 : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -46,11 +46,11 @@ class class_1a456b75 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_3b1f1b69
+		Name: set_progfraca
 		Namespace: namespace_1a456b75
 		Checksum: 0x9B1FEB38
 		Offset: 0x320
@@ -58,7 +58,7 @@ class class_1a456b75 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3b1f1b69(player, value)
+	function set_progfraca(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 1, int(value * (128 - 1)), 0);
 	}
@@ -74,7 +74,7 @@ class class_1a456b75 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -88,11 +88,11 @@ class class_1a456b75 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_objective_secure_hud");
+		cluielem::setup_clientfields("sr_objective_secure_hud");
 	}
 
 	/*
-		Name: function_a1cd68d0
+		Name: set_progfracb
 		Namespace: namespace_1a456b75
 		Checksum: 0x2A6A109
 		Offset: 0x398
@@ -100,13 +100,13 @@ class class_1a456b75 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a1cd68d0(player, value)
+	function set_progfracb(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 2, int(value * (128 - 1)), 0);
 	}
 
 	/*
-		Name: function_d2f341fe
+		Name: set_objectivewhitea
 		Namespace: namespace_1a456b75
 		Checksum: 0xC83E637B
 		Offset: 0x410
@@ -114,13 +114,13 @@ class class_1a456b75 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_d2f341fe(player, value)
+	function set_objectivewhitea(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 3, value, 0);
 	}
 
 	/*
-		Name: function_e4a4e561
+		Name: set_objectivewhiteb
 		Namespace: namespace_1a456b75
 		Checksum: 0xD0372B18
 		Offset: 0x468
@@ -128,18 +128,18 @@ class class_1a456b75 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_e4a4e561(player, value)
+	function set_objectivewhiteb(player, value)
 	{
 		player lui::function_bb6bcb89(hash(var_d5213cbb), var_bf9c8c95, 4, value, 0);
 	}
 
 }
 
-#namespace namespace_30e191ea;
+#namespace sr_objective_secure_hud;
 
 /*
 	Name: function_45d1349a
-	Namespace: namespace_30e191ea
+	Namespace: sr_objective_secure_hud
 	Checksum: 0xA0D8106E
 	Offset: 0xB0
 	Size: 0x14
@@ -153,7 +153,7 @@ function private autoexec function_45d1349a()
 
 /*
 	Name: register
-	Namespace: namespace_30e191ea
+	Namespace: sr_objective_secure_hud
 	Checksum: 0x85ED5E28
 	Offset: 0xD0
 	Size: 0x34
@@ -169,7 +169,7 @@ function register()
 
 /*
 	Name: open
-	Namespace: namespace_30e191ea
+	Namespace: sr_objective_secure_hud
 	Checksum: 0x584B4B43
 	Offset: 0x110
 	Size: 0x38
@@ -187,7 +187,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_30e191ea
+	Namespace: sr_objective_secure_hud
 	Checksum: 0x5189623B
 	Offset: 0x150
 	Size: 0x1C
@@ -201,7 +201,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_30e191ea
+	Namespace: sr_objective_secure_hud
 	Checksum: 0xC3D6EA8D
 	Offset: 0x178
 	Size: 0x1A
@@ -214,58 +214,58 @@ function is_open(player)
 }
 
 /*
-	Name: function_3b1f1b69
-	Namespace: namespace_30e191ea
+	Name: set_progfraca
+	Namespace: sr_objective_secure_hud
 	Checksum: 0xB7D1BD41
 	Offset: 0x1A0
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_3b1f1b69(player, value)
+function set_progfraca(player, value)
 {
-	[[ self ]]->function_3b1f1b69(player, value);
+	[[ self ]]->set_progfraca(player, value);
 }
 
 /*
-	Name: function_a1cd68d0
-	Namespace: namespace_30e191ea
+	Name: set_progfracb
+	Namespace: sr_objective_secure_hud
 	Checksum: 0xAA4788EA
 	Offset: 0x1D0
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_a1cd68d0(player, value)
+function set_progfracb(player, value)
 {
-	[[ self ]]->function_a1cd68d0(player, value);
+	[[ self ]]->set_progfracb(player, value);
 }
 
 /*
-	Name: function_d2f341fe
-	Namespace: namespace_30e191ea
+	Name: set_objectivewhitea
+	Namespace: sr_objective_secure_hud
 	Checksum: 0xF6E20BA7
 	Offset: 0x200
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_d2f341fe(player, value)
+function set_objectivewhitea(player, value)
 {
-	[[ self ]]->function_d2f341fe(player, value);
+	[[ self ]]->set_objectivewhitea(player, value);
 }
 
 /*
-	Name: function_e4a4e561
-	Namespace: namespace_30e191ea
+	Name: set_objectivewhiteb
+	Namespace: sr_objective_secure_hud
 	Checksum: 0x1B306AD6
 	Offset: 0x230
 	Size: 0x28
 	Parameters: 2
 	Flags: None
 */
-function function_e4a4e561(player, value)
+function set_objectivewhiteb(player, value)
 {
-	[[ self ]]->function_e4a4e561(player, value);
+	[[ self ]]->set_objectivewhiteb(player, value);
 }
 

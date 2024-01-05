@@ -1,7 +1,7 @@
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_ac4c291d;
 
@@ -20,7 +20,7 @@ function private autoexec function_7b10ec4a()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_ac4c291d
 	Checksum: 0x9BFA97EB
 	Offset: 0xA0
@@ -28,7 +28,7 @@ function private autoexec function_7b10ec4a()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1c2f845f6ae4ceb2", &function_70a657d8, undefined, undefined, undefined);
 }

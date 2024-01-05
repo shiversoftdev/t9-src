@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_d1b6325c : class_6aaccc24
+class czm_game_over : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x1FFDEF9E
 		Offset: 0x218
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_d1b6325c : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0xC57ADBD4
 		Offset: 0x498
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_d1b6325c : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x59173F80
 		Offset: 0x2B0
 		Size: 0x3C
@@ -47,12 +47,12 @@ class class_d1b6325c : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0xEFF2F2BA
 		Offset: 0x2F8
 		Size: 0x24
@@ -61,12 +61,12 @@ class class_d1b6325c : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x8FEA55D2
 		Offset: 0x238
 		Size: 0x6C
@@ -75,14 +75,14 @@ class class_d1b6325c : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_game_over");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("rounds", 1, 8, "int");
+		cluielem::setup_clientfields("zm_game_over");
+		cluielem::add_clientfield("_state", 1, 2, "int");
+		cluielem::add_clientfield("rounds", 1, 8, "int");
 	}
 
 	/*
 		Name: set_rounds
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0x3EE86ED2
 		Offset: 0x448
 		Size: 0x44
@@ -96,7 +96,7 @@ class class_d1b6325c : class_6aaccc24
 
 	/*
 		Name: set_state
-		Namespace: namespace_d1b6325c
+		Namespace: czm_game_over
 		Checksum: 0xC44D7DB2
 		Offset: 0x328
 		Size: 0x114
@@ -162,7 +162,7 @@ function private autoexec function_eac61074()
 */
 function register()
 {
-	elem = new class_d1b6325c();
+	elem = new czm_game_over();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

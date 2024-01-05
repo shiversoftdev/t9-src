@@ -1,16 +1,16 @@
 #using script_1478fbd17fe393cf;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
 #using scripts\cp_common\objectives.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_96850e69;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_96850e69
 	Checksum: 0x99C2C230
 	Offset: 0x348
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3ee5d3ee068a8cc", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -88,7 +88,7 @@ function function_49ebaad2()
 		timeout = 5;
 		notify_str = "show_objectives";
 		player thread function_d18e2e61(timeout, notify_str);
-		player thread namespace_fe8e9929::function_4c2d4fc4(#"hash_30ae598288c72637", undefined, undefined, undefined, 2, timeout, notify_str);
+		player thread hint_tutorial::function_4c2d4fc4(#"hash_30ae598288c72637", undefined, undefined, undefined, 2, timeout, notify_str);
 	}
 }
 
@@ -409,7 +409,7 @@ function function_f3ac479c(obj_id)
 }
 
 /*
-	Name: function_affe8f61
+	Name: set_progress
 	Namespace: namespace_96850e69
 	Checksum: 0x9F30514D
 	Offset: 0xEC8
@@ -417,7 +417,7 @@ function function_f3ac479c(obj_id)
 	Parameters: 2
 	Flags: None
 */
-function function_affe8f61(obj_id, progress)
+function set_progress(obj_id, progress)
 {
 	globallogic_ui::function_8954fa13("_DataSources.cp_objectives_list", obj_id, "progress", progress);
 }

@@ -1,10 +1,10 @@
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace serverfaceanim;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: serverfaceanim
 	Checksum: 0x985E3041
 	Offset: 0xC0
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"serverfaceanim", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -52,7 +52,7 @@ function init_serverfaceanim()
 		level.face_event_handler = spawnstruct();
 		level.face_event_handler.events = [];
 		level.face_event_handler.events[#"death"] = "face_death";
-		level.face_event_handler.events[#"hash_70bb20cec150f744"] = "face_alert";
+		level.face_event_handler.events[#"grenade danger"] = "face_alert";
 		level.face_event_handler.events[#"bulletwhizby"] = "face_alert";
 		level.face_event_handler.events[#"projectile_impact"] = "face_alert";
 		level.face_event_handler.events[#"explode"] = "face_alert";

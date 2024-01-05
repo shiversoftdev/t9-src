@@ -38,7 +38,7 @@ function init()
 	doa_pickups::function_c1018360(#"hash_583a497cd4bc1057", 22, 0, 0, 1);
 	doa_pickups::function_c1018360(#"zombietron_boots", 24, 0, 0, 1, (0, 0, 0));
 	doa_pickups::function_c1018360(#"zombietron_chicken", 15, 0, 0, 1);
-	doa_pickups::function_c1018360(#"hash_4f0227ddf8189df0", 3, 0, 0, 3, vectorscale((0, 0, -1), 80), undefined, 3);
+	doa_pickups::function_c1018360(#"zombietron_firstperson", 3, 0, 0, 3, vectorscale((0, 0, -1), 80), undefined, 3);
 	doa_pickups::function_c1018360(#"zombietron_monkey_bomb", 27, 0, 0, 1, vectorscale((0, 0, -1), 80));
 	doa_pickups::function_c1018360(#"zombietron_tesla_ball", 29, 0, 0, 1, vectorscale((0, 0, -1), 80));
 	doa_pickups::function_c1018360(#"zombietron_barrel", 17, 0, 0, 1);
@@ -64,7 +64,7 @@ function init()
 	doa_pickups::function_c1018360(#"zombietron_vortexmdl", 43, 0, 2, 1, (0, 0, 0));
 	doa_pickups::function_c1018360(#"zombietron_arcademachine", 44, 0, 3, 1, vectorscale((0, 0, 1), 40));
 	doa_pickups::function_c1018360(#"zombietron_extra_life", 16, 0, 3, 1, vectorscale((0, 0, -1), 80));
-	doa_pickups::function_c1018360(#"hash_1276f1a5ab5d186a", 33, 0, 3, 1);
+	doa_pickups::function_c1018360(#"zombietron_egg_golden", 33, 0, 3, 1);
 	doa_pickups::function_c1018360(#"zombietron_skeleton_key", 14, 0, 4, 3, vectorscale((1, 0, 0), 80));
 	doa_pickups::function_c1018360(#"p7_doa_powerup_skull", 36, 0, 4, 1, vectorscale((-1, 0, 0), 70));
 	doa_pickups::function_c1018360(#"p7_doa_powerup_skull_red", 37, 0, 4, 1, vectorscale((-1, 0, 0), 70));

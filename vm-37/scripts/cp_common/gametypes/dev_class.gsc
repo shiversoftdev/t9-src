@@ -1,14 +1,14 @@
+#using scripts\cp_common\util.gsc;
+#using scripts\cp_common\gametypes\dev.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\cp_common\gametypes\dev.gsc;
-#using scripts\cp_common\util.gsc;
 
 #namespace dev_class;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: dev_class
 	Checksum: 0x5CC2ADA0
 	Offset: 0x90
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"dev_class", &function_70a657d8, undefined, undefined, undefined);

@@ -1,11 +1,11 @@
-#using scripts\core_common\doors_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\doors_shared.gsc;
 
-class class_65d2fd70 : cdoor
+class cbarricade : cdoor
 {
 	var m_e_door;
 	var var_a2f96f78;
@@ -13,7 +13,7 @@ class class_65d2fd70 : cdoor
 
 	/*
 		Name: constructor
-		Namespace: namespace_65d2fd70
+		Namespace: cbarricade
 		Checksum: 0x882363E2
 		Offset: 0x348
 		Size: 0x22
@@ -27,7 +27,7 @@ class class_65d2fd70 : cdoor
 
 	/*
 		Name: destructor
-		Namespace: namespace_65d2fd70
+		Namespace: cbarricade
 		Checksum: 0x8E4C70AC
 		Offset: 0x378
 		Size: 0x14
@@ -40,7 +40,7 @@ class class_65d2fd70 : cdoor
 
 	/*
 		Name: function_6c15ac46
-		Namespace: namespace_65d2fd70
+		Namespace: cbarricade
 		Checksum: 0xF2D9D29F
 		Offset: 0x9A8
 		Size: 0x138
@@ -49,7 +49,7 @@ class class_65d2fd70 : cdoor
 	*/
 	function function_6c15ac46()
 	{
-		m_e_door endon(#"delete", #"hash_430683d292f4ba43");
+		m_e_door endon(#"delete", #"barricade_removed");
 		while(true)
 		{
 			m_e_door endon(#"delete");
@@ -68,7 +68,7 @@ class class_65d2fd70 : cdoor
 
 	/*
 		Name: init
-		Namespace: namespace_65d2fd70
+		Namespace: cbarricade
 		Checksum: 0x72743651
 		Offset: 0x398
 		Size: 0x224
@@ -108,7 +108,7 @@ class class_65d2fd70 : cdoor
 
 	/*
 		Name: function_b4a1f06a
-		Namespace: namespace_65d2fd70
+		Namespace: cbarricade
 		Checksum: 0xEC4627FD
 		Offset: 0x5C8
 		Size: 0x280
@@ -143,7 +143,7 @@ class class_65d2fd70 : cdoor
 							m_e_door scene::play(m_s_bundle.var_8124c17f, m_e_door);
 						}
 						m_e_door notify(#"gameobject_deleted");
-						m_e_door notify(#"hash_430683d292f4ba43");
+						m_e_door notify(#"barricade_removed");
 						waitframe(1);
 						m_e_door.mdl_gameobject delete();
 						m_e_door delete();
@@ -165,7 +165,7 @@ class class_65d2fd70 : cdoor
 
 	/*
 		Name: function_da5abae9
-		Namespace: namespace_65d2fd70
+		Namespace: cbarricade
 		Checksum: 0xD4FD4E9E
 		Offset: 0x850
 		Size: 0x14E
@@ -174,7 +174,7 @@ class class_65d2fd70 : cdoor
 	*/
 	function function_da5abae9()
 	{
-		m_e_door endon(#"delete", #"hash_430683d292f4ba43");
+		m_e_door endon(#"delete", #"barricade_removed");
 		while(true)
 		{
 			m_e_door waittill(#"hash_7166c13e79b73f9");
@@ -215,7 +215,7 @@ function private autoexec function_f8c32aff()
 #namespace barricades;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: barricades
 	Checksum: 0xBA520186
 	Offset: 0x150
@@ -223,7 +223,7 @@ function private autoexec function_f8c32aff()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"barricades", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -239,12 +239,12 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!isdefined(level.var_9c740bff))
+	if(!isdefined(level.a_s_barricades))
 	{
-		level.var_9c740bff = [];
+		level.a_s_barricades = [];
 	}
-	level.var_9c740bff = struct::get_array("scriptbundle_barricades", "classname");
-	foreach(s_instance in level.var_9c740bff)
+	level.a_s_barricades = struct::get_array("scriptbundle_barricades", "classname");
+	foreach(s_instance in level.a_s_barricades)
 	{
 		c_door = s_instance function_14354831();
 		if(isdefined(c_door))
@@ -269,7 +269,7 @@ function function_14354831()
 	{
 		var_9fecaae1 = getscriptbundle(self.scriptbundlename);
 	}
-	var_2a44a7ed = new class_65d2fd70();
+	var_2a44a7ed = new cbarricade();
 	var_2a44a7ed = [[ var_2a44a7ed ]]->init(var_9fecaae1, self);
 	return var_2a44a7ed;
 }

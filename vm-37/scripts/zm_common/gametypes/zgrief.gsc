@@ -1,16 +1,16 @@
-#using script_6ce38ab036223e6e;
-#using script_db06eb511bd9b36;
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_round_logic.gsc;
+#using scripts\zm_common\zm_player.gsc;
+#using scripts\zm_common\zm_cleanup_mgr.gsc;
+#using scripts\zm_common\zm_behavior.gsc;
+#using scripts\zm_common\gametypes\globallogic_utils.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\zm_common\gametypes\zm_gametype.gsc;
 #using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\gametypes\globallogic_utils.gsc;
-#using scripts\zm_common\gametypes\zm_gametype.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm_behavior.gsc;
-#using scripts\zm_common\zm_player.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
-#using scripts\zm_common\zm_stats.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace zgrief;
 
@@ -35,8 +35,8 @@ event main(eventstruct)
 	level.onscorelimit = &onscorelimit;
 	level._game_module_custom_spawn_init_func = &zm_gametype::custom_spawn_init_func;
 	level._game_module_stat_update_func = &zm_stats::survival_classic_custom_stat_update;
-	level._round_start_func = &namespace_a28acff3::round_start;
-	zm_player::register_player_damage_callback(&function_567c449a);
+	level._round_start_func = &zm_round_logic::round_start;
+	zm_player::register_player_damage_callback(&playerdamagecallback);
 	callback::on_spawned(&onplayerspawned);
 }
 
@@ -117,7 +117,7 @@ function onscorelimit()
 }
 
 /*
-	Name: function_567c449a
+	Name: playerdamagecallback
 	Namespace: zgrief
 	Checksum: 0xBF7B8C9D
 	Offset: 0x5A8
@@ -125,7 +125,7 @@ function onscorelimit()
 	Parameters: 10
 	Flags: None
 */
-function function_567c449a(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime)
+function playerdamagecallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime)
 {
 	if(isdefined(shitloc) && isplayer(shitloc))
 	{

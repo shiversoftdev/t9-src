@@ -1,42 +1,42 @@
+#using script_85cd2e9a28ea8a1;
+#using script_3dc93ca9902a9cda;
 #using script_1292451e284848cc;
+#using script_3de86a21a0c8d47b;
+#using script_74940ab70a48ee4e;
+#using script_4937c6974f43bb71;
+#using script_7cf3e180e994d17f;
+#using script_31e9b35aaacbbd93;
+#using script_45e09f634c49fdba;
+#using script_61cfc2ab8e60625;
+#using scripts\cp\cp_takedown.gsc;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\util.gsc;
+#using scripts\cp_common\skipto.gsc;
+#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\cp_common\objectives.gsc;
+#using scripts\core_common\lui_shared.gsc;
 #using script_263b7f2982258785;
 #using script_2d443451ce681a;
-#using script_31e9b35aaacbbd93;
-#using script_3dc93ca9902a9cda;
-#using script_3de86a21a0c8d47b;
-#using script_45e09f634c49fdba;
-#using script_4937c6974f43bb71;
-#using script_4a73380997c0854e;
-#using script_61cfc2ab8e60625;
-#using script_74940ab70a48ee4e;
-#using script_7cf3e180e994d17f;
-#using script_85cd2e9a28ea8a1;
 #using scripts\core_common\ai_shared.gsc;
 #using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
-#using scripts\cp_common\gametypes\battlechatter.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
-#using scripts\cp_common\skipto.gsc;
-#using scripts\cp_common\util.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-#namespace namespace_4926d69e;
+#namespace tkdn_af_intro;
 
 /*
 	Name: starting
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0x46ABED2B
 	Offset: 0x328
 	Size: 0x9C
@@ -52,14 +52,14 @@ function starting(str_skipto)
 			iprintlnbold("");
 		}
 	#/
-	namespace_7d4dd7f0::function_a2015343();
+	tkdn_af_hill::function_a2015343();
 	level scene::init("scene_tkd_hit3_intro");
 	player freezecontrols(1);
 }
 
 /*
 	Name: main
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0xB822C53B
 	Offset: 0x3D0
 	Size: 0x67C
@@ -82,7 +82,7 @@ function main(str_skipto, b_starting)
 		player = getplayers()[0];
 	}
 	player endon(#"death", #"disconnect");
-	player function_8fd843dd(7);
+	player setcharacteroutfit(7);
 	player clientfield::set_to_player("force_stream_weapons", 2);
 	setdvar(#"hash_76c0d7e6385ee6de", 0.05);
 	setdvar(#"hash_7b06b8037c26b99b", 255);
@@ -109,7 +109,7 @@ function main(str_skipto, b_starting)
 	thread namespace_a052577e::function_dd4c9710();
 	player thread function_b598d07b();
 	level waittill(#"hash_1582572f4be81dc1");
-	player function_8fd843dd(9);
+	player setcharacteroutfit(9);
 	level flag::set("af_fade_in_complete");
 	player namespace_db2381c4::function_c8bc54e4();
 	level waittill(#"hash_47b9f42b49b80814");
@@ -141,7 +141,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: function_b598d07b
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0x1EA25DFE
 	Offset: 0xA58
 	Size: 0x3C
@@ -156,7 +156,7 @@ function function_b598d07b()
 
 /*
 	Name: function_1dee368
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0xD80A88A6
 	Offset: 0xAA0
 	Size: 0xC4
@@ -180,7 +180,7 @@ function function_1dee368(var_54fed624)
 
 /*
 	Name: function_d12ea338
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0x311F2AFA
 	Offset: 0xB70
 	Size: 0x4C
@@ -195,7 +195,7 @@ function function_d12ea338()
 
 /*
 	Name: function_cc5aa221
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0x2D85A27F
 	Offset: 0xBC8
 	Size: 0x3C
@@ -210,7 +210,7 @@ function function_cc5aa221()
 
 /*
 	Name: cleanup
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0x267D2F65
 	Offset: 0xC10
 	Size: 0x64
@@ -225,7 +225,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0xE1292BAC
 	Offset: 0xC80
 	Size: 0x24
@@ -239,7 +239,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0x80F724D1
 	Offset: 0xCB0
 	Size: 0x4
@@ -252,7 +252,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0x80F724D1
 	Offset: 0xCC0
 	Size: 0x4
@@ -265,7 +265,7 @@ function init_scenes()
 
 /*
 	Name: function_78bc26d5
-	Namespace: namespace_4926d69e
+	Namespace: tkdn_af_intro
 	Checksum: 0xF9B3FEAB
 	Offset: 0xCD0
 	Size: 0x34

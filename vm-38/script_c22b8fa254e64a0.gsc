@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace turret_dead_system;
 
@@ -18,7 +18,7 @@ function private autoexec function_a22723ef()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: turret_dead_system
 	Checksum: 0xAE9200C5
 	Offset: 0x90
@@ -26,7 +26,7 @@ function private autoexec function_a22723ef()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4bbb330ecd0b67a8", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

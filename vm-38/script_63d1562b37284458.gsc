@@ -1,9 +1,9 @@
-#using script_68d2ee1489345a1d;
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\gestures.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 
 #namespace zipline_player;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_9dffc5d0()
 {
-	level notify(187558945);
+	level notify(-187558945);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zipline_player
 	Checksum: 0xDA4C139A
 	Offset: 0x148
@@ -30,7 +30,7 @@ function private autoexec function_9dffc5d0()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zipline_player", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -86,7 +86,7 @@ function function_e415c864(var_5da09c55)
 	zipline_trigger setcursorhint("HINT_NOICON");
 	hint = #"hash_5ca3696cb6c3bea9";
 	zipline_trigger sethintstring(hint);
-	zipline_trigger callback::function_35a12f19(&function_234876c9);
+	zipline_trigger callback::on_trigger(&function_234876c9);
 	zipline_trigger function_2e7a1fba();
 	return zipline_trigger;
 }
@@ -107,7 +107,7 @@ function function_77fde59c(var_5da09c55)
 	zipline_trigger triggerignoreteam();
 	zipline_trigger setvisibletoall();
 	zipline_trigger setteamfortrigger(#"none");
-	zipline_trigger callback::function_35a12f19(&function_5abc3f1f);
+	zipline_trigger callback::on_trigger(&function_5abc3f1f);
 	return zipline_trigger;
 }
 
@@ -261,7 +261,7 @@ function debug_zipline()
 			return;
 		}
 		ziplines = level.var_e02fab68;
-		mapname = util::function_53bbf9d2();
+		mapname = util::get_map_name();
 		adddebugcommand(("" + mapname) + "");
 		while(getdvarint(#"hash_13a9fb4be8e86e13", 0))
 		{
@@ -276,9 +276,9 @@ function debug_zipline()
 				line(var_86660d95, zipline.endstruct.origin, (0, 1, 0));
 				if(isdefined(level.var_94f4ca81))
 				{
-					foreach(var_e3c223f5 in level.var_94f4ca81.var_e3c223f5)
+					foreach(dataset in level.var_94f4ca81.dataset)
 					{
-						foreach(spawn in var_e3c223f5.spawns)
+						foreach(spawn in dataset.spawns)
 						{
 							spawn_origin = spawn.origin;
 							if(distance2dsquared(spawn_origin, var_86660d95) <= 4096)

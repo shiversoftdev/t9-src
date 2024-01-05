@@ -1,13 +1,13 @@
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 
 #namespace flashlight;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: flashlight
 	Checksum: 0xF7C75B5C
 	Offset: 0x1D8
@@ -15,7 +15,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"flashlight", &function_f64316de, undefined, undefined, undefined);
 }

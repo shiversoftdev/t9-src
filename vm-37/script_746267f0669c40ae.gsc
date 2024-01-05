@@ -1,8 +1,8 @@
-#using script_42e02216167edefc;
 #using script_dc59353021baee1;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
+#using script_42e02216167edefc;
 #using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_95fdc800;
 

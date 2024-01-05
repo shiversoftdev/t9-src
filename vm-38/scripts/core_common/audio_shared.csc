@@ -1,12 +1,12 @@
-#using script_59f62971655f7103;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\battlechatter.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\trigger_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\trigger_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using script_59f62971655f7103;
+#using scripts\core_common\battlechatter.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace audio_shared;
 
@@ -27,7 +27,7 @@ function private autoexec function_a239a68f()
 #namespace audio;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: audio
 	Checksum: 0x3613576
 	Offset: 0x5E8
@@ -35,7 +35,7 @@ function private autoexec function_a239a68f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"audio", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -166,7 +166,7 @@ function local_player_spawn(localclientnum)
 	{
 		return;
 	}
-	if(!sessionmodeismultiplayergame() && !function_f99d2668())
+	if(!sessionmodeismultiplayergame() && !sessionmodeiswarzonegame())
 	{
 		self thread sndmusicdeathwatcher();
 	}
@@ -364,7 +364,7 @@ function snd_snapshot_init()
 {
 	level._sndactivesnapshot = "default";
 	level._sndnextsnapshot = "default";
-	if(!util::function_3f165ee8())
+	if(!util::is_frontend_map())
 	{
 		if(sessionmodeiscampaigngame() && !function_22a92b8b() && !function_c9705ad4())
 		{
@@ -409,7 +409,7 @@ function sndlevelstartduck_shutoff()
 function function_22a92b8b()
 {
 	ignore = 1;
-	mapname = util::function_53bbf9d2();
+	mapname = util::get_map_name();
 	switch(mapname)
 	{
 		case "hash_15642edd0e4376f1":
@@ -422,7 +422,7 @@ function function_22a92b8b()
 			break;
 		}
 	}
-	gametype = hash(util::function_5df4294());
+	gametype = hash(util::get_game_type());
 	switch(gametype)
 	{
 		case "download":
@@ -446,7 +446,7 @@ function function_22a92b8b()
 function function_c9705ad4()
 {
 	ignore = 1;
-	gametype = hash(util::function_5df4294());
+	gametype = hash(util::get_game_type());
 	switch(gametype)
 	{
 		case "coop":
@@ -1287,7 +1287,7 @@ function absolute_value(fowd)
 */
 function closest_point_on_line_to_point(point, linestart, lineend)
 {
-	self endon(#"hash_66fcfbe39e07bd83");
+	self endon(#"end line sound");
 	linemagsqrd = lengthsquared(lineend - linestart);
 	t = (point[0] - linestart[0]) * (lineend[0] - linestart[0]) + (point[1] - linestart[1]) * (lineend[1] - linestart[1]) + (point[2] - linestart[2]) * (lineend[2] - linestart[2]) / linemagsqrd;
 	if(t < 0)
@@ -1846,7 +1846,7 @@ function weapon_butt_sounds(localclientnum, oldval, newval, bnewent, binitialsna
 */
 function sndmatchsnapshot(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump)
 {
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		return;
 	}
@@ -2188,7 +2188,7 @@ function sndchyronloop(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 function function_aa906715()
 {
 	self endon(#"death", #"disconnect", #"game_ended");
-	if(self function_21c0fa55() && sessionmodeismultiplayergame() || function_f99d2668())
+	if(self function_21c0fa55() && sessionmodeismultiplayergame() || sessionmodeiswarzonegame())
 	{
 		self.var_e4acdf73 = 0;
 		var_1b0c36cc = self battlechatter::get_player_dialog_alias("exertGasCough");
@@ -2287,7 +2287,7 @@ function function_deedd8d0(var_78ca4238)
 function sndsprintbreath(localclientnum)
 {
 	self endon(#"death");
-	if(self function_21c0fa55() && sessionmodeismultiplayergame() || function_f99d2668())
+	if(self function_21c0fa55() && sessionmodeismultiplayergame() || sessionmodeiswarzonegame())
 	{
 		self.var_29054134 = 0;
 		var_63112f76 = self battlechatter::get_player_dialog_alias("exertBreatheSprinting");

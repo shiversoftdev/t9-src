@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace perks;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_9b2d1837()
 {
-	level notify(587089867);
+	level notify(-587089867);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: perks
 	Checksum: 0x45295B7F
 	Offset: 0x110
@@ -28,7 +28,7 @@ function private autoexec function_9b2d1837()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"perks", &function_70a657d8, undefined, undefined, undefined);
 }

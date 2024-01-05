@@ -1,13 +1,13 @@
+#using scripts\core_common\gestures.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\killcam_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using script_396f7d71538c9677;
 #using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gestures.gsc;
-#using scripts\core_common\killcam_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\mp_common\util.gsc;
 #using scripts\mp_common\draft.gsc;
 #using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\util.gsc;
 
 #namespace menus;
 
@@ -26,7 +26,7 @@ function private autoexec function_8eb52f32()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: menus
 	Checksum: 0x4F50937A
 	Offset: 0x2D0
@@ -34,7 +34,7 @@ function private autoexec function_8eb52f32()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"menus", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -154,7 +154,7 @@ function on_menu_response(params)
 	}
 	if(response == "endround")
 	{
-		if(function_f99d2668())
+		if(sessionmodeiswarzonegame())
 		{
 			level.var_67a68459 = 1;
 		}
@@ -169,7 +169,7 @@ function on_menu_response(params)
 			{
 				self closeingamemenu();
 			}
-			if(function_f99d2668())
+			if(sessionmodeiswarzonegame())
 			{
 				level notify(#"hash_197c640e2f684a74");
 			}
@@ -185,7 +185,7 @@ function on_menu_response(params)
 		self [[level.autocontrolplayer]]();
 		return;
 	}
-	if(response == #"hash_37a46164a47ed885")
+	if(response == #"play_deathcam")
 	{
 		self killcam::start_deathcam();
 		return;
@@ -195,7 +195,7 @@ function on_menu_response(params)
 		level flag::set(#"hash_321357f5b78401ef");
 		self callback::callback(#"hash_4fd893d99ecc3458");
 	}
-	if(response == #"hash_aa9fde2b084d482")
+	if(response == #"skip_deathcam")
 	{
 		self.sessionstate = "spectator";
 		self.spectatorclient = -1;
@@ -302,7 +302,7 @@ function function_2d1eb0ec(intpayload)
 {
 	if(!isdefined(level.var_4a38c46e))
 	{
-		level.var_4a38c46e = getscriptbundlelist(#"hash_1499732db058e6fb");
+		level.var_4a38c46e = getscriptbundlelist(#"callout_wheel");
 	}
 	var_a4d879fa = intpayload % 100;
 	var_f4cd8d56 = (int(intpayload / 100)) % 10;
@@ -368,7 +368,7 @@ function function_2d1eb0ec(intpayload)
 			}
 			if(isdefined(gesture))
 			{
-				self gestures::function_b204f6e3(gesture, undefined, 0);
+				self gestures::play_gesture(gesture, undefined, 0);
 			}
 		}
 		team = self.pers[#"team"];
@@ -389,7 +389,7 @@ function function_2d1eb0ec(intpayload)
 function function_8e00969()
 {
 	self endon(#"death");
-	if(self function_8b1a219a() && function_f99d2668())
+	if(self function_8b1a219a() && sessionmodeiswarzonegame())
 	{
 		while(true)
 		{

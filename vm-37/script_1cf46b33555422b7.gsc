@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_e6e7895b : class_6aaccc24
+class cluielemtext : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_e6e7895b
+		Namespace: cluielemtext
 		Checksum: 0x531DE040
 		Offset: 0x680
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_e6e7895b : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_e6e7895b
+		Namespace: cluielemtext
 		Checksum: 0x93069EDB
 		Offset: 0xBF0
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_e6e7895b : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_e6e7895b
+		Namespace: cluielemtext
 		Checksum: 0xD454C337
 		Offset: 0x858
 		Size: 0x3C
@@ -47,54 +47,54 @@ class class_e6e7895b : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_1bd2bb26
-		Namespace: namespace_e6e7895b
+		Name: set_horizontal_alignment
+		Namespace: cluielemtext
 		Checksum: 0xBB7F262D
 		Offset: 0xBA0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_1bd2bb26(player, value)
+	function set_horizontal_alignment(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "horizontal_alignment", value);
 	}
 
 	/*
-		Name: function_2208b8db
-		Namespace: namespace_e6e7895b
+		Name: set_green
+		Namespace: cluielemtext
 		Checksum: 0x3FCCDEDE
 		Offset: 0xAB0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_2208b8db(player, value)
+	function set_green(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "green", value);
 	}
 
 	/*
-		Name: function_237ff433
-		Namespace: namespace_e6e7895b
+		Name: set_fadeovertime
+		Namespace: cluielemtext
 		Checksum: 0x6F194EE3
 		Offset: 0x9C0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_237ff433(player, value)
+	function set_fadeovertime(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "fadeOverTime", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_e6e7895b
+		Namespace: cluielemtext
 		Checksum: 0x208D9318
 		Offset: 0x8A0
 		Size: 0x24
@@ -103,40 +103,40 @@ class class_e6e7895b : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_5dbd7024
-		Namespace: namespace_e6e7895b
+		Name: set_height
+		Namespace: cluielemtext
 		Checksum: 0x4FC40400
 		Offset: 0x970
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_5dbd7024(player, value)
+	function set_height(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "height", value);
 	}
 
 	/*
-		Name: function_7420df0a
-		Namespace: namespace_e6e7895b
+		Name: set_blue
+		Namespace: cluielemtext
 		Checksum: 0xFECE06FE
 		Offset: 0xB00
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_7420df0a(player, value)
+	function set_blue(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "blue", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_e6e7895b
+		Namespace: cluielemtext
 		Checksum: 0xA20FE93
 		Offset: 0x6A0
 		Size: 0x1AC
@@ -145,22 +145,22 @@ class class_e6e7895b : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("LUIelemText");
-		namespace_6aaccc24::function_da693cbe("x", 1, 7, "int");
-		namespace_6aaccc24::function_da693cbe("y", 1, 6, "int");
-		namespace_6aaccc24::function_da693cbe("height", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("fadeOverTime", 1, 5, "int");
-		namespace_6aaccc24::function_da693cbe("alpha", 1, 4, "float");
-		namespace_6aaccc24::function_da693cbe("red", 1, 4, "float");
-		namespace_6aaccc24::function_da693cbe("green", 1, 4, "float");
-		namespace_6aaccc24::function_da693cbe("blue", 1, 4, "float");
-		namespace_6aaccc24::function_dcb34c80("string", "text", 1);
-		namespace_6aaccc24::function_da693cbe("horizontal_alignment", 1, 2, "int");
+		cluielem::setup_clientfields("LUIelemText");
+		cluielem::add_clientfield("x", 1, 7, "int");
+		cluielem::add_clientfield("y", 1, 6, "int");
+		cluielem::add_clientfield("height", 1, 2, "int");
+		cluielem::add_clientfield("fadeOverTime", 1, 5, "int");
+		cluielem::add_clientfield("alpha", 1, 4, "float");
+		cluielem::add_clientfield("red", 1, 4, "float");
+		cluielem::add_clientfield("green", 1, 4, "float");
+		cluielem::add_clientfield("blue", 1, 4, "float");
+		cluielem::function_dcb34c80("string", "text", 1);
+		cluielem::add_clientfield("horizontal_alignment", 1, 2, "int");
 	}
 
 	/*
 		Name: set_y
-		Namespace: namespace_e6e7895b
+		Namespace: cluielemtext
 		Checksum: 0xADF909DA
 		Offset: 0x920
 		Size: 0x44
@@ -173,22 +173,22 @@ class class_e6e7895b : class_6aaccc24
 	}
 
 	/*
-		Name: function_aa5c711d
-		Namespace: namespace_e6e7895b
+		Name: set_alpha
+		Namespace: cluielemtext
 		Checksum: 0x127032D
 		Offset: 0xA10
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_aa5c711d(player, value)
+	function set_alpha(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "alpha", value);
 	}
 
 	/*
 		Name: set_x
-		Namespace: namespace_e6e7895b
+		Namespace: cluielemtext
 		Checksum: 0x7548E1E7
 		Offset: 0x8D0
 		Size: 0x44
@@ -201,29 +201,29 @@ class class_e6e7895b : class_6aaccc24
 	}
 
 	/*
-		Name: function_d5ea17f0
-		Namespace: namespace_e6e7895b
+		Name: set_text
+		Namespace: cluielemtext
 		Checksum: 0x3C48B417
 		Offset: 0xB50
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_d5ea17f0(player, value)
+	function set_text(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "text", value);
 	}
 
 	/*
-		Name: function_eccc151d
-		Namespace: namespace_e6e7895b
+		Name: set_red
+		Namespace: cluielemtext
 		Checksum: 0xAD661CBC
 		Offset: 0xA60
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_eccc151d(player, value)
+	function set_red(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "red", value);
 	}
@@ -243,9 +243,9 @@ class class_e6e7895b : class_6aaccc24
 */
 function set_color(player, red, green, blue)
 {
-	self function_eccc151d(player, red);
-	self function_2208b8db(player, green);
-	self function_7420df0a(player, blue);
+	self set_red(player, red);
+	self set_green(player, green);
+	self set_blue(player, blue);
 }
 
 /*
@@ -263,8 +263,8 @@ function fade(player, var_1a92607f, duration)
 	{
 		duration = 0;
 	}
-	self function_aa5c711d(player, var_1a92607f);
-	self function_237ff433(player, int(duration * 10));
+	self set_alpha(player, var_1a92607f);
+	self set_fadeovertime(player, int(duration * 10));
 }
 
 /*
@@ -357,7 +357,7 @@ function function_f97e9049(player, var_c6572d9b, var_d390c80e)
 */
 function register()
 {
-	elem = new class_e6e7895b();
+	elem = new cluielemtext();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -437,7 +437,7 @@ function set_y(player, value)
 }
 
 /*
-	Name: function_5dbd7024
+	Name: set_height
 	Namespace: luielemtext
 	Checksum: 0x478F9F5E
 	Offset: 0x500
@@ -445,13 +445,13 @@ function set_y(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_5dbd7024(player, value)
+function set_height(player, value)
 {
-	[[ self ]]->function_5dbd7024(player, value);
+	[[ self ]]->set_height(player, value);
 }
 
 /*
-	Name: function_237ff433
+	Name: set_fadeovertime
 	Namespace: luielemtext
 	Checksum: 0x982084C2
 	Offset: 0x530
@@ -459,13 +459,13 @@ function function_5dbd7024(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_237ff433(player, value)
+function set_fadeovertime(player, value)
 {
-	[[ self ]]->function_237ff433(player, value);
+	[[ self ]]->set_fadeovertime(player, value);
 }
 
 /*
-	Name: function_aa5c711d
+	Name: set_alpha
 	Namespace: luielemtext
 	Checksum: 0xA455F9DA
 	Offset: 0x560
@@ -473,13 +473,13 @@ function function_237ff433(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_aa5c711d(player, value)
+function set_alpha(player, value)
 {
-	[[ self ]]->function_aa5c711d(player, value);
+	[[ self ]]->set_alpha(player, value);
 }
 
 /*
-	Name: function_eccc151d
+	Name: set_red
 	Namespace: luielemtext
 	Checksum: 0x354DF135
 	Offset: 0x590
@@ -487,13 +487,13 @@ function function_aa5c711d(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_eccc151d(player, value)
+function set_red(player, value)
 {
-	[[ self ]]->function_eccc151d(player, value);
+	[[ self ]]->set_red(player, value);
 }
 
 /*
-	Name: function_2208b8db
+	Name: set_green
 	Namespace: luielemtext
 	Checksum: 0xBBCA4FAB
 	Offset: 0x5C0
@@ -501,13 +501,13 @@ function function_eccc151d(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_2208b8db(player, value)
+function set_green(player, value)
 {
-	[[ self ]]->function_2208b8db(player, value);
+	[[ self ]]->set_green(player, value);
 }
 
 /*
-	Name: function_7420df0a
+	Name: set_blue
 	Namespace: luielemtext
 	Checksum: 0xF47129E7
 	Offset: 0x5F0
@@ -515,13 +515,13 @@ function function_2208b8db(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_7420df0a(player, value)
+function set_blue(player, value)
 {
-	[[ self ]]->function_7420df0a(player, value);
+	[[ self ]]->set_blue(player, value);
 }
 
 /*
-	Name: function_d5ea17f0
+	Name: set_text
 	Namespace: luielemtext
 	Checksum: 0xF02D9A8E
 	Offset: 0x620
@@ -529,13 +529,13 @@ function function_7420df0a(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_d5ea17f0(player, value)
+function set_text(player, value)
 {
-	[[ self ]]->function_d5ea17f0(player, value);
+	[[ self ]]->set_text(player, value);
 }
 
 /*
-	Name: function_1bd2bb26
+	Name: set_horizontal_alignment
 	Namespace: luielemtext
 	Checksum: 0xA364FAFB
 	Offset: 0x650
@@ -543,8 +543,8 @@ function function_d5ea17f0(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_1bd2bb26(player, value)
+function set_horizontal_alignment(player, value)
 {
-	[[ self ]]->function_1bd2bb26(player, value);
+	[[ self ]]->set_horizontal_alignment(player, value);
 }
 

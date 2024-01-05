@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_b5586f52 : class_6aaccc24
+class class_b5586f52 : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_b5586f52 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_b5586f52
 		Checksum: 0x909E9EB7
 		Offset: 0x348
@@ -52,9 +52,9 @@ class class_b5586f52 : class_6aaccc24
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_objective_timer");
+		cluielem::register_clientside("sr_objective_timer");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_b5586f52 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("sr_objective_timer");
+		cluielem::setup_clientfields("sr_objective_timer");
 	}
 
 	/*
@@ -82,7 +82,7 @@ class class_b5586f52 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 	}
 
 }
@@ -136,7 +136,7 @@ function register()
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: sr_objective_timer
 	Checksum: 0x1261F43B
 	Offset: 0x248
@@ -144,10 +144,10 @@ function register()
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_b5586f52();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

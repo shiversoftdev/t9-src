@@ -1,9 +1,9 @@
 #using script_73eb42a5c11334f7;
 #using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
 
 #namespace zm_magicbox;
 
@@ -22,7 +22,7 @@ function private autoexec function_791a7a03()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_magicbox
 	Checksum: 0x2E9AC02F
 	Offset: 0x1F0
@@ -30,7 +30,7 @@ function private autoexec function_791a7a03()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_magicbox", &function_70a657d8, undefined, undefined, undefined);
 }

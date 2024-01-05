@@ -1,14 +1,14 @@
+#using scripts\zm\zm_gold.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\zm_common\zm_sq.gsc;
 #using script_2f560596a9a134ab;
 #using script_4ce5d94e8c797350;
-#using script_5b4f7a8178990872;
-#using script_6c5b51f98cd04fa3;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm\zm_gold.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_hud.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace namespace_ac0e32c5;
 
@@ -349,36 +349,36 @@ function zone_init()
 	zm_zonemgr::add_adjacent_zone("zone_burnt_forest_defend_outside", "zone_napalm_strike2", "connect_burnt_forest_defend_to_napalm_strike");
 	zm_zonemgr::add_adjacent_zone("zone_burnt_forest_defend_outside", "zone_burnt_forest_defend", "connect_burnt_forest_defend_to_napalm_strike");
 	zm_zonemgr::add_adjacent_zone("zone_burnt_forest_defend_outside", "zone_tents2", "connect_tents_to_burnt_forest_defend");
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_7e80a8ea892ec8c4", 90, "zone_trenches", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_trenches", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_beba8c495ad1123", 90, array("zone_firebase", "zone_firebase2", "zone_firebase3"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_firebase", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_47d7bcdc94e2be1c", 90, array("zone_tents", "zone_tents2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_tents", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_26e32893218f3cc2", 90, array("zone_napalm_strike", "zone_napalm_strike2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_napalm_strike", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_363ccc9296a0bb43", 90, array("zone_artillery_strike", "zone_artillery_strike2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_artillery_strike", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_97ec7cda4d126e", 90, array("zone_village", "zone_village2", "zone_village3"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_village", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_2274efc6b68c164b", 90, "zone_artillery_strike", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_upper_data_center", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_7e80a8ea892ec8c4", 90, "zone_trenches", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_trenches", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_beba8c495ad1123", 90, array("zone_firebase", "zone_firebase2", "zone_firebase3"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_firebase", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_47d7bcdc94e2be1c", 90, array("zone_tents", "zone_tents2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_tents", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_26e32893218f3cc2", 90, array("zone_napalm_strike", "zone_napalm_strike2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_napalm_strike", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_363ccc9296a0bb43", 90, array("zone_artillery_strike", "zone_artillery_strike2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_artillery_strike", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	namespace_f0b43eb5::create_challenge(#"hash_97ec7cda4d126e", 90, array("zone_village", "zone_village2", "zone_village3"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_village", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_2274efc6b68c164b", 90, "zone_artillery_strike", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_upper_data_center", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_7cfeb04f6733358c";
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_1cc52d72244f1eda", 90, "zone_artillery_strike2", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_lower_data_center", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_1cc52d72244f1eda", 90, "zone_artillery_strike2", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_lower_data_center", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_2c46e924aa04dbf1";
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_79ec66f63fc093c6", 90, "zone_trenches_office", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_motor_office", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_3b5a9c328640c84f", 90, "zone_trenches_garage", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_motor_garage", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_864f03f723d7dc3", 90, "zone_tents_a", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_tents_a", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_864f13f723d7f76", 90, "zone_tents_b", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_tents_b", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_78b5818aca0414eb", 90, "zone_field_hospital", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_field_hospital", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_3f88531b59d4cc0b", 90, "zone_walkway", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_walkway", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_64cc9ec22d551ae5", 90, "zone_colonel_office", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_colonel_office", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_79ec66f63fc093c6", 90, "zone_trenches_office", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_motor_office", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_3b5a9c328640c84f", 90, "zone_trenches_garage", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_motor_garage", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_864f03f723d7dc3", 90, "zone_tents_a", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_tents_a", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_864f13f723d7f76", 90, "zone_tents_b", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_tents_b", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_78b5818aca0414eb", 90, "zone_field_hospital", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_field_hospital", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_3f88531b59d4cc0b", 90, "zone_walkway", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_walkway", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_64cc9ec22d551ae5", 90, "zone_colonel_office", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_colonel_office", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_64c3b50e1de42d57";
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_1f16e513ff381c18", 90, "zone_chopper_gunner", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_chopper_gunner", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_2f4a7e5da228eead", 90, "zone_chopper_gunner3", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_chopper_gunner3", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_257a005f64e8c41e", 90, array("zone_armory2", "zone_armory2_outside"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_armory", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_1f16e513ff381c18", 90, "zone_chopper_gunner", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_chopper_gunner", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_2f4a7e5da228eead", 90, "zone_chopper_gunner3", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_chopper_gunner3", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_257a005f64e8c41e", 90, array("zone_armory2", "zone_armory2_outside"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_armory", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_3cc28115aef8d6f6";
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_6e9cc81a9a529f18", 90, "zone_lot", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_lot", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_6e9cc81a9a529f18", 90, "zone_lot", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_lot", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_4e1d8a30f4ea2f2b";
-	namespace_f0b43eb5::function_cd7f17dd(#"hash_52a6d61d1d8e570c", 90, "zone_weapon_lab", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_weapon_lab", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_346b7588b58a9ac5", 90, "zone_mess_hall", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_mess_hall", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	namespace_f0b43eb5::create_challenge(#"hash_52a6d61d1d8e570c", 90, "zone_weapon_lab", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_weapon_lab", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_346b7588b58a9ac5", 90, "zone_mess_hall", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_mess_hall", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_8dfbc02b8d787a5";
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_b5ed710fa19696b", 90, "zone_briefing_room", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_briefing_room", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_b5ed710fa19696b", 90, "zone_briefing_room", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_briefing_room", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_3802e9f1f7fdc236";
-	s_challenge = namespace_f0b43eb5::function_cd7f17dd(#"hash_749eb9a0557be48d", 90, "zone_scientist_quarters", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_scientist_quarters", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
+	s_challenge = namespace_f0b43eb5::create_challenge(#"hash_749eb9a0557be48d", 90, "zone_scientist_quarters", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_scientist_quarters", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
 	s_challenge.var_4e0096cd = #"hash_6e2fe33d2742e702";
 }
 
@@ -455,7 +455,7 @@ function function_a2cfeff5()
 	}
 	foreach(var_b338b8ed in getentarray("flinger_landing_pad", "targetname"))
 	{
-		if(var_b338b8ed.script_noteworthy === #"hash_4174c23ef2048d2e")
+		if(var_b338b8ed.script_noteworthy === #"landing_pad")
 		{
 			var_b338b8ed clientfield::set("set_compass_icon", 1);
 		}
@@ -493,8 +493,8 @@ function function_44b1279a()
 			self namespace_808e3265::setupminimap("", "village");
 			self clientfield::set_to_player("" + #"hash_697cae64fbcf81f8", 0);
 		}
-		var_be17187b = undefined;
-		var_be17187b = self waittill(#"hash_2d4daa9e80b86b60");
+		s_waitresult = undefined;
+		s_waitresult = self waittill(#"zone_change");
 	}
 }
 
@@ -548,115 +548,115 @@ function function_27028b8e(str_zone)
 	}
 	switch(str_zone)
 	{
-		case "hash_64d4cc9731a01d78":
-		case "hash_75b4eee95311c4be":
-		case "hash_75b4efe95311c671":
+		case "zone_village":
+		case "zone_village2":
+		case "zone_village3":
 		{
 			var_601fee0 = #"hash_1a784c62f3f40a7c";
 			break;
 		}
-		case "hash_54dfd4e7d10e2bb":
+		case "zone_village_house":
 		{
 			var_601fee0 = #"hash_712a00f5a89f306c";
 			break;
 		}
-		case "hash_3b79fe592b7dff48":
+		case "zone_portal_transfer":
 		{
 			var_601fee0 = #"hash_435a0098fb8df5e4";
 			break;
 		}
-		case "hash_42ac79c9c56988e2":
+		case "zone_atrium":
 		{
 			var_601fee0 = #"hash_7f333ea55aeef7fe";
 			break;
 		}
-		case "hash_4e8c54af30b21fa6":
+		case "zone_scientist":
 		{
 			var_601fee0 = #"hash_6e2fe33d2742e702";
 			break;
 		}
-		case "hash_2cd57a6bcfcae077":
+		case "zone_peck_quarters":
 		{
 			var_601fee0 = #"hash_475dca43d660d1cb";
 			break;
 		}
-		case "hash_ea5e3bb6bcf51ee":
-		case "hash_ea5e4bb6bcf53a1":
-		case "hash_7e900ae8e3ffe369":
+		case "zone_firebase3":
+		case "zone_firebase2":
+		case "zone_firebase":
 		{
 			var_601fee0 = #"hash_5c666bba11ef5ae5";
 			break;
 		}
-		case "hash_4a91def736d3a4d7":
+		case "zone_lot":
 		{
 			var_601fee0 = #"hash_4e1d8a30f4ea2f2b";
 			break;
 		}
-		case "hash_60c88bedd8d4fc0":
+		case "zone_armory2":
 		case "zone_armory":
 		{
 			var_601fee0 = #"hash_3cc28115aef8d6f6";
 			break;
 		}
-		case "hash_41fb6aef9a5e869f":
+		case "zone_chopper_gunner":
 		{
 			var_601fee0 = #"hash_3a39c1a8fe2b4634";
 			break;
 		}
-		case "hash_7cbd62234e9ed7f7":
+		case "zone_chopper_gunner2":
 		{
 			var_601fee0 = #"hash_6a4e6de3fc04ec43";
 			break;
 		}
-		case "hash_7cbd61234e9ed644":
+		case "zone_chopper_gunner3":
 		{
 			var_601fee0 = #"hash_11c2394ea2e2d131";
 			break;
 		}
-		case "hash_152763dcf86ff16a":
+		case "zone_trenches":
 		{
 			var_601fee0 = #"hash_5194b7f4cbf03b5e";
 			break;
 		}
-		case "hash_5742ce5631da8df3":
+		case "zone_trenches_office":
 		{
 			var_601fee0 = #"hash_2b4cf31f8f6bf7e6";
 			break;
 		}
-		case "hash_2e342fa159a9ac1a":
+		case "zone_trenches_garage":
 		{
 			var_601fee0 = #"hash_452e2000b54dc76f";
 			break;
 		}
-		case "hash_4aa1cd3af0b8f244":
-		case "hash_4fca3dde9735fa9e":
+		case "zone_tents2":
+		case "zone_tents":
 		{
 			var_601fee0 = #"hash_7c1689ac620afc8a";
 			break;
 		}
-		case "hash_a28fc270a7fa716":
+		case "zone_tents_a":
 		{
 			var_601fee0 = #"hash_481096036403fa63";
 			break;
 		}
-		case "hash_a28fb270a7fa563":
+		case "zone_tents_b":
 		{
 			var_601fee0 = #"hash_481097036403fc16";
 			break;
 		}
-		case "hash_72d6272d367bbb1":
-		case "hash_20944a5a4e2b3339":
+		case "zone_artillery_strike2":
+		case "zone_artillery_strike":
 		{
 			var_601fee0 = #"hash_6412a219d050bd95";
 			break;
 		}
-		case "hash_2a414d349e7040c1":
+		case "zone_rocky_slope_defend":
 		{
 			var_601fee0 = #"hash_6b7c9e9fcdc2d4f5";
 			break;
 		}
-		case "hash_5bdf5947c4426530":
-		case "hash_5ee9b6f27cd1a266":
+		case "zone_napalm_strike":
+		case "zone_napalm_strike2":
 		{
 			var_601fee0 = #"hash_2c0516d13ededf0c";
 			break;
@@ -666,33 +666,33 @@ function function_27028b8e(str_zone)
 			var_601fee0 = #"hash_3020c93a3f65deed";
 			break;
 		}
-		case "hash_6c20f47b4d4428a2":
+		case "zone_burnt_forest_defend":
 		{
 			var_601fee0 = #"hash_49e45240b857b096";
 			break;
 		}
-		case "hash_46e68b3b2a356838":
+		case "zone_hillside_road_defend":
 		{
 			var_601fee0 = #"hash_1159d5e7f96b57cc";
 			break;
 		}
-		case "hash_64094ef7451a3b64":
-		case "hash_7ea1a27a8242415e":
+		case "zone_opc":
+		case "zone_opc_room":
 		{
 			var_601fee0 = #"hash_67b0f231034932d8";
 			break;
 		}
-		case "hash_4da894c3756ea177":
+		case "zone_field_hospital":
 		{
 			var_601fee0 = #"hash_5387a0350fe7780b";
 			break;
 		}
-		case "hash_8927f8cd2531dc8":
+		case "zone_walkway":
 		{
 			var_601fee0 = #"hash_2aa69d05c4cff89c";
 			break;
 		}
-		case "hash_7faf519183e3dad8":
+		case "zone_weapon_lab":
 		{
 			var_601fee0 = #"hash_42192a6d158c852c";
 			break;

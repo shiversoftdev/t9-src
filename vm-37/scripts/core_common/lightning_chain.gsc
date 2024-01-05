@@ -1,16 +1,16 @@
-#using script_3f9e0dc8454d98e1;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_net.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace lightning_chain;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: lightning_chain
 	Checksum: 0x762C8F9F
 	Offset: 0x1D8
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"lightning_chain", &init, undefined, undefined, undefined);
 }
@@ -349,7 +349,7 @@ function private lc_flag_hit(enemy, hit, var_ab5b905e)
 						enemy[i] ai::stun(var_ab5b905e);
 						continue;
 					}
-					enemy[i] ai::function_62795e55();
+					enemy[i] ai::clear_stun();
 				}
 			}
 		}
@@ -361,7 +361,7 @@ function private lc_flag_hit(enemy, hit, var_ab5b905e)
 			}
 			else
 			{
-				enemy ai::function_62795e55();
+				enemy ai::clear_stun();
 			}
 		}
 	}
@@ -489,8 +489,8 @@ function private function_915d4fec(params, v_origin, player)
 {
 	if(isdefined(params.var_a9255d36))
 	{
-		var_be17187b = undefined;
-		var_be17187b = self waittill(params.var_a9255d36, #"death");
+		s_waitresult = undefined;
+		s_waitresult = self waittill(params.var_a9255d36, #"death");
 	}
 	weapon = (isdefined(params.weapon) ? params.weapon : level.weaponnone);
 	str_mod = (isdefined(params.str_mod) ? params.str_mod : "MOD_UNKNOWN");

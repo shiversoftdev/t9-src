@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_35ee22bc : class_6aaccc24
+class ccp_captured_supplydrop : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_35ee22bc
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0xE7AEC773
 		Offset: 0x378
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_35ee22bc : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_35ee22bc
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0xF8F7F4CC
 		Offset: 0x780
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_35ee22bc : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_35ee22bc
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0x6905B833
 		Offset: 0x4D8
 		Size: 0x3C
@@ -47,54 +47,54 @@ class class_35ee22bc : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_16715e9f
-		Namespace: namespace_35ee22bc
+		Name: set_guardian_count
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0xCF8F4C31
 		Offset: 0x640
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_16715e9f(player, value)
+	function set_guardian_count(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "guardian_count", value);
 	}
 
 	/*
-		Name: function_191323ee
-		Namespace: namespace_35ee22bc
+		Name: set_raps_count
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0x321F39C8
 		Offset: 0x6E0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_191323ee(player, value)
+	function set_raps_count(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "raps_count", value);
 	}
 
 	/*
-		Name: function_461034d2
-		Namespace: namespace_35ee22bc
+		Name: set_selector_state
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0x34BCEDA1
 		Offset: 0x730
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_461034d2(player, value)
+	function set_selector_state(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "selector_state", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_35ee22bc
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0xFEF2F282
 		Offset: 0x520
 		Size: 0x24
@@ -103,26 +103,26 @@ class class_35ee22bc : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
-		Name: function_69d88480
-		Namespace: namespace_35ee22bc
+		Name: set_wasp_count
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0xE073D084
 		Offset: 0x5A0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_69d88480(player, value)
+	function set_wasp_count(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "wasp_count", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_35ee22bc
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0xDBAFF5BF
 		Offset: 0x398
 		Size: 0x134
@@ -131,54 +131,54 @@ class class_35ee22bc : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("cp_captured_supplydrop");
-		namespace_6aaccc24::function_da693cbe("micromissile_count", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("wasp_count", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("rcxd_count", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("guardian_count", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("robot_count", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("raps_count", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("selector_state", 1, 3, "int");
+		cluielem::setup_clientfields("cp_captured_supplydrop");
+		cluielem::add_clientfield("micromissile_count", 1, 2, "int");
+		cluielem::add_clientfield("wasp_count", 1, 2, "int");
+		cluielem::add_clientfield("rcxd_count", 1, 2, "int");
+		cluielem::add_clientfield("guardian_count", 1, 2, "int");
+		cluielem::add_clientfield("robot_count", 1, 2, "int");
+		cluielem::add_clientfield("raps_count", 1, 2, "int");
+		cluielem::add_clientfield("selector_state", 1, 3, "int");
 	}
 
 	/*
-		Name: function_de1ece9c
-		Namespace: namespace_35ee22bc
+		Name: set_robot_count
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0xE537351D
 		Offset: 0x690
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_de1ece9c(player, value)
+	function set_robot_count(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "robot_count", value);
 	}
 
 	/*
-		Name: function_ebe4fe7a
-		Namespace: namespace_35ee22bc
+		Name: set_rcxd_count
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0x2BE8FC09
 		Offset: 0x5F0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_ebe4fe7a(player, value)
+	function set_rcxd_count(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "rcxd_count", value);
 	}
 
 	/*
-		Name: function_fdfe76bb
-		Namespace: namespace_35ee22bc
+		Name: set_micromissile_count
+		Namespace: ccp_captured_supplydrop
 		Checksum: 0x3806744
 		Offset: 0x550
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_fdfe76bb(player, value)
+	function set_micromissile_count(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "micromissile_count", value);
 	}
@@ -212,7 +212,7 @@ function private autoexec function_a666ed95()
 */
 function register()
 {
-	elem = new class_35ee22bc();
+	elem = new ccp_captured_supplydrop();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -264,7 +264,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_fdfe76bb
+	Name: set_micromissile_count
 	Namespace: cp_captured_supplydrop
 	Checksum: 0x6CAEED59
 	Offset: 0x228
@@ -272,13 +272,13 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_fdfe76bb(player, value)
+function set_micromissile_count(player, value)
 {
-	[[ self ]]->function_fdfe76bb(player, value);
+	[[ self ]]->set_micromissile_count(player, value);
 }
 
 /*
-	Name: function_69d88480
+	Name: set_wasp_count
 	Namespace: cp_captured_supplydrop
 	Checksum: 0x5BA9D309
 	Offset: 0x258
@@ -286,13 +286,13 @@ function function_fdfe76bb(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_69d88480(player, value)
+function set_wasp_count(player, value)
 {
-	[[ self ]]->function_69d88480(player, value);
+	[[ self ]]->set_wasp_count(player, value);
 }
 
 /*
-	Name: function_ebe4fe7a
+	Name: set_rcxd_count
 	Namespace: cp_captured_supplydrop
 	Checksum: 0x6CBF72F3
 	Offset: 0x288
@@ -300,13 +300,13 @@ function function_69d88480(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_ebe4fe7a(player, value)
+function set_rcxd_count(player, value)
 {
-	[[ self ]]->function_ebe4fe7a(player, value);
+	[[ self ]]->set_rcxd_count(player, value);
 }
 
 /*
-	Name: function_16715e9f
+	Name: set_guardian_count
 	Namespace: cp_captured_supplydrop
 	Checksum: 0xE834147
 	Offset: 0x2B8
@@ -314,13 +314,13 @@ function function_ebe4fe7a(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_16715e9f(player, value)
+function set_guardian_count(player, value)
 {
-	[[ self ]]->function_16715e9f(player, value);
+	[[ self ]]->set_guardian_count(player, value);
 }
 
 /*
-	Name: function_de1ece9c
+	Name: set_robot_count
 	Namespace: cp_captured_supplydrop
 	Checksum: 0xF8D64904
 	Offset: 0x2E8
@@ -328,13 +328,13 @@ function function_16715e9f(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_de1ece9c(player, value)
+function set_robot_count(player, value)
 {
-	[[ self ]]->function_de1ece9c(player, value);
+	[[ self ]]->set_robot_count(player, value);
 }
 
 /*
-	Name: function_191323ee
+	Name: set_raps_count
 	Namespace: cp_captured_supplydrop
 	Checksum: 0xAE4E78C
 	Offset: 0x318
@@ -342,13 +342,13 @@ function function_de1ece9c(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_191323ee(player, value)
+function set_raps_count(player, value)
 {
-	[[ self ]]->function_191323ee(player, value);
+	[[ self ]]->set_raps_count(player, value);
 }
 
 /*
-	Name: function_461034d2
+	Name: set_selector_state
 	Namespace: cp_captured_supplydrop
 	Checksum: 0xCEA5B92A
 	Offset: 0x348
@@ -356,8 +356,8 @@ function function_191323ee(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_461034d2(player, value)
+function set_selector_state(player, value)
 {
-	[[ self ]]->function_461034d2(player, value);
+	[[ self ]]->set_selector_state(player, value);
 }
 

@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_25c5977f : class_6aaccc24
+class class_25c5977f : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_25c5977f : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_25c5977f
 		Checksum: 0x2B7CA68B
 		Offset: 0x3D0
@@ -52,9 +52,9 @@ class class_25c5977f : class_6aaccc24
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_tungsten_title_cards");
+		cluielem::register_clientside("zm_tungsten_title_cards");
 	}
 
 	/*
@@ -68,7 +68,7 @@ class class_25c5977f : class_6aaccc24
 	*/
 	function function_89134efb(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "is_title_card_02", value);
+		[[ self ]]->set_data(localclientnum, "is_title_card_02", value);
 	}
 
 	/*
@@ -82,8 +82,8 @@ class class_25c5977f : class_6aaccc24
 	*/
 	function setup_clientfields(var_cb91ced3)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_tungsten_title_cards");
-		namespace_6aaccc24::function_da693cbe("is_title_card_02", 4000, 1, "int", var_cb91ced3);
+		cluielem::setup_clientfields("zm_tungsten_title_cards");
+		cluielem::add_clientfield("is_title_card_02", 4000, 1, "int", var_cb91ced3);
 	}
 
 	/*
@@ -97,17 +97,17 @@ class class_25c5977f : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "is_title_card_02", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "is_title_card_02", 0);
 	}
 
 }
 
-#namespace namespace_6783631d;
+#namespace zm_tungsten_title_cards;
 
 /*
 	Name: function_63423176
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0xA42A0FC4
 	Offset: 0xD0
 	Size: 0x14
@@ -116,12 +116,12 @@ class class_25c5977f : class_6aaccc24
 */
 function private autoexec function_63423176()
 {
-	level notify(1793476796);
+	level notify(-1793476796);
 }
 
 /*
 	Name: register
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0x297DB24B
 	Offset: 0xF0
 	Size: 0x176
@@ -136,40 +136,40 @@ function register(var_cb91ced3)
 	{
 		level.var_ae746e8f = associativearray();
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_33eaad913c636274"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_tungsten_title_cards"]))
 	{
-		level.var_ae746e8f[#"hash_33eaad913c636274"] = [];
+		level.var_ae746e8f[#"zm_tungsten_title_cards"] = [];
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_33eaad913c636274"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_tungsten_title_cards"]))
 	{
-		level.var_ae746e8f[#"hash_33eaad913c636274"] = [];
+		level.var_ae746e8f[#"zm_tungsten_title_cards"] = [];
 	}
-	else if(!isarray(level.var_ae746e8f[#"hash_33eaad913c636274"]))
+	else if(!isarray(level.var_ae746e8f[#"zm_tungsten_title_cards"]))
 	{
-		level.var_ae746e8f[#"hash_33eaad913c636274"] = array(level.var_ae746e8f[#"hash_33eaad913c636274"]);
+		level.var_ae746e8f[#"zm_tungsten_title_cards"] = array(level.var_ae746e8f[#"zm_tungsten_title_cards"]);
 	}
-	level.var_ae746e8f[#"hash_33eaad913c636274"][level.var_ae746e8f[#"hash_33eaad913c636274"].size] = elem;
+	level.var_ae746e8f[#"zm_tungsten_title_cards"][level.var_ae746e8f[#"zm_tungsten_title_cards"].size] = elem;
 }
 
 /*
-	Name: function_5c1bb138
-	Namespace: namespace_6783631d
+	Name: register_clientside
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0x9E386FC1
 	Offset: 0x270
 	Size: 0x34
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_25c5977f();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0xC950A47
 	Offset: 0x2B0
 	Size: 0x1C
@@ -183,7 +183,7 @@ function open(player)
 
 /*
 	Name: close
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0x371BE82F
 	Offset: 0x2D8
 	Size: 0x1C
@@ -197,7 +197,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0x38B4598
 	Offset: 0x300
 	Size: 0x1A
@@ -211,7 +211,7 @@ function is_open(localclientnum)
 
 /*
 	Name: function_89134efb
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0xAB1DD420
 	Offset: 0x328
 	Size: 0x28

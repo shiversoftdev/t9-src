@@ -1,15 +1,15 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_24c32478acf44108;
+#using scripts\zm_common\zm_equipment.gsc;
 #using script_35598499769dbb3d;
-#using script_3f9e0dc8454d98e1;
-#using script_8988fdbc78d6c53;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using script_24c32478acf44108;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
 
 #namespace namespace_a5ef5769;
 
@@ -24,11 +24,11 @@
 */
 function private autoexec function_af1e31d7()
 {
-	level notify(38913368);
+	level notify(-38913368);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_a5ef5769
 	Checksum: 0xC78DD7F8
 	Offset: 0x1D0
@@ -36,7 +36,7 @@ function private autoexec function_af1e31d7()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_52556758a0c8acfe", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -67,16 +67,16 @@ function private function_70a657d8()
 	weaponobjects::function_e6400478(#"hash_5bd48d860ebd5a41", &function_5acf1bb9, 1);
 	weaponobjects::function_e6400478(#"hash_426d7c850c7f1d2", &function_5acf1bb9, 1);
 	zombie_utility::add_zombie_gib_weapon_callback(#"hash_ac86d29509a8939", &function_81027f3e, &function_81027f3e);
-	callback::function_34dea974(level.var_db785e13, &function_a70ad564);
-	callback::function_34dea974(level.var_a467bdbc, &function_43a02dae);
-	callback::function_34dea974(level.var_76fe888f, &function_a70ad564);
-	callback::function_34dea974(level.var_3415bf61, &function_43a02dae);
+	callback::add_weapon_fired(level.var_db785e13, &function_a70ad564);
+	callback::add_weapon_fired(level.var_a467bdbc, &function_43a02dae);
+	callback::add_weapon_fired(level.var_76fe888f, &function_a70ad564);
+	callback::add_weapon_fired(level.var_3415bf61, &function_43a02dae);
 	clientfield::register("scriptmover", "" + #"hash_47e7d5219a26a786", 16000, 3, "int");
 	clientfield::register("actor", "" + #"hash_3a47820a21ce3170", 16000, 2, "int");
 	clientfield::register("allplayers", "" + #"hash_7508e13e17dd1e3c", 16000, 4, "int");
 	namespace_9ff9f642::register_slowdown(#"hash_5c37161904f4bcc9", 0.8, 3);
 	namespace_9ff9f642::register_slowdown(#"hash_21cb91304fde349a", 0.5, 5);
-	callback::function_f77ced93(&function_54e9969b);
+	callback::on_weapon_change(&function_54e9969b);
 	callback::on_ai_killed(&function_65ba5ec2);
 	zm_weapons::function_90953640(level.var_a467bdbc, 5, float(function_60d95f53()) / 1000);
 	level.var_c09dd754 = 0;
@@ -96,11 +96,11 @@ function private function_70a657d8()
 		level.var_1a4cc228[#"hash_6904f5c7bef64405"] = [0:#"hash_5eafd160d077670d"];
 		level.var_1a4cc228[#"hash_7f957e36b4f6160f"] = [0:#"hash_61df3be05096e9e2"];
 	}
-	else if(util::function_53bbf9d2() == "zm_gold")
+	else if(util::get_map_name() == "zm_gold")
 	{
-		level.var_1a4cc228[#"hash_579653d9eb129d4a"] = [7:#"hash_63d74789d0b11dbc", 6:#"hash_15e17500f1c8d0e9", 5:#"hash_1b6585308f85be40", 4:#"hash_e3b20622eb68c2b", 3:#"hash_735b3e8785d43fdb", 2:#"hash_3b5927d61466dc58", 1:#"hash_36991df55c87dbcb", 0:#"hash_a80d8840eaa4e7e"];
-		level.var_1a4cc228[#"hash_257d03ac72a268f6"] = [0:#"hash_4729aed4cfa43476"];
-		level.var_1a4cc228[#"hash_b96aeeb4d082b04"] = [0:#"hash_59e40ffcdcfbffa6"];
+		level.var_1a4cc228[#"spawner_bo5_zombie_zm_gold"] = [7:#"hash_63d74789d0b11dbc", 6:#"hash_15e17500f1c8d0e9", 5:#"hash_1b6585308f85be40", 4:#"hash_e3b20622eb68c2b", 3:#"hash_735b3e8785d43fdb", 2:#"hash_3b5927d61466dc58", 1:#"hash_36991df55c87dbcb", 0:#"hash_a80d8840eaa4e7e"];
+		level.var_1a4cc228[#"spawner_bo5_zombie_zm_gold_armor_heavy"] = [0:#"hash_4729aed4cfa43476"];
+		level.var_1a4cc228[#"spawner_bo5_zombie_zm_gold_armor_medium"] = [0:#"hash_59e40ffcdcfbffa6"];
 		level.var_1a4cc228[#"hash_5765ccddce11dc6c"] = [7:#"hash_2d07ee0d2dca46d9", 6:#"hash_5c0dcc3f9d9e1ea5", 5:#"hash_35d84238103deb46", 4:#"hash_7151a0027b3ff314", 3:#"hash_7b3bac29e8e3bf13", 2:#"hash_1c8805fec5806efe", 1:#"hash_78a973a6fb604cf", 0:#"hash_1c89bc2d12106779"];
 		level.var_1a4cc228[#"hash_78215fa79f5557dc"] = [0:#"hash_2cb37314243526ec"];
 		level.var_1a4cc228[#"hash_7a8b592728eec95d"] = level.var_1a4cc228[#"hash_78215fa79f5557dc"];
@@ -533,20 +533,20 @@ function function_98175f42(watcher, player)
 			var_7dcfceb3.var_7ef7dc23 = vortex;
 			if(self.var_59ba00f5[0] != 0)
 			{
-				var_c7ca84dc = var_b9fb2cb5[0] / self.var_59ba00f5[0];
+				hit_time = var_b9fb2cb5[0] / self.var_59ba00f5[0];
 			}
 			else
 			{
 				if(self.var_59ba00f5[1] != 0)
 				{
-					var_c7ca84dc = var_b9fb2cb5[1] / self.var_59ba00f5[1];
+					hit_time = var_b9fb2cb5[1] / self.var_59ba00f5[1];
 				}
 				else
 				{
-					var_c7ca84dc = var_b9fb2cb5[2] / self.var_59ba00f5[2];
+					hit_time = var_b9fb2cb5[2] / self.var_59ba00f5[2];
 				}
 			}
-			var_7dcfceb3.var_a31e9c2 = int(var_c7ca84dc / (float(function_60d95f53()) / 1000));
+			var_7dcfceb3.var_a31e9c2 = int(hit_time / (float(function_60d95f53()) / 1000));
 			if(!isdefined(self.var_6ccc858c))
 			{
 				self.var_6ccc858c = [];
@@ -582,7 +582,7 @@ function function_bb80aad0()
 			{
 				if(isdefined(var_7dcfceb3.var_7ef7dc23))
 				{
-					var_7dcfceb3.var_7ef7dc23 notify(#"hash_7fdacd511a4333d5");
+					var_7dcfceb3.var_7ef7dc23 notify(#"ray_hit");
 				}
 				var_a8024c64++;
 				if(var_a8024c64 >= self.var_6ccc858c.size)
@@ -720,14 +720,14 @@ function function_646f5566()
 	while(true)
 	{
 		s_notify = undefined;
-		s_notify = self waittill(#"hash_7fdacd511a4333d5");
+		s_notify = self waittill(#"ray_hit");
 		if(!isdefined(self) || !self.is_active)
 		{
 			return;
 		}
 		if(self.var_669f67cf == 0)
 		{
-			self notify(#"hash_7fdacd511a4333d5");
+			self notify(#"ray_hit");
 		}
 		self.var_669f67cf++;
 		if(self.var_669f67cf >= 8)
@@ -814,7 +814,7 @@ function function_d60a354c()
 	self endon(#"explode");
 	self endon(#"death");
 	waitresult = undefined;
-	waitresult = self waittilltimeout(3, #"hash_7fdacd511a4333d5");
+	waitresult = self waittilltimeout(3, #"ray_hit");
 	if(waitresult._notify !== "ray_hit")
 	{
 		/#
@@ -1011,7 +1011,7 @@ function private function_e28429db()
 */
 function private function_4a074587(weapon)
 {
-	var_4bd40253 = self namespace_b376ff3f::function_230ceec4(weapon);
+	var_4bd40253 = self item_inventory::function_230ceec4(weapon);
 	if(isdefined(var_4bd40253.var_a8bccf69))
 	{
 		switch(var_4bd40253.var_a8bccf69)

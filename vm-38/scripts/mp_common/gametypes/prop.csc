@@ -1,8 +1,8 @@
 #using script_640ee26e1d271011;
 #using script_67b81035ebe2a4fe;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace prop;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_b7af5bea()
 {
-	level notify(623056366);
+	level notify(-623056366);
 }
 
 /*
@@ -38,20 +38,20 @@ event main(eventstruct)
 	clientfield::register("toplayer", "PROP.cameraRange", 16000, 8, "int", &function_d8273603, 0, 0);
 	clientfield::register("toplayer", "PROP.hide_prop", 16000, 1, "int", &function_65208afd, 0, 0);
 	clientfield::function_5b7d846d("hudItems.war.attackingTeam", #"hash_11ea1e04b846f98e", #"attackingteam", 16000, 2, "int", undefined, 0, 1);
-	clientfield::function_a8bbc967("hudItems.numPropsAlive", #"hud_items", #"hash_486f8ad98177fae8", 16000, 4, "int", undefined, 0, 1);
-	clientfield::function_a8bbc967("hudItems.numPropConcusses", #"hud_items", #"hash_445bc773f16d2e44", 16000, 2, "int", undefined, 0, 1);
-	clientfield::function_a8bbc967("hudItems.numPropChanges", #"hud_items", #"hash_7d362093bb553a7b", 16000, 2, "int", undefined, 0, 1);
-	clientfield::function_a8bbc967("hudItems.numPropDecoys", #"hud_items", #"hash_30bdcde2ca8cdccf", 16000, 4, "int", undefined, 0, 1);
+	clientfield::register_clientuimodel("hudItems.numPropsAlive", #"hud_items", #"hash_486f8ad98177fae8", 16000, 4, "int", undefined, 0, 1);
+	clientfield::register_clientuimodel("hudItems.numPropConcusses", #"hud_items", #"hash_445bc773f16d2e44", 16000, 2, "int", undefined, 0, 1);
+	clientfield::register_clientuimodel("hudItems.numPropChanges", #"hud_items", #"hash_7d362093bb553a7b", 16000, 2, "int", undefined, 0, 1);
+	clientfield::register_clientuimodel("hudItems.numPropDecoys", #"hud_items", #"hash_30bdcde2ca8cdccf", 16000, 4, "int", undefined, 0, 1);
 	clientfield::register("toplayer", "realtime_multiplay", 16000, 1, "int", &function_a1b40aa4, 0, 1);
-	level.var_82e6af5d = mp_prop_timer::register();
-	level.var_314165c4 = mp_prop_controls::register();
-	callback::on_localplayer_spawned(&function_357207b9);
+	level.hide_timer = mp_prop_timer::register();
+	level.prop_controls = mp_prop_controls::register();
+	callback::on_localplayer_spawned(&onlocalplayerspawned);
 	level.var_20ece392 = &function_aa5f176f;
 	thread function_2691bc1b();
 }
 
 /*
-	Name: function_357207b9
+	Name: onlocalplayerspawned
 	Namespace: prop
 	Checksum: 0x83B93309
 	Offset: 0x668
@@ -59,7 +59,7 @@ event main(eventstruct)
 	Parameters: 1
 	Flags: None
 */
-function function_357207b9(localclientnum)
+function onlocalplayerspawned(localclientnum)
 {
 	level notify("localPlayerSpectatingEnd" + localclientnum);
 	if(!self function_b9fceaaf(localclientnum))
@@ -337,12 +337,12 @@ function function_65208afd(localclientnum, oldval, newval, bnewent, binitialsnap
 	{
 		if(isdefined(self.prop))
 		{
-			self.prop function_bf9d3071(#"hash_14be6378dfef6b7");
+			self.prop playrenderoverridebundle(#"hash_14be6378dfef6b7");
 		}
 	}
 	else if(isdefined(self.prop))
 	{
-		self.prop function_5d482e78(#"hash_14be6378dfef6b7");
+		self.prop stoprenderoverridebundle(#"hash_14be6378dfef6b7");
 	}
 }
 
@@ -448,16 +448,16 @@ function function_b9fceaaf(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_f6c0a66e(localclientnum, var_b0a45a26)
+function function_f6c0a66e(localclientnum, teamint)
 {
 	self endon(#"entityshutdown");
 	self notify(#"hash_65350e9157e1e7fd");
 	self endon(#"hash_65350e9157e1e7fd");
 	/#
-		assert(var_b0a45a26 == 1 || var_b0a45a26 == 2);
+		assert(teamint == 1 || teamint == 2);
 	#/
 	team = "allies";
-	if(var_b0a45a26 == 2)
+	if(teamint == 2)
 	{
 		team = "axis";
 	}

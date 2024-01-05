@@ -1,24 +1,24 @@
-#using script_47fb62300ac0bd60;
-#using script_545a0bac37bda541;
-#using script_68d2ee1489345a1d;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
-#using scripts\core_common\damage.gsc;
-#using scripts\core_common\entityheadicons_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
 #using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\globallogic\globallogic_score.gsc;
+#using scripts\core_common\entityheadicons_shared.gsc;
+#using scripts\core_common\damage.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\battlechatter.gsc;
 
 #namespace nightingale;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: nightingale
 	Checksum: 0xDB2053F5
 	Offset: 0x158
@@ -26,7 +26,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"nightingale", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -223,19 +223,19 @@ function private function_acc36c55(watcher)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_6ab1797f(var_3f142cad)
+function private function_6ab1797f(decoygrenade)
 {
-	if(is_true(var_3f142cad.shuttingdown))
+	if(is_true(decoygrenade.shuttingdown))
 	{
 		return;
 	}
-	if(isdefined(var_3f142cad.var_20a0f018))
+	if(isdefined(decoygrenade.var_20a0f018))
 	{
-		var_3f142cad.var_20a0f018 clientfield::set("isJammed", 1);
-		var_3f142cad.var_20a0f018 clientfield::set("" + #"hash_7c2ee5bfa7cad803", 0);
-		var_3f142cad.var_20a0f018 stoploopsound(0.5);
+		decoygrenade.var_20a0f018 clientfield::set("isJammed", 1);
+		decoygrenade.var_20a0f018 clientfield::set("" + #"hash_7c2ee5bfa7cad803", 0);
+		decoygrenade.var_20a0f018 stoploopsound(0.5);
 	}
-	var_3f142cad scene::stop();
+	decoygrenade scene::stop();
 }
 
 /*
@@ -247,20 +247,20 @@ function private function_6ab1797f(var_3f142cad)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_7dfb4daa(var_3f142cad)
+function private function_7dfb4daa(decoygrenade)
 {
-	if(is_true(var_3f142cad.shuttingdown))
+	if(is_true(decoygrenade.shuttingdown))
 	{
 		return;
 	}
-	if(!isdefined(var_3f142cad.var_20a0f018))
+	if(!isdefined(decoygrenade.var_20a0f018))
 	{
 		return;
 	}
-	var_3f142cad.var_20a0f018 clientfield::set("isJammed", 0);
-	var_3f142cad.var_20a0f018 clientfield::set("" + #"hash_7c2ee5bfa7cad803", 1);
-	var_3f142cad.var_20a0f018 playloopsound(#"hash_6e07f5906d35471");
-	var_3f142cad thread scene::play(#"scene_grenade_decoy_footsteps", var_3f142cad.var_20a0f018);
+	decoygrenade.var_20a0f018 clientfield::set("isJammed", 0);
+	decoygrenade.var_20a0f018 clientfield::set("" + #"hash_7c2ee5bfa7cad803", 1);
+	decoygrenade.var_20a0f018 playloopsound(#"hash_6e07f5906d35471");
+	decoygrenade thread scene::play(#"scene_grenade_decoy_footsteps", decoygrenade.var_20a0f018);
 }
 
 /*
@@ -527,6 +527,6 @@ function function_dedc78a9(attacker, victim, weapon, attackerweapon, meansofdeat
 */
 function function_a8222420(attacker, time, weapon, var_25f92d1d, var_deb2a22b)
 {
-	var_deb2a22b contracts::function_a54e2068(#"hash_6c38f28fb66ca0c4");
+	var_deb2a22b contracts::increment_contract(#"hash_6c38f28fb66ca0c4");
 }
 

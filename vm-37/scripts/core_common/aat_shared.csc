@@ -1,12 +1,12 @@
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace aat;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: aat
 	Checksum: 0x7D141E2A
 	Offset: 0x148
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"aat", &function_70a657d8, &finalize_clientfields, undefined, undefined);
 }
@@ -70,11 +70,11 @@ function function_4f950d48(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwastimejump)
 	{
-		self function_bf9d3071("rob_ammo_mod_ready_light");
+		self playrenderoverridebundle("rob_ammo_mod_ready_light");
 	}
 	else
 	{
-		self function_5d482e78("rob_ammo_mod_ready_light");
+		self stoprenderoverridebundle("rob_ammo_mod_ready_light");
 	}
 }
 

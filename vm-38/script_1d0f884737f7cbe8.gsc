@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.gsc;
 
-class class_1762fc34 : class_6aaccc24
+class clui_napalm_strike : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0x88FC4B08
 		Offset: 0x1A0
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_1762fc34 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0x61AE0512
 		Offset: 0x260
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_1762fc34 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0x3AED3C6B
 		Offset: 0x1E8
 		Size: 0x3C
@@ -44,12 +44,12 @@ class class_1762fc34 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0x56CA8646
 		Offset: 0x230
 		Size: 0x24
@@ -58,12 +58,12 @@ class class_1762fc34 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_1762fc34
+		Namespace: clui_napalm_strike
 		Checksum: 0xA0495291
 		Offset: 0x1C0
 		Size: 0x1C
@@ -72,7 +72,7 @@ class class_1762fc34 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("lui_napalm_strike");
+		cluielem::setup_clientfields("lui_napalm_strike");
 	}
 
 }
@@ -90,7 +90,7 @@ class class_1762fc34 : class_6aaccc24
 */
 function private autoexec function_5be85e35()
 {
-	level notify(521615871);
+	level notify(-521615871);
 }
 
 /*
@@ -104,7 +104,7 @@ function private autoexec function_5be85e35()
 */
 function register()
 {
-	elem = new class_1762fc34();
+	elem = new clui_napalm_strike();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }

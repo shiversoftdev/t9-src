@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_4914de7c;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_83eaf112()
 {
-	level notify(1715586623);
+	level notify(-1715586623);
 }
 
 /*
@@ -28,7 +28,7 @@ function private autoexec function_83eaf112()
 */
 event main(eventstruct)
 {
-	if(util::function_53bbf9d2() !== "wz_russia")
+	if(util::get_map_name() !== "wz_russia")
 	{
 		return;
 	}

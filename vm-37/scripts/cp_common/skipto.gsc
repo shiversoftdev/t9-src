@@ -1,43 +1,43 @@
-#using script_256b8879317373de;
-#using script_267e1d16ae28392b;
-#using script_272c4fcff156116d;
-#using script_32399001bdb550da;
-#using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
-#using script_4ae261b2785dda9f;
-#using script_7b4396f5e8e35b28;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\load_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\teleport_shared.gsc;
-#using scripts\core_common\traps_deployable.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\challenges.gsc;
 #using scripts\cp_common\collectibles.gsc;
-#using scripts\cp_common\gametypes\globallogic.gsc;
-#using scripts\cp_common\gametypes\globallogic_player.gsc;
-#using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\load.gsc;
+#using script_267e1d16ae28392b;
 #using scripts\cp_common\util.gsc;
+#using script_4ae261b2785dda9f;
+#using scripts\cp_common\load.gsc;
+#using script_32399001bdb550da;
+#using scripts\cp_common\gametypes\globallogic_ui.gsc;
+#using scripts\cp_common\gametypes\globallogic_player.gsc;
+#using scripts\cp_common\gametypes\globallogic.gsc;
+#using scripts\cp_common\challenges.gsc;
+#using scripts\cp_common\bb.gsc;
+#using script_7b4396f5e8e35b28;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\traps_deployable.gsc;
+#using scripts\core_common\teleport_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawning_shared.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using script_272c4fcff156116d;
 
 #namespace skipto;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: skipto
 	Checksum: 0x1E9270C1
 	Offset: 0x8B8
@@ -45,7 +45,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"skipto", &function_70a657d8, &function_8ac3bea9, &on_finalize_initialization, undefined);
 }
@@ -2933,7 +2933,7 @@ function private standard_objective_done(skipto, starting, direct, player)
 		level thread function_30523221(player);
 		level thread function_8ca86687(player);
 	}
-	level thread traps_deployable::function_64590698(0, player, undefined);
+	level thread traps_deployable::clean_traps(0, player, undefined);
 }
 
 /*
@@ -2970,8 +2970,8 @@ function function_30523221(str_skipto)
 */
 function function_8ca86687(str_skipto)
 {
-	var_c3977917 = struct::get_array(str_skipto, "script_objective");
-	foreach(s_gameobject in var_c3977917)
+	a_s_gameobjects = struct::get_array(str_skipto, "script_objective");
+	foreach(s_gameobject in a_s_gameobjects)
 	{
 		if(isdefined(s_gameobject.mdl_gameobject))
 		{

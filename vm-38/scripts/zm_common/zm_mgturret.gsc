@@ -13,7 +13,7 @@
 */
 function private autoexec function_6dcfa408()
 {
-	level notify(445736891);
+	level notify(-445736891);
 }
 
 /*

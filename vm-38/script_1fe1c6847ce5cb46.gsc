@@ -1,6 +1,6 @@
 #using script_382ba4154c04904e;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_e502fca8;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_ae2475cf()
 {
-	level notify(2109915973);
+	level notify(-2109915973);
 }
 
 /*
@@ -83,9 +83,9 @@ function function_34eb3249(localclientnum, oldval, newval, bnewent, binitialsnap
 	if(bwasdemojump)
 	{
 		var_1da0aee8 = getent(fieldname, "anytown_usa_teleporter", "targetname");
-		if(var_1da0aee8.model !== #"hash_45169d3166db3fb3")
+		if(var_1da0aee8.model !== #"p9_zm_gold_teleporter_b")
 		{
-			var_1da0aee8 setmodel(#"hash_45169d3166db3fb3");
+			var_1da0aee8 setmodel(#"p9_zm_gold_teleporter_b");
 		}
 		function_d93b0fff(fieldname, e_portal);
 		wait(1.5);

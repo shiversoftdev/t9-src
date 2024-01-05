@@ -1,8 +1,8 @@
 #using script_19c6c147c637b960;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace territory;
 
@@ -21,7 +21,7 @@ function private autoexec function_1726fab1()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: territory
 	Checksum: 0xF1F9F335
 	Offset: 0x158
@@ -29,7 +29,7 @@ function private autoexec function_1726fab1()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"territory", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -162,16 +162,16 @@ function private function_36a1028e(localclientnum, origin, radius)
 	circle = spawn(localclientnum, origin, "script_model");
 	circle = spawn(localclientnum, origin, "script_model");
 	circle setmodel("p9_territory_cylinder");
-	circle function_bf9d3071(#"hash_43d22d2a5ec27460");
+	circle playrenderoverridebundle(#"hash_43d22d2a5ec27460");
 	modelscale = radius / 150000;
 	circle function_78233d29(#"hash_43d22d2a5ec27460", "", "Scale", modelscale);
 	circle setcompassicon("minimap_collapse_ring");
-	circle function_a5edb367(#"hash_4964cfaa74d2a1ac");
+	circle function_a5edb367(#"death_ring");
 	circle function_811196d1(0);
 	circle function_95bc465d(1);
 	circle function_5e00861(0, 1);
 	circle function_60212003(1);
-	var_70aac56d = radius * 2;
-	circle function_5e00861(var_70aac56d, 1);
+	compassscale = radius * 2;
+	circle function_5e00861(compassscale, 1);
 }
 

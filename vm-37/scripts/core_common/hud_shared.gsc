@@ -1,16 +1,16 @@
 #using script_6103fadfc4a82745;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace hud;
 
@@ -54,7 +54,7 @@ event private function_e0a8e4ba(struct)
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: hud
 	Checksum: 0x7054B493
 	Offset: 0x580
@@ -62,7 +62,7 @@ event private function_e0a8e4ba(struct)
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hud", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -312,7 +312,7 @@ function function_6cf4a466()
 }
 
 /*
-	Name: function_1a5d6fff
+	Name: set_team_objective
 	Namespace: hud
 	Checksum: 0x65FB6AF2
 	Offset: 0xCD0
@@ -320,7 +320,7 @@ function function_6cf4a466()
 	Parameters: 6
 	Flags: Linked
 */
-function function_1a5d6fff(var_3c9f56bd, var_cc966c56, n_obj_id, n_widget, var_48d81699, b_pvp)
+function set_team_objective(var_3c9f56bd, var_cc966c56, n_obj_id, n_widget, var_48d81699, b_pvp)
 {
 	if(!isdefined(level.var_6371e281))
 	{
@@ -1436,7 +1436,7 @@ function private function_cbf3f034(s_objective)
 }
 
 /*
-	Name: function_215b60ea
+	Name: set_pvp_objective
 	Namespace: hud
 	Checksum: 0xCFD5201A
 	Offset: 0x3D20
@@ -1444,7 +1444,7 @@ function private function_cbf3f034(s_objective)
 	Parameters: 6
 	Flags: None
 */
-function function_215b60ea(str_identifier, n_obj_id, n_widget, var_48d81699, var_94fe5aa5, var_23b4190)
+function set_pvp_objective(str_identifier, n_obj_id, n_widget, var_48d81699, var_94fe5aa5, var_23b4190)
 {
 	foreach(str_flag in array("pvp_objective_set_allies", "pvp_objective_set_axis"))
 	{
@@ -1466,10 +1466,10 @@ function function_215b60ea(str_identifier, n_obj_id, n_widget, var_48d81699, var
 		if(is_true(var_ae4241f))
 		{
 			var_ae4241f = undefined;
-			self thread function_1a5d6fff(str_identifier, var_cc966c56, n_obj_id, var_fc6b273a, var_48d81699, 1);
+			self thread set_team_objective(str_identifier, var_cc966c56, n_obj_id, var_fc6b273a, var_48d81699, 1);
 			continue;
 		}
-		self function_1a5d6fff(str_identifier, var_cc966c56, n_obj_id, var_fc6b273a, var_48d81699, 1);
+		self set_team_objective(str_identifier, var_cc966c56, n_obj_id, var_fc6b273a, var_48d81699, 1);
 	}
 	flag::wait_till_all(array("pvp_objective_set_allies", "pvp_objective_set_axis"));
 	mission flag::clear("pvp_objectives_updating");

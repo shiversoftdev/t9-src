@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_4914de7c;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_52cbff6e()
 {
-	level notify(441037074);
+	level notify(-441037074);
 }
 
 /*
@@ -30,12 +30,12 @@ function private autoexec function_52cbff6e()
 */
 event main(eventstruct)
 {
-	if(util::function_53bbf9d2() !== "wz_russia")
+	if(util::get_map_name() !== "wz_russia")
 	{
 		return;
 	}
 	callback::add_callback(#"objective_started", &function_386821d6);
-	callback::add_callback(#"hash_69090774fec4a17b", &function_b1eb7f05);
+	callback::add_callback(#"objective_ended", &function_b1eb7f05);
 }
 
 /*

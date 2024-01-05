@@ -1,25 +1,25 @@
 #using script_566bf433dcd9d9c;
-#using script_7cc5fb39b97494c4;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\doors_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\cp_common\gametypes\globallogic_utils.gsc;
+#using scripts\core_common\doors_shared.gsc;
+#using script_7cc5fb39b97494c4;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_4fa53161;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4fa53161
 	Checksum: 0x104AA3A6
 	Offset: 0x190
@@ -27,7 +27,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4ad49805c423429d", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -78,7 +78,7 @@ function private function_8ac3bea9()
 function private function_550f629a()
 {
 	var_1cde154f = getgametypesetting(#"use_doors");
-	var_5a23774b = getdvarint(#"hash_1da83e9a3dca0a70", 0);
+	var_5a23774b = getdvarint(#"disabledoors", 0);
 	if(!is_true(var_1cde154f) || is_true(var_5a23774b))
 	{
 		return;
@@ -394,14 +394,14 @@ function private function_a07f8293()
 			result = self waittill(#"hash_46fda91c613b40e5");
 			msg = result.msg;
 			var_e9968086 = msg;
-			self thread function_a1891b01(var_e9968086, var_dc35cd8c);
+			self childthread update_debug(var_e9968086, var_dc35cd8c);
 			var_dc35cd8c = var_e9968086;
 		}
 	#/
 }
 
 /*
-	Name: function_a1891b01
+	Name: update_debug
 	Namespace: namespace_4fa53161
 	Checksum: 0x83DDAD7
 	Offset: 0xF10
@@ -409,7 +409,7 @@ function private function_a07f8293()
 	Parameters: 2
 	Flags: Private
 */
-function private function_a1891b01(var_e9968086, var_dc35cd8c)
+function private update_debug(var_e9968086, var_dc35cd8c)
 {
 	/#
 		self notify(#"new_msg");
@@ -569,9 +569,9 @@ function private ai_monitor_doors()
 		while(true)
 		{
 			results = self function_a847c61f(4096);
-			var_d834bf03 = results.entrypoint[0];
+			doorloc = results.entrypoint[0];
 			var_3e8fb6d0 = function_13f8cd4c(results.entity[0]);
-			if(isdefined(var_d834bf03))
+			if(isdefined(doorloc))
 			{
 				if(isdefined(var_3e8fb6d0))
 				{

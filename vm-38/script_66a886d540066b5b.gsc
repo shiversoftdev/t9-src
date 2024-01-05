@@ -1,11 +1,11 @@
-#using scripts\core_common\aat_shared.csc;
 #using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\aat_shared.csc;
 
-#namespace namespace_8652b0d1;
+#namespace ammomod_shatterblast;
 
 /*
 	Name: function_42777e2f
-	Namespace: namespace_8652b0d1
+	Namespace: ammomod_shatterblast
 	Checksum: 0xA5AB4AFC
 	Offset: 0x170
 	Size: 0x14
@@ -14,12 +14,12 @@
 */
 function private autoexec function_42777e2f()
 {
-	level notify(1462538574);
+	level notify(-1462538574);
 }
 
 /*
 	Name: function_4e14a881
-	Namespace: namespace_8652b0d1
+	Namespace: ammomod_shatterblast
 	Checksum: 0x372EF605
 	Offset: 0x190
 	Size: 0x18C
@@ -43,7 +43,7 @@ function function_4e14a881()
 
 /*
 	Name: function_d28d723d
-	Namespace: namespace_8652b0d1
+	Namespace: ammomod_shatterblast
 	Checksum: 0x72801BC4
 	Offset: 0x328
 	Size: 0x64

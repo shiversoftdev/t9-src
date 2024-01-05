@@ -1,15 +1,15 @@
-#using script_2d142c6d365a90a3;
-#using script_3d0f36632dad12df;
-#using script_713f934fea43e1fc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using script_3d0f36632dad12df;
+#using script_2d142c6d365a90a3;
+#using script_713f934fea43e1fc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_6615ea91;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_6615ea91
 	Checksum: 0x2AF7D4E2
 	Offset: 0x1C8
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_53f69893eea352cb", &function_70a657d8, undefined, undefined, #"radiation");
 }
@@ -37,9 +37,9 @@ function private function_70a657d8()
 	{
 		return;
 	}
-	clientfield::function_a8bbc967("hudItems.incursion.radiationDamage", #"hash_4f154d6820b7e836", [0:#"hash_17c333de26f9a5c9"], 1, 5, "float", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.incursion.radiationProtection", #"hash_4f154d6820b7e836", [0:#"hash_6a2df23dda50fd53"], 1, 5, "float", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.incursion.radiationHealth", #"hash_4f154d6820b7e836", [0:#"hash_1ea71fd40691443e"], 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.incursion.radiationDamage", #"hash_4f154d6820b7e836", [0:#"radiationdamage"], 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.incursion.radiationProtection", #"hash_4f154d6820b7e836", [0:#"hash_6a2df23dda50fd53"], 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.incursion.radiationHealth", #"hash_4f154d6820b7e836", [0:#"hash_1ea71fd40691443e"], 1, 5, "float", undefined, 0, 0);
 	clientfield::register("toplayer", "radiation", 1, 10, "int", &radiation, 0, 1);
 	callback::on_localclient_connect(&function_5cb7f849);
 	level.var_6d29a25e = [];
@@ -57,7 +57,7 @@ function private function_70a657d8()
 function private function_9cc6a162(localclientnum, sickness, var_46bdb64c)
 {
 	/#
-		assert(function_7a600918(sickness) || isstring(sickness));
+		assert(ishash(sickness) || isstring(sickness));
 	#/
 	/#
 		assert(isdefined(var_46bdb64c));
@@ -65,17 +65,17 @@ function private function_9cc6a162(localclientnum, sickness, var_46bdb64c)
 	var_5e7fb773 = function_1df4c3b0(localclientnum, #"hash_4f154d6820b7e836");
 	var_9ad901c3 = createuimodel(var_5e7fb773, "sickness");
 	var_a60a2640 = level.radiation.sickness.size;
-	var_e4130a92 = createuimodel(var_9ad901c3, "item" + var_a60a2640);
-	var_1c254c7e = createuimodel(var_e4130a92, "endStartFraction");
+	itemuimodel = createuimodel(var_9ad901c3, "item" + var_a60a2640);
+	var_1c254c7e = createuimodel(itemuimodel, "endStartFraction");
 	setuimodelvalue(var_1c254c7e, 1);
-	var_43df2991 = createuimodel(var_e4130a92, "info");
+	var_43df2991 = createuimodel(itemuimodel, "info");
 	setuimodelvalue(var_43df2991, var_46bdb64c.var_4bd5611f);
 	var_8e2253bd = {};
 	var_8e2253bd.var_a2c3987d = sickness;
 	var_8e2253bd.var_3a94cbe6 = gettime();
 	var_8e2253bd.var_cb9fc1f3 = gettime() + var_46bdb64c.duration;
 	var_8e2253bd.var_4bd5611f = var_46bdb64c.var_4bd5611f;
-	var_8e2253bd.var_e4130a92 = var_e4130a92;
+	var_8e2253bd.itemuimodel = itemuimodel;
 	level.var_96929d7f[localclientnum].sickness[level.var_96929d7f[localclientnum].sickness.size] = var_8e2253bd;
 	var_a25538fb = createuimodel(var_9ad901c3, "count");
 	setuimodelvalue(var_a25538fb, level.var_96929d7f[localclientnum].sickness.size);
@@ -111,7 +111,7 @@ function private function_e352066c(localclientnum)
 function private function_b200b0ea(localclientnum, sickness, var_46bdb64c)
 {
 	/#
-		assert(function_7a600918(sickness) || isstring(sickness));
+		assert(ishash(sickness) || isstring(sickness));
 	#/
 	/#
 		assert(isdefined(var_46bdb64c));
@@ -145,10 +145,10 @@ function private function_162db916(localclientnum)
 	for(var_a60a2640 = 0; var_a60a2640 < level.var_96929d7f[localclientnum].sickness.size; var_a60a2640++)
 	{
 		var_8e2253bd = level.var_96929d7f[localclientnum].sickness[var_a60a2640];
-		var_e4130a92 = createuimodel(var_9ad901c3, "item" + var_a60a2640);
-		var_43df2991 = createuimodel(var_e4130a92, "info");
+		itemuimodel = createuimodel(var_9ad901c3, "item" + var_a60a2640);
+		var_43df2991 = createuimodel(itemuimodel, "info");
 		setuimodelvalue(var_43df2991, var_8e2253bd.var_4bd5611f);
-		var_8e2253bd.var_e4130a92 = var_e4130a92;
+		var_8e2253bd.itemuimodel = itemuimodel;
 	}
 	var_a25538fb = createuimodel(var_9ad901c3, "count");
 	setuimodelvalue(var_a25538fb, level.var_96929d7f[localclientnum].sickness.size);

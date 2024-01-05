@@ -14,11 +14,11 @@
 */
 function private autoexec function_b10c2094()
 {
-	level notify(667363604);
+	level notify(-667363604);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: burnplayer
 	Checksum: 0x5584DEC7
 	Offset: 0xE0
@@ -26,7 +26,7 @@ function private autoexec function_b10c2094()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"burnplayer", &function_70a657d8, undefined, undefined, undefined);
 }

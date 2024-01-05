@@ -1,5 +1,5 @@
-#using script_35ae72be7b4fec10;
 #using scripts\core_common\values_shared.gsc;
+#using script_35ae72be7b4fec10;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
 
 #namespace namespace_29a279dd;
@@ -22,7 +22,7 @@ function function_901ca209(state, text, desc)
 	}
 	if(isdefined(text))
 	{
-		namespace_61e6d095::function_d5ea17f0(#"hash_767355dc5e1cddfb", text);
+		namespace_61e6d095::set_text(#"hash_767355dc5e1cddfb", text);
 	}
 	if(isdefined(desc))
 	{

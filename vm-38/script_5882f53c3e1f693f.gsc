@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_812a8849;
 
@@ -132,12 +132,12 @@ function function_bd7cde02(state)
 				level clientfield::set("helping_hand_room_light", 4);
 				break;
 			}
-			case "hash_5d16dc15bacebc31":
+			case "turn_room_5_light_on":
 			{
 				level clientfield::set("helping_hand_room_light", 5);
 				break;
 			}
-			case "hash_7c795fec6d335b4d":
+			case "turn_room_5_light_off":
 			{
 				level clientfield::set("helping_hand_room_light", 6);
 				break;
@@ -158,9 +158,9 @@ function function_bd7cde02(state)
 function function_387ae4cb()
 {
 	level endon(#"end_game");
-	level waittill(#"hash_6990bc8ecd1b7d78");
+	level waittill(#"dance_party_light_on");
 	level clientfield::set("dance_party_light", 1);
-	level waittill(#"hash_7c5254a6859e80b2");
+	level waittill(#"dance_party_light_off");
 	level clientfield::set("dance_party_light", 0);
 }
 
@@ -180,7 +180,7 @@ function function_32ba2029(state)
 	{
 		switch(state)
 		{
-			case "hash_26fe7957ec929d1f":
+			case "eye_corpse_all_lights_off":
 			{
 				level clientfield::set("eye_corpse_light", 0);
 				break;
@@ -210,7 +210,7 @@ function function_32ba2029(state)
 				level clientfield::set("eye_corpse_light", 5);
 				break;
 			}
-			case "hash_ff649c11f82a671":
+			case "eye_corpse_final_light_on":
 			{
 				level clientfield::set("eye_corpse_light", 6);
 				break;

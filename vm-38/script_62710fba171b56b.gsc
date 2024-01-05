@@ -1,12 +1,12 @@
-#using script_8988fdbc78d6c53;
 #using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace electroball_grenade;
 
@@ -25,7 +25,7 @@ function private autoexec function_bf77d1ec()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: electroball_grenade
 	Checksum: 0xED575D6C
 	Offset: 0x240
@@ -33,7 +33,7 @@ function private autoexec function_bf77d1ec()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("electroball_grenade", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -60,7 +60,7 @@ function function_70a657d8()
 	level thread register();
 	callback::on_spawned(&on_player_spawned);
 	callback::on_ai_spawned(&on_ai_spawned);
-	callback::function_20263b9e(&begin_other_grenade_tracking);
+	callback::on_grenade_fired(&begin_other_grenade_tracking);
 }
 
 /*
@@ -91,7 +91,7 @@ function register()
 */
 function function_5d95c1d()
 {
-	watcher = self weaponobjects::function_9d7ae85f("electroball_grenade", undefined, 0);
+	watcher = self weaponobjects::createwatcher("electroball_grenade", undefined, 0);
 	watcher.watchforfire = 1;
 	watcher.hackable = 0;
 	watcher.hackertoolradius = level.equipmenthackertoolradius;

@@ -1,9 +1,9 @@
-#using script_5399f402045d7abd;
-#using script_68d2ee1489345a1d;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\weapons\weapon_utils.gsc;
 #using scripts\core_common\weapons_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace damagefeedback_shared;
 
@@ -24,7 +24,7 @@ function private autoexec function_c12ae4cd()
 #namespace damagefeedback;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: damagefeedback
 	Checksum: 0xBF9ADF
 	Offset: 0x1C8
@@ -32,7 +32,7 @@ function private autoexec function_c12ae4cd()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"damagefeedback", &function_70a657d8, undefined, undefined, undefined);
@@ -115,7 +115,7 @@ function play_hit_alert_sfx(mod, inflictor, perkfeedback, weapon, victim, psoffs
 	{
 		hitalias = hit_alert_sfx_cp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fatal);
 	}
-	if(sessionmodeismultiplayergame() || function_f99d2668())
+	if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame())
 	{
 		hitalias = hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fatal, idflags);
 	}
@@ -232,7 +232,7 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
 				}
 				else
 				{
-					if(victim.name == #"hash_1888d1367d69b3a7")
+					if(victim.name == #"waterballoon")
 					{
 						hitalias = #"hash_1fd605562fb1fd3a";
 					}
@@ -744,7 +744,7 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
 		return;
 	}
 	var_32f65675 = 0;
-	if(isdefined(victim) && damagestage == 5 && isdefined(level.var_97a55bea) && !is_true(level.var_97a55bea) && !is_true(victim.laststand) && isplayer(victim))
+	if(isdefined(victim) && damagestage == 5 && isdefined(level.skiplaststand) && !is_true(level.skiplaststand) && !is_true(victim.laststand) && isplayer(victim))
 	{
 		var_32f65675 = 1;
 	}

@@ -1,9 +1,9 @@
-#using script_2c49ae69cd8ce30c;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
 #using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace high_value_target;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_dce756af()
 {
-	level notify(458403634);
+	level notify(-458403634);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: high_value_target
 	Checksum: 0xF8831DA
 	Offset: 0xC8
@@ -30,7 +30,7 @@ function private autoexec function_dce756af()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"high_value_target", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -116,7 +116,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 				scoreevent = #"hash_782e222fd957d953" + var_13f7eb29;
 			}
 			scoreevents::processscoreevent(scoreevent, psoffsettime, self, deathanimduration);
-			psoffsettime contracts::function_a54e2068(#"hash_587a28da043d491d", 1);
+			psoffsettime contracts::increment_contract(#"hash_587a28da043d491d", 1);
 		}
 	}
 }

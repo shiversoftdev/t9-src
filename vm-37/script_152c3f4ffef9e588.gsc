@@ -1,16 +1,16 @@
+#using script_c8d806d2487b617;
 #using script_1f41849126bfc83d;
 #using script_49e18fd5437112e;
 #using script_50fe40f0d2eaa66c;
-#using script_c8d806d2487b617;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace radiation;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: radiation
 	Checksum: 0x6110E9B0
 	Offset: 0xC8
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"radiation", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -43,7 +43,7 @@ function private function_70a657d8()
 		return;
 	}
 	level thread function_1e3ac913();
-	callback::on_spawned(&function_e4a4b07b);
+	callback::on_spawned(&_on_player_spawned);
 }
 
 /*
@@ -83,7 +83,7 @@ function private function_3c3e40b6()
 }
 
 /*
-	Name: function_e4a4b07b
+	Name: _on_player_spawned
 	Namespace: radiation
 	Checksum: 0xA47D7A28
 	Offset: 0x290
@@ -91,7 +91,7 @@ function private function_3c3e40b6()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_e4a4b07b()
+function private _on_player_spawned()
 {
 	if(!namespace_956bd4dd::function_ab99e60c())
 	{
@@ -250,7 +250,7 @@ function function_e2336716(player, radiationlevel, sickness)
 		#/
 		return;
 	}
-	if(!function_7a600918(sickness))
+	if(!ishash(sickness))
 	{
 		/#
 			assert(0);
@@ -291,7 +291,7 @@ function private function_f68871f2(player, sickness)
 		#/
 		return;
 	}
-	if(!function_7a600918(sickness))
+	if(!ishash(sickness))
 	{
 		/#
 			assert(0);

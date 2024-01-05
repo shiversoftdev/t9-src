@@ -1,9 +1,9 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_35598499769dbb3d;
 #using script_5f261a5d57de5f7c;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using script_35598499769dbb3d;
+#using scripts\core_common\item_inventory.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace namespace_42457a0;
 
@@ -18,7 +18,7 @@
 */
 function private autoexec function_d401c967()
 {
-	level notify(206293533);
+	level notify(-206293533);
 }
 
 /*
@@ -48,11 +48,11 @@ function function_d6863a3(inflictor, attacker, meansofdeath, weapon, aat, item)
 	}
 	if(!isdefined(element) && isdefined(item))
 	{
-		if(isplayer(player) && isdefined(weapon) && !namespace_b376ff3f::function_4d426f94(weapon))
+		if(isplayer(player) && isdefined(weapon) && !item_inventory::function_4d426f94(weapon))
 		{
 			if(!isdefined(item))
 			{
-				item = player namespace_b376ff3f::function_230ceec4(weapon);
+				item = player item_inventory::function_230ceec4(weapon);
 			}
 			if(isdefined(item.var_e91aba42))
 			{

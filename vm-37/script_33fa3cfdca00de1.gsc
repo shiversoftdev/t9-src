@@ -140,7 +140,7 @@ event private function_406f0371(eventstruct)
 		{
 			if(!isdefined(levelname))
 			{
-				levelname = util::function_53bbf9d2();
+				levelname = util::get_map_name();
 			}
 			level.activities = {#gametype:getdvar(#"g_gametype"), #mapname:levelname};
 		}

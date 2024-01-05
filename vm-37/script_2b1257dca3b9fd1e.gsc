@@ -1,36 +1,36 @@
-#using script_1478fbd17fe393cf;
-#using script_263b7f2982258785;
-#using script_2c1348b5a72ac8cf;
-#using script_2d443451ce681a;
-#using script_31786c2dc684e9b;
 #using script_31e9b35aaacbbd93;
-#using script_32399001bdb550da;
-#using script_3626f1b2cf51a99c;
-#using script_3b82b8c68189025e;
-#using script_3d18e87594285298;
 #using script_3dc93ca9902a9cda;
 #using script_474bf596f5ecdb01;
-#using script_5431e074c1428743;
-#using script_61cfc2ab8e60625;
-#using script_9bfd3d8a6a89e5e;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\gametypes\battlechatter.gsc;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
 #using scripts\cp_common\skipto.gsc;
+#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using script_32399001bdb550da;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using script_2c1348b5a72ac8cf;
+#using script_31786c2dc684e9b;
 #using scripts\cp_common\util.gsc;
+#using script_1478fbd17fe393cf;
+#using script_263b7f2982258785;
+#using scripts\core_common\struct.gsc;
+#using scripts\cp_common\objectives.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using script_3b82b8c68189025e;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using script_61cfc2ab8e60625;
+#using script_2d443451ce681a;
+#using script_5431e074c1428743;
+#using script_3d18e87594285298;
+#using script_9bfd3d8a6a89e5e;
+#using script_3626f1b2cf51a99c;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_e133827d;
 
@@ -67,12 +67,12 @@ function starting(str_skipto)
 	{
 		spawner spawner::add_spawn_function(&namespace_b100dd86::function_6578b894);
 	}
-	namespace_b331012d::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
-	namespace_b331012d::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
-	namespace_b331012d::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
-	namespace_b331012d::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
-	namespace_b331012d::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
-	namespace_b331012d::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
+	tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
+	tkdn_raid_apt::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
+	tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
+	tkdn_raid_apt::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
+	tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
+	tkdn_raid_apt::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
 	level scene::play("scene_tkd_hit2_apt_blindfire_bathroom", "death");
 	thread objectives::scripted("obj_takedown_capture", undefined, #"hash_49c1d860c97e3792");
 }
@@ -140,9 +140,9 @@ function function_f7dbd7e1()
 	player playgestureviewmodel(#"hash_320d152af1fadd63", undefined, 1, 1, 0, 1, 1);
 	wait(1.25);
 	player stopanimscripted();
-	var_9f4d9e27 = [0:namespace_fe8e9929::function_f0104b5([1:#"hash_46b1d4bb698b8298", 0:#"hash_5f8c7ca0a178e810"])];
-	namespace_fe8e9929::function_4c2d4fc4(#"hash_e67c810a4c45083", #"hash_4f8907e75463e084", undefined, undefined, undefined, undefined, undefined, 1, var_9f4d9e27);
-	namespace_fe8e9929::pause("+melee_zoom;+melee", #"hash_2b84cc72687b168a");
+	var_9f4d9e27 = [0:hint_tutorial::function_f0104b5([1:#"hash_46b1d4bb698b8298", 0:#"hash_5f8c7ca0a178e810"])];
+	hint_tutorial::function_4c2d4fc4(#"hash_e67c810a4c45083", #"hash_4f8907e75463e084", undefined, undefined, undefined, undefined, undefined, 1, var_9f4d9e27);
+	hint_tutorial::pause("+melee_zoom;+melee", #"hash_2b84cc72687b168a");
 	player val::reset_all(#"hash_145f61f7ef6685a5");
 	victim = player.takedown.potential_victims[0];
 	if(isdefined(victim))
@@ -225,7 +225,7 @@ function function_c39dde0e()
 	player notifyonplayercommand("tutorial_pressed_jump", "+gostand");
 	while(true)
 	{
-		player waittill(#"hash_2d33f8504e163257");
+		player waittill(#"tutorial_pressed_jump");
 		if(!player flag::get("body_shield_active"))
 		{
 			level flag::set("flag_takedown_tutorial_player_mantling");

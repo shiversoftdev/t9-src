@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_b6e5ba9d : class_6aaccc24
+class cinsertion_passenger_count : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0xC1C69FCE
 		Offset: 0x330
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_b6e5ba9d : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x297A5532
 		Offset: 0x480
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_b6e5ba9d : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0xF7BE7806
 		Offset: 0x418
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_b6e5ba9d : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_b6e5ba9d
+		Name: register_clientside
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x7AEED724
 		Offset: 0x3A8
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("insertion_passenger_count");
+		cluielem::register_clientside("insertion_passenger_count");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x441BC31C
 		Offset: 0x350
 		Size: 0x4C
@@ -68,13 +68,13 @@ class class_b6e5ba9d : class_6aaccc24
 	*/
 	function setup_clientfields(var_fbcc4763)
 	{
-		namespace_6aaccc24::setup_clientfields("insertion_passenger_count");
-		namespace_6aaccc24::function_da693cbe("count", 1, 7, "int", var_fbcc4763);
+		cluielem::setup_clientfields("insertion_passenger_count");
+		cluielem::add_clientfield("count", 1, 7, "int", var_fbcc4763);
 	}
 
 	/*
 		Name: set_count
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x1B64CA6F
 		Offset: 0x448
 		Size: 0x30
@@ -83,12 +83,12 @@ class class_b6e5ba9d : class_6aaccc24
 	*/
 	function set_count(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "count", value);
+		[[ self ]]->set_data(localclientnum, "count", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_b6e5ba9d
+		Namespace: cinsertion_passenger_count
 		Checksum: 0x908F770E
 		Offset: 0x3D0
 		Size: 0x40
@@ -97,8 +97,8 @@ class class_b6e5ba9d : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "count", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "count", 0);
 	}
 
 }
@@ -116,7 +116,7 @@ class class_b6e5ba9d : class_6aaccc24
 */
 function register(var_fbcc4763)
 {
-	elem = new class_b6e5ba9d();
+	elem = new cinsertion_passenger_count();
 	[[ elem ]]->setup_clientfields(var_fbcc4763);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -138,7 +138,7 @@ function register(var_fbcc4763)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: insertion_passenger_count
 	Checksum: 0xECCBFF15
 	Offset: 0x248
@@ -146,10 +146,10 @@ function register(var_fbcc4763)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_b6e5ba9d();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cinsertion_passenger_count();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

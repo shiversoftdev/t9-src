@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_fbe341f : class_6aaccc24
+class cdirtybomb_usebar : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xBF886762
 		Offset: 0x250
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_fbe341f : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x3027D772
 		Offset: 0x500
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_fbe341f : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xE8B551DB
 		Offset: 0x310
 		Size: 0x3C
@@ -47,26 +47,26 @@ class class_fbe341f : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_4aa46834
-		Namespace: namespace_fbe341f
+		Name: set_activatorcount
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x6F3194CD
 		Offset: 0x4B0
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4aa46834(player, value)
+	function set_activatorcount(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "activatorCount", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xA80C57EA
 		Offset: 0x358
 		Size: 0x24
@@ -75,12 +75,12 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0x7C199C54
 		Offset: 0x270
 		Size: 0x94
@@ -89,15 +89,15 @@ class class_fbe341f : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("DirtyBomb_UseBar");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("progressFrac", 1, 10, "float");
-		namespace_6aaccc24::function_da693cbe("activatorCount", 1, 3, "int", 0);
+		cluielem::setup_clientfields("DirtyBomb_UseBar");
+		cluielem::add_clientfield("_state", 1, 1, "int");
+		cluielem::add_clientfield("progressFrac", 1, 10, "float");
+		cluielem::add_clientfield("activatorCount", 1, 3, "int", 0);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_fbe341f
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xCE30F09
 		Offset: 0x388
 		Size: 0xCC
@@ -128,15 +128,15 @@ class class_fbe341f : class_6aaccc24
 	}
 
 	/*
-		Name: function_f0df5702
-		Namespace: namespace_fbe341f
+		Name: set_progressfrac
+		Namespace: cdirtybomb_usebar
 		Checksum: 0xF948958C
 		Offset: 0x460
 		Size: 0x44
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f0df5702(player, value)
+	function set_progressfrac(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "progressFrac", value);
 	}
@@ -156,7 +156,7 @@ class class_fbe341f : class_6aaccc24
 */
 function register()
 {
-	elem = new class_fbe341f();
+	elem = new cdirtybomb_usebar();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -222,7 +222,7 @@ function set_state(player, state_name)
 }
 
 /*
-	Name: function_f0df5702
+	Name: set_progressfrac
 	Namespace: dirtybomb_usebar
 	Checksum: 0x43153B29
 	Offset: 0x1F0
@@ -230,13 +230,13 @@ function set_state(player, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_f0df5702(player, value)
+function set_progressfrac(player, value)
 {
-	[[ self ]]->function_f0df5702(player, value);
+	[[ self ]]->set_progressfrac(player, value);
 }
 
 /*
-	Name: function_4aa46834
+	Name: set_activatorcount
 	Namespace: dirtybomb_usebar
 	Checksum: 0xBEC1AF0A
 	Offset: 0x220
@@ -244,8 +244,8 @@ function function_f0df5702(player, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4aa46834(player, value)
+function set_activatorcount(player, value)
 {
-	[[ self ]]->function_4aa46834(player, value);
+	[[ self ]]->set_activatorcount(player, value);
 }
 

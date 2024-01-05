@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_e5d48e46 : class_6aaccc24
+class cscavenger_icon : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x70C4EE11
 		Offset: 0x410
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_e5d48e46 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x77D1B4D3
 		Offset: 0x7F0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_e5d48e46 : class_6aaccc24
 
 	/*
 		Name: function_65b281a
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x731937F2
 		Offset: 0x688
 		Size: 0x6C
@@ -40,14 +40,14 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function function_65b281a(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "armorPlatePulse");
+		current_val = [[ self ]]->get_data(localclientnum, "armorPlatePulse");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "armorPlatePulse", new_val);
+		[[ self ]]->set_data(localclientnum, "armorPlatePulse", new_val);
 	}
 
 	/*
 		Name: open
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x9E331489
 		Offset: 0x5E0
 		Size: 0x24
@@ -56,12 +56,12 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
 		Name: function_417df30c
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0xA65878F1
 		Offset: 0x778
 		Size: 0x6C
@@ -70,14 +70,14 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function function_417df30c(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "rareScrapPulse");
+		current_val = [[ self ]]->get_data(localclientnum, "rareScrapPulse");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "rareScrapPulse", new_val);
+		[[ self ]]->set_data(localclientnum, "rareScrapPulse", new_val);
 	}
 
 	/*
 		Name: function_47e82a09
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x9FD56A
 		Offset: 0x700
 		Size: 0x6C
@@ -86,28 +86,28 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function function_47e82a09(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "scrapPulse");
+		current_val = [[ self ]]->get_data(localclientnum, "scrapPulse");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "scrapPulse", new_val);
+		[[ self ]]->set_data(localclientnum, "scrapPulse", new_val);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_e5d48e46
+		Name: register_clientside
+		Namespace: cscavenger_icon
 		Checksum: 0x6319BC2C
 		Offset: 0x518
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("scavenger_icon");
+		cluielem::register_clientside("scavenger_icon");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x405AB23B
 		Offset: 0x430
 		Size: 0xDC
@@ -116,16 +116,16 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function setup_clientfields(var_c21a7363, var_acffa825, var_32c73fea, var_d239de43)
 	{
-		namespace_6aaccc24::setup_clientfields("scavenger_icon");
-		namespace_6aaccc24::function_da693cbe("ammoPulse", 1, 1, "counter", var_c21a7363);
-		namespace_6aaccc24::function_da693cbe("armorPlatePulse", 1, 1, "counter", var_acffa825);
-		namespace_6aaccc24::function_da693cbe("scrapPulse", 1, 1, "counter", var_32c73fea);
-		namespace_6aaccc24::function_da693cbe("rareScrapPulse", 4000, 1, "counter", var_d239de43);
+		cluielem::setup_clientfields("scavenger_icon");
+		cluielem::add_clientfield("ammoPulse", 1, 1, "counter", var_c21a7363);
+		cluielem::add_clientfield("armorPlatePulse", 1, 1, "counter", var_acffa825);
+		cluielem::add_clientfield("scrapPulse", 1, 1, "counter", var_32c73fea);
+		cluielem::add_clientfield("rareScrapPulse", 4000, 1, "counter", var_d239de43);
 	}
 
 	/*
 		Name: function_e4e9c303
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x8BA0B740
 		Offset: 0x610
 		Size: 0x6C
@@ -134,14 +134,14 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function function_e4e9c303(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "ammoPulse");
+		current_val = [[ self ]]->get_data(localclientnum, "ammoPulse");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "ammoPulse", new_val);
+		[[ self ]]->set_data(localclientnum, "ammoPulse", new_val);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_e5d48e46
+		Namespace: cscavenger_icon
 		Checksum: 0x2E6E267C
 		Offset: 0x540
 		Size: 0x94
@@ -150,11 +150,11 @@ class class_e5d48e46 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "ammoPulse", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "armorPlatePulse", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "scrapPulse", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "rareScrapPulse", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "ammoPulse", 0);
+		[[ self ]]->set_data(localclientnum, "armorPlatePulse", 0);
+		[[ self ]]->set_data(localclientnum, "scrapPulse", 0);
+		[[ self ]]->set_data(localclientnum, "rareScrapPulse", 0);
 	}
 
 }
@@ -172,7 +172,7 @@ class class_e5d48e46 : class_6aaccc24
 */
 function private autoexec function_f9a9c71d()
 {
-	level notify(1049016570);
+	level notify(-1049016570);
 }
 
 /*
@@ -186,7 +186,7 @@ function private autoexec function_f9a9c71d()
 */
 function register(var_c21a7363, var_acffa825, var_32c73fea, var_d239de43)
 {
-	elem = new class_e5d48e46();
+	elem = new cscavenger_icon();
 	[[ elem ]]->setup_clientfields(var_c21a7363, var_acffa825, var_32c73fea, var_d239de43);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -208,7 +208,7 @@ function register(var_c21a7363, var_acffa825, var_32c73fea, var_d239de43)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: scavenger_icon
 	Checksum: 0xA1DDFD1F
 	Offset: 0x2B8
@@ -216,10 +216,10 @@ function register(var_c21a7363, var_acffa825, var_32c73fea, var_d239de43)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_e5d48e46();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cscavenger_icon();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 

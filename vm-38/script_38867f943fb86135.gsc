@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_260f8380;
 
@@ -20,7 +20,7 @@ function private autoexec function_2fcdbf5f()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_260f8380
 	Checksum: 0xE1AAF840
 	Offset: 0x118
@@ -28,7 +28,7 @@ function private autoexec function_2fcdbf5f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5cd88d9b0fb0d8ad", undefined, &function_64608eb3, undefined, undefined);
 }

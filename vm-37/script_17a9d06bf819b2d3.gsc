@@ -1,10 +1,10 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_5b1144e;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_5b1144e
 	Checksum: 0xA0BDBE08
 	Offset: 0x318
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1e8eafe505e52c51", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -60,7 +60,7 @@ function private function_70a657d8()
 	function_5ae4a10c(#"p9_sur_vending_ads", "perk_deadshot", #"hash_7c5e12190fbe93c0", #"hash_462ae51bbab3172a", #"hash_44728ebc2543db8e", 1, -20);
 	function_5ae4a10c(#"p7_zm_power_up_nuke", "powerup_nuke", #"hash_39772b1fab5ee98c", #"hash_db9d5c95dfea201", #"hash_79ebbb36553f5b21");
 	function_5ae4a10c(#"p7_zm_power_up_insta_kill", "powerup_insta_kill", #"hash_1784640b956f2f85", #"hash_504ad9537b38881f", #"hash_79ac89cbcace5b3b");
-	function_5ae4a10c(#"p7_zm_power_up_max_ammo", "powerup_max_ammo", #"hash_460ca52bf94f19c0", #"hash_2a901c3db306ba24", #"hash_4612fc19f97f58ad");
+	function_5ae4a10c(#"p7_zm_power_up_max_ammo", "powerup_max_ammo", #"zombie/powerup_max_ammo", #"hash_2a901c3db306ba24", #"hash_4612fc19f97f58ad");
 	function_5ae4a10c(#"p7_zm_power_up_double_points", "powerup_double_points", #"hash_774207d74b355a8a", #"hash_25d360e4ab517722", #"hash_3f59065a3419e61d");
 	function_5ae4a10c(#"p7_zm_power_up_carpenter", "powerup_carpenter", #"hash_7ee3cb05607f53f3", #"hash_23e7594539b63cb8", #"hash_bfa2b9c3bd06c40");
 	function_5ae4a10c(#"p7_zm_power_up_firesale", "powerup_firesale", #"hash_2c7bc0fa0980f8f5", #"hash_365549a15c5bde23", #"hash_8ea2b7214fa0627");

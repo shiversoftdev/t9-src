@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_ad2941a0 : class_6aaccc24
+class cvehicleturretoverheat : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_ad2941a0
+		Namespace: cvehicleturretoverheat
 		Checksum: 0x65C4FF7C
 		Offset: 0x390
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_ad2941a0 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_ad2941a0
+		Namespace: cvehicleturretoverheat
 		Checksum: 0x2F909BAF
 		Offset: 0x5E8
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_ad2941a0 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_ad2941a0
+		Namespace: cvehicleturretoverheat
 		Checksum: 0x971B8ACD
 		Offset: 0x4C8
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_ad2941a0 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_ad2941a0
+		Name: register_clientside
+		Namespace: cvehicleturretoverheat
 		Checksum: 0xF6A11C77
 		Offset: 0x430
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("VehicleTurretOverheat");
+		cluielem::register_clientside("VehicleTurretOverheat");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_ad2941a0
+		Namespace: cvehicleturretoverheat
 		Checksum: 0x4719A6BC
 		Offset: 0x3B0
 		Size: 0x74
@@ -68,14 +68,14 @@ class class_ad2941a0 : class_6aaccc24
 	*/
 	function setup_clientfields(var_661989d5)
 	{
-		namespace_6aaccc24::setup_clientfields("VehicleTurretOverheat");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("bar_percent", 1, 6, "float", var_661989d5);
+		cluielem::setup_clientfields("VehicleTurretOverheat");
+		cluielem::add_clientfield("_state", 1, 1, "int");
+		cluielem::add_clientfield("bar_percent", 1, 6, "float", var_661989d5);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_ad2941a0
+		Namespace: cvehicleturretoverheat
 		Checksum: 0xB2C68AA4
 		Offset: 0x4F8
 		Size: 0xAC
@@ -86,13 +86,13 @@ class class_ad2941a0 : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"overheat" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
@@ -107,7 +107,7 @@ class class_ad2941a0 : class_6aaccc24
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_ad2941a0
+		Namespace: cvehicleturretoverheat
 		Checksum: 0x5C6F6C68
 		Offset: 0x458
 		Size: 0x68
@@ -116,23 +116,23 @@ class class_ad2941a0 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "bar_percent", 0);
+		[[ self ]]->set_data(localclientnum, "bar_percent", 0);
 	}
 
 	/*
-		Name: function_fd8c13fb
-		Namespace: namespace_ad2941a0
+		Name: set_bar_percent
+		Namespace: cvehicleturretoverheat
 		Checksum: 0x2E9D86BF
 		Offset: 0x5B0
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_fd8c13fb(localclientnum, value)
+	function set_bar_percent(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "bar_percent", value);
+		[[ self ]]->set_data(localclientnum, "bar_percent", value);
 	}
 
 }
@@ -164,7 +164,7 @@ function private autoexec function_7a6f549c()
 */
 function register(var_661989d5)
 {
-	elem = new class_ad2941a0();
+	elem = new cvehicleturretoverheat();
 	[[ elem ]]->setup_clientfields(var_661989d5);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -186,7 +186,7 @@ function register(var_661989d5)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: vehicleturretoverheat
 	Checksum: 0x6301106A
 	Offset: 0x278
@@ -194,10 +194,10 @@ function register(var_661989d5)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_ad2941a0();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cvehicleturretoverheat();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -258,7 +258,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_fd8c13fb
+	Name: set_bar_percent
 	Namespace: vehicleturretoverheat
 	Checksum: 0xD20D0EDD
 	Offset: 0x360
@@ -266,8 +266,8 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_fd8c13fb(localclientnum, value)
+function set_bar_percent(localclientnum, value)
 {
-	[[ self ]]->function_fd8c13fb(localclientnum, value);
+	[[ self ]]->set_bar_percent(localclientnum, value);
 }
 

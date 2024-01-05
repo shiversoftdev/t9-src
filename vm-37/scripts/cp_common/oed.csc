@@ -1,15 +1,15 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\visionset_mgr_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace oed;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: oed
 	Checksum: 0x30A987C6
 	Offset: 0x1A0
@@ -17,7 +17,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"oed", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -221,7 +221,7 @@ function private function_67243557(localclientnum)
 	{
 		waitframe(1);
 	}
-	self function_bf9d3071(#"hash_44a7b967f9f18d4f");
+	self playrenderoverridebundle(#"hash_44a7b967f9f18d4f");
 }
 
 /*
@@ -237,7 +237,7 @@ function private function_e4f63ce7(localclientnum)
 {
 	if(isdefined(self))
 	{
-		self function_5d482e78(#"hash_44a7b967f9f18d4f");
+		self stoprenderoverridebundle(#"hash_44a7b967f9f18d4f");
 	}
 }
 
@@ -351,7 +351,7 @@ function private function_a47e049d(localclientnum)
 		{
 			waitframe(1);
 		}
-		self function_bf9d3071(#"hash_1cbf6d26721c59a7");
+		self playrenderoverridebundle(#"hash_1cbf6d26721c59a7");
 	}
 }
 
@@ -369,7 +369,7 @@ function private function_ac5dfb21(localclientnum)
 	localclient = function_5c10bd79(localclientnum);
 	if(isdefined(self) && localclient != self)
 	{
-		self function_5d482e78(#"hash_1cbf6d26721c59a7");
+		self stoprenderoverridebundle(#"hash_1cbf6d26721c59a7");
 	}
 }
 
@@ -457,12 +457,12 @@ function function_39273849(b_disabled)
 	}
 	if(b_disabled)
 	{
-		self function_5d482e78(#"hash_1cbf6d26721c59a7");
+		self stoprenderoverridebundle(#"hash_1cbf6d26721c59a7");
 		self.var_d676dcaa = 1;
 	}
 	else
 	{
-		self function_bf9d3071(#"hash_1cbf6d26721c59a7");
+		self playrenderoverridebundle(#"hash_1cbf6d26721c59a7");
 		self.var_d676dcaa = undefined;
 	}
 }

@@ -1,10 +1,10 @@
-#using script_3dc93ca9902a9cda;
 #using script_85cd2e9a28ea8a1;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using script_3dc93ca9902a9cda;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace snd;
 
@@ -55,9 +55,9 @@ function function_efda2d6d()
 		assert(function_e3a36342(self));
 	#/
 	vieworigin = undefined;
-	if(isscriptfunctionptr(level.var_17e6189d._callbacks[#"player_view"]))
+	if(isscriptfunctionptr(level._snd._callbacks[#"player_view"]))
 	{
-		vieworigin = player [[level.var_17e6189d._callbacks[#"player_view"]]]();
+		vieworigin = player [[level._snd._callbacks[#"player_view"]]]();
 	}
 	else
 	{
@@ -85,9 +85,9 @@ function function_3d31768f()
 		assert(function_e3a36342(self));
 	#/
 	viewangles = undefined;
-	if(isscriptfunctionptr(level.var_17e6189d._callbacks[#"player_angles"]))
+	if(isscriptfunctionptr(level._snd._callbacks[#"player_angles"]))
 	{
-		viewangles = player [[level.var_17e6189d._callbacks[#"player_angles"]]]();
+		viewangles = player [[level._snd._callbacks[#"player_angles"]]]();
 	}
 	else
 	{
@@ -115,9 +115,9 @@ function function_731299e5()
 		assert(function_e3a36342(self));
 	#/
 	fov = undefined;
-	if(isscriptfunctionptr(level.var_17e6189d._callbacks[#"player_fov"]))
+	if(isscriptfunctionptr(level._snd._callbacks[#"player_fov"]))
 	{
-		fov = player [[level.var_17e6189d._callbacks[#"player_fov"]]]();
+		fov = player [[level._snd._callbacks[#"player_fov"]]]();
 	}
 	else
 	{
@@ -493,7 +493,7 @@ function function_783b69(s, wrap)
 	wrap = function_ea2f17d1(wrap, "");
 	str = "";
 	/#
-		if(function_7a600918(s))
+		if(ishash(s))
 		{
 			if(wrap != "")
 			{
@@ -965,7 +965,7 @@ function function_e3a36342(player)
 */
 function function_2b2b83dc(team)
 {
-	if(is_true(level.var_17e6189d.var_8c37ff34))
+	if(is_true(level._snd.var_8c37ff34))
 	{
 		players = getplayers(0, team);
 		foreach(player in players)
@@ -977,7 +977,7 @@ function function_2b2b83dc(team)
 		}
 		return players;
 	}
-	if(is_true(level.var_17e6189d.var_2dd09170))
+	if(is_true(level._snd.var_2dd09170))
 	{
 		players = getplayers(team);
 		return players;
@@ -1057,11 +1057,11 @@ function function_da785aa8(team)
 */
 function function_869cb8c6()
 {
-	if(is_true(level.var_17e6189d.var_8c37ff34))
+	if(is_true(level._snd.var_8c37ff34))
 	{
 		return int(60);
 	}
-	if(is_true(level.var_17e6189d.var_2dd09170))
+	if(is_true(level._snd.var_2dd09170))
 	{
 		return int(20);
 	}
@@ -1079,11 +1079,11 @@ function function_869cb8c6()
 */
 function function_6cfa7975()
 {
-	if(is_true(level.var_17e6189d.var_8c37ff34))
+	if(is_true(level._snd.var_8c37ff34))
 	{
 		return float(0.01666667);
 	}
-	if(is_true(level.var_17e6189d.var_2dd09170))
+	if(is_true(level._snd.var_2dd09170))
 	{
 		return float(0.05);
 	}
@@ -1346,7 +1346,7 @@ function function_bf7c949(var_aaa97ea4)
 	ent = self;
 	tagname = "";
 	tagorigin = undefined;
-	if(is_true(level.var_17e6189d.var_8c37ff34))
+	if(is_true(level._snd.var_8c37ff34))
 	{
 		tagname = "tag_origin";
 	}
@@ -1436,9 +1436,9 @@ function function_827811b5()
 function function_95c9af4b()
 {
 	/#
-		if(isdefined(level.var_17e6189d._debug.debuglevel))
+		if(isdefined(level._snd._debug.debuglevel))
 		{
-			return level.var_17e6189d._debug.debuglevel;
+			return level._snd._debug.debuglevel;
 		}
 	#/
 	return 0;

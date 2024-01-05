@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_ab111f2c : class_6aaccc24
+class class_ab111f2c : cluielem
 {
 
 	/*
@@ -40,7 +40,7 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
@@ -54,13 +54,13 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function function_1c78fe1e(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "fadeout");
+		current_val = [[ self ]]->get_data(localclientnum, "fadeout");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "fadeout", new_val);
+		[[ self ]]->set_data(localclientnum, "fadeout", new_val);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_ab111f2c
 		Checksum: 0xB6DE3C6D
 		Offset: 0x500
@@ -68,9 +68,9 @@ class class_ab111f2c : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("cp_hint_text");
+		cluielem::register_clientside("cp_hint_text");
 	}
 
 	/*
@@ -84,9 +84,9 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function function_64d95cad(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "display_blink");
+		current_val = [[ self ]]->get_data(localclientnum, "display_blink");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "display_blink", new_val);
+		[[ self ]]->set_data(localclientnum, "display_blink", new_val);
 	}
 
 	/*
@@ -100,15 +100,15 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function setup_clientfields(var_4f361551, var_8f133ca4, var_b38e91b5, var_101d8535)
 	{
-		namespace_6aaccc24::setup_clientfields("cp_hint_text");
-		namespace_6aaccc24::function_dcb34c80("string", "hint_text", 1);
-		namespace_6aaccc24::function_da693cbe("display_blink", 1, 1, "counter", var_8f133ca4);
-		namespace_6aaccc24::function_da693cbe("fadeout", 1, 1, "counter", var_b38e91b5);
-		namespace_6aaccc24::function_da693cbe("display_noblink", 1, 1, "counter", var_101d8535);
+		cluielem::setup_clientfields("cp_hint_text");
+		cluielem::function_dcb34c80("string", "hint_text", 1);
+		cluielem::add_clientfield("display_blink", 1, 1, "counter", var_8f133ca4);
+		cluielem::add_clientfield("fadeout", 1, 1, "counter", var_b38e91b5);
+		cluielem::add_clientfield("display_noblink", 1, 1, "counter", var_101d8535);
 	}
 
 	/*
-		Name: function_a16f86c1
+		Name: set_hint_text
 		Namespace: namespace_ab111f2c
 		Checksum: 0x8D24C80D
 		Offset: 0x600
@@ -116,9 +116,9 @@ class class_ab111f2c : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a16f86c1(localclientnum, value)
+	function set_hint_text(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "hint_text", value);
+		[[ self ]]->set_data(localclientnum, "hint_text", value);
 	}
 
 	/*
@@ -132,9 +132,9 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function function_a981d6b6(localclientnum)
 	{
-		current_val = [[ self ]]->function_92ba69fa(localclientnum, "display_noblink");
+		current_val = [[ self ]]->get_data(localclientnum, "display_noblink");
 		new_val = (current_val + 1) % 2;
-		[[ self ]]->function_d7d2fcce(localclientnum, "display_noblink", new_val);
+		[[ self ]]->set_data(localclientnum, "display_noblink", new_val);
 	}
 
 	/*
@@ -148,11 +148,11 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "hint_text", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "display_blink", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "fadeout", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "display_noblink", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "hint_text", #"");
+		[[ self ]]->set_data(localclientnum, "display_blink", 0);
+		[[ self ]]->set_data(localclientnum, "fadeout", 0);
+		[[ self ]]->set_data(localclientnum, "display_noblink", 0);
 	}
 
 }
@@ -192,7 +192,7 @@ function register(var_4f361551, var_8f133ca4, var_b38e91b5, var_101d8535)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: cp_hint_text
 	Checksum: 0xE4EA823E
 	Offset: 0x298
@@ -200,10 +200,10 @@ function register(var_4f361551, var_8f133ca4, var_b38e91b5, var_101d8535)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_ab111f2c();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -250,7 +250,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_a16f86c1
+	Name: set_hint_text
 	Namespace: cp_hint_text
 	Checksum: 0xB92D3D45
 	Offset: 0x350
@@ -258,9 +258,9 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_a16f86c1(localclientnum, value)
+function set_hint_text(localclientnum, value)
 {
-	[[ self ]]->function_a16f86c1(localclientnum, value);
+	[[ self ]]->set_hint_text(localclientnum, value);
 }
 
 /*

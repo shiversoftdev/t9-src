@@ -1,18 +1,18 @@
 #using script_1cd690a97dfca36e;
-#using script_1d4ca739cb476f50;
 #using script_3318f11e3a1b2358;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\math_shared.csc;
-#using scripts\core_common\serverfield_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
+#using scripts\core_common\serverfield_shared.csc;
+#using script_1d4ca739cb476f50;
+#using scripts\core_common\math_shared.csc;
+#using scripts\core_common\flag_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace lockpick;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: lockpick
 	Checksum: 0x8CAB5F89
 	Offset: 0x330
@@ -20,7 +20,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("lockpick", &function_70a657d8, undefined, undefined, undefined);
 }

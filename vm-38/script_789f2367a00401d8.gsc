@@ -1,24 +1,24 @@
-#using script_396f7d71538c9677;
-#using script_3f9e0dc8454d98e1;
-#using script_4d85e8de54b02198;
-#using script_57f7003580bb15e0;
 #using script_62caa307a394c18c;
-#using script_6809bf766eba194a;
-#using script_7bafaa95bb1b427e;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\scoreevents.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_4d85e8de54b02198;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\weapons\weapons.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_396f7d71538c9677;
+#using scripts\core_common\battlechatter.gsc;
 
 #namespace namespace_68a80213;
 
@@ -37,7 +37,7 @@ function private autoexec function_7b9d0fd7()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_68a80213
 	Checksum: 0xCC749D06
 	Offset: 0x278
@@ -45,7 +45,7 @@ function private autoexec function_7b9d0fd7()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_512409f8a5de10e4", &init_shared, undefined, undefined, undefined);
 }
@@ -62,9 +62,9 @@ function private autoexec function_89f2df9()
 function init_shared()
 {
 	clientfield::register("actor", "" + #"hash_c5d06ae18fde4c0", 1, 1, "int");
-	params = function_4d1e7b48("dot_molotov_dog");
+	params = getstatuseffect("dot_molotov_dog");
 	level.var_e6a4f161 = params.var_18d16a6b;
-	level.var_5d450296 = params.var_67e2281d;
+	level.var_5d450296 = params.setype;
 	level.var_e8a6b3ee = [];
 	spawner::add_archetype_spawn_function(#"zombie_dog", &function_4f3cd1f0);
 }
@@ -83,7 +83,7 @@ function function_4f3cd1f0()
 	if(self.var_9fde8624 === #"hash_28e36e7b7d5421f")
 	{
 		self.var_90d0c0ff = "anim_spawn_hellhound";
-		self callback::function_d8abfc3d(#"hash_46a032931418eecf", &start_fire);
+		self callback::function_d8abfc3d(#"on_dog_killed", &start_fire);
 	}
 }
 
@@ -137,8 +137,8 @@ function start_fire()
 */
 function function_f4e48434(position)
 {
-	var_c84f4998 = getwaterheight(position) - position[2];
-	return var_c84f4998 >= 24;
+	water_depth = getwaterheight(position) - position[2];
+	return water_depth >= 24;
 }
 
 /*
@@ -150,13 +150,13 @@ function function_f4e48434(position)
 	Parameters: 1
 	Flags: Linked
 */
-function function_a66ba8cc(var_c84f4998)
+function function_a66ba8cc(water_depth)
 {
-	return 0 < var_c84f4998 && var_c84f4998 < 24;
+	return 0 < water_depth && water_depth < 24;
 }
 
 /*
-	Name: function_330c2616
+	Name: get_water_depth
 	Namespace: namespace_68a80213
 	Checksum: 0x60308935
 	Offset: 0x678
@@ -164,7 +164,7 @@ function function_a66ba8cc(var_c84f4998)
 	Parameters: 1
 	Flags: Linked
 */
-function function_330c2616(position)
+function get_water_depth(position)
 {
 	return getwaterheight(position) - position[2];
 }
@@ -200,9 +200,9 @@ function function_7cbeb2f0(normal)
 	Parameters: 7
 	Flags: Linked
 */
-function function_e8ad1d81(position, normal, velocity, team, var_4dd46f8a, attacker, exploder)
+function function_e8ad1d81(position, normal, velocity, team, customsettings, attacker, exploder)
 {
-	var_4f9d7296 = position;
+	originalposition = position;
 	var_493d36f9 = normal;
 	var_77261b6 = vectornormalize(velocity);
 	var_1f254a06 = vectorscale(var_77261b6, -1);
@@ -210,7 +210,7 @@ function function_e8ad1d81(position, normal, velocity, team, var_4dd46f8a, attac
 	var_e76400c0 = undefined;
 	wallnormal = undefined;
 	var_693f108f = undefined;
-	var_aecaaa11 = getweapon(#"hash_23dd6039fe2f36c6");
+	var_aecaaa11 = getweapon(#"molotov_fire");
 	var_5632b17 = getweapon("molotov_fire_wall");
 	var_7bf146f2 = getweapon("molotov_steam");
 	if(normal[2] < -0.5)
@@ -262,14 +262,14 @@ function function_e8ad1d81(position, normal, velocity, team, var_4dd46f8a, attac
 	if(normal[2] < 0.5)
 	{
 		wall_normal = normal;
-		var_36c22d1d = var_4f9d7296 + vectorscale(var_493d36f9, 8);
+		var_36c22d1d = originalposition + vectorscale(var_493d36f9, 8);
 		var_8ae62b02 = var_36c22d1d - vectorscale((0, 0, 1), 300);
 		var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, vectorscale((-1, -1, -1), 3), vectorscale((1, 1, 1), 3), self, 1);
 		var_693f108f = var_69d15ad0[#"fraction"] * 300;
 		var_959a2a8b = 0;
 		if(var_693f108f > 10)
 		{
-			var_e76400c0 = var_4f9d7296;
+			var_e76400c0 = originalposition;
 			wallnormal = var_493d36f9;
 			var_d6d43109 = sqrt(1 - var_69d15ad0[#"fraction"]);
 			var_959a2a8b = 1;
@@ -288,17 +288,17 @@ function function_e8ad1d81(position, normal, velocity, team, var_4dd46f8a, attac
 		}
 		if(var_959a2a8b)
 		{
-			x = var_4f9d7296[0];
-			y = var_4f9d7296[1];
+			x = originalposition[0];
+			y = originalposition[1];
 			lowestz = var_69d15ad0[#"position"][2];
-			z = var_4f9d7296[2];
+			z = originalposition[2];
 			while(z > lowestz)
 			{
 				newpos = (x, y, z);
-				var_c84f4998 = function_330c2616(newpos);
-				if(function_a66ba8cc(var_c84f4998) || function_f4e48434(newpos))
+				water_depth = get_water_depth(newpos);
+				if(function_a66ba8cc(water_depth) || function_f4e48434(newpos))
 				{
-					newpos = newpos - (0, 0, var_c84f4998);
+					newpos = newpos - (0, 0, water_depth);
 					level thread function_42b9fdbe(var_7bf146f2, newpos, (0, 0, 1), int(5), team);
 					break;
 				}
@@ -330,7 +330,7 @@ function function_e8ad1d81(position, normal, velocity, team, var_4dd46f8a, attac
 		}
 	}
 	var_1f254a06 = normal;
-	level function_8a03d3f3(position, startpos, var_1f254a06, var_d6d43109, rotation, team, var_e76400c0, wallnormal, var_693f108f, var_4dd46f8a, attacker, exploder);
+	level function_8a03d3f3(position, startpos, var_1f254a06, var_d6d43109, rotation, team, var_e76400c0, wallnormal, var_693f108f, customsettings, attacker, exploder);
 }
 
 /*
@@ -413,7 +413,7 @@ function function_31f342a2(origin, var_9c7e3678)
 	Parameters: 12
 	Flags: Linked
 */
-function function_8a03d3f3(impactpos, startpos, normal, multiplier, rotation, team, var_e76400c0, wallnormal, var_693f108f, var_4dd46f8a, attacker, exploder)
+function function_8a03d3f3(impactpos, startpos, normal, multiplier, rotation, team, var_e76400c0, wallnormal, var_693f108f, customsettings, attacker, exploder)
 {
 	defaultdistance = 65 * multiplier;
 	defaultdropdistance = getdvarint(#"hash_4a8fc6d7cacea9d5", 90);
@@ -429,8 +429,8 @@ function function_8a03d3f3(impactpos, startpos, normal, multiplier, rotation, te
 	locations[#"distsqrd"] = [];
 	locations[#"fxtoplay"] = [];
 	locations[#"radius"] = [];
-	locations[#"hash_33059ac06a23beca"] = [];
-	locations[#"hash_7852e39f75c4b5c0"] = [];
+	locations[#"tallfire"] = [];
+	locations[#"smallfire"] = [];
 	locations[#"steam"] = [];
 	fxcount = 7;
 	var_33ad9452 = (isdefined(1) ? 1 : 0);
@@ -465,7 +465,7 @@ function function_8a03d3f3(impactpos, startpos, normal, multiplier, rotation, te
 			locations[#"normal"][count] = trace[#"normal"];
 			if(var_1cac1ca8)
 			{
-				locations[#"hash_33059ac06a23beca"][count] = 1;
+				locations[#"tallfire"][count] = 1;
 			}
 			hitsomething = 1;
 		}
@@ -476,17 +476,17 @@ function function_8a03d3f3(impactpos, startpos, normal, multiplier, rotation, te
 			{
 				function_1493c734(var_e5d1793d[#"position"], 10, (0, 0, 1), 0.6, 200);
 				locations[#"loc"][count] = var_e5d1793d[#"position"];
-				var_c84f4998 = function_330c2616(var_e5d1793d[#"position"]);
-				if(function_a66ba8cc(var_c84f4998))
+				water_depth = get_water_depth(var_e5d1793d[#"position"]);
+				if(function_a66ba8cc(water_depth))
 				{
 					locations[#"normal"][count] = (0, 0, 1);
 					locations[#"steam"][count] = 1;
-					locations[#"loc"][count] = locations[#"loc"][count] - (0, 0, var_c84f4998);
+					locations[#"loc"][count] = locations[#"loc"][count] - (0, 0, water_depth);
 				}
 				else
 				{
 					locations[#"normal"][count] = var_e5d1793d[#"normal"];
-					locations[#"hash_7852e39f75c4b5c0"][count] = 1;
+					locations[#"smallfire"][count] = 1;
 				}
 			}
 		}
@@ -504,19 +504,19 @@ function function_8a03d3f3(impactpos, startpos, normal, multiplier, rotation, te
 				function_1493c734(var_9417df90[#"position"], 10, (0, 0, 1), 0.6, 200);
 				locindex = count + (fxcount * (var_ecef2fde + 1));
 				locations[#"loc"][locindex] = var_9417df90[#"position"];
-				var_c84f4998 = function_330c2616(var_9417df90[#"position"]);
-				if(function_a66ba8cc(var_c84f4998))
+				water_depth = get_water_depth(var_9417df90[#"position"]);
+				if(function_a66ba8cc(water_depth))
 				{
 					locations[#"normal"][locindex] = (0, 0, 1);
 					locations[#"steam"][locindex] = 1;
-					locations[#"loc"][locindex] = locations[#"loc"][locindex] - (0, 0, var_c84f4998);
+					locations[#"loc"][locindex] = locations[#"loc"][locindex] - (0, 0, water_depth);
 					continue;
 				}
 				locations[#"normal"][locindex] = var_9417df90[#"normal"];
 			}
 		}
 	}
-	var_aecaaa11 = getweapon(#"hash_23dd6039fe2f36c6");
+	var_aecaaa11 = getweapon(#"molotov_fire");
 	var_3cbce009 = getweapon("molotov_fire_tall");
 	var_4a1b9411 = getweapon("molotov_fire_small");
 	var_7bf146f2 = getweapon("molotov_steam");
@@ -551,35 +551,35 @@ function function_8a03d3f3(impactpos, startpos, normal, multiplier, rotation, te
 	var_4b424bc1 = level.var_a88ac760[var_bf264593];
 	var_4b424bc1.var_46ee5246 = int(gettime() + 5000);
 	var_4b424bc1.origin = startpos;
-	thread damageeffectarea(startpos, normal, var_aecaaa11, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246, var_4dd46f8a, attacker, exploder);
-	thread function_9464e4ad(startpos, normal, var_aecaaa11, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246, var_4dd46f8a, attacker, exploder);
+	thread damageeffectarea(startpos, normal, var_aecaaa11, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246, customsettings, attacker, exploder);
+	thread function_9464e4ad(startpos, normal, var_aecaaa11, multiplier, var_e76400c0, wallnormal, var_693f108f, var_4b424bc1.var_46ee5246, customsettings, attacker, exploder);
 	var_b1dd2ca0 = getarraykeys(locations[#"loc"]);
-	foreach(var_7ee5c69b in var_b1dd2ca0)
+	foreach(lockey in var_b1dd2ca0)
 	{
-		if(!isdefined(var_7ee5c69b))
+		if(!isdefined(lockey))
 		{
 			continue;
 		}
-		if(function_f4e48434(locations[#"loc"][var_7ee5c69b]))
+		if(function_f4e48434(locations[#"loc"][lockey]))
 		{
 			continue;
 		}
-		if(isdefined(locations[#"hash_7852e39f75c4b5c0"][var_7ee5c69b]))
+		if(isdefined(locations[#"smallfire"][lockey]))
 		{
 			fireweapon = var_4a1b9411;
 		}
 		else
 		{
-			if(isdefined(locations[#"steam"][var_7ee5c69b]))
+			if(isdefined(locations[#"steam"][lockey]))
 			{
 				fireweapon = var_7bf146f2;
 			}
 			else
 			{
-				fireweapon = (isdefined(locations[#"hash_33059ac06a23beca"][var_7ee5c69b]) ? var_3cbce009 : var_aecaaa11);
+				fireweapon = (isdefined(locations[#"tallfire"][lockey]) ? var_3cbce009 : var_aecaaa11);
 			}
 		}
-		level thread function_42b9fdbe(fireweapon, locations[#"loc"][var_7ee5c69b], locations[#"normal"][var_7ee5c69b], int(5), team);
+		level thread function_42b9fdbe(fireweapon, locations[#"loc"][lockey], locations[#"normal"][lockey], int(5), team);
 	}
 }
 
@@ -611,7 +611,7 @@ function function_42b9fdbe(weapon, loc, normal, duration, team)
 function incendiary_debug_line(from, to, color, depthtest, time)
 {
 	/#
-		debug_rcbomb = getdvarint(#"hash_4eff71fc5bf5542a", 0);
+		debug_rcbomb = getdvarint(#"scr_molotov_debug", 0);
 		if(debug_rcbomb == 1)
 		{
 			if(!isdefined(time))
@@ -636,7 +636,7 @@ function incendiary_debug_line(from, to, color, depthtest, time)
 	Parameters: 11
 	Flags: Linked
 */
-function damageeffectarea(position, normal, weapon, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime, var_4dd46f8a, attacker, exploder)
+function damageeffectarea(position, normal, weapon, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime, customsettings, attacker, exploder)
 {
 	level endon(#"game_ended");
 	radius = 65 * radius_multiplier;
@@ -682,7 +682,7 @@ function damageeffectarea(position, normal, weapon, radius_multiplier, var_e7640
 			waitframe(1);
 			if(isdefined(target) && isdefined(self))
 			{
-				self trytoapplyfiredamage(target, normal, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a, attacker, exploder);
+				self trytoapplyfiredamage(target, normal, fireeffectarea, var_289a74bc, weapon, customsettings, attacker, exploder);
 			}
 		}
 		wait(0.2);
@@ -766,7 +766,7 @@ function stopfiresound()
 	Parameters: 11
 	Flags: Linked
 */
-function function_9464e4ad(position, normal, weapon, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime, var_4dd46f8a, attacker, exploder)
+function function_9464e4ad(position, normal, weapon, radius_multiplier, var_e76400c0, wallnormal, var_cbaaea69, damageendtime, customsettings, attacker, exploder)
 {
 	level endon(#"game_ended");
 	radius = 65 * radius_multiplier;
@@ -794,10 +794,10 @@ function function_9464e4ad(position, normal, weapon, radius_multiplier, var_e764
 			waitframe(1);
 			if(isdefined(target) && isdefined(self))
 			{
-				self trytoapplyfiredamage(target, normal, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a, attacker);
+				self trytoapplyfiredamage(target, normal, fireeffectarea, var_289a74bc, weapon, customsettings, attacker);
 			}
 		}
-		wait(var_4dd46f8a.var_8fbd03cb);
+		wait(customsettings.var_8fbd03cb);
 	}
 	arrayremovevalue(self.var_ebf0b1c9, undefined);
 	foreach(target in self.var_ebf0b1c9)
@@ -963,7 +963,7 @@ function function_851843a5(target, position, fireeffectarea, var_289a74bc, weapo
 	Parameters: 8
 	Flags: Linked
 */
-function trytoapplyfiredamage(target, position, fireeffectarea, var_289a74bc, weapon, var_4dd46f8a, attacker, exploder)
+function trytoapplyfiredamage(target, position, fireeffectarea, var_289a74bc, weapon, customsettings, attacker, exploder)
 {
 	if(!(isdefined(fireeffectarea) || isdefined(var_289a74bc)))
 	{
@@ -991,17 +991,17 @@ function trytoapplyfiredamage(target, position, fireeffectarea, var_289a74bc, we
 		{
 			if(isplayer(target))
 			{
-				target thread damageinfirearea(sourcepos, trace, position, weapon, fireeffectarea, var_289a74bc, var_4dd46f8a);
+				target thread damageinfirearea(sourcepos, trace, position, weapon, fireeffectarea, var_289a74bc, customsettings);
 			}
 			else
 			{
 				if(isai(target))
 				{
-					target function_8422dabd(sourcepos, trace, position, var_4dd46f8a, attacker, exploder);
+					target function_8422dabd(sourcepos, trace, position, customsettings, attacker, exploder);
 				}
 				else
 				{
-					target thread function_37ddab3(sourcepos, trace, position, weapon, var_4dd46f8a);
+					target thread function_37ddab3(sourcepos, trace, position, weapon, customsettings);
 				}
 			}
 			self.var_ebf0b1c9[targetentnum] = target;
@@ -1053,15 +1053,15 @@ function function_c049196a()
 	Parameters: 7
 	Flags: Linked
 */
-function damageinfirearea(origin, trace, position, weapon, fireeffectarea, var_289a74bc, var_4dd46f8a)
+function damageinfirearea(origin, trace, position, weapon, fireeffectarea, var_289a74bc, customsettings)
 {
 	self endon(#"death");
 	timer = 0;
 	if(candofiredamage(self, 0.2))
 	{
 		/#
-			level.var_de532e7f = getdvarint(#"hash_4eff71fc5bf5542a", 0);
-			if(level.var_de532e7f)
+			level.molotov_debug = getdvarint(#"scr_molotov_debug", 0);
+			if(level.molotov_debug)
 			{
 				if(!isdefined(level.incendiarydamagetime))
 				{
@@ -1075,7 +1075,7 @@ function damageinfirearea(origin, trace, position, weapon, fireeffectarea, var_2
 		{
 			self.var_84e41b20 = [];
 		}
-		params = function_4d1e7b48("dot_molotov_dog");
+		params = getstatuseffect("dot_molotov_dog");
 		if(undefined !== self)
 		{
 			if(isdefined(var_289a74bc))
@@ -1084,10 +1084,10 @@ function damageinfirearea(origin, trace, position, weapon, fireeffectarea, var_2
 				self.var_ae639436 = var_289a74bc;
 				self thread sndfiredamage();
 			}
-			else if(isdefined(var_4dd46f8a))
+			else if(isdefined(customsettings))
 			{
-				self status_effect::status_effect_apply(params, fireeffectarea, var_4dd46f8a, 0, undefined, undefined, weapon);
-				self.var_ae639436 = var_4dd46f8a;
+				self status_effect::status_effect_apply(params, fireeffectarea, customsettings, 0, undefined, undefined, weapon);
+				self.var_ae639436 = customsettings;
 				self thread sndfiredamage();
 			}
 		}
@@ -1103,11 +1103,11 @@ function damageinfirearea(origin, trace, position, weapon, fireeffectarea, var_2
 	Parameters: 6
 	Flags: Linked
 */
-function function_8422dabd(origin, trace, position, var_4dd46f8a, attacker, exploder)
+function function_8422dabd(origin, trace, position, customsettings, attacker, exploder)
 {
 	self endon(#"death");
 	timer = 0;
-	if(candofiredamage(self, var_4dd46f8a.var_90bd7d92))
+	if(candofiredamage(self, customsettings.var_90bd7d92))
 	{
 		if(!isdefined(self.var_84e41b20))
 		{
@@ -1155,18 +1155,18 @@ function function_8422dabd(origin, trace, position, var_4dd46f8a, attacker, expl
 	Parameters: 5
 	Flags: Linked
 */
-function function_37ddab3(origin, trace, position, weapon, var_4dd46f8a)
+function function_37ddab3(origin, trace, position, weapon, customsettings)
 {
 	self endon(#"death");
 	timer = 0;
-	if(candofiredamage(self, var_4dd46f8a.var_8fbd03cb))
+	if(candofiredamage(self, customsettings.var_8fbd03cb))
 	{
 		var_4dd4e6ee = undefined;
 		if(!isdefined(self.var_84e41b20))
 		{
 			self.var_84e41b20 = [];
 		}
-		var_341dfe48 = int(var_4dd46f8a.var_4931651e * var_4dd46f8a.var_8fbd03cb);
+		var_341dfe48 = int(customsettings.var_4931651e * customsettings.var_8fbd03cb);
 		self dodamage(var_341dfe48, self.origin, undefined, weapon, "none", "MOD_BURNED", 0, weapon);
 		self.var_ae639436 = var_4dd4e6ee;
 	}
@@ -1292,8 +1292,8 @@ function hitpos(start, end, color)
 {
 	trace = bullettrace(start, end, 0, undefined);
 	/#
-		level.var_de532e7f = getdvarint(#"hash_4eff71fc5bf5542a", 0);
-		if(level.var_de532e7f)
+		level.molotov_debug = getdvarint(#"scr_molotov_debug", 0);
+		if(level.molotov_debug)
 		{
 			debugstar(trace[#"position"], 2000, color);
 		}
@@ -1361,12 +1361,12 @@ function resetfiredamage(entnum, time)
 function function_1493c734(origin, radius, color, alpha, time)
 {
 	/#
-		var_9f49d7d = getdvarint(#"hash_58042b6209e0c2a6", 0);
-		if(var_9f49d7d > 0)
+		debug_fire = getdvarint(#"hash_58042b6209e0c2a6", 0);
+		if(debug_fire > 0)
 		{
-			if(var_9f49d7d > 1)
+			if(debug_fire > 1)
 			{
-				radius = int(radius / var_9f49d7d);
+				radius = int(radius / debug_fire);
 			}
 			util::debug_sphere(origin, radius, color, alpha, time);
 		}

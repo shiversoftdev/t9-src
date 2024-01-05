@@ -19,7 +19,7 @@ function private autoexec function_df433d97()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: rappel
 	Checksum: 0x699FE508
 	Offset: 0x120
@@ -27,7 +27,7 @@ function private autoexec function_df433d97()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"rappel", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -181,7 +181,7 @@ function function_c487f6c0(var_13bb8c94)
 	var_3d783ef7 function_95c6df5a();
 	hint = #"hash_4079b1df1f035718";
 	var_3d783ef7 sethintstring(hint);
-	var_3d783ef7 callback::function_35a12f19(&function_4945d10b);
+	var_3d783ef7 callback::on_trigger(&function_4945d10b);
 	return var_3d783ef7;
 }
 

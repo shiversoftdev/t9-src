@@ -1,11 +1,11 @@
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
 
 #namespace destructible;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: destructible
 	Checksum: 0xA7E6C202
 	Offset: 0x268
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"destructible", &function_70a657d8, undefined, undefined, undefined);
 }

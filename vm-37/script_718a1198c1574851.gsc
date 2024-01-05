@@ -1,18 +1,18 @@
-#using script_2da073d4aa78c206;
-#using script_335d0650ed05d36d;
+#using scripts\wz_common\wz_loadouts.gsc;
+#using scripts\wz_common\hud.gsc;
+#using script_5495f0bb06045dc7;
+#using scripts\mp_common\player\player_loadout.gsc;
 #using script_4108035fe400ce67;
+#using scripts\core_common\util_shared.gsc;
+#using script_335d0650ed05d36d;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_reinsertion.gsc;
+#using scripts\core_common\player\player_insertion.gsc;
 #using script_44b0b8420eabacad;
 #using script_471b31bd963b388e;
-#using script_5209c07c35771d12;
-#using script_5495f0bb06045dc7;
-#using script_788472602edbe3b9;
 #using script_7bacb32f8222fa3e;
-#using script_9279a21b1e8b6c9;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\death_circle.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\wz_common\hud.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_bc2b656d;
 
@@ -31,20 +31,20 @@ event main(eventstruct)
 	spawning::function_32b97d1b(&spawning::function_90dee50d);
 	spawning::function_adbbb58a(&spawning::function_c24e290c);
 	spawning::addsupportedspawnpointtype("fireteam");
-	callback::add_callback(#"hash_1019ab4b81d07b35", &function_6f72a4d);
+	callback::add_callback(#"hash_1019ab4b81d07b35", &on_team_eliminated);
 	callback::add_callback(#"hash_7912e21750e4010d", &function_b057aee2);
 	callback::on_player_killed(&on_player_killed);
 	callback::on_disconnect(&on_player_disconnect);
 	level.alwaysusestartspawns = 1;
-	level.onstartgametype = &namespace_17baa64d::function_d81f6eb7;
-	level.givecustomloadout = &function_511245ae;
+	level.onstartgametype = &namespace_17baa64d::on_start_game_type;
+	level.givecustomloadout = &give_custom_loadout;
 	level.var_894b9d74 = 1;
 	level.var_405a6738 = 25000;
 	level.var_c7f8ccf6 = 50;
 	level.var_5c14d2e6 = &function_b82fbeb8;
 	level.var_317fb13c = &function_b82fbeb8;
 	level.var_5cb948b1 = &function_6de0bb32;
-	namespace_c2bb938a::function_b5ee47fa(&function_807b902);
+	player_reinsertion::function_b5ee47fa(&function_807b902);
 }
 
 /*
@@ -67,7 +67,7 @@ event level_init(eventstruct)
 }
 
 /*
-	Name: function_511245ae
+	Name: give_custom_loadout
 	Namespace: namespace_bc2b656d
 	Checksum: 0xB17907F2
 	Offset: 0x398
@@ -75,7 +75,7 @@ event level_init(eventstruct)
 	Parameters: 1
 	Flags: None
 */
-function function_511245ae(takeoldweapon)
+function give_custom_loadout(takeoldweapon)
 {
 	if(!isdefined(takeoldweapon))
 	{
@@ -91,20 +91,20 @@ function function_511245ae(takeoldweapon)
 			self takeweapon(weapon);
 		}
 	}
-	var_43d69af6 = getweapon(#"null_offhand_primary");
-	self giveweapon(var_43d69af6);
-	self setweaponammoclip(var_43d69af6, 0);
-	self switchtooffhand(var_43d69af6);
+	nullprimary = getweapon(#"null_offhand_primary");
+	self giveweapon(nullprimary);
+	self setweaponammoclip(nullprimary, 0);
+	self switchtooffhand(nullprimary);
 	if(self.firstspawn !== 0)
 	{
 		hud::function_2f66bc37();
 	}
-	var_2b15e2fe = getweapon(#"hash_5a7fd1af4a1d5c9");
-	self giveweapon(var_2b15e2fe);
-	self setweaponammoclip(var_2b15e2fe, 0);
-	self switchtooffhand(var_2b15e2fe);
-	level.var_ef61b4b5 = var_2b15e2fe;
-	var_fb6490c8 = self gadgetgetslot(var_2b15e2fe);
+	healthgadget = getweapon(#"hash_5a7fd1af4a1d5c9");
+	self giveweapon(healthgadget);
+	self setweaponammoclip(healthgadget, 0);
+	self switchtooffhand(healthgadget);
+	level.var_ef61b4b5 = healthgadget;
+	var_fb6490c8 = self gadgetgetslot(healthgadget);
 	self gadgetpowerset(var_fb6490c8, 0);
 	bare_hands = getweapon(#"bare_hands");
 	self giveweapon(bare_hands);
@@ -146,8 +146,8 @@ function function_b82fbeb8()
 	{
 		return;
 	}
-	self namespace_441c2f1c::give_weapon(#"hash_2099525166a32b52");
-	self namespace_441c2f1c::function_52df229a(#"hash_837a6ea0c2864a8");
+	self wz_loadouts::give_weapon(#"hash_2099525166a32b52");
+	self wz_loadouts::function_52df229a(#"hash_837a6ea0c2864a8");
 }
 
 /*
@@ -170,28 +170,28 @@ function function_6de0bb32()
 		var_122bdb78 = function_4ba8fde(#"hash_837a6ea0c2864a8").id;
 		var_dd8041ff = 0;
 		var_348a5219 = 1;
-		foreach(var_b619c089 in self.inventory.items)
+		foreach(inventoryitem in self.inventory.items)
 		{
-			var_d8138db2 = var_b619c089.id;
-			if(var_d8138db2 == 32767)
+			itemid = inventoryitem.id;
+			if(itemid == 32767)
 			{
 				continue;
 			}
-			if(var_d8138db2 != var_cc6ff6a1)
+			if(itemid != var_cc6ff6a1)
 			{
 				var_348a5219 = 0;
 				break;
 			}
 		}
-		foreach(var_d8138db2 in self.inventory.ammo)
+		foreach(itemid in self.inventory.ammo)
 		{
 			if(!var_348a5219)
 			{
 				break;
 			}
-			weapon = getweapon(var_95162a97);
+			weapon = getweapon(ammoweapon);
 			ammostock = self getweaponammostock(weapon);
-			if(var_d8138db2 == var_122bdb78)
+			if(itemid == var_122bdb78)
 			{
 				var_dd8041ff = ammostock;
 				continue;
@@ -204,9 +204,9 @@ function function_6de0bb32()
 		}
 		if(var_348a5219)
 		{
-			var_375298f3 = function_4ba8fde(#"hash_837a6ea0c2864a8");
-			var_95162a97 = namespace_ad5a0cd6::function_f4a8d375(var_375298f3.id);
-			item_drop::drop_item(0, var_95162a97, 1, var_dd8041ff, var_375298f3.id, self.origin);
+			ammoitem = function_4ba8fde(#"hash_837a6ea0c2864a8");
+			ammoweapon = item_world_util::function_f4a8d375(ammoitem.id);
+			item_drop::drop_item(0, ammoweapon, 1, var_dd8041ff, ammoitem.id, self.origin);
 		}
 		return !var_348a5219;
 	}
@@ -214,7 +214,7 @@ function function_6de0bb32()
 }
 
 /*
-	Name: function_6f72a4d
+	Name: on_team_eliminated
 	Namespace: namespace_bc2b656d
 	Checksum: 0x772D6D80
 	Offset: 0xA98
@@ -222,7 +222,7 @@ function function_6de0bb32()
 	Parameters: 1
 	Flags: None
 */
-function function_6f72a4d(params)
+function on_team_eliminated(params)
 {
 	players = getplayers(params.team);
 	foreach(player in players)
@@ -419,7 +419,7 @@ function function_2ec1bf5c(origin)
 {
 	circle = level.deathcircle.var_5c54ab33;
 	var_bab1ee6b = {#radius:circle.radius - 1500, #origin:circle.origin};
-	var_d9100e0 = (isdefined(level.deathcircle.var_7aec140c) ? level.deathcircle.var_7aec140c.origin : circle.origin);
+	var_d9100e0 = (isdefined(level.deathcircle.nextcircle) ? level.deathcircle.nextcircle.origin : circle.origin);
 	dir = vectornormalize(origin - var_d9100e0);
 	var_51c8b128 = death_circle::function_936b3f09(origin, dir, var_bab1ee6b);
 	point = (var_51c8b128[0], var_51c8b128[1], 0);
@@ -431,8 +431,8 @@ function function_2ec1bf5c(origin)
 		{
 			foreach(bound in level.territory.bounds)
 			{
-				var_fa52306b = (point[0], point[1], bound.origin[2]);
-				if(istouching(var_fa52306b, bound))
+				testpoint = (point[0], point[1], bound.origin[2]);
+				if(istouching(testpoint, bound))
 				{
 					inbounds = 1;
 					break;
@@ -520,7 +520,7 @@ function function_2613549d(origin, var_6b4313e9)
 		self unlink();
 		launchvelocity = anglestoforward(self getplayerangles());
 	}
-	self namespace_67838d10::start_freefall(launchvelocity, 1);
+	self player_insertion::start_freefall(launchvelocity, 1);
 }
 
 /*

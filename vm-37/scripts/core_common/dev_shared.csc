@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace dev_shared;
 
@@ -138,7 +138,7 @@ function function_f3346975()
 				if(var_9cf37283.valid)
 				{
 					var_346660ac = function_2c6232e5(makelocalizedstring(var_9cf37283.var_74996050));
-					var_1bf829f2 = ((((outfitindex + "") + var_346660ac) + "") + function_9e72a96(var_9cf37283.var_3cf2d21) + "") + outfitindex;
+					var_1bf829f2 = ((((outfitindex + "") + var_346660ac) + "") + function_9e72a96(var_9cf37283.namehash) + "") + outfitindex;
 					add_devgui_cmd(0, (("" + body_name) + "") + var_1bf829f2, (("" + playerbodytype) + "") + outfitindex);
 				}
 			}
@@ -155,11 +155,11 @@ function function_f3346975()
 	Parameters: 1
 	Flags: None
 */
-function function_2c6232e5(var_4148b6dc)
+function function_2c6232e5(in_string)
 {
 	/#
-		var_8d9c8a5d = function_ea13f55(var_4148b6dc, "", "");
-		return var_8d9c8a5d;
+		out_string = strreplace(in_string, "", "");
+		return out_string;
 	#/
 }
 

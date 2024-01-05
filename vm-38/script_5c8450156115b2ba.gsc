@@ -1,14 +1,14 @@
 #using script_1029986e2bc8ca8e;
-#using script_3cebb48c37fc271;
-#using script_6c5b51f98cd04fa3;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_sq.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_fasttravel.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_ff7e490;
 
@@ -50,7 +50,7 @@ function init()
 }
 
 /*
-	Name: function_677bca6e
+	Name: start_fasttravel
 	Namespace: namespace_ff7e490
 	Checksum: 0x8C71D2BC
 	Offset: 0x4A8
@@ -58,7 +58,7 @@ function init()
 	Parameters: 0
 	Flags: None
 */
-function function_677bca6e()
+function start_fasttravel()
 {
 	level flag::set(#"hash_1446e25b57f66305");
 	level clientfield::set("" + #"hash_666ad912cb4541f1", 1);
@@ -133,7 +133,7 @@ function function_c52e8ba(player, var_8d5d092c)
 		{
 			switch(self.stub.script_string)
 			{
-				case "hash_10867d96a0793a37":
+				case "helipads_to_main_street":
 				{
 					if(level flag::get(#"hash_5981a23fdea21f78"))
 					{
@@ -142,7 +142,7 @@ function function_c52e8ba(player, var_8d5d092c)
 					}
 					break;
 				}
-				case "hash_e90df2ca25fbd31":
+				case "anytown_usa_to_bunker":
 				{
 					if(!level flag::get(#"hash_bc6e6c4a2ea3f60"))
 					{
@@ -151,7 +151,7 @@ function function_c52e8ba(player, var_8d5d092c)
 					}
 					break;
 				}
-				case "hash_4f67bbef6c02e1ce":
+				case "observation_to_helipads":
 				{
 					if(!level flag::get(#"power_on1"))
 					{
@@ -200,44 +200,44 @@ function function_c52e8ba(player, var_8d5d092c)
 				{
 					switch(self.stub.script_string)
 					{
-						case "hash_32dfe21b4b983a5d":
-						case "hash_4f67bbef6c02e1ce":
+						case "main_street_to_helipads":
+						case "observation_to_helipads":
 						{
 							self.hint_string[n_player_index] = #"hash_304d3a663d56e57f";
 							break;
 						}
-						case "hash_10867d96a0793a37":
+						case "helipads_to_main_street":
 						{
 							self.hint_string[n_player_index] = #"hash_44a5bc69db5e0ee7";
 							break;
 						}
-						case "hash_3d8c7ec25b02d4f1":
+						case "anytown_usa_to_main_street":
 						{
 							self.hint_string[n_player_index] = #"hash_423e9a8e530ed95a";
 							break;
 						}
-						case "hash_2e6796ab3a32706f":
+						case "main_street_to_anytown_usa":
 						{
 							self.hint_string[n_player_index] = #"hash_29eee6d6112fe209";
 							break;
 						}
-						case "hash_1130e6ad815578c1":
+						case "bunker_to_anytown_usa":
 						{
 							self.hint_string[n_player_index] = #"hash_6250636afaff2f8b";
 							break;
 						}
-						case "hash_e90df2ca25fbd31":
+						case "anytown_usa_to_bunker":
 						{
 							self.hint_string[n_player_index] = #"hash_4c57d5cff43d2407";
 							break;
 						}
-						case "hash_662c79a325e5abb1":
+						case "observation_to_bunker":
 						{
 							self.hint_string[n_player_index] = #"hash_656093d7320c2914";
 							break;
 						}
-						case "hash_166fe534402b9b58":
-						case "hash_5fc30c4b8c9bfde9":
+						case "helipads_to_observation":
+						case "bunker_to_observation":
 						{
 							self.hint_string[n_player_index] = #"hash_3b286335feef3751";
 							break;
@@ -305,7 +305,7 @@ function function_a70fa155(var_74fbad21, var_af6496cd, var_54829af, var_32281137
 			else
 			{
 				e_player function_66c3f496(var_74fbad21);
-				e_player namespace_ee206246::objective_set(var_af6496cd, var_e3c700bd, undefined, undefined, undefined, 96);
+				e_player zm_sq::objective_set(var_af6496cd, var_e3c700bd, undefined, undefined, undefined, 96);
 				level.var_7899bc18[e_player.playernum] = var_e3c700bd;
 			}
 			continue;
@@ -328,7 +328,7 @@ function function_a70fa155(var_74fbad21, var_af6496cd, var_54829af, var_32281137
 				{
 					if(isdefined(level.var_7899bc18[e_player.playernum]))
 					{
-						e_player namespace_ee206246::objective_complete(var_af6496cd);
+						e_player zm_sq::objective_complete(var_af6496cd);
 						level.var_7899bc18[e_player.playernum] = undefined;
 					}
 					if(!isdefined(level.var_c1bfcfe0[e_player.playernum]))
@@ -348,14 +348,14 @@ function function_a70fa155(var_74fbad21, var_af6496cd, var_54829af, var_32281137
 					{
 						if(!array::function_460f3c24(level.var_7899bc18[e_player.playernum], var_e3c700bd))
 						{
-							e_player namespace_ee206246::objective_complete(var_af6496cd, level.var_7899bc18[e_player.playernum]);
-							e_player namespace_ee206246::objective_set(var_af6496cd, var_e3c700bd, undefined, undefined, undefined, 96);
+							e_player zm_sq::objective_complete(var_af6496cd, level.var_7899bc18[e_player.playernum]);
+							e_player zm_sq::objective_set(var_af6496cd, var_e3c700bd, undefined, undefined, undefined, 96);
 							level.var_7899bc18[e_player.playernum] = var_e3c700bd;
 						}
 					}
 					else
 					{
-						e_player namespace_ee206246::objective_set(var_af6496cd, var_e3c700bd, undefined, undefined, undefined, 96);
+						e_player zm_sq::objective_set(var_af6496cd, var_e3c700bd, undefined, undefined, undefined, 96);
 						level.var_7899bc18[e_player.playernum] = var_e3c700bd;
 					}
 				}
@@ -368,7 +368,7 @@ function function_a70fa155(var_74fbad21, var_af6496cd, var_54829af, var_32281137
 			}
 			if(isdefined(level.var_7899bc18[e_player.playernum]))
 			{
-				e_player namespace_ee206246::objective_complete(var_af6496cd);
+				e_player zm_sq::objective_complete(var_af6496cd);
 				level.var_7899bc18[e_player.playernum] = undefined;
 			}
 		}
@@ -390,7 +390,7 @@ function private function_c8901681(var_b09af3eb)
 	{
 		if(isdefined(level.var_7899bc18[e_player.playernum]))
 		{
-			e_player namespace_ee206246::objective_complete(level.var_2918dbdf);
+			e_player zm_sq::objective_complete(level.var_2918dbdf);
 			level.var_7899bc18[e_player.playernum] = undefined;
 		}
 		if(isdefined(level.var_c1bfcfe0[e_player.playernum]))
@@ -402,9 +402,9 @@ function private function_c8901681(var_b09af3eb)
 	{
 		if(isdefined(level.var_474108be))
 		{
-			if(function_7a600918(level.var_474108be) || isstring(level.var_474108be))
+			if(ishash(level.var_474108be) || isstring(level.var_474108be))
 			{
-				level namespace_ee206246::objective_complete(level.var_474108be);
+				level zm_sq::objective_complete(level.var_474108be);
 			}
 			else if(isint(level.var_474108be))
 			{
@@ -428,9 +428,9 @@ function private function_66c3f496(var_74fbad21)
 {
 	if(isdefined(var_74fbad21))
 	{
-		if(function_7a600918(var_74fbad21) || isstring(var_74fbad21))
+		if(ishash(var_74fbad21) || isstring(var_74fbad21))
 		{
-			self namespace_ee206246::function_3029d343(var_74fbad21);
+			self zm_sq::function_3029d343(var_74fbad21);
 		}
 		else if(isint(var_74fbad21))
 		{
@@ -452,9 +452,9 @@ function private function_4f928bec(var_74fbad21, var_54829af)
 {
 	if(isdefined(var_74fbad21))
 	{
-		if(function_7a600918(var_74fbad21) || isstring(var_74fbad21))
+		if(ishash(var_74fbad21) || isstring(var_74fbad21))
 		{
-			self namespace_ee206246::function_aee0b4b4(var_74fbad21, var_54829af);
+			self zm_sq::function_aee0b4b4(var_74fbad21, var_54829af);
 		}
 		else if(isint(var_74fbad21))
 		{
@@ -508,7 +508,7 @@ function function_10ff2c34(var_54829af, var_32281137)
 			{
 				if(array::function_460f3c24(var_32281137, level.var_2f941a56))
 				{
-					if(level flag::get(#"hash_307316b2795265e6"))
+					if(level flag::get(#"connect_anytown_usa_west_zones"))
 					{
 						return struct::get_array("helipads_to_main_street", "script_string");
 					}
@@ -557,7 +557,7 @@ function function_10ff2c34(var_54829af, var_32281137)
 				}
 				else if(array::function_460f3c24(var_32281137, level.var_2f941a56))
 				{
-					if(level flag::get(#"hash_307316b2795265e6"))
+					if(level flag::get(#"connect_anytown_usa_west_zones"))
 					{
 						return struct::get_array("main_street_to_anytown_usa", "script_string");
 					}

@@ -1,12 +1,12 @@
-#using script_32399001bdb550da;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_32399001bdb550da;
 
 #namespace player_decision;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: player_decision
 	Checksum: 0x95E91365
 	Offset: 0x198
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("player_decision", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -150,7 +150,7 @@ function function_ff7e19cb(var_6aeabb95)
 	function_4f0f89(#"hash_3650eaf15ceb89e7", var_6aeabb95);
 	if(var_6aeabb95 == 2)
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_bloodthirty_park_lazar_dead", 1);
+		getplayers()[0] stats::set_stat_global("cp_bloodthirty_park_lazar_dead", 1);
 	}
 }
 
@@ -205,7 +205,7 @@ function function_cde4f4e9(var_fda79bf3)
 	function_4f0f89(#"hash_5cdfba0959eb3c63", var_fda79bf3);
 	if(var_fda79bf3)
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_bloodthirty_duga_dead", 1);
+		getplayers()[0] stats::set_stat_global("cp_bloodthirty_duga_dead", 1);
 	}
 }
 
@@ -251,11 +251,11 @@ function function_83bb4d9c(iskilled)
 	function_4f0f89(#"hash_78916ab4267af9ff", iskilled);
 	if(!iskilled)
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_loyal_agent_informant", 1);
+		getplayers()[0] stats::set_stat_global("cp_loyal_agent_informant", 1);
 	}
 	else
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_bloodthirty_informant_dead", 1);
+		getplayers()[0] stats::set_stat_global("cp_bloodthirty_informant_dead", 1);
 	}
 }
 
@@ -293,11 +293,11 @@ function function_a029a114(iskilled)
 	function_4f0f89(#"hash_2209b7d4d5e867da", iskilled);
 	if(!iskilled)
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_loyal_agent_qasim_live", 1);
+		getplayers()[0] stats::set_stat_global("cp_loyal_agent_qasim_live", 1);
 	}
 	else
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_bloodthirty_qasim_dead", 1);
+		getplayers()[0] stats::set_stat_global("cp_bloodthirty_qasim_dead", 1);
 	}
 }
 
@@ -335,11 +335,11 @@ function function_5d2eb7fa(iskilled)
 	function_4f0f89(#"hash_19be69882298b84a", iskilled);
 	if(!iskilled)
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_loyal_agent_volkov_capture", 1);
+		getplayers()[0] stats::set_stat_global("cp_loyal_agent_volkov_capture", 1);
 	}
 	else
 	{
-		getplayers()[0] stats::function_4db3fba1("cp_bloodthirty_volkov_dead", 1);
+		getplayers()[0] stats::set_stat_global("cp_bloodthirty_volkov_dead", 1);
 	}
 }
 
@@ -436,7 +436,7 @@ function function_e40c7d56()
 function function_557c31b1()
 {
 	savegame::set_player_data(#"hash_1353a738ffed49d7", 1);
-	getplayers()[0] stats::function_4db3fba1("cp_dark_chaos", 1);
+	getplayers()[0] stats::set_stat_global("cp_dark_chaos", 1);
 }
 
 /*

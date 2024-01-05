@@ -1,21 +1,21 @@
-#using script_25c09ccacf057919;
-#using script_69d3c825b6585548;
-#using script_7133a4d461308099;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\delete.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_69d3c825b6585548;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\activecamo_shared.gsc;
+#using script_25c09ccacf057919;
+#using scripts\core_common\delete.gsc;
 
 #namespace load;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: load
 	Checksum: 0xB6261232
 	Offset: 0x260
@@ -23,7 +23,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"load", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -120,7 +120,7 @@ function private function_70a657d8()
 			defaultaspectratio = 1.777778;
 		}
 	}
-	level.script = util::function_53bbf9d2();
+	level.script = util::get_map_name();
 	level.clientscripts = getdvarstring(#"cg_usingclientscripts") != "";
 	level.clientscripts = getdvarstring(#"cg_usingclientscripts") != "";
 	if(!isdefined(level.timeofday))
@@ -873,9 +873,9 @@ function hide_ents()
 {
 	foreach(ent in getentarray())
 	{
-		if(is_true(ent.var_8c43d611))
+		if(is_true(ent.script_hide))
 		{
-			ent val::set(#"hash_231dddc2afe6275f", "hide", 1);
+			ent val::set(#"script_hide", "hide", 1);
 		}
 	}
 }

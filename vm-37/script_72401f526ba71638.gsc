@@ -1,29 +1,29 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_1caf36ff04a85ff6;
-#using script_2467fe25132955b8;
-#using script_27610ca25737f68d;
-#using script_340a2e805e35f7a2;
-#using script_3751b21462a54a7d;
-#using script_3f9e0dc8454d98e1;
-#using script_4108035fe400ce67;
 #using script_421ca110b4204518;
-#using script_44c2a1259e14bef1;
-#using script_471b31bd963b388e;
-#using script_47fb62300ac0bd60;
 #using script_58860a35d0555f74;
+#using script_27610ca25737f68d;
+#using script_44c2a1259e14bef1;
+#using script_2467fe25132955b8;
+#using scripts\zm_common\zm_utility.gsc;
+#using script_3751b21462a54a7d;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_471b31bd963b388e;
+#using script_4108035fe400ce67;
+#using script_340a2e805e35f7a2;
+#using script_1caf36ff04a85ff6;
+#using scripts\core_common\item_inventory.gsc;
 #using script_7bacb32f8222fa3e;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\core_common\rank_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_1b527536;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_1b527536
 	Checksum: 0x32297716
 	Offset: 0x1C8
@@ -31,7 +31,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_13a43d760497b54d", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -53,9 +53,9 @@ function private function_70a657d8()
 		return;
 	}
 	level.var_d98fc25e = [];
-	function_134fcf4b(#"hash_85edf3a63bb488c", #"hash_2f148f3f9c3812a8", #"hash_2f14923f9c3817c1", #"hash_2f14913f9c38160e", #"hash_2f14943f9c381b27", #"frost_blast_5");
+	function_134fcf4b(#"hash_85edf3a63bb488c", #"frost_blast_1", #"frost_blast_2", #"frost_blast_3", #"frost_blast_4", #"frost_blast_5");
 	function_134fcf4b(#"heal_aoe", #"hash_379869d5b6da974b", #"hash_37986ad5b6da98fe", #"hash_37986bd5b6da9ab1", #"hash_37986cd5b6da9c64", #"hash_37986dd5b6da9e17");
-	function_134fcf4b(#"energy_mine", #"hash_4ac402a4add2a995", #"hash_4ac3ffa4add2a47c", #"hash_4ac400a4add2a62f", #"hash_4ac3fda4add2a116", #"hash_4ac3fea4add2a2c9");
+	function_134fcf4b(#"energy_mine", #"energy_mine_1", #"energy_mine_2", #"energy_mine_3", #"energy_mine_4", #"hash_4ac3fea4add2a2c9");
 	function_134fcf4b(#"aether_shroud", #"hash_164c43cbd0ee958", #"hash_164c73cbd0eee71", #"hash_164c63cbd0eecbe", #"hash_164c93cbd0ef1d7", #"hash_164c83cbd0ef024");
 	function_134fcf4b(#"ring_of_fire", #"hash_631a223758cd92a", #"hash_631a123758cd777", #"hash_631a023758cd5c4", #"hash_6319f23758cd411", #"hash_6319e23758cd25e");
 	function_134fcf4b(#"hash_55569355da0f0f68", #"hash_43e326396554e18c", #"hash_43e329396554e6a5", #"hash_43e328396554e4f2", #"hash_43e323396554dc73", #"hash_43e322396554dac0");
@@ -64,8 +64,8 @@ function private function_70a657d8()
 	level.var_fee98522 = [];
 	level.var_5b46d961 = [];
 	level.var_197c8eb1 = 0;
-	level.var_1b527536 = array(#"hash_85edf3a63bb488c", #"hash_2f148f3f9c3812a8", #"hash_2f14923f9c3817c1", #"hash_2f14913f9c38160e", #"hash_2f14943f9c381b27", #"frost_blast_5", #"heal_aoe", #"hash_379869d5b6da974b", #"hash_37986ad5b6da98fe", #"hash_37986bd5b6da9ab1", #"hash_37986cd5b6da9c64", #"hash_37986dd5b6da9e17", #"energy_mine", #"hash_4ac402a4add2a995", #"hash_4ac3ffa4add2a47c", #"hash_4ac400a4add2a62f", #"hash_4ac3fda4add2a116", #"hash_4ac3fea4add2a2c9", #"aether_shroud", #"hash_164c43cbd0ee958", #"hash_164c73cbd0eee71", #"hash_164c63cbd0eecbe", #"hash_164c93cbd0ef1d7", #"hash_164c83cbd0ef024", #"ring_of_fire", #"hash_631a223758cd92a", #"hash_631a123758cd777", #"hash_631a023758cd5c4", #"hash_6319f23758cd411", #"hash_6319e23758cd25e", #"hash_55569355da0f0f68", #"hash_43e326396554e18c", #"hash_43e329396554e6a5", #"hash_43e328396554e4f2", #"hash_43e323396554dc73", #"hash_43e322396554dac0");
-	clientfield::function_a8bbc967("hud_items.ammoCooldowns.fieldUpgrade", 1, 5, "float");
+	level.var_1b527536 = array(#"hash_85edf3a63bb488c", #"frost_blast_1", #"frost_blast_2", #"frost_blast_3", #"frost_blast_4", #"frost_blast_5", #"heal_aoe", #"hash_379869d5b6da974b", #"hash_37986ad5b6da98fe", #"hash_37986bd5b6da9ab1", #"hash_37986cd5b6da9c64", #"hash_37986dd5b6da9e17", #"energy_mine", #"energy_mine_1", #"energy_mine_2", #"energy_mine_3", #"energy_mine_4", #"hash_4ac3fea4add2a2c9", #"aether_shroud", #"hash_164c43cbd0ee958", #"hash_164c73cbd0eee71", #"hash_164c63cbd0eecbe", #"hash_164c93cbd0ef1d7", #"hash_164c83cbd0ef024", #"ring_of_fire", #"hash_631a223758cd92a", #"hash_631a123758cd777", #"hash_631a023758cd5c4", #"hash_6319f23758cd411", #"hash_6319e23758cd25e", #"hash_55569355da0f0f68", #"hash_43e326396554e18c", #"hash_43e329396554e6a5", #"hash_43e328396554e4f2", #"hash_43e323396554dc73", #"hash_43e322396554dac0");
+	clientfield::register_clientuimodel("hud_items.ammoCooldowns.fieldUpgrade", 1, 5, "float");
 	clientfield::register("toplayer", "field_upgrade_selected", 1, 5, "int");
 	clientfield::register("allplayers", "field_upgrade_fired", 1, 4, "counter");
 	callback::on_spawned(&function_1505f5d4);
@@ -331,8 +331,8 @@ function private function_7fb7c83c(weaponname)
 	{
 		weaponname = weaponname.name;
 	}
-	var_66ac8e3e = isinarray(level.var_1b527536, weaponname);
-	return var_66ac8e3e;
+	inarray = isinarray(level.var_1b527536, weaponname);
+	return inarray;
 }
 
 /*
@@ -353,7 +353,7 @@ function function_1067f94c(class_index)
 		if(self.var_87f72f8 != level.var_5b46d961[var_d07d57b2])
 		{
 			self function_460882e2();
-			namespace_b376ff3f::function_5852cb7b(item.var_bd027dd9);
+			item_inventory::remove_inventory_item(item.var_bd027dd9);
 		}
 	}
 	self function_3ef3cec3(class_index);
@@ -466,11 +466,11 @@ function private function_9a67c8c7(str_name)
 	switch(str_name)
 	{
 		case "hash_85edf3a63bb488c":
-		case "hash_2f148f3f9c3812a8":
-		case "hash_2f14913f9c38160e":
-		case "hash_2f14923f9c3817c1":
+		case "frost_blast_1":
+		case "frost_blast_3":
+		case "frost_blast_2":
 		case "frost_blast_5":
-		case "hash_2f14943f9c381b27":
+		case "frost_blast_4":
 		{
 			var_45d28da0 = 1;
 			break;
@@ -486,11 +486,11 @@ function private function_9a67c8c7(str_name)
 			break;
 		}
 		case "energy_mine":
-		case "hash_4ac3fda4add2a116":
+		case "energy_mine_4":
 		case "hash_4ac3fea4add2a2c9":
-		case "hash_4ac3ffa4add2a47c":
-		case "hash_4ac400a4add2a62f":
-		case "hash_4ac402a4add2a995":
+		case "energy_mine_2":
+		case "energy_mine_3":
+		case "energy_mine_1":
 		{
 			var_45d28da0 = 3;
 			break;
@@ -735,12 +735,12 @@ function function_6457e4cd(item_name)
 	}
 	self playlocalsound(#"hash_55f9d99ffab775e1");
 	item = function_4ba8fde(item_name);
-	var_fa3df96 = self namespace_b376ff3f::function_e66dcff5(item);
+	var_fa3df96 = self item_inventory::function_e66dcff5(item);
 	if(isdefined(var_fa3df96))
 	{
-		if(!namespace_ad5a0cd6::function_db35e94f(item.var_bd027dd9))
+		if(!item_world_util::function_db35e94f(item.var_bd027dd9))
 		{
-			item.var_bd027dd9 = namespace_ad5a0cd6::function_970b8d86(var_fa3df96);
+			item.var_bd027dd9 = item_world_util::function_970b8d86(var_fa3df96);
 		}
 		self item_world::function_de2018e3(item, self, var_fa3df96, 0);
 	}

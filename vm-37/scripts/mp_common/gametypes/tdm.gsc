@@ -1,24 +1,24 @@
-#using script_1cc417743d7c262d;
-#using script_229f24b1662651c4;
-#using script_2c49ae69cd8ce30c;
-#using script_335d0650ed05d36d;
-#using script_3f27a7b2232674db;
-#using script_44b0b8420eabacad;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\dogtags.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\mp_common\bb.gsc;
-#using scripts\mp_common\gametypes\gametype.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
-#using scripts\mp_common\gametypes\match.gsc;
-#using scripts\mp_common\gametypes\spawning.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
+#using scripts\mp_common\gametypes\match.gsc;
+#using scripts\core_common\dogtags.gsc;
+#using scripts\killstreaks\mp\killstreaks.gsc;
+#using scripts\mp_common\gametypes\spawning.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\mp_common\gametypes\gametype.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\spawning_shared.gsc;
+#using script_335d0650ed05d36d;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
 
 #namespace tdm;
 
@@ -39,7 +39,7 @@ event main(eventstruct)
 	level.onstartgametype = &onstartgametype;
 	level.onspawnplayer = &onspawnplayer;
 	level.onroundswitch = &onroundswitch;
-	level.var_f6d301b = &function_f6d301b;
+	level.onendround = &onendround;
 	player::function_cf3aa03d(&onplayerkilled);
 	spawning::addsupportedspawnpointtype("tdm");
 	spawning::function_32b97d1b(&spawning::function_90dee50d);
@@ -113,7 +113,7 @@ function onroundswitch()
 }
 
 /*
-	Name: function_f6d301b
+	Name: onendround
 	Namespace: tdm
 	Checksum: 0xCB5200F2
 	Offset: 0x440
@@ -121,7 +121,7 @@ function onroundswitch()
 	Parameters: 1
 	Flags: Linked
 */
-function function_f6d301b(var_c1e98979)
+function onendround(var_c1e98979)
 {
 	function_e596b745(var_c1e98979);
 }

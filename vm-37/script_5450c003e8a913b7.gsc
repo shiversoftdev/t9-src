@@ -1,15 +1,15 @@
-#using script_139ae0bb0a87141c;
-#using script_16a28d93ee216f6f;
-#using script_1883fa4e60abbf9f;
-#using script_3072532951b5b4ae;
 #using script_3819e7a1427df6d2;
-#using script_3ad66e3076c279ab;
-#using script_42310dfa1362069f;
+#using script_3072532951b5b4ae;
 #using script_7e3221b6c80d8cc4;
 #using script_912160eeb6a2d51;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_16a28d93ee216f6f;
+#using script_42310dfa1362069f;
+#using script_139ae0bb0a87141c;
+#using script_1883fa4e60abbf9f;
+#using script_3ad66e3076c279ab;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace enemy;
 
@@ -461,7 +461,7 @@ function set_sight_state(state)
 			break;
 		}
 		case "hunt":
-		case "hash_4b55a59a56c4bdb3":
+		case "combat_hunt":
 		{
 			self namespace_6c0cd084::threat_sight_set_state("combat_hunt");
 			self.fovcosine = 0.7;
@@ -883,7 +883,7 @@ function should_ignore_sprint_footstep(event)
 	{
 		ignoreents = arraycombine(ignoreents, self.stealth.cantracetoaiignoreents);
 	}
-	if(isplayer(event.entity) && util::function_30d3b9ff(event.origin + traceoffset, self, 250, ignoreents[0], ignoreents[1]))
+	if(isplayer(event.entity) && util::can_see_ai(event.origin + traceoffset, self, 250, ignoreents[0], ignoreents[1]))
 	{
 		dist_sq = distancesquared(self.origin, event.origin);
 		radius = 250;
@@ -893,7 +893,7 @@ function should_ignore_sprint_footstep(event)
 		}
 		if(dist_sq < sqr(radius))
 		{
-			var_c1c8aacd = util::function_30d3b9ff(event.origin + traceoffset, self, 250, ignoreents[0], ignoreents[1]);
+			var_c1c8aacd = util::can_see_ai(event.origin + traceoffset, self, 250, ignoreents[0], ignoreents[1]);
 			return false;
 		}
 		var_1cc7bd2f = self cansee(event.entity);
@@ -920,10 +920,10 @@ function event_override_disguise(event)
 	{
 		switch(event.typeorig)
 		{
-			case "hash_1d42f8a3b0f3b508":
+			case "footstep_sprint":
 			case "footstep":
-			case "hash_3196b9140027f625":
-			case "hash_390cbdf038cb3251":
+			case "footstep_walk":
+			case "footstep_run":
 			case "proximity":
 			{
 				self thread namespace_6c0cd084::threat_sight_force_visible(event.entity, 1);
@@ -1022,7 +1022,7 @@ function event_handler_translate_severity(event)
 			}
 			break;
 		}
-		case "hash_70bb20cec150f744":
+		case "grenade danger":
 		{
 			if(event_anyone_within_radius(event.origin, 128))
 			{
@@ -1160,12 +1160,12 @@ function react_announce_specific(event)
 				self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "explosion", delaytime);
 				return true;
 			}
-			case "hash_70bb20cec150f744":
+			case "grenade danger":
 			{
 				self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "grenade_danger", delaytime);
 				return true;
 			}
-			case "hash_7d47b13a63d533c":
+			case "seek_backup":
 			{
 				self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "seek_backup", randomfloatrange(2, 2.5), event);
 				return true;
@@ -1197,7 +1197,7 @@ function react_announce_specific(event)
 				#/
 				return true;
 			}
-			case "hash_60484d1d72fd4ce9":
+			case "ally_killed":
 			{
 				self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "ally_killed", 0.5);
 				/#
@@ -1210,10 +1210,10 @@ function react_announce_specific(event)
 				self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "proximity", 0.5);
 				return true;
 			}
-			case "hash_1d42f8a3b0f3b508":
+			case "footstep_sprint":
 			case "footstep":
 			case "glass_destroyed":
-			case "hash_390cbdf038cb3251":
+			case "footstep_run":
 			{
 				self thread namespace_979752dc::function_f5f4416f("stealth", "announce", "investigate", delaytime);
 				return true;

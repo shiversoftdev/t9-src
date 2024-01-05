@@ -1,23 +1,23 @@
-#using script_16cb0a6a492a6a4f;
-#using script_18f0d22c75b141a7;
-#using script_1bd0552c85e48ebe;
-#using script_256b8879317373de;
-#using script_2dc48f46bfeac894;
-#using script_32c8b5b0eb2854f3;
-#using script_3d703ef87a841fe4;
-#using script_3f27a7b2232674db;
-#using script_45fdb6cec5580007;
-#using script_47fb62300ac0bd60;
-#using script_6c8abe14025b47c4;
-#using script_788472602edbe3b9;
-#using scripts\core_common\hud_message_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\spectating.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\draft.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\userspawnselection.gsc;
+#using scripts\abilities\ability_player.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\userspawnselection.gsc;
+#using scripts\mp_common\teams\team_assignment.gsc;
+#using scripts\mp_common\player\player_loadout.gsc;
+#using scripts\mp_common\player\player.gsc;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\mp_common\draft.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_3d703ef87a841fe4;
+#using script_45fdb6cec5580007;
+#using scripts\core_common\spectating.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\player\player_role.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\hud_message_shared.gsc;
+#using script_32c8b5b0eb2854f3;
 
 #namespace globallogic_ui;
 
@@ -32,7 +32,7 @@
 */
 function private autoexec function_839afd8()
 {
-	level notify(1957111712);
+	level notify(-1957111712);
 }
 
 /*
@@ -660,7 +660,7 @@ function menupositiondraft(response, intpayload)
 		{
 			if(intpayload == "ready")
 			{
-				self draft::function_3e46326b();
+				self draft::client_ready();
 			}
 			else
 			{

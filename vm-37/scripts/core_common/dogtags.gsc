@@ -1,14 +1,14 @@
-#using script_47fb62300ac0bd60;
-#using script_6167e26342be354b;
-#using script_7a8059ca02b7b09e;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
 #using scripts\core_common\oob.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spectating.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using script_7a8059ca02b7b09e;
+#using scripts\core_common\spectating.gsc;
+#using script_6167e26342be354b;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace dogtags;
 
@@ -67,7 +67,7 @@ function private function_bf06b7aa(victim, attacker, on_use_function)
 	{
 		trigger.var_a865c2cd = 0;
 	}
-	objectivename = (isdefined(level.var_febab1ea) ? level.var_febab1ea : #"hash_bc7bcc75f63dc7b");
+	objectivename = (isdefined(level.var_febab1ea) ? level.var_febab1ea : #"conf_dogtags");
 	dogtag = gameobjects::create_use_object(attacker.team, trigger, visuals, (0, 0, 0), objectivename);
 	trigger.dogtag = dogtag;
 	dogtag gameobjects::set_use_time(0);

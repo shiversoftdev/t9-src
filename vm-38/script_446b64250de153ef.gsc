@@ -42,9 +42,9 @@ function autoexec function_88ff61e0()
 */
 function function_45a212c0()
 {
-	var_87d0eef8 = &namespace_b0722f43::function_63bfe27;
-	var_74257310 = &namespace_b0722f43::function_6da5e673;
-	var_f8a4c541 = &namespace_b0722f43::function_6991057;
+	var_87d0eef8 = &item_world_fixup::remove_item;
+	var_74257310 = &item_world_fixup::add_item_replacement;
+	var_f8a4c541 = &item_world_fixup::function_6991057;
 	while(!isdefined(level))
 	{
 		waitframe(1);
@@ -84,15 +84,15 @@ function private function_205a8326(msg, var_9fb99f62)
 	Parameters: 1
 	Flags: Private
 */
-function private function_48b77dbf(var_3ff328e2)
+function private function_48b77dbf(customgame)
 {
 	/#
 		var_9fb99f62 = "";
-		if(!is_true(getgametypesetting(#"hash_512aec4c9e79844f")))
+		if(!is_true(getgametypesetting(#"wzenablespraycans")))
 		{
-			var_9fb99f62 = "" + (isdefined(getgametypesetting(#"hash_512aec4c9e79844f")) ? getgametypesetting(#"hash_512aec4c9e79844f") : "");
+			var_9fb99f62 = "" + (isdefined(getgametypesetting(#"wzenablespraycans")) ? getgametypesetting(#"wzenablespraycans") : "");
 		}
-		else if(var_3ff328e2)
+		else if(customgame)
 		{
 			if(gamemodeismode(1))
 			{

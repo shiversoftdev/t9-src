@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_ba33e0c1 : class_6aaccc24
+class class_ba33e0c1 : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_ba33e0c1 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_4aa46834
+		Name: set_activatorcount
 		Namespace: namespace_ba33e0c1
 		Checksum: 0xB65BE9F1
 		Offset: 0x680
@@ -52,13 +52,13 @@ class class_ba33e0c1 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_4aa46834(localclientnum, value)
+	function set_activatorcount(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "activatorCount", value);
+		[[ self ]]->set_data(localclientnum, "activatorCount", value);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_ba33e0c1
 		Checksum: 0xF04F683E
 		Offset: 0x4A8
@@ -66,9 +66,9 @@ class class_ba33e0c1 : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("EncodedRadio_UseBar");
+		cluielem::register_clientside("EncodedRadio_UseBar");
 	}
 
 	/*
@@ -82,10 +82,10 @@ class class_ba33e0c1 : class_6aaccc24
 	*/
 	function setup_clientfields(var_ec85b709, var_193163f7)
 	{
-		namespace_6aaccc24::setup_clientfields("EncodedRadio_UseBar");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 1, "int");
-		namespace_6aaccc24::function_da693cbe("progressFrac", 1, 10, "float", var_ec85b709);
-		namespace_6aaccc24::function_da693cbe("activatorCount", 1, 3, "int", var_193163f7);
+		cluielem::setup_clientfields("EncodedRadio_UseBar");
+		cluielem::add_clientfield("_state", 1, 1, "int");
+		cluielem::add_clientfield("progressFrac", 1, 10, "float", var_ec85b709);
+		cluielem::add_clientfield("activatorCount", 1, 3, "int", var_193163f7);
 	}
 
 	/*
@@ -101,13 +101,13 @@ class class_ba33e0c1 : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"hash_5fba3d476e0b33f8" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
@@ -121,7 +121,7 @@ class class_ba33e0c1 : class_6aaccc24
 	}
 
 	/*
-		Name: function_f0df5702
+		Name: set_progressfrac
 		Namespace: namespace_ba33e0c1
 		Checksum: 0x74921D4F
 		Offset: 0x648
@@ -129,9 +129,9 @@ class class_ba33e0c1 : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_f0df5702(localclientnum, value)
+	function set_progressfrac(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "progressFrac", value);
+		[[ self ]]->set_data(localclientnum, "progressFrac", value);
 	}
 
 	/*
@@ -145,10 +145,10 @@ class class_ba33e0c1 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "progressFrac", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "activatorCount", 0);
+		[[ self ]]->set_data(localclientnum, "progressFrac", 0);
+		[[ self ]]->set_data(localclientnum, "activatorCount", 0);
 	}
 
 }
@@ -166,7 +166,7 @@ class class_ba33e0c1 : class_6aaccc24
 */
 function private autoexec function_73aa7ff5()
 {
-	level notify(217624107);
+	level notify(-217624107);
 }
 
 /*
@@ -202,7 +202,7 @@ function register(var_ec85b709, var_193163f7)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: namespace_4d6a580c
 	Checksum: 0xF3BD5896
 	Offset: 0x290
@@ -210,10 +210,10 @@ function register(var_ec85b709, var_193163f7)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_ba33e0c1();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -274,7 +274,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_f0df5702
+	Name: set_progressfrac
 	Namespace: namespace_4d6a580c
 	Checksum: 0x49B4A999
 	Offset: 0x378
@@ -282,13 +282,13 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_f0df5702(localclientnum, value)
+function set_progressfrac(localclientnum, value)
 {
-	[[ self ]]->function_f0df5702(localclientnum, value);
+	[[ self ]]->set_progressfrac(localclientnum, value);
 }
 
 /*
-	Name: function_4aa46834
+	Name: set_activatorcount
 	Namespace: namespace_4d6a580c
 	Checksum: 0x2C4FBCC9
 	Offset: 0x3A8
@@ -296,8 +296,8 @@ function function_f0df5702(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_4aa46834(localclientnum, value)
+function set_activatorcount(localclientnum, value)
 {
-	[[ self ]]->function_4aa46834(localclientnum, value);
+	[[ self ]]->set_activatorcount(localclientnum, value);
 }
 

@@ -1,7 +1,7 @@
 #using scripts\core_common\bb_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 
 #namespace bb;
 
@@ -16,11 +16,11 @@
 */
 function private autoexec function_263830df()
 {
-	level notify(580674019);
+	level notify(-580674019);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: bb
 	Checksum: 0xA277CF56
 	Offset: 0xD8
@@ -28,7 +28,7 @@ function private autoexec function_263830df()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"bb", &function_70a657d8, undefined, undefined, undefined);
 }

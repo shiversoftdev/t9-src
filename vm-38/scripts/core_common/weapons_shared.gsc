@@ -1,9 +1,9 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\debug_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\debug_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace weapons_shared;
 
@@ -18,13 +18,13 @@
 */
 function private autoexec function_3f8ba640()
 {
-	level notify(1321638023);
+	level notify(-1321638023);
 }
 
 #namespace weapons;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: weapons
 	Checksum: 0x20FC735E
 	Offset: 0x190
@@ -32,7 +32,7 @@ function private autoexec function_3f8ba640()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"weapons_shared", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -209,7 +209,7 @@ function function_e870d33d()
 		{
 			continue;
 		}
-		if(!current_weapon.var_93295a64)
+		if(!current_weapon.mountable)
 		{
 			continue;
 		}
@@ -333,7 +333,7 @@ function function_e870d33d()
 				}
 			}
 			var_394fad2b = 1;
-			var_94e17956 = 0;
+			vehicle_used = 0;
 			player thread function_18a9a4e4(settings);
 			ads_fraction = player playerads();
 			var_4308b3d8 = gettime() + ((1 - ads_fraction) * current_weapon.var_e5db3b95);
@@ -362,7 +362,7 @@ function function_e870d33d()
 				vehicle show();
 				vehicle clientfield::set("enemyvehicle", 0);
 				vehicle usevehicle(player, 0);
-				var_94e17956 = 1;
+				vehicle_used = 1;
 				vehicle turretsettargetangles(0, var_a3a6eba5 - player_angles);
 				player.var_ca876b0f = 1;
 				player.var_e7e2e3e5 = 1;
@@ -389,7 +389,7 @@ function function_e870d33d()
 			}
 			vehicle delete();
 			vehicle = undefined;
-			if(var_94e17956)
+			if(vehicle_used)
 			{
 				player setorigin(exit_origin);
 			}
@@ -403,14 +403,14 @@ function function_e870d33d()
 					{
 						continue;
 					}
-					if(current_weapon.var_93295a64)
+					if(current_weapon.mountable)
 					{
 						continue;
 					}
 					break;
 				}
 			}
-			else if(var_94e17956)
+			else if(vehicle_used)
 			{
 				wait(0.4);
 			}
@@ -481,7 +481,7 @@ function function_18a9a4e4(settings)
 function function_7a677105(weapon)
 {
 	/#
-		assert(isdefined(weapon.var_4dd46f8a), "" + weapon.name);
+		assert(isdefined(weapon.customsettings), "" + weapon.name);
 	#/
 	if(!isdefined(level.var_825acea))
 	{
@@ -490,7 +490,7 @@ function function_7a677105(weapon)
 	var_f0bf9259 = hash(weapon.name);
 	if(!isdefined(level.var_825acea[var_f0bf9259]))
 	{
-		level.var_825acea[var_f0bf9259] = getscriptbundle(weapon.var_4dd46f8a);
+		level.var_825acea[var_f0bf9259] = getscriptbundle(weapon.customsettings);
 	}
 	return level.var_825acea[var_f0bf9259];
 }

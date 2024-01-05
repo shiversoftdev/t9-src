@@ -1,9 +1,9 @@
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\exploder_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\sound_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\sound_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\exploder_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace fx_shared;
 
@@ -18,13 +18,13 @@
 */
 function private autoexec function_127fc1a9()
 {
-	level notify(394462125);
+	level notify(-394462125);
 }
 
 #namespace fx;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: fx
 	Checksum: 0xB741A650
 	Offset: 0x2B0
@@ -32,7 +32,7 @@ function private autoexec function_127fc1a9()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"fx", &function_70a657d8, undefined, undefined, undefined);
 }

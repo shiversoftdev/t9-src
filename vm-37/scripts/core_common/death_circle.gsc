@@ -1,17 +1,17 @@
-#using script_47fb62300ac0bd60;
-#using script_6350c209b3d1b07d;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\match_record.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\match_record.gsc;
+#using scripts\core_common\map.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace death_circle;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: death_circle
 	Checksum: 0x38A35913
 	Offset: 0x2D0
@@ -19,7 +19,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"death_circle", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -40,11 +40,11 @@ function private function_70a657d8()
 		level.deathcircle = {};
 	}
 	level.deathcircle.enabled = currentsessionmode() != 4 && is_true(getgametypesetting(#"deathcircle"));
-	level.var_fb91af8 = [];
-	level.deathcircle.var_12be3b68 = 0;
+	level.deathcircles = [];
+	level.deathcircle.delaysec = 0;
 	level.deathcircle.collapsetime = 0;
 	level.deathcircle.players = [];
-	level.deathcircle.timescale = getdvarfloat(#"hash_384e7606945bf63", 1);
+	level.deathcircle.timescale = getdvarfloat(#"deathcircle_timescale", 1);
 	level.deathcircle.var_4b31458 = getdvarfloat(#"hash_69ae65ef32a36959", 1);
 	level.deathcircle.var_473f2707 = getdvarfloat(#"hash_263e72f970ac144d", 1);
 	if(!level.deathcircle.enabled)
@@ -57,12 +57,12 @@ function private function_70a657d8()
 	clientfield::register("allplayers", "deathcircleopacityflag", 1, 1, "counter");
 	clientfield::function_5b7d846d("hudItems.warzone.collapseTimerState", 1, 2, "int");
 	clientfield::function_5b7d846d("hudItems.warzone.collapseProgress", 1, 7, "float");
-	clientfield::function_a8bbc967("hudItems.distanceFromDeathCircle", 1, 7, "float", 0);
-	callback::function_98a0917d(&start);
+	clientfield::register_clientuimodel("hudItems.distanceFromDeathCircle", 1, 7, "float", 0);
+	callback::on_game_playing(&start);
 	/#
 		level.var_47947565 = [];
 		level.var_475c53d7 = [];
-		level thread function_5f747d5a();
+		level thread devgui_loop();
 		level thread debug_loop();
 	#/
 }
@@ -86,15 +86,15 @@ function init()
 	{
 		return;
 	}
-	if(level.var_fb91af8.size > 0)
+	if(level.deathcircles.size > 0)
 	{
 		return;
 	}
-	var_52b56362 = (isdefined(getgametypesetting(#"hash_70072ee20a43ae21")) ? getgametypesetting(#"hash_70072ee20a43ae21") : 0);
+	deathcircleindex = (isdefined(getgametypesetting(#"hash_70072ee20a43ae21")) ? getgametypesetting(#"hash_70072ee20a43ae21") : 0);
 	var_65792f8b = map::get_script_bundle();
-	if(isdefined(var_65792f8b) && isarray(var_65792f8b.var_2fd8cff3) && var_52b56362 < var_65792f8b.var_2fd8cff3.size)
+	if(isdefined(var_65792f8b) && isarray(var_65792f8b.var_2fd8cff3) && deathcircleindex < var_65792f8b.var_2fd8cff3.size)
 	{
-		var_ae6c2bbe = getscriptbundle(var_65792f8b.var_2fd8cff3[var_52b56362].var_47fd5ad2);
+		var_ae6c2bbe = getscriptbundle(var_65792f8b.var_2fd8cff3[deathcircleindex].var_47fd5ad2);
 		level function_5e412e4a(var_ae6c2bbe);
 	}
 }
@@ -122,9 +122,9 @@ function function_5e412e4a(var_ae6c2bbe)
 	level.var_6c870a00 = (isdefined(var_ae6c2bbe.var_6c870a00) ? var_ae6c2bbe.var_6c870a00 : 10);
 	level.var_ab9cd581 = (isdefined(var_ae6c2bbe.var_ab9cd581) ? var_ae6c2bbe.var_ab9cd581 : 20);
 	function_90aaa085(var_ae6c2bbe);
-	if(!level function_b36ed270())
+	if(!level shuffle_circles())
 	{
-		foreach(circle in level.var_fb91af8)
+		foreach(circle in level.deathcircles)
 		{
 			circle.origin = circle.var_3b9f4abf;
 			/#
@@ -151,7 +151,7 @@ function private function_90aaa085(var_ae6c2bbe)
 		var_b9aec05c = (isdefined(circle.var_b9aec05c) ? circle.var_b9aec05c : 0);
 		var_112f6f50 = (isdefined(circle.var_112f6f50) ? circle.var_112f6f50 : 0);
 		origin = (var_b9aec05c, var_112f6f50, 0);
-		var_7aa7cb54 = function_3e8742fe(origin, circle.var_95437170, circle.var_a3841ae2, circle.circleradius, circle.var_834d4268, circle.var_5a8689a9, circle.var_4eb77bff, circle.var_24ae2e27, circle.var_1dfb1051, circle.var_96584cff, circle.var_b97ecd26);
+		var_7aa7cb54 = add_circle(origin, circle.var_95437170, circle.var_a3841ae2, circle.circleradius, circle.circledamage, circle.var_5a8689a9, circle.circledelay, circle.var_24ae2e27, circle.var_1dfb1051, circle.var_96584cff, circle.var_b97ecd26);
 	}
 }
 
@@ -180,8 +180,8 @@ function private function_130c92ab(var_8e3c3c5b)
 		if(isdefined(var_8e3c3c5b.var_c8e8809e))
 		{
 			var_8e3c3c5b.var_3b9f4abf = var_8e3c3c5b.var_c8e8809e;
-			var_8e3c3c5b.var_66b35636 = var_8e3c3c5b.var_add6f3a8;
-			var_8e3c3c5b.var_3b4ad673 = var_8e3c3c5b.var_9b9cf80d;
+			var_8e3c3c5b.mapwidth = var_8e3c3c5b.var_add6f3a8;
+			var_8e3c3c5b.mapheight = var_8e3c3c5b.var_9b9cf80d;
 		}
 		return;
 	}
@@ -195,12 +195,12 @@ function private function_130c92ab(var_8e3c3c5b)
 	if(!isdefined(var_8e3c3c5b.var_c8e8809e))
 	{
 		var_8e3c3c5b.var_c8e8809e = var_8e3c3c5b.var_3b9f4abf;
-		var_8e3c3c5b.var_add6f3a8 = var_8e3c3c5b.var_66b35636;
-		var_8e3c3c5b.var_9b9cf80d = var_8e3c3c5b.var_3b4ad673;
+		var_8e3c3c5b.var_add6f3a8 = var_8e3c3c5b.mapwidth;
+		var_8e3c3c5b.var_9b9cf80d = var_8e3c3c5b.mapheight;
 	}
 	var_8e3c3c5b.var_3b9f4abf = var_32607106.origin;
-	var_8e3c3c5b.var_66b35636 = var_32607106.width;
-	var_8e3c3c5b.var_3b4ad673 = var_32607106.height;
+	var_8e3c3c5b.mapwidth = var_32607106.width;
+	var_8e3c3c5b.mapheight = var_32607106.height;
 }
 
 /*
@@ -318,11 +318,11 @@ function function_b980b4ca()
 */
 function get_next_origin()
 {
-	if(!isdefined(level.deathcircle.var_7aec140c))
+	if(!isdefined(level.deathcircle.nextcircle))
 	{
 		return function_b980b4ca();
 	}
-	return level.deathcircle.var_7aec140c.origin;
+	return level.deathcircle.nextcircle.origin;
 }
 
 /*
@@ -371,13 +371,13 @@ function function_8978c48a(damage, origin)
 	Parameters: 1
 	Flags: Linked
 */
-function function_d81873aa(var_12be3b68)
+function function_d81873aa(delaysec)
 {
 	/#
-		assert(var_12be3b68 >= 0, "" + "");
+		assert(delaysec >= 0, "" + "");
 	#/
-	var_12be3b68 = var_12be3b68 * level.deathcircle.var_473f2707;
-	level.deathcircle.var_12be3b68 = var_12be3b68;
+	delaysec = delaysec * level.deathcircle.var_473f2707;
+	level.deathcircle.delaysec = delaysec;
 }
 
 /*
@@ -389,13 +389,13 @@ function function_d81873aa(var_12be3b68)
 	Parameters: 1
 	Flags: Linked
 */
-function function_114f128a(var_12be3b68)
+function function_114f128a(delaysec)
 {
 	/#
-		assert(var_12be3b68 >= 0, "" + "");
+		assert(delaysec >= 0, "" + "");
 	#/
-	var_12be3b68 = var_12be3b68 * level.deathcircle.var_473f2707;
-	level.deathcircle.var_672f2d98 = var_12be3b68;
+	delaysec = delaysec * level.deathcircle.var_473f2707;
+	level.deathcircle.var_672f2d98 = delaysec;
 }
 
 /*
@@ -417,7 +417,7 @@ function function_c156630d()
 }
 
 /*
-	Name: function_3e8742fe
+	Name: add_circle
 	Namespace: death_circle
 	Checksum: 0x3BBE3C62
 	Offset: 0x11B0
@@ -425,15 +425,15 @@ function function_c156630d()
 	Parameters: 11
 	Flags: Linked
 */
-function function_3e8742fe(var_3b9f4abf, var_66b35636, var_3b4ad673, radius, damage, var_c71fc4f4, var_edd69b13, var_fdd51794, var_55ad5e4, var_c3bf31b, var_18fa918d)
+function add_circle(var_3b9f4abf, mapwidth, mapheight, radius, damage, damageinterval, waitsec, scalesec, var_55ad5e4, var_c3bf31b, var_18fa918d)
 {
-	if(!isdefined(var_66b35636))
+	if(!isdefined(mapwidth))
 	{
-		var_66b35636 = 0;
+		mapwidth = 0;
 	}
-	if(!isdefined(var_3b4ad673))
+	if(!isdefined(mapheight))
 	{
-		var_3b4ad673 = 0;
+		mapheight = 0;
 	}
 	if(!isdefined(radius))
 	{
@@ -443,17 +443,17 @@ function function_3e8742fe(var_3b9f4abf, var_66b35636, var_3b4ad673, radius, dam
 	{
 		damage = 0;
 	}
-	if(!isdefined(var_c71fc4f4))
+	if(!isdefined(damageinterval))
 	{
-		var_c71fc4f4 = 0;
+		damageinterval = 0;
 	}
-	if(!isdefined(var_edd69b13))
+	if(!isdefined(waitsec))
 	{
-		var_edd69b13 = 0;
+		waitsec = 0;
 	}
-	if(!isdefined(var_fdd51794))
+	if(!isdefined(scalesec))
 	{
-		var_fdd51794 = 0;
+		scalesec = 0;
 	}
 	if(!isdefined(var_55ad5e4))
 	{
@@ -472,15 +472,15 @@ function function_3e8742fe(var_3b9f4abf, var_66b35636, var_3b4ad673, radius, dam
 	#/
 	var_55ad5e4 = int(var_55ad5e4 * 1000);
 	var_c3bf31b = int(var_c3bf31b * 1000);
-	var_edd69b13 = var_edd69b13 * level.deathcircle.var_4b31458;
-	var_fdd51794 = var_fdd51794 * level.deathcircle.timescale;
-	circle = {#hash_18fa918d:var_18fa918d, #hash_c3bf31b:var_c3bf31b, #hash_55ad5e4:var_55ad5e4, #hash_fdd51794:var_fdd51794, #hash_edd69b13:var_edd69b13, #hash_c71fc4f4:var_c71fc4f4, #damage:damage, #radiussq:radius * radius, #radius:radius, #origin:var_3b9f4abf, #hash_3b4ad673:var_3b4ad673, #hash_66b35636:var_66b35636, #hash_3b9f4abf:var_3b9f4abf};
-	level.var_fb91af8[level.var_fb91af8.size] = circle;
+	waitsec = waitsec * level.deathcircle.var_4b31458;
+	scalesec = scalesec * level.deathcircle.timescale;
+	circle = {#hash_18fa918d:var_18fa918d, #hash_c3bf31b:var_c3bf31b, #hash_55ad5e4:var_55ad5e4, #scalesec:scalesec, #waitsec:waitsec, #damageinterval:damageinterval, #damage:damage, #radiussq:radius * radius, #radius:radius, #origin:var_3b9f4abf, #mapheight:mapheight, #mapwidth:mapwidth, #hash_3b9f4abf:var_3b9f4abf};
+	level.deathcircles[level.deathcircles.size] = circle;
 	return circle;
 }
 
 /*
-	Name: function_b36ed270
+	Name: shuffle_circles
 	Namespace: death_circle
 	Checksum: 0xF121457C
 	Offset: 0x1470
@@ -488,15 +488,15 @@ function function_3e8742fe(var_3b9f4abf, var_66b35636, var_3b4ad673, radius, dam
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_b36ed270()
+function private shuffle_circles()
 {
-	var_b0b91d4 = level.var_fb91af8[0];
+	var_b0b91d4 = level.deathcircles[0];
 	if(!isdefined(var_b0b91d4))
 	{
 		return false;
 	}
-	finalindex = level.var_fb91af8.size - 1;
-	var_8e3c3c5b = level.var_fb91af8[finalindex];
+	finalindex = level.deathcircles.size - 1;
+	var_8e3c3c5b = level.deathcircles[finalindex];
 	attempts = 0;
 	while(attempts < 20)
 	{
@@ -594,9 +594,9 @@ function private function_a0004b40(var_b0b91d4, finalindex)
 {
 	for(i = finalindex - 1; i > 0; i--)
 	{
-		circle = level.var_fb91af8[i];
-		var_7aec140c = level.var_fb91af8[i + 1];
-		if(!function_a84cfbd0(var_b0b91d4, circle, var_7aec140c))
+		circle = level.deathcircles[i];
+		nextcircle = level.deathcircles[i + 1];
+		if(!function_a84cfbd0(var_b0b91d4, circle, nextcircle))
 		{
 			return false;
 		}
@@ -613,27 +613,27 @@ function private function_a0004b40(var_b0b91d4, finalindex)
 	Parameters: 3
 	Flags: Linked, Private
 */
-function private function_a84cfbd0(var_b0b91d4, circle, var_7aec140c)
+function private function_a84cfbd0(var_b0b91d4, circle, nextcircle)
 {
 	var_f811e54e = var_b0b91d4.radius - circle.radius;
 	sqinterfaceattributes = var_f811e54e * var_f811e54e;
-	var_897ef629 = circle.radius - var_7aec140c.radius;
+	var_897ef629 = circle.radius - nextcircle.radius;
 	var_eccfdb0 = var_897ef629 * var_897ef629;
-	var_3904bb72 = circle.radius * 0.01;
-	var_e3cedc58 = var_3904bb72 * var_3904bb72;
+	pplate_pplatede = circle.radius * 0.01;
+	var_e3cedc58 = pplate_pplatede * pplate_pplatede;
 	circle.attempts = 0;
 	if(circle.attempts < 10)
 	{
 		for(;;)
 		{
 			circle.attempts++;
-			x = var_7aec140c.origin[0] + (randomfloatrange(var_897ef629 * -1, var_897ef629));
-			halfwidth = circle.var_66b35636 / 2;
+			x = nextcircle.origin[0] + (randomfloatrange(var_897ef629 * -1, var_897ef629));
+			halfwidth = circle.mapwidth / 2;
 		}
 		for(;;)
 		{
-			y = var_7aec140c.origin[1] + (randomfloatrange(var_897ef629 * -1, var_897ef629));
-			halfheight = circle.var_3b4ad673 / 2;
+			y = nextcircle.origin[1] + (randomfloatrange(var_897ef629 * -1, var_897ef629));
+			halfheight = circle.mapheight / 2;
 		}
 		for(;;)
 		{
@@ -642,18 +642,18 @@ function private function_a84cfbd0(var_b0b91d4, circle, var_7aec140c)
 		}
 		for(;;)
 		{
-			var_6eb6c7b5 = distance2dsquared(var_7aec140c.origin, origin);
+			var_6eb6c7b5 = distance2dsquared(nextcircle.origin, origin);
 		}
 		for(;;)
 		{
 		}
-		if(circle.var_66b35636 > 0)
+		if(circle.mapwidth > 0)
 		{
 			if(x < (circle.var_3b9f4abf[0] - halfwidth) || x > (circle.var_3b9f4abf[0] + halfwidth))
 			{
 			}
 		}
-		if(circle.var_3b4ad673 > 0)
+		if(circle.mapheight > 0)
 		{
 			if(y < (circle.var_3b9f4abf[1] - halfheight) || y > (circle.var_3b9f4abf[1] + halfheight))
 			{
@@ -691,14 +691,14 @@ function private function_3e47f08b(circle)
 {
 	xoffset = 0;
 	yoffset = 0;
-	if(circle.var_66b35636 > 0)
+	if(circle.mapwidth > 0)
 	{
-		halfwidth = circle.var_66b35636 / 2;
+		halfwidth = circle.mapwidth / 2;
 		xoffset = randomfloatrange(halfwidth * -1, halfwidth);
 	}
-	if(circle.var_3b4ad673 > 0)
+	if(circle.mapheight > 0)
 	{
-		halfheight = circle.var_3b4ad673 / 2;
+		halfheight = circle.mapheight / 2;
 		yoffset = randomfloatrange(halfheight * -1, halfheight);
 	}
 	origin = (circle.var_3b9f4abf[0] + xoffset, circle.var_3b9f4abf[1] + yoffset, circle.var_3b9f4abf[2]);
@@ -853,8 +853,8 @@ function private function_a1dbce4a()
 */
 function start()
 {
-	level endoncallback(&function_cc0398cd, #"game_ended", #"hash_12a8f2c59a67e4fc");
-	if(!level.deathcircle.enabled || level.var_fb91af8.size <= 0)
+	level endoncallback(&cleanup_circle, #"game_ended", #"hash_12a8f2c59a67e4fc");
+	if(!level.deathcircle.enabled || level.deathcircles.size <= 0)
 	{
 		return;
 	}
@@ -862,51 +862,51 @@ function start()
 		function_ded40950();
 	#/
 	startindex = getdvarint(#"hash_38c802382b915fe6", 0);
-	var_7a6bf18a = level.var_fb91af8[startindex];
-	var_12be3b68 = (startindex > 0 ? 0 : level.deathcircle.var_12be3b68);
+	var_7a6bf18a = level.deathcircles[startindex];
+	delaysec = (startindex > 0 ? 0 : level.deathcircle.delaysec);
 	if(level.var_f2814a96 === 0)
 	{
-		level flag::wait_till(#"hash_5a3e17fbc33cdc86");
+		level flag::wait_till(#"insertion_teleport_completed");
 	}
-	level.deathcircle.collapsetime = gettime() + (int((var_7a6bf18a.var_edd69b13 + var_12be3b68) * 1000));
+	level.deathcircle.collapsetime = gettime() + (int((var_7a6bf18a.waitsec + delaysec) * 1000));
 	level clientfield::set_world_uimodel("hudItems.warzone.collapse", level.deathcircle.collapsetime);
-	wait(var_12be3b68);
-	level.deathcircle.var_5c54ab33 = function_a8749d88(var_7a6bf18a.origin, var_7a6bf18a.radius, var_7a6bf18a.damage, var_7a6bf18a.var_c71fc4f4, var_7a6bf18a.var_18fa918d, var_7a6bf18a.var_55ad5e4, var_7a6bf18a.var_c3bf31b);
+	wait(delaysec);
+	level.deathcircle.var_5c54ab33 = function_a8749d88(var_7a6bf18a.origin, var_7a6bf18a.radius, var_7a6bf18a.damage, var_7a6bf18a.damageinterval, var_7a6bf18a.var_18fa918d, var_7a6bf18a.var_55ad5e4, var_7a6bf18a.var_c3bf31b);
 	level thread function_dc15ad60(level.deathcircle.var_5c54ab33);
 	circle = undefined;
 	var_9275bfa4 = undefined;
 	level flag::set(#"hash_405e46788e83af41");
 	level callback::callback(#"hash_405e46788e83af41");
-	level.var_74887eb = level.var_fb91af8.size - 1;
-	if(util::function_5df4294() == #"hash_753fcf1725358921")
+	level.var_74887eb = level.deathcircles.size - 1;
+	if(util::get_game_type() == #"warzone_bigteam_dbno_quad")
 	{
-		level.var_74887eb = level.var_fb91af8.size - 3;
+		level.var_74887eb = level.deathcircles.size - 3;
 	}
 	level.var_245d4af9 = level.var_74887eb - 1;
 	level clientfield::set_world_uimodel("hudItems.warzone.collapseCount", level.var_74887eb);
 	level.var_78442886 = -1;
-	for(i = startindex; i < level.var_fb91af8.size; i++)
+	for(i = startindex; i < level.deathcircles.size; i++)
 	{
-		if((i + 1) == level.var_fb91af8.size)
+		if((i + 1) == level.deathcircles.size)
 		{
 			level callback::callback(#"hash_7119d854cd41a4fd");
 		}
-		level.var_52b56362 = i;
+		level.deathcircleindex = i;
 		level clientfield::set_world_uimodel("hudItems.warzone.collapseIndex", i);
-		circle = level.var_fb91af8[i];
-		var_7aec140c = level.var_fb91af8[i + 1];
+		circle = level.deathcircles[i];
+		nextcircle = level.deathcircles[i + 1];
 		level.deathcircle.var_46fc3d6e = circle;
-		level.deathcircle.var_7aec140c = var_7aec140c;
-		if(isdefined(var_7aec140c))
+		level.deathcircle.nextcircle = nextcircle;
+		if(isdefined(nextcircle))
 		{
 			level notify(#"hash_1ff3496c9049969");
-			var_7791d394 = var_7aec140c;
+			var_7791d394 = nextcircle;
 			if(is_true(getgametypesetting(#"hash_21ab1ca7e18bddcd")))
 			{
 				var_87f4757a = (isdefined(getgametypesetting(#"hash_3e62d9528eca0a13")) ? getgametypesetting(#"hash_3e62d9528eca0a13") : 0);
-				if(1 && level.var_fb91af8.size > var_87f4757a && (i + 1) < var_87f4757a)
+				if(1 && level.deathcircles.size > var_87f4757a && (i + 1) < var_87f4757a)
 				{
-					var_7791d394 = level.var_fb91af8[var_87f4757a];
+					var_7791d394 = level.deathcircles[var_87f4757a];
 				}
 			}
 			if(isdefined(level.var_bd19c3a8))
@@ -932,30 +932,30 @@ function start()
 		{
 			var_9275bfa4 delete();
 		}
-		if(!isdefined(var_7aec140c) && is_true(level.deathcircle.var_cb3d0e42))
+		if(!isdefined(nextcircle) && is_true(level.deathcircle.var_cb3d0e42))
 		{
 			break;
 		}
-		if(circle.var_edd69b13 > 0)
+		if(circle.waitsec > 0)
 		{
 			setmatchflag("bomb_timer_a", 1);
-			setbombtimer("A", (gettime() + 1000) + (int(circle.var_edd69b13 * 1000)));
+			setbombtimer("A", (gettime() + 1000) + (int(circle.waitsec * 1000)));
 			level clientfield::set_world_uimodel("hudItems.warzone.collapseProgress", 0);
 			waitframe(1);
 			function_55bf22ef();
 		}
-		level countdown(circle.var_edd69b13, i, var_7aec140c);
+		level countdown(circle.waitsec, i, nextcircle);
 		setmatchflag("bomb_timer_a", 0);
 		level clientfield::set_world_uimodel("hudItems.warzone.collapseTimerState", 2);
 		level.deathcircle.var_5c54ab33.damage = circle.damage;
-		level.deathcircle.var_5c54ab33.var_c71fc4f4 = circle.var_c71fc4f4;
+		level.deathcircle.var_5c54ab33.damageinterval = circle.damageinterval;
 		level.deathcircle.var_5c54ab33.var_18fa918d = circle.var_18fa918d;
 		level.deathcircle.var_5c54ab33.var_55ad5e4 = circle.var_55ad5e4;
 		level.deathcircle.var_5c54ab33.var_c3bf31b = circle.var_c3bf31b;
-		if(isdefined(var_7aec140c))
+		if(isdefined(nextcircle))
 		{
 			level clientfield::set_world_uimodel("hudItems.warzone.collapseProgress", 0);
-			level thread function_ccac34f8(1, gettime() + (int((circle.var_fdd51794 + var_7aec140c.var_edd69b13) * 1000)));
+			level thread function_ccac34f8(1, gettime() + (int((circle.scalesec + nextcircle.waitsec) * 1000)));
 		}
 		else
 		{
@@ -963,13 +963,13 @@ function start()
 		}
 		level.var_78442886 = i;
 		level callback::callback(#"hash_3057417db7f8acdd");
-		if(isdefined(var_7aec140c))
+		if(isdefined(nextcircle))
 		{
-			function_9229c3b3(level.deathcircle.var_5c54ab33, var_7aec140c.radius, var_7aec140c.origin, circle.var_fdd51794);
+			function_9229c3b3(level.deathcircle.var_5c54ab33, nextcircle.radius, nextcircle.origin, circle.scalesec);
 		}
 		else
 		{
-			function_9229c3b3(level.deathcircle.var_5c54ab33, 0, circle.origin, circle.var_fdd51794);
+			function_9229c3b3(level.deathcircle.var_5c54ab33, 0, circle.origin, circle.scalesec);
 		}
 		level clientfield::set_world_uimodel("hudItems.warzone.collapseTimerState", 0);
 		level callback::callback(#"hash_7912e21750e4010d");
@@ -1003,7 +1003,7 @@ function start()
 	Parameters: 7
 	Flags: Linked
 */
-function function_a8749d88(origin, radius, damage, var_c71fc4f4, var_18fa918d, var_55ad5e4, var_c3bf31b)
+function function_a8749d88(origin, radius, damage, damageinterval, var_18fa918d, var_55ad5e4, var_c3bf31b)
 {
 	if(!isdefined(var_18fa918d))
 	{
@@ -1023,7 +1023,7 @@ function function_a8749d88(origin, radius, damage, var_c71fc4f4, var_18fa918d, v
 	function_55ffaf7(deathcircle, radius);
 	deathcircle clientfield::set("deathcircleflag", 1);
 	deathcircle.damage = damage;
-	deathcircle.var_c71fc4f4 = var_c71fc4f4;
+	deathcircle.damageinterval = damageinterval;
 	deathcircle.var_18fa918d = var_18fa918d;
 	deathcircle.var_55ad5e4 = var_55ad5e4;
 	deathcircle.var_c3bf31b = var_c3bf31b;
@@ -1041,13 +1041,13 @@ function function_a8749d88(origin, radius, damage, var_c71fc4f4, var_18fa918d, v
 */
 function function_bfdaeb3a(origin, radius)
 {
-	var_7aec140c = spawn("script_model", origin);
-	var_7aec140c.targetname = "next_death_circle";
-	var_7aec140c setmodel("tag_origin");
-	function_55ffaf7(var_7aec140c, radius);
-	var_7aec140c.team = #"neutral";
-	var_7aec140c clientfield::set("deathcircleflag", 1);
-	return var_7aec140c;
+	nextcircle = spawn("script_model", origin);
+	nextcircle.targetname = "next_death_circle";
+	nextcircle setmodel("tag_origin");
+	function_55ffaf7(nextcircle, radius);
+	nextcircle.team = #"neutral";
+	nextcircle clientfield::set("deathcircleflag", 1);
+	return nextcircle;
 }
 
 /*
@@ -1095,7 +1095,7 @@ function function_190ab063(v_origin, n_radius, var_c3b8a25)
 	n_old_radius = level.deathcircle.radius;
 	if(!is_true(level.deathcircle.scaling))
 	{
-		var_e9f455c0 = level.var_fb91af8[level.var_52b56362].var_edd69b13;
+		var_e9f455c0 = level.deathcircles[level.deathcircleindex].waitsec;
 		setmatchflag("bomb_timer_a", 0);
 	}
 	level.deathcircle.origin = v_origin;
@@ -1159,7 +1159,7 @@ function function_d61ba114(var_9c038d31)
 	}
 	if(!is_true(level.deathcircle.var_5c54ab33.scaling))
 	{
-		var_4863283f = level.var_fb91af8[level.var_52b56362].var_edd69b13;
+		var_4863283f = level.deathcircles[level.deathcircleindex].waitsec;
 	}
 	level flag::clear(#"hash_18141f1491e42a85");
 	if(isdefined(var_4863283f) && var_9c038d31)
@@ -1177,7 +1177,7 @@ function function_d61ba114(var_9c038d31)
 }
 
 /*
-	Name: function_cc0398cd
+	Name: cleanup_circle
 	Namespace: death_circle
 	Checksum: 0x46DCCC5E
 	Offset: 0x32E0
@@ -1185,7 +1185,7 @@ function function_d61ba114(var_9c038d31)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_cc0398cd(notifyhash)
+function private cleanup_circle(notifyhash)
 {
 	level clientfield::set_world_uimodel("hudItems.warzone.collapseTimerState", 0);
 }
@@ -1199,10 +1199,10 @@ function private function_cc0398cd(notifyhash)
 	Parameters: 3
 	Flags: Linked, Private
 */
-function private countdown(var_edd69b13, circleindex, var_7aec140c)
+function private countdown(waitsec, circleindex, nextcircle)
 {
 	level endon(#"hash_3a3e3a27bf34fa8a");
-	if(!isdefined(var_7aec140c))
+	if(!isdefined(nextcircle))
 	{
 		callback::callback(#"hash_3ab90c4405f67276");
 	}
@@ -1219,19 +1219,19 @@ function private countdown(var_edd69b13, circleindex, var_7aec140c)
 	}
 	if(getdvarstring(#"g_gametype") === "survival" || getdvarstring(#"g_gametype") === "zsurvival")
 	{
-		function_2b2fc512(var_edd69b13, 15);
+		function_2b2fc512(waitsec, 15);
 	}
 	else
 	{
-		if(var_edd69b13 > 15 && var_edd69b13 >= 45)
+		if(waitsec > 15 && waitsec >= 45)
 		{
-			wait(var_edd69b13 - 15);
+			wait(waitsec - 15);
 			callback::callback(#"hash_3cadee0b88ef66a2");
 			wait(15);
 		}
 		else
 		{
-			wait(var_edd69b13);
+			wait(waitsec);
 		}
 	}
 	callback::callback(#"hash_166e273d927bf6a3");
@@ -1247,12 +1247,12 @@ function private countdown(var_edd69b13, circleindex, var_7aec140c)
 	Parameters: 2
 	Flags: Linked
 */
-function function_2b2fc512(var_edd69b13, var_b96c8a8f)
+function function_2b2fc512(waitsec, var_b96c8a8f)
 {
-	if(var_edd69b13 > var_b96c8a8f && var_edd69b13 >= 45)
+	if(waitsec > var_b96c8a8f && waitsec >= 45)
 	{
 		n_time = 0;
-		while(n_time < var_edd69b13 - var_b96c8a8f)
+		while(n_time < waitsec - var_b96c8a8f)
 		{
 			wait(1);
 			n_time++;
@@ -1270,7 +1270,7 @@ function function_2b2fc512(var_edd69b13, var_b96c8a8f)
 	else
 	{
 		n_time = 0;
-		while(n_time < var_edd69b13)
+		while(n_time < waitsec)
 		{
 			wait(1);
 			n_time++;
@@ -1288,28 +1288,28 @@ function function_2b2fc512(var_edd69b13, var_b96c8a8f)
 	Parameters: 4
 	Flags: Linked
 */
-function function_9229c3b3(circle, var_85ba7700, neworigin, var_fdd51794)
+function function_9229c3b3(circle, newradius, neworigin, scalesec)
 {
-	if(!isdefined(var_fdd51794))
+	if(!isdefined(scalesec))
 	{
-		var_fdd51794 = 0;
+		scalesec = 0;
 	}
 	level endon(#"game_ended", #"hash_12a8f2c59a67e4fc", #"hash_6adadb0779eac3c6");
 	circle endon(#"hash_62db096da271699d");
-	if(var_fdd51794 <= 0)
+	if(scalesec <= 0)
 	{
-		function_55ffaf7(circle, var_85ba7700);
+		function_55ffaf7(circle, newradius);
 		circle.origin = neworigin;
 		return;
 	}
 	circle.scaling = 1;
 	time = gettime();
-	endtime = time + (int(var_fdd51794 * 1000));
+	endtime = time + (int(scalesec * 1000));
 	level clientfield::set_world_uimodel("hudItems.warzone.collapseProgress", 0);
-	circle moveto(neworigin, var_fdd51794);
-	var_76c954d6 = var_85ba7700 - circle.radius;
-	frames = var_fdd51794 / (float(function_60d95f53()) / 1000);
-	var_cbc2cea3 = var_76c954d6 / frames;
+	circle moveto(neworigin, scalesec);
+	var_76c954d6 = newradius - circle.radius;
+	frames = scalesec / (float(function_60d95f53()) / 1000);
+	framedelta = var_76c954d6 / frames;
 	progress = 0;
 	var_6e09d4b7 = 1 / frames;
 	while(time < endtime)
@@ -1322,7 +1322,7 @@ function function_9229c3b3(circle, var_85ba7700, neworigin, var_fdd51794)
 			endtime = endtime + (var_9bd64c7b - pausetime);
 			circle moveto(neworigin, (float(endtime - var_9bd64c7b)) / 1000);
 		}
-		function_55ffaf7(circle, circle.radius + var_cbc2cea3);
+		function_55ffaf7(circle, circle.radius + framedelta);
 		if(circle.radius <= 0)
 		{
 			break;
@@ -1414,8 +1414,8 @@ function function_a086017a(point)
 */
 function function_dc15ad60(deathcircle)
 {
-	level endoncallback(&function_a9d55ec2, #"game_ended", #"hash_12a8f2c59a67e4fc");
-	var_f4d9a132 = gettime() + (int(deathcircle.var_c71fc4f4 * 1000));
+	level endoncallback(&cleanup_feedback, #"game_ended", #"hash_12a8f2c59a67e4fc");
+	var_f4d9a132 = gettime() + (int(deathcircle.damageinterval * 1000));
 	var_1a1c0d86 = 0;
 	while(isdefined(deathcircle))
 	{
@@ -1434,7 +1434,7 @@ function function_dc15ad60(deathcircle)
 			{
 				player function_60d14da8(0);
 				player clientfield::set("outsidedeathcircle", 0);
-				player function_8c7edff5();
+				player hide_effects();
 				player function_ce0f27e0();
 				continue;
 			}
@@ -1464,20 +1464,20 @@ function function_dc15ad60(deathcircle)
 					player.var_6cd69660 = player.var_6cd69660 + deathcircle.var_18fa918d;
 					player.var_b8328141 = time + deathcircle.var_c3bf31b;
 				}
-				player.var_d2bc9ac0 = damage + player.var_6cd69660;
+				player.deathcircledamage = damage + player.var_6cd69660;
 				if(isdefined(level.deathcircle.var_5c54ab33.intensity))
 				{
 					intensity = level.deathcircle.var_5c54ab33.intensity;
 				}
 				else
 				{
-					if(isdefined(level.var_ab9cd581) && player.var_d2bc9ac0 >= level.var_ab9cd581)
+					if(isdefined(level.var_ab9cd581) && player.deathcircledamage >= level.var_ab9cd581)
 					{
 						intensity = 3;
 					}
 					else
 					{
-						if(isdefined(level.var_6c870a00) && player.var_d2bc9ac0 >= level.var_6c870a00)
+						if(isdefined(level.var_6c870a00) && player.deathcircledamage >= level.var_6c870a00)
 						{
 							intensity = 2;
 						}
@@ -1489,12 +1489,12 @@ function function_dc15ad60(deathcircle)
 				}
 				player function_60d14da8(1);
 				player clientfield::set("outsidedeathcircle", 1);
-				player function_3ac75bd8(intensity);
+				player show_effects(intensity);
 				player function_8bd303cc();
 				if(dodamage)
 				{
-					damage = player.var_d2bc9ac0;
-					if(player hasperk(#"hash_559086ccb08f32ba"))
+					damage = player.deathcircledamage;
+					if(player hasperk(#"specialty_outlander"))
 					{
 						damage = int(ceil(damage * 0.5));
 					}
@@ -1506,14 +1506,14 @@ function function_dc15ad60(deathcircle)
 			}
 			player function_60d14da8(0);
 			player clientfield::set("outsidedeathcircle", 0);
-			player function_8c7edff5();
+			player hide_effects();
 			player function_ce0f27e0();
 			player.var_6cd69660 = 0;
 			player.var_b8328141 = time + deathcircle.var_55ad5e4;
 		}
 		if(dodamage)
 		{
-			var_f4d9a132 = gettime() + (int(deathcircle.var_c71fc4f4 * 1000));
+			var_f4d9a132 = gettime() + (int(deathcircle.damageinterval * 1000));
 		}
 		var_1a1c0d86 = (var_1a1c0d86 + 1) % 5;
 		waitframe(1);
@@ -1521,7 +1521,7 @@ function function_dc15ad60(deathcircle)
 }
 
 /*
-	Name: function_a9d55ec2
+	Name: cleanup_feedback
 	Namespace: death_circle
 	Checksum: 0x38B22711
 	Offset: 0x4230
@@ -1529,12 +1529,12 @@ function function_dc15ad60(deathcircle)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_a9d55ec2(notifyhash)
+function private cleanup_feedback(notifyhash)
 {
 	foreach(player in getplayers())
 	{
 		player function_60d14da8(0);
-		player function_8c7edff5();
+		player hide_effects();
 	}
 }
 
@@ -1550,13 +1550,13 @@ function private function_a9d55ec2(notifyhash)
 function function_ba02cfb5()
 {
 	var_46fc3d6e = level.deathcircle.var_46fc3d6e;
-	var_7aec140c = level.deathcircle.var_7aec140c;
-	if(!(isdefined(var_46fc3d6e) && isdefined(var_7aec140c)))
+	nextcircle = level.deathcircle.nextcircle;
+	if(!(isdefined(var_46fc3d6e) && isdefined(nextcircle)))
 	{
 		return;
 	}
 	playerorigin = self function_664f77db();
-	if(isdefined(var_7aec140c) && distance2dsquared(playerorigin, var_7aec140c.origin) <= var_7aec140c.radiussq)
+	if(isdefined(nextcircle) && distance2dsquared(playerorigin, nextcircle.origin) <= nextcircle.radiussq)
 	{
 		self clientfield::set_player_uimodel("hudItems.distanceFromDeathCircle", 1);
 		return;
@@ -1566,27 +1566,27 @@ function function_ba02cfb5()
 		self clientfield::set_player_uimodel("hudItems.distanceFromDeathCircle", 0);
 		return;
 	}
-	nextcenter = (isdefined(var_7aec140c) ? var_7aec140c.origin : var_46fc3d6e.origin);
+	nextcenter = (isdefined(nextcircle) ? nextcircle.origin : var_46fc3d6e.origin);
 	dir = vectornormalize(playerorigin - nextcenter);
 	nextpoint = nextcenter;
-	if(isdefined(var_7aec140c))
+	if(isdefined(nextcircle))
 	{
-		nextpoint = nextcenter + (dir * var_7aec140c.radius);
+		nextpoint = nextcenter + (dir * nextcircle.radius);
 	}
 	prevpoint = function_936b3f09(nextcenter, dir, var_46fc3d6e);
 	totaldist = distance2d(prevpoint, nextpoint);
 	playerdist = distance2d(prevpoint, playerorigin);
 	self clientfield::set_player_uimodel("hudItems.distanceFromDeathCircle", playerdist / totaldist);
 	/#
-		if(self ishost() && getdvarint(#"hash_938f5c3c3f6a4dd", 0))
+		if(self ishost() && getdvarint(#"deathcircle_debug", 0))
 		{
 			radius = 150;
 			sphere(nextpoint, radius, (0, 1, 0), 1, 0, 10, 5);
 			line(playerorigin, nextpoint, (0, 1, 0), 1, 0, 5);
 			sphere(prevpoint, radius, (1, 0, 0), 1, 0, 10, 5);
 			line(playerorigin, prevpoint, (1, 0, 0), 1, 0, 5);
-			var_735d5b58 = function_936b3f09(nextcenter, dir, level.deathcircle.var_5c54ab33);
-			sphere(var_735d5b58, 125, (1, 0, 1), 1, 0, 10, 5);
+			deathpoint = function_936b3f09(nextcenter, dir, level.deathcircle.var_5c54ab33);
+			sphere(deathpoint, 125, (1, 0, 1), 1, 0, 10, 5);
 		}
 	#/
 }
@@ -1635,13 +1635,13 @@ function function_936b3f09(p, d, circle)
 	m = p - circle.origin;
 	b = vectordot(m, d);
 	c = vectordot(m, m) - (circle.radius * circle.radius);
-	var_f43bd65b = (b * b) - c;
-	t = (b * -1) + sqrt(var_f43bd65b);
+	discr = (b * b) - c;
+	t = (b * -1) + sqrt(discr);
 	return p + (t * d);
 }
 
 /*
-	Name: function_3ac75bd8
+	Name: show_effects
 	Namespace: death_circle
 	Checksum: 0x1D33317F
 	Offset: 0x4848
@@ -1649,13 +1649,13 @@ function function_936b3f09(p, d, circle)
 	Parameters: 1
 	Flags: Linked
 */
-function function_3ac75bd8(intensity)
+function show_effects(intensity)
 {
 	self clientfield::set_to_player("deathcircleeffects", intensity);
 }
 
 /*
-	Name: function_8c7edff5
+	Name: hide_effects
 	Namespace: death_circle
 	Checksum: 0xC1D3B594
 	Offset: 0x4880
@@ -1663,7 +1663,7 @@ function function_3ac75bd8(intensity)
 	Parameters: 0
 	Flags: Linked
 */
-function function_8c7edff5()
+function hide_effects()
 {
 	self clientfield::set_to_player("deathcircleeffects", 0);
 }
@@ -1683,28 +1683,28 @@ function function_27d5d349()
 	{
 		return;
 	}
-	for(i = 0; i < level.var_fb91af8.size; i++)
+	for(i = 0; i < level.deathcircles.size; i++)
 	{
 		/#
 			assert(i < 14, "");
 		#/
-		circle = level.var_fb91af8[i];
+		circle = level.deathcircles[i];
 		match_record::function_7a93acec(#"death_circle", i, #"origin", circle.origin);
 		match_record::set_stat(#"death_circle", i, #"radius", int(circle.radius));
 		match_record::set_stat(#"death_circle", i, #"damage", int(circle.damage));
-		match_record::set_stat(#"death_circle", i, #"damage_interval", circle.var_c71fc4f4);
-		match_record::set_stat(#"death_circle", i, #"hash_253edb095a1521ea", circle.var_edd69b13);
-		match_record::set_stat(#"death_circle", i, #"hash_69da5ce7650a101b", circle.var_fdd51794);
+		match_record::set_stat(#"death_circle", i, #"damage_interval", circle.damageinterval);
+		match_record::set_stat(#"death_circle", i, #"wait_sec", circle.waitsec);
+		match_record::set_stat(#"death_circle", i, #"scale_sec", circle.scalesec);
 		match_record::set_stat(#"death_circle", i, #"final", 0);
-		if(i == level.var_52b56362)
+		if(i == level.deathcircleindex)
 		{
 			i++;
 			match_record::function_7a93acec(#"death_circle", i, #"origin", level.deathcircle.var_5c54ab33.origin);
 			match_record::set_stat(#"death_circle", i, #"radius", level.deathcircle.var_5c54ab33.radius);
 			match_record::set_stat(#"death_circle", i, #"damage", level.deathcircle.var_5c54ab33.damage);
-			match_record::set_stat(#"death_circle", i, #"damage_interval", level.deathcircle.var_5c54ab33.var_c71fc4f4);
-			match_record::set_stat(#"death_circle", i, #"hash_253edb095a1521ea", circle.var_edd69b13);
-			match_record::set_stat(#"death_circle", i, #"hash_69da5ce7650a101b", circle.var_fdd51794);
+			match_record::set_stat(#"death_circle", i, #"damage_interval", level.deathcircle.var_5c54ab33.damageinterval);
+			match_record::set_stat(#"death_circle", i, #"wait_sec", circle.waitsec);
+			match_record::set_stat(#"death_circle", i, #"scale_sec", circle.scalesec);
 			match_record::set_stat(#"death_circle", i, #"final", 1);
 			break;
 		}
@@ -1723,9 +1723,9 @@ function function_27d5d349()
 function function_49443399()
 {
 	time = 0;
-	for(i = 0; i < level.var_fb91af8.size - 1; i++)
+	for(i = 0; i < level.deathcircles.size - 1; i++)
 	{
-		time = time + (level.var_fb91af8[i].var_fdd51794 + level.var_fb91af8[i].var_edd69b13);
+		time = time + (level.deathcircles[i].scalesec + level.deathcircles[i].waitsec);
 	}
 	return time;
 }
@@ -1741,7 +1741,7 @@ function function_49443399()
 */
 function function_9956f107()
 {
-	if(!is_active() || isdefined(level.deathcircle.var_7aec140c))
+	if(!is_active() || isdefined(level.deathcircle.nextcircle))
 	{
 		return false;
 	}
@@ -1759,14 +1759,14 @@ function function_9956f107()
 */
 function function_d66a3de1()
 {
-	if(is_true(level.spawnsystem.var_f220c297))
+	if(is_true(level.spawnsystem.deathcirclerespawn))
 	{
-		var_3db6ed91 = level.var_fb91af8.size - 2;
+		var_3db6ed91 = level.deathcircles.size - 2;
 		if(var_3db6ed91 < 0)
 		{
 			var_3db6ed91 = 0;
 		}
-		if(is_true(level.spawnsystem.var_f220c297) && (isdefined(level.var_78442886) ? level.var_78442886 : 0) >= var_3db6ed91)
+		if(is_true(level.spawnsystem.deathcirclerespawn) && (isdefined(level.var_78442886) ? level.var_78442886 : 0) >= var_3db6ed91)
 		{
 			return false;
 		}
@@ -1790,7 +1790,7 @@ function function_d66a3de1()
 */
 function function_4dc40125()
 {
-	if(is_true(level.spawnsystem.var_f220c297) && function_9956f107())
+	if(is_true(level.spawnsystem.deathcirclerespawn) && function_9956f107())
 	{
 		return function_b1565133() || level.deathcircle.var_5c54ab33.radius <= 0;
 	}
@@ -1798,7 +1798,7 @@ function function_4dc40125()
 }
 
 /*
-	Name: function_5f747d5a
+	Name: devgui_loop
 	Namespace: death_circle
 	Checksum: 0xB383144A
 	Offset: 0x4F18
@@ -1806,7 +1806,7 @@ function function_4dc40125()
 	Parameters: 0
 	Flags: Private
 */
-function private function_5f747d5a()
+function private devgui_loop()
 {
 	/#
 		level endon(#"game_ended");
@@ -1821,7 +1821,7 @@ function private function_5f747d5a()
 		adddebugcommand("");
 		adddebugcommand("" + 150000);
 		adddebugcommand("");
-		if(getdvarint(#"hash_6706b0bc8458c9f7", 0) > 0)
+		if(getdvarint(#"testcircleradius", 0) > 0)
 		{
 			adddebugcommand("");
 			adddebugcommand("");
@@ -1842,23 +1842,23 @@ function private function_5f747d5a()
 		while(true)
 		{
 			wait(0.25);
-			dvarstr = getdvarstring(#"hash_2ffb520615032eca", "");
+			dvarstr = getdvarstring(#"devgui_deathcircle", "");
 			if(dvarstr == "")
 			{
 				continue;
 			}
-			setdvar(#"hash_2ffb520615032eca", "");
+			setdvar(#"devgui_deathcircle", "");
 			args = strtok(dvarstr, "");
 			switch(args[0])
 			{
 				case "clear":
 				{
-					function_75ae968e();
+					devgui_clear();
 					break;
 				}
 				case "shuffle":
 				{
-					level thread function_4c517813(args[1]);
+					level thread devgui_shuffle(args[1]);
 					break;
 				}
 				case "hash_5d7130ece48ceb02":
@@ -1872,7 +1872,7 @@ function private function_5f747d5a()
 }
 
 /*
-	Name: function_75ae968e
+	Name: devgui_clear
 	Namespace: death_circle
 	Checksum: 0xC30A7223
 	Offset: 0x5358
@@ -1880,7 +1880,7 @@ function private function_5f747d5a()
 	Parameters: 0
 	Flags: Private
 */
-function private function_75ae968e()
+function private devgui_clear()
 {
 	/#
 		level notify(#"hash_12a8f2c59a67e4fc");
@@ -1912,14 +1912,14 @@ function private debug_loop()
 				waitframe(1);
 				continue;
 			}
-			if(getdvarint(#"hash_938f5c3c3f6a4dd", 0))
+			if(getdvarint(#"deathcircle_debug", 0))
 			{
 				var_9f6ad7bb = getdvarint(#"hash_31a5138991bbbf63", -1);
 				var_a15ea324 = getdvarint(#"hash_118a6d37e5aa4589", 0);
-				maxindex = level.var_fb91af8.size - 1;
+				maxindex = level.deathcircles.size - 1;
 				if(var_9f6ad7bb >= 0)
 				{
-					circle = level.var_fb91af8[var_9f6ad7bb];
+					circle = level.deathcircles[var_9f6ad7bb];
 					if(isdefined(circle))
 					{
 						color = circle_color(var_9f6ad7bb, maxindex);
@@ -1929,7 +1929,7 @@ function private debug_loop()
 				else
 				{
 					index = 0;
-					foreach(circle in level.var_fb91af8)
+					foreach(circle in level.deathcircles)
 					{
 						color = circle_color(index, maxindex);
 						draw_circle(circle, index, color, var_a15ea324);
@@ -2019,32 +2019,32 @@ function private debug_loop()
 function private function_ded40950()
 {
 	/#
-		var_f15be329 = getdvarint(#"hash_6706b0bc8458c9f7", 0);
-		if(var_f15be329 < 0)
+		testcircleradius = getdvarint(#"testcircleradius", 0);
+		if(testcircleradius < 0)
 		{
-			var_f15be329 = 0;
+			testcircleradius = 0;
 		}
-		else if(var_f15be329 > 150000)
+		else if(testcircleradius > 150000)
 		{
-			var_f15be329 = 150000;
+			testcircleradius = 150000;
 		}
-		if(var_f15be329 > 0)
+		if(testcircleradius > 0)
 		{
-			level.var_fb91af8 = [];
-			level.deathcircle.var_12be3b68 = 0;
-			var_db6547d = getdvarstring(#"hash_76b26d6e696b82e8", "");
-			damage = getdvarint(#"hash_5675659e1a445164", 0);
-			var_c71fc4f4 = getdvarint(#"hash_700ae39acbcd84e5", 60);
-			var_edd69b13 = getdvarint(#"hash_5779bb38cf5f61a9", 36000);
-			var_fdd51794 = getdvarint(#"hash_537f05a2ad3b9d7a", 60);
+			level.deathcircles = [];
+			level.deathcircle.delaysec = 0;
+			centerstr = getdvarstring(#"hash_76b26d6e696b82e8", "");
+			damage = getdvarint(#"testcircledamage", 0);
+			damageinterval = getdvarint(#"hash_700ae39acbcd84e5", 60);
+			waitsec = getdvarint(#"hash_5779bb38cf5f61a9", 36000);
+			scalesec = getdvarint(#"hash_537f05a2ad3b9d7a", 60);
 			intensity = getdvarint(#"hash_16271dbe4d00b41e", 1);
 			center = (level.mapcenter[0], level.mapcenter[1], 0);
-			if(var_db6547d != "")
+			if(centerstr != "")
 			{
-				var_ad7b95c0 = strtok(var_db6547d, "");
+				var_ad7b95c0 = strtok(centerstr, "");
 				center = (float(var_ad7b95c0[0]), float(var_ad7b95c0[1]), 0);
 			}
-			function_3e8742fe(center, 0, 0, var_f15be329, damage, var_c71fc4f4, var_edd69b13, var_fdd51794, intensity);
+			add_circle(center, 0, 0, testcircleradius, damage, damageinterval, waitsec, scalesec, intensity);
 			level thread function_81ccccb6();
 		}
 	#/
@@ -2066,7 +2066,7 @@ function private function_81ccccb6()
 		waitframe(1);
 		while(isdefined(level.deathcircle.var_5c54ab33))
 		{
-			radius = getdvarint(#"hash_6706b0bc8458c9f7", 0);
+			radius = getdvarint(#"testcircleradius", 0);
 			intensity = getdvarint(#"hash_16271dbe4d00b41e", 0);
 			if(radius < 1)
 			{
@@ -2088,7 +2088,7 @@ function private function_81ccccb6()
 }
 
 /*
-	Name: function_4c517813
+	Name: devgui_shuffle
 	Namespace: death_circle
 	Checksum: 0xDF42B6BA
 	Offset: 0x6188
@@ -2096,14 +2096,14 @@ function private function_81ccccb6()
 	Parameters: 1
 	Flags: Private
 */
-function private function_4c517813(count)
+function private devgui_shuffle(count)
 {
 	/#
 		if(!isdefined(count))
 		{
 			count = 1;
 		}
-		function_75ae968e();
+		devgui_clear();
 		count = int(count);
 		level.var_47947565 = [];
 		level.var_475c53d7 = [];
@@ -2111,14 +2111,14 @@ function private function_4c517813(count)
 		{
 			for(i = 0; i < count; i++)
 			{
-				function_b36ed270();
+				shuffle_circles();
 				waitframe(1);
 			}
 		}
 		else
 		{
-			function_b36ed270();
-			level.var_47947565[0] = level.var_fb91af8[level.var_fb91af8.size - 1].tracepos;
+			shuffle_circles();
+			level.var_47947565[0] = level.deathcircles[level.deathcircles.size - 1].tracepos;
 		}
 	#/
 }
@@ -2144,7 +2144,7 @@ function private function_e4f60619(areaname)
 		{
 			setdvar(areaname, 1);
 		}
-		level function_b36ed270();
+		level shuffle_circles();
 	#/
 }
 
@@ -2168,10 +2168,10 @@ function private simulate(var_1baf9723)
 		var_f3ca456b = [];
 		for(i = 0; i < var_4fbe4dc7; i++)
 		{
-			function_4c517813();
-			for(c = 0; c < level.var_fb91af8.size; c++)
+			devgui_shuffle();
+			for(c = 0; c < level.deathcircles.size; c++)
 			{
-				circle = {#index:c, #radius:level.var_fb91af8[c].radius, #hash_6e78c55a:level.var_fb91af8[c].origin[1], #hash_ef0c4683:level.var_fb91af8[c].origin[0]};
+				circle = {#index:c, #radius:level.deathcircles[c].radius, #hash_6e78c55a:level.deathcircles[c].origin[1], #hash_ef0c4683:level.deathcircles[c].origin[0]};
 				if(!isdefined(var_f3ca456b))
 				{
 					var_f3ca456b = [];
@@ -2182,7 +2182,7 @@ function private simulate(var_1baf9723)
 				}
 				var_f3ca456b[var_f3ca456b.size] = circle;
 			}
-			if((var_f3ca456b.size + level.var_fb91af8.size) >= var_9a165bb5)
+			if((var_f3ca456b.size + level.deathcircles.size) >= var_9a165bb5)
 			{
 				var_de130ab9 = {#hash_91393a2d:var_1baf9723};
 				function_92d1707f(#"hash_3a9b483e717d26be", #"info", var_de130ab9, #"circles", var_f3ca456b);
@@ -2212,23 +2212,23 @@ function private draw_circle(circle, index, color, groundtrace)
 {
 	/#
 		origin = (groundtrace ? (isdefined(circle.tracepos) ? circle.tracepos : circle.origin) : circle.origin);
-		var_a42bf85 = origin + vectorscale((0, 0, 1), 2000);
+		printorigin = origin + vectorscale((0, 0, 1), 2000);
 		var_6970fc75 = string(index);
 		var_6970fc75 = var_6970fc75 + ("" + (isdefined(circle.attempts) ? circle.attempts : ""));
 		var_6970fc75 = var_6970fc75 + ("" + circle.radius);
 		var_6970fc75 = var_6970fc75 + ("" + circle.damage);
-		var_6970fc75 = var_6970fc75 + ("" + circle.var_c71fc4f4);
-		var_6970fc75 = var_6970fc75 + ("" + (isdefined(circle.var_edd69b13) ? circle.var_edd69b13 : ""));
-		var_6970fc75 = var_6970fc75 + ("" + (isdefined(circle.var_fdd51794) ? circle.var_fdd51794 : ""));
-		print3d(var_a42bf85, var_6970fc75, (1, 1, 1), 1, 5);
-		line(var_a42bf85, origin, color);
+		var_6970fc75 = var_6970fc75 + ("" + circle.damageinterval);
+		var_6970fc75 = var_6970fc75 + ("" + (isdefined(circle.waitsec) ? circle.waitsec : ""));
+		var_6970fc75 = var_6970fc75 + ("" + (isdefined(circle.scalesec) ? circle.scalesec : ""));
+		print3d(printorigin, var_6970fc75, (1, 1, 1), 1, 5);
+		line(printorigin, origin, color);
 		sphere(origin, 5, color);
 		circle(origin, circle.radius, color, 0, 1);
-		if(isdefined(circle.var_3b9f4abf) && isdefined(circle.var_66b35636) && isdefined(circle.var_3b4ad673))
+		if(isdefined(circle.var_3b9f4abf) && isdefined(circle.mapwidth) && isdefined(circle.mapheight))
 		{
 			var_3b9f4abf = (circle.var_3b9f4abf[0], circle.var_3b9f4abf[1], origin[2]);
-			halfwidth = circle.var_66b35636 / 2;
-			halfheight = circle.var_3b4ad673 / 2;
+			halfwidth = circle.mapwidth / 2;
+			halfheight = circle.mapheight / 2;
 			var_b99d691b = var_3b9f4abf + (halfwidth, halfheight, 0);
 			var_91d25b4a = var_3b9f4abf + (halfwidth, halfheight * -1, 0);
 			var_3c4ec32 = var_3b9f4abf + (halfwidth * -1, halfheight * -1, 0);

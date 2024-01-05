@@ -1,7 +1,7 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace visionset_mgr_shared;
 
@@ -16,13 +16,13 @@
 */
 function private autoexec function_a44e1ad8()
 {
-	level notify(1047558522);
+	level notify(-1047558522);
 }
 
 #namespace visionset_mgr;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: visionset_mgr
 	Checksum: 0x16F7644B
 	Offset: 0x108
@@ -30,7 +30,7 @@ function private autoexec function_a44e1ad8()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"visionset_mgr", &function_70a657d8, &finalize_clientfields, undefined, undefined);
 }

@@ -1,14 +1,14 @@
-#using script_3f9e0dc8454d98e1;
-#using script_62caa307a394c18c;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\lightning_chain.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
 #using scripts\zm_common\zm_equipment.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\lightning_chain.gsc;
+#using script_62caa307a394c18c;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace ammomod_deadwire;
 
@@ -23,7 +23,7 @@
 */
 function private autoexec function_97b6a34b()
 {
-	level notify(1281833007);
+	level notify(-1281833007);
 }
 
 /*

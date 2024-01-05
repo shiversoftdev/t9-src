@@ -86,7 +86,7 @@ class throttle
 	}
 
 	/*
-		Name: function_5ef47bb4
+		Name: leavequeue
 		Namespace: throttle
 		Checksum: 0x786BE36B
 		Offset: 0x458
@@ -94,7 +94,7 @@ class throttle
 		Parameters: 1
 		Flags: Linked
 	*/
-	function function_5ef47bb4(entity)
+	function leavequeue(entity)
 	{
 		arrayremovevalue(queue_, entity);
 	}
@@ -260,7 +260,7 @@ class class_c6c0e94
 	}
 
 	/*
-		Name: function_5ef47bb4
+		Name: leavequeue
 		Namespace: namespace_c6c0e94
 		Checksum: 0x389BBD0D
 		Offset: 0x938
@@ -268,7 +268,7 @@ class class_c6c0e94
 		Parameters: 1
 		Flags: Linked
 	*/
-	function function_5ef47bb4(entity)
+	function leavequeue(entity)
 	{
 		arrayremovevalue(queue_, entity);
 	}

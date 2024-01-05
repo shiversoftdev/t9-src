@@ -1,14 +1,14 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_f4d68515 : class_6aaccc24
+class cinitial_black : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
 
 	/*
 		Name: constructor
-		Namespace: namespace_f4d68515
+		Namespace: cinitial_black
 		Checksum: 0xB09D89E
 		Offset: 0x1C8
 		Size: 0x14
@@ -21,7 +21,7 @@ class class_f4d68515 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_f4d68515
+		Namespace: cinitial_black
 		Checksum: 0x23E379AE
 		Offset: 0x300
 		Size: 0x14
@@ -34,7 +34,7 @@ class class_f4d68515 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_f4d68515
+		Namespace: cinitial_black
 		Checksum: 0x4EC1E20B
 		Offset: 0x238
 		Size: 0x3C
@@ -47,26 +47,26 @@ class class_f4d68515 : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
-		Name: function_2eb3f6e8
-		Namespace: namespace_f4d68515
+		Name: set_developer_mode
+		Namespace: cinitial_black
 		Checksum: 0xA0B86C7A
 		Offset: 0x2B0
 		Size: 0x44
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_2eb3f6e8(player, value)
+	function set_developer_mode(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "developer_mode", value);
 	}
 
 	/*
 		Name: close
-		Namespace: namespace_f4d68515
+		Namespace: cinitial_black
 		Checksum: 0x10682DF4
 		Offset: 0x280
 		Size: 0x24
@@ -75,12 +75,12 @@ class class_f4d68515 : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_f4d68515
+		Namespace: cinitial_black
 		Checksum: 0x19CC9B3B
 		Offset: 0x1E8
 		Size: 0x44
@@ -89,8 +89,8 @@ class class_f4d68515 : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("initial_black");
-		namespace_6aaccc24::function_da693cbe("developer_mode", 1, 1, "int");
+		cluielem::setup_clientfields("initial_black");
+		cluielem::add_clientfield("developer_mode", 1, 1, "int");
 	}
 
 }
@@ -108,7 +108,7 @@ class class_f4d68515 : class_6aaccc24
 */
 function register()
 {
-	elem = new class_f4d68515();
+	elem = new cinitial_black();
 	[[ elem ]]->setup_clientfields();
 	return elem;
 }
@@ -160,7 +160,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_2eb3f6e8
+	Name: set_developer_mode
 	Namespace: initial_black
 	Checksum: 0x97770F6E
 	Offset: 0x198
@@ -168,8 +168,8 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_2eb3f6e8(player, value)
+function set_developer_mode(player, value)
 {
-	[[ self ]]->function_2eb3f6e8(player, value);
+	[[ self ]]->set_developer_mode(player, value);
 }
 

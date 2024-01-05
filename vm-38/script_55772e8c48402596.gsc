@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_51e5626e : class_6aaccc24
+class csr_message_box : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_51e5626e
+		Namespace: csr_message_box
 		Checksum: 0x4D8CCE20
 		Offset: 0x348
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_51e5626e : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_51e5626e
+		Namespace: csr_message_box
 		Checksum: 0x8E54A456
 		Offset: 0x4A8
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_51e5626e : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_51e5626e
+		Namespace: csr_message_box
 		Checksum: 0xFA7DD94A
 		Offset: 0x440
 		Size: 0x24
@@ -40,40 +40,40 @@ class class_51e5626e : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_51e5626e
+		Name: register_clientside
+		Namespace: csr_message_box
 		Checksum: 0x5D2D3ED5
 		Offset: 0x3C0
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("sr_message_box");
+		cluielem::register_clientside("sr_message_box");
 	}
 
 	/*
-		Name: function_7a690474
-		Namespace: namespace_51e5626e
+		Name: set_messagebox
+		Namespace: csr_message_box
 		Checksum: 0xC655DBC9
 		Offset: 0x470
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_7a690474(localclientnum, value)
+	function set_messagebox(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "messagebox", value);
+		[[ self ]]->set_data(localclientnum, "messagebox", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_51e5626e
+		Namespace: csr_message_box
 		Checksum: 0x287AE7D7
 		Offset: 0x368
 		Size: 0x4C
@@ -82,13 +82,13 @@ class class_51e5626e : class_6aaccc24
 	*/
 	function setup_clientfields(var_50fe5991)
 	{
-		namespace_6aaccc24::setup_clientfields("sr_message_box");
-		namespace_6aaccc24::function_dcb34c80("string", "messagebox", 1);
+		cluielem::setup_clientfields("sr_message_box");
+		cluielem::function_dcb34c80("string", "messagebox", 1);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_51e5626e
+		Namespace: csr_message_box
 		Checksum: 0xB2E61558
 		Offset: 0x3E8
 		Size: 0x4C
@@ -97,8 +97,8 @@ class class_51e5626e : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "messagebox", #"");
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "messagebox", #"");
 	}
 
 }
@@ -130,7 +130,7 @@ function private autoexec function_8d8b21ed()
 */
 function register(var_50fe5991)
 {
-	elem = new class_51e5626e();
+	elem = new csr_message_box();
 	[[ elem ]]->setup_clientfields(var_50fe5991);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -152,7 +152,7 @@ function register(var_50fe5991)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: sr_message_box
 	Checksum: 0x4D077C00
 	Offset: 0x260
@@ -160,10 +160,10 @@ function register(var_50fe5991)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_51e5626e();
-	[[ elem ]]->function_5c1bb138();
+	elem = new csr_message_box();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -210,7 +210,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_7a690474
+	Name: set_messagebox
 	Namespace: sr_message_box
 	Checksum: 0x4A457B7A
 	Offset: 0x318
@@ -218,8 +218,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_7a690474(localclientnum, value)
+function set_messagebox(localclientnum, value)
 {
-	[[ self ]]->function_7a690474(localclientnum, value);
+	[[ self ]]->set_messagebox(localclientnum, value);
 }
 

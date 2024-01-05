@@ -1,8 +1,8 @@
-#using script_32c8b5b0eb2854f3;
-#using script_47fb62300ac0bd60;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\mp_common\gametypes\match.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_32c8b5b0eb2854f3;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace arena;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_85737a30()
 {
-	level notify(1404738273);
+	level notify(-1404738273);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: arena
 	Checksum: 0xEAB2F411
 	Offset: 0xD0
@@ -29,7 +29,7 @@ function private autoexec function_85737a30()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"arena", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -49,7 +49,7 @@ function private function_70a657d8()
 	callback::on_disconnect(&on_disconnect);
 	if(gamemodeisarena())
 	{
-		callback::function_98a0917d(&function_98a0917d);
+		callback::on_game_playing(&on_game_playing);
 		level.var_a962eeb6 = &function_51203700;
 	}
 }
@@ -92,7 +92,7 @@ function on_connect()
 }
 
 /*
-	Name: function_98a0917d
+	Name: on_game_playing
 	Namespace: arena
 	Checksum: 0x82864998
 	Offset: 0x298
@@ -100,7 +100,7 @@ function on_connect()
 	Parameters: 0
 	Flags: Linked
 */
-function function_98a0917d()
+function on_game_playing()
 {
 	if(gamemodeisarena())
 	{
@@ -215,7 +215,7 @@ function match_end()
 			if(isdefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1)
 			{
 				var_affb66b5 = undefined;
-				if(match::function_5f24faac("tie"))
+				if(match::get_flag("tie"))
 				{
 					var_affb66b5 = 1;
 					player arenaendmatch(0);
@@ -272,7 +272,7 @@ function update_arena_challenge_seasons()
 		}
 		case 0:
 		{
-			eventstate = #"hash_60f1e9335197f661";
+			eventstate = #"leagueplaystats";
 			break;
 		}
 		case 4:
@@ -285,7 +285,7 @@ function update_arena_challenge_seasons()
 			return;
 		}
 	}
-	perseasonwins = self stats::get_stat(#"arenaperseasonstats", eventstate, #"hash_2f54ed970fcecc95", #"wins");
+	perseasonwins = self stats::get_stat(#"arenaperseasonstats", eventstate, #"matchesstats", #"wins");
 	if(perseasonwins >= getdvarint(#"arena_seasonvetchallengewins", 0))
 	{
 		arenaslot = arenagetslot();

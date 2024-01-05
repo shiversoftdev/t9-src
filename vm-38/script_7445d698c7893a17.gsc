@@ -1,14 +1,14 @@
-#using script_35598499769dbb3d;
-#using script_3f9e0dc8454d98e1;
-#using script_460f2e04fb3cff8a;
-#using script_62caa307a394c18c;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\zm_common\trials\zm_trial_headshots_only.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using script_62caa307a394c18c;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_35598499769dbb3d;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
 
 #namespace ammomod_brainrot;
 
@@ -174,7 +174,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
 */
 function function_c81ac3e5(attacker, weapon, var_fd90b0bb, tier)
 {
-	if(self.var_6f84b820 === #"elite" || self.var_6f84b820 === #"boss" || self.var_6f84b820 === #"hash_8b8ef6434c32b55")
+	if(self.var_6f84b820 === #"elite" || self.var_6f84b820 === #"boss" || self.var_6f84b820 === #"inanimate")
 	{
 		return;
 	}
@@ -321,7 +321,7 @@ function function_f7f8a2cc(attacker, weapon)
 */
 function private function_eb8a62bc(var_c5ad44f1, n_damage, e_attacker, weapon)
 {
-	if(namespace_25f0796c::is_active())
+	if(zm_trial_headshots_only::is_active())
 	{
 		return;
 	}
@@ -436,7 +436,7 @@ function zombie_death_time_limit(e_attacker, weapon, var_fd90b0bb, tier)
 	Parameters: 1
 	Flags: Linked
 */
-function function_a22e41ec(var_5a5260d8)
+function function_a22e41ec(_hash)
 {
 	if(!isdefined(level.ai))
 	{
@@ -589,7 +589,7 @@ function zombie_death_gib(e_attacker, weapon, var_fd90b0bb)
 	}
 	gibserverutils::giblegs(self, var_c3317960);
 	self.var_f42aed2a = 1;
-	if(is_true(level.headshots_only) || namespace_25f0796c::is_active())
+	if(is_true(level.headshots_only) || zm_trial_headshots_only::is_active())
 	{
 		self kill();
 	}

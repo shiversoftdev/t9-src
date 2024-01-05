@@ -69,7 +69,7 @@ function getattribute(blackboard, attribute)
 		assert(isstruct(blackboard));
 	#/
 	/#
-		assert(isstring(attribute) || function_7a600918(attribute));
+		assert(isstring(attribute) || ishash(attribute));
 	#/
 	/#
 		assert(isarray(blackboard.values));
@@ -121,7 +121,7 @@ function setattribute(blackboard, attribute, value, readonly)
 		assert(isstruct(blackboard));
 	#/
 	/#
-		assert(isstring(attribute) || function_7a600918(attribute));
+		assert(isstring(attribute) || ishash(attribute));
 	#/
 	/#
 		assert(isarray(blackboard.values));

@@ -1,21 +1,21 @@
 #using script_176597095ddfaa17;
-#using script_4108035fe400ce67;
-#using script_47fb62300ac0bd60;
 #using script_73bd646be3641c07;
-#using script_7bacb32f8222fa3e;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_stats.gsc;
 #using scripts\zm_common\zm_unitrigger.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using script_4108035fe400ce67;
+#using script_7bacb32f8222fa3e;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace namespace_4abf1500;
 
@@ -34,7 +34,7 @@ function private autoexec function_47222bef()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4abf1500
 	Checksum: 0xA89843D5
 	Offset: 0x1B0
@@ -42,7 +42,7 @@ function private autoexec function_47222bef()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_63e00d742a373f5f", &function_70a657d8, &function_8ac3bea9, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -72,7 +72,7 @@ function function_70a657d8()
 	}
 	callback::on_connect(&on_connect);
 	callback::on_ai_killed(&on_ai_killed);
-	callback::function_10a4dd0a(&function_b0049c2a);
+	callback::on_item_pickup(&function_b0049c2a);
 	level thread function_696dd88b();
 	level thread function_aa317cfe();
 	/#
@@ -197,7 +197,7 @@ function private function_32b4eecc()
 */
 function private function_fe74d984(var_37a01ce0)
 {
-	if(isstring(var_37a01ce0) || function_7a600918(var_37a01ce0))
+	if(isstring(var_37a01ce0) || ishash(var_37a01ce0))
 	{
 		var_19a3087c = getscriptbundle(var_37a01ce0);
 	}
@@ -223,7 +223,7 @@ function private function_fe74d984(var_37a01ce0)
 */
 function private function_46181f8c(var_37a01ce0)
 {
-	if(isstring(var_37a01ce0) || function_7a600918(var_37a01ce0))
+	if(isstring(var_37a01ce0) || ishash(var_37a01ce0))
 	{
 		var_19a3087c = getscriptbundle(var_37a01ce0);
 	}
@@ -643,7 +643,7 @@ function private function_fe024191()
 	Parameters: 2
 	Flags: None
 */
-function function_c1974629(var_3dfc6e69, n_power)
+function function_c1974629(v_target_loc, n_power)
 {
 	if(!isdefined(n_power))
 	{
@@ -661,26 +661,26 @@ function function_c1974629(var_3dfc6e69, n_power)
 	{
 		return;
 	}
-	if(!isdefined(var_3dfc6e69) && isdefined(self.target))
+	if(!isdefined(v_target_loc) && isdefined(self.target))
 	{
 		target = getent(self.target, "targetname");
 		if(!isdefined(target))
 		{
 			target = struct::get(self.target, "targetname");
 		}
-		var_3dfc6e69 = target.origin;
+		v_target_loc = target.origin;
 		var_efc184d0 = target.angles;
 	}
 	/#
 		/#
-			assert(isdefined(var_3dfc6e69), "" + function_9e72a96(var_bdb97676.var_d5fa8477));
+			assert(isdefined(v_target_loc), "" + function_9e72a96(var_bdb97676.var_d5fa8477));
 		#/
 	#/
 	if(is_true(var_bdb97676.var_cbbbaf39))
 	{
-		n_time = var_bdb97676 zm_utility::fake_physicslaunch(var_3dfc6e69, n_power);
+		n_time = var_bdb97676 zm_utility::fake_physicslaunch(v_target_loc, n_power);
 		wait(n_time);
-		var_bdb97676.origin = var_3dfc6e69;
+		var_bdb97676.origin = v_target_loc;
 		if(isdefined(var_efc184d0))
 		{
 			var_bdb97676.angles = var_efc184d0;
@@ -693,9 +693,9 @@ function function_c1974629(var_3dfc6e69, n_power)
 	}
 	else
 	{
-		n_time = var_bdb97676 zm_utility::fake_physicslaunch(var_3dfc6e69, n_power);
+		n_time = var_bdb97676 zm_utility::fake_physicslaunch(v_target_loc, n_power);
 		wait(n_time);
-		var_bdb97676.origin = var_3dfc6e69;
+		var_bdb97676.origin = v_target_loc;
 		if(isdefined(var_efc184d0))
 		{
 			var_bdb97676.angles = var_efc184d0;
@@ -816,9 +816,9 @@ function private function_a78987b(e_player)
 	var_bdb97676 = self.stub.related_parent;
 	while(true)
 	{
-		var_be17187b = undefined;
-		var_be17187b = self waittill(#"trigger");
-		e_player = var_be17187b.activator;
+		s_waitresult = undefined;
+		s_waitresult = self waittill(#"trigger");
+		e_player = s_waitresult.activator;
 		if(isdefined(var_bdb97676.var_56c62073[e_player.name]))
 		{
 			var_d5fa8477 = var_bdb97676.var_56c62073[e_player.name];
@@ -862,7 +862,7 @@ function collect_intel(var_d5fa8477, var_bdb97676, var_eac6151d)
 	}
 	self function_7e211a10(var_d5fa8477);
 	self zm_stats::function_a6b15f2c(var_d5fa8477, 1);
-	self function_bc82f900(#"hash_410bd55524ae7d");
+	self function_bc82f900(#"zm_interact_rumble");
 	if(!isdefined(self.var_9d781602))
 	{
 		self.var_9d781602 = [];
@@ -907,7 +907,7 @@ function collect_intel(var_d5fa8477, var_bdb97676, var_eac6151d)
 			}
 			if(is_true(var_bdb97676.var_cbbbaf39))
 			{
-				item_world::function_7730442c(var_bdb97676);
+				item_world::consume_item(var_bdb97676);
 			}
 			else
 			{
@@ -1655,7 +1655,7 @@ function private function_44fcc093(v_pos)
 			}
 		}
 	}
-	else if(zm_utility::check_point_in_playable_area(self.origin) || is_true(level.var_374c2805))
+	else if(zm_utility::check_point_in_playable_area(self.origin) || is_true(level.onslaught_game))
 	{
 		return true;
 	}
@@ -1700,9 +1700,9 @@ function function_ded2880a()
 		foreach(var_d5fa8477 in level.var_54f9341)
 		{
 			var_d5fa8477 = function_9e72a96(var_d5fa8477);
-			util::function_345e5b9a(((("" + var_d5fa8477) + "") + var_d5fa8477) + "");
-			util::function_345e5b9a(((("" + var_d5fa8477) + "") + var_d5fa8477) + "");
-			util::function_345e5b9a(((("" + var_d5fa8477) + "") + var_d5fa8477) + "");
+			util::add_debug_command(((("" + var_d5fa8477) + "") + var_d5fa8477) + "");
+			util::add_debug_command(((("" + var_d5fa8477) + "") + var_d5fa8477) + "");
+			util::add_debug_command(((("" + var_d5fa8477) + "") + var_d5fa8477) + "");
 		}
 	#/
 }

@@ -4,7 +4,7 @@
 #namespace paintshop;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: paintshop
 	Checksum: 0xE97AF9DA
 	Offset: 0x70
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"paintshop", &function_70a657d8, undefined, undefined, undefined);
 }

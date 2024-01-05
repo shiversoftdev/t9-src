@@ -1,16 +1,16 @@
-#using script_2c5daa95f8fec03c;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\scoreevents.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\scoreevents.gsc;
+#using script_2c5daa95f8fec03c;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_b61a349a;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_b61a349a
 	Checksum: 0x8B968403
 	Offset: 0xB0
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_775f993ac537d970", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }

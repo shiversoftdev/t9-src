@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace perks;
 
@@ -18,7 +18,7 @@ function private autoexec function_b500a37c()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: perks
 	Checksum: 0xC865259A
 	Offset: 0xF8
@@ -26,7 +26,7 @@ function private autoexec function_b500a37c()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2af3fdb587243686", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -42,7 +42,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	clientfield::function_a8bbc967("hudItems.ammoCooldowns.equipment.tactical", #"hud_items", [2:#"tactical", 1:#"equipment", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.ammoCooldowns.equipment.lethal", #"hud_items", [2:#"lethal", 1:#"equipment", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.ammoCooldowns.equipment.tactical", #"hud_items", [2:#"tactical", 1:#"equipment", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.ammoCooldowns.equipment.lethal", #"hud_items", [2:#"lethal", 1:#"equipment", 0:#"hash_2f126bd99a74de8b"], 1, 5, "float", undefined, 0, 0);
 }
 

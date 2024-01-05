@@ -13,11 +13,11 @@
 */
 event main(eventstruct)
 {
-	callback::function_d46d9315(&function_d46d9315);
+	callback::on_gameplay_started(&on_gameplay_started);
 }
 
 /*
-	Name: function_d46d9315
+	Name: on_gameplay_started
 	Namespace: namespace_a376209a
 	Checksum: 0xB82292DC
 	Offset: 0xD8
@@ -25,7 +25,7 @@ event main(eventstruct)
 	Parameters: 1
 	Flags: Linked
 */
-function function_d46d9315(localclientnum)
+function on_gameplay_started(localclientnum)
 {
 	waitframe(1);
 	level thread nuked_doomsday_clock_init(localclientnum);

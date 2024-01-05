@@ -1,16 +1,16 @@
-#using script_27c22e1d8df4d852;
-#using script_6021ce59143452c3;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_trial_util.gsc;
+#using scripts\zm_common\zm_trial.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_5f342394;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_5f342394
 	Checksum: 0x5829FD1
 	Offset: 0xA0
@@ -18,7 +18,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6c9de9db7f3e44a3", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -34,15 +34,15 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!zm_trial::function_b47f6aba())
+	if(!zm_trial::is_trial_mode())
 	{
 		return;
 	}
-	zm_trial::register_challenge(#"hash_6c9de9db7f3e44a3", &function_d1de6a85, &function_9e7b3f4d);
+	zm_trial::register_challenge(#"hash_6c9de9db7f3e44a3", &on_begin, &on_end);
 }
 
 /*
-	Name: function_d1de6a85
+	Name: on_begin
 	Namespace: namespace_5f342394
 	Checksum: 0xD05F3ED
 	Offset: 0x150
@@ -50,12 +50,12 @@ function private function_70a657d8()
 	Parameters: 9
 	Flags: Private
 */
-function private function_d1de6a85(var_a84ac7c8, str_archetype, n_kill_count, str_destination, str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9)
+function private on_begin(var_a84ac7c8, str_archetype, n_kill_count, str_destination, str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9)
 {
-	var_1968096a = [4:var_84245fe9, 3:var_91e2fb66, 2:var_588808b1, 1:str_zone2, 0:str_zone1];
-	arrayremovevalue(var_1968096a, undefined, 0);
+	str_zones = [4:var_84245fe9, 3:var_91e2fb66, 2:var_588808b1, 1:str_zone2, 0:str_zone1];
+	arrayremovevalue(str_zones, undefined, 0);
 	level.var_8c6f70d0 = [];
-	foreach(str_zone in var_1968096a)
+	foreach(str_zone in str_zones)
 	{
 		if(!isdefined(level.var_8c6f70d0))
 		{
@@ -73,13 +73,13 @@ function private function_d1de6a85(var_a84ac7c8, str_archetype, n_kill_count, st
 	level.var_c23449d8 = zm_trial::function_5769f26a(str_destination);
 	self.var_925854c7 = n_kill_count;
 	level.var_fbca3288 = 0;
-	namespace_b22c99a5::function_2976fa44(level.var_c23449d8);
-	namespace_b22c99a5::function_dace284(0);
+	zm_trial_util::function_2976fa44(level.var_c23449d8);
+	zm_trial_util::function_dace284(0);
 	callback::on_ai_killed(&on_ai_killed);
 }
 
 /*
-	Name: function_9e7b3f4d
+	Name: on_end
 	Namespace: namespace_5f342394
 	Checksum: 0x8AAC9F1
 	Offset: 0x3B8
@@ -87,9 +87,9 @@ function private function_d1de6a85(var_a84ac7c8, str_archetype, n_kill_count, st
 	Parameters: 1
 	Flags: Private
 */
-function private function_9e7b3f4d(round_reset)
+function private on_end(round_reset)
 {
-	namespace_b22c99a5::function_f3dbeda7();
+	zm_trial_util::function_f3dbeda7();
 	n_remaining = level.var_c23449d8;
 	level.var_c23449d8 = undefined;
 	level.var_925854c7 = undefined;
@@ -126,7 +126,7 @@ function private on_ai_killed(params)
 		{
 			level.var_c23449d8--;
 			level.var_fbca3288++;
-			namespace_b22c99a5::function_dace284(level.var_fbca3288);
+			zm_trial_util::function_dace284(level.var_fbca3288);
 		}
 	}
 }

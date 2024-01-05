@@ -1,46 +1,46 @@
-#using script_263b7f2982258785;
-#using script_31e9b35aaacbbd93;
-#using script_3626f1b2cf51a99c;
-#using script_3819e7a1427df6d2;
-#using script_3b82b8c68189025e;
-#using script_3dc93ca9902a9cda;
-#using script_45e09f634c49fdba;
-#using script_47fb62300ac0bd60;
-#using script_4ae261b2785dda9f;
-#using script_61cfc2ab8e60625;
-#using script_671f58f0b7aa833d;
-#using script_6809bf766eba194a;
-#using script_74940ab70a48ee4e;
-#using script_7b4396f5e8e35b28;
-#using script_7d0013bbc05623b9;
-#using script_9bfd3d8a6a89e5e;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\lui_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\collectibles.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using script_7d0013bbc05623b9;
+#using script_45e09f634c49fdba;
+#using script_3819e7a1427df6d2;
+#using script_74940ab70a48ee4e;
 #using scripts\cp_common\gametypes\battlechatter.gsc;
+#using script_4ae261b2785dda9f;
+#using scripts\cp_common\collectibles.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using script_7b4396f5e8e35b28;
+#using script_671f58f0b7aa833d;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_61cfc2ab8e60625;
+#using script_31e9b35aaacbbd93;
+#using script_3dc93ca9902a9cda;
+#using scripts\core_common\ai_shared.gsc;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
-#using scripts\cp_common\objectives.gsc;
 #using scripts\cp_common\skipto.gsc;
 #using scripts\cp_common\util.gsc;
+#using script_9bfd3d8a6a89e5e;
+#using script_3626f1b2cf51a99c;
+#using scripts\core_common\array_shared.gsc;
+#using script_263b7f2982258785;
+#using scripts\cp_common\objectives.gsc;
+#using script_3b82b8c68189025e;
+#using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-#namespace namespace_b995dbff;
+#namespace tkdn_raid_capture;
 
 /*
 	Name: starting
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x7F37DE40
 	Offset: 0x988
 	Size: 0x394
@@ -77,7 +77,7 @@ function starting(str_skipto)
 
 /*
 	Name: function_daaa52d5
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xC22A1EA5
 	Offset: 0xD28
 	Size: 0x2B0
@@ -94,8 +94,8 @@ function function_daaa52d5()
 	level thread scene::play("scene_tkd_hit2_canal_ambience");
 	level thread scene::init("bird_plantsmash_startle", "targetname");
 	level thread function_bde24dd8();
-	var_db9090e4 = getentarray("canal_boats", "targetname");
-	foreach(boat in var_db9090e4)
+	canal_boats = getentarray("canal_boats", "targetname");
+	foreach(boat in canal_boats)
 	{
 		if(isdefined(boat.target))
 		{
@@ -124,7 +124,7 @@ function function_daaa52d5()
 
 /*
 	Name: function_bde24dd8
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x41F09079
 	Offset: 0xFE0
 	Size: 0x44
@@ -133,13 +133,13 @@ function function_daaa52d5()
 */
 function function_bde24dd8()
 {
-	level waittill(#"hash_3e7de7a955d9aaa4");
+	level waittill(#"bird_plantsmash_startle");
 	level thread scene::play("bird_plantsmash_startle", "targetname");
 }
 
 /*
 	Name: function_d40d301c
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x9ABF572B
 	Offset: 0x1030
 	Size: 0x84
@@ -161,7 +161,7 @@ function function_d40d301c()
 
 /*
 	Name: main
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x84D6F554
 	Offset: 0x10C0
 	Size: 0x534
@@ -181,11 +181,11 @@ function main(str_skipto, b_starting)
 	level thread function_3dafee47();
 	if(isdefined(level.adler))
 	{
-		level.var_d9f0cb5b = level.adler;
+		level.raid_adler = level.adler;
 	}
 	if(isdefined(level.woods))
 	{
-		level.var_e228f5df = level.woods;
+		level.raid_woods = level.woods;
 	}
 	level battlechatter::function_2ab9360b(0);
 	player thread function_c0b643d5();
@@ -213,16 +213,16 @@ function main(str_skipto, b_starting)
 	player setstance("stand");
 	player freezecontrols(1);
 	player util::set_low_ready(0);
-	namespace_7d4dd7f0::function_a2015343();
+	tkdn_af_hill::function_a2015343();
 	level thread scene::init("scene_tkd_hit3_intro");
 	wait(2.5);
-	if(isdefined(level.var_d9f0cb5b.magic_bullet_shield))
+	if(isdefined(level.raid_adler.magic_bullet_shield))
 	{
-		level thread util::stop_magic_bullet_shield(level.var_d9f0cb5b);
+		level thread util::stop_magic_bullet_shield(level.raid_adler);
 	}
-	if(isdefined(level.var_e228f5df.magic_bullet_shield))
+	if(isdefined(level.raid_woods.magic_bullet_shield))
 	{
-		level thread util::stop_magic_bullet_shield(level.var_e228f5df);
+		level thread util::stop_magic_bullet_shield(level.raid_woods);
 	}
 	level scene::stop("scene_tkd_hit2_rooftop", 1);
 	level scene::stop("scene_tkd_hit2_rooftop_props", 1);
@@ -243,7 +243,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: function_c0b643d5
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xC72637BC
 	Offset: 0x1600
 	Size: 0x3C
@@ -258,7 +258,7 @@ function function_c0b643d5()
 
 /*
 	Name: function_26e6230d
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x7DF3ADD8
 	Offset: 0x1648
 	Size: 0x14C
@@ -274,8 +274,8 @@ function function_26e6230d()
 	level.qasim endon(#"death");
 	level.qasim.var_c681e4c1 = 1;
 	level.qasim.ignoreall = 1;
-	level.var_d9f0cb5b = level.adler;
-	level.var_e228f5df = level.woods;
+	level.raid_adler = level.adler;
+	level.raid_woods = level.woods;
 	level.var_862acc3d = level.qasim;
 	level flag::wait_till("flag_qasim_ready_for_interrogation");
 	level.qasim thread dialog_tree::function_cfa96cee(level.var_27da2f39, undefined, undefined, undefined, 100, 200, 15, vectorscale((0, 0, 1), 6), 1);
@@ -284,7 +284,7 @@ function function_26e6230d()
 
 /*
 	Name: function_e5aa773b
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x7B916BDE
 	Offset: 0x17A0
 	Size: 0x7C
@@ -300,7 +300,7 @@ function function_e5aa773b(struct_name)
 
 /*
 	Name: function_6c1a4c01
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x314C5BED
 	Offset: 0x1828
 	Size: 0x11C
@@ -328,7 +328,7 @@ function function_6c1a4c01(a_ents, str_shot)
 
 /*
 	Name: function_44f8874
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xBA5E593B
 	Offset: 0x1950
 	Size: 0x15C
@@ -344,9 +344,9 @@ function function_44f8874()
 	{
 		level.var_30fc6630 delete();
 	}
-	if(isdefined(level.var_d9f0cb5b.model) && level.var_d9f0cb5b.model != #"c_t9_usa_hero_adler_civ_amsterdam_body_no_dyn")
+	if(isdefined(level.raid_adler.model) && level.raid_adler.model != #"c_t9_usa_hero_adler_civ_amsterdam_body_no_dyn")
 	{
-		level.var_d9f0cb5b thread namespace_b100dd86::function_f82142f8(undefined, "c_t9_usa_hero_adler_civ_amsterdam_body_no_dyn");
+		level.raid_adler thread namespace_b100dd86::function_f82142f8(undefined, "c_t9_usa_hero_adler_civ_amsterdam_body_no_dyn");
 	}
 	level thread scene::play("scene_tkd_hit2_rooftop_props", "dt_enter");
 	level scene::play("scene_tkd_hit2_rooftop", "dt_enter");
@@ -356,7 +356,7 @@ function function_44f8874()
 
 /*
 	Name: function_8a6dd527
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xA4E8A0A4
 	Offset: 0x1AB8
 	Size: 0x3C
@@ -371,7 +371,7 @@ function function_8a6dd527()
 
 /*
 	Name: function_3dafee47
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x5ECBB10C
 	Offset: 0x1B00
 	Size: 0x49C
@@ -402,7 +402,7 @@ function function_3dafee47()
 
 /*
 	Name: function_86b6bafa
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x243E9D6D
 	Offset: 0x1FA8
 	Size: 0x104
@@ -416,15 +416,15 @@ function function_86b6bafa()
 	level.var_58759087 thread dialog_tree::run(level.qasim);
 	level districts::function_a7d79fcb([1:"airfield_base", 0:"airfield_intro"]);
 	level thread function_5f86b0a3();
-	if(isdefined(level.var_d9f0cb5b.model) && level.var_d9f0cb5b.model != #"c_t9_usa_hero_adler_civ_amsterdam_body")
+	if(isdefined(level.raid_adler.model) && level.raid_adler.model != #"c_t9_usa_hero_adler_civ_amsterdam_body")
 	{
-		level.var_d9f0cb5b thread namespace_b100dd86::function_f82142f8(undefined, "c_t9_usa_hero_adler_civ_amsterdam_body");
+		level.raid_adler thread namespace_b100dd86::function_f82142f8(undefined, "c_t9_usa_hero_adler_civ_amsterdam_body");
 	}
 }
 
 /*
 	Name: function_b47183fb
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xB8F58451
 	Offset: 0x20B8
 	Size: 0x1CC
@@ -469,7 +469,7 @@ function function_b47183fb()
 
 /*
 	Name: function_ba74fe83
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xFAE726F8
 	Offset: 0x2290
 	Size: 0x3F4
@@ -543,7 +543,7 @@ function function_ba74fe83()
 
 /*
 	Name: function_58efdf6d
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xAC4E261D
 	Offset: 0x2690
 	Size: 0x3C
@@ -558,7 +558,7 @@ function function_58efdf6d()
 
 /*
 	Name: function_6321f3d1
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x8FFCACF
 	Offset: 0x26D8
 	Size: 0x54
@@ -574,7 +574,7 @@ function function_6321f3d1()
 
 /*
 	Name: function_80b14544
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x13CFE596
 	Offset: 0x2738
 	Size: 0x104
@@ -594,7 +594,7 @@ function function_80b14544()
 
 /*
 	Name: function_5f86b0a3
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x78984895
 	Offset: 0x2848
 	Size: 0x44
@@ -609,7 +609,7 @@ function function_5f86b0a3()
 
 /*
 	Name: function_c29f52ec
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x81FD4400
 	Offset: 0x2898
 	Size: 0x3C
@@ -624,7 +624,7 @@ function function_c29f52ec()
 
 /*
 	Name: function_1998b542
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xAF092066
 	Offset: 0x28E0
 	Size: 0x84
@@ -641,7 +641,7 @@ function function_1998b542()
 
 /*
 	Name: function_4f4627e4
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x89FB0A1D
 	Offset: 0x2970
 	Size: 0x10E
@@ -661,7 +661,7 @@ function function_4f4627e4()
 
 /*
 	Name: function_f48f4f4f
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xFBC12AC7
 	Offset: 0x2A88
 	Size: 0x7C
@@ -679,7 +679,7 @@ function function_f48f4f4f()
 
 /*
 	Name: function_95707bc7
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x4D4A8A2D
 	Offset: 0x2B10
 	Size: 0x1CC
@@ -693,7 +693,7 @@ function function_95707bc7()
 	level.qasim thread function_fa343ac7();
 	aiutility::addaioverridedamagecallback(level.qasim, &function_c5881277);
 	waitresult = undefined;
-	waitresult = level.qasim waittill(#"damage", #"hash_5e43e2867eb75c4b");
+	waitresult = level.qasim waittill(#"damage", #"dt_5_res_over");
 	if(waitresult._notify == "dt_5_res_over")
 	{
 		level thread scene::play("scene_tkd_hit2_rooftop", "dt_5_res_idle");
@@ -710,7 +710,7 @@ function function_95707bc7()
 
 /*
 	Name: function_e65b6174
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x718ADA84
 	Offset: 0x2CE8
 	Size: 0x34
@@ -725,7 +725,7 @@ function function_e65b6174()
 
 /*
 	Name: head_shot
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x96C38370
 	Offset: 0x2D28
 	Size: 0x3C
@@ -740,7 +740,7 @@ function head_shot()
 
 /*
 	Name: function_c5f7e209
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xFE18B077
 	Offset: 0x2D70
 	Size: 0x3C
@@ -755,7 +755,7 @@ function function_c5f7e209()
 
 /*
 	Name: function_c5881277
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x298E0288
 	Offset: 0x2DB8
 	Size: 0x130
@@ -777,7 +777,7 @@ function function_c5881277(inflictor, attacker, damage, idflags, meansofdeath, w
 
 /*
 	Name: function_dd99245
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xB79688A2
 	Offset: 0x2EF8
 	Size: 0x5C
@@ -798,7 +798,7 @@ function function_dd99245(s_result)
 
 /*
 	Name: function_fa343ac7
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xBB4E0891
 	Offset: 0x2F60
 	Size: 0x66
@@ -810,12 +810,12 @@ function function_fa343ac7()
 	self endon(#"death");
 	self endon(#"damage");
 	self waittillmatch({#notetrack:"end"}, #"hash_14f49c6f7696568c");
-	self notify(#"hash_5e43e2867eb75c4b");
+	self notify(#"dt_5_res_over");
 }
 
 /*
 	Name: function_2ed341fb
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x56CC43B4
 	Offset: 0x2FD0
 	Size: 0xDC
@@ -836,7 +836,7 @@ function function_2ed341fb()
 
 /*
 	Name: cleanup
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0xEA7B098A
 	Offset: 0x30B8
 	Size: 0x41C
@@ -853,21 +853,21 @@ function cleanup(name, starting, direct, player)
 		}
 		level.var_862acc3d delete();
 	}
-	if(isdefined(level.var_d9f0cb5b))
+	if(isdefined(level.raid_adler))
 	{
-		if(isdefined(level.var_d9f0cb5b.magic_bullet_shield))
+		if(isdefined(level.raid_adler.magic_bullet_shield))
 		{
-			level thread util::stop_magic_bullet_shield(level.var_d9f0cb5b);
+			level thread util::stop_magic_bullet_shield(level.raid_adler);
 		}
-		level.var_d9f0cb5b delete();
+		level.raid_adler delete();
 	}
-	if(isdefined(level.var_e228f5df))
+	if(isdefined(level.raid_woods))
 	{
-		if(isdefined(level.var_e228f5df.magic_bullet_shield))
+		if(isdefined(level.raid_woods.magic_bullet_shield))
 		{
-			level thread util::stop_magic_bullet_shield(level.var_e228f5df);
+			level thread util::stop_magic_bullet_shield(level.raid_woods);
 		}
-		level.var_e228f5df delete();
+		level.raid_woods delete();
 	}
 	var_5895f36c = getent("raid_capture_street_vehicle", "targetname");
 	if(isdefined(var_5895f36c))
@@ -879,10 +879,10 @@ function cleanup(name, starting, direct, player)
 	{
 		var_67de73de delete();
 	}
-	var_db9090e4 = getentarray("canal_boats", "targetname");
-	if(isdefined(var_db9090e4))
+	canal_boats = getentarray("canal_boats", "targetname");
+	if(isdefined(canal_boats))
 	{
-		foreach(boat in var_db9090e4)
+		foreach(boat in canal_boats)
 		{
 			if(isdefined(boat.target))
 			{
@@ -917,7 +917,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x80F724D1
 	Offset: 0x34E0
 	Size: 0x4
@@ -930,7 +930,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x80F724D1
 	Offset: 0x34F0
 	Size: 0x4
@@ -943,7 +943,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x80F724D1
 	Offset: 0x3500
 	Size: 0x4
@@ -956,7 +956,7 @@ function init_scenes()
 
 /*
 	Name: function_2d0aefe0
-	Namespace: namespace_b995dbff
+	Namespace: tkdn_raid_capture
 	Checksum: 0x679E4B66
 	Offset: 0x3510
 	Size: 0x184

@@ -1,9 +1,9 @@
-#using script_35e940bfe99f96cd;
-#using scripts\core_common\array_shared.csc;
+#using scripts\core_common\ai\archetype_nosferatu.csc;
 #using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\util_shared.csc;
 #using scripts\core_common\flag_shared.csc;
 #using scripts\core_common\math_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace namespace_58e19d6;
 

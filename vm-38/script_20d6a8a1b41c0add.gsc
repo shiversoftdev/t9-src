@@ -1,18 +1,18 @@
-#using script_18bc13f07baf161a;
-#using script_24879e3929b5b5e9;
 #using script_31b23f5316d1b26d;
-#using script_38635d174016f682;
-#using script_4fc0ca879f81e0dc;
+#using script_18bc13f07baf161a;
 #using script_64e5d3ad71ce8140;
-#using script_66548bb129ab65aa;
+#using script_38635d174016f682;
 #using script_67049b48b589d81;
-#using script_aa59671292d1c87;
 #using script_ec3113f01f76388;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using script_66548bb129ab65aa;
+#using script_4fc0ca879f81e0dc;
+#using script_aa59671292d1c87;
+#using script_24879e3929b5b5e9;
 #using scripts\core_common\struct.csc;
 #using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace namespace_981c1f3c;
 
@@ -27,7 +27,7 @@
 */
 function private autoexec function_cfd9f3e9()
 {
-	level notify(245167251);
+	level notify(-245167251);
 }
 
 /*

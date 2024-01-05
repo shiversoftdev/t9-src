@@ -1,37 +1,37 @@
 #using script_1940fc077a028a81;
-#using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
-#using script_41fe08c37d53a635;
-#using script_4d85e8de54b02198;
-#using script_58c342edd81589fb;
-#using script_6809bf766eba194a;
-#using script_7e59d7bba853fe4b;
-#using script_bd2b8aaa388dcce;
-#using script_db06eb511bd9b36;
-#using script_ed50e9299d3e143;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\zm_common\zm_round_spawning.gsc;
 #using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_behavior.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_net.gsc;
 #using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_audio.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_net.gsc;
+#using scripts\zm_common\zm_devgui.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_cleanup_mgr.gsc;
+#using scripts\zm_common\zm_behavior.gsc;
+#using script_ed50e9299d3e143;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\ai\zombie.gsc;
+#using script_35598499769dbb3d;
+#using script_41fe08c37d53a635;
+#using script_3aa0f32b70d4f7cb;
+#using script_4d85e8de54b02198;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_3819e7a1427df6d2;
+#using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace zm_ai_mechz;
 
@@ -46,11 +46,11 @@
 */
 function private autoexec function_8904e6ee()
 {
-	level notify(214266055);
+	level notify(-214266055);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_ai_mechz
 	Checksum: 0xD9835AA0
 	Offset: 0x1D8
@@ -58,7 +58,7 @@ function private autoexec function_8904e6ee()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_ai_mechz", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -74,8 +74,8 @@ function private autoexec function_89f2df9()
 */
 function function_70a657d8()
 {
-	namespace_c3287616::register_archetype(#"mechz", &function_13043824, &round_spawn, undefined, 100);
-	namespace_c3287616::function_306ce518(#"mechz", &function_5e8a178a);
+	zm_round_spawning::register_archetype(#"mechz", &function_13043824, &round_spawn, undefined, 100);
+	zm_round_spawning::function_306ce518(#"mechz", &function_5e8a178a);
 	spawner::add_archetype_spawn_function(#"mechz", &mechzspawnsetup);
 	spawner::function_89a2cd87(#"mechz", &function_5d873f78);
 	zm_cleanup::function_cdf5a512(#"mechz", &function_66247c2);
@@ -201,17 +201,17 @@ function function_66247c2()
 		}
 		util::wait_network_frame();
 	}
-	var_a1ef7f29 = [];
+	s_spawn_locs = [];
 	if(isdefined(level.var_e333bf92))
 	{
 		spawn_locs = [[level.var_e333bf92]](1);
 		if(isarray(spawn_locs))
 		{
-			var_a1ef7f29 = spawn_locs;
+			s_spawn_locs = spawn_locs;
 		}
 		else
 		{
-			array::add(var_a1ef7f29, spawn_locs);
+			array::add(s_spawn_locs, spawn_locs);
 		}
 	}
 	else
@@ -219,13 +219,13 @@ function function_66247c2()
 		spawn_locs = function_65c98960(1);
 		if(isarray(spawn_locs))
 		{
-			var_a1ef7f29 = spawn_locs;
+			s_spawn_locs = spawn_locs;
 		}
 	}
 	var_69681a59 = [];
-	if(isdefined(level.active_zone_names) && isarray(var_a1ef7f29) && var_a1ef7f29.size > 0)
+	if(isdefined(level.active_zone_names) && isarray(s_spawn_locs) && s_spawn_locs.size > 0)
 	{
-		foreach(spawn_loc in var_a1ef7f29)
+		foreach(spawn_loc in s_spawn_locs)
 		{
 			if(isdefined(spawn_loc.zone_name) && array::contains(level.active_zone_names, spawn_loc.zone_name))
 			{
@@ -261,7 +261,7 @@ function function_66247c2()
 	/#
 		iprintln((("" + self.origin) + "") + var_b2aa54a9.origin);
 	#/
-	self namespace_e0710ee6::function_a8dc3363(var_b2aa54a9);
+	self zm_ai_utility::function_a8dc3363(var_b2aa54a9);
 	self.completed_emerging_into_playable_area = 1;
 	self.var_5e54763a = var_b2aa54a9.zone_name;
 	return true;
@@ -537,7 +537,7 @@ function function_5e8a178a(n_round_number)
 	while(true)
 	{
 		level waittill(#"hash_5d3012139f083ccb");
-		if(namespace_c3287616::function_d0db51fc(#"mechz"))
+		if(zm_round_spawning::function_d0db51fc(#"mechz"))
 		{
 			level.var_ea1e9b1e++;
 			n_player_count = zm_utility::function_a2541519(getplayers().size);
@@ -564,11 +564,11 @@ function function_5e8a178a(n_round_number)
 */
 function function_1064536d(pos)
 {
-	var_9a28a0c8 = getentarray("mechz_cant_path", "script_noteworthy");
-	if(var_9a28a0c8.size)
+	a_vols = getentarray("mechz_cant_path", "script_noteworthy");
+	if(a_vols.size)
 	{
 		radius = self getpathfindingradius();
-		foreach(e_vol in var_9a28a0c8)
+		foreach(e_vol in a_vols)
 		{
 			if(istouching(pos, e_vol, (radius, radius, radius)))
 			{
@@ -588,7 +588,7 @@ function function_1064536d(pos)
 	Parameters: 2
 	Flags: Linked
 */
-function function_6bf0d9e0(var_e2414b1b, player)
+function function_6bf0d9e0(zone_path, player)
 {
 	if(!self function_1064536d(player.origin))
 	{

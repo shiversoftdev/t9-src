@@ -1,8 +1,8 @@
-#using script_618d6f5ff5d18933;
-#using scripts\core_common\ai_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using script_618d6f5ff5d18933;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_4aff7b6b;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_4b49d1cd()
 {
-	level notify(1329810676);
+	level notify(-1329810676);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4aff7b6b
 	Checksum: 0x5410738C
 	Offset: 0x130
@@ -29,7 +29,7 @@ function private autoexec function_4b49d1cd()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_11b091d0ce567b82", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
@@ -125,11 +125,11 @@ function private function_62708cfa(localclientnum, oldval, newval, bnewent, bini
 		}
 	}
 	self.var_fc558e74 = "mimic_prop_spawn";
-	var_d8138db2 = self getitemindex();
-	self.item = function_b1702735(var_d8138db2);
+	itemid = self getitemindex();
+	self.item = function_b1702735(itemid);
 	if(isdefined(rob))
 	{
-		self function_bf9d3071(rob);
+		self playrenderoverridebundle(rob);
 		self thread function_81c73263(fieldname, rob);
 	}
 }
@@ -155,7 +155,7 @@ function function_81c73263(localclientnum, rob)
 		wait(0.1);
 		if(!self function_d2503806(rob) && getplayers(localclientnum, undefined, self.origin, maxdist).size)
 		{
-			self function_bf9d3071(rob);
+			self playrenderoverridebundle(rob);
 		}
 	}
 }

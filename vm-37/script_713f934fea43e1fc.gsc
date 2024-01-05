@@ -1,14 +1,14 @@
 #using script_2d142c6d365a90a3;
-#using script_7183ecf0e4bbcdf8;
 #using script_7ebad89114ecedb1;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
+#using script_7183ecf0e4bbcdf8;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace radiation;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: radiation
 	Checksum: 0x32045DA7
 	Offset: 0x90
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"radiation", &function_70a657d8, undefined, undefined, undefined);
 }

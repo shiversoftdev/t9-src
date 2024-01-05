@@ -1,10 +1,10 @@
-#using script_1cc417743d7c262d;
-#using script_335d0650ed05d36d;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\userspawnselection.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\userspawnselection.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using script_335d0650ed05d36d;
+#using script_1cc417743d7c262d;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace gametype;
 
@@ -37,7 +37,7 @@ function init_mp()
 }
 
 /*
-	Name: function_d81f6eb7
+	Name: on_start_game_type
 	Namespace: gametype
 	Checksum: 0x2EFF2A71
 	Offset: 0x1A0
@@ -45,7 +45,7 @@ function init_mp()
 	Parameters: 0
 	Flags: Linked
 */
-function function_d81f6eb7()
+function on_start_game_type()
 {
 	bundle = level.var_d1455682;
 	if(!isdefined(bundle))

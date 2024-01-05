@@ -1,22 +1,22 @@
-#using script_3626f1b2cf51a99c;
-#using script_47fb62300ac0bd60;
-#using script_522aeb6ae906391e;
-#using script_52da18c20f45c56a;
-#using script_7d0013bbc05623b9;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\bb.gsc;
-#using scripts\cp_common\gametypes\battlechatter.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\cp_common\bb.gsc;
+#using script_7d0013bbc05623b9;
+#using script_52da18c20f45c56a;
+#using script_3626f1b2cf51a99c;
+#using scripts\cp_common\gametypes\battlechatter.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using script_522aeb6ae906391e;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
 
 #namespace namespace_9c83b58d;
 
@@ -31,11 +31,11 @@
 */
 function private autoexec function_bebd32e3()
 {
-	level notify(1353653199);
+	level notify(-1353653199);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9c83b58d
 	Checksum: 0x5C31B95E
 	Offset: 0x340
@@ -43,7 +43,7 @@ function private autoexec function_bebd32e3()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7e93e9089f28804f", &function_70a657d8, undefined, undefined, #"actions");
 }
@@ -531,9 +531,9 @@ function function_41abe76e(action)
 							else
 							{
 								var_25b46261 = 5;
-								var_13b3084 = var_25b46261 + 0.1;
-								traceresult = playerphysicstrace(self.origin + (0, 0, var_25b46261), self.origin + (0, 0, var_13b3084));
-								if(traceresult[2] < self.origin[2] + var_13b3084)
+								endz = var_25b46261 + 0.1;
+								traceresult = playerphysicstrace(self.origin + (0, 0, var_25b46261), self.origin + (0, 0, endz));
+								if(traceresult[2] < self.origin[2] + endz)
 								{
 									/#
 										box(self.origin + (0, 0, var_25b46261), vectorscale((-1, -1, 0), 15), (15, 15, 70), 0, (1, 0, 0), 1, 1, 1);
@@ -728,7 +728,7 @@ function function_146a3d56(enemy)
 	/#
 		assert(isplayer(self));
 	#/
-	return vectornormalize(enemy.var_97e2c0da.var_232d0f3b - self getplayercamerapos());
+	return vectornormalize(enemy.var_97e2c0da.check_origin - self getplayercamerapos());
 }
 
 /*
@@ -1041,7 +1041,7 @@ function function_c943b729(action, takedown, player)
 			zoffset = (0, 0, takedown.traceheight);
 		}
 		start = player.origin + zoffset;
-		end = self.var_97e2c0da.var_232d0f3b + zoffset;
+		end = self.var_97e2c0da.check_origin + zoffset;
 		radius = 0;
 		trace = physicstrace(start, end, (radius * -1, radius * -1, radius * -1), (radius, radius, radius), self.var_a08ba405, 32 | 1, 32768 | 8388608);
 		if(trace[#"fraction"] < 1)
@@ -1343,9 +1343,9 @@ function function_7a061b23(enabled, action_name)
 	}
 	else
 	{
-		foreach(var_82402c2 in self.takedown.var_9871533)
+		foreach(shaderanimopacity_opacity in self.takedown.var_9871533)
 		{
-			bitmask = bitmask | (1 << var_82402c2);
+			bitmask = bitmask | (1 << shaderanimopacity_opacity);
 		}
 	}
 	if(enabled)
@@ -1529,12 +1529,12 @@ function function_8c04a084(player)
 		}
 		var_da4521b5 = vectorcross(var_a38620f, (0, 0, 1));
 		self.var_97e2c0da.dir_to_player = var_b6db82af;
-		self.var_97e2c0da.var_f67f7d03 = vectordot(var_a38620f, var_b6db82af);
+		self.var_97e2c0da.dot_forward = vectordot(var_a38620f, var_b6db82af);
 		self.var_97e2c0da.dot_right = vectordot(var_da4521b5, var_b6db82af);
 		self.var_97e2c0da.height = self.origin[2] - player.origin[2];
 		self.var_97e2c0da.var_bd87dbc5 = abs(self.var_97e2c0da.height);
-		self.var_97e2c0da.var_232d0f3b = self gettagorigin(tag);
-		self.var_97e2c0da.distsq = distancesquared(self.var_97e2c0da.var_232d0f3b, player getplayercamerapos());
+		self.var_97e2c0da.check_origin = self gettagorigin(tag);
+		self.var_97e2c0da.distsq = distancesquared(self.var_97e2c0da.check_origin, player getplayercamerapos());
 		self.var_9959f16e = now;
 	}
 	return self.var_97e2c0da;

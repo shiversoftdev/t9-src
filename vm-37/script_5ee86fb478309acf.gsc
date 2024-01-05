@@ -1,12 +1,12 @@
-#using script_727042a075af51b7;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using script_727042a075af51b7;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_85745671;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_85745671
 	Checksum: 0x13D0C83
 	Offset: 0xC8
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_74761c506cae8855", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -32,7 +32,7 @@ function private function_70a657d8()
 {
 	clientfield::register("toplayer", "zombie_vehicle_shake", 1, 1, "counter", &function_3acc8ce4, 0, 0);
 	clientfield::register("toplayer", "zombie_melee_shake", 1, 1, "counter", &function_6c13a7f0, 0, 0);
-	level._effect[#"hash_2ff87d61167ea531"] = #"hash_1127495f599a3db4";
+	level._effect[#"hash_2ff87d61167ea531"] = #"wz/fx8_zm_box_marker";
 	level._effect[#"hash_1e5c0bbc60604949"] = #"wz/fx8_zm_box_marker_red";
 	level._effect[#"hash_7fe086085cbbacac"] = #"hash_4bd4c9b0fb97f425";
 	level._effect[#"hash_4048cb4967032c4a"] = #"hash_1e43d43c6586fcb5";

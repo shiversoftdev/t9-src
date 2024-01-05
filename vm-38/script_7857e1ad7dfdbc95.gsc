@@ -1,30 +1,30 @@
-#using script_164a456ce05c3483;
-#using script_17dcb1172e441bf6;
-#using script_18166da2cb5f51d3;
-#using script_1b01e95a6b5270fd;
-#using script_1ee011cd0961afd7;
-#using script_2a5bf5b4a00cee0d;
-#using script_2c5daa95f8fec03c;
 #using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
-#using script_3faf478d5b0850fe;
+#using scripts\core_common\ai\archetype_skeleton.gsc;
 #using script_41fe08c37d53a635;
-#using script_47851dbeea22fe66;
-#using script_5701633066d199f2;
-#using script_5f20d3b434d24884;
-#using script_774302f762d76254;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\animation_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\throttle_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using script_2c5daa95f8fec03c;
+#using scripts\core_common\ai\zombie_utility.gsc;
 #using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\throttle_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_3aa0f32b70d4f7cb;
+#using scripts\core_common\animation_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using script_774302f762d76254;
+#using script_3faf478d5b0850fe;
+#using script_47851dbeea22fe66;
+#using script_2a5bf5b4a00cee0d;
+#using script_164a456ce05c3483;
+#using script_5f20d3b434d24884;
+#using script_1ee011cd0961afd7;
+#using script_5701633066d199f2;
+#using script_1b01e95a6b5270fd;
+#using script_17dcb1172e441bf6;
 
 #namespace namespace_d1abdcb5;
 
@@ -53,7 +53,7 @@ function private autoexec function_e130aa10()
 */
 function init()
 {
-	clientfield::register("scriptmover", "" + #"hash_26686fdfe90ecd97", 1, 1, "int");
+	clientfield::register("scriptmover", "" + #"spartoi_reassemble_clientfield", 1, 1, "int");
 	clientfield::register("actor", "" + #"hash_3a6a3e4ef0a1a999", 1, 1, "counter");
 	clientfield::register("actor", "skel_spawn_fx", 1, 1, "counter");
 	namespace_250e9486::function_252dff4d("skeleton", 12, &function_2ee0142d, undefined, 65);
@@ -789,9 +789,9 @@ function private function_af85a094(inflictor, attacker, damage, idflags, meansof
 				self.var_992c3917 = 1;
 				self playsoundontag(#"hash_7241c61ae34b51a1", "j_head");
 			}
-			if(boneindex == 0 && isdefined(var_84ed9a13.var_d8fa3d82) && var_84ed9a13.var_d8fa3d82.size > 0)
+			if(boneindex == 0 && isdefined(var_84ed9a13.hittags) && var_84ed9a13.hittags.size > 0)
 			{
-				boneindex = var_84ed9a13.var_d8fa3d82[0];
+				boneindex = var_84ed9a13.hittags[0];
 			}
 			var_dc905145 = namespace_81245006::function_37e3f011(self, boneindex, 2);
 			if(isdefined(var_dc905145))

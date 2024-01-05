@@ -1,21 +1,21 @@
-#using script_18f0d22c75b141a7;
-#using script_256b8879317373de;
-#using script_25c09ccacf057919;
 #using script_32399001bdb550da;
-#using script_56ca01b3b31455b5;
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\abilities\ability_util.gsc;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\player\player_loadout.gsc;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\load_shared.gsc;
-#using scripts\core_common\perks.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\perks.gsc;
+#using scripts\core_common\load_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_25c09ccacf057919;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace profile_traits;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: profile_traits
 	Checksum: 0xD2A63AD3
 	Offset: 0x108
@@ -23,7 +23,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"profile_traits", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -430,7 +430,7 @@ function function_1c1fa213(var_f03e5d1b)
 		{
 			if(is_true(trait.var_e75fcf1a) && player hasperk(trait.perk_name))
 			{
-				player perks::function_45d12554(trait.perk_name);
+				player perks::perk_unsetperk(trait.perk_name);
 			}
 			else if(trait.ref_name == "jugernog")
 			{
@@ -475,7 +475,7 @@ function function_d53bb873()
 		{
 			if(is_true(trait.var_e75fcf1a) && !player hasperk(trait.perk_name))
 			{
-				player perks::function_7637bafa(trait.perk_name);
+				player perks::perk_setperk(trait.perk_name);
 			}
 			else if(trait.ref_name == "jugernog")
 			{

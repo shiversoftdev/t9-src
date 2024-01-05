@@ -1,13 +1,13 @@
+#using scripts\zm_common\zm_utility.gsc;
 #using script_19367cd29a4485db;
 #using script_3411bb48d41bd3b;
-#using script_7fc996fe8678852;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_a2a34bbc;
 
@@ -26,7 +26,7 @@ function private autoexec function_7699909f()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_a2a34bbc
 	Checksum: 0xE4A8E2A2
 	Offset: 0xF0
@@ -34,7 +34,7 @@ function private autoexec function_7699909f()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_1613437b4759eb4a", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }

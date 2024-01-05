@@ -1,5 +1,5 @@
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\gametypes\dev.gsc;
+#using scripts\core_common\util_shared.gsc;
 
 #namespace dev_class;
 
@@ -14,7 +14,7 @@
 */
 function private autoexec function_c59eac23()
 {
-	level notify(1032694612);
+	level notify(-1032694612);
 }
 
 /*

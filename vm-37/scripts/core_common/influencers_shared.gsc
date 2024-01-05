@@ -1,11 +1,11 @@
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace influencers;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: influencers
 	Checksum: 0x2CEF7063
 	Offset: 0x108
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"influencers_shared", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -37,7 +37,7 @@ function private function_70a657d8()
 	level.var_a3e7732d = sessionmode == 1 || sessionmode == 3;
 	if(level.var_3d984b4c && level.var_a3e7732d)
 	{
-		callback::function_20263b9e(&function_20263b9e);
+		callback::on_grenade_fired(&on_grenade_fired);
 		callback::on_player_killed(&on_player_death);
 		callback::on_joined_team(&on_joined_team);
 		callback::on_spawned(&on_spawned);
@@ -92,7 +92,7 @@ function on_joined_team(params)
 }
 
 /*
-	Name: function_20263b9e
+	Name: on_grenade_fired
 	Namespace: influencers
 	Checksum: 0xFAC11358
 	Offset: 0x320
@@ -100,7 +100,7 @@ function on_joined_team(params)
 	Parameters: 1
 	Flags: Linked
 */
-function function_20263b9e(params)
+function on_grenade_fired(params)
 {
 	grenade = params.projectile;
 	weapon = params.weapon;

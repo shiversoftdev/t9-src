@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_cb308359;
 
@@ -192,7 +192,7 @@ function function_5c922fb8(localclientnum, oldval, newval, bnewent, binitialsnap
 	if(bwastimejump == 1)
 	{
 		self endon(#"death");
-		self function_bf9d3071(#"hash_5e09fb8e239d3dd3");
+		self playrenderoverridebundle(#"hash_5e09fb8e239d3dd3");
 		self function_78233d29(#"hash_5e09fb8e239d3dd3", "", "Brightness", 1);
 		self function_78233d29(#"hash_5e09fb8e239d3dd3", "", "Tint", 1);
 		self.var_7cf04bb1 = util::playfxontag(fieldname, "sr/fx9_obj_console_defend_vat_lights", self, "tag_tank_lights_d0");
@@ -200,7 +200,7 @@ function function_5c922fb8(localclientnum, oldval, newval, bnewent, binitialsnap
 	}
 	else
 	{
-		self function_5d482e78(#"hash_5e09fb8e239d3dd3");
+		self stoprenderoverridebundle(#"hash_5e09fb8e239d3dd3");
 		if(isdefined(self.var_7cf04bb1))
 		{
 			stopfx(fieldname, self.var_7cf04bb1);

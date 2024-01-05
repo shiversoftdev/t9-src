@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_42946372 : class_6aaccc24
+class cdoa_textbubble_playername : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x3CA92F02
 		Offset: 0x4B8
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_42946372 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x2394690F
 		Offset: 0x750
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_42946372 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0xED71C4D6
 		Offset: 0x608
 		Size: 0x24
@@ -40,82 +40,82 @@ class class_42946372 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_3b7b386a
-		Namespace: namespace_42946372
+		Name: set_clientnum
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x494CFAA
 		Offset: 0x670
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_3b7b386a(localclientnum, value)
+	function set_clientnum(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "clientnum", value);
+		[[ self ]]->set_data(localclientnum, "clientnum", value);
 	}
 
 	/*
-		Name: function_4f6e830d
-		Namespace: namespace_42946372
+		Name: set_offset_y
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x7C61F63F
 		Offset: 0x6E0
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_4f6e830d(localclientnum, value)
+	function set_offset_y(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "offset_y", value);
+		[[ self ]]->set_data(localclientnum, "offset_y", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_42946372
+		Name: register_clientside
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0xE7D621C7
 		Offset: 0x528
 		Size: 0x1C
 		Parameters: 0
 		Flags: Linked
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("DOA_TextBubble_PlayerName");
+		cluielem::register_clientside("DOA_TextBubble_PlayerName");
 	}
 
 	/*
-		Name: function_61312692
-		Namespace: namespace_42946372
+		Name: set_offset_x
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x7EEC2235
 		Offset: 0x6A8
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_61312692(localclientnum, value)
+	function set_offset_x(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "offset_x", value);
+		[[ self ]]->set_data(localclientnum, "offset_x", value);
 	}
 
 	/*
-		Name: function_7ddfdfef
-		Namespace: namespace_42946372
+		Name: set_offset_z
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x414C32B0
 		Offset: 0x718
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_7ddfdfef(localclientnum, value)
+	function set_offset_z(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "offset_z", value);
+		[[ self ]]->set_data(localclientnum, "offset_z", value);
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0xEE62ABCF
 		Offset: 0x4D8
 		Size: 0x44
@@ -124,26 +124,26 @@ class class_42946372 : class_6aaccc24
 	*/
 	function setup_clientfields(var_5a7b4b38, var_c05c67e2, var_5957697a, var_90efc226, var_b77f41ee)
 	{
-		namespace_6aaccc24::setup_clientfields("DOA_TextBubble_PlayerName");
+		cluielem::setup_clientfields("DOA_TextBubble_PlayerName");
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_42946372
+		Name: set_entnum
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0xD267C096
 		Offset: 0x638
 		Size: 0x30
 		Parameters: 2
 		Flags: Linked
 	*/
-	function function_c8350e33(localclientnum, value)
+	function set_entnum(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "entnum", value);
+		[[ self ]]->set_data(localclientnum, "entnum", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_42946372
+		Namespace: cdoa_textbubble_playername
 		Checksum: 0x3E48E153
 		Offset: 0x550
 		Size: 0xB0
@@ -152,12 +152,12 @@ class class_42946372 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "entnum", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "clientnum", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "offset_x", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "offset_y", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "offset_z", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "entnum", 0);
+		[[ self ]]->set_data(localclientnum, "clientnum", 0);
+		[[ self ]]->set_data(localclientnum, "offset_x", 0);
+		[[ self ]]->set_data(localclientnum, "offset_y", 0);
+		[[ self ]]->set_data(localclientnum, "offset_z", 0);
 	}
 
 }
@@ -175,9 +175,9 @@ class class_42946372 : class_6aaccc24
 */
 function function_b4023f5a(localclientnum, offsetx, offsety, offsetz)
 {
-	self function_61312692(localclientnum, offsetx);
-	self function_4f6e830d(localclientnum, offsety);
-	self function_7ddfdfef(localclientnum, offsetz);
+	self set_offset_x(localclientnum, offsetx);
+	self set_offset_y(localclientnum, offsety);
+	self set_offset_z(localclientnum, offsetz);
 }
 
 /*
@@ -191,7 +191,7 @@ function function_b4023f5a(localclientnum, offsetx, offsety, offsetz)
 */
 function register(var_5a7b4b38, var_c05c67e2, var_5957697a, var_90efc226, var_b77f41ee)
 {
-	elem = new class_42946372();
+	elem = new cdoa_textbubble_playername();
 	[[ elem ]]->setup_clientfields(var_5a7b4b38, var_c05c67e2, var_5957697a, var_90efc226, var_b77f41ee);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -213,7 +213,7 @@ function register(var_5a7b4b38, var_c05c67e2, var_5957697a, var_90efc226, var_b7
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: doa_textbubble_playername
 	Checksum: 0xE3D078BB
 	Offset: 0x310
@@ -221,10 +221,10 @@ function register(var_5a7b4b38, var_c05c67e2, var_5957697a, var_90efc226, var_b7
 	Parameters: 0
 	Flags: Linked
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_42946372();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cdoa_textbubble_playername();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -271,7 +271,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: doa_textbubble_playername
 	Checksum: 0xD470DB9A
 	Offset: 0x3C8
@@ -279,13 +279,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: Linked
 */
-function function_c8350e33(localclientnum, value)
+function set_entnum(localclientnum, value)
 {
-	[[ self ]]->function_c8350e33(localclientnum, value);
+	[[ self ]]->set_entnum(localclientnum, value);
 }
 
 /*
-	Name: function_3b7b386a
+	Name: set_clientnum
 	Namespace: doa_textbubble_playername
 	Checksum: 0x2C6907CA
 	Offset: 0x3F8
@@ -293,13 +293,13 @@ function function_c8350e33(localclientnum, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_3b7b386a(localclientnum, value)
+function set_clientnum(localclientnum, value)
 {
-	[[ self ]]->function_3b7b386a(localclientnum, value);
+	[[ self ]]->set_clientnum(localclientnum, value);
 }
 
 /*
-	Name: function_61312692
+	Name: set_offset_x
 	Namespace: doa_textbubble_playername
 	Checksum: 0x42384878
 	Offset: 0x428
@@ -307,13 +307,13 @@ function function_3b7b386a(localclientnum, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_61312692(localclientnum, value)
+function set_offset_x(localclientnum, value)
 {
-	[[ self ]]->function_61312692(localclientnum, value);
+	[[ self ]]->set_offset_x(localclientnum, value);
 }
 
 /*
-	Name: function_4f6e830d
+	Name: set_offset_y
 	Namespace: doa_textbubble_playername
 	Checksum: 0x8F22A8C8
 	Offset: 0x458
@@ -321,13 +321,13 @@ function function_61312692(localclientnum, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_4f6e830d(localclientnum, value)
+function set_offset_y(localclientnum, value)
 {
-	[[ self ]]->function_4f6e830d(localclientnum, value);
+	[[ self ]]->set_offset_y(localclientnum, value);
 }
 
 /*
-	Name: function_7ddfdfef
+	Name: set_offset_z
 	Namespace: doa_textbubble_playername
 	Checksum: 0xFAF3B05A
 	Offset: 0x488
@@ -335,8 +335,8 @@ function function_4f6e830d(localclientnum, value)
 	Parameters: 2
 	Flags: Linked
 */
-function function_7ddfdfef(localclientnum, value)
+function set_offset_z(localclientnum, value)
 {
-	[[ self ]]->function_7ddfdfef(localclientnum, value);
+	[[ self ]]->set_offset_z(localclientnum, value);
 }
 

@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_d1ed471a : class_6aaccc24
+class class_d1ed471a : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_d1ed471a
 		Checksum: 0x1B878BD3
 		Offset: 0x420
@@ -52,9 +52,9 @@ class class_d1ed471a : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("zm_gold_hud");
+		cluielem::register_clientside("zm_gold_hud");
 	}
 
 	/*
@@ -68,9 +68,9 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function setup_clientfields(var_ad2e14b, var_ffd97b17)
 	{
-		namespace_6aaccc24::setup_clientfields("zm_gold_hud");
-		namespace_6aaccc24::function_da693cbe("showTerminal", 1000, 1, "int", var_ffd97b17);
-		namespace_6aaccc24::function_dcb34c80("string", "satelliteInfo", 1000);
+		cluielem::setup_clientfields("zm_gold_hud");
+		cluielem::add_clientfield("showTerminal", 1000, 1, "int", var_ffd97b17);
+		cluielem::function_dcb34c80("string", "satelliteInfo", 1000);
 	}
 
 	/*
@@ -84,7 +84,7 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function function_9dc41635(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "showTerminal", value);
+		[[ self ]]->set_data(localclientnum, "showTerminal", value);
 	}
 
 	/*
@@ -98,7 +98,7 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function function_f308d6bb(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "satelliteInfo", value);
+		[[ self ]]->set_data(localclientnum, "satelliteInfo", value);
 	}
 
 	/*
@@ -112,18 +112,18 @@ class class_d1ed471a : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "showTerminal", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "satelliteInfo", #"");
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "showTerminal", 0);
+		[[ self ]]->set_data(localclientnum, "satelliteInfo", #"");
 	}
 
 }
 
-#namespace namespace_82d7691b;
+#namespace zm_gold_hud;
 
 /*
 	Name: register
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0xC40DA770
 	Offset: 0xD8
 	Size: 0x17E
@@ -138,40 +138,40 @@ function register(var_ad2e14b, var_ffd97b17)
 	{
 		level.var_ae746e8f = associativearray();
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_270f51c6d631dccd"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_gold_hud"]))
 	{
-		level.var_ae746e8f[#"hash_270f51c6d631dccd"] = [];
+		level.var_ae746e8f[#"zm_gold_hud"] = [];
 	}
-	if(!isdefined(level.var_ae746e8f[#"hash_270f51c6d631dccd"]))
+	if(!isdefined(level.var_ae746e8f[#"zm_gold_hud"]))
 	{
-		level.var_ae746e8f[#"hash_270f51c6d631dccd"] = [];
+		level.var_ae746e8f[#"zm_gold_hud"] = [];
 	}
-	else if(!isarray(level.var_ae746e8f[#"hash_270f51c6d631dccd"]))
+	else if(!isarray(level.var_ae746e8f[#"zm_gold_hud"]))
 	{
-		level.var_ae746e8f[#"hash_270f51c6d631dccd"] = array(level.var_ae746e8f[#"hash_270f51c6d631dccd"]);
+		level.var_ae746e8f[#"zm_gold_hud"] = array(level.var_ae746e8f[#"zm_gold_hud"]);
 	}
-	level.var_ae746e8f[#"hash_270f51c6d631dccd"][level.var_ae746e8f[#"hash_270f51c6d631dccd"].size] = elem;
+	level.var_ae746e8f[#"zm_gold_hud"][level.var_ae746e8f[#"zm_gold_hud"].size] = elem;
 }
 
 /*
-	Name: function_5c1bb138
-	Namespace: namespace_82d7691b
+	Name: register_clientside
+	Namespace: zm_gold_hud
 	Checksum: 0x43A289C3
 	Offset: 0x260
 	Size: 0x34
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_d1ed471a();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
 /*
 	Name: open
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x2452FC06
 	Offset: 0x2A0
 	Size: 0x1C
@@ -185,7 +185,7 @@ function open(player)
 
 /*
 	Name: close
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0xFE1506A9
 	Offset: 0x2C8
 	Size: 0x1C
@@ -199,7 +199,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0xC80CA57E
 	Offset: 0x2F0
 	Size: 0x1A
@@ -213,7 +213,7 @@ function is_open(localclientnum)
 
 /*
 	Name: function_9dc41635
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0xD9E4F7F6
 	Offset: 0x318
 	Size: 0x28
@@ -227,7 +227,7 @@ function function_9dc41635(localclientnum, value)
 
 /*
 	Name: function_f308d6bb
-	Namespace: namespace_82d7691b
+	Namespace: zm_gold_hud
 	Checksum: 0x784B59E6
 	Offset: 0x348
 	Size: 0x28

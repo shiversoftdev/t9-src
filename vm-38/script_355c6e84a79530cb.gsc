@@ -1,27 +1,27 @@
-#using script_1029986e2bc8ca8e;
-#using script_1cc417743d7c262d;
-#using script_23ffc3f9567be80c;
-#using script_25be5471a9c31833;
+#using scripts\core_common\armor.gsc;
 #using script_2618e0f3e5e11649;
-#using script_340a2e805e35f7a2;
-#using script_4ccfb58a9443a60b;
+#using scripts\zm_common\zm_utility.gsc;
 #using script_6b2d896ac43eb90;
+#using script_1029986e2bc8ca8e;
+#using script_23ffc3f9567be80c;
+#using script_4ccfb58a9443a60b;
 #using script_6fc2be37feeb317b;
 #using script_7a5293d92c61c788;
+#using script_25be5471a9c31833;
+#using scripts\zm_common\zm_score.gsc;
+#using script_1cc417743d7c262d;
+#using script_340a2e805e35f7a2;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
 #using script_7fc996fe8678852;
-#using scripts\core_common\armor.gsc;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_73df937d;
 
@@ -40,7 +40,7 @@ function private autoexec function_eefe9674()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_73df937d
 	Checksum: 0x199FFDBA
 	Offset: 0x270
@@ -48,7 +48,7 @@ function private autoexec function_eefe9674()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5ff56dba9074b0b4", &function_70a657d8, undefined, &finalize, #"hash_f81b9dea74f0ee");
 }
@@ -67,7 +67,7 @@ function function_70a657d8()
 	namespace_8b6a9d79::function_b3464a7c("safehouse", &function_d0e7af66);
 	level clientfield::register("scriptmover", "safehouse_claim_fx", 1, 1, "int");
 	callback::add_callback(#"objective_started", &function_83b6d24a);
-	callback::add_callback(#"hash_69090774fec4a17b", &function_2b1da4a6);
+	callback::add_callback(#"objective_ended", &function_2b1da4a6);
 }
 
 /*
@@ -85,7 +85,7 @@ function finalize()
 	level.var_7d45d0d4.var_bb7e7804 = 1;
 	level thread function_9d178321();
 	/#
-		level thread function_2085db3b();
+		level thread init_devgui();
 	#/
 }
 
@@ -535,7 +535,7 @@ function private function_98715738(instance)
 }
 
 /*
-	Name: function_2085db3b
+	Name: init_devgui
 	Namespace: namespace_73df937d
 	Checksum: 0xDF641E74
 	Offset: 0x1910
@@ -543,13 +543,13 @@ function private function_98715738(instance)
 	Parameters: 0
 	Flags: None
 */
-function function_2085db3b()
+function init_devgui()
 {
 	/#
 		util::waittill_can_add_debug_command();
 		level thread function_dab40c5f();
 		adddebugcommand("");
-		util::function_e2e9d901(namespace_8b6a9d79::function_7956c7ac("", 105), "");
+		util::add_devgui(namespace_8b6a9d79::devgui_path("", 105), "");
 	#/
 }
 

@@ -1,14 +1,14 @@
-#using script_3b8f43c68572f06;
 #using script_6409d04aa560106c;
+#using script_3b8f43c68572f06;
 #using script_70ab01a7690ea256;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\lui_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
-#using scripts\zm_common\load.csc;
 #using scripts\zm_common\util.csc;
+#using scripts\zm_common\load.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\lui_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace zm_laststand;
 
@@ -23,11 +23,11 @@
 */
 function private autoexec function_4e0d732()
 {
-	level notify(1889930456);
+	level notify(-1889930456);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: zm_laststand
 	Checksum: 0x1658BB0B
 	Offset: 0x2C0
@@ -35,7 +35,7 @@ function private autoexec function_4e0d732()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"zm_laststand", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -57,14 +57,14 @@ function private function_70a657d8()
 	level.laststands = [];
 	level.var_ff482f76 = zm_laststand_client::register();
 	level.var_16af4504 = [];
-	clientfield::function_a8bbc967("ZMInventoryPersonal.self_revive_count", #"hash_1d3ddede734994d8", #"hash_6f4d1146f69437b9", 1, 2, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("ZMInventoryPersonal.self_revive_count", #"hash_1d3ddede734994d8", #"self_revive_count", 1, 2, "int", undefined, 0, 0);
 	clientfield::register("allplayers", "zm_last_stand_postfx", 1, 1, "int", &function_50d4c00a, 0, 1);
 	for(i = 0; i < 5; i++)
 	{
 		level.laststands[i] = spawnstruct();
 		level.laststands[i].laststand_update_clientfields = "laststand_update" + i;
 		clientfield::register("world", level.laststands[i].laststand_update_clientfields, 1, 5, "float", &update_bleedout_timer, 0, 0);
-		clientfield::function_a8bbc967(("WorldSpaceIndicators.bleedOutModel" + i) + ".hide", #"hash_56cb8e9a65d9f9ad", [1:#"hide", 0:#"bleedoutmodel" + (isdefined(i) ? "" + i : "")], 1, 1, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel(("WorldSpaceIndicators.bleedOutModel" + i) + ".hide", #"hash_56cb8e9a65d9f9ad", [1:#"hide", 0:#"bleedoutmodel" + (isdefined(i) ? "" + i : "")], 1, 1, "int", undefined, 0, 0);
 	}
 	callback::on_localplayer_spawned(&function_e1479c);
 	level thread wait_and_set_revive_shader_constant();
@@ -226,7 +226,7 @@ function function_be34e28f(localclientnum, var_d2c301e0)
 	self endoncallback(&function_ac994c83, #"death", #"hash_2f1dc2ea83ba9e2");
 	self postfx::playpostfxbundle("pstfx_zm_last_stand");
 	var_6c2f58e2 = var_d2c301e0 + (int(level.var_629da31e * 1000));
-	if(util::function_cd6c95db(localclientnum) || namespace_a6aea2c6::is_active(#"hash_65cfe78dc61dd3af"))
+	if(util::function_cd6c95db(localclientnum) || namespace_a6aea2c6::is_active(#"silent_film"))
 	{
 		self postfx::function_c8b5f318("pstfx_zm_last_stand", "Desaturation", 1);
 	}

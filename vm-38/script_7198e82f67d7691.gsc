@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_fb1bfa12 : class_6aaccc24
+class cevidence_board_mission_preview : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x8037B073
 		Offset: 0x528
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_fb1bfa12 : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x291BE1E8
 		Offset: 0x9C0
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_fb1bfa12 : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x18C5B0D0
 		Offset: 0x808
 		Size: 0x24
@@ -40,82 +40,82 @@ class class_fb1bfa12 : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_10415bce
-		Namespace: namespace_fb1bfa12
+		Name: set_lvldescriptionshort
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x1AC9397E
 		Offset: 0x918
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_10415bce(localclientnum, value)
+	function set_lvldescriptionshort(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlDescriptionShort", value);
+		[[ self ]]->set_data(localclientnum, "lvlDescriptionShort", value);
 	}
 
 	/*
-		Name: function_275127c2
-		Namespace: namespace_fb1bfa12
+		Name: set_lvldescriptionlong
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x5E687928
 		Offset: 0x950
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_275127c2(localclientnum, value)
+	function set_lvldescriptionlong(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlDescriptionLong", value);
+		[[ self ]]->set_data(localclientnum, "lvlDescriptionLong", value);
 	}
 
 	/*
-		Name: function_3d5ae5d4
-		Namespace: namespace_fb1bfa12
+		Name: set_lvlprogress
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0xB8F77B3E
 		Offset: 0x988
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_3d5ae5d4(localclientnum, value)
+	function set_lvlprogress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlProgress", value);
+		[[ self ]]->set_data(localclientnum, "lvlProgress", value);
 	}
 
 	/*
-		Name: function_57d3362b
-		Namespace: namespace_fb1bfa12
+		Name: set_activestate
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0xF0D3F5AE
 		Offset: 0x870
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_57d3362b(localclientnum, value)
+	function set_activestate(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "activeState", value);
+		[[ self ]]->set_data(localclientnum, "activeState", value);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_fb1bfa12
+		Name: register_clientside
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x6B7EFFC2
 		Offset: 0x6C0
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("evidence_board_mission_preview");
+		cluielem::register_clientside("evidence_board_mission_preview");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0xDA3D5BED
 		Offset: 0x548
 		Size: 0x16C
@@ -124,61 +124,61 @@ class class_fb1bfa12 : class_6aaccc24
 	*/
 	function setup_clientfields(var_5a7b4b38, var_ce679737, var_21c9fb3e, var_370e913b, var_4682a952, var_72328549, var_8c8b5d16)
 	{
-		namespace_6aaccc24::setup_clientfields("evidence_board_mission_preview");
-		namespace_6aaccc24::function_da693cbe("entNum", 1, 10, "int", var_370e913b);
-		namespace_6aaccc24::function_da693cbe("activeState", 1, 2, "int", var_4682a952);
-		namespace_6aaccc24::function_da693cbe("lvlYear", 1, 11, "int", var_72328549);
-		namespace_6aaccc24::function_dcb34c80("string", "lvlName", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "lvlDescriptionShort", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "lvlDescriptionLong", 1);
-		namespace_6aaccc24::function_da693cbe("lvlProgress", 1, 4, "float", var_8c8b5d16);
+		cluielem::setup_clientfields("evidence_board_mission_preview");
+		cluielem::add_clientfield("entNum", 1, 10, "int", var_370e913b);
+		cluielem::add_clientfield("activeState", 1, 2, "int", var_4682a952);
+		cluielem::add_clientfield("lvlYear", 1, 11, "int", var_72328549);
+		cluielem::function_dcb34c80("string", "lvlName", 1);
+		cluielem::function_dcb34c80("string", "lvlDescriptionShort", 1);
+		cluielem::function_dcb34c80("string", "lvlDescriptionLong", 1);
+		cluielem::add_clientfield("lvlProgress", 1, 4, "float", var_8c8b5d16);
 	}
 
 	/*
-		Name: function_c063a71c
-		Namespace: namespace_fb1bfa12
+		Name: set_lvlname
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x9384DC91
 		Offset: 0x8E0
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c063a71c(localclientnum, value)
+	function set_lvlname(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlName", value);
+		[[ self ]]->set_data(localclientnum, "lvlName", value);
 	}
 
 	/*
-		Name: function_c2c6a8c3
-		Namespace: namespace_fb1bfa12
+		Name: set_lvlyear
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x9C4D499
 		Offset: 0x8A8
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c2c6a8c3(localclientnum, value)
+	function set_lvlyear(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlYear", value);
+		[[ self ]]->set_data(localclientnum, "lvlYear", value);
 	}
 
 	/*
-		Name: function_c8350e33
-		Namespace: namespace_fb1bfa12
+		Name: set_entnum
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0xF598FB24
 		Offset: 0x838
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_c8350e33(localclientnum, value)
+	function set_entnum(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "entNum", value);
+		[[ self ]]->set_data(localclientnum, "entNum", value);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_fb1bfa12
+		Namespace: cevidence_board_mission_preview
 		Checksum: 0x8DDC08E9
 		Offset: 0x6E8
 		Size: 0x118
@@ -187,14 +187,14 @@ class class_fb1bfa12 : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "entNum", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "activeState", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlYear", 0);
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlName", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlDescriptionShort", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlDescriptionLong", #"");
-		[[ self ]]->function_d7d2fcce(localclientnum, "lvlProgress", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "entNum", 0);
+		[[ self ]]->set_data(localclientnum, "activeState", 0);
+		[[ self ]]->set_data(localclientnum, "lvlYear", 0);
+		[[ self ]]->set_data(localclientnum, "lvlName", #"");
+		[[ self ]]->set_data(localclientnum, "lvlDescriptionShort", #"");
+		[[ self ]]->set_data(localclientnum, "lvlDescriptionLong", #"");
+		[[ self ]]->set_data(localclientnum, "lvlProgress", 0);
 	}
 
 }
@@ -212,7 +212,7 @@ class class_fb1bfa12 : class_6aaccc24
 */
 function private autoexec function_5190815f()
 {
-	level notify(1699795143);
+	level notify(-1699795143);
 }
 
 /*
@@ -226,7 +226,7 @@ function private autoexec function_5190815f()
 */
 function register(var_5a7b4b38, var_ce679737, var_21c9fb3e, var_370e913b, var_4682a952, var_72328549, var_8c8b5d16)
 {
-	elem = new class_fb1bfa12();
+	elem = new cevidence_board_mission_preview();
 	[[ elem ]]->setup_clientfields(var_5a7b4b38, var_ce679737, var_21c9fb3e, var_370e913b, var_4682a952, var_72328549, var_8c8b5d16);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -248,7 +248,7 @@ function register(var_5a7b4b38, var_ce679737, var_21c9fb3e, var_370e913b, var_46
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: evidence_board_mission_preview
 	Checksum: 0x6B1C2D71
 	Offset: 0x320
@@ -256,10 +256,10 @@ function register(var_5a7b4b38, var_ce679737, var_21c9fb3e, var_370e913b, var_46
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_fb1bfa12();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cevidence_board_mission_preview();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -306,7 +306,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_c8350e33
+	Name: set_entnum
 	Namespace: evidence_board_mission_preview
 	Checksum: 0x45DE3893
 	Offset: 0x3D8
@@ -314,13 +314,13 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_c8350e33(localclientnum, value)
+function set_entnum(localclientnum, value)
 {
-	[[ self ]]->function_c8350e33(localclientnum, value);
+	[[ self ]]->set_entnum(localclientnum, value);
 }
 
 /*
-	Name: function_57d3362b
+	Name: set_activestate
 	Namespace: evidence_board_mission_preview
 	Checksum: 0x7A0D5C4
 	Offset: 0x408
@@ -328,13 +328,13 @@ function function_c8350e33(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_57d3362b(localclientnum, value)
+function set_activestate(localclientnum, value)
 {
-	[[ self ]]->function_57d3362b(localclientnum, value);
+	[[ self ]]->set_activestate(localclientnum, value);
 }
 
 /*
-	Name: function_c2c6a8c3
+	Name: set_lvlyear
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xE50C0D79
 	Offset: 0x438
@@ -342,13 +342,13 @@ function function_57d3362b(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c2c6a8c3(localclientnum, value)
+function set_lvlyear(localclientnum, value)
 {
-	[[ self ]]->function_c2c6a8c3(localclientnum, value);
+	[[ self ]]->set_lvlyear(localclientnum, value);
 }
 
 /*
-	Name: function_c063a71c
+	Name: set_lvlname
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xF4E863DA
 	Offset: 0x468
@@ -356,13 +356,13 @@ function function_c2c6a8c3(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_c063a71c(localclientnum, value)
+function set_lvlname(localclientnum, value)
 {
-	[[ self ]]->function_c063a71c(localclientnum, value);
+	[[ self ]]->set_lvlname(localclientnum, value);
 }
 
 /*
-	Name: function_10415bce
+	Name: set_lvldescriptionshort
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xD7AEAA9C
 	Offset: 0x498
@@ -370,13 +370,13 @@ function function_c063a71c(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_10415bce(localclientnum, value)
+function set_lvldescriptionshort(localclientnum, value)
 {
-	[[ self ]]->function_10415bce(localclientnum, value);
+	[[ self ]]->set_lvldescriptionshort(localclientnum, value);
 }
 
 /*
-	Name: function_275127c2
+	Name: set_lvldescriptionlong
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xDB793EC4
 	Offset: 0x4C8
@@ -384,13 +384,13 @@ function function_10415bce(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_275127c2(localclientnum, value)
+function set_lvldescriptionlong(localclientnum, value)
 {
-	[[ self ]]->function_275127c2(localclientnum, value);
+	[[ self ]]->set_lvldescriptionlong(localclientnum, value);
 }
 
 /*
-	Name: function_3d5ae5d4
+	Name: set_lvlprogress
 	Namespace: evidence_board_mission_preview
 	Checksum: 0xECF99C89
 	Offset: 0x4F8
@@ -398,8 +398,8 @@ function function_275127c2(localclientnum, value)
 	Parameters: 2
 	Flags: None
 */
-function function_3d5ae5d4(localclientnum, value)
+function set_lvlprogress(localclientnum, value)
 {
-	[[ self ]]->function_3d5ae5d4(localclientnum, value);
+	[[ self ]]->set_lvlprogress(localclientnum, value);
 }
 

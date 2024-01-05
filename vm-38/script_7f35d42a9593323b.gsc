@@ -1,38 +1,38 @@
-#using script_178024232e91b0a1;
-#using script_2c5daa95f8fec03c;
-#using script_317aa6153a75c589;
+#using scripts\zm_common\ai\zm_ai_utility.gsc;
+#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\zm_common\zm_audio.gsc;
+#using script_5e0bde12853401b5;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\core_common\ai\archetype_mocomps_utility.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
 #using script_35598499769dbb3d;
-#using script_3819e7a1427df6d2;
-#using script_3aa0f32b70d4f7cb;
-#using script_3f9e0dc8454d98e1;
+#using script_71dfbfdfba4489a0;
 #using script_41fe08c37d53a635;
+#using script_2c5daa95f8fec03c;
+#using script_522aeb6ae906391e;
+#using script_3aa0f32b70d4f7cb;
+#using script_178024232e91b0a1;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_3819e7a1427df6d2;
 #using script_4bf952f6ba31bb17;
 #using script_4d85e8de54b02198;
-#using script_522aeb6ae906391e;
-#using script_5e0bde12853401b5;
-#using script_6809bf766eba194a;
-#using script_71dfbfdfba4489a0;
-#using script_7e59d7bba853fe4b;
-#using script_8988fdbc78d6c53;
 #using script_caf007e2a98afa2;
-#using scripts\core_common\aat_shared.gsc;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\burnplayer.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\burnplayer.gsc;
 #using scripts\core_common\visionset_mgr_shared.gsc;
-#using scripts\zm_common\zm_audio.gsc;
-#using scripts\zm_common\zm_spawner.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\aat_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace mechz;
 
@@ -53,7 +53,7 @@ function private autoexec function_dbe6dcb9()
 #namespace mechzbehavior;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: mechzbehavior
 	Checksum: 0xB03905E4
 	Offset: 0xA18
@@ -61,7 +61,7 @@ function private autoexec function_dbe6dcb9()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"mechz", &init, undefined, &finalize, undefined);
 }
@@ -251,9 +251,9 @@ function private initmechzbehaviorsandasm()
 	#/
 	behaviorstatemachine::registerbsmscriptapiinternal("mechzSetSpeedWalk", &function_fc05dfd3);
 	/#
-		assert(isscriptfunctionptr(&function_1a37c206));
+		assert(isscriptfunctionptr(&mechzsetspeedrun));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi("mechzSetSpeedRun", &function_1a37c206);
+	behaviortreenetworkutility::registerbehaviortreescriptapi("mechzSetSpeedRun", &mechzsetspeedrun);
 	/#
 		assert(isscriptfunctionptr(&mechzshootflame));
 	#/
@@ -295,9 +295,9 @@ function private initmechzbehaviorsandasm()
 	#/
 	behaviortreenetworkutility::registerbehaviortreescriptapi("mechzJetpackPainTerminate", &function_2726bc43);
 	/#
-		assert(isscriptfunctionptr(&function_16c82231));
+		assert(isscriptfunctionptr(&mechzlongjumpstart));
 	#/
-	behaviortreenetworkutility::registerbehaviortreescriptapi("mechzLongJumpStart", &function_16c82231);
+	behaviortreenetworkutility::registerbehaviortreescriptapi("mechzLongJumpStart", &mechzlongjumpstart);
 	/#
 		assert(isscriptfunctionptr(&function_4af53b9a));
 	#/
@@ -894,7 +894,7 @@ function mechzshouldshootgrenade(entity)
 	{
 		return false;
 	}
-	enemy = namespace_e0710ee6::function_825317c(entity);
+	enemy = zm_ai_utility::function_825317c(entity);
 	if(!isdefined(enemy))
 	{
 		return false;
@@ -1378,7 +1378,7 @@ function private function_fc05dfd3(entity)
 }
 
 /*
-	Name: function_1a37c206
+	Name: mechzsetspeedrun
 	Namespace: mechzbehavior
 	Checksum: 0x62C1F4CB
 	Offset: 0x4640
@@ -1386,7 +1386,7 @@ function private function_fc05dfd3(entity)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_1a37c206(entity)
+function private mechzsetspeedrun(entity)
 {
 	entity setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
 }
@@ -1727,7 +1727,7 @@ function private function_2726bc43(entity)
 }
 
 /*
-	Name: function_16c82231
+	Name: mechzlongjumpstart
 	Namespace: mechzbehavior
 	Checksum: 0xD5A14EAB
 	Offset: 0x5090
@@ -1735,7 +1735,7 @@ function private function_2726bc43(entity)
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_16c82231(entity)
+function private mechzlongjumpstart(entity)
 {
 	entity.isjumping = 1;
 	entity callback::callback(#"hash_1c5ac76933317a1d");
@@ -1869,7 +1869,7 @@ function private mechzspawnsetup()
 	self.stumble_stun_cooldown_time = gettime();
 	self.jump_cooldown = 0;
 	self.var_e9c62827 = 1;
-	self weaponobjects::function_9d7ae85f("eq_mechz_firebomb", &function_d0651b24, 1);
+	self weaponobjects::createwatcher("eq_mechz_firebomb", &function_d0651b24, 1);
 	/#
 		self.debug_traversal_ast = "";
 	#/
@@ -2169,11 +2169,11 @@ function private mechzweapondamagemodifier(damage, weapon)
 {
 	if(isdefined(weapon) && isdefined(weapon.name))
 	{
-		if(weapon.name == #"hash_566413d54185cd2a")
+		if(weapon.name == #"eq_mechz_firebomb")
 		{
 			return 0;
 		}
-		if(weapon.name == #"hash_23dd6039fe2f36c6")
+		if(weapon.name == #"molotov_fire")
 		{
 			return 0;
 		}
@@ -2443,7 +2443,7 @@ function function_53f176ae(eventstruct)
 			break;
 		}
 		case "alerted":
-		case "hash_37f66b10bf727fdf":
+		case "melee_notetrack":
 		case "hash_42df88229e5571c4":
 		case "jump":
 		case "hash_7ab80d642b09800b":
@@ -2454,8 +2454,8 @@ function function_53f176ae(eventstruct)
 			break;
 		}
 		case "ambient":
-		case "hash_4320680add0fb1ee":
-		case "hash_7609057ae05fd29a":
+		case "ambient_enraged":
+		case "ambient_alert":
 		{
 			n_priority = 1;
 			break;

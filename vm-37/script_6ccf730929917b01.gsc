@@ -1,14 +1,14 @@
 #using script_35ae72be7b4fec10;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_93648050;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_93648050
 	Checksum: 0x6A4251CD
 	Offset: 0x120
@@ -16,7 +16,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_7ccb313a097bf40", &preload, undefined, undefined, undefined);
 }
@@ -533,14 +533,14 @@ function private _think()
 			{
 				if(isdefined(var_36247bfb) && var_36247bfb != #"")
 				{
-					namespace_61e6d095::function_d5ea17f0(#"hash_7ccb313a097bf40", var_36247bfb);
+					namespace_61e6d095::set_text(#"hash_7ccb313a097bf40", var_36247bfb);
 					namespace_61e6d095::function_bfdab223(#"hash_7ccb313a097bf40", text);
 				}
 				else
 				{
 					if(data.var_774d5d03 == 3)
 					{
-						namespace_61e6d095::function_d5ea17f0(#"hash_7ccb313a097bf40", text);
+						namespace_61e6d095::set_text(#"hash_7ccb313a097bf40", text);
 					}
 					else
 					{
@@ -551,7 +551,7 @@ function private _think()
 			}
 			else
 			{
-				namespace_61e6d095::function_d5ea17f0(#"hash_7ccb313a097bf40", #"");
+				namespace_61e6d095::set_text(#"hash_7ccb313a097bf40", #"");
 				namespace_61e6d095::function_bfdab223(#"hash_7ccb313a097bf40", #"");
 				namespace_61e6d095::set_state(#"hash_7ccb313a097bf40", 0);
 			}

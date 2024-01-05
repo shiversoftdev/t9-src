@@ -1,11 +1,11 @@
 #using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace perks;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: perks
 	Checksum: 0xF2C244CE
 	Offset: 0x140
@@ -13,7 +13,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2af3fdb587243686", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -29,14 +29,14 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	clientfield::function_a8bbc967("hudItems.ammoCooldowns.equipment.tactical", 1, 5, "float", 0);
-	clientfield::function_a8bbc967("hudItems.ammoCooldowns.equipment.lethal", 1, 5, "float", 0);
+	clientfield::register_clientuimodel("hudItems.ammoCooldowns.equipment.tactical", 1, 5, "float", 0);
+	clientfield::register_clientuimodel("hudItems.ammoCooldowns.equipment.lethal", 1, 5, "float", 0);
 	callback::on_spawned(&on_player_spawned);
 	level.var_b8e083d0 = &function_b8e083d0;
 }
 
 /*
-	Name: function_7637bafa
+	Name: perk_setperk
 	Namespace: perks
 	Checksum: 0xC9305325
 	Offset: 0x220
@@ -44,7 +44,7 @@ function private function_70a657d8()
 	Parameters: 1
 	Flags: Linked
 */
-function function_7637bafa(str_perk)
+function perk_setperk(str_perk)
 {
 	if(!isdefined(self.var_fb3c9d6a))
 	{
@@ -65,7 +65,7 @@ function function_7637bafa(str_perk)
 }
 
 /*
-	Name: function_45d12554
+	Name: perk_unsetperk
 	Namespace: perks
 	Checksum: 0xED68E9A0
 	Offset: 0x300
@@ -73,7 +73,7 @@ function function_7637bafa(str_perk)
 	Parameters: 1
 	Flags: Linked
 */
-function function_45d12554(str_perk)
+function perk_unsetperk(str_perk)
 {
 	if(!isdefined(self.var_fb3c9d6a))
 	{
@@ -94,7 +94,7 @@ function function_45d12554(str_perk)
 }
 
 /*
-	Name: function_be94fe26
+	Name: perk_hasperk
 	Namespace: perks
 	Checksum: 0x71434E84
 	Offset: 0x3C0
@@ -102,7 +102,7 @@ function function_45d12554(str_perk)
 	Parameters: 1
 	Flags: Linked
 */
-function function_be94fe26(str_perk)
+function perk_hasperk(str_perk)
 {
 	if(isdefined(self.var_fb3c9d6a) && isdefined(self.var_fb3c9d6a[str_perk]) && self.var_fb3c9d6a[str_perk] > 0)
 	{
@@ -112,7 +112,7 @@ function function_be94fe26(str_perk)
 }
 
 /*
-	Name: function_3cd6f625
+	Name: perk_reset_all
 	Namespace: perks
 	Checksum: 0xF14DBAA7
 	Offset: 0x418
@@ -120,7 +120,7 @@ function function_be94fe26(str_perk)
 	Parameters: 0
 	Flags: Linked
 */
-function function_3cd6f625()
+function perk_reset_all()
 {
 	self clearperks();
 	self.var_fb3c9d6a = [];

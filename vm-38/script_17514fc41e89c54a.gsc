@@ -1,24 +1,24 @@
-#using script_1029986e2bc8ca8e;
 #using script_193d6fcd3b319d05;
-#using script_1c65dbfc2f1c8d8f;
-#using script_340a2e805e35f7a2;
 #using script_34e9dd62fc371077;
-#using script_5bb072c3abf4652c;
 #using script_6196bd4e1ff26cc0;
+#using scripts\zm_common\aats\zm_aat.gsc;
+#using script_1029986e2bc8ca8e;
+#using scripts\zm_common\zm_vo.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_devgui.gsc;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using script_340a2e805e35f7a2;
+#using scripts\core_common\item_inventory.gsc;
 #using script_7bacb32f8222fa3e;
-#using script_f11fc6f7a3ad5b9;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_devgui.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_9be1ab53;
 
@@ -37,7 +37,7 @@ function private autoexec function_a7ebca77()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9be1ab53
 	Checksum: 0x3F51E8AA
 	Offset: 0x128
@@ -45,7 +45,7 @@ function private autoexec function_a7ebca77()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5aa4949e75ab9d9c", &function_70a657d8, undefined, undefined, undefined);
 }

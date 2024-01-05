@@ -1,22 +1,22 @@
-#using script_5dfa1afaab9c1935;
-#using script_5f2ba47ebe695e43;
-#using script_6809bf766eba194a;
 #using scripts\core_common\ai_puppeteer_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\colors_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\cp_common\debug_menu.gsc;
 #using scripts\cp_common\util.gsc;
+#using scripts\cp_common\debug_menu.gsc;
+#using script_5f2ba47ebe695e43;
+#using scripts\core_common\ai\archetype_utility.gsc;
+#using script_5dfa1afaab9c1935;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\colors_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace debug;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: debug
 	Checksum: 0x111C9ADA
 	Offset: 0xD0
@@ -24,7 +24,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"debug_script", &function_70a657d8, undefined, undefined, undefined);
@@ -1212,11 +1212,11 @@ function displaythreat(entity, entitygroup)
 				selfthreat = selfthreat + getthreatbias(mygroup, entitygroup);
 			}
 		}
-		if(entity.ignoreme || threat < 900000)
+		if(entity.ignoreme || threat < -900000)
 		{
 			threat = "";
 		}
-		if(self.ignoreme || selfthreat < 900000)
+		if(self.ignoreme || selfthreat < -900000)
 		{
 			selfthreat = "";
 		}

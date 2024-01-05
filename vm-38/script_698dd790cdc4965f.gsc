@@ -1,6 +1,6 @@
-#using script_27c22e1d8df4d852;
 #using script_35d3717bf2cbee8f;
-#using script_6021ce59143452c3;
+#using scripts\zm_common\zm_trial_util.gsc;
+#using scripts\zm_common\zm_trial.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
@@ -17,11 +17,11 @@
 */
 function private autoexec function_d2a28a03()
 {
-	level notify(876905365);
+	level notify(-876905365);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_83dc3729
 	Checksum: 0x8F79BACE
 	Offset: 0xA8
@@ -29,7 +29,7 @@ function private autoexec function_d2a28a03()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_491590ee8fe06753", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -45,15 +45,15 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(!zm_trial::function_b47f6aba())
+	if(!zm_trial::is_trial_mode())
 	{
 		return;
 	}
-	zm_trial::register_challenge(#"hash_7dd35595d2a7953a", &function_d1de6a85, &function_9e7b3f4d);
+	zm_trial::register_challenge(#"hash_7dd35595d2a7953a", &on_begin, &on_end);
 }
 
 /*
-	Name: function_d1de6a85
+	Name: on_begin
 	Namespace: namespace_83dc3729
 	Checksum: 0x76222A6F
 	Offset: 0x158
@@ -61,7 +61,7 @@ function private function_70a657d8()
 	Parameters: 0
 	Flags: Linked, Private
 */
-function private function_d1de6a85()
+function private on_begin()
 {
 	/#
 		assert(isdefined(level.zombie_weapons_upgraded));
@@ -75,15 +75,15 @@ function private function_d1de6a85()
 	{
 		player function_6a8979c9();
 		player callback::function_33f0ddd3(&function_33f0ddd3);
-		player namespace_b22c99a5::function_7dbb1712(1);
-		player callback::function_f77ced93(&namespace_b22c99a5::function_79518194);
+		player zm_trial_util::function_7dbb1712(1);
+		player callback::on_weapon_change(&zm_trial_util::function_79518194);
 	}
-	namespace_b22c99a5::function_eea26e56();
+	zm_trial_util::function_eea26e56();
 	level zm_trial::function_8e2a923(1);
 }
 
 /*
-	Name: function_9e7b3f4d
+	Name: on_end
 	Namespace: namespace_83dc3729
 	Checksum: 0x9A664A0B
 	Offset: 0x340
@@ -91,12 +91,12 @@ function private function_d1de6a85()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_9e7b3f4d(round_reset)
+function private on_end(round_reset)
 {
 	foreach(player in getplayers())
 	{
 		player callback::function_824d206(&function_33f0ddd3);
-		player callback::function_5a753d97(&namespace_b22c99a5::function_79518194);
+		player callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
 		foreach(weapon in player getweaponslist(1))
 		{
 			player unlockweapon(weapon);
@@ -105,10 +105,10 @@ function private function_9e7b3f4d(round_reset)
 				player unlockweapon(weapon.dualwieldweapon);
 			}
 		}
-		player namespace_b22c99a5::function_7dbb1712(1);
+		player zm_trial_util::function_7dbb1712(1);
 	}
 	level.var_af806901 = undefined;
-	namespace_b22c99a5::function_ef1fce77();
+	zm_trial_util::function_ef1fce77();
 	level zm_trial::function_8e2a923(0);
 }
 

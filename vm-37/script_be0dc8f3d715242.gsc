@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_4868ccea : class_6aaccc24
+class class_4868ccea : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,7 +47,7 @@ class class_4868ccea : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -89,7 +89,7 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -117,10 +117,10 @@ class class_4868ccea : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("mp_gamemode_onslaught_endscore_msg");
-		namespace_6aaccc24::function_dcb34c80("string", "wavesText", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "eliteKillsText", 1);
-		namespace_6aaccc24::function_dcb34c80("string", "zkillsText", 1);
+		cluielem::setup_clientfields("mp_gamemode_onslaught_endscore_msg");
+		cluielem::function_dcb34c80("string", "wavesText", 1);
+		cluielem::function_dcb34c80("string", "eliteKillsText", 1);
+		cluielem::function_dcb34c80("string", "zkillsText", 1);
 	}
 
 }

@@ -1,18 +1,18 @@
-#using script_4108035fe400ce67;
-#using script_61828ad9e71c6616;
-#using script_72d96920f15049b8;
-#using script_7bdcff4f92f3d220;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_ai_shared.gsc;
-#using scripts\zm_common\zm_player.gsc;
 #using scripts\zm_common\zm_utility.gsc;
 #using scripts\zm_common\zm_zonemgr.gsc;
+#using scripts\zm_common\zm_player.gsc;
+#using script_7bdcff4f92f3d220;
+#using script_61828ad9e71c6616;
+#using scripts\core_common\flag_shared.gsc;
+#using script_4108035fe400ce67;
+#using script_72d96920f15049b8;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace chopper_gunner;
 
@@ -31,7 +31,7 @@ function private autoexec function_b5f64519()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: chopper_gunner
 	Checksum: 0x735B9946
 	Offset: 0x1C0
@@ -39,7 +39,7 @@ function private autoexec function_b5f64519()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"chopper_gunner", &function_70a657d8, undefined, &function_3675de8b, #"killstreaks");
 }
@@ -322,10 +322,10 @@ function function_bfba820f()
 	}
 	if(var_1120bf0.var_bd027dd9 == 32767)
 	{
-		var_d90e0e15 = function_4ba8fde(#"hash_541f29266c6b7df8");
-		if(isdefined(var_d90e0e15))
+		itempoint = function_4ba8fde(#"hash_541f29266c6b7df8");
+		if(isdefined(itempoint))
 		{
-			item_world::function_de2018e3(var_d90e0e15, self, 17);
+			item_world::function_de2018e3(itempoint, self, 17);
 		}
 	}
 }

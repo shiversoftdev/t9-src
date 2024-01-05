@@ -1,8 +1,8 @@
-#using script_64ac23dbb2d7d587;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
+#using scripts\weapons\weaponobjects.csc;
 #using scripts\core_common\math_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace satchel_charge;
 
@@ -17,7 +17,7 @@
 */
 function private autoexec function_ddb49059()
 {
-	level notify(231808013);
+	level notify(-231808013);
 }
 
 /*
@@ -52,9 +52,9 @@ function satchel_spawned(localclientnum)
 		return;
 	}
 	self util::waittill_dobj(localclientnum);
-	if(isdefined(self.weapon.var_4dd46f8a))
+	if(isdefined(self.weapon.customsettings))
 	{
-		var_966a1350 = getscriptbundle(self.weapon.var_4dd46f8a);
+		var_966a1350 = getscriptbundle(self.weapon.customsettings);
 		self.var_966a1350 = var_966a1350;
 		if(isdefined(var_966a1350.var_b941081f) && isdefined(var_966a1350.var_40772cbe))
 		{

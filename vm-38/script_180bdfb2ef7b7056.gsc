@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_28a7d65d : class_6aaccc24
+class cself_respawn : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x999020D4
 		Offset: 0x348
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_28a7d65d : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0xDAA783F2
 		Offset: 0x4A0
 		Size: 0x14
@@ -30,22 +30,22 @@ class class_28a7d65d : class_6aaccc24
 	}
 
 	/*
-		Name: function_459465a
-		Namespace: namespace_28a7d65d
+		Name: set_percent
+		Namespace: cself_respawn
 		Checksum: 0x7F231CEC
 		Offset: 0x468
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_459465a(localclientnum, value)
+	function set_percent(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "percent", value);
+		[[ self ]]->set_data(localclientnum, "percent", value);
 	}
 
 	/*
 		Name: open
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x6760E502
 		Offset: 0x438
 		Size: 0x24
@@ -54,26 +54,26 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_28a7d65d
+		Name: register_clientside
+		Namespace: cself_respawn
 		Checksum: 0x3DD4B28F
 		Offset: 0x3C0
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("self_respawn");
+		cluielem::register_clientside("self_respawn");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x1D696B36
 		Offset: 0x368
 		Size: 0x4C
@@ -82,13 +82,13 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function setup_clientfields(var_1089a5f3)
 	{
-		namespace_6aaccc24::setup_clientfields("self_respawn");
-		namespace_6aaccc24::function_da693cbe("percent", 1, 6, "float", var_1089a5f3);
+		cluielem::setup_clientfields("self_respawn");
+		cluielem::add_clientfield("percent", 1, 6, "float", var_1089a5f3);
 	}
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_28a7d65d
+		Namespace: cself_respawn
 		Checksum: 0x479F3D60
 		Offset: 0x3E8
 		Size: 0x48
@@ -97,8 +97,8 @@ class class_28a7d65d : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "percent", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "percent", 0);
 	}
 
 }
@@ -116,7 +116,7 @@ class class_28a7d65d : class_6aaccc24
 */
 function private autoexec function_87ee9c1d()
 {
-	level notify(1759616643);
+	level notify(-1759616643);
 }
 
 /*
@@ -130,7 +130,7 @@ function private autoexec function_87ee9c1d()
 */
 function register(var_1089a5f3)
 {
-	elem = new class_28a7d65d();
+	elem = new cself_respawn();
 	[[ elem ]]->setup_clientfields(var_1089a5f3);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -152,7 +152,7 @@ function register(var_1089a5f3)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: self_respawn
 	Checksum: 0xFE2FF996
 	Offset: 0x260
@@ -160,10 +160,10 @@ function register(var_1089a5f3)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_28a7d65d();
-	[[ elem ]]->function_5c1bb138();
+	elem = new cself_respawn();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -210,7 +210,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_459465a
+	Name: set_percent
 	Namespace: self_respawn
 	Checksum: 0xD0D8B6EE
 	Offset: 0x318
@@ -218,8 +218,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_459465a(localclientnum, value)
+function set_percent(localclientnum, value)
 {
-	[[ self ]]->function_459465a(localclientnum, value);
+	[[ self ]]->set_percent(localclientnum, value);
 }
 

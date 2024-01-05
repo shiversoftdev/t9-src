@@ -1,11 +1,11 @@
 #using script_113dd7f0ea2a1d4f;
-#using script_1cc417743d7c262d;
-#using script_3f9e0dc8454d98e1;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace namespace_553954de;
 
@@ -58,7 +58,7 @@ function end_match(b_success)
 	}
 	foreach(player in getplayers())
 	{
-		level.var_31028c5d prototype_hud::function_817e4d10(player, 0);
+		level.var_31028c5d prototype_hud::set_active_obj_visibility(player, 0);
 	}
 	if(b_success || getdvarint(#"hash_15b141da1584bd0d", 1) == 0)
 	{

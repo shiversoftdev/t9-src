@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_12a6a726;
 
@@ -15,11 +15,11 @@
 */
 function private autoexec function_a84b86bb()
 {
-	level notify(392598706);
+	level notify(-392598706);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_12a6a726
 	Checksum: 0x32FAC17F
 	Offset: 0xD8
@@ -27,7 +27,7 @@ function private autoexec function_a84b86bb()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_72a9f15f4124442", &function_70a657d8, undefined, undefined, undefined);
 }

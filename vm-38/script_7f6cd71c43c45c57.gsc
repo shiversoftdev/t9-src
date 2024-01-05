@@ -11,7 +11,7 @@
 */
 function private autoexec function_77a320c4()
 {
-	level notify(943377718);
+	level notify(-943377718);
 }
 
 #namespace weapons;

@@ -1,10 +1,10 @@
 #using scripts\core_common\callbacks_shared.gsc;
 
-#namespace namespace_e42b3e24;
+#namespace globallogic_scriptmover;
 
 /*
 	Name: function_8c7ec52f
-	Namespace: namespace_e42b3e24
+	Namespace: globallogic_scriptmover
 	Checksum: 0xCABE1EF9
 	Offset: 0x68
 	Size: 0x23C

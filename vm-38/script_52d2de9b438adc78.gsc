@@ -1,11 +1,11 @@
-#using script_2c74a7b5eea1ec89;
-#using script_383a3b1bb18ba876;
-#using script_3fda550bc6e1089a;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\killstreaks\killstreak_bundles.gsc;
+#using scripts\killstreaks\helicopter_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_f0840611;
 
@@ -74,12 +74,12 @@ function function_8806675d(var_45e9e49f, activatefunc)
 	Parameters: 4
 	Flags: Linked
 */
-function function_c5d20b5c(owner, context, position, var_1ab696c6)
+function function_c5d20b5c(owner, context, position, ksweapon)
 {
 	self sethintstring("");
-	if(isdefined(level.var_d2c88dc5[var_1ab696c6.rootweapon.name]))
+	if(isdefined(level.var_d2c88dc5[ksweapon.rootweapon.name]))
 	{
-		[[level.var_d2c88dc5[var_1ab696c6.rootweapon.name]]](owner, context, position);
+		[[level.var_d2c88dc5[ksweapon.rootweapon.name]]](owner, context, position);
 	}
 }
 
@@ -431,7 +431,7 @@ function function_ef6c4a46(killstreak_id, trigger_event, supplydropweapon, conte
 				ksbundle = killstreaks::get_script_bundle(context.killstreaktype);
 				if(isdefined(ksbundle))
 				{
-					context.time = ksbundle.var_1a58d0e4;
+					context.time = ksbundle.kstime;
 					context.fx_name = ksbundle.var_3af79d7e;
 				}
 				var_ca7e0817 = player.markerposition;
@@ -539,7 +539,7 @@ function function_d5ca3f62(player)
 	{
 		return;
 	}
-	player notify(#"hash_50b80d70e12fbb51");
+	player notify(#"strobe_marked");
 	if(!isdefined(self))
 	{
 		return;
@@ -552,7 +552,7 @@ function function_d5ca3f62(player)
 		fx_name = killstreak_bundle.var_3af79d7e;
 	}
 	self function_2cbae477(fx_name);
-	player waittilltimeout(90, #"hash_50b80d70e12fbb51", #"hash_6736343f5a9c98f2", #"hash_d843795c594bf0e", #"disconnect");
+	player waittilltimeout(90, #"strobe_marked", #"payload_delivered", #"payload_fail", #"disconnect");
 	if(!isdefined(self))
 	{
 		return;
@@ -574,7 +574,7 @@ function private function_2cbae477(var_babebdbc, var_76361c1a)
 {
 	if(!isdefined(var_babebdbc))
 	{
-		var_babebdbc = #"hash_2742656099567e1e";
+		var_babebdbc = #"weapon/fx8_equip_swat_smk_signal";
 	}
 	if(!isdefined(var_76361c1a))
 	{
@@ -630,11 +630,11 @@ function private function_f61c0c1(timeout)
 {
 	if(isdefined(timeout))
 	{
-		self waittilltimeout(timeout, #"death", #"hash_28674b59b141c8d5");
+		self waittilltimeout(timeout, #"death", #"strobe_stop");
 	}
 	else
 	{
-		self waittill(#"death", #"hash_28674b59b141c8d5");
+		self waittill(#"death", #"strobe_stop");
 	}
 	if(!isdefined(self))
 	{

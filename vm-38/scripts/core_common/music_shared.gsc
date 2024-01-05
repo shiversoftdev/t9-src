@@ -1,6 +1,6 @@
 #using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace music_shared;
 
@@ -21,7 +21,7 @@ function private autoexec function_d8547de()
 #namespace music;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: music
 	Checksum: 0x4A701397
 	Offset: 0xE0
@@ -29,7 +29,7 @@ function private autoexec function_d8547de()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"music", &function_70a657d8, undefined, undefined, undefined);
 }

@@ -1,6 +1,6 @@
-#using script_37f9ff47f340fbe8;
-#using scripts\core_common\math_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using script_37f9ff47f340fbe8;
 
 #namespace easing;
 

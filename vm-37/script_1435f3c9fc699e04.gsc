@@ -63,9 +63,9 @@ function function_136c2270(user)
 	{
 		self.users[user] = {};
 	}
-	if(!isdefined(self.users[user].var_5b307a20))
+	if(!isdefined(self.users[user].contributors))
 	{
-		self.users[user].var_5b307a20 = [];
+		self.users[user].contributors = [];
 	}
 }
 
@@ -84,16 +84,16 @@ function function_a1839d6b(user, player, key)
 		assert(isdefined(self.users[user]));
 	#/
 	/#
-		assert(isdefined(self.users[user].var_5b307a20));
+		assert(isdefined(self.users[user].contributors));
 	#/
-	if(!isdefined(self.users[user].var_5b307a20[key]))
+	if(!isdefined(self.users[user].contributors[key]))
 	{
 		contribution = {#contribution:0, #player:player};
-		self.users[user].var_5b307a20[key] = contribution;
+		self.users[user].contributors[key] = contribution;
 	}
 	else
 	{
-		contribution = self.users[user].var_5b307a20[key];
+		contribution = self.users[user].contributors[key];
 	}
 	if(!isdefined(contribution.player))
 	{
@@ -101,7 +101,7 @@ function function_a1839d6b(user, player, key)
 	}
 	contribution.starttime = gettime();
 	contribution.var_e22ea52b = 1;
-	return self.users[user].var_5b307a20[key];
+	return self.users[user].contributors[key];
 }
 
 /*
@@ -117,7 +117,7 @@ function function_98aae7cf()
 {
 	foreach(user in self.users)
 	{
-		user.var_5b307a20 = undefined;
+		user.contributors = undefined;
 	}
 }
 
@@ -157,9 +157,9 @@ function function_bd47b0c7()
 */
 function function_f30290b(user, key)
 {
-	if(isdefined(self.users[user]) && isdefined(self.users[user].var_5b307a20))
+	if(isdefined(self.users[user]) && isdefined(self.users[user].contributors))
 	{
-		self.users[user].var_5b307a20[key] = undefined;
+		self.users[user].contributors[key] = undefined;
 	}
 }
 
@@ -610,7 +610,7 @@ function function_472b3c15(user, var_5717fa0c)
 }
 
 /*
-	Name: function_c299518b
+	Name: is_player_touching
 	Namespace: gameobjects
 	Checksum: 0xCF461814
 	Offset: 0x1238
@@ -618,7 +618,7 @@ function function_472b3c15(user, var_5717fa0c)
 	Parameters: 2
 	Flags: Linked, Private
 */
-function private function_c299518b(var_9b6a15e9, player)
+function private is_player_touching(var_9b6a15e9, player)
 {
 	foreach(touching_player in var_9b6a15e9)
 	{
@@ -650,7 +650,7 @@ function function_73944efe(var_9b6a15e9, touch)
 		owner = touch.player.owner;
 		if(isdefined(owner) && isplayer(owner))
 		{
-			if(!function_c299518b(var_9b6a15e9, owner))
+			if(!is_player_touching(var_9b6a15e9, owner))
 			{
 				return owner;
 			}

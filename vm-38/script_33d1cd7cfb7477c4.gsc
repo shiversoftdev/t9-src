@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_25c5977f : class_6aaccc24
+class class_25c5977f : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,7 +47,7 @@ class class_25c5977f : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -61,7 +61,7 @@ class class_25c5977f : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -89,17 +89,17 @@ class class_25c5977f : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("zm_tungsten_title_cards");
-		namespace_6aaccc24::function_da693cbe("is_title_card_02", 4000, 1, "int");
+		cluielem::setup_clientfields("zm_tungsten_title_cards");
+		cluielem::add_clientfield("is_title_card_02", 4000, 1, "int");
 	}
 
 }
 
-#namespace namespace_6783631d;
+#namespace zm_tungsten_title_cards;
 
 /*
 	Name: function_6365072c
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0xDF67B9EB
 	Offset: 0xD8
 	Size: 0x14
@@ -108,12 +108,12 @@ class class_25c5977f : class_6aaccc24
 */
 function private autoexec function_6365072c()
 {
-	level notify(1188439486);
+	level notify(-1188439486);
 }
 
 /*
 	Name: register
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0x97CBB6A4
 	Offset: 0xF8
 	Size: 0x34
@@ -129,7 +129,7 @@ function register()
 
 /*
 	Name: open
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0xAA4B8EB3
 	Offset: 0x138
 	Size: 0x38
@@ -147,7 +147,7 @@ function open(player, flags)
 
 /*
 	Name: close
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0xF8A9CA82
 	Offset: 0x178
 	Size: 0x1C
@@ -161,7 +161,7 @@ function close(player)
 
 /*
 	Name: is_open
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0xA2C3BD60
 	Offset: 0x1A0
 	Size: 0x1A
@@ -175,7 +175,7 @@ function is_open(player)
 
 /*
 	Name: function_89134efb
-	Namespace: namespace_6783631d
+	Namespace: zm_tungsten_title_cards
 	Checksum: 0x48DE785
 	Offset: 0x1C8
 	Size: 0x28

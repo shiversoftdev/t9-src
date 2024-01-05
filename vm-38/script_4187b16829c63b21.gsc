@@ -1,11 +1,11 @@
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\struct.gsc;
 #using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
 #using scripts\zm_common\zm_score.gsc;
 #using scripts\zm_common\zm_unitrigger.gsc;
+#using scripts\zm_common\zm_equipment.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_5ce39742;
 

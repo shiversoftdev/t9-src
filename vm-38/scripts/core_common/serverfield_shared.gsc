@@ -11,7 +11,7 @@
 */
 function private autoexec function_9832fda8()
 {
-	level notify(1440317845);
+	level notify(-1440317845);
 }
 
 #namespace serverfield;

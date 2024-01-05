@@ -34,7 +34,7 @@ function init()
 			name = function_9e72a96(var_1c59693d.name);
 			locstr = function_9e72a96(var_1c59693d.var_d5ab2ea4);
 			var_59ea00e = ("" + name) + "";
-			util::function_e2e9d901(var_663588d + name, var_59ea00e);
+			util::add_devgui(var_663588d + name, var_59ea00e);
 		}
 	#/
 }

@@ -1,18 +1,18 @@
 #using script_16b1b77a76492c6a;
-#using script_340a2e805e35f7a2;
 #using script_34ab99a4ca1a43d;
 #using script_789f2367a00401d8;
-#using script_7fc996fe8678852;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\hud_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_340a2e805e35f7a2;
+#using script_7fc996fe8678852;
+#using scripts\core_common\clientfield_shared.gsc;
 
 #namespace namespace_780aaec4;
 
@@ -27,11 +27,11 @@
 */
 function private autoexec function_c0520079()
 {
-	level notify(944115389);
+	level notify(-944115389);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_780aaec4
 	Checksum: 0xD46540B
 	Offset: 0x218
@@ -39,7 +39,7 @@ function private autoexec function_c0520079()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_4d08eeea0f720e8d", &function_70a657d8, undefined, undefined, #"hash_f81b9dea74f0ee");
 }
@@ -63,7 +63,7 @@ function function_70a657d8()
 	{
 		return;
 	}
-	namespace_8b6a9d79::function_b3464a7c(#"hash_132e0a4325fb7ed5", &function_4ba28b7e);
+	namespace_8b6a9d79::function_b3464a7c(#"demented_echo", &function_4ba28b7e);
 	clientfield::register("scriptmover", "sr_demented_echo_fx", 1, 2, "int");
 }
 
@@ -99,8 +99,8 @@ function private function_4ba28b7e(s_instance)
 	var_3d014474 = level.var_41dd92fd[#"hash_7cba8a05511ceedf"].health;
 	var_85c920d0.health = int(var_3d014474 * 1.75);
 	var_85c920d0.instance = s_instance;
-	var_85c920d0 val::set(#"hash_132e0a4325fb7ed5", "takedamage", 1);
-	var_85c920d0 val::set(#"hash_132e0a4325fb7ed5", "allowdeath", 0);
+	var_85c920d0 val::set(#"demented_echo", "takedamage", 1);
+	var_85c920d0 val::set(#"demented_echo", "allowdeath", 0);
 	level thread function_a1ce8017(var_85c920d0);
 	trigger = getent(s_instance.targetname, "target");
 	if(!isdefined(trigger))
@@ -117,7 +117,7 @@ function private function_4ba28b7e(s_instance)
 		trigger = spawn("trigger_radius", s_spawn.origin + v_offset, 0, int(s_spawn.radius), int(s_spawn.height));
 	}
 	trigger.var_85c920d0 = var_85c920d0;
-	trigger callback::function_35a12f19(&function_6b6377f8);
+	trigger callback::on_trigger(&function_6b6377f8);
 	level callback::add_callback(#"hash_594217387367ebb4", &function_7ee520f8, s_instance);
 }
 
@@ -184,8 +184,8 @@ function private function_6f4653fd(player)
 		n_time = max(n_time - 0.1, 0.2);
 	}
 	self notify(#"hash_1a42ae1b66d06a7d");
-	self val::reset(#"hash_132e0a4325fb7ed5", "takedamage");
-	self val::reset(#"hash_132e0a4325fb7ed5", "allowdeath");
+	self val::reset(#"demented_echo", "takedamage");
+	self val::reset(#"demented_echo", "allowdeath");
 	/#
 		iprintlnbold("");
 	#/
@@ -194,7 +194,7 @@ function private function_6f4653fd(player)
 		self linkto(var_55e11aa9);
 		v_facing = vectortoangles(player.origin - self.origin);
 		var_55e11aa9 rotateto(v_facing, 0.3);
-		player namespace_68a80213::damageinfirearea(player.origin, undefined, undefined, getweapon(#"hash_23dd6039fe2f36c6"), self, undefined, getscriptbundle("molotov_custom_settings"));
+		player namespace_68a80213::damageinfirearea(player.origin, undefined, undefined, getweapon(#"molotov_fire"), self, undefined, getscriptbundle("molotov_custom_settings"));
 	}
 	level thread function_491bb6b7(self.instance, self.origin);
 	self playsound(#"hash_1c9b23a03a1c2367");

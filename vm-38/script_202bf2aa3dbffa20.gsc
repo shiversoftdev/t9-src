@@ -1,6 +1,6 @@
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace namespace_dd8b9b1a;
 
@@ -21,7 +21,7 @@ function private autoexec function_422b8440()
 #namespace namespace_4faef43b;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_4faef43b
 	Checksum: 0x54F10A6C
 	Offset: 0x168
@@ -29,7 +29,7 @@ function private autoexec function_422b8440()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_3793eb4a6c52c66f", &__init__, undefined, undefined, undefined);
 }
@@ -49,7 +49,7 @@ function __init__()
 	clientfield::register("scriptmover", "" + #"hash_6d9aa5215e695ca2", 1, 1, "counter", &function_65502dee, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_1f232116f775fa91", 1, 1, "counter", &function_de8dd244, 0, 0);
 	clientfield::register("scriptmover", "" + #"hash_4719ef7fda616f3a", 1, 1, "counter", &function_b6000359, 0, 0);
-	clientfield::function_a8bbc967("hudItems.reinforcing", #"hud_items", #"reinforcing", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.reinforcing", #"hud_items", #"reinforcing", 1, 1, "int", undefined, 0, 0);
 }
 
 /*

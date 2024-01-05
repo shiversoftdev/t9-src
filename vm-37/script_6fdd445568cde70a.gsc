@@ -1,11 +1,11 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_b201538a : class_6aaccc24
+class ccp_test_journalist1_uni_download_hack_luielem : cluielem
 {
 
 	/*
 		Name: constructor
-		Namespace: namespace_b201538a
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0x7F922B9B
 		Offset: 0x390
 		Size: 0x14
@@ -18,7 +18,7 @@ class class_b201538a : class_6aaccc24
 
 	/*
 		Name: destructor
-		Namespace: namespace_b201538a
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0xD4974
 		Offset: 0x620
 		Size: 0x14
@@ -31,7 +31,7 @@ class class_b201538a : class_6aaccc24
 
 	/*
 		Name: open
-		Namespace: namespace_b201538a
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0xFC81CCE5
 		Offset: 0x4C8
 		Size: 0x24
@@ -40,26 +40,26 @@ class class_b201538a : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
-		Namespace: namespace_b201538a
+		Name: register_clientside
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0x2C58A
 		Offset: 0x430
 		Size: 0x1C
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("cp_test_journalist1_uni_download_hack_luielem");
+		cluielem::register_clientside("cp_test_journalist1_uni_download_hack_luielem");
 	}
 
 	/*
 		Name: setup_clientfields
-		Namespace: namespace_b201538a
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0xF1B0C7B7
 		Offset: 0x3B0
 		Size: 0x74
@@ -68,28 +68,28 @@ class class_b201538a : class_6aaccc24
 	*/
 	function setup_clientfields(var_fff52af4)
 	{
-		namespace_6aaccc24::setup_clientfields("cp_test_journalist1_uni_download_hack_luielem");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 2, "int");
-		namespace_6aaccc24::function_da693cbe("download_progress", 1, 7, "float", var_fff52af4);
+		cluielem::setup_clientfields("cp_test_journalist1_uni_download_hack_luielem");
+		cluielem::add_clientfield("_state", 1, 2, "int");
+		cluielem::add_clientfield("download_progress", 1, 7, "float", var_fff52af4);
 	}
 
 	/*
-		Name: function_97bf49cb
-		Namespace: namespace_b201538a
+		Name: set_download_progress
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0xEBA8C6FA
 		Offset: 0x5E8
 		Size: 0x30
 		Parameters: 2
 		Flags: None
 	*/
-	function function_97bf49cb(localclientnum, value)
+	function set_download_progress(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "download_progress", value);
+		[[ self ]]->set_data(localclientnum, "download_progress", value);
 	}
 
 	/*
 		Name: set_state
-		Namespace: namespace_b201538a
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0x27EFEC54
 		Offset: 0x4F8
 		Size: 0xE4
@@ -100,19 +100,19 @@ class class_b201538a : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"paused" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
 				if(#"finished" == state_name)
 				{
-					[[ self ]]->function_d7d2fcce(localclientnum, "_state", 2);
+					[[ self ]]->set_data(localclientnum, "_state", 2);
 				}
 				else
 				{
@@ -128,7 +128,7 @@ class class_b201538a : class_6aaccc24
 
 	/*
 		Name: function_fa582112
-		Namespace: namespace_b201538a
+		Namespace: ccp_test_journalist1_uni_download_hack_luielem
 		Checksum: 0xFA968833
 		Offset: 0x458
 		Size: 0x68
@@ -137,9 +137,9 @@ class class_b201538a : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "download_progress", 0);
+		[[ self ]]->set_data(localclientnum, "download_progress", 0);
 	}
 
 }
@@ -157,7 +157,7 @@ class class_b201538a : class_6aaccc24
 */
 function register(var_fff52af4)
 {
-	elem = new class_b201538a();
+	elem = new ccp_test_journalist1_uni_download_hack_luielem();
 	[[ elem ]]->setup_clientfields(var_fff52af4);
 	if(!isdefined(level.var_ae746e8f))
 	{
@@ -179,7 +179,7 @@ function register(var_fff52af4)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: cp_test_journalist1_uni_download_hack_luielem
 	Checksum: 0x3976E0A1
 	Offset: 0x278
@@ -187,10 +187,10 @@ function register(var_fff52af4)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
-	elem = new class_b201538a();
-	[[ elem ]]->function_5c1bb138();
+	elem = new ccp_test_journalist1_uni_download_hack_luielem();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -251,7 +251,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_97bf49cb
+	Name: set_download_progress
 	Namespace: cp_test_journalist1_uni_download_hack_luielem
 	Checksum: 0xC2586AD2
 	Offset: 0x360
@@ -259,8 +259,8 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_97bf49cb(localclientnum, value)
+function set_download_progress(localclientnum, value)
 {
-	[[ self ]]->function_97bf49cb(localclientnum, value);
+	[[ self ]]->set_download_progress(localclientnum, value);
 }
 

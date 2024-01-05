@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_5c7b7dcc : class_6aaccc24
+class class_5c7b7dcc : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_5c7b7dcc : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_5c7b7dcc
 		Checksum: 0x3DD4B28F
 		Offset: 0x3D0
@@ -52,13 +52,13 @@ class class_5c7b7dcc : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("mp_infect_timer");
+		cluielem::register_clientside("mp_infect_timer");
 	}
 
 	/*
-		Name: function_8c8674a4
+		Name: set_infectiontimeremaining
 		Namespace: namespace_5c7b7dcc
 		Checksum: 0x74623191
 		Offset: 0x470
@@ -66,9 +66,9 @@ class class_5c7b7dcc : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_8c8674a4(localclientnum, value)
+	function set_infectiontimeremaining(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "infectionTimeRemaining", value);
+		[[ self ]]->set_data(localclientnum, "infectionTimeRemaining", value);
 	}
 
 	/*
@@ -82,8 +82,8 @@ class class_5c7b7dcc : class_6aaccc24
 	*/
 	function setup_clientfields(var_7682811d)
 	{
-		namespace_6aaccc24::setup_clientfields("mp_infect_timer");
-		namespace_6aaccc24::function_da693cbe("infectionTimeRemaining", 1, 4, "int", var_7682811d);
+		cluielem::setup_clientfields("mp_infect_timer");
+		cluielem::add_clientfield("infectionTimeRemaining", 1, 4, "int", var_7682811d);
 	}
 
 	/*
@@ -97,8 +97,8 @@ class class_5c7b7dcc : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
-		[[ self ]]->function_d7d2fcce(localclientnum, "infectionTimeRemaining", 0);
+		cluielem::function_fa582112(localclientnum);
+		[[ self ]]->set_data(localclientnum, "infectionTimeRemaining", 0);
 	}
 
 }
@@ -152,7 +152,7 @@ function register(var_7682811d)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: mp_infect_timer
 	Checksum: 0x50F579D3
 	Offset: 0x270
@@ -160,10 +160,10 @@ function register(var_7682811d)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_5c7b7dcc();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -210,7 +210,7 @@ function is_open(localclientnum)
 }
 
 /*
-	Name: function_8c8674a4
+	Name: set_infectiontimeremaining
 	Namespace: mp_infect_timer
 	Checksum: 0x673B5144
 	Offset: 0x328
@@ -218,8 +218,8 @@ function is_open(localclientnum)
 	Parameters: 2
 	Flags: None
 */
-function function_8c8674a4(localclientnum, value)
+function set_infectiontimeremaining(localclientnum, value)
 {
-	[[ self ]]->function_8c8674a4(localclientnum, value);
+	[[ self ]]->set_infectiontimeremaining(localclientnum, value);
 }
 

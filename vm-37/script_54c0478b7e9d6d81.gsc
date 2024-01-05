@@ -3,7 +3,7 @@
 #namespace gadget_clone_render;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: gadget_clone_render
 	Checksum: 0xBADDC6B6
 	Offset: 0x80
@@ -11,7 +11,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"gadget_clone_render", &function_70a657d8, undefined, undefined, undefined);
 }

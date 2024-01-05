@@ -1,53 +1,53 @@
-#using script_16f6e32fce786c0d;
+#using scripts\zm_common\zm_weapons.gsc;
+#using scripts\zm_common\zm.gsc;
+#using scripts\zm_common\util.gsc;
+#using scripts\zm_common\rat.gsc;
+#using scripts\weapons\zm\weaponobjects.gsc;
+#using scripts\zm_common\gametypes\spawnlogic.gsc;
+#using scripts\zm_common\gametypes\hud_message.gsc;
+#using scripts\zm_common\gametypes\hostmigration.gsc;
+#using scripts\zm_common\gametypes\globallogic_utils.gsc;
+#using scripts\zm_common\gametypes\globallogic_ui.gsc;
+#using scripts\zm_common\gametypes\globallogic_spawn.gsc;
+#using scripts\zm_common\gametypes\globallogic_score.gsc;
+#using scripts\zm_common\gametypes\globallogic_player.gsc;
+#using scripts\zm_common\gametypes\globallogic_defaults.gsc;
+#using scripts\zm_common\gametypes\globallogic_audio.gsc;
 #using script_41b18a77720c5395;
-#using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
-#using script_70a43d6ba27cff6a;
+#using scripts\zm_common\gametypes\dev.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\globallogic\globallogic_player.gsc;
+#using scripts\core_common\visionset_mgr_shared.gsc;
 #using scripts\core_common\bb_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\gamestate.gsc;
-#using scripts\core_common\gametype_shared.gsc;
-#using scripts\core_common\healthoverlay.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\simple_hostmigration.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\tweakables_shared.gsc;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\popups_shared.gsc;
+#using scripts\core_common\persistence_shared.gsc;
+#using scripts\core_common\music_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\hud_util_shared.gsc;
 #using scripts\core_common\hud_message_shared.gsc;
 #using scripts\core_common\hud_shared.gsc;
-#using scripts\core_common\hud_util_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\music_shared.gsc;
-#using scripts\core_common\persistence_shared.gsc;
-#using scripts\core_common\popups_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\simple_hostmigration.gsc;
+#using scripts\core_common\healthoverlay.gsc;
+#using scripts\core_common\gametype_shared.gsc;
+#using scripts\core_common\gamestate.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\tweakables_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\visionset_mgr_shared.gsc;
-#using scripts\zm_common\gametypes\dev.gsc;
-#using scripts\zm_common\gametypes\globallogic_audio.gsc;
-#using scripts\zm_common\gametypes\globallogic_defaults.gsc;
-#using scripts\zm_common\gametypes\globallogic_player.gsc;
-#using scripts\zm_common\gametypes\globallogic_score.gsc;
-#using scripts\zm_common\gametypes\globallogic_spawn.gsc;
-#using scripts\zm_common\gametypes\globallogic_ui.gsc;
-#using scripts\zm_common\gametypes\globallogic_utils.gsc;
-#using scripts\zm_common\gametypes\hostmigration.gsc;
-#using scripts\zm_common\gametypes\hud_message.gsc;
-#using scripts\zm_common\gametypes\spawnlogic.gsc;
-#using scripts\zm_common\rat.gsc;
-#using scripts\zm_common\util.gsc;
-#using scripts\zm_common\zm.gsc;
-#using scripts\zm_common\zm_weapons.gsc;
 
 #namespace globallogic;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: globallogic
 	Checksum: 0x9071F6C3
 	Offset: 0x4D8
@@ -55,7 +55,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"globallogic", &function_70a657d8, undefined, undefined, #"visionset_mgr");
 }
@@ -72,9 +72,9 @@ function private autoexec function_89f2df9()
 function private function_70a657d8()
 {
 	visionset_mgr::register_info("visionset", "crithealth", 1, 4, 25, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
-	clientfield::function_a8bbc967("hudItems.armorIsOnCooldown", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.armorIsOnCooldown", 1, 1, "int");
 	clientfield::function_91cd7763("string", "hudItems.cursorHintZMPurchaseInvalidText", 1, 0);
-	clientfield::function_a8bbc967("hudItems.cursorHintZMPurchaseInvalid", 1, 1, "int");
+	clientfield::register_clientuimodel("hudItems.cursorHintZMPurchaseInvalid", 1, 1, "int");
 }
 
 /*
@@ -112,8 +112,8 @@ function init()
 			level.rankedmatch = 1;
 		}
 	#/
-	level.script = util::function_53bbf9d2();
-	level.gametype = util::function_5df4294();
+	level.script = util::get_map_name();
+	level.gametype = util::get_game_type();
 	level.var_837aa533 = hash(level.gametype);
 	if(isdefined(level.gametype))
 	{
@@ -188,7 +188,7 @@ function init()
 		setdvar(#"bg_falldamagemaxheight", 512);
 		setdvar(#"player_clipsizemultiplier", 2);
 	}
-	namespace_81c567a8::init_shared();
+	display_transition::init_shared();
 	if(!isdefined(game.tiebreaker))
 	{
 		game.tiebreaker = 0;
@@ -483,7 +483,7 @@ function forceend(hostsucks)
 	{
 		if(level.splitscreen)
 		{
-			endstring = #"hash_4f9682270c82e8f6";
+			endstring = #"mp/ended_game";
 		}
 		else
 		{
@@ -809,7 +809,7 @@ function updategameevents()
 			else if(someoneoneachteam())
 			{
 				level.gameforfeited = 0;
-				level notify(#"hash_39a00a79045884ca");
+				level notify(#"abort forfeit");
 			}
 		}
 		else
@@ -825,7 +825,7 @@ function updategameevents()
 			else if(util::totalplayercount() > 1)
 			{
 				level.gameforfeited = 0;
-				level notify(#"hash_39a00a79045884ca");
+				level notify(#"abort forfeit");
 			}
 		}
 	}
@@ -867,15 +867,15 @@ function function_8da685e9()
 	{
 		foreach(player in level.players)
 		{
-			var_b318478d = 1;
+			shouldshow = 1;
 			for(var_3c0cc784 = 0; var_3c0cc784 < level.var_75433ec1.size; var_3c0cc784++)
 			{
 				if(player == level.var_75433ec1[var_3c0cc784])
 				{
-					var_b318478d = 0;
+					shouldshow = 0;
 				}
 			}
-			if(var_b318478d)
+			if(shouldshow)
 			{
 				player luinotifyevent(#"create_prematch_timer", 2, level.var_fd167bf6, level.var_5654073f);
 				level.var_75433ec1[level.var_75433ec1.size] = player;
@@ -1080,7 +1080,7 @@ function getendreasontext()
 		{
 			return #"hash_cd63faed592da03";
 		}
-		return #"hash_4f9682270c82e8f6";
+		return #"mp/ended_game";
 	}
 	return game.strings[#"time_limit_reached"];
 }
@@ -1846,7 +1846,7 @@ function startgame()
 	level.prematch_over = 1;
 	thread graceperiod();
 	thread watchmatchendingsoon();
-	level callback::callback(#"hash_361e06db4b210e");
+	level callback::callback(#"on_game_playing");
 	if(is_true(level.zm_disable_recording_stats))
 	{
 		return;
@@ -2067,13 +2067,13 @@ function callback_startgametype()
 		game.strings[#"change_class"] = #"hash_181a96fe9c28ada2";
 		game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
 		game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
-		game.strings[#"tie"] = #"hash_72785a9088fa0d1b";
-		game.strings[#"round_draw"] = #"hash_7d3ae25e0187143e";
+		game.strings[#"tie"] = #"mp/match_tie";
+		game.strings[#"round_draw"] = #"mp/round_draw";
 		game.strings[#"enemies_eliminated"] = #"mp_enemies_eliminated";
-		game.strings[#"score_limit_reached"] = #"hash_3050eee23c6a3574";
-		game.strings[#"round_limit_reached"] = #"hash_3b23cb510ab5970a";
-		game.strings[#"time_limit_reached"] = #"hash_4e2680278af76571";
-		game.strings[#"players_forfeited"] = #"hash_4b172be7ce459674";
+		game.strings[#"score_limit_reached"] = #"mp/score_limit_reached";
+		game.strings[#"round_limit_reached"] = #"mp/round_limit_reached";
+		game.strings[#"time_limit_reached"] = #"mp/time_limit_reached";
+		game.strings[#"players_forfeited"] = #"mp/players_forfeited";
 		assertteamvariables();
 		if(isdefined(level.onprecachegametype))
 		{

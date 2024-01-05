@@ -1,12 +1,12 @@
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_7c1d0bac;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_7c1d0bac
 	Checksum: 0xF6C9F3D8
 	Offset: 0xE8
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_5fe7a854b630ef02", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -33,7 +33,7 @@ function private function_70a657d8()
 	clientfield::register("toplayer", "player_hit_freezing_snowball", 9000, 1, "int");
 	clientfield::register("toplayer", "player_hit_snowball_direction", 9000, 4, "int");
 	callback::on_player_damage(&function_c9509a9c);
-	weaponobjects::function_e6400478(#"snowball", &function_ece99a15, 1);
+	weaponobjects::function_e6400478(#"snowball", &creategrenadewatcher, 1);
 }
 
 /*
@@ -53,7 +53,7 @@ function function_c9509a9c(params)
 		{
 			var_feafe576 = 0;
 			var_cb01806c = 0;
-			var_797a4fe0 = 0;
+			bleft = 0;
 			bright = 0;
 			var_4e1c6c81 = 1;
 			var_9ed2938d = 1;
@@ -83,7 +83,7 @@ function function_c9509a9c(params)
 			}
 			else if(vec_dot < -0.2)
 			{
-				var_797a4fe0 = 1;
+				bleft = 1;
 				var_9ed2938d = 0;
 			}
 			if(var_4e1c6c81 && var_9ed2938d)
@@ -92,7 +92,7 @@ function function_c9509a9c(params)
 			}
 			else
 			{
-				if(var_4e1c6c81 && var_797a4fe0)
+				if(var_4e1c6c81 && bleft)
 				{
 					self clientfield::set_to_player("player_hit_snowball_direction", 2);
 				}
@@ -116,7 +116,7 @@ function function_c9509a9c(params)
 							}
 							else
 							{
-								if(var_feafe576 && var_797a4fe0)
+								if(var_feafe576 && bleft)
 								{
 									self clientfield::set_to_player("player_hit_snowball_direction", 6);
 								}
@@ -128,7 +128,7 @@ function function_c9509a9c(params)
 									}
 									else
 									{
-										if(var_cb01806c && var_797a4fe0)
+										if(var_cb01806c && bleft)
 										{
 											self clientfield::set_to_player("player_hit_snowball_direction", 9);
 										}
@@ -180,7 +180,7 @@ function function_8407e8ae(notifyhash)
 }
 
 /*
-	Name: function_ece99a15
+	Name: creategrenadewatcher
 	Namespace: namespace_7c1d0bac
 	Checksum: 0xF805319D
 	Offset: 0x700
@@ -188,7 +188,7 @@ function function_8407e8ae(notifyhash)
 	Parameters: 1
 	Flags: Linked
 */
-function function_ece99a15(watcher)
+function creategrenadewatcher(watcher)
 {
 	watcher.onspawn = &function_aa95d684;
 }
@@ -236,7 +236,7 @@ function function_5f86757d()
 				}
 				var_feafe576 = 0;
 				var_cb01806c = 0;
-				var_797a4fe0 = 0;
+				bleft = 0;
 				bright = 0;
 				var_4e1c6c81 = 1;
 				var_9ed2938d = 1;
@@ -266,7 +266,7 @@ function function_5f86757d()
 				}
 				else if(vec_dot < -0.2)
 				{
-					var_797a4fe0 = 1;
+					bleft = 1;
 					var_9ed2938d = 0;
 				}
 				if(var_4e1c6c81 && var_9ed2938d)
@@ -275,7 +275,7 @@ function function_5f86757d()
 				}
 				else
 				{
-					if(var_4e1c6c81 && var_797a4fe0)
+					if(var_4e1c6c81 && bleft)
 					{
 						player clientfield::set_to_player("player_hit_snowball_direction", 2);
 					}
@@ -299,7 +299,7 @@ function function_5f86757d()
 								}
 								else
 								{
-									if(var_feafe576 && var_797a4fe0)
+									if(var_feafe576 && bleft)
 									{
 										player clientfield::set_to_player("player_hit_snowball_direction", 6);
 									}
@@ -311,7 +311,7 @@ function function_5f86757d()
 										}
 										else
 										{
-											if(var_cb01806c && var_797a4fe0)
+											if(var_cb01806c && bleft)
 											{
 												player clientfield::set_to_player("player_hit_snowball_direction", 9);
 											}

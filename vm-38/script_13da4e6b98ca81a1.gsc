@@ -1,7 +1,7 @@
-#using scripts\core_common\flag_shared.csc;
-#using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\renderoverridebundle.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\renderoverridebundle.csc;
+#using scripts\core_common\postfx_shared.csc;
+#using scripts\core_common\flag_shared.csc;
 
 #namespace codcaster;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_154d9633()
 {
-	level notify(1784295172);
+	level notify(-1784295172);
 }
 
 /*
@@ -248,7 +248,7 @@ function private codcaster_monitor_xray_change(localclientnum)
 	level endon("codcaster_monitor_xray_change" + localclientnum);
 	level.var_6a64742e = 1;
 	localplayer = function_5c10bd79(localclientnum);
-	var_2c491b2b = localplayer.team;
+	lastteam = localplayer.team;
 	var_f4e066d = 0;
 	var_fb32b8ee = 0;
 	var_adcf5c30 = 0;
@@ -276,11 +276,11 @@ function private codcaster_monitor_xray_change(localclientnum)
 		var_50b78b20 = function_cd753154(localclientnum);
 		var_920aadd7 = is_true(level.isigcactive);
 		var_86a34b38 = function_b3cde530(localclientnum, localplayer getentitynumber());
-		var_504a9922 = team != var_2c491b2b || var_52fe6881 != var_f4e066d || var_6f36c5bc != var_fb32b8ee || var_349e9a55 != var_adcf5c30 || var_2db6105b != var_894a233a || var_50b78b20 != var_9c1f6f || var_920aadd7 != var_f0868cc0 || var_86a34b38 != var_22aac170;
-		if(var_504a9922 || level.var_6a64742e)
+		needupdate = team != lastteam || var_52fe6881 != var_f4e066d || var_6f36c5bc != var_fb32b8ee || var_349e9a55 != var_adcf5c30 || var_2db6105b != var_894a233a || var_50b78b20 != var_9c1f6f || var_920aadd7 != var_f0868cc0 || var_86a34b38 != var_22aac170;
+		if(needupdate || level.var_6a64742e)
 		{
 			level.var_6a64742e = 0;
-			var_2c491b2b = team;
+			lastteam = team;
 			var_f4e066d = var_52fe6881;
 			var_fb32b8ee = var_6f36c5bc;
 			var_adcf5c30 = var_349e9a55;
@@ -361,10 +361,10 @@ function private function_1cc61419(localclientnum, settings)
 	foreach(array in var_f2a410c9)
 	{
 		entity = array[0];
-		var_c43ac0da = array[1];
+		robkey = array[1];
 		rob = array[2];
 		team = array[3];
-		entity function_89106df8(localclientnum, var_c43ac0da, rob, team, settings);
+		entity function_89106df8(localclientnum, robkey, rob, team, settings);
 	}
 }
 
@@ -442,7 +442,7 @@ function function_471909d9(localclientnum, entity, settings, localplayerteam)
 	Parameters: 5
 	Flags: Linked
 */
-function function_89106df8(localclientnum, var_c43ac0da, rob, var_4724c867, settings)
+function function_89106df8(localclientnum, robkey, rob, var_4724c867, settings)
 {
 	if(!function_b8fe9b52(localclientnum))
 	{
@@ -464,7 +464,7 @@ function function_89106df8(localclientnum, var_c43ac0da, rob, var_4724c867, sett
 	{
 		alpha = 0;
 	}
-	self renderoverridebundle::function_c8d97b8e(localclientnum, #"hash_7e51b929877df918", var_c43ac0da);
+	self renderoverridebundle::function_c8d97b8e(localclientnum, #"hash_7e51b929877df918", robkey);
 	if(!self function_d2503806(rob))
 	{
 		return;
@@ -545,7 +545,7 @@ function function_995e01b6(localclientnum, player)
 		var_3a0f5e49 = getdvarfloat(#"hash_595a2f8a298ab607", 1);
 		teamcolor = teamcolor * var_3a0f5e49;
 	}
-	var_1762ffa function_bf9d3071(rob);
+	var_1762ffa playrenderoverridebundle(rob);
 	if(var_1762ffa postfx::function_556665f2(postfx))
 	{
 		var_1762ffa function_116b95e5(postfx, #"color", teamcolor[0], teamcolor[1], teamcolor[2]);
@@ -569,7 +569,7 @@ function private function_425a51a2(var_5854d8e)
 {
 	if(var_5854d8e function_d2503806(var_5854d8e.rob))
 	{
-		var_5854d8e function_5d482e78(var_5854d8e.rob);
+		var_5854d8e stoprenderoverridebundle(var_5854d8e.rob);
 	}
 	var_5854d8e delete();
 }

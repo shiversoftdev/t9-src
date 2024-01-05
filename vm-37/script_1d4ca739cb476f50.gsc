@@ -1,10 +1,10 @@
-#using scripts\core_common\serverfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\serverfield_shared.csc;
 
 #namespace minigame;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: minigame
 	Checksum: 0x8D7D7549
 	Offset: 0xA0
@@ -12,7 +12,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register("minigames", &function_70a657d8, undefined, undefined, undefined);
 }

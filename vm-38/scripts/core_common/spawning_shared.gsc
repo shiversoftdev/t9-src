@@ -1,20 +1,20 @@
-#using script_335d0650ed05d36d;
-#using script_3e196d275a6fb180;
-#using script_44b0b8420eabacad;
-#using script_491ff5a2ba670762;
 #using script_5ee699b0aaf564c4;
+#using script_491ff5a2ba670762;
 #using script_6167e26342be354b;
+#using script_3e196d275a6fb180;
 #using script_7d712f77ab8d0c16;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
+#using script_335d0650ed05d36d;
+#using script_44b0b8420eabacad;
 #using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
 #using scripts\core_common\match_record.gsc;
 #using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace spawning_shared;
 
@@ -29,13 +29,13 @@
 */
 function private autoexec function_16148aa1()
 {
-	level notify(2100667326);
+	level notify(-2100667326);
 }
 
 #namespace spawning;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: spawning
 	Checksum: 0x5E081A74
 	Offset: 0x150
@@ -43,7 +43,7 @@ function private autoexec function_16148aa1()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"spawning_shared", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -59,7 +59,7 @@ function private autoexec function_89f2df9()
 */
 function private function_70a657d8()
 {
-	if(util::function_3f165ee8())
+	if(util::is_frontend_map())
 	{
 		return;
 	}
@@ -96,12 +96,12 @@ function private function_70a657d8()
 		level.spawnsystem.var_3709dc53 = 1;
 	}
 	function_8e22661a();
-	function_44c8af7f();
+	init_teams();
 	function_d0149d6b();
 	function_f210e027();
 	function_d9deb7d7();
 	namespace_aaddef5a::function_98ebe1b4();
-	callback::add_callback(#"hash_79b2aab11c0a9902", &function_44c8af7f);
+	callback::add_callback(#"init_teams", &init_teams);
 	callback::on_connect(&on_player_connect);
 	callback::on_spawned(&on_player_spawned);
 	callback::on_joined_team(&on_joined_team);
@@ -164,7 +164,7 @@ function private function_8e22661a()
 	level.spawnsystem.var_a9293f4a = randomint(1033);
 	level.spawnsystem.var_d9984264 = (isdefined(getgametypesetting(#"spawnprotectiontime")) ? getgametypesetting(#"spawnprotectiontime") : 0);
 	level.spawnsystem.spawntraptriggertime = (isdefined(getgametypesetting(#"spawntraptriggertime")) ? getgametypesetting(#"spawntraptriggertime") : 0);
-	level.spawnsystem.var_f220c297 = (isdefined(getgametypesetting(#"hash_19400c3e10b77e6b")) ? getgametypesetting(#"hash_19400c3e10b77e6b") : 0);
+	level.spawnsystem.deathcirclerespawn = (isdefined(getgametypesetting(#"deathcirclerespawn")) ? getgametypesetting(#"deathcirclerespawn") : 0);
 	level.spawnsystem.var_c2cc011f = (isdefined(getgametypesetting(#"hash_4bdd1bd86b610871")) ? getgametypesetting(#"hash_4bdd1bd86b610871") : 0);
 }
 
@@ -191,7 +191,7 @@ function add_default_spawnlist(spawnlist)
 }
 
 /*
-	Name: function_44c8af7f
+	Name: init_teams
 	Namespace: spawning
 	Checksum: 0xAB80DE89
 	Offset: 0x6E0
@@ -199,7 +199,7 @@ function add_default_spawnlist(spawnlist)
 	Parameters: 0
 	Flags: Linked
 */
-function function_44c8af7f()
+function init_teams()
 {
 	spawnsystem = level.spawnsystem;
 	spawnsystem.ispawn_teammask = [];

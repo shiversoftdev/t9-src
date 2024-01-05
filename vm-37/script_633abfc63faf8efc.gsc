@@ -1,7 +1,7 @@
-#using scripts\core_common\clientfield_shared.gsc;
 #using scripts\core_common\lui_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-class class_ab111f2c : class_6aaccc24
+class class_ab111f2c : cluielem
 {
 	var var_bf9c8c95;
 	var var_d5213cbb;
@@ -47,7 +47,7 @@ class class_ab111f2c : class_6aaccc24
 		{
 			flags = 0;
 		}
-		namespace_6aaccc24::function_8b8089ba(player, flags);
+		cluielem::open_luielem(player, flags);
 	}
 
 	/*
@@ -75,7 +75,7 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function close(player)
 	{
-		namespace_6aaccc24::function_a68f6e20(player);
+		cluielem::close_luielem(player);
 	}
 
 	/*
@@ -103,15 +103,15 @@ class class_ab111f2c : class_6aaccc24
 	*/
 	function setup_clientfields()
 	{
-		namespace_6aaccc24::setup_clientfields("cp_hint_text");
-		namespace_6aaccc24::function_dcb34c80("string", "hint_text", 1);
-		namespace_6aaccc24::function_da693cbe("display_blink", 1, 1, "counter");
-		namespace_6aaccc24::function_da693cbe("fadeout", 1, 1, "counter");
-		namespace_6aaccc24::function_da693cbe("display_noblink", 1, 1, "counter");
+		cluielem::setup_clientfields("cp_hint_text");
+		cluielem::function_dcb34c80("string", "hint_text", 1);
+		cluielem::add_clientfield("display_blink", 1, 1, "counter");
+		cluielem::add_clientfield("fadeout", 1, 1, "counter");
+		cluielem::add_clientfield("display_noblink", 1, 1, "counter");
 	}
 
 	/*
-		Name: function_a16f86c1
+		Name: set_hint_text
 		Namespace: namespace_ab111f2c
 		Checksum: 0x4D39131D
 		Offset: 0x3D8
@@ -119,7 +119,7 @@ class class_ab111f2c : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_a16f86c1(player, value)
+	function set_hint_text(player, value)
 	{
 		player clientfield::function_9bf78ef8(var_d5213cbb, var_bf9c8c95, "hint_text", value);
 	}
@@ -205,7 +205,7 @@ function is_open(player)
 }
 
 /*
-	Name: function_a16f86c1
+	Name: set_hint_text
 	Namespace: cp_hint_text
 	Checksum: 0x80E3CC01
 	Offset: 0x1D0
@@ -213,9 +213,9 @@ function is_open(player)
 	Parameters: 2
 	Flags: None
 */
-function function_a16f86c1(player, value)
+function set_hint_text(player, value)
 {
-	[[ self ]]->function_a16f86c1(player, value);
+	[[ self ]]->set_hint_text(player, value);
 }
 
 /*

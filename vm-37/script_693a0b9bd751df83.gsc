@@ -1,29 +1,29 @@
-#using script_1292451e284848cc;
-#using script_1883fa4e60abbf9f;
-#using script_2d443451ce681a;
-#using script_31e9b35aaacbbd93;
-#using script_45e09f634c49fdba;
-#using script_61cfc2ab8e60625;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\exploder_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\trigger_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
 #using scripts\cp_common\gametypes\globallogic_ui.gsc;
 #using scripts\cp_common\skipto.gsc;
+#using script_1883fa4e60abbf9f;
 #using scripts\cp_common\util.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using script_1292451e284848cc;
+#using script_31e9b35aaacbbd93;
+#using script_61cfc2ab8e60625;
+#using script_45e09f634c49fdba;
+#using script_2d443451ce681a;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\exploder_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\scene_shared.gsc;
+#using scripts\core_common\trigger_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
 
-#namespace namespace_2fbde9a9;
+#namespace tkdn_af_tarmac;
 
 /*
 	Name: starting
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0x70CD56E3
 	Offset: 0x4F8
 	Size: 0x2C4
@@ -33,7 +33,7 @@
 function starting(str_skipto)
 {
 	namespace_b100dd86::function_5aabc3fb();
-	namespace_7d4dd7f0::function_a2015343(str_skipto);
+	tkdn_af_hill::function_a2015343(str_skipto);
 	plane = namespace_b100dd86::function_5431431d();
 	namespace_b100dd86::function_c8381339(plane, 0);
 	exploder::stop_exploder("airfield_assault_lighting_noplane");
@@ -52,12 +52,12 @@ function starting(str_skipto)
 	level flag::set("af_hill_complete");
 	level flag::set("af_tarmac_complete");
 	level thread scene::play_from_time("scene_tkd_hit3_intro", "shot 1", undefined, 1, 1, 1, 0, 0);
-	util::delay(0.2, undefined, &namespace_7d4dd7f0::function_9967d19b, var_2713b408);
+	util::delay(0.2, undefined, &tkdn_af_hill::function_9967d19b, var_2713b408);
 }
 
 /*
 	Name: main
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0xB2FF2A7B
 	Offset: 0x7C8
 	Size: 0x4CC
@@ -105,7 +105,7 @@ function main(str_skipto, b_starting)
 
 /*
 	Name: cleanup
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0xC600E01E
 	Offset: 0xCA0
 	Size: 0x24
@@ -118,7 +118,7 @@ function cleanup(name, starting, direct, player)
 
 /*
 	Name: init_flags
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0xCC8B8141
 	Offset: 0xCD0
 	Size: 0x24
@@ -132,7 +132,7 @@ function init_flags()
 
 /*
 	Name: init_clientfields
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0xB2A6AD55
 	Offset: 0xD00
 	Size: 0x34
@@ -146,7 +146,7 @@ function init_clientfields()
 
 /*
 	Name: init_scenes
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0x80F724D1
 	Offset: 0xD40
 	Size: 0x4
@@ -159,7 +159,7 @@ function init_scenes()
 
 /*
 	Name: function_b3df3ebf
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0xF02DD8C5
 	Offset: 0xD50
 	Size: 0x1DC
@@ -189,7 +189,7 @@ function function_b3df3ebf()
 
 /*
 	Name: function_3d64bc8b
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0x5B312919
 	Offset: 0xF38
 	Size: 0x54
@@ -204,7 +204,7 @@ function function_3d64bc8b()
 
 /*
 	Name: function_565588e1
-	Namespace: namespace_2fbde9a9
+	Namespace: tkdn_af_tarmac
 	Checksum: 0x52E7D7A2
 	Offset: 0xF98
 	Size: 0x2D6
@@ -213,9 +213,9 @@ function function_3d64bc8b()
 */
 function function_565588e1()
 {
-	level endon(#"hash_208e5d16e9a9afbd");
-	level endon(#"hash_3d626fc37750e82b");
-	level endon(#"hash_37bcf09cedd4cc34");
+	level endon(#"af_player_get_in_back");
+	level endon(#"af_player_get_in_left");
+	level endon(#"af_player_get_in_right");
 	level flag::wait_till("woods_to_truck");
 	level.woods thread util::delay(3, undefined, &util::function_27f5f662, [1:"vox_cp_tdwn_07200_wood_gettothattruck_5e", 0:"vox_cp_tdwn_07200_adlr_wehavetocatchth_c8"], "forever", 4);
 	while(!isdefined(level.var_49a5d2a4))
@@ -234,7 +234,7 @@ function function_565588e1()
 	}
 	else
 	{
-		level endon(#"hash_55f3dcd7efa561a8");
+		level endon(#"woods_get_in_truck");
 	}
 	while(true)
 	{

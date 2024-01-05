@@ -1,14 +1,14 @@
 #using script_396f7d71538c9677;
-#using script_5399f402045d7abd;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\array_shared.gsc;
 #using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
+#using scripts\weapons\weapon_utils.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_5232fbcc;
 
@@ -23,7 +23,7 @@
 */
 function private autoexec function_56a766e6()
 {
-	level notify(1227618250);
+	level notify(-1227618250);
 }
 
 #namespace battlechatter;
@@ -178,10 +178,10 @@ event function_e77b4f15(eventstruct)
 	{
 		if(isdefined(source.turretweapon))
 		{
-			if(source.turretweapon.name == #"hash_36a6454f13b54f18")
+			if(source.turretweapon.name == #"gun_ultimate_turret")
 			{
 				source.var_87b1ba00 = 1;
-				self function_cef454e8(source.killstreaktype);
+				self playkillstreakthreat(source.killstreaktype);
 			}
 		}
 		else if(isdefined(source.weapon))
@@ -249,7 +249,7 @@ event function_4540ef25(eventstruct)
 				}
 				if(isdefined(traceresult[#"entity"].killstreaktype) && !isarray(traceresult[#"entity"].killstreaktype))
 				{
-					self function_cef454e8(traceresult[#"entity"].killstreaktype);
+					self playkillstreakthreat(traceresult[#"entity"].killstreaktype);
 					traceresult[#"entity"].var_9ee835dc = 1;
 					self.enemythreattime = gettime();
 				}
@@ -302,7 +302,7 @@ event function_4540ef25(eventstruct)
 		{
 			if(!traceresult[#"entity"].var_9ee835dc === 1)
 			{
-				self function_cef454e8(traceresult[#"entity"].killstreaktype);
+				self playkillstreakthreat(traceresult[#"entity"].killstreaktype);
 				traceresult[#"entity"].var_9ee835dc = 1;
 				self.enemythreattime = gettime();
 			}
@@ -381,7 +381,7 @@ function private function_1bc99c5e(attacker, inflictor, weapon, mod, killstreakt
 	allyradius = mpdialog_value("killstreakKillAllyRadius", 0);
 	if(isdefined(ally) && distancesquared(self.origin, ally.origin) < sqr(allyradius))
 	{
-		ally function_cef454e8(killstreaktype);
+		ally playkillstreakthreat(killstreaktype);
 		mod.var_95b0150d = gettime();
 	}
 }
@@ -490,7 +490,7 @@ function function_5e1705fa(thrower, projectile, weapon)
 		return;
 	}
 	incomingprojectileradius = mpdialog_value("incomingProjectileRadius", 0);
-	players = projectile function_bdda420f(projectile.origin, incomingprojectileradius);
+	players = projectile getenemiesinradius(projectile.origin, incomingprojectileradius);
 	var_3c0b0429 = (0, 0, thrower getplayerviewheight());
 	foreach(player in players)
 	{

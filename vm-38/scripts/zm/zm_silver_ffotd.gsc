@@ -1,12 +1,12 @@
-#using script_58860a35d0555f74;
 #using scripts\core_common\flag_shared.gsc;
+#using script_58860a35d0555f74;
 #using scripts\core_common\system_shared.gsc;
 
-#namespace namespace_b121f976;
+#namespace zm_silver_ffotd;
 
 /*
 	Name: function_67f43f1e
-	Namespace: namespace_b121f976
+	Namespace: zm_silver_ffotd
 	Checksum: 0x490E0C86
 	Offset: 0x130
 	Size: 0x14
@@ -15,26 +15,26 @@
 */
 function private autoexec function_67f43f1e()
 {
-	level notify(780767230);
+	level notify(-780767230);
 }
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_b121f976
+	Name: __init__system__
+	Namespace: zm_silver_ffotd
 	Checksum: 0x38318076
 	Offset: 0x150
 	Size: 0x4C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_c5040460d9f3ee6", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
+	system::register(#"zm_silver_ffotd", &function_70a657d8, &function_8ac3bea9, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_b121f976
+	Namespace: zm_silver_ffotd
 	Checksum: 0x80F724D1
 	Offset: 0x1A8
 	Size: 0x4
@@ -47,7 +47,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_8ac3bea9
-	Namespace: namespace_b121f976
+	Namespace: zm_silver_ffotd
 	Checksum: 0x7B52CE56
 	Offset: 0x1B8
 	Size: 0x554
@@ -81,7 +81,7 @@ function private function_8ac3bea9()
 
 /*
 	Name: function_69e91dea
-	Namespace: namespace_b121f976
+	Namespace: zm_silver_ffotd
 	Checksum: 0x9065D6DC
 	Offset: 0x718
 	Size: 0x94

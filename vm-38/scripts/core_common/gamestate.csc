@@ -1,5 +1,5 @@
-#using scripts\core_common\callbacks_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
 
 #namespace gamestate;
 
@@ -14,11 +14,11 @@
 */
 function private autoexec function_4033e06()
 {
-	level notify(1871729413);
+	level notify(-1871729413);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: gamestate
 	Checksum: 0x58DB7158
 	Offset: 0x90
@@ -26,7 +26,7 @@ function private autoexec function_4033e06()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"gamestate", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -70,7 +70,7 @@ event function_69452d92(eventstruct)
 		{
 			case "playing":
 			{
-				callback::callback(#"hash_361e06db4b210e", eventstruct);
+				callback::callback(#"on_game_playing", eventstruct);
 				break;
 			}
 			case "postgame":

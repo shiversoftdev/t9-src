@@ -1,7 +1,7 @@
-#using script_40fc784c60f9fa7b;
 #using script_4108035fe400ce67;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
+#using script_40fc784c60f9fa7b;
 
 #namespace vehicle;
 
@@ -19,25 +19,25 @@ function private autoexec function_1622f082()
 	level notify(963480644);
 }
 
-#namespace namespace_964fbfb5;
+#namespace wz_vehicle;
 
 /*
-	Name: function_89f2df9
-	Namespace: namespace_964fbfb5
+	Name: __init__system__
+	Namespace: wz_vehicle
 	Checksum: 0x7E59B10F
 	Offset: 0xC0
 	Size: 0x3C
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
-	system::register(#"hash_efc308ec898ff43", &function_70a657d8, undefined, undefined, undefined);
+	system::register(#"wz_vehicle", &function_70a657d8, undefined, undefined, undefined);
 }
 
 /*
 	Name: function_70a657d8
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0xFF8A97A7
 	Offset: 0x108
 	Size: 0xBC
@@ -56,7 +56,7 @@ function private function_70a657d8()
 
 /*
 	Name: function_f565cb50
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0x11B973A9
 	Offset: 0x1D0
 	Size: 0x1C
@@ -70,7 +70,7 @@ function function_f565cb50()
 
 /*
 	Name: function_8307577f
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0xF6943C1E
 	Offset: 0x1F8
 	Size: 0xA4
@@ -90,7 +90,7 @@ function function_8307577f(params)
 
 /*
 	Name: function_6bcb016d
-	Namespace: namespace_964fbfb5
+	Namespace: wz_vehicle
 	Checksum: 0xE6F510C2
 	Offset: 0x2A8
 	Size: 0xC4
@@ -102,7 +102,7 @@ function function_6bcb016d(params)
 	vehicle = self;
 	player = params.player;
 	seatindex = params.eventstruct.seat_index;
-	var_6747c7b8 = params.eventstruct.var_21911287;
+	oldseatindex = params.eventstruct.old_seat_index;
 	if(seatindex == 0)
 	{
 		callback::callback("on_driving_wz_vehicle", {#seatindex:seatindex, #player:self, #vehicle:vehicle});

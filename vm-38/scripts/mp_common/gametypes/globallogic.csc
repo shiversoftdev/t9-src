@@ -1,18 +1,18 @@
-#using script_13da4e6b98ca81a1;
+#using scripts\killstreaks\killstreak_detect.csc;
+#using scripts\mp_common\player\player.csc;
+#using scripts\mp_common\gametypes\display_transition.csc;
 #using script_1bd5a845bf9ba498;
-#using script_4029012c9af5b12a;
-#using script_6ad3fda349f49bf9;
-#using script_6f7d15a072a2565;
-#using scripts\core_common\animation_shared.csc;
-#using scripts\core_common\array_shared.csc;
-#using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\dogtags.csc;
-#using scripts\core_common\killcam_shared.csc;
 #using scripts\core_common\renderoverridebundle.csc;
-#using scripts\core_common\system_shared.csc;
-#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\animation_shared.csc;
 #using scripts\core_common\visionset_mgr_shared.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\killcam_shared.csc;
+#using script_13da4e6b98ca81a1;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\callbacks_shared.csc;
+#using scripts\core_common\array_shared.csc;
 
 #namespace globallogic;
 
@@ -27,11 +27,11 @@
 */
 function private autoexec function_266aa367()
 {
-	level notify(1262597303);
+	level notify(-1262597303);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: globallogic
 	Checksum: 0xA5024812
 	Offset: 0x3C0
@@ -39,7 +39,7 @@ function private autoexec function_266aa367()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"globallogic", &function_70a657d8, undefined, undefined, #"visionset_mgr");
 }
@@ -73,18 +73,18 @@ function private function_70a657d8()
 		clientfield::function_5b7d846d(("hudItems.team" + i) + ".livesCount", #"hash_410fe12a68d6e801", [1:#"livescount", 0:#"team" + i], 1, 8, "int", undefined, 0, 0);
 		clientfield::function_5b7d846d(("hudItems.team" + i) + ".noRespawnsLeft", #"hash_410fe12a68d6e801", [1:#"hash_76037d6f2477675a", 0:#"team" + i], 1, 1, "int", undefined, 0, 0);
 	}
-	clientfield::function_a8bbc967("hudItems.armorIsOnCooldown", #"hud_items", #"hash_2f36ddfd4c373968", 1, 1, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.hideOutcomeUI", #"hud_items", #"hideoutcomeui", 1, 1, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.captureCrateState", #"hud_items", #"capturecratestate", 1, 2, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.captureCrateTotalTime", #"hud_items", #"capturecratetotaltime", 1, 13, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("hudItems.playerLivesCount", #"hud_items", #"hash_44630db9c3f712e2", 1, 8, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("huditems.killedByEntNum", #"hud_items", #"hash_2079d1575aee92da", 1, 4, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("huditems.killedByAttachmentCount", #"hud_items", #"hash_274d099fe70992df", 1, 4, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("huditems.killedByItemIndex", #"hud_items", #"hash_27e698bb4bd0cf62", 1, 10, "int", undefined, 0, 0);
-	clientfield::function_a8bbc967("huditems.killedByMOD", #"hud_items", #"hash_6974ee9ad621feeb", 1, 8, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.armorIsOnCooldown", #"hud_items", #"hash_2f36ddfd4c373968", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.hideOutcomeUI", #"hud_items", #"hideoutcomeui", 1, 1, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.captureCrateState", #"hud_items", #"capturecratestate", 1, 2, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.captureCrateTotalTime", #"hud_items", #"capturecratetotaltime", 1, 13, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("hudItems.playerLivesCount", #"hud_items", #"hash_44630db9c3f712e2", 1, 8, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("huditems.killedByEntNum", #"hud_items", #"hash_2079d1575aee92da", 1, 4, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("huditems.killedByAttachmentCount", #"hud_items", #"hash_274d099fe70992df", 1, 4, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("huditems.killedByItemIndex", #"hud_items", #"hash_27e698bb4bd0cf62", 1, 10, "int", undefined, 0, 0);
+	clientfield::register_clientuimodel("huditems.killedByMOD", #"hud_items", #"hash_6974ee9ad621feeb", 1, 8, "int", undefined, 0, 0);
 	for(index = 0; index < 5; index++)
 	{
-		clientfield::function_a8bbc967("huditems.killedByAttachment" + index, #"hud_items", #"hash_173e5db4d7c14570" + (isdefined(index) ? "" + index : ""), 1, 6, "int", undefined, 0, 0);
+		clientfield::register_clientuimodel("huditems.killedByAttachment" + index, #"hud_items", #"hash_173e5db4d7c14570" + (isdefined(index) ? "" + index : ""), 1, 6, "int", undefined, 0, 0);
 	}
 	clientfield::register("toplayer", "thermal_sight", 1, 1, "int", &function_765b7c63, 0, 0);
 	clientfield::register("toplayer", "strobe_light", 1, 1, "int", &function_e1af467, 0, 0);
@@ -95,16 +95,16 @@ function private function_70a657d8()
 	level.postgame = 0;
 	level.new_health_model = getdvarint(#"new_health_model", 1) > 0;
 	level.var_90bb9821 = getgametypesetting(#"playermaxhealth") - 150;
-	setdvar(#"hash_6028c4687677bbc9", getgametypesetting(#"boastenabled"));
+	setdvar(#"bg_boastenabled", getgametypesetting(#"boastenabled"));
 	boastallowcam = getgametypesetting(#"boastallowcam");
 	setdvar(#"hash_23c5d7207ebc0bf9", boastallowcam);
 	setdvar(#"hash_62833d3c5e6d7380", boastallowcam);
 	setdvar(#"hash_e099986c072eb0f", getgametypesetting(#"hash_104f124f56f0f20a"));
 	setdvar(#"hash_553ad8f9db24bf22", int(1000 * getgametypesetting(#"hash_1614b9cbe0df6f75")));
-	setdvar(#"hash_442d42efc73d739a", 25);
+	setdvar(#"cg_healthperbar", 25);
 	callback::on_spawned(&on_player_spawned);
-	callback::add_callback(#"hash_361e06db4b210e", &function_977fa24b);
-	namespace_81c567a8::init_shared();
+	callback::add_callback(#"on_game_playing", &function_977fa24b);
+	display_transition::init_shared();
 	level.droppedtagrespawn = getgametypesetting(#"droppedtagrespawn");
 	if(is_true(level.droppedtagrespawn))
 	{
@@ -280,8 +280,8 @@ function updateenemyequipment(local_client_num, newval)
 	if(codcaster::function_b8fe9b52(newval))
 	{
 		var_7eda7144 = (self codcaster::is_friendly(newval) ? #"friendly" : #"enemy");
-		var_c43ac0da = (self codcaster::is_friendly(newval) ? #"hash_2476e7ae62469f70" : #"hash_2476eaae6246a489");
-		self renderoverridebundle::function_c8d97b8e(newval, var_7eda7144, var_c43ac0da);
+		robkey = (self codcaster::is_friendly(newval) ? #"hash_2476e7ae62469f70" : #"hash_2476eaae6246a489");
+		self renderoverridebundle::function_c8d97b8e(newval, var_7eda7144, robkey);
 		return;
 	}
 	if(isdefined(level.var_58253868))
@@ -333,7 +333,7 @@ function function_765b7c63(local_client_num, oldval, newval, bnewent, binitialsn
 		self stoploopsound(self.var_8e7f416f);
 		self.var_33b61b6f = 0;
 	}
-	level notify(#"hash_2452fc0a6548ed2d");
+	level notify(#"thermal_toggle");
 	players = getplayers(local_client_num);
 	foreach(player in players)
 	{
@@ -388,13 +388,13 @@ function function_194072a7(local_client_num, oldval, newval, bnewent, binitialsn
 	{
 		if(bwastimejump)
 		{
-			self function_5d482e78(#"rob_sonar_set_enemy");
-			self function_bf9d3071(#"rob_sonar_set_enemy_cold");
+			self stoprenderoverridebundle(#"rob_sonar_set_enemy");
+			self playrenderoverridebundle(#"rob_sonar_set_enemy_cold");
 		}
 		else
 		{
-			self function_5d482e78(#"rob_sonar_set_enemy_cold");
-			self function_bf9d3071(#"rob_sonar_set_enemy");
+			self stoprenderoverridebundle(#"rob_sonar_set_enemy_cold");
+			self playrenderoverridebundle(#"rob_sonar_set_enemy");
 		}
 	}
 }

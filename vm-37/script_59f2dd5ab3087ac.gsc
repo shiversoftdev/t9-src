@@ -1,12 +1,12 @@
 #using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\system_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace weapon_cache;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: weapon_cache
 	Checksum: 0xB39CE745
 	Offset: 0x158
@@ -14,7 +14,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"weapon_cache", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -38,14 +38,14 @@ function private function_70a657d8()
 	clientfield::register("toplayer", "weapon_cache_ammo_cooldown", 1, 1, "int", &function_ce75a340, 0, 0);
 	clientfield::register("toplayer", "weapon_cache_cac_cooldown", 1, 1, "int", &weapon_cache_cac_cooldown, 0, 0);
 	callback::on_localplayer_spawned(&on_localplayer_spawned);
-	callback::on_localclient_connect(&function_86c5661a);
+	callback::on_localclient_connect(&_on_localclient_connect);
 	level.var_745f6ccb = [];
 	level.var_2e44d000 = [];
 	level.var_a979e61b = &function_a979e61b;
 }
 
 /*
-	Name: function_86c5661a
+	Name: _on_localclient_connect
 	Namespace: weapon_cache
 	Checksum: 0xA4BB9CE
 	Offset: 0x328
@@ -53,7 +53,7 @@ function private function_70a657d8()
 	Parameters: 1
 	Flags: Linked, Private
 */
-function private function_86c5661a(localclientnum)
+function private _on_localclient_connect(localclientnum)
 {
 	level.var_745f6ccb[localclientnum] = 0;
 	level.var_2e44d000[localclientnum] = 0;

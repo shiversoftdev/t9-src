@@ -1,26 +1,26 @@
-#using script_256b8879317373de;
-#using script_3751b21462a54a7d;
+#using scripts\zm_common\zm_utility.gsc;
 #using script_3ddf84b7bb3bf47d;
-#using script_55b68e9c3e3a915b;
-#using script_7d7ac1f663edcdc8;
-#using script_7fc996fe8678852;
-#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
 #using scripts\core_common\gameobjects_shared.gsc;
 #using scripts\core_common\laststand_shared.gsc;
+#using script_55b68e9c3e3a915b;
+#using script_7d7ac1f663edcdc8;
+#using scripts\zm_common\zm_score.gsc;
+#using script_3751b21462a54a7d;
 #using scripts\core_common\scene_shared.gsc;
-#using scripts\core_common\struct.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using script_7fc996fe8678852;
+#using scripts\core_common\player\player_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\zm_score.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\flag_shared.gsc;
 
 #namespace namespace_82b4c2d1;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_82b4c2d1
 	Checksum: 0x5E06966E
 	Offset: 0x1D8
@@ -28,7 +28,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_79fe34c9f8a0e44c", &function_70a657d8, &function_8ac3bea9, &finalize, #"hash_f81b9dea74f0ee");
 }
@@ -365,14 +365,14 @@ function function_2c5b6acc(var_438da649)
 */
 function function_5d21ed88(var_82e23366)
 {
-	if(!isdefined(var_82e23366.var_3cf2d21))
+	if(!isdefined(var_82e23366.namehash))
 	{
 		return;
 	}
 	var_8c590502 = (isdefined(getgametypesetting(#"hash_3c2c78e639bfd3c6")) ? getgametypesetting(#"hash_3c2c78e639bfd3c6") : 0);
 	if(var_8c590502 > 0)
 	{
-		var_8aa9ab80 = var_82e23366.var_3cf2d21;
+		var_8aa9ab80 = var_82e23366.namehash;
 		var_75da77d3 = 0;
 		foreach(var_24303d72 in level.var_c723ac75)
 		{
@@ -385,7 +385,7 @@ function function_5d21ed88(var_82e23366)
 			}
 		}
 	}
-	return var_82e23366.var_3cf2d21;
+	return var_82e23366.namehash;
 }
 
 /*
@@ -467,7 +467,7 @@ function function_4513f006(machine, trigger)
 					{
 						if(namespace_791d0451::function_cc0055e9(talent))
 						{
-							self playrumbleonentity(#"hash_410bd55524ae7d");
+							self playrumbleonentity(#"zm_interact_rumble");
 							self zm_score::minus_to_player_score(var_87abc3a0);
 							self namespace_791d0451::function_3fecad82(talent);
 							machine thread namespace_791d0451::function_3e9d8a8e(talent);

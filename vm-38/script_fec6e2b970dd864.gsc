@@ -1,11 +1,11 @@
-#using script_1c65dbfc2f1c8d8f;
-#using script_68d2ee1489345a1d;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\zm_common\zm_stats.gsc;
+#using scripts\zm_common\zm_utility.gsc;
+#using scripts\zm_common\scoreevents.gsc;
+#using scripts\core_common\item_inventory.gsc;
 #using scripts\core_common\callbacks_shared.gsc;
 #using scripts\core_common\scoreevents_shared.gsc;
 #using scripts\core_common\system_shared.gsc;
-#using scripts\zm_common\scoreevents.gsc;
-#using scripts\zm_common\zm_stats.gsc;
-#using scripts\zm_common\zm_utility.gsc;
 
 #namespace namespace_feb8f309;
 
@@ -20,13 +20,13 @@
 */
 function private autoexec function_8ceef761()
 {
-	level notify(988617730);
+	level notify(-988617730);
 }
 
 #namespace scoreevents;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: scoreevents
 	Checksum: 0xF86D00C3
 	Offset: 0x260
@@ -34,7 +34,7 @@ function private autoexec function_8ceef761()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_2f9a92f69b207b7c", &function_70a657d8, undefined, undefined, undefined);
 }
@@ -56,7 +56,7 @@ function private function_70a657d8()
 	level.var_88e6f8b7 = &function_88e6f8b7;
 	level.var_24a17c08 = &function_24a17c08;
 	callback::on_player_damage(&on_player_damage);
-	callback::function_10a4dd0a(&function_10a4dd0a);
+	callback::on_item_pickup(&on_item_pickup);
 }
 
 /*
@@ -148,7 +148,7 @@ function function_b122e75f()
 */
 function function_f8b76690(var_a0345f37, player, weapon)
 {
-	var_4838b749 = weapon namespace_b376ff3f::function_d768ea30();
+	var_4838b749 = weapon item_inventory::function_d768ea30();
 	weapon_item = weapon.inventory.items[var_4838b749];
 	if(weapon_item.var_a6762160.var_387e74f4 === 1)
 	{
@@ -363,7 +363,7 @@ function function_31553fb3()
 }
 
 /*
-	Name: function_10a4dd0a
+	Name: on_item_pickup
 	Namespace: scoreevents
 	Checksum: 0x9852CF1
 	Offset: 0x14E0
@@ -371,7 +371,7 @@ function function_31553fb3()
 	Parameters: 1
 	Flags: Linked
 */
-function function_10a4dd0a(params)
+function on_item_pickup(params)
 {
 	item = params.item;
 	if(isplayer(self))

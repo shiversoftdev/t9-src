@@ -1,6 +1,6 @@
 #using script_ac6a30f1991e105;
-#using scripts\core_common\ai_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\ai_shared.csc;
 
 #namespace namespace_8c89a9e9;
 
@@ -15,7 +15,7 @@
 */
 function private autoexec function_ee622b()
 {
-	level notify(102266780);
+	level notify(-102266780);
 }
 
 /*
@@ -61,10 +61,10 @@ function private function_20705e4c(localclientnum)
 	while(true)
 	{
 		waitresult = undefined;
-		waitresult = self waittill(#"hash_488fe0f467820fcf", #"set_visible", #"hash_6ab654a4c018818c");
+		waitresult = self waittill(#"set_invisible", #"set_visible", #"hash_6ab654a4c018818c");
 		switch(waitresult._notify)
 		{
-			case "hash_488fe0f467820fcf":
+			case "set_invisible":
 			{
 				self fxclientutils::function_ae92446(localclientnum, self, self.fxdef);
 				break;

@@ -1,17 +1,17 @@
-#using script_1cc417743d7c262d;
-#using script_32c8b5b0eb2854f3;
-#using script_44b0b8420eabacad;
-#using script_68d2ee1489345a1d;
-#using script_7dc3a36c222eaf22;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\rank_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\match.gsc;
-#using scripts\mp_common\gametypes\round.gsc;
 #using scripts\mp_common\util.gsc;
+#using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\match.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using script_7dc3a36c222eaf22;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\rank_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using script_32c8b5b0eb2854f3;
+#using scripts\core_common\callbacks_shared.gsc;
 
 #namespace globallogic_defaults;
 
@@ -26,7 +26,7 @@
 */
 function private autoexec function_44cb2ab8()
 {
-	level notify(1781239746);
+	level notify(-1781239746);
 }
 
 /*
@@ -59,8 +59,8 @@ function getwinningteamfromloser(losing_team)
 function default_onforfeit(params)
 {
 	level.gameforfeited = 1;
-	level notify(#"hash_7c63ed1f465e8e8e");
-	level endon(#"hash_7c63ed1f465e8e8e", #"hash_39a00a79045884ca");
+	level notify(#"forfeit in progress");
+	level endon(#"forfeit in progress", #"abort forfeit");
 	forfeit_delay = 20;
 	announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
 	wait(10);
@@ -68,11 +68,11 @@ function default_onforfeit(params)
 	wait(10);
 	if(!isdefined(params))
 	{
-		round::function_d1e740f6(level.players[0]);
+		round::set_winner(level.players[0]);
 	}
 	else if(params.var_6eb69269.size)
 	{
-		round::function_d1e740f6(params.var_6eb69269[0]);
+		round::set_winner(params.var_6eb69269[0]);
 	}
 	level.forcedend = 1;
 	round::set_flag("force_end");
@@ -90,14 +90,14 @@ function default_onforfeit(params)
 */
 function default_ondeadevent(team)
 {
-	var_2e0d5506 = round::function_9b24638f();
+	var_2e0d5506 = round::get_winner();
 	if(isdefined(var_2e0d5506) && var_2e0d5506 != #"none")
 	{
 		return;
 	}
 	if(isdefined(level.teams[team]))
 	{
-		round::function_d1e740f6(getwinningteamfromloser(team));
+		round::set_winner(getwinningteamfromloser(team));
 		thread globallogic::end_round(6);
 	}
 	else
@@ -150,7 +150,7 @@ function function_dcf41142(params)
 */
 function function_daa7e9d5()
 {
-	level callback::remove_callback(#"hash_84d8c1164d90313", &function_dcf41142);
+	level callback::remove_callback(#"on_last_alive", &function_dcf41142);
 }
 
 /*
@@ -197,7 +197,7 @@ function default_ononeleftevent(team)
 {
 	if(!level.teambased)
 	{
-		round::function_d1e740f6(globallogic_score::gethighestscoringplayer());
+		round::set_winner(globallogic_score::gethighestscoringplayer());
 		thread globallogic::end_round(6);
 	}
 	else
@@ -352,9 +352,9 @@ function default_onspawnintermission(endgame)
 function default_gettimelimit()
 {
 	/#
-		if((getdvarfloat(#"hash_5424bc2a81bcb188", -1)) != -1)
+		if((getdvarfloat(#"timelimit_override", -1)) != -1)
 		{
-			return math::clamp(getdvarfloat(#"hash_5424bc2a81bcb188", -1), level.timelimitmin, level.timelimitmax);
+			return math::clamp(getdvarfloat(#"timelimit_override", -1), level.timelimitmin, level.timelimitmax);
 		}
 	#/
 	return math::clamp(getgametypesetting(#"timelimit"), level.timelimitmin, level.timelimitmax);

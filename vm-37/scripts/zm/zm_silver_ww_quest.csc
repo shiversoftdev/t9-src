@@ -1,7 +1,7 @@
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\util_shared.csc;
 #using scripts\zm_common\zm_utility.csc;
+#using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\audio_shared.csc;
 
 #namespace namespace_c8c67699;
 
@@ -140,7 +140,7 @@ function function_c4793fe5(localclientnum, oldval, newval, bnewent, binitialsnap
 	if(bwasdemojump == 1)
 	{
 		util::playfxontag(fieldname, #"hash_2ddd7e581a184f88", self, "tag_origin");
-		self function_bf9d3071(#"hash_6116131e6c28b26e", "tag_chain_cryo");
+		self playrenderoverridebundle(#"hash_6116131e6c28b26e", "tag_chain_cryo");
 	}
 }
 
@@ -238,14 +238,14 @@ function function_f0bc5344(localclientnum, oldval, newval, bnewent, binitialsnap
 {
 	if(bwasdemojump == 1)
 	{
-		self function_bf9d3071(#"hash_7930c9f965b0357b");
+		self playrenderoverridebundle(#"hash_7930c9f965b0357b");
 		self playsound(fieldname, #"hash_7b43e72a8c1d3334");
 	}
 	else
 	{
 		self playsound(fieldname, #"hash_2edd62f08d4adbd4");
-		self function_5d482e78(#"hash_7930c9f965b0357b");
-		self function_bf9d3071(#"hash_3dd7407a7104870e");
+		self stoprenderoverridebundle(#"hash_7930c9f965b0357b");
+		self playrenderoverridebundle(#"hash_3dd7407a7104870e");
 	}
 }
 

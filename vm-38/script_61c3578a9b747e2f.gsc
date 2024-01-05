@@ -1,20 +1,20 @@
-#using script_24c32478acf44108;
-#using script_3f9e0dc8454d98e1;
-#using script_62caa307a394c18c;
+#using scripts\zm_common\zm_utility.gsc;
 #using script_72401f526ba71638;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
+#using script_62caa307a394c18c;
+#using scripts\zm_common\zm_equipment.gsc;
+#using script_24c32478acf44108;
+#using scripts\core_common\ai\zombie_utility.gsc;
+#using scripts\core_common\values_shared.gsc;
 #using scripts\core_common\scene_shared.gsc;
 #using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\system_shared.gsc;
 #using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\zm_common\zm_equipment.gsc;
-#using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
 
 #namespace namespace_9111e6ab;
 
@@ -33,7 +33,7 @@ function private autoexec function_1c86fe80()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: namespace_9111e6ab
 	Checksum: 0x6AE7243C
 	Offset: 0x1B0
@@ -41,7 +41,7 @@ function private autoexec function_1c86fe80()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hash_6c156e681484d01a", &function_70a657d8, undefined, undefined, #"hash_13a43d760497b54d");
 }
@@ -174,7 +174,7 @@ function function_1e0fa475(weapon, var_2b003a39, var_5baceff5, n_duration)
 				circle(self.origin, var_5baceff5, (0, 1, 0), undefined, 1);
 			}
 		#/
-		a_enemies = self function_bdda420f(self.origin, var_5baceff5);
+		a_enemies = self getenemiesinradius(self.origin, var_5baceff5);
 		foreach(ai in a_enemies)
 		{
 			if(ai function_165a06f0(self, var_2b003a39, var_5baceff5, weapon))
@@ -208,16 +208,16 @@ function function_1e0fa475(weapon, var_2b003a39, var_5baceff5, n_duration)
 	Parameters: 4
 	Flags: Linked
 */
-function function_5bcee875(var_12a907ec, weapon, var_5baceff5, var_2b003a39)
+function function_5bcee875(player_source, weapon, var_5baceff5, var_2b003a39)
 {
 	self.var_23fa23a9 = 1;
 	self clientfield::set("" + #"hash_1668fcf85f7c231", 2);
 	self function_65e5989c(weapon);
-	var_e041507a = var_12a907ec getentitynumber();
+	var_e041507a = player_source getentitynumber();
 	var_e42a877c = 0;
 	var_a01d6a1b = randomintrange(10, 15);
 	util::wait_network_frame();
-	while(isalive(self) && isalive(var_12a907ec) && is_true(self.var_23fa23a9) && !self laststand::player_is_in_laststand() && !var_12a907ec laststand::player_is_in_laststand() && is_true(var_12a907ec.var_60b31640) && !self scene::is_igc_active() && !var_12a907ec scene::is_igc_active() && distance(self.origin, var_12a907ec.origin) <= var_5baceff5)
+	while(isalive(self) && isalive(player_source) && is_true(self.var_23fa23a9) && !self laststand::player_is_in_laststand() && !player_source laststand::player_is_in_laststand() && is_true(player_source.var_60b31640) && !self scene::is_igc_active() && !player_source scene::is_igc_active() && distance(self.origin, player_source.origin) <= var_5baceff5)
 	{
 		/#
 			if(getdvarint(#"hash_3ce5890428b398f1", 0))
@@ -225,18 +225,18 @@ function function_5bcee875(var_12a907ec, weapon, var_5baceff5, var_2b003a39)
 				circle(self.origin, var_2b003a39, (1, 0, 0), undefined, 1);
 			}
 		#/
-		a_enemies = self function_bdda420f(self.origin, var_5baceff5);
+		a_enemies = self getenemiesinradius(self.origin, var_5baceff5);
 		foreach(ai in a_enemies)
 		{
 			if(ai function_165a06f0(self, var_2b003a39, var_5baceff5, weapon))
 			{
-				ai thread function_c79f4bd7(weapon, self, var_12a907ec);
+				ai thread function_c79f4bd7(weapon, self, player_source);
 			}
 		}
 		var_e42a877c++;
 		if((var_e42a877c % var_a01d6a1b) == 0)
 		{
-			if(!var_12a907ec function_6c7755f9(self, undefined, 0))
+			if(!player_source function_6c7755f9(self, undefined, 0))
 			{
 				break;
 			}
@@ -298,9 +298,9 @@ function function_7b69ae3f()
 	Parameters: 4
 	Flags: Linked
 */
-function function_165a06f0(var_12a907ec, var_2b003a39, var_5baceff5, weapon)
+function function_165a06f0(player_source, var_2b003a39, var_5baceff5, weapon)
 {
-	if(isactor(self) && isalive(self) && !self flag::get(#"hash_6ab8e3db32b20d33") && isalive(var_12a907ec) && !var_12a907ec laststand::player_is_in_laststand() && self.team === level.zombie_team && !is_true(self.var_c8065bf4) && !is_true(self.var_8576e0be))
+	if(isactor(self) && isalive(self) && !self flag::get(#"hash_6ab8e3db32b20d33") && isalive(player_source) && !player_source laststand::player_is_in_laststand() && self.team === level.zombie_team && !is_true(self.var_c8065bf4) && !is_true(self.var_8576e0be))
 	{
 		if(self.var_6f84b820 === #"boss")
 		{
@@ -332,20 +332,20 @@ function function_165a06f0(var_12a907ec, var_2b003a39, var_5baceff5, weapon)
 				}
 			}
 		}
-		if(distance(self.origin, var_12a907ec.origin) < var_2b003a39)
+		if(distance(self.origin, player_source.origin) < var_2b003a39)
 		{
 			return true;
 		}
-		if(is_true(var_12a907ec.var_60b31640))
+		if(is_true(player_source.var_60b31640))
 		{
-			var_281b41ca = function_a1ef346b(var_12a907ec.team, var_12a907ec.origin, var_5baceff5);
+			var_281b41ca = function_a1ef346b(player_source.team, player_source.origin, var_5baceff5);
 			foreach(player in var_281b41ca)
 			{
-				if(player == var_12a907ec || !is_true(player.var_23fa23a9))
+				if(player == player_source || !is_true(player.var_23fa23a9))
 				{
 					continue;
 				}
-				v_start_pos = var_12a907ec gettagorigin("j_spineupper");
+				v_start_pos = player_source gettagorigin("j_spineupper");
 				v_end_pos = player gettagorigin("j_spineupper");
 				if(!(isdefined(v_start_pos) && isdefined(v_end_pos)))
 				{
@@ -414,12 +414,12 @@ function function_6c7755f9(player, var_347c484e, var_6f40c449)
 	Parameters: 3
 	Flags: Linked
 */
-function function_c79f4bd7(weapon, var_12a907ec, var_15625d6b)
+function function_c79f4bd7(weapon, player_source, var_15625d6b)
 {
 	self endon(#"death");
 	if(!isdefined(var_15625d6b))
 	{
-		var_15625d6b = var_12a907ec;
+		var_15625d6b = player_source;
 	}
 	if(!self flag::get(#"hash_6ab8e3db32b20d33"))
 	{
@@ -489,13 +489,13 @@ function function_c79f4bd7(weapon, var_12a907ec, var_15625d6b)
 		}
 		level.var_cef2e607[#"hash_13c4587dc27db042"]++;
 		wait((float(function_60d95f53()) / 1000) * ((level.var_cef2e607[#"hash_13c4587dc27db042"] % (int((float(function_60d95f53()) / 1000) / (float(function_60d95f53()) / 1000)))) + 1));
-		if(isdefined(var_70ab6bc) && isdefined(n_clientfield) && isalive(var_12a907ec) && isalive(var_15625d6b))
+		if(isdefined(var_70ab6bc) && isdefined(n_clientfield) && isalive(player_source) && isalive(var_15625d6b))
 		{
 			self.var_5f6261a5 = var_15625d6b;
 			self clientfield::set("" + #"hash_70a85ea8b0e1b09c", n_clientfield);
 			scoreevents::processscoreevent("tesla_storm_stun_zm", var_15625d6b, self, weapon);
 			self ai::stun(1);
-			self namespace_42457a0::function_601fabe9(#"electrical", var_70ab6bc, var_12a907ec.origin, var_15625d6b, var_15625d6b, "none", "MOD_ELECTROCUTED", 0, weapon);
+			self namespace_42457a0::function_601fabe9(#"electrical", var_70ab6bc, player_source.origin, var_15625d6b, var_15625d6b, "none", "MOD_ELECTROCUTED", 0, weapon);
 			wait(1);
 		}
 		self.var_5f6261a5 = undefined;

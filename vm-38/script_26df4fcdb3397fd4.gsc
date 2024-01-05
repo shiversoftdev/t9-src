@@ -1,7 +1,7 @@
-#using scripts\core_common\audio_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
-#using scripts\core_common\struct.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
+#using scripts\core_common\audio_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace namespace_c097de49;
 
@@ -16,7 +16,7 @@
 */
 function private autoexec function_5e7b8ce0()
 {
-	level notify(241235664);
+	level notify(-241235664);
 }
 
 /*

@@ -1,39 +1,39 @@
-#using script_1cc417743d7c262d;
-#using script_2c49ae69cd8ce30c;
-#using script_335d0650ed05d36d;
-#using script_44b0b8420eabacad;
-#using script_47fb62300ac0bd60;
-#using script_56ca01b3b31455b5;
-#using script_67ce8e728d8f37ba;
-#using script_725554a59d6a75b9;
-#using script_788472602edbe3b9;
-#using script_7bafaa95bb1b427e;
 #using script_7fb8e6e31dd139d;
 #using script_8abbc35fe12516a;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\damagefeedback_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\fx_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\hostmigration_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
-#using scripts\core_common\killcam_shared.gsc;
-#using scripts\core_common\math_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\spawning_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
+#using scripts\weapons\weapons.gsc;
 #using scripts\core_common\values_shared.gsc;
-#using scripts\mp_common\gametypes\_prop_controls.gsc;
-#using scripts\mp_common\gametypes\_prop_dev.gsc;
-#using scripts\mp_common\gametypes\globallogic.gsc;
-#using scripts\mp_common\gametypes\globallogic_defaults.gsc;
-#using scripts\mp_common\gametypes\globallogic_score.gsc;
-#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
-#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using script_44b0b8420eabacad;
+#using scripts\core_common\spawning_shared.gsc;
+#using script_335d0650ed05d36d;
+#using scripts\core_common\killcam_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\scoreevents_shared.gsc;
+#using scripts\core_common\math_shared.gsc;
+#using script_67ce8e728d8f37ba;
+#using scripts\core_common\hostmigration_shared.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\fx_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\damagefeedback_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\abilities\ability_util.gsc;
+#using scripts\mp_common\player\player_utils.gsc;
+#using scripts\core_common\player\player_stats.gsc;
 #using scripts\mp_common\gametypes\round.gsc;
+#using scripts\mp_common\gametypes\_prop_dev.gsc;
+#using scripts\mp_common\gametypes\_prop_controls.gsc;
+#using scripts\mp_common\player\player_loadout.gsc;
+#using scripts\mp_common\gametypes\globallogic_utils.gsc;
+#using scripts\mp_common\gametypes\globallogic_spawn.gsc;
+#using scripts\mp_common\gametypes\globallogic_score.gsc;
+#using scripts\mp_common\gametypes\globallogic_defaults.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\mp_common\gametypes\globallogic.gsc;
+#using script_725554a59d6a75b9;
 #using scripts\mp_common\util.gsc;
 
 #namespace prop;
@@ -179,7 +179,7 @@ event main(eventstruct)
 	function_5ac4dc99("scr_prop_minigame", 1);
 	/#
 		level.var_a7997034 = 0;
-		thread namespace_829e1a63::function_93440c52();
+		thread prop_dev::function_93440c52();
 	#/
 	clientfield::register("allplayers", "hideTeamPlayer", 16000, 2, "int");
 	clientfield::register("allplayers", "pingHighlight", 16000, 1, "int");
@@ -188,13 +188,13 @@ event main(eventstruct)
 	clientfield::register("toplayer", "PROP.cameraRange", 16000, 8, "int");
 	clientfield::register("toplayer", "PROP.hide_prop", 16000, 1, "int");
 	clientfield::function_5b7d846d("hudItems.war.attackingTeam", 16000, 2, "int");
-	clientfield::function_a8bbc967("hudItems.numPropsAlive", 16000, 4, "int", 0);
-	clientfield::function_a8bbc967("hudItems.numPropConcusses", 16000, 2, "int", 0);
-	clientfield::function_a8bbc967("hudItems.numPropChanges", 16000, 2, "int", 0);
-	clientfield::function_a8bbc967("hudItems.numPropDecoys", 16000, 4, "int", 0);
+	clientfield::register_clientuimodel("hudItems.numPropsAlive", 16000, 4, "int", 0);
+	clientfield::register_clientuimodel("hudItems.numPropConcusses", 16000, 2, "int", 0);
+	clientfield::register_clientuimodel("hudItems.numPropChanges", 16000, 2, "int", 0);
+	clientfield::register_clientuimodel("hudItems.numPropDecoys", 16000, 4, "int", 0);
 	clientfield::register("toplayer", "realtime_multiplay", 16000, 1, "int");
-	level.var_82e6af5d = mp_prop_timer::register();
-	level.var_314165c4 = mp_prop_controls::register();
+	level.hide_timer = mp_prop_timer::register();
+	level.prop_controls = mp_prop_controls::register();
 }
 
 /*
@@ -206,9 +206,9 @@ event main(eventstruct)
 	Parameters: 2
 	Flags: None
 */
-function function_85762fc0(&weapons, var_3cf2d21)
+function function_85762fc0(&weapons, namehash)
 {
-	weapon = getweapon(var_3cf2d21);
+	weapon = getweapon(namehash);
 	none = getweapon(#"none");
 	/#
 		assert(weapon != none);
@@ -340,16 +340,16 @@ function function_c676c423()
 */
 function onroundendgame(var_ea2932d6)
 {
-	var_1b574851 = var_ea2932d6;
+	gamewinner = var_ea2932d6;
 	if(level.gameended)
 	{
-		var_1b574851 = function_cdcbe19(var_1b574851, 1);
+		gamewinner = function_cdcbe19(gamewinner, 1);
 	}
-	if(var_1b574851 == "allies" || var_1b574851 == "axis")
+	if(gamewinner == "allies" || gamewinner == "axis")
 	{
-		ph_setfinalkillcamwinner(var_1b574851);
+		ph_setfinalkillcamwinner(gamewinner);
 	}
-	return var_1b574851;
+	return gamewinner;
 }
 
 /*
@@ -377,7 +377,7 @@ function determinewinner(roundwinner)
 */
 function function_cdcbe19(roundwinner, var_2cd61e6c)
 {
-	var_1b574851 = roundwinner;
+	gamewinner = roundwinner;
 	var_41886d38 = "roundswon";
 	level.proptiebreaker = "none";
 	if(game.stat[var_41886d38][#"allies"] == game.stat[var_41886d38][#"axis"])
@@ -389,17 +389,17 @@ function function_cdcbe19(roundwinner, var_2cd61e6c)
 			if(game.hunterkilltime[#"axis"] == game.hunterkilltime[#"allies"])
 			{
 				level.proptiebreaker = "tie";
-				var_1b574851 = "tie";
+				gamewinner = "tie";
 			}
 			else
 			{
 				if(game.hunterkilltime[#"axis"] < game.hunterkilltime[#"allies"])
 				{
-					var_1b574851 = "axis";
+					gamewinner = "axis";
 				}
 				else
 				{
-					var_1b574851 = "allies";
+					gamewinner = "allies";
 				}
 			}
 		}
@@ -407,30 +407,30 @@ function function_cdcbe19(roundwinner, var_2cd61e6c)
 		{
 			if(game.propscore[#"axis"] > game.propscore[#"allies"])
 			{
-				var_1b574851 = "axis";
+				gamewinner = "axis";
 			}
 			else
 			{
-				var_1b574851 = "allies";
+				gamewinner = "allies";
 			}
 		}
-		if(var_1b574851 != "tie" && var_2cd61e6c)
+		if(gamewinner != "tie" && var_2cd61e6c)
 		{
-			globallogic_score::giveteamscoreforobjective_delaypostprocessing(var_1b574851, 1);
+			globallogic_score::giveteamscoreforobjective_delaypostprocessing(gamewinner, 1);
 		}
 	}
 	else
 	{
 		if(game.stat[var_41886d38][#"axis"] > game.stat[var_41886d38][#"allies"])
 		{
-			var_1b574851 = "axis";
+			gamewinner = "axis";
 		}
 		else
 		{
-			var_1b574851 = "allies";
+			gamewinner = "allies";
 		}
 	}
-	return var_1b574851;
+	return gamewinner;
 }
 
 /*
@@ -522,7 +522,7 @@ function hidehudintermission()
 	}
 	foreach(player in level.players)
 	{
-		player namespace_314165c4::propabilitykeysvisible(0);
+		player prop_controls::propabilitykeysvisible(0);
 	}
 }
 
@@ -660,7 +660,7 @@ function function_75b4c8bc()
 	level endon(#"game_ended");
 	foreach(player in level.players)
 	{
-		level.var_82e6af5d mp_prop_timer::close(player);
+		level.hide_timer mp_prop_timer::close(player);
 	}
 }
 
@@ -681,14 +681,14 @@ function function_7913d068(var_fae892d1)
 	{
 		if(player util::isprop())
 		{
-			level.var_314165c4 mp_prop_controls::open(player, 1);
+			level.prop_controls mp_prop_controls::open(player, 1);
 		}
 	}
 	while(true)
 	{
 		foreach(player in level.players)
 		{
-			level.var_82e6af5d mp_prop_timer::function_cb4a80b1(player, int((var_fb3f700 - gettime()) / 1000));
+			level.hide_timer mp_prop_timer::set_timeremaining(player, int((var_fb3f700 - gettime()) / 1000));
 		}
 		n_current_time = (var_fb3f700 - gettime()) / 1000;
 		var_4dd94c4c = int(n_current_time);
@@ -833,7 +833,7 @@ function givecustomloadout()
 			self attackerinitammo();
 		}
 	}
-	self notify(#"hash_492fdea00c40222d");
+	self notify(#"applyloadout");
 	return weapon;
 }
 
@@ -902,7 +902,7 @@ function whistlestarttimer_internal(counttime)
 function useprophudserver()
 {
 	/#
-		if(getdvarint(#"hash_38ca626afad6fe7d", 0) != 0)
+		if(getdvarint(#"scr_ph_useprophudserver", 0) != 0)
 		{
 			return true;
 		}
@@ -1068,8 +1068,8 @@ function get_alive_nonspecating_players(team)
 */
 function function_3a38741e()
 {
-	level notify(#"hash_611b967582940077");
-	level endon(#"hash_611b967582940077", #"game_ended");
+	level notify(#"huntersforfeit");
+	level endon(#"huntersforfeit", #"game_ended");
 	wait(5);
 	numhunters = 0;
 	foreach(player in level.players)
@@ -1138,17 +1138,17 @@ function function_71a55567()
 	if(isdefined(self))
 	{
 		var_9ba0a68f = int(level.phsettings.propchangecount);
-		var_484b4cdc = undefined;
+		abilitycount = undefined;
 		var_3a346a8 = undefined;
 		if(isdefined(self.spawnedonce) && isdefined(self.changesleft))
 		{
 			var_9ba0a68f = self.changesleft;
-			var_484b4cdc = self.abilityleft;
+			abilitycount = self.abilityleft;
 			var_3a346a8 = self.clonesleft;
 		}
-		self namespace_314165c4::propsetchangesleft(var_9ba0a68f);
-		self namespace_314165c4::setnewabilitycount(self.currentability, var_484b4cdc);
-		self namespace_314165c4::setnewabilitycount("CLONE", var_3a346a8);
+		self prop_controls::propsetchangesleft(var_9ba0a68f);
+		self prop_controls::setnewabilitycount(self.currentability, abilitycount);
+		self prop_controls::setnewabilitycount("CLONE", var_3a346a8);
 		self clientfield::set_to_player("realtime_multiplay", 1);
 	}
 }
@@ -1165,9 +1165,9 @@ function function_71a55567()
 function onspawnplayer(predictedspawn)
 {
 	self.breathingstoptime = 0;
-	if(!level.var_82e6af5d mp_prop_timer::is_open(self))
+	if(!level.hide_timer mp_prop_timer::is_open(self))
 	{
-		level.var_82e6af5d mp_prop_timer::open(self, 1);
+		level.hide_timer mp_prop_timer::open(self, 1);
 	}
 	if(self util::isprop())
 	{
@@ -1187,14 +1187,14 @@ function onspawnplayer(predictedspawn)
 		self.currentability = level.abilities[self.pers[#"ability"]];
 		if(useprophudserver())
 		{
-			self thread namespace_314165c4::propcontrolshud();
+			self thread prop_controls::propcontrolshud();
 		}
 		self.isangleoffset = 0;
 		self.var_b279086a = 1;
 		self.var_4c45f505 = 1;
 		self thread function_71a55567();
-		level.var_82e6af5d mp_prop_timer::function_51883733(self, 1);
-		self thread namespace_314165c4::cleanuppropcontrolshudondeath();
+		level.hide_timer mp_prop_timer::set_isprop(self, 1);
+		self thread prop_controls::cleanuppropcontrolshudondeath();
 		self thread handleprop();
 	}
 	else
@@ -1210,7 +1210,7 @@ function onspawnplayer(predictedspawn)
 		{
 			self.thrownspecialcount = 0;
 		}
-		level.var_82e6af5d mp_prop_timer::function_51883733(self, 0);
+		level.hide_timer mp_prop_timer::set_isprop(self, 0);
 		self thread function_58c3eef7();
 	}
 	self thread attackerswaittime();
@@ -1334,7 +1334,7 @@ function handleprop()
 {
 	level endon(#"game_ended");
 	self endon(#"death");
-	self waittill(#"hash_492fdea00c40222d");
+	self waittill(#"applyloadout");
 	self allowprone(0);
 	self allowcrouch(0);
 	self allowsprint(0);
@@ -1353,9 +1353,9 @@ function handleprop()
 		assert(!isdefined(self.prop));
 	#/
 	self thread setupprop();
-	self thread namespace_314165c4::setupkeybindings();
+	self thread prop_controls::setupkeybindings();
 	self thread setupdamage();
-	self thread namespace_314165c4::propinputwatch();
+	self thread prop_controls::propinputwatch();
 	self thread propwatchdeath();
 	self thread propwatchcleanupondisconnect();
 	self thread propwatchcleanuponroundend();
@@ -1563,8 +1563,8 @@ function propwhistle()
 				level.whistling.alpha = 1;
 				level.whistling.alpha = 0.6;
 			}
-			var_5e03f315 = arraysortclosest(level.players, var_b87d1ed);
-			foreach(player in var_5e03f315)
+			sortedplayers = arraysortclosest(level.players, var_b87d1ed);
+			foreach(player in sortedplayers)
 			{
 				if(!isdefined(player))
 				{
@@ -1704,7 +1704,7 @@ function damagewatch(damage, attacker, direction_vec, point, meansofdeath, model
 		modelname thread damagefeedback::update();
 		if(isdefined(weapon) && weapon.rootweapon === level.phsettings.var_86fda1fd && isdefined(partname) && partname != "MOD_IMPACT")
 		{
-			namespace_314165c4::function_d04b961(modelname, undefined, partname, meansofdeath, tagname, weapon);
+			prop_controls::function_d04b961(modelname, undefined, partname, meansofdeath, tagname, weapon);
 		}
 	}
 	self.owner dodamage(meansofdeath, tagname, modelname, modelname, "none", "MOD_IMPACT", idflags, weapon);
@@ -1928,9 +1928,9 @@ function propwatchprematchsettings()
 	Parameters: 1
 	Flags: None
 */
-function organizeproplist(var_66ac8e3e)
+function organizeproplist(inarray)
 {
-	return array::randomize(var_66ac8e3e);
+	return array::randomize(inarray);
 }
 
 /*
@@ -1983,7 +1983,7 @@ function randgetpropsizetoallocate()
 	Parameters: 1
 	Flags: None
 */
-function getnextprop(var_d8316f60)
+function getnextprop(inplayer)
 {
 	var_f220f2d1 = randgetpropsizetoallocate();
 	var_d4cb730b = getarraykeys(level.proplist);
@@ -2009,11 +2009,11 @@ function getnextprop(var_d8316f60)
 		{
 			prop = _tomb_zmb_ee_monitor_button[j];
 			var_72595382 = 0;
-			if(isdefined(var_d8316f60.usedprops) && var_d8316f60.usedprops.size)
+			if(isdefined(inplayer.usedprops) && inplayer.usedprops.size)
 			{
-				for(index = 0; index < var_d8316f60.usedprops.size; index++)
+				for(index = 0; index < inplayer.usedprops.size; index++)
 				{
-					if(prop.modelname == var_d8316f60.usedprops[index].modelname)
+					if(prop.modelname == inplayer.usedprops[index].modelname)
 					{
 						var_72595382 = 1;
 						break;
@@ -2080,13 +2080,13 @@ function populateproplist()
 	{
 		modelname = tablelookupbyrow(var_a01224f2, rowindex, 0);
 		propsizetext = tablelookupbyrow(var_a01224f2, rowindex, 1);
-		var_9846ca56 = float(tablelookupbyrow(var_a01224f2, rowindex, 2));
+		propscale = float(tablelookupbyrow(var_a01224f2, rowindex, 2));
 		offsetx = int(tablelookupbyrow(var_a01224f2, rowindex, 3));
 		offsety = int(tablelookupbyrow(var_a01224f2, rowindex, 4));
 		offsetz = int(tablelookupbyrow(var_a01224f2, rowindex, 5));
-		var_f16633ee = int(tablelookupbyrow(var_a01224f2, rowindex, 6));
+		rotationx = int(tablelookupbyrow(var_a01224f2, rowindex, 6));
 		rotationy = int(tablelookupbyrow(var_a01224f2, rowindex, 7));
-		var_f16733fc = int(tablelookupbyrow(var_a01224f2, rowindex, 8));
+		rotationz = int(tablelookupbyrow(var_a01224f2, rowindex, 8));
 		propheight = tablelookupbyrow(var_a01224f2, rowindex, 9);
 		proprange = tablelookupbyrow(var_a01224f2, rowindex, 10);
 		offset = undefined;
@@ -2095,13 +2095,13 @@ function populateproplist()
 			offset = (offsetx, offsety, offsetz);
 		}
 		rotation = undefined;
-		if(isdefined(var_f16633ee) && isdefined(rotationy) && isdefined(var_f16733fc))
+		if(isdefined(rotationx) && isdefined(rotationy) && isdefined(rotationz))
 		{
-			rotation = (var_f16633ee, rotationy, var_f16733fc);
+			rotation = (rotationx, rotationy, rotationz);
 		}
-		if(!isdefined(var_9846ca56) || var_9846ca56 == 0)
+		if(!isdefined(propscale) || propscale == 0)
 		{
-			var_9846ca56 = 1;
+			propscale = 1;
 		}
 		propsize = getpropsize(propsizetext);
 		if(!isdefined(propheight) || propheight == "")
@@ -2120,7 +2120,7 @@ function populateproplist()
 		{
 			proprange = int(proprange);
 		}
-		addproptolist(modelname, propsize, offset, rotation, propsizetext, var_9846ca56, propheight, proprange);
+		addproptolist(modelname, propsize, offset, rotation, propsizetext, propscale, propheight, proprange);
 	}
 	if(var_c6e6d665 == 0)
 	{
@@ -2161,7 +2161,7 @@ function setupprop()
 	self.prop = spawn("script_model", self.propent.origin);
 	self.prop.targetname = "prop";
 	self.prop setmodel(propinfo.modelname);
-	self.prop setscale(propinfo.var_9846ca56);
+	self.prop setscale(propinfo.propscale);
 	self.prop setcandamage(1);
 	self.prop setowner(self);
 	self.prop.xyzoffset = propinfo.xyzoffset;
@@ -2232,13 +2232,13 @@ function function_63d4897()
 		var_309e583f.anglesoffset = self.prop.info.anglesoffset;
 		var_309e583f.propheight = self.prop.info.propheight;
 		var_309e583f.proprange = self.prop.info.proprange;
-		var_309e583f.var_9846ca56 = self.prop.info.var_9846ca56;
+		var_309e583f.propscale = self.prop.info.propscale;
 		while(true)
 		{
 			var_94903b3f = 0;
-			offsetx = getdvarfloat(#"hash_1fc47d2e76f07df6", -0.0123);
-			offsety = getdvarfloat(#"hash_1fc47e2e76f07fa9", -0.0123);
-			offsetz = getdvarfloat(#"hash_1fc47b2e76f07a90", -0.0123);
+			offsetx = getdvarfloat(#"prop_offsetx", -0.0123);
+			offsety = getdvarfloat(#"prop_offsety", -0.0123);
+			offsetz = getdvarfloat(#"prop_offsetz", -0.0123);
 			if(offsetx != -0.0123 && offsetx != var_309e583f.xyzoffset[0])
 			{
 				var_309e583f.xyzoffset = (offsetx, var_309e583f.xyzoffset[1], var_309e583f.xyzoffset[2]);
@@ -2289,7 +2289,7 @@ function function_63d4897()
 				self applyanglesoffset();
 				self.prop linkto(self.propent);
 			}
-			height = getdvarint(#"hash_187deb59bde0efa2", -1);
+			height = getdvarint(#"prop_height", -1);
 			if(height != -1 && height != var_309e583f.propheight)
 			{
 				var_309e583f.propheight = height;
@@ -2297,7 +2297,7 @@ function function_63d4897()
 				self.thirdpersonheightoffset = height;
 				clientfield::set_to_player("", int(self.thirdpersonheightoffset / 10));
 			}
-			range = getdvarint(#"hash_2994877143792932", -1);
+			range = getdvarint(#"prop_range", -1);
 			if(range != -1 && range != var_309e583f.proprange)
 			{
 				var_309e583f.proprange = range;
@@ -2305,11 +2305,11 @@ function function_63d4897()
 				self.thirdpersonrange = range;
 				clientfield::set_to_player("", int(self.thirdpersonrange / 10));
 			}
-			scale = getdvarfloat(#"hash_41d2895b4805ea11", -0.0123);
-			if(scale != -0.0123 && scale != var_309e583f.var_9846ca56)
+			scale = getdvarfloat(#"prop_scale", -0.0123);
+			if(scale != -0.0123 && scale != var_309e583f.propscale)
 			{
-				var_309e583f.var_9846ca56 = scale;
-				self.prop.info.var_9846ca56 = scale;
+				var_309e583f.propscale = scale;
+				self.prop.info.propscale = scale;
 				self.prop setscale(scale);
 			}
 			waitframe(1);
@@ -2449,7 +2449,7 @@ function getpropsize(propsizetext)
 	Parameters: 8
 	Flags: None
 */
-function addproptolist(modelname, propsize, xyzoffset, anglesoffset, propsizetext, var_9846ca56, propheight, proprange)
+function addproptolist(modelname, propsize, xyzoffset, anglesoffset, propsizetext, propscale, propheight, proprange)
 {
 	if(!isdefined(level.proplist))
 	{
@@ -2465,7 +2465,7 @@ function addproptolist(modelname, propsize, xyzoffset, anglesoffset, propsizetex
 	}
 	propinfo = spawnstruct();
 	propinfo.modelname = modelname;
-	propinfo.var_9846ca56 = var_9846ca56;
+	propinfo.propscale = propscale;
 	propinfo.propsize = int(propsize);
 	propinfo.propsizetext = propsizetext;
 	if(isdefined(xyzoffset))
@@ -2496,7 +2496,7 @@ function addproptolist(modelname, propsize, xyzoffset, anglesoffset, propsizetex
 */
 function function_36f8016e(winning_team, var_c1e98979)
 {
-	round::function_d1e740f6(winning_team);
+	round::set_winner(winning_team);
 	thread globallogic::function_a3e3bd39(winning_team, var_c1e98979);
 }
 
@@ -2676,9 +2676,9 @@ function givelastonteamwarning()
 	Parameters: 2
 	Flags: None
 */
-function function_c4aeb146(var_efb758a8, var_befddc02)
+function function_c4aeb146(var_efb758a8, calloutplayer)
 {
-	luinotifyevent(#"player_callout", 2, var_efb758a8, var_befddc02.entnum);
+	luinotifyevent(#"player_callout", 2, var_efb758a8, calloutplayer.entnum);
 }
 
 /*
@@ -2708,7 +2708,7 @@ function ontimelimit()
 			{
 				if(is_true(1))
 				{
-					potm::bookmark(#"hash_1b2c9f8864e884c5", gettime(), player);
+					potm::bookmark(#"prop_survive", gettime(), player);
 				}
 				scoreevents::processscoreevent("prop_survived_entire_round", player);
 			}
@@ -2830,7 +2830,7 @@ function choosebestpropforkillcam(var_545f0775, var_57713248)
 function function_d25cfae3(setclientfield)
 {
 	self show();
-	self notify(#"hash_7fe1b861ea89d531");
+	self notify(#"showplayer");
 	if(setclientfield)
 	{
 		self clientfield::set("hideTeamPlayer", 0);
@@ -2879,14 +2879,14 @@ function function_832a882d(team, setclientfield)
 function function_aa8a29ee(team)
 {
 	level endon(#"game_ended");
-	self endon(#"disconnect", #"hash_7fe1b861ea89d531");
+	self endon(#"disconnect", #"showplayer");
 	waitframe(1);
-	var_b0a45a26 = 1;
+	teamint = 1;
 	if(team == "axis")
 	{
-		var_b0a45a26 = 2;
+		teamint = 2;
 	}
-	self clientfield::set("hideTeamPlayer", var_b0a45a26);
+	self clientfield::set("hideTeamPlayer", teamint);
 }
 
 /*
@@ -2901,7 +2901,7 @@ function function_aa8a29ee(team)
 function function_3ea2519e(team)
 {
 	level endon(#"game_ended");
-	self endon(#"disconnect", #"hash_7fe1b861ea89d531");
+	self endon(#"disconnect", #"showplayer");
 	while(true)
 	{
 		res = undefined;
@@ -2923,7 +2923,7 @@ function function_3ea2519e(team)
 function function_8e69759(player, team)
 {
 	level endon(#"game_ended");
-	self endon(#"disconnect", #"hash_7fe1b861ea89d531");
+	self endon(#"disconnect", #"showplayer");
 	player endon(#"disconnect");
 	if(self util::isprop())
 	{
@@ -3198,7 +3198,7 @@ function function_6363ab34(var_167fb943, remainingtime)
 		fadeintime = 0;
 		fadeouttime = 0;
 	}
-	self thread namespace_314165c4::function_d8b858d4(remainingtime, fadeintime, fadeouttime);
+	self thread prop_controls::function_d8b858d4(remainingtime, fadeintime, fadeouttime);
 	level thread function_7913d068(remainingtime);
 	result = self function_1ee6f124(remainingtime);
 	self freezecontrols(0);
@@ -3250,7 +3250,7 @@ function function_bfc79664(var_167fb943, remainingtime)
 			fadeintime = 0;
 			fadeouttime = 0;
 		}
-		self thread namespace_314165c4::function_d8b858d4(remainingtime, fadeintime, fadeouttime);
+		self thread prop_controls::function_d8b858d4(remainingtime, fadeintime, fadeouttime);
 		result = self function_1ee6f124(remainingtime);
 		self val::function_5276aede(#"hash_28635ef576a942da", 0);
 	}
@@ -3288,8 +3288,8 @@ function function_70d75619()
 		level waittill(#"host_migration_begin");
 		starttime = gettime();
 		level waittill(#"host_migration_end");
-		var_2329780a = gettime() - starttime;
-		level.var_ac79a938 = level.var_ac79a938 + var_2329780a;
+		passedtime = gettime() - starttime;
+		level.var_ac79a938 = level.var_ac79a938 + passedtime;
 	}
 }
 
@@ -3325,7 +3325,7 @@ function function_1ee6f124(remainingtime)
 */
 function function_e32f6296(remainingtime)
 {
-	level endon(#"hash_72a9d8619c126022");
+	level endon(#"cancelcountdown");
 	hostmigration::waitlongdurationwithhostmigrationpause(remainingtime);
 	return true;
 }
@@ -3444,7 +3444,7 @@ function attackerinitammo()
 		{
 			self.thrownspecialcount = 0;
 		}
-		self thread namespace_314165c4::watchspecialgrenadethrow();
+		self thread prop_controls::watchspecialgrenadethrow();
 	}
 }
 
@@ -3602,7 +3602,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 			self thread respawnplayer();
 			return;
 		}
-		level.var_314165c4 mp_prop_controls::close(self);
+		level.prop_controls mp_prop_controls::close(self);
 	}
 	if(isdefined(lifeid) && isplayer(lifeid) && lifeid != victim && victim.team != lifeid.team)
 	{
@@ -3620,18 +3620,18 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 				scoreevents::processscoreevent("prop_killed_three_props", lifeid, victim);
 			}
 		}
-		foreach(var_909b3023 in victim.attackers)
+		foreach(assailant in victim.attackers)
 		{
-			if(!isdefined(var_909b3023) || !isentity(var_909b3023))
+			if(!isdefined(assailant) || !isentity(assailant))
 			{
 				continue;
 			}
-			if(var_909b3023 == lifeid)
+			if(assailant == lifeid)
 			{
-				var_909b3023 playhitmarker("mpl_hit_alert");
+				assailant playhitmarker("mpl_hit_alert");
 				continue;
 			}
-			var_909b3023 playhitmarker("mpl_hit_alert_escort");
+			assailant playhitmarker("mpl_hit_alert_escort");
 		}
 	}
 	foreach(player in level.players)
@@ -3858,7 +3858,7 @@ function function_ef516d85(winner, endtype, endreasontext, outcometext, team, wi
 	{
 		if(mp_prop_controls::is_open(player))
 		{
-			level.var_314165c4 mp_prop_controls::close(self);
+			level.prop_controls mp_prop_controls::close(self);
 		}
 	}
 	if(endreasontext == "gameend" && isdefined(level.proptiebreaker))
@@ -3937,7 +3937,7 @@ function function_7470e459(spawnpoint, predictedspawn)
 {
 	if(!predictedspawn)
 	{
-		self.var_b936d86b = spawnpoint;
+		self.startspawn = spawnpoint;
 	}
 }
 
@@ -4119,7 +4119,7 @@ function function_cd48b338(eattacker, einflictor, weapon, meansofdeath, damage, 
 		{
 			damageorigin = point;
 		}
-		if(self namespace_314165c4::function_d3b8a20e(damageorigin))
+		if(self prop_controls::function_d3b8a20e(damageorigin))
 		{
 			return;
 		}
@@ -4147,9 +4147,9 @@ function function_cd48b338(eattacker, einflictor, weapon, meansofdeath, damage, 
 			{
 				if(is_true(self.lock))
 				{
-					self namespace_314165c4::unlockprop();
+					self prop_controls::unlockprop();
 				}
-				self namespace_314165c4::function_d04b961(einflictor, self, meansofdeath, damage, damageorigin, weapon);
+				self prop_controls::function_d04b961(einflictor, self, meansofdeath, damage, damageorigin, weapon);
 			}
 		}
 	}

@@ -1,29 +1,29 @@
-#using script_1cc417743d7c262d;
-#using script_1d1a97b78f64bfd;
-#using script_2c74a7b5eea1ec89;
-#using script_47fb62300ac0bd60;
-#using script_545a0bac37bda541;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using script_79a7e1c31a3e8cc;
-#using script_8988fdbc78d6c53;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\contracts_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\gameobjects_shared.gsc;
-#using scripts\core_common\influencers_shared.gsc;
 #using scripts\core_common\rank_shared.gsc;
 #using scripts\core_common\scoreevents_shared.gsc;
-#using scripts\core_common\throttle_shared.gsc;
-#using scripts\core_common\turret_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_ai_shared.gsc;
-#using scripts\core_common\vehicle_shared.gsc;
+#using script_1cc417743d7c262d;
+#using scripts\core_common\globallogic\globallogic_score.gsc;
+#using scripts\weapons\deployable.gsc;
+#using scripts\core_common\flag_shared.gsc;
 #using scripts\core_common\visionset_mgr_shared.gsc;
+#using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\turret_shared.gsc;
+#using scripts\weapons\weaponobjects.gsc;
+#using scripts\core_common\gameobjects_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\killstreaks\remote_weapons.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreak_bundles.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\core_common\throttle_shared.gsc;
+#using scripts\core_common\influencers_shared.gsc;
+#using scripts\core_common\contracts_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\battlechatter.gsc;
 
 #namespace namespace_1b611bca;
 
@@ -38,7 +38,7 @@
 */
 function private autoexec function_985b175c()
 {
-	level notify(1826253464);
+	level notify(-1826253464);
 }
 
 #namespace missile_turret;
@@ -68,7 +68,7 @@ function init_shared()
 		level.var_6964d56c.var_d67ec774[#"remote_missile"] = 1;
 		level.var_6964d56c.var_d67ec774[#"straferun"] = 1;
 		level.var_6964d56c.var_1543185c = array("ac130", "inventory_ac130", "helicopter_guard", "inventory_helicopter_guard", "chopper_gunner", "inventory_chopper_gunner", "hoverjet", "inventory_hoverjet", "helicopter_comlink", "inventory_helicopter_comlink", "recon_plane", "inventory_recon_plane", "uav", "inventory_uav", "counteruav", "inventory_counteruav");
-		level.var_6964d56c.var_512625a1 = [#"hash_73f41ae07ef2ba54":"uav", #"uav":"uav", #"hash_62a2088c3368ea":"spy_plane_alt", #"recon_plane":"spy_plane_alt", #"hash_511b5c81a984baf9":"hover_jet", #"hoverjet":"hover_jet", #"inventory_helicopter_comlink":"lgt_chop", #"helicopter_comlink":"lgt_chop", #"inventory_helicopter_guard":"lgt_chop", #"helicopter_guard":"lgt_chop", #"hash_65f8a13931095b50":"cuav", #"counteruav":"cuav", #"hash_1bf811fa5d684607":"chop_gun", #"chopper_gunner":"chop_gun", #"hash_459c0007ec5e2470":"gunship", #"ac130":"gunship"];
+		level.var_6964d56c.var_512625a1 = [#"inventory_uav":"uav", #"uav":"uav", #"inventory_recon_plane":"spy_plane_alt", #"recon_plane":"spy_plane_alt", #"inventory_hoverjet":"hover_jet", #"hoverjet":"hover_jet", #"inventory_helicopter_comlink":"lgt_chop", #"helicopter_comlink":"lgt_chop", #"inventory_helicopter_guard":"lgt_chop", #"helicopter_guard":"lgt_chop", #"inventory_counteruav":"cuav", #"counteruav":"cuav", #"inventory_chopper_gunner":"chop_gun", #"chopper_gunner":"chop_gun", #"inventory_ac130":"gunship", #"ac130":"gunship"];
 		level.var_6964d56c.var_e321cb16 = [];
 		if(!isdefined(level.var_2d90c17e))
 		{
@@ -90,7 +90,7 @@ function init_shared()
 		callback::on_vehicle_killed(&on_vehicle_killed);
 		weaponobjects::function_e6400478(#"missile_turret", &function_fdf195f2, undefined);
 		level.var_4d11b106 = 0;
-		deployable::function_2e088f73(getweapon("missile_turret"), undefined);
+		deployable::register_deployable(getweapon("missile_turret"), undefined);
 		callback::on_finalize_initialization(&function_1c601b99);
 		if(!isdefined(level.var_c61fd5a9))
 		{
@@ -188,14 +188,14 @@ function function_1c601b99()
 	Parameters: 2
 	Flags: Linked
 */
-function function_127fb8f3(turret, var_dbd1a594)
+function function_127fb8f3(turret, attackingplayer)
 {
 	turret turretcleartarget(0);
 	if(isdefined(level.var_86e3d17a) && turret.classname == "script_vehicle")
 	{
 		if(isdefined(level.var_1794f85f))
 		{
-			[[level.var_1794f85f]](var_dbd1a594, "disrupted_sentry");
+			[[level.var_1794f85f]](attackingplayer, "disrupted_sentry");
 		}
 		turret clientfield::set("enemyvehicle", 0);
 	}
@@ -210,7 +210,7 @@ function function_127fb8f3(turret, var_dbd1a594)
 	Parameters: 2
 	Flags: Linked
 */
-function function_bff5c062(turret, var_dbd1a594)
+function function_bff5c062(turret, attackingplayer)
 {
 	var_f3ab6571 = turret.owner weaponobjects::function_8481fc06(turret.weapon) > 1;
 	turret.owner thread globallogic_audio::function_a2cde53d(turret.weapon, var_f3ab6571);
@@ -219,15 +219,15 @@ function function_bff5c062(turret, var_dbd1a594)
 	{
 		turret.owner weaponobjects::hackerremoveweapon(turret.turret);
 	}
-	turret.owner = var_dbd1a594;
-	turret.team = var_dbd1a594.team;
-	turret setowner(var_dbd1a594);
-	turret setteam(var_dbd1a594.team);
+	turret.owner = attackingplayer;
+	turret.team = attackingplayer.team;
+	turret setowner(attackingplayer);
+	turret setteam(attackingplayer.team);
 	if(turret.classname == "script_vehicle")
 	{
-		turret.var_1ee03b04 = [];
-		turret.var_1ee03b04[0] = turret createturretinfluencer("turret");
-		turret.var_1ee03b04[1] = turret createturretinfluencer("turret_close");
+		turret.spawninfluencers = [];
+		turret.spawninfluencers[0] = turret createturretinfluencer("turret");
+		turret.spawninfluencers[1] = turret createturretinfluencer("turret_close");
 	}
 	turret thread turret_watch_owner_events();
 }
@@ -281,13 +281,13 @@ function function_fdf195f2(watcher)
 	watcher.var_10efd558 = "switched_field_upgrade";
 	watcher.hackertoolradius = level.equipmenthackertoolradius;
 	watcher.hackertooltimems = level.equipmenthackertooltimems;
-	if(isdefined(watcher.weapon.var_4dd46f8a))
+	if(isdefined(watcher.weapon.customsettings))
 	{
-		var_e6fbac16 = getscriptbundle(watcher.weapon.var_4dd46f8a);
+		var_e6fbac16 = getscriptbundle(watcher.weapon.customsettings);
 		/#
 			assert(isdefined(var_e6fbac16));
 		#/
-		level.var_6964d56c.var_4dd46f8a = var_e6fbac16;
+		level.var_6964d56c.customsettings = var_e6fbac16;
 	}
 }
 
@@ -310,19 +310,19 @@ function function_3be2d17f(watcher, player)
 	player gadgetpowerset(slot, 0);
 	self weaponobjects::onspawnuseweaponobject(watcher, player);
 	self hide();
-	self.var_52a68abf = 1;
-	self.var_24d0abd1 = 1;
-	self.var_501460f = int((isdefined(level.var_6964d56c.var_4dd46f8a.var_4c3a3d79) ? level.var_6964d56c.var_4dd46f8a.var_4c3a3d79 : 1) * 1000);
-	self.var_2350dc16 = (isdefined(level.var_6964d56c.var_4dd46f8a.var_783913b4) ? level.var_6964d56c.var_4dd46f8a.var_783913b4 : 5);
+	self.canthack = 1;
+	self.ignoreemp = 1;
+	self.var_501460f = int((isdefined(level.var_6964d56c.customsettings.var_4c3a3d79) ? level.var_6964d56c.customsettings.var_4c3a3d79 : 1) * 1000);
+	self.var_2350dc16 = (isdefined(level.var_6964d56c.customsettings.var_783913b4) ? level.var_6964d56c.customsettings.var_783913b4 : 5);
 	self.var_b19fe20c = self.var_2350dc16;
-	self.var_83891ae2 = (isdefined(level.var_6964d56c.var_4dd46f8a.var_ba53d794) ? level.var_6964d56c.var_4dd46f8a.var_ba53d794 : 1);
-	self.var_f75c2458 = level.var_6964d56c.var_4dd46f8a.var_27c4391d;
-	self.var_3bfa4639 = int((isdefined(level.var_6964d56c.var_4dd46f8a.var_12c45fc8) ? level.var_6964d56c.var_4dd46f8a.var_12c45fc8 : 0) * 1000);
-	self.var_98b4ef7e = int((isdefined(level.var_6964d56c.var_4dd46f8a.var_85707b85) ? level.var_6964d56c.var_4dd46f8a.var_85707b85 : 0) * 1000);
-	self.var_40c696e = int((isdefined(level.var_6964d56c.var_4dd46f8a.var_f1c58cd5) ? level.var_6964d56c.var_4dd46f8a.var_f1c58cd5 : 0) * 1000);
-	self.var_eb9e0e9c = int((isdefined(level.var_6964d56c.var_4dd46f8a.var_1c3fb32f) ? level.var_6964d56c.var_4dd46f8a.var_1c3fb32f : 0) * 1000);
-	self.var_ddf7efa7 = sqr((isdefined(level.var_6964d56c.var_4dd46f8a.var_b6f11437) ? level.var_6964d56c.var_4dd46f8a.var_b6f11437 : 30000));
-	self.var_6a629b6e = (isdefined(level.var_6964d56c.var_4dd46f8a.var_fe7839bf) ? level.var_6964d56c.var_4dd46f8a.var_fe7839bf : 0);
+	self.var_83891ae2 = (isdefined(level.var_6964d56c.customsettings.var_ba53d794) ? level.var_6964d56c.customsettings.var_ba53d794 : 1);
+	self.var_f75c2458 = level.var_6964d56c.customsettings.var_27c4391d;
+	self.var_3bfa4639 = int((isdefined(level.var_6964d56c.customsettings.var_12c45fc8) ? level.var_6964d56c.customsettings.var_12c45fc8 : 0) * 1000);
+	self.var_98b4ef7e = int((isdefined(level.var_6964d56c.customsettings.var_85707b85) ? level.var_6964d56c.customsettings.var_85707b85 : 0) * 1000);
+	self.var_40c696e = int((isdefined(level.var_6964d56c.customsettings.var_f1c58cd5) ? level.var_6964d56c.customsettings.var_f1c58cd5 : 0) * 1000);
+	self.var_eb9e0e9c = int((isdefined(level.var_6964d56c.customsettings.var_1c3fb32f) ? level.var_6964d56c.customsettings.var_1c3fb32f : 0) * 1000);
+	self.var_ddf7efa7 = sqr((isdefined(level.var_6964d56c.customsettings.var_b6f11437) ? level.var_6964d56c.customsettings.var_b6f11437 : 30000));
+	self.var_6a629b6e = (isdefined(level.var_6964d56c.customsettings.var_fe7839bf) ? level.var_6964d56c.customsettings.var_fe7839bf : 0);
 	var_83ed455 = 0;
 	if(var_83ed455 && isdefined(player))
 	{
@@ -387,7 +387,7 @@ function function_450ab98d(var_baf60e5)
 		return;
 	}
 	self.var_66f1c537 = 1;
-	self.var_52a68abf = 1;
+	self.canthack = 1;
 	self.var_515d6dda = 0;
 	self stoploopsound();
 	self.scanning = 1;
@@ -535,13 +535,13 @@ function onplaceturret(turret)
 		}
 		turret.vehicle thread turret_watch_owner_events();
 		turret.vehicle thread function_31477582();
-		turret.vehicle.var_1ee03b04 = [];
-		turret.vehicle.var_1ee03b04[0] = turret.vehicle createturretinfluencer("turret");
-		turret.vehicle.var_1ee03b04[1] = turret.vehicle createturretinfluencer("turret_close");
+		turret.vehicle.spawninfluencers = [];
+		turret.vehicle.spawninfluencers[0] = turret.vehicle createturretinfluencer("turret");
+		turret.vehicle.spawninfluencers[1] = turret.vehicle createturretinfluencer("turret_close");
 		turret.vehicle thread util::ghost_wait_show(0.05);
 		turret.vehicle.var_63d65a8d = "circle";
 		turret.vehicle.var_7eb3ebd5 = [];
-		turret.vehicle util::function_c596f193();
+		turret.vehicle util::make_sentient();
 		turret.vehicle function_bc7568f1();
 		turret.vehicle.var_aac73d6c = 1;
 		var_34a76f8d = player.pers[#"hash_55c15f9af76e4e68"][turret.vehicle.killstreakslot];
@@ -567,7 +567,7 @@ function onplaceturret(turret)
 	trigger setvisibletoplayer(self);
 	trigger.var_a865c2cd = 0;
 	self clientclaimtrigger(trigger);
-	if(is_true(level.var_6964d56c.var_4dd46f8a.var_cfb3573a))
+	if(is_true(level.var_6964d56c.customsettings.var_cfb3573a))
 	{
 		gameobject = gameobjects::create_use_object(self.team, trigger, [], (0, 0, 0));
 		gameobject gameobjects::set_use_time(1);
@@ -579,7 +579,7 @@ function onplaceturret(turret)
 		gameobject.turret = turret;
 		turret.vehicle.gameobject = gameobject;
 	}
-	turret.vehicle thread vehicle::watch_freeze_on_flash((isdefined(level.var_6964d56c.var_4dd46f8a.var_85dc57d4) ? level.var_6964d56c.var_4dd46f8a.var_85dc57d4 : 3));
+	turret.vehicle thread vehicle::watch_freeze_on_flash((isdefined(level.var_6964d56c.customsettings.var_85dc57d4) ? level.var_6964d56c.customsettings.var_85dc57d4 : 3));
 	turret.vehicle thread turretscanning();
 	player notify(#"hash_6a3b9d0c6cd28c99", {#turret:turret.vehicle});
 }
@@ -792,16 +792,16 @@ function createturretinfluencer(name)
 */
 function function_3a9dddac()
 {
-	if(!isdefined(self.var_1ee03b04))
+	if(!isdefined(self.spawninfluencers))
 	{
-		self.var_1ee03b04 = [];
+		self.spawninfluencers = [];
 		return;
 	}
-	foreach(influencer in self.var_1ee03b04)
+	foreach(influencer in self.spawninfluencers)
 	{
 		self influencers::remove_influencer(influencer);
 	}
-	self.var_1ee03b04 = [];
+	self.spawninfluencers = [];
 }
 
 /*
@@ -847,7 +847,7 @@ function function_bc7568f1()
 	self.sightlatency = 100;
 	self.fovcosine = 0;
 	self.fovcosinebusy = 0;
-	self.var_3413afc5 = #"hash_3cf9b05c0d2cb80e";
+	self.var_3413afc5 = #"standard_sight";
 }
 
 /*
@@ -1422,12 +1422,12 @@ function function_16ccb771()
 		var_b48dd15a = function_ebf4ce2c();
 		if(isdefined(var_b48dd15a))
 		{
-			var_ea411dd7 = level.var_6964d56c.var_4dd46f8a.var_59802432;
+			var_ea411dd7 = level.var_6964d56c.customsettings.var_59802432;
 			if(isdefined(var_ea411dd7))
 			{
 				playfxontag(var_ea411dd7, self, var_b48dd15a);
 			}
-			var_e389c550 = level.var_6964d56c.var_4dd46f8a.var_33b48768;
+			var_e389c550 = level.var_6964d56c.customsettings.var_33b48768;
 			if(isdefined(var_e389c550))
 			{
 				self playsoundontag(var_e389c550, var_b48dd15a);
@@ -1857,7 +1857,7 @@ function function_507b0349(target)
 			self.var_b0f12639 = undefined;
 			self.var_b563164a = undefined;
 			scoreevents::processscoreevent(#"hash_71aa47b0ca3ecb46", self.owner, undefined, self.weapon);
-			self.owner contracts::function_a54e2068("contract_mp_field_upgrade_sam_turret_destructions_multiple", 1);
+			self.owner contracts::increment_contract("contract_mp_field_upgrade_sam_turret_destructions_multiple", 1);
 			self.owner stats::function_622feb0d(self.weapon.name, #"hash_7dec06273af56b68", 1);
 			return;
 		}
@@ -1908,7 +1908,7 @@ function function_5a5ec846(e_target)
 	self.owner function_678f57c8(#"hash_54016137d148e68c", s_params);
 	self.owner stats::function_622feb0d(self.weapon.name, #"hash_3d7965db54a794ce", 1);
 	self.owner stats::function_6fb0b113(self.weapon.name, #"hash_7575a19de6d2f3bd");
-	self.owner contracts::function_a54e2068(#"hash_189a19dfebc71184");
+	self.owner contracts::increment_contract(#"hash_189a19dfebc71184");
 }
 
 /*

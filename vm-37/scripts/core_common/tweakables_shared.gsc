@@ -3,7 +3,7 @@
 #namespace tweakables;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: tweakables
 	Checksum: 0xC1F5BF01
 	Offset: 0x80
@@ -11,7 +11,7 @@
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"tweakables", &function_70a657d8, undefined, undefined, undefined);
 }

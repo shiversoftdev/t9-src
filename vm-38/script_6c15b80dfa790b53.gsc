@@ -1,9 +1,9 @@
 #using scripts\core_common\callbacks_shared.csc;
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\postfx_shared.csc;
-#using scripts\core_common\struct.csc;
-#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\util_shared.csc;
+#using scripts\core_common\system_shared.csc;
+#using scripts\core_common\struct.csc;
 
 #namespace hazard;
 
@@ -18,11 +18,11 @@
 */
 function private autoexec function_511e8ca4()
 {
-	level notify(919292926);
+	level notify(-919292926);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: hazard
 	Checksum: 0x625CCB8E
 	Offset: 0x128
@@ -30,7 +30,7 @@ function private autoexec function_511e8ca4()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"hazard", &function_70a657d8, undefined, undefined, undefined);
 }

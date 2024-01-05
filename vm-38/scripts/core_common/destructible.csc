@@ -1,5 +1,5 @@
-#using scripts\core_common\clientfield_shared.csc;
 #using scripts\core_common\system_shared.csc;
+#using scripts\core_common\clientfield_shared.csc;
 
 #namespace destructible;
 
@@ -18,7 +18,7 @@ function private autoexec function_78177c3d()
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: destructible
 	Checksum: 0x8C96576
 	Offset: 0xD8
@@ -26,7 +26,7 @@ function private autoexec function_78177c3d()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"destructible", &function_70a657d8, undefined, undefined, undefined);
 }

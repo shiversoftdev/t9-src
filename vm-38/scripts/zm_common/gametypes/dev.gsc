@@ -1,19 +1,19 @@
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\dev_shared.gsc;
-#using scripts\core_common\hud_message_shared.gsc;
-#using scripts\core_common\potm_shared.gsc;
-#using scripts\core_common\sound_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\zm_common\gametypes\dev_class.gsc;
-#using scripts\zm_common\gametypes\globallogic.gsc;
-#using scripts\zm_common\gametypes\globallogic_score.gsc;
-#using scripts\zm_common\gametypes\globallogic_utils.gsc;
 #using scripts\zm_common\util.gsc;
+#using scripts\zm_common\gametypes\globallogic_utils.gsc;
+#using scripts\zm_common\gametypes\globallogic_score.gsc;
+#using scripts\zm_common\gametypes\globallogic.gsc;
+#using scripts\zm_common\gametypes\dev_class.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\sound_shared.gsc;
+#using scripts\core_common\potm_shared.gsc;
+#using scripts\core_common\hud_message_shared.gsc;
+#using scripts\core_common\dev_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
+#using scripts\core_common\struct.gsc;
 
 #namespace dev;
 
@@ -28,11 +28,11 @@
 */
 function private autoexec function_a31ccfd5()
 {
-	level notify(1909627981);
+	level notify(-1909627981);
 }
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: dev
 	Checksum: 0x775AFB45
 	Offset: 0x100
@@ -40,7 +40,7 @@ function private autoexec function_a31ccfd5()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	/#
 		system::register(#"dev", &function_70a657d8, undefined, undefined, #"spawnlogic");
@@ -629,9 +629,9 @@ function updatedevsettings()
 			}
 			setdvar(#"scr_giveperk", "");
 		}
-		if(getdvarstring(#"hash_6fdd112130a541d4") != "")
+		if(getdvarstring(#"scr_toggleperk") != "")
 		{
-			perk = getdvarstring(#"hash_6fdd112130a541d4");
+			perk = getdvarstring(#"scr_toggleperk");
 			specialties = strtok(perk, "");
 			players = getplayers();
 			iprintln(("" + perk) + "");
@@ -653,7 +653,7 @@ function updatedevsettings()
 					player.extraperks[specialty] = 1;
 				}
 			}
-			setdvar(#"hash_6fdd112130a541d4", "");
+			setdvar(#"scr_toggleperk", "");
 		}
 		if(getdvarstring(#"scr_forceevent") != "")
 		{

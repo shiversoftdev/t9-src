@@ -1,4 +1,4 @@
-#using script_70aa5f5f0b09ad1a;
+#using scripts\weapons\bouncingbetty.csc;
 #using scripts\core_common\system_shared.csc;
 
 #namespace namespace_78b43a28;
@@ -20,7 +20,7 @@ function private autoexec function_cfbd32a1()
 #namespace bouncingbetty;
 
 /*
-	Name: function_89f2df9
+	Name: __init__system__
 	Namespace: bouncingbetty
 	Checksum: 0xF60BF781
 	Offset: 0x90
@@ -28,7 +28,7 @@ function private autoexec function_cfbd32a1()
 	Parameters: 0
 	Flags: AutoExec, Private
 */
-function private autoexec function_89f2df9()
+function private autoexec __init__system__()
 {
 	system::register(#"bouncingbetty", &function_70a657d8, undefined, undefined, undefined);
 }

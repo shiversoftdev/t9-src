@@ -1,18 +1,18 @@
+#using scripts\zm_common\zm_aoe.gsc;
 #using script_36f4be19da8eb6d0;
-#using script_47495939f228e438;
-#using script_556e19065f09f8a2;
-#using script_57f7003580bb15e0;
-#using scripts\core_common\array_shared.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\flag_shared.gsc;
-#using scripts\core_common\laststand_shared.gsc;
-#using scripts\core_common\spawner_shared.gsc;
-#using scripts\core_common\struct.gsc;
-#using scripts\core_common\system_shared.gsc;
-#using scripts\core_common\util_shared.gsc;
 #using scripts\zm_common\zm_devgui.gsc;
 #using scripts\zm_common\zm_utility.gsc;
+#using scripts\core_common\struct.gsc;
+#using scripts\core_common\status_effects\status_effect_util.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using script_556e19065f09f8a2;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\system_shared.gsc;
+#using scripts\core_common\spawner_shared.gsc;
+#using scripts\core_common\laststand_shared.gsc;
+#using scripts\core_common\flag_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\array_shared.gsc;
 
 #namespace namespace_ce8a59be;
 
@@ -27,7 +27,7 @@
 */
 function private autoexec function_4f574095()
 {
-	level notify(1495307139);
+	level notify(-1495307139);
 }
 
 /*
@@ -201,11 +201,11 @@ function private function_1c2829b5()
 	self endon(#"death");
 	while(true)
 	{
-		var_be17187b = undefined;
-		var_be17187b = self waittill(#"hash_30e5a6bd41a5917c");
-		if(var_be17187b.var_159100b7 == "zm_aoe_radiation_hazard")
+		s_waitresult = undefined;
+		s_waitresult = self waittill(#"aoe_damage");
+		if(s_waitresult.var_159100b7 == "zm_aoe_radiation_hazard")
 		{
-			self status_effect::status_effect_apply(function_4d1e7b48(#"hash_48bb9c4c96e64c3d"), undefined, self);
+			self status_effect::status_effect_apply(getstatuseffect(#"hash_48bb9c4c96e64c3d"), undefined, self);
 		}
 	}
 }

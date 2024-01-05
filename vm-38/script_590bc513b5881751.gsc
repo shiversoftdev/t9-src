@@ -1,27 +1,27 @@
-#using script_15022fca9ab99080;
-#using script_1d1a97b78f64bfd;
-#using script_2c74a7b5eea1ec89;
-#using script_3728b3b9606c4299;
-#using script_383a3b1bb18ba876;
-#using script_3fda550bc6e1089a;
+#using scripts\weapons\heatseekingmissile.gsc;
+#using scripts\weapons\hacker_tool.gsc;
+#using scripts\killstreaks\remote_weapons.gsc;
+#using scripts\killstreaks\killstreaks_util.gsc;
+#using scripts\killstreaks\killstreakrules_shared.gsc;
+#using scripts\killstreaks\killstreak_hacking.gsc;
+#using scripts\killstreaks\killstreak_bundles.gsc;
+#using scripts\killstreaks\killstreaks_shared.gsc;
+#using scripts\killstreaks\killstreak_vehicle.gsc;
 #using script_4721de209091b1a6;
-#using script_47fb62300ac0bd60;
-#using script_4a03c204316cf33;
-#using script_68d2ee1489345a1d;
-#using script_6c8abe14025b47c4;
-#using script_6d9aa3cb389aa46a;
-#using scripts\core_common\ai_shared.gsc;
-#using scripts\core_common\audio_shared.gsc;
-#using scripts\core_common\battlechatter.gsc;
-#using scripts\core_common\callbacks_shared.gsc;
-#using scripts\core_common\challenges_shared.gsc;
-#using scripts\core_common\clientfield_shared.gsc;
-#using scripts\core_common\killcam_shared.gsc;
-#using scripts\core_common\oob.gsc;
-#using scripts\core_common\util_shared.gsc;
-#using scripts\core_common\values_shared.gsc;
-#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\killstreaks\helicopter_shared.gsc;
 #using scripts\core_common\vehicle_shared.gsc;
+#using scripts\core_common\vehicle_ai_shared.gsc;
+#using scripts\core_common\values_shared.gsc;
+#using scripts\core_common\util_shared.gsc;
+#using scripts\core_common\player\player_stats.gsc;
+#using scripts\core_common\oob.gsc;
+#using scripts\core_common\killcam_shared.gsc;
+#using scripts\core_common\clientfield_shared.gsc;
+#using scripts\core_common\challenges_shared.gsc;
+#using scripts\core_common\callbacks_shared.gsc;
+#using scripts\core_common\battlechatter.gsc;
+#using scripts\core_common\audio_shared.gsc;
+#using scripts\core_common\ai_shared.gsc;
 
 #namespace namespace_2d34cefc;
 
@@ -51,11 +51,11 @@ function private autoexec function_ff600e26()
 function function_70a657d8(var_9dedc222)
 {
 	init_shared();
-	killstreaks::function_e4ef8390(var_9dedc222, &activatemaingunner);
+	killstreaks::register_killstreak(var_9dedc222, &activatemaingunner);
 	killstreaks::function_94c74046("ac130");
 	killcam::function_4789a39a(#"hash_17df39d53492b0bf", &function_91ba5c69);
 	killcam::function_4789a39a(#"hash_7b24d0d0d2823bca", &function_91ba5c69);
-	killcam::function_4789a39a(#"hash_721bd01efec90239", &function_91ba5c69);
+	killcam::function_4789a39a(#"ac130_chaingun", &function_91ba5c69);
 }
 
 /*
@@ -144,10 +144,10 @@ function spawnac130(killstreaktype)
 	level.ac130 helicopter::create_flare_ent(vectorscale((0, 0, -1), 25));
 	level.ac130 thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile(bundle, "death");
 	level.ac130.is_still_valid_target_for_stinger_override = &function_c2bfa7e1;
-	level.ac130 thread namespace_231aa29a::function_d4896942(bundle, "ac130", "ac130_shutdown");
-	level.ac130 thread namespace_231aa29a::function_31f9c728(bundle, "ac130", "exp_incoming_missile", "uin_ac130_alarm_missile_incoming", "ac130_shutdown");
+	level.ac130 thread killstreak_vehicle::function_d4896942(bundle, "ac130", "ac130_shutdown");
+	level.ac130 thread killstreak_vehicle::function_31f9c728(bundle, "ac130", "exp_incoming_missile", "uin_ac130_alarm_missile_incoming", "ac130_shutdown");
 	level.ac130 setrotorspeed(1);
-	level.ac130 util::function_c596f193();
+	level.ac130 util::make_sentient();
 	level.ac130.maxvisibledist = 16384;
 	level.ac130 function_53d3b37a(bundle);
 	level.ac130.totalrockethits = 0;
@@ -159,12 +159,12 @@ function spawnac130(killstreaktype)
 	level.ac130 namespace_f9b02f80::play_pilot_dialog_on_owner("arrive", "ac130", killstreak_id);
 	level.ac130 thread killstreaks::player_killstreak_threat_tracking("ac130", 0.9848077);
 	level.ac130 thread function_e187e17b();
-	player stats::function_e24eec31(bundle.var_1ab696c6, #"used", 1);
+	player stats::function_e24eec31(bundle.ksweapon, #"used", 1);
 	player thread waitforvtolshutdownthread(level.ac130);
 	var_e47f3d4a = getdvarfloat(#"hash_29a9f2bae7599f46", -27);
 	radius = (isdefined(level.var_8db9ea19) ? level.var_8db9ea19 : (isdefined(bundle.var_1f9faa0c) ? bundle.var_1f9faa0c : 12000));
 	level.ac130.var_9d44b193 = bundle.var_693dc1fb;
-	if(function_f99d2668())
+	if(sessionmodeiswarzonegame())
 	{
 		var_b0490eb9 = getheliheightlockheight(player.origin);
 		trace = groundtrace((player.origin[0], player.origin[1], var_b0490eb9), player.origin - vectorscale((0, 0, 1), 5000), 0, level.ac130);
@@ -271,9 +271,9 @@ function init_shared()
 	callback::on_connect(&onplayerconnect);
 	level thread waitforgameendthread();
 	level.ac130 = undefined;
-	clientfield::function_a8bbc967("vehicle.selectedWeapon", 1, 2, "int", 0);
-	clientfield::function_a8bbc967("vehicle.flareCount", 1, 2, "int", 0);
-	clientfield::function_a8bbc967("vehicle.inAC130", 1, 1, "int", 0);
+	clientfield::register_clientuimodel("vehicle.selectedWeapon", 1, 2, "int", 0);
+	clientfield::register_clientuimodel("vehicle.flareCount", 1, 2, "int", 0);
+	clientfield::register_clientuimodel("vehicle.inAC130", 1, 1, "int", 0);
 	clientfield::register("toplayer", "inAC130", 1, 1, "int");
 }
 
@@ -286,9 +286,9 @@ function init_shared()
 	Parameters: 2
 	Flags: Linked
 */
-function function_bff5c062(var_2f03ffd6, var_dbd1a594)
+function function_bff5c062(var_2f03ffd6, attackingplayer)
 {
-	var_2f03ffd6 killstreaks::function_73566ec7(var_dbd1a594, getweapon(#"gadget_icepick"), var_2f03ffd6.owner);
+	var_2f03ffd6 killstreaks::function_73566ec7(attackingplayer, getweapon(#"gadget_icepick"), var_2f03ffd6.owner);
 	var_2f03ffd6.destroyscoreeventgiven = 1;
 	function_8721028e(var_2f03ffd6.owner, 1);
 }

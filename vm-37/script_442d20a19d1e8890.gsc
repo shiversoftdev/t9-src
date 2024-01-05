@@ -1,6 +1,6 @@
 #using scripts\core_common\lui_shared.csc;
 
-class class_7c3faeda : class_6aaccc24
+class class_7c3faeda : cluielem
 {
 
 	/*
@@ -40,11 +40,11 @@ class class_7c3faeda : class_6aaccc24
 	*/
 	function open(localclientnum)
 	{
-		namespace_6aaccc24::open(localclientnum);
+		cluielem::open(localclientnum);
 	}
 
 	/*
-		Name: function_5c1bb138
+		Name: register_clientside
 		Namespace: namespace_7c3faeda
 		Checksum: 0x740BAEAC
 		Offset: 0x420
@@ -52,9 +52,9 @@ class class_7c3faeda : class_6aaccc24
 		Parameters: 0
 		Flags: None
 	*/
-	function function_5c1bb138()
+	function register_clientside()
 	{
-		namespace_6aaccc24::function_5c1bb138("Incursion_InfiltrationTitleCards");
+		cluielem::register_clientside("Incursion_InfiltrationTitleCards");
 	}
 
 	/*
@@ -68,9 +68,9 @@ class class_7c3faeda : class_6aaccc24
 	*/
 	function setup_clientfields(var_f1385203)
 	{
-		namespace_6aaccc24::setup_clientfields("Incursion_InfiltrationTitleCards");
-		namespace_6aaccc24::function_da693cbe("_state", 1, 4, "int");
-		namespace_6aaccc24::function_da693cbe("SelectedInfiltration", 1, 3, "int", var_f1385203);
+		cluielem::setup_clientfields("Incursion_InfiltrationTitleCards");
+		cluielem::add_clientfield("_state", 1, 4, "int");
+		cluielem::add_clientfield("SelectedInfiltration", 1, 3, "int", var_f1385203);
 	}
 
 	/*
@@ -86,85 +86,85 @@ class class_7c3faeda : class_6aaccc24
 	{
 		if(#"defaultstate" == state_name)
 		{
-			[[ self ]]->function_d7d2fcce(localclientnum, "_state", 0);
+			[[ self ]]->set_data(localclientnum, "_state", 0);
 		}
 		else
 		{
 			if(#"hash_1c7fa28cf1485078" == state_name)
 			{
-				[[ self ]]->function_d7d2fcce(localclientnum, "_state", 1);
+				[[ self ]]->set_data(localclientnum, "_state", 1);
 			}
 			else
 			{
 				if(#"hash_41af72ac3698f06f" == state_name)
 				{
-					[[ self ]]->function_d7d2fcce(localclientnum, "_state", 2);
+					[[ self ]]->set_data(localclientnum, "_state", 2);
 				}
 				else
 				{
 					if(#"hash_5b1f56f3d27d25f0" == state_name)
 					{
-						[[ self ]]->function_d7d2fcce(localclientnum, "_state", 3);
+						[[ self ]]->set_data(localclientnum, "_state", 3);
 					}
 					else
 					{
 						if(#"hash_249ee0339eddec66" == state_name)
 						{
-							[[ self ]]->function_d7d2fcce(localclientnum, "_state", 4);
+							[[ self ]]->set_data(localclientnum, "_state", 4);
 						}
 						else
 						{
 							if(#"hash_55a524ad199904e9" == state_name)
 							{
-								[[ self ]]->function_d7d2fcce(localclientnum, "_state", 5);
+								[[ self ]]->set_data(localclientnum, "_state", 5);
 							}
 							else
 							{
 								if(#"hash_37b2af92df0bfd42" == state_name)
 								{
-									[[ self ]]->function_d7d2fcce(localclientnum, "_state", 6);
+									[[ self ]]->set_data(localclientnum, "_state", 6);
 								}
 								else
 								{
 									if(#"hash_30029804cf01e828" == state_name)
 									{
-										[[ self ]]->function_d7d2fcce(localclientnum, "_state", 7);
+										[[ self ]]->set_data(localclientnum, "_state", 7);
 									}
 									else
 									{
 										if(#"hash_386af01523f194e5" == state_name)
 										{
-											[[ self ]]->function_d7d2fcce(localclientnum, "_state", 8);
+											[[ self ]]->set_data(localclientnum, "_state", 8);
 										}
 										else
 										{
 											if(#"hash_c5a40437efffe76" == state_name)
 											{
-												[[ self ]]->function_d7d2fcce(localclientnum, "_state", 9);
+												[[ self ]]->set_data(localclientnum, "_state", 9);
 											}
 											else
 											{
 												if(#"hash_88bd3835c23cdbc" == state_name)
 												{
-													[[ self ]]->function_d7d2fcce(localclientnum, "_state", 10);
+													[[ self ]]->set_data(localclientnum, "_state", 10);
 												}
 												else
 												{
 													if(#"hash_55e75da288d110d4" == state_name)
 													{
-														[[ self ]]->function_d7d2fcce(localclientnum, "_state", 11);
+														[[ self ]]->set_data(localclientnum, "_state", 11);
 													}
 													else
 													{
 														if(#"hash_3eb38ea38a92fe35" == state_name)
 														{
-															[[ self ]]->function_d7d2fcce(localclientnum, "_state", 12);
+															[[ self ]]->set_data(localclientnum, "_state", 12);
 														}
 														else
 														{
 															if(#"hash_79efd6a9d00cac13" == state_name)
 															{
-																[[ self ]]->function_d7d2fcce(localclientnum, "_state", 13);
+																[[ self ]]->set_data(localclientnum, "_state", 13);
 															}
 															else
 															{
@@ -190,7 +190,7 @@ class class_7c3faeda : class_6aaccc24
 	}
 
 	/*
-		Name: function_ee0c7ef6
+		Name: set_selectedinfiltration
 		Namespace: namespace_7c3faeda
 		Checksum: 0xF7CC94A8
 		Offset: 0x838
@@ -198,9 +198,9 @@ class class_7c3faeda : class_6aaccc24
 		Parameters: 2
 		Flags: None
 	*/
-	function function_ee0c7ef6(localclientnum, value)
+	function set_selectedinfiltration(localclientnum, value)
 	{
-		[[ self ]]->function_d7d2fcce(localclientnum, "SelectedInfiltration", value);
+		[[ self ]]->set_data(localclientnum, "SelectedInfiltration", value);
 	}
 
 	/*
@@ -214,9 +214,9 @@ class class_7c3faeda : class_6aaccc24
 	*/
 	function function_fa582112(localclientnum)
 	{
-		namespace_6aaccc24::function_fa582112(localclientnum);
+		cluielem::function_fa582112(localclientnum);
 		[[ self ]]->set_state(localclientnum, #"defaultstate");
-		[[ self ]]->function_d7d2fcce(localclientnum, "SelectedInfiltration", 0);
+		[[ self ]]->set_data(localclientnum, "SelectedInfiltration", 0);
 	}
 
 }
@@ -256,7 +256,7 @@ function register(var_f1385203)
 }
 
 /*
-	Name: function_5c1bb138
+	Name: register_clientside
 	Namespace: incursion_infiltrationtitlecards
 	Checksum: 0x87F72BB3
 	Offset: 0x268
@@ -264,10 +264,10 @@ function register(var_f1385203)
 	Parameters: 0
 	Flags: None
 */
-function function_5c1bb138()
+function register_clientside()
 {
 	elem = new class_7c3faeda();
-	[[ elem ]]->function_5c1bb138();
+	[[ elem ]]->register_clientside();
 	return elem;
 }
 
@@ -328,7 +328,7 @@ function set_state(localclientnum, state_name)
 }
 
 /*
-	Name: function_ee0c7ef6
+	Name: set_selectedinfiltration
 	Namespace: incursion_infiltrationtitlecards
 	Checksum: 0x6CB8B387
 	Offset: 0x350
@@ -336,8 +336,8 @@ function set_state(localclientnum, state_name)
 	Parameters: 2
 	Flags: None
 */
-function function_ee0c7ef6(localclientnum, value)
+function set_selectedinfiltration(localclientnum, value)
 {
-	[[ self ]]->function_ee0c7ef6(localclientnum, value);
+	[[ self ]]->set_selectedinfiltration(localclientnum, value);
 }
 

@@ -42,7 +42,7 @@ function function_12b1d8eb()
 }
 
 /*
-	Name: function_9290b227
+	Name: startzmbspawnersoundloops
 	Namespace: namespace_f172695e
 	Checksum: 0x90F1FAC5
 	Offset: 0x2B0
@@ -50,7 +50,7 @@ function function_12b1d8eb()
 	Parameters: 0
 	Flags: None
 */
-function function_9290b227()
+function startzmbspawnersoundloops()
 {
 	loopers = struct::get_array("spawn_location", "script_noteworthy");
 	if(isdefined(loopers) && loopers.size > 0)
